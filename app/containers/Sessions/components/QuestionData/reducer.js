@@ -17,6 +17,7 @@ import {
   tlfbEvents,
   tlfbQuestion,
   henryFordQuestion,
+  smsQuestion,
 } from 'models/Session/QuestionTypes';
 
 import currencyQuestionReducer from './CurrencyQuestion/reducer';
@@ -44,6 +45,7 @@ const questionDataReducer = (question, data) => {
     case thirdPartyQuestion.id:
       return thirdPartyQuestionReducer(question, data);
     case singleQuestion.id:
+    case smsQuestion.id:
       return singleQuestionReducer(question, data);
     case multiQuestion.id:
       return multiQuestionReducer(question, data);

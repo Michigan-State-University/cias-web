@@ -21,6 +21,9 @@ import {
   REORDER_GROUP_LIST_ERROR,
   CLEAN_GROUPS,
   DUPLICATE_GROUPS_INTERNALLY_REQUEST,
+  UPDATE_QUESTION_GROUP_REQUEST,
+  UPDATE_QUESTION_GROUP_SUCCESS,
+  UPDATE_QUESTION_GROUP_ERROR,
 } from './constants';
 
 export const duplicateGroupsHereRequest = (questionIds, sessionId) =>
@@ -59,6 +62,13 @@ export const shareGroupsExternallySuccess = () =>
   actionBuilder(SHARE_GROUPS_EXTERNALLY_SUCCESS, {});
 export const shareGroupsExternallyError = (error) =>
   actionBuilder(SHARE_GROUPS_EXTERNALLY_ERROR, { error });
+
+export const updateQuestionGroupSettings = (data, sessionId, groupId) =>
+  actionBuilder(UPDATE_QUESTION_GROUP_REQUEST, { data, sessionId, groupId });
+export const updateQuestionGroupSettingsSuccess = () =>
+  actionBuilder(UPDATE_QUESTION_GROUP_SUCCESS, {});
+export const updateQuestionGroupSettingsError = (error) =>
+  actionBuilder(UPDATE_QUESTION_GROUP_ERROR, { error });
 
 export const changeGroupNameRequest = (title, sessionId, groupId) =>
   actionBuilder(CHANGE_GROUP_NAME_REQUEST, { title, sessionId, groupId });

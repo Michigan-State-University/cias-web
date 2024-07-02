@@ -10,21 +10,22 @@ import { ScrollFogBox } from 'components/Box/ScrollFog';
 import questionTypesMessages from 'global/i18n/questionTypesMessages';
 import questionGroupTypeMessages from 'global/i18n/questionGroupTypeMessages';
 import {
+  makeSelectHenryFordInitialScreenExists,
   makeSelectNameQuestionExists,
   makeSelectParticipantReportQuestionExists,
   makeSelectPhoneQuestionExists,
-  makeSelectHenryFordInitialScreenExists,
 } from 'global/reducers/questions';
 import { makeSelectInterventionHfhsAccess } from 'global/reducers/intervention';
 
 import useOutsideClick from 'utils/useOutsideClick';
 import {
-  AddableQuestionTypes,
+  AddableToClassicSessionQuestionTypes,
+  henryFordInitialScreen,
+  henryFordQuestion,
   nameQuestion,
   participantReport,
   phoneQuestion,
-  henryFordInitialScreen,
-  henryFordQuestion,
+  AddableToSmsSessionQuestionTypes,
 } from 'models/Session/QuestionTypes';
 import { AddableGroups } from 'models/QuestionGroup';
 import { Question } from 'models/Question';
@@ -34,6 +35,8 @@ import { borders, boxShadows, colors, fontSizes } from 'theme';
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
 import { useChildSizeCalculator } from 'utils/useChildSizeCalculator';
 
+import { SessionTypes } from 'models/Session';
+
 import DefaultButtonComponent from './DefaultButtonComponent';
 import messages from './messages';
 import NewItem from './NewItem';
@@ -41,11 +44,13 @@ import { ConditionalAppearanceConfig } from './types';
 
 type Props = {
   onClick: (type: string) => void;
+  sessionType: SessionTypes;
   ButtonComponent?: React.ReactNode;
 };
 
 const QuestionTypeChooser = ({
   onClick,
+  sessionType,
   ButtonComponent = DefaultButtonComponent,
 }: Props) => {
   const nameQuestionExists = useSelector(makeSelectNameQuestionExists());
@@ -86,6 +91,11 @@ const QuestionTypeChooser = ({
     onClick(type);
     toggleTypeChooser();
   };
+
+  const questionTypes =
+    sessionType === SessionTypes.SMS_SESSION
+      ? AddableToSmsSessionQuestionTypes
+      : AddableToClassicSessionQuestionTypes;
 
   const isVisible = visible && height;
 
@@ -162,8 +172,9 @@ const QuestionTypeChooser = ({
               height={height}
               ref={containerRef}
               horizontalFogVisible={false}
+              verticalFogVisible={sessionType !== SessionTypes.SMS_SESSION}
             >
-              {AddableQuestionTypes.map(({ color, id }) => (
+              {questionTypes.map(({ color, id }) => (
                 <NewItem
                   key={id}
                   color={color}
@@ -172,15 +183,16 @@ const QuestionTypeChooser = ({
                   conditionalAppearanceConfig={conditionalAppearanceConfigs[id]}
                 />
               ))}
-              {AddableGroups.map(({ color, id }) => (
-                <NewItem
-                  key={id}
-                  color={color}
-                  handleClick={() => handleClick(id)}
-                  title={formatMessage(questionGroupTypeMessages[id])}
-                  isGroup
-                />
-              ))}
+              {sessionType === SessionTypes.CLASSIC_SESSION &&
+                AddableGroups.map(({ color, id }) => (
+                  <NewItem
+                    key={id}
+                    color={color}
+                    handleClick={() => handleClick(id)}
+                    title={formatMessage(questionGroupTypeMessages[id])}
+                    isGroup
+                  />
+                ))}
             </ScrollFogBox>
           </Box>
         )}

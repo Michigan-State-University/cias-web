@@ -7,6 +7,10 @@ export default defineMessages({
     id: `${scope}.changeGroupName`,
     defaultMessage: 'Cannot change group name',
   },
+  updateQuestionGroup: {
+    id: `${scope}.updateQuestionGroup`,
+    defaultMessage: 'Cannot update question group',
+  },
   groupError: {
     id: `${scope}.groupError`,
     defaultMessage:

@@ -23,6 +23,8 @@ import {
   updateQuestionSettingsSaga,
 } from 'global/reducers/questions';
 
+import { SessionTypes } from 'models/Session';
+
 import Settings from './Settings';
 import messages from './messages';
 import { SettingsBar, Container, OpenButton } from './styled';
@@ -30,6 +32,7 @@ import { SettingsBar, Container, OpenButton } from './styled';
 const QuestionSettings = ({
   settingsVisibility,
   toggleSettings,
+  sessionType,
   intl: { formatMessage },
   questionsLength,
   onGoToSessionMapClick,
@@ -48,13 +51,15 @@ const QuestionSettings = ({
           <Row align="center" justify="between" mb={40}>
             <H2>{formatMessage(messages.header)}</H2>
           </Row>
-          <Settings />
-          <Button
-            ml={10}
-            onClick={onGoToSessionMapClick}
-            width={175}
-            title={formatMessage(messages.goToSessionMap)}
-          />
+          <Settings sessionType={sessionType} />
+          {sessionType !== SessionTypes.SMS_SESSION && (
+            <Button
+              ml={10}
+              onClick={onGoToSessionMapClick}
+              width={175}
+              title={formatMessage(messages.goToSessionMap)}
+            />
+          )}
         </Box>
       </SettingsBar>
       <OpenButton
@@ -72,6 +77,7 @@ QuestionSettings.propTypes = {
   intl: PropTypes.object.isRequired,
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
+  sessionType: PropTypes.string,
   questionsLength: PropTypes.number,
   onGoToSessionMapClick: PropTypes.func,
 };

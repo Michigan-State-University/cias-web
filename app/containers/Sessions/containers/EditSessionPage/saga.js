@@ -15,6 +15,7 @@ import {
   groupQuestionsSaga,
   shareQuestionsToResearchersSaga,
   changeGroupNameSaga,
+  updateQuestionGroupSaga,
 } from 'global/reducers/questionGroups';
 
 import { logInGuestSaga } from 'global/reducers/auth/sagas';
@@ -32,6 +33,7 @@ export default function* editInterventionPageSaga() {
     groupQuestionsSaga(),
     shareQuestionsToResearchersSaga(),
     changeGroupNameSaga(),
+    updateQuestionGroupSaga(),
     logInGuestSaga(),
     redirectToPreviewSaga(),
     copyExternallyQuestionSaga(),

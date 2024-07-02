@@ -25,9 +25,15 @@ import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import flow from 'lodash/flow';
 import intersection from 'lodash/intersection';
+import includes from 'lodash/includes';
 
 import { reorderScope } from 'models/Session/ReorderScope';
-import { ClassicSession, Session } from 'models/Session';
+import {
+  ClassicSession,
+  Session,
+  SessionTypes,
+  SmsSession,
+} from 'models/Session';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { questionType } from 'models/Session/QuestionTypes';
@@ -95,6 +101,7 @@ import {
   reorderGroupListRequest,
   reorderQuestionGroupsSaga,
   shareGroupsExternallyRequest,
+  updateQuestionGroupSettings,
 } from 'global/reducers/questionGroups';
 import {
   allCopyModalSagas,
@@ -120,15 +127,21 @@ import QuestionListGroup from '../QuestionListGroup';
 import defaultQuestionSubtitlesMessages from './defaultQuestionSubtitlesMessages';
 
 type NonReduxProps = {
-  session: ClassicSession;
+  session: ClassicSession | SmsSession;
   editingPossible: boolean;
   interventionStatus: string;
+  interventionId?: string;
 };
 
 type Props = {
   getQuestionGroups: (sessionId: string, questionToSelectId?: string) => void;
   changeGroupName: (
     newName: string,
+    sessionId: string,
+    groupId: string,
+  ) => void;
+  updateQuestionGroup: (
+    data: object,
     sessionId: string,
     groupId: string,
   ) => void;
@@ -181,7 +194,7 @@ type Props = {
   createQuestionGroup: (sessionId: string, groupType: string) => void;
 } & NonReduxProps;
 
-const EditClassicSessionPage = ({
+const EditSessionCommon = ({
   questions,
   selectedQuestion,
   createQuestion,
@@ -196,8 +209,9 @@ const EditClassicSessionPage = ({
   groups,
   navbarHeight,
   changeGroupName,
+  updateQuestionGroup,
   getQuestionGroups,
-  session: { id: sessionId, name: sessionName },
+  session: { id: sessionId, name: sessionName, type: sessionType },
   interventionStatus,
   createQuestionGroup,
 }: Props): JSX.Element => {
@@ -444,7 +458,8 @@ const EditClassicSessionPage = ({
     duplicateGroupsInternally(selectedSlides, target.id);
 
   // @ts-ignore
-  if (questions.length === 0) return <Loader size={100} />;
+  if (questions.length === 0 && sessionType !== SessionTypes.SMS_SESSION)
+    return <Loader size={100} />;
 
   const selectSlide = (slideId: string) =>
     setSelectedSlides(xor(selectedSlides, [slideId]));
@@ -489,6 +504,11 @@ const EditClassicSessionPage = ({
   const handleGroupNameChange = (name: string) => {
     changeGroupName(name, sessionId, currentGroupScope.id);
   };
+
+  const shouldRenderSettings = !includes(
+    [QuestionTypes.TLFB_CONFIG, QuestionTypes.SMS_INFORMATION_QUESTION],
+    currentQuestion?.type,
+  );
 
   return (
     <>
@@ -572,8 +592,10 @@ const EditClassicSessionPage = ({
                           index={index}
                           editingPossible={editingPossible}
                           changeGroupName={changeGroupName}
+                          updateQuestionGroup={updateQuestionGroup}
                           checkSelectedGroup={checkSelectedGroup}
                           sessionId={sessionId}
+                          sessionType={sessionType}
                           manage={manage}
                           questionGroup={questionGroup}
                           selectSlide={selectSlide}
@@ -583,6 +605,7 @@ const EditClassicSessionPage = ({
                           toggleGroup={toggleGroup}
                           isDuringQuestionReorder={isDuringQuestionReorder}
                           interventionStatus={interventionStatus}
+                          interventionId={interventionId}
                           formatMessage={formatMessage}
                           groupIds={groupIds}
                           toggleCollapsable={toggleGroupCollapsable}
@@ -598,8 +621,10 @@ const EditClassicSessionPage = ({
                 <QuestionListGroup
                   editingPossible={editingPossible}
                   changeGroupName={changeGroupName}
+                  updateQuestionGroup={updateQuestionGroup}
                   checkSelectedGroup={checkSelectedGroup}
                   sessionId={sessionId}
+                  sessionType={sessionType}
                   manage={manage}
                   questionGroup={finishGroup}
                   selectSlide={selectSlide}
@@ -609,6 +634,7 @@ const EditClassicSessionPage = ({
                   toggleGroup={toggleGroup}
                   isDuringQuestionReorder={isDuringQuestionReorder}
                   interventionStatus={interventionStatus}
+                  interventionId={interventionId}
                   formatMessage={formatMessage}
                   groupIds={groupIds}
                   toggleCollapsable={toggleGroupCollapsable}
@@ -620,7 +646,10 @@ const EditClassicSessionPage = ({
             <Spacer />
             {editingPossible && (
               <StyledQuestionTypeChooser>
-                <QuestionTypeChooser onClick={onCreateQuestion} />
+                <QuestionTypeChooser
+                  onClick={onCreateQuestion}
+                  sessionType={sessionType}
+                />
               </StyledQuestionTypeChooser>
             )}
 
@@ -642,9 +671,12 @@ const EditClassicSessionPage = ({
               changeGroupName={handleGroupNameChange}
               currentGroupScope={currentGroupScope}
             />
-            {currentQuestion?.type !== QuestionTypes.TLFB_CONFIG && (
-              // @ts-ignore
-              <QuestionSettings onGoToSessionMapClick={goToSessionMap} />
+            {shouldRenderSettings && (
+              <QuestionSettings
+                // @ts-ignore
+                onGoToSessionMapClick={goToSessionMap}
+                sessionType={sessionType}
+              />
             )}
           </Row>
         </Column>
@@ -670,6 +702,7 @@ const mapDispatchToProps = {
   groupQuestions: groupQuestionsRequest,
   shareGroupsExternally: shareGroupsExternallyRequest,
   changeGroupName: changeGroupNameRequest,
+  updateQuestionGroup: updateQuestionGroupSettings,
   getQuestionGroups: getQuestionGroupsRequest,
   selectQuestion: selectQuestionAction,
   createQuestionGroup: createQuestionGroupRequest,
@@ -692,4 +725,4 @@ export default compose(
     saga: reorderQuestionGroupsSaga,
   }),
   withConnect,
-)(EditClassicSessionPage) as React.ComponentType<NonReduxProps>;
+)(EditSessionCommon) as React.ComponentType<NonReduxProps>;

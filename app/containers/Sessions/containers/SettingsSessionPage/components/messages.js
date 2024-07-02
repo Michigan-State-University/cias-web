@@ -11,6 +11,26 @@ export default defineMessages({
     id: `${scope}.nameLabel`,
     defaultMessage: 'Name',
   },
+  welcomeMessageLabel: {
+    id: `${scope}.welcomeMessageLabel`,
+    defaultMessage: 'Welcome message',
+  },
+  defaultResponseLabel: {
+    id: `${scope}.defaultResponseLabel`,
+    defaultMessage: 'Default response for wrong message',
+  },
+  smsCodeForClinic: {
+    id: `${scope}.smsCodeForClinic`,
+    defaultMessage: 'SMS Code for {clinicName}',
+  },
+  smsCode: {
+    id: `${scope}.smsCode`,
+    defaultMessage: 'SMS Code',
+  },
+  smsCodeRandomize: {
+    id: `${scope}.smsCodeRandomize`,
+    defaultMessage: 'Randomize code',
+  },
   variableLabel: {
     id: `${scope}.variableLabel`,
     defaultMessage: 'Variable',

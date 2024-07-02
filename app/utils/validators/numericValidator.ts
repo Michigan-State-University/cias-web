@@ -8,11 +8,15 @@ import {
   naturalNumberRegex,
   floatCharRegex,
   nonNegativeIntegerRegex,
+  arrayRegex,
 } from 'global/constants/regex';
 import validatorsMessages from 'global/i18n/validatorsMessages';
 
 export const numericValidator = (target: string) =>
   numericRegex.test(target) || target === '';
+
+export const arrayValidator = (target: string) =>
+  arrayRegex.test(target) || target === '';
 
 export const numericValidationSchema = Yup.string().matches(
   numericRegex,
