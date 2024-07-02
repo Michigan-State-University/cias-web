@@ -10,6 +10,7 @@ import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { Intervention } from 'models/Intervention';
 import { CHARACTER_CONFIGS } from 'models/Character';
+import { Session, SessionTypes } from 'models/Session';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
@@ -40,6 +41,7 @@ import Img from 'components/Img';
 import Text from 'components/Text';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
+import { makeSelectSession } from 'global/reducers/session/selectors';
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
 import QuestionNarrator from '../QuestionNarrator';
@@ -82,6 +84,7 @@ const RenderQuestionDetails = ({
   const intervention: Nullable<Intervention> = useSelector(
     makeSelectIntervention(),
   );
+  const session: Session = useSelector(makeSelectSession());
   const editingPossible = useSelector(makeSelectEditingPossible());
 
   const isNarratorTab: boolean = useSelector(makeSelectIsNarratorTab());
@@ -119,6 +122,8 @@ const RenderQuestionDetails = ({
     settings: questionSettings,
     narrator: { settings: narratorSettings, blocks },
   } = selectedQuestion;
+
+  const { type: sessionType } = session;
 
   const {
     video,
@@ -222,7 +227,7 @@ const RenderQuestionDetails = ({
                     )}
                     {subtitle && (
                       <Row>
-                        <QuestionSubtitle />
+                        <QuestionSubtitle sessionType={sessionType} />
                       </Row>
                     )}
                     {'variable' in body && (
@@ -271,17 +276,19 @@ const RenderQuestionDetails = ({
                   <QuestionData />
                 </Row>
 
-                <Row align="center" gap={16} dir={fixedElementsDirection}>
-                  {renderBackButton && <ScreenBackButton disabled />}
-                  <ActionButtons
-                    questionType={type}
-                    questionRequired={required}
-                    isCatMhSession={false}
-                    skipQuestionButtonDisabled
-                    renderContinueButton={renderContinueButton}
-                    continueButtonDisabled
-                  />
-                </Row>
+                {sessionType !== SessionTypes.SMS_SESSION && (
+                  <Row align="center" gap={16} dir={fixedElementsDirection}>
+                    {renderBackButton && <ScreenBackButton disabled />}
+                    <ActionButtons
+                      questionType={type}
+                      questionRequired={required}
+                      isCatMhSession={false}
+                      skipQuestionButtonDisabled
+                      renderContinueButton={renderContinueButton}
+                      continueButtonDisabled
+                    />
+                  </Row>
+                )}
               </AppContainer>
             </Row>
           </AnswerInterventionContent>

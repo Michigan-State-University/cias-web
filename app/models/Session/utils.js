@@ -36,6 +36,7 @@ import {
   tlfbConfig,
   tlfbEvents,
   henryFordInitialScreen,
+  smsInformationQuestion,
 } from './QuestionTypes';
 
 /**
@@ -127,6 +128,7 @@ export const getEditVariables = (questions, options) => {
       case gridQuestion.id:
         questionVariables = getGridVariables(question);
         break;
+      case smsInformationQuestion.id:
       case informationQuestion.id:
       case feedbackQuestion.id:
       case finishQuestion.id:
@@ -275,6 +277,7 @@ export const NOT_ANSWERABLE_QUESTIONS = [
   informationQuestion.id,
   finishQuestion.id,
   feedbackQuestion.id,
+  smsInformationQuestion.id,
 ];
 
 export const QUESTIONS_WITHOUT_VARIABLE = [

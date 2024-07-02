@@ -35,4 +35,8 @@ export default defineMessages({
     id: `${scope}.allSupportedFormats`,
     defaultMessage: 'All supported formats:',
   },
+  linksListLabel: {
+    id: `${scope}.linksListLabel`,
+    defaultMessage: 'Links in the SMS are:',
+  },
 });

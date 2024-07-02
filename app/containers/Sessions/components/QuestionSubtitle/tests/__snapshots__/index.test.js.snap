@@ -99,6 +99,7 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  width: inherit;
   color: unset;
 }
 
@@ -131,6 +132,7 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c2"
+        width="inherit"
       >
         <div
           class="c3"

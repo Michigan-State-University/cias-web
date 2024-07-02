@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import 'react-quill/dist/quill.bubble.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -141,6 +141,12 @@ const ApprovableInput = ({
     if (onValueChange) onValueChange(value);
   }, [value, onValueChange]);
 
+  useLayoutEffect(() => {
+    if (type === 'multiline' && !richText) {
+      adjustTextAreaHeight();
+    }
+  }, []);
+
   const onInputChange = (targetValue) => {
     if (!validator) setValue(targetValue);
     else {
@@ -150,6 +156,30 @@ const ApprovableInput = ({
 
       if (onValidation) onValidation(validationResult);
     }
+  };
+
+  const adjustTextAreaHeight = () => {
+    if (autoSize) {
+      const computed = window.getComputedStyle(ref.current);
+
+      ref.current.style.height = '0px';
+      const { scrollHeight } = ref.current;
+
+      const computedHeightAdditions =
+        parseInt(computed.getPropertyValue('border-top-width'), 10) +
+        parseInt(computed.getPropertyValue('padding-top'), 10) +
+        parseInt(computed.getPropertyValue('padding-bottom'), 10) +
+        parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+      ref.current.style.height = `${scrollHeight + computedHeightAdditions}px`;
+    }
+  };
+
+  const onTextAreaChange = (e) => {
+    const textAreaValue = e.target.value;
+
+    adjustTextAreaHeight();
+    onInputChange(textAreaValue);
   };
 
   const onBlur = () => {
@@ -196,7 +226,7 @@ const ApprovableInput = ({
           {...(rows ? { rows, height: 'auto' } : {})}
           mr={isNumber(mr) ? mr : 9}
           value={value}
-          onChange={(event) => onInputChange(event.target.value)}
+          onChange={onTextAreaChange}
           onFocus={handleFocus}
           onBlur={onBlur}
           placeholder={placeholder}

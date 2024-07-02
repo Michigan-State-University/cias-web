@@ -89,4 +89,12 @@ export default defineMessages<QuestionTypes>({
     id: `${scope}.Question::HenryFordInitial`,
     defaultMessage: 'Henry Ford Initial Screen',
   },
+  [QuestionTypes.SMS_QUESTION]: {
+    id: `${scope}.Question::Sms`,
+    defaultMessage: 'Sms Question',
+  },
+  [QuestionTypes.SMS_INFORMATION_QUESTION]: {
+    id: `${scope}.Question::SmsInformation`,
+    defaultMessage: 'Sms Information',
+  },
 });

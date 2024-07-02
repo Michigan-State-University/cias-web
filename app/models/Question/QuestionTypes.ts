@@ -20,6 +20,8 @@ export enum QuestionTypes {
   TLFB_QUESTION = 'Question::TlfbQuestion',
   HENRY_FORD_QUESTION = 'Question::HenryFord',
   HENRY_FORD_INITIAL = 'Question::HenryFordInitial',
+  SMS_QUESTION = 'Question::Sms',
+  SMS_INFORMATION_QUESTION = 'Question::SmsInformation',
 }
 
 export const TLFB_QUESTION_TYPES = [

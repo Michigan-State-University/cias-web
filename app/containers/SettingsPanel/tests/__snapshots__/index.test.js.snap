@@ -1083,7 +1083,11 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
               <b>
                 not
               </b>
-               supported.
+               supported. 
+              <b>
+                Anyone with SMS Code
+              </b>
+               can access SMS Campaigns.
             </p>
           </div>
         </div>

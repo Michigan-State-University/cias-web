@@ -23,6 +23,7 @@ const useGet = <DTO, U>(
   url: string,
   dataParser: (data: DTO) => U,
   suspend?: boolean,
+  dependencyArray?: unknown[],
 ): State<U> => {
   const [state, setState] = useState<State<U>>(defaultState);
 
@@ -40,7 +41,7 @@ const useGet = <DTO, U>(
     if (url && !suspend) {
       fetchData();
     }
-  }, [url, suspend]);
+  }, [url, suspend, ...(dependencyArray || [])]);
 
   return state;
 };

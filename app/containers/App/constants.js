@@ -13,4 +13,5 @@ export const OMIT_FETCH_SELF_DETAILS_PATHS = [
   RoutePath.PREVIEW_SESSION_FROM_INDEX,
   RoutePath.LOGOUT,
   RoutePath.VERIFY_USER_KEY,
+  RoutePath.VERIFY_SMS_LINK,
 ];

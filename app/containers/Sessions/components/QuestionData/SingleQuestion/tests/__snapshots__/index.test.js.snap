@@ -241,6 +241,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  width: inherit;
   color: unset;
 }
 
@@ -277,18 +278,26 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
+.c18 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  color: unset;
+}
+
 .c6 {
   width: auto;
   height: auto;
   margin-inline-end: 16px;
 }
 
-.c19 {
+.c20 {
   width: auto;
   height: auto;
 }
 
-.c18 {
+.c19 {
   border-radius: 50%;
   background-color: #B727EA;
   display: -webkit-box;
@@ -312,7 +321,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c20 {
+.c21 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -403,6 +412,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c8"
+                  width="inherit"
                 >
                   <div
                     class="c9"
@@ -1946,6 +1956,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c8"
+                  width="inherit"
                 >
                   <div
                     class="c9"
@@ -3466,23 +3477,23 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
       class="c17"
     >
       <div
-        class="c8"
+        class="c18"
       >
         <div
           class="c12"
         >
           <div
-            class="c18"
+            class="c19"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="c19"
+              class="c20"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="c20"
+            class="c21"
             color="#B727EA"
             font-weight="bold"
           >

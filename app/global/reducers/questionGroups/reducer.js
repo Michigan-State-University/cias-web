@@ -1,28 +1,31 @@
 import produce from 'immer';
 import sortBy from 'lodash/sortBy';
-import sortedIndexBy from 'lodash/sortedIndexBy';
+import { merge, cloneDeep, sortedIndexBy } from 'lodash';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
 import { GroupType } from 'models/QuestionGroup';
 import { ternary } from 'utils/ternary';
 import { assignDraftItems } from 'utils/reduxUtils';
 import {
-  GET_QUESTION_GROUPS_SUCCESS,
-  GROUP_QUESTIONS_SUCCESS,
-  CHANGE_GROUP_NAME_REQUEST,
-  SAVING_ACTIONS,
-  SAVED_ACTIONS,
   CHANGE_GROUP_NAME_ERROR,
+  CHANGE_GROUP_NAME_REQUEST,
   CHANGE_GROUP_NAME_SUCCESS,
-  REORDER_GROUP_LIST_REQUEST,
-  REORDER_GROUP_LIST_SUCCESS,
-  REORDER_GROUP_LIST_ERROR,
   CLEAN_GROUPS,
-  GET_QUESTION_GROUPS_ERROR,
-  GET_QUESTION_GROUPS_REQUEST,
-  DUPLICATE_GROUPS_HERE_SUCCESS,
   DUPLICATE_GROUPS_HERE_ERROR,
   DUPLICATE_GROUPS_HERE_REQUEST,
+  DUPLICATE_GROUPS_HERE_SUCCESS,
+  GET_QUESTION_GROUPS_ERROR,
+  GET_QUESTION_GROUPS_REQUEST,
+  GET_QUESTION_GROUPS_SUCCESS,
+  GROUP_QUESTIONS_SUCCESS,
+  REORDER_GROUP_LIST_ERROR,
+  REORDER_GROUP_LIST_REQUEST,
+  REORDER_GROUP_LIST_SUCCESS,
+  SAVED_ACTIONS,
+  SAVING_ACTIONS,
+  UPDATE_QUESTION_GROUP_ERROR,
+  UPDATE_QUESTION_GROUP_REQUEST,
+  UPDATE_QUESTION_GROUP_SUCCESS,
 } from './constants';
 
 export const initialState = {
@@ -71,6 +74,26 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         const insertIndex = sortedIndexBy(state.groups, group, 'position');
         insertAt(draft.groups, insertIndex, group);
         assignDraftItems(draft.groups, draft.cache.groups);
+        break;
+      }
+      case UPDATE_QUESTION_GROUP_REQUEST: {
+        // Intentionally not using updateById, as it causes erroneous behaviour with re-rending
+        const index = state.groups.findIndex(
+          ({ id }) => id === payload.groupId,
+        );
+
+        draft.groups[index] = merge(
+          cloneDeep(state.groups[index]),
+          payload.data,
+        );
+        break;
+      }
+      case UPDATE_QUESTION_GROUP_SUCCESS: {
+        assignDraftItems(draft.groups, draft.cache.groups);
+        break;
+      }
+      case UPDATE_QUESTION_GROUP_ERROR: {
+        assignDraftItems(draft.cache.groups, draft.groups);
         break;
       }
       case CHANGE_GROUP_NAME_REQUEST: {

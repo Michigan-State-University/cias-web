@@ -36,17 +36,17 @@ export default defineMessages({
   anyoneWithTheLinkSublabel: {
     id: `${scope}.anyoneWithTheLinkSublabel`,
     defaultMessage:
-      '<b>Anyone with the link</b> can access the intervention. Responses will be <b>anonymous</b> - therefore branching between sessions is <b>not</b> supported.',
+      '<b>Anyone with the link</b> can access the intervention. Responses will be <b>anonymous</b> - therefore branching between sessions is <b>not</b> supported. <b>Anyone with SMS Code</b> can access SMS Campaigns.',
   },
   anyoneWhoIsARegisterdParticipantSublabel: {
     id: `${scope}.anyoneWhoIsARegisterdParticipantSublabel`,
     defaultMessage:
-      'To access the intervention, participants must <b>create</b> or <b>have</b> a <b>CIAS account.</b>',
+      'To access the intervention, participants must <b>create</b> or <b>have</b> a <b>CIAS account.</b> <b>Anyone with SMS Code</b> can access SMS Campaigns.',
   },
   onlyInvitedRegisteredParticipantsSublabel: {
     id: `${scope}.onlyInvitedRegisteredParticipantsSublabel`,
     defaultMessage:
-      'Participants can only access the intervention <b>if access is granted</b> by entering their email address below. Participants must also <b>create</b> or <b>have</b> a <b>CIAS account.</b>',
+      'Participants can only access the intervention <b>if access is granted</b> by entering their email address below. Participants must also <b>create</b> or <b>have</b> a <b>CIAS account.</b> <b>Anyone with SMS Code</b> can access SMS Campaigns.',
   },
   accessGiverHeader: {
     id: `${scope}.accessGiverHeader`,

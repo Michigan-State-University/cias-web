@@ -9,6 +9,10 @@ export default defineMessages<GroupType>({
     id: `${scope}.QuestionGroup::Plain`,
     defaultMessage: 'Plain',
   },
+  [GroupType.INITIAL]: {
+    id: `${scope}.QuestionGroup::Initial`,
+    defaultMessage: 'Initial',
+  },
   [GroupType.FINISH]: {
     id: `${scope}.QuestionGroup::Finish`,
     defaultMessage: 'Finish',

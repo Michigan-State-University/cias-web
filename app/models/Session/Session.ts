@@ -5,6 +5,7 @@ import { SessionTargetType } from './SessionTargetType';
 
 export enum SessionTypes {
   CLASSIC_SESSION = 'Session::Classic',
+  SMS_SESSION = 'Session::Sms',
   CAT_SESSION = 'Session::CatMh',
 }
 
@@ -61,10 +62,17 @@ export interface Session {
   autofinishDelay: number;
   autocloseEnabled: boolean;
   autocloseAt: Nullable<string>;
+  smsCodesAttributes: Array<object>;
+  welcomeMessage: string;
+  defaultResponse: string;
 }
 
 export interface ClassicSession extends Session {
   type: SessionTypes.CLASSIC_SESSION;
+}
+
+export interface SmsSession extends Session {
+  type: SessionTypes.SMS_SESSION;
 }
 
 export interface CatSession extends Session {

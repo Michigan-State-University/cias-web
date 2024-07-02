@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
+import { SessionTypes } from 'models/Session';
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 import { selectQuillText } from 'components/Input/utils';
@@ -25,6 +26,7 @@ const QuestionSubtitle = ({
   intl: { formatMessage },
   updateSubtitle,
   dynamicElementsDirection,
+  sessionType,
 }) => {
   const handleUpdate = (val) =>
     updateSubtitle({ path: 'subtitle', value: val });
@@ -51,7 +53,8 @@ const QuestionSubtitle = ({
           onCheck={handleUpdate}
           onFocus={onFocus}
           autoSize
-          richText
+          fullWidth={sessionType === SessionTypes.SMS_SESSION}
+          richText={sessionType !== SessionTypes.SMS_SESSION}
           fontSize={36}
           emptyWidth={215}
         />
@@ -62,6 +65,7 @@ const QuestionSubtitle = ({
 
 QuestionSubtitle.propTypes = {
   selectedQuestion: PropTypes.object,
+  sessionType: PropTypes.string,
   updateSubtitle: PropTypes.func,
   intl: PropTypes.object,
   dynamicElementsDirection: PropTypes.string,

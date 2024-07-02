@@ -19,6 +19,8 @@ export const passwordRegex =
 
 export const numericRegex = /^[0-9\b]+$/;
 
+export const arrayRegex = /^[0-9,\b]+$/;
+
 export const floatRegex = /^\d+(\.\d+)?$/;
 
 // To allow iterative input states (like `4.` which is not entirely a valid float)
