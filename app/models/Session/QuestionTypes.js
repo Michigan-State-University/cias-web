@@ -131,6 +131,18 @@ export const henryFordInitialScreen = new QuestionType(
   colors.kleinBlue,
 );
 
+export const smsQuestion = new QuestionType(
+  `${questionType}Sms`,
+  'Sms Question',
+  colors.jungleGreenLighter,
+);
+
+export const smsInformationQuestion = new QuestionType(
+  `${questionType}SmsInformation`,
+  'SmsInformation',
+  colors.kleinBlue,
+);
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
@@ -153,6 +165,8 @@ export const QuestionTypes = [
   tlfbEvents,
   henryFordInitialScreen,
   henryFordQuestion,
+  smsQuestion,
+  smsInformationQuestion,
 ];
 
 const notAddableQuestionTypes = [
@@ -162,6 +176,18 @@ const notAddableQuestionTypes = [
   tlfbQuestion.id,
 ];
 
-export const AddableQuestionTypes = QuestionTypes.filter(
-  ({ id }) => !notAddableQuestionTypes.includes(id),
+const addableToSmsSessionQuestionTypes = [
+  smsQuestion.id,
+  smsInformationQuestion.id,
+];
+
+export const AddableToClassicSessionQuestionTypes = QuestionTypes.filter(
+  ({ id }) =>
+    !notAddableQuestionTypes
+      .concat(addableToSmsSessionQuestionTypes)
+      .includes(id),
+);
+
+export const AddableToSmsSessionQuestionTypes = QuestionTypes.filter(({ id }) =>
+  addableToSmsSessionQuestionTypes.includes(id),
 );

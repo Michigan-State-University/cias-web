@@ -33,13 +33,18 @@ import {
   reportTemplatesReducer,
   reportTemplatesSaga,
 } from 'global/reducers/reportTemplates';
-import { CatSession, ClassicSession, SessionTypes } from 'models/Session';
+import {
+  CatSession,
+  ClassicSession,
+  SessionTypes,
+  SmsSession,
+} from 'models/Session';
 import { RouteComponentProps } from 'react-router-dom';
 import editInterventionPageSaga from './saga';
 
 import messages from './messages';
 import { EditSessionPageContext } from './utils';
-import EditClassicSession from './EditClassicSession';
+import EditSessionCommon from './EditSessionCommon';
 import EditCatSession from './EditCatSession';
 
 interface MatchParams {
@@ -59,7 +64,7 @@ interface Props extends RouteComponentProps<MatchParams> {
   fetchInterventions: () => void;
   fetchReportTemplates: (sessionId: string) => void;
   interventionStatus: string;
-  session: ClassicSession | CatSession;
+  session: ClassicSession | SmsSession | CatSession;
   editingPossible: boolean;
 }
 
@@ -74,12 +79,13 @@ const EditSessionPage = ({
   editingPossible,
 }: Props): JSX.Element => {
   const { name: sessionName, type } = session;
+  const { interventionId } = params;
   const { formatMessage } = useIntl();
 
   const [storeInitialized, setStoreInitialized] = useState(false);
 
   useEffect(() => {
-    const { interventionId, sessionId: paramSessionId } = params;
+    const { sessionId: paramSessionId } = params;
     getSession({
       sessionId: paramSessionId,
       interventionId,
@@ -104,11 +110,13 @@ const EditSessionPage = ({
           {formatMessage(messages.pageTitle, { name: sessionName })}
         </title>
       </Helmet>
-      {type === SessionTypes.CLASSIC_SESSION && (
-        <EditClassicSession
+      {(type === SessionTypes.SMS_SESSION ||
+        type === SessionTypes.CLASSIC_SESSION) && (
+        <EditSessionCommon
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}
-          session={session as ClassicSession}
+          interventionId={interventionId}
+          session={session}
         />
       )}
       {type === SessionTypes.CAT_SESSION && (

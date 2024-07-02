@@ -17,6 +17,7 @@ import { StyledCheckbox, StyledLabel, StyledIcon } from './styled';
 
 type Props = {
   checked: boolean;
+  inlineLabel?: boolean;
   children?: ReactNode;
   disabled?: boolean;
   id: string;
@@ -28,6 +29,7 @@ const Checkbox = ({
   checked,
   children,
   disabled = false,
+  inlineLabel = true,
   id,
   onChange,
   stroke,
@@ -54,7 +56,7 @@ const Checkbox = ({
         $clickable
       />
 
-      <StyledLabel htmlFor={id}>
+      <StyledLabel htmlFor={id} inlineLabel={inlineLabel}>
         <StyledIcon
           src={icon}
           fill={themeColors.secondary}

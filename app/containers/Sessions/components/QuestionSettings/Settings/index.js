@@ -22,6 +22,7 @@ import { makeSelectSelectedQuestionGroup } from 'global/reducers/questionGroups'
 
 import { InterventionType } from 'models/Intervention/Intervention';
 import { GroupType } from 'models/QuestionGroup';
+import { SessionTypes } from 'models/Session';
 
 import Column from 'components/Column';
 import Tabs from 'components/Tabs';
@@ -29,6 +30,8 @@ import Tabs from 'components/Tabs';
 import BranchingTab from './Components/Tabs/BranchingTab';
 import NarratorTab from './Components/Tabs/NarratorTab';
 import SettingsTab from './Components/Tabs/SettingsTab';
+import SmsSettingsTab from './Components/Tabs/SmsSettingsTab';
+
 import messages from './messages';
 import {
   HIDE_BRANCHING_TAB_QUESTIONS,
@@ -37,10 +40,19 @@ import {
 } from '../constants';
 
 const Settings = ({
-  selectedQuestion: { narrator, settings, id, formulas, type } = {},
+  selectedQuestion: {
+    narrator,
+    settings,
+    id,
+    formulas,
+    type,
+    accepted_answers: acceptedAnswers,
+    sms_reminders: smsReminders,
+  } = {},
   intl: { formatMessage },
   tab,
   changeTab,
+  sessionType,
   setDraggable,
   interventionType,
   questionGroup,
@@ -52,6 +64,7 @@ const Settings = ({
   };
 
   const isTlfbGroup = questionGroup?.type === GroupType.TLFB;
+  const isSmsSession = sessionType === SessionTypes.SMS_SESSION;
 
   const hideSettingsTab = HIDE_SETTINGS_TAB_QUESTIONS.includes(type);
   const hideNarratorTab = HIDE_NARRATOR_TAB_QUESTIONS.includes(type);
@@ -69,13 +82,24 @@ const Settings = ({
           label={formatMessage(messages[settingsTabLabels.settings])}
           hidden={hideSettingsTab}
         >
-          <SettingsTab
-            formatMessage={formatMessage}
-            disabled={!editingPossible}
-            settings={settings}
-            type={type}
-            id={id}
-          />
+          {isSmsSession ? (
+            <SmsSettingsTab
+              formatMessage={formatMessage}
+              disabled={!editingPossible}
+              acceptedAnswers={acceptedAnswers}
+              smsReminders={smsReminders}
+              type={type}
+              id={id}
+            />
+          ) : (
+            <SettingsTab
+              formatMessage={formatMessage}
+              disabled={!editingPossible}
+              settings={settings}
+              type={type}
+              id={id}
+            />
+          )}
         </div>
         <div
           label={formatMessage(messages[settingsTabLabels.narrator])}
@@ -120,6 +144,7 @@ Settings.propTypes = {
   tab: PropTypes.string,
   changeTab: PropTypes.func,
   setDraggable: PropTypes.func,
+  sessionType: PropTypes.string,
   interventionType: PropTypes.string,
   questionGroup: PropTypes.object,
   editingPossible: PropTypes.bool,

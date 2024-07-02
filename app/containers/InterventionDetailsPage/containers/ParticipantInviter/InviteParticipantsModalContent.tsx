@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import { InterventionStatus, InterventionType } from 'models/Intervention';
-import { Session } from 'models/Session';
+import { Session, SessionTypes } from 'models/Session';
 import { Organization } from 'models/Organization';
 import {
   canCopyInvitationLink,
@@ -81,10 +81,15 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   }, [organizationId]);
 
-  const sessionOptions: SelectOption<string>[] = useMemo(() => {
-    if (isModularIntervention) return [];
-    return sessions.map(({ id, name }) => ({ value: id, label: name }));
-  }, [isModularIntervention, sessions]);
+  const sessionOptions: (SelectOption<string> & { type: string })[] =
+    useMemo(() => {
+      if (isModularIntervention) return [];
+      return sessions.map(({ id, name, type }) => ({
+        value: id,
+        label: name,
+        type,
+      }));
+    }, [isModularIntervention, sessions]);
 
   const normalizedSessions: NormalizedSessions = useMemo(() => {
     if (isModularIntervention) return {};
@@ -184,6 +189,10 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     organizationLoading ||
     (isReportingIntervention && organizationId !== organization?.id);
 
+  const filteredSessionOptions = sessionOptions.filter(
+    (session) => session.type !== SessionTypes.SMS_SESSION,
+  );
+
   const { view } = currentView;
 
   return (
@@ -203,7 +212,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               creatingPredefinedParticipantsPossible={
                 creatingPredefinedParticipantsPossible
               }
-              sessionOptions={sessionOptions}
+              sessionOptions={filteredSessionOptions}
               healthClinicOptions={healthClinicOptions}
               normalizedSessions={normalizedSessions}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}

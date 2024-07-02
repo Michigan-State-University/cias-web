@@ -55,6 +55,9 @@ import {
   VERIFY_SHORT_LINK_REQUEST,
   VERIFY_SHORT_LINK_SUCCESS,
   VERIFY_SHORT_LINK_ERROR,
+  VERIFY_SMS_LINK_REQUEST,
+  VERIFY_SMS_LINK_SUCCESS,
+  VERIFY_SMS_LINK_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -361,6 +364,19 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case VERIFY_USER_KEY_ERROR: {
         const { error } = payload;
         draft.errors.verifyUserKeyError = error;
+        break;
+      }
+
+      case VERIFY_SMS_LINK_REQUEST: {
+        draft.errors.verifySmsLinkError = null;
+        break;
+      }
+      case VERIFY_SMS_LINK_SUCCESS: {
+        break;
+      }
+      case VERIFY_SMS_LINK_ERROR: {
+        const { error } = payload;
+        draft.errors.verifySmsLinkError = error;
         break;
       }
     }

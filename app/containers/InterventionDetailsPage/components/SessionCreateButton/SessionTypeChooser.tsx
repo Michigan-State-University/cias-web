@@ -14,16 +14,27 @@ import { prepareSessionTypes } from './constants';
 
 type Props = {
   onCreateSession: (sessionType: SessionTypes) => void;
+  canCreateCatSession: boolean;
+  canCreateSmsSession: boolean;
 };
 
-const SessionTypeChooser = ({ onCreateSession }: Props): JSX.Element => {
+const SessionTypeChooser = ({
+  onCreateSession,
+  canCreateCatSession,
+  canCreateSmsSession,
+}: Props): JSX.Element => {
   const { formatMessage } = useIntl();
   const [selectedSessionType, setSelectedSessionType] = useState(
     SessionTypes.CLASSIC_SESSION,
   );
 
   const sessionTypes = useMemo(
-    () => prepareSessionTypes(formatMessage),
+    () =>
+      prepareSessionTypes(
+        formatMessage,
+        canCreateCatSession,
+        canCreateSmsSession,
+      ),
     [formatMessage],
   );
 

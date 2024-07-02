@@ -117,7 +117,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   display: none;
 }
 
-.c20 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -299,6 +299,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  width: inherit;
   color: unset;
 }
 
@@ -335,18 +336,26 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
+.c20 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  color: unset;
+}
+
 .c6 {
   width: auto;
   height: auto;
   margin-inline-end: 16px;
 }
 
-.c22 {
+.c23 {
   width: auto;
   height: auto;
 }
 
-.c21 {
+.c22 {
   border-radius: 50%;
   background-color: #B727EA;
   display: -webkit-box;
@@ -370,7 +379,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c23 {
+.c24 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -477,6 +486,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c8"
+                  width="inherit"
                 >
                   <div
                     class="c9"
@@ -2011,23 +2021,23 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
       class="c19"
     >
       <div
-        class="c8"
+        class="c20"
       >
         <div
-          class="c20"
+          class="c21"
         >
           <div
-            class="c21"
+            class="c22"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="c22"
+              class="c23"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="c23"
+            class="c24"
             color="#B727EA"
             font-weight="bold"
           >

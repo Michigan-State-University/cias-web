@@ -134,7 +134,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   gap: 16px;
 }
 
-.c34 {
+.c35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -219,6 +219,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  width: inherit;
   color: unset;
 }
 
@@ -283,7 +284,15 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: unset;
 }
 
-.c32 {
+.c31 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  color: unset;
+}
+
+.c33 {
   width: auto;
   height: auto;
   margin-block-end: 2px;
@@ -299,7 +308,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: rgba(107,112,124,1);
 }
 
-.c33 {
+.c34 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -342,7 +351,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c35 {
+.c36 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -360,7 +369,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 120px;
 }
 
-.c31 {
+.c32 {
   outline: none;
   border: none;
   background: transparent;
@@ -774,6 +783,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   >
                     <div
                       class="c13"
+                      width="inherit"
                     >
                       <div
                         class="c10"
@@ -2264,6 +2274,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   >
                     <div
                       class="c13"
+                      width="inherit"
                     >
                       <div
                         class="c10"
@@ -3825,13 +3836,13 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                     display="flex"
                   >
                     <div
-                      class="c13"
+                      class="c31"
                       data-for="back-button-tooltip-id"
                       data-tip=""
                     >
                       <div>
                         <button
-                          class="c31"
+                          class="c32"
                           dir="ltr"
                           disabled=""
                           display="flex"
@@ -3839,11 +3850,11 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                         >
                           <img
                             alt="traingle"
-                            class="c32"
+                            class="c33"
                             src="IMAGE_MOCK"
                           />
                           <p
-                            class="c33"
+                            class="c34"
                             color="#B727EA"
                             font-weight="bold"
                           >
@@ -3855,11 +3866,11 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   </div>
                 </div>
                 <div
-                  class="c34"
+                  class="c35"
                   width="100%"
                 >
                   <button
-                    class="c35"
+                    class="c36"
                     color="primary"
                     data-cy="continue-button"
                     disabled=""

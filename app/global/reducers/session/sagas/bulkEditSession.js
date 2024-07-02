@@ -2,9 +2,9 @@ import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import { formatMessage } from 'utils/intlOutsideReact';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import { BULK_EDIT_SESSION_REQUEST } from '../constants';
 import {
@@ -43,7 +43,10 @@ export function* bulkEditSession({
 
     yield put(editSessionSuccess(jsonApiToObject(data, 'session')));
   } catch (error) {
-    yield call(toast.error, formatMessage(messages.editSessionError));
+    yield call(
+      toast.error,
+      formatApiErrorMessage(error, messages.editSessionError),
+    );
     yield put(editSessionError(error));
   }
 }
