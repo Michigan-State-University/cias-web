@@ -104,6 +104,7 @@
   "app.components.Calendar.substances": "{count, plural, one {# sustancia} other {# sustancias}}",
   "app.components.CharacterSelector.emmi": "",
   "app.components.CharacterSelector.peedy": "",
+  "app.components.CharacterSelector.crystal": "",
   "app.components.ChatMessage.me": "A mí",
   "app.components.ChatMessage.read": "Leer",
   "app.components.ChatMessageInput.inputPlaceholder": "Escribe tu mensaje aquí...",

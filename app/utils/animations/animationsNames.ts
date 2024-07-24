@@ -52,12 +52,29 @@ const emmiAutoRestBodyAnimations = [
   BodyAutoRestAnimation.SURPRISED,
 ];
 
+const crystalAutoRestBodyAnimations = [
+  BodyAutoRestAnimation.STAND_STILL,
+  BodyAutoRestAnimation.POINT_UP,
+  BodyAutoRestAnimation.POINT_LEFT_UP,
+  BodyAutoRestAnimation.POINT_RIGHT_UP,
+  BodyAutoRestAnimation.REST_SHOULDER_RUBBING,
+  BodyAutoRestAnimation.REST_STRETCHING,
+  BodyAutoRestAnimation.REST_WEIGHT_SHIFT,
+  BodyAutoRestAnimation.THINK,
+  BodyAutoRestAnimation.UNCERTAIN,
+  BodyAutoRestAnimation.WAVE,
+  BodyAutoRestAnimation.CONGRATULATE,
+  BodyAutoRestAnimation.PROCESS,
+  BodyAutoRestAnimation.SURPRISED,
+];
+
 const characterToAutoRestBodyAnimationsMap: Record<
   CharacterType,
   BodyAutoRestAnimation[]
 > = {
   [CharacterType.PEEDY]: peedyAutoRestBodyAnimations,
   [CharacterType.EMMI]: emmiAutoRestBodyAnimations,
+  [CharacterType.CRYSTAL]: crystalAutoRestBodyAnimations,
 };
 
 const peedyReverseBodyAnimations = [
@@ -75,6 +92,7 @@ const peedyReverseBodyAnimations = [
 ];
 
 const emmiReverseBodyAnimations: BodyReverseAnimation[] = [];
+const crystalReverseBodyAnimations: BodyReverseAnimation[] = [];
 
 const characterToReverseBodyAnimationsMap: Record<
   CharacterType,
@@ -82,6 +100,7 @@ const characterToReverseBodyAnimationsMap: Record<
 > = {
   [CharacterType.PEEDY]: peedyReverseBodyAnimations,
   [CharacterType.EMMI]: emmiReverseBodyAnimations,
+  [CharacterType.CRYSTAL]: crystalReverseBodyAnimations,
 };
 
 const peedyAutoRestHeadAnimations = [
@@ -107,12 +126,28 @@ const emmiAutoRestHeadAnimations = [
   HeadAutoRestAnimation.SUGGEST,
   HeadAutoRestAnimation.WEAR_SUNGLASSES,
 ];
+
+const crystalAutoRestHeadAnimations = [
+  HeadAutoRestAnimation.ACKNOWLEDGE,
+  HeadAutoRestAnimation.ACKNOWLEDGE_THOUGHTFUL,
+  HeadAutoRestAnimation.BLINK,
+  HeadAutoRestAnimation.DECLINE,
+  HeadAutoRestAnimation.DECLINE_ANNOYED,
+  HeadAutoRestAnimation.DECLINE_THOUGHTFUL,
+  HeadAutoRestAnimation.BROWS_UP,
+  HeadAutoRestAnimation.PLEASED,
+  HeadAutoRestAnimation.SAD,
+  HeadAutoRestAnimation.SUGGEST,
+  HeadAutoRestAnimation.WEAR_SUNGLASSES,
+];
+
 const characterToAutoRestHeadAnimationsMap: Record<
   CharacterType,
   HeadAutoRestAnimation[]
 > = {
   [CharacterType.PEEDY]: peedyAutoRestHeadAnimations,
   [CharacterType.EMMI]: emmiAutoRestHeadAnimations,
+  [CharacterType.CRYSTAL]: crystalAutoRestHeadAnimations,
 };
 
 const peedyReverseHeadAnimations = [
@@ -130,6 +165,7 @@ const peedyReverseHeadAnimations = [
 ];
 
 const emmiReverseHeadAnimations: HeadReverseAnimation[] = [];
+const crystalReverseHeadAnimations: HeadReverseAnimation[] = [];
 
 const characterToReverseHeadAnimationsMap: Record<
   CharacterType,
@@ -137,6 +173,7 @@ const characterToReverseHeadAnimationsMap: Record<
 > = {
   [CharacterType.PEEDY]: peedyReverseHeadAnimations,
   [CharacterType.EMMI]: emmiReverseHeadAnimations,
+  [CharacterType.CRYSTAL]: crystalReverseHeadAnimations,
 };
 
 const peedySpeechAnimationsMapper: Record<string, TSpeechAnimation> = {
@@ -280,12 +317,54 @@ const emmiSpeechAnimationsMapper: Record<string, TSpeechAnimation> = {
   },
 };
 
+const crystalSpeechAnimationsMapper: Record<string, TSpeechAnimation> = {
+  [SpeechAnimation.REST]: {
+    animations: { speech: SpeechAnimationFile.REST_SPEECH },
+  },
+  [SpeechAnimation.POINT_UP]: {
+    animations: {
+      start: SpeechAnimationFile.POINT_UP_START,
+      speech: SpeechAnimationFile.POINT_UP_SPEECH,
+      end: SpeechAnimationFile.POINT_UP_END,
+    },
+  },
+  [SpeechAnimation.OTOH_LEFT_HAND]: {
+    animations: {
+      start: SpeechAnimationFile.OTOH_LEFT_HAND_START,
+      speech: SpeechAnimationFile.OTOH_LEFT_HAND_SPEECH,
+      end: SpeechAnimationFile.OTOH_LEFT_HAND_END,
+    },
+  },
+  [SpeechAnimation.OTOH_RIGHT_HAND]: {
+    animations: {
+      start: SpeechAnimationFile.OTOH_RIGHT_HAND_START,
+      speech: SpeechAnimationFile.OTOH_RIGHT_HAND_SPEECH,
+      end: SpeechAnimationFile.OTOH_RIGHT_HAND_END,
+    },
+  },
+  [SpeechAnimation.EXPLAIN]: {
+    animations: {
+      start: SpeechAnimationFile.EXPLAIN_START,
+      speech: SpeechAnimationFile.EXPLAIN_SPEECH,
+      end: SpeechAnimationFile.EXPLAIN_END,
+    },
+  },
+  [SpeechAnimation.ANNOUNCE]: {
+    animations: {
+      start: SpeechAnimationFile.ANNOUNCE_START,
+      speech: SpeechAnimationFile.ANNOUNCE_SPEECH,
+      end: SpeechAnimationFile.ANNOUNCE_END,
+    },
+  },
+};
+
 const speechAnimationsMapper: Record<
   CharacterType,
   Record<SpeechAnimation, TSpeechAnimation>
 > = {
   [CharacterType.PEEDY]: peedySpeechAnimationsMapper,
   [CharacterType.EMMI]: emmiSpeechAnimationsMapper,
+  [CharacterType.CRYSTAL]: crystalSpeechAnimationsMapper,
 };
 
 const characterToSpeechAnimationsMap: Record<CharacterType, SpeechAnimation[]> =
@@ -296,12 +375,16 @@ const characterToSpeechAnimationsMap: Record<CharacterType, SpeechAnimation[]> =
     [CharacterType.EMMI]: keys(
       speechAnimationsMapper[CharacterType.EMMI],
     ) as SpeechAnimation[],
+    [CharacterType.CRYSTAL]: keys(
+      speechAnimationsMapper[CharacterType.CRYSTAL],
+    ) as SpeechAnimation[],
   };
 
 const moveAnimations = [MoveAnimation.MOVE_LEFT, MoveAnimation.MOVE_RIGHT];
 const characterToMoveAnimationsMap: Record<CharacterType, MoveAnimation[]> = {
   [CharacterType.PEEDY]: moveAnimations,
   [CharacterType.EMMI]: moveAnimations,
+  [CharacterType.CRYSTAL]: moveAnimations,
 };
 
 const getBodyAnimations = (character: CharacterType): BodyAnimation[] => [

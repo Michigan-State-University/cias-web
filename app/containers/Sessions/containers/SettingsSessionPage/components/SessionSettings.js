@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import some from 'lodash/some';
@@ -183,6 +183,29 @@ const SessionSettings = ({
     });
   };
 
+  const shouldTriggerModal = (selectedNarrator) => {
+    if (currentNarrator === 'peedy' && selectedNarrator !== null) return true;
+    if (
+      (currentNarrator === 'emmi' || currentNarrator === 'crystal') &&
+      selectedNarrator === 'peedy'
+    ) {
+      return true;
+    }
+    if (selectedNarrator === null || currentNarrator === undefined)
+      return false;
+    return false;
+  };
+
+  useEffect(() => {
+    if (!shouldTriggerModal(newNarrator) && newNarrator !== null) {
+      onNarratorChange({
+        HeadAnimation: {},
+        BodyAnimation: {},
+        SpeechAnimation: {},
+      });
+    }
+  }, [newNarrator]);
+
   return (
     <>
       <ConfirmationModal
@@ -196,7 +219,7 @@ const SessionSettings = ({
       <GlobalReplacementModal
         sourceNarrator={currentNarrator}
         destinationNarrator={newNarrator}
-        visible={newNarrator !== null}
+        visible={shouldTriggerModal(newNarrator)}
         onClose={() => setNewNarrator(null)}
         onChangeNarrator={onNarratorChange}
       />
