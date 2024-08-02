@@ -185,15 +185,10 @@ const SessionSettings = ({
 
   const shouldTriggerModal = (selectedNarrator) => {
     if (currentNarrator === 'peedy' && selectedNarrator !== null) return true;
-    if (
+    return (
       (currentNarrator === 'emmi' || currentNarrator === 'crystal') &&
       selectedNarrator === 'peedy'
-    ) {
-      return true;
-    }
-    if (selectedNarrator === null || currentNarrator === undefined)
-      return false;
-    return false;
+    );
   };
 
   useEffect(() => {
