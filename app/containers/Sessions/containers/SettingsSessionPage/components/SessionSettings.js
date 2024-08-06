@@ -13,6 +13,8 @@ import { colors, themeColors } from 'theme';
 
 import { variableNameValidator } from 'utils/validators';
 import lastKey from 'utils/getLastKey';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
+import { languageSelectOptionFormatter } from 'utils/formatters';
 
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 import { SessionTypes } from 'models/Session';
@@ -44,6 +46,7 @@ import { Row as GridRow } from 'components/ReactGridSystem';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import { TextButton } from 'components/Button';
+import ApiSelect from 'components/Select/ApiSelect';
 
 import Option from './Option';
 import messages from './messages';
@@ -53,14 +56,7 @@ import { SessionSettingsForm } from './SessionSettingsForm';
 import { getRandomString } from './utils';
 
 import { SessionSettingsColumn, SessionSettingsContainer } from '../styled';
-import {ApiDataCollection} from "../../../../../models/Api";
-import {Language} from "../../../../../models/Language";
-import {jsonApiToArray} from "../../../../../utils/jsonApiMapper";
-import {LanguageSelectOption, languageSelectOptionFormatter} from "../../../../../utils/formatters";
-import {
-  INTERVENTION_LANGUAGE_LABEL_ID
-} from "../../../../InterventionDetailsPage/components/Modals/InterventionSettingsModal/constants";
-import ApiSelect from "../../../../../components/Select/ApiSelect";
+import { INTERVENTION_LANGUAGE_LABEL_ID } from '../../../../InterventionDetailsPage/components/Modals/InterventionSettingsModal/constants';
 
 const SessionSettings = ({
   name,
