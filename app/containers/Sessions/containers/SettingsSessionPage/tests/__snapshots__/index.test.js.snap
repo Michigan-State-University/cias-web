@@ -243,7 +243,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c36 {
+.c37 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -276,7 +276,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c45 {
+.c46 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -295,7 +295,22 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c37 {
+.c36 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -397,16 +412,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c40 {
+.c41 {
   display: none;
 }
 
-.c39:disabled + label > .c43 {
+.c40:disabled + label > .c44 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c42 {
+.c43 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -418,24 +433,35 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c42:hover {
+.c43:hover {
   cursor: pointer;
 }
 
-.c39:disabled + .c41 {
+.c40:disabled + .c42 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c44 {
+.c45 {
   margin-inline-start: 5px;
 }
 
-.c38 {
+.c39 {
   width: 100%;
   padding: 16px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
+}
+
+.c39 label {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .c26 {
@@ -570,6 +596,22 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
 
 .c3 {
   padding-block: 25px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (min-width:768px) {
@@ -1046,100 +1088,161 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           >
             <div
               class="c36"
-              width="100%"
             >
               <div
                 class="c37"
+                width="100%"
               >
                 <div
-                  class="c13 c38"
+                  class="c38"
                 >
-                  <input
-                    class="c39 c40"
-                    disabled=""
-                    id="character-setting-peedy"
-                    type="radio"
-                  />
-                  <label
-                    class="c41 c42"
-                    for="character-setting-peedy"
+                  <div
+                    class="c13 c39"
                   >
-                    <img
-                      class="c43 "
-                      src="IMAGE_MOCK"
+                    <input
+                      class="c40 c41"
+                      disabled=""
+                      id="character-setting-peedy"
+                      type="radio"
                     />
-                    <div
-                      class="c20 c44"
+                    <label
+                      class="c42 c43"
+                      for="character-setting-peedy"
                     >
+                      <img
+                        class="c44 "
+                        src="IMAGE_MOCK"
+                      />
                       <div
-                        class="c13"
+                        class="c20 c45"
                       >
                         <div
-                          class="c20"
+                          class="c13"
                         >
-                          <p
-                            class="c45"
+                          <div
+                            class="c20"
                           >
-                            Peedy
-                          </p>
-                        </div>
-                        <div
-                          class="c20"
-                        >
-                          <img
-                            src="IMAGE_MOCK"
-                          />
+                            <p
+                              class="c46"
+                            >
+                              Peedy
+                            </p>
+                          </div>
+                          <div
+                            class="c20"
+                          >
+                            <img
+                              src="IMAGE_MOCK"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </label>
+                    </label>
+                  </div>
                 </div>
               </div>
               <div
                 class="c37"
+                width="100%"
               >
                 <div
-                  class="c13 c38"
+                  class="c38"
                 >
-                  <input
-                    class="c39 c40"
-                    disabled=""
-                    id="character-setting-emmi"
-                    type="radio"
-                  />
-                  <label
-                    class="c41 c42"
-                    for="character-setting-emmi"
+                  <div
+                    class="c13 c39"
                   >
-                    <img
-                      class="c43 "
-                      src="IMAGE_MOCK"
+                    <input
+                      class="c40 c41"
+                      disabled=""
+                      id="character-setting-emmi"
+                      type="radio"
                     />
-                    <div
-                      class="c20 c44"
+                    <label
+                      class="c42 c43"
+                      for="character-setting-emmi"
                     >
+                      <img
+                        class="c44 "
+                        src="IMAGE_MOCK"
+                      />
                       <div
-                        class="c13"
+                        class="c20 c45"
                       >
                         <div
-                          class="c20"
+                          class="c13"
                         >
-                          <p
-                            class="c45"
+                          <div
+                            class="c20"
                           >
-                            Emmi
-                          </p>
-                        </div>
-                        <div
-                          class="c20"
-                        >
-                          <img
-                            src="IMAGE_MOCK"
-                          />
+                            <p
+                              class="c46"
+                            >
+                              Emmi
+                            </p>
+                          </div>
+                          <div
+                            class="c20"
+                          >
+                            <img
+                              src="IMAGE_MOCK"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </label>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="c37"
+                width="100%"
+              >
+                <div
+                  class="c38"
+                >
+                  <div
+                    class="c13 c39"
+                  >
+                    <input
+                      class="c40 c41"
+                      disabled=""
+                      id="character-setting-crystal"
+                      type="radio"
+                    />
+                    <label
+                      class="c42 c43"
+                      for="character-setting-crystal"
+                    >
+                      <img
+                        class="c44 "
+                        src="IMAGE_MOCK"
+                      />
+                      <div
+                        class="c20 c45"
+                      >
+                        <div
+                          class="c13"
+                        >
+                          <div
+                            class="c20"
+                          >
+                            <p
+                              class="c46"
+                            >
+                              crystal
+                            </p>
+                          </div>
+                          <div
+                            class="c20"
+                          >
+                            <img
+                              src="IMAGE_MOCK"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>

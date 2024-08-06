@@ -22,25 +22,40 @@ const Component = ({ value, disabled, onChange }: Props) => {
   );
 
   return (
-    <Row gap={16} width="100%">
-      <Column flex={1}>
-        <CharacterRadio
-          character={CharacterType.PEEDY}
-          onChange={setCharacter(CharacterType.PEEDY)}
-          checked={value === CharacterType.PEEDY}
-          disabled={disabled}
-        />
+    <>
+      <Column flex={1} gap={8}>
+        <Row gap={16} width="100%">
+          <Column flex={1}>
+            <CharacterRadio
+              character={CharacterType.PEEDY}
+              onChange={setCharacter(CharacterType.PEEDY)}
+              checked={value === CharacterType.PEEDY}
+              disabled={disabled}
+            />
+          </Column>
+        </Row>
+        <Row gap={16} width="100%">
+          <Column flex={1}>
+            <CharacterRadio
+              character={CharacterType.EMMI}
+              onChange={setCharacter(CharacterType.EMMI)}
+              checked={value === CharacterType.EMMI}
+              disabled={disabled}
+            />
+          </Column>
+        </Row>
+        <Row gap={16} width="100%">
+          <Column flex={1}>
+            <CharacterRadio
+              character={CharacterType.CRYSTAL}
+              onChange={setCharacter(CharacterType.CRYSTAL)}
+              checked={value === CharacterType.CRYSTAL}
+              disabled={disabled}
+            />
+          </Column>
+        </Row>
       </Column>
-
-      <Column flex={1}>
-        <CharacterRadio
-          character={CharacterType.EMMI}
-          onChange={setCharacter(CharacterType.EMMI)}
-          checked={value === CharacterType.EMMI}
-          disabled={disabled}
-        />
-      </Column>
-    </Row>
+    </>
   );
 };
 

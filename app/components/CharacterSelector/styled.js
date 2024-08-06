@@ -10,6 +10,11 @@ export const SelectCharacterRadio = styled(Radio)`
   border: 1px solid ${themeColors.highlight};
   border-radius: ${borders.borderRadius};
 
+  label {
+    display: flex;
+    justify-content: center;
+  }
+
   ${({ checked }) =>
     checked &&
     css`
