@@ -245,9 +245,9 @@ const SessionSettings = ({
                 />
               </InputContainer>
 
-              <InputContainer>
+              <InputContainer mt={15}>
                 <H3 mb={5} fontWeight="regular">
-                  {formatMessage(messages.nameLabel)}
+                  {formatMessage(messages.language)}
                 </H3>
                 <ApiSelect
                   // @ts-ignore
