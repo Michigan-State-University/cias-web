@@ -21,3 +21,6 @@ export const makeSelectSessionEditLoader = () =>
 
 export const makeSelectSessionError = (name) =>
   createSelector(selectSession, ({ errors }) => errors[name]);
+
+export const makeSelectSessionLanguageCode = () =>
+  createSelector(selectSession, (substate) => substate.session?.languageCode);

@@ -31,7 +31,17 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c20 {
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  cursor: not-allowed;
+  color: unset;
+}
+
+.c25 {
   width: auto;
   height: auto;
   display: block;
@@ -39,7 +49,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c24 {
+.c29 {
   width: auto;
   height: auto;
   display: block;
@@ -61,7 +71,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c29 {
+.c34 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -71,7 +81,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c31 {
+.c36 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -80,7 +90,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c34 {
+.c39 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -90,7 +100,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c12 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -115,7 +125,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   padding-bottom: 15px;
 }
 
-.c13 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -138,7 +148,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c19 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -162,7 +172,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c22 {
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -181,7 +191,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c30 {
+.c35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -206,7 +216,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c32 {
+.c37 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -232,7 +242,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-bottom: 1px solid #E9F1FB;
 }
 
-.c35 {
+.c40 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -243,7 +253,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c37 {
+.c42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -256,19 +266,27 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c25 {
+.c13 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c30 {
   width: auto;
   height: auto;
 }
 
-.c23 {
+.c28 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c33 {
+.c38 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -276,7 +294,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c46 {
+.c51 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -295,7 +313,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c36 {
+.c41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -310,7 +328,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   flex: 1;
 }
 
-.c38 {
+.c43 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -322,6 +340,36 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 24px;
+  height: 24px;
+}
+
+.c12:after {
+  content: ' ';
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
 }
 
 .c2 {
@@ -367,7 +415,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c10 {
+.c15 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -386,17 +434,17 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c10:focus {
+.c15:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c10:disabled {
+.c15:disabled {
   color: #ABBBD1;
 }
 
-.c11 {
+.c16 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -406,22 +454,22 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c11:focus {
+.c16:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
 }
 
-.c41 {
+.c46 {
   display: none;
 }
 
-.c40:disabled + label > .c44 {
+.c45:disabled + label > .c49 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c43 {
+.c48 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -433,27 +481,27 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c43:hover {
+.c48:hover {
   cursor: pointer;
 }
 
-.c40:disabled + .c42 {
+.c45:disabled + .c47 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c45 {
+.c50 {
   margin-inline-start: 5px;
 }
 
-.c39 {
+.c44 {
   width: 100%;
   padding: 16px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
 }
 
-.c39 label {
+.c44 label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -464,21 +512,38 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   justify-content: center;
 }
 
-.c26 {
+.c11 {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c31 {
   position: relative;
   display: inline-block;
   min-width: 40px;
   height: 21px;
 }
 
-.c16 {
+.c21 {
   opacity: 0;
   width: 0;
   height: 0;
   visibility: collapse;
 }
 
-.c18 {
+.c23 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -490,16 +555,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c18:hover {
+.c23:hover {
   cursor: pointer;
 }
 
-.c15:disabled + .c17 {
+.c20:disabled + .c22 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c28 {
+.c33 {
   position: absolute;
   top: 0;
   left: 0;
@@ -511,20 +576,20 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c15:checked + .c17 .c27 {
+.c20:checked + .c22 .c32 {
   background-color: #B727EA;
 }
 
-.c15:focus + .c17 .c27 {
+.c20:focus + .c22 .c32 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c15:disabled + .c17 .c27 {
+.c20:disabled + .c22 .c32 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c28:before {
+.c33:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -537,17 +602,17 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c15:checked + .c17 .c27:before {
+.c20:checked + .c22 .c32:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
-.c21 {
+.c26 {
   margin-right: 5px;
 }
 
-.c14 {
+.c19 {
   width: 100% !important;
 }
 
@@ -575,6 +640,18 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 .c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -694,12 +771,101 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
               class="c6"
               font-weight="regular"
             >
+              Language
+            </h3>
+            <div
+              class="c10"
+              cursor="not-allowed"
+              width="100%"
+            >
+              <div
+                class=" css-14jk2my-container"
+              >
+                <span
+                  aria-atomic="false"
+                  aria-live="polite"
+                  aria-relevant="additions text"
+                  class="css-1f43avz-a11yText-A11yText"
+                />
+                <div
+                  class=" css-vz7ypb-control"
+                >
+                  <div
+                    class=" css-g1d714-ValueContainer"
+                  >
+                    <div
+                      class=" css-107lb6w-singleValue"
+                    />
+                    <div
+                      class="css-1bwsx9e-Input"
+                    >
+                      <div
+                        class=""
+                        style="display: inline-block;"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-labelledby="select-label-intervention-language"
+                          autocapitalize="none"
+                          autocomplete="off"
+                          autocorrect="off"
+                          disabled=""
+                          id="react-select-3-input"
+                          spellcheck="false"
+                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                          tabindex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class=" css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <div
+                      class="c11"
+                      data-testid="inline-loader"
+                    >
+                      <div
+                        class="c12"
+                        color="#B727EA"
+                        size="24"
+                        width="6"
+                      />
+                    </div>
+                    <div
+                      aria-hidden="true"
+                      class=" css-tlfecz-indicatorContainer"
+                    >
+                      <img
+                        alt="arrow"
+                        class="c13"
+                        src="IMAGE_MOCK"
+                        transform=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c14"
+          >
+            <h3
+              class="c6"
+              font-weight="regular"
+            >
               Variable
             </h3>
             <input
               aria-label="Variable name..."
               autocomplete="off"
-              class="c10 c11"
+              class="c15 c16"
               color="#107969"
               dir="auto"
               disabled=""
@@ -711,15 +877,15 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             />
           </div>
           <div
-            class="c12"
+            class="c17"
           >
             <div
-              class="c13 c14"
+              class="c18 c19"
             >
               <input
                 aria-checked="false"
                 aria-disabled="true"
-                class="c15 c16"
+                class="c20 c21"
                 data-cy="branching-intervention-toggle"
                 data-testid="switch-input"
                 disabled=""
@@ -728,36 +894,36 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 type="checkbox"
               />
               <label
-                class="c17 c18"
+                class="c22 c23"
                 for="Ability to fill the session multiple times"
               >
                 <div
-                  class="c19"
+                  class="c24"
                   width="100%"
                 >
                   <div
-                    class="c20 c21"
+                    class="c25 c26"
                   >
                     <div
-                      class="c22"
+                      class="c27"
                     >
                       <p
-                        class="c23"
+                        class="c28"
                       >
                         Ability to fill the session multiple times
                       </p>
                       <div
-                        class="c24"
+                        class="c29"
                         display="flex"
                       >
                         <div
-                          class="c20"
+                          class="c25"
                           data-for="option-tooltip-Ability to fill the session multiple times"
                           data-tip=""
                         >
                           <img
                             alt="?"
-                            class="c25"
+                            class="c30"
                             src="IMAGE_MOCK"
                           />
                         </div>
@@ -765,10 +931,10 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     </div>
                   </div>
                   <div
-                    class="c26"
+                    class="c31"
                   >
                     <span
-                      class="c27 c28"
+                      class="c32 c33"
                     />
                   </div>
                 </div>
@@ -776,7 +942,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <h3
-            class="c29"
+            class="c34"
           >
             Autofinish settings
           </h3>
@@ -787,12 +953,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
               class="c4"
             >
               <div
-                class="c13"
+                class="c18"
               >
                 <input
                   aria-checked="false"
                   aria-disabled="true"
-                  class="c15 c16"
+                  class="c20 c21"
                   data-cy="branching-intervention-toggle"
                   data-testid="switch-input"
                   disabled=""
@@ -801,33 +967,33 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                   type="checkbox"
                 />
                 <label
-                  class="c17 c18"
+                  class="c22 c23"
                   for="autocloseEnabled"
                 >
                   <div
-                    class="c19"
+                    class="c24"
                     name="autocloseEnabled"
                     width="100%"
                   >
                     <div
-                      class="c20 c21"
+                      class="c25 c26"
                     >
                       <div
-                        class="c22"
+                        class="c27"
                       >
                         Set session close date
                         <div
-                          class="c24"
+                          class="c29"
                           display="flex"
                         >
                           <div
-                            class="c20"
+                            class="c25"
                             data-for="autoclose-enabled-tooltip-info"
                             data-tip=""
                           >
                             <img
                               alt="?"
-                              class="c25"
+                              class="c30"
                               src="IMAGE_MOCK"
                             />
                           </div>
@@ -835,10 +1001,10 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                       </div>
                     </div>
                     <div
-                      class="c26"
+                      class="c31"
                     >
                       <span
-                        class="c27 c28"
+                        class="c32 c33"
                       />
                     </div>
                   </div>
@@ -853,12 +1019,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
               class="c4"
             >
               <div
-                class="c13"
+                class="c18"
               >
                 <input
                   aria-checked="false"
                   aria-disabled="true"
-                  class="c15 c16"
+                  class="c20 c21"
                   data-cy="branching-intervention-toggle"
                   data-testid="switch-input"
                   disabled=""
@@ -867,33 +1033,33 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                   type="checkbox"
                 />
                 <label
-                  class="c17 c18"
+                  class="c22 c23"
                   for="autofinishEnabled"
                 >
                   <div
-                    class="c30"
+                    class="c35"
                     name="autofinishEnabled"
                     width="100%"
                   >
                     <div
-                      class="c20 c21"
+                      class="c25 c26"
                     >
                       <div
-                        class="c22"
+                        class="c27"
                       >
                         Set Autofinish timer
                         <div
-                          class="c24"
+                          class="c29"
                           display="flex"
                         >
                           <div
-                            class="c20"
+                            class="c25"
                             data-for="autofinish-enabled-tooltip-info"
                             data-tip=""
                           >
                             <img
                               alt="?"
-                              class="c25"
+                              class="c30"
                               src="IMAGE_MOCK"
                             />
                           </div>
@@ -901,10 +1067,10 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                       </div>
                     </div>
                     <div
-                      class="c26"
+                      class="c31"
                     >
                       <span
-                        class="c27 c28"
+                        class="c32 c33"
                       />
                     </div>
                   </div>
@@ -923,21 +1089,21 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           class="c4"
         >
           <h3
-            class="c31"
+            class="c36"
           >
             Narrator Settings
           </h3>
           <div
-            class="c32"
+            class="c37"
           >
             <div
-              class="c13 c14"
+              class="c18 c19"
             >
               <input
                 aria-checked="true"
                 aria-disabled="true"
                 checked=""
-                class="c15 c16"
+                class="c20 c21"
                 data-cy="branching-intervention-toggle"
                 data-testid="switch-input"
                 disabled=""
@@ -946,21 +1112,21 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 type="checkbox"
               />
               <label
-                class="c17 c18"
+                class="c22 c23"
                 for="Narrator Active"
               >
                 <div
-                  class="c19"
+                  class="c24"
                   width="100%"
                 >
                   <div
-                    class="c20 c21"
+                    class="c25 c26"
                   >
                     <div
-                      class="c22"
+                      class="c27"
                     >
                       <p
-                        class="c33"
+                        class="c38"
                         font-weight="bold"
                       >
                         Narrator Active
@@ -968,10 +1134,10 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     </div>
                   </div>
                   <div
-                    class="c26"
+                    class="c31"
                   >
                     <span
-                      class="c27 c28"
+                      class="c32 c33"
                     />
                   </div>
                 </div>
@@ -979,16 +1145,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c32"
+            class="c37"
           >
             <div
-              class="c13 c14"
+              class="c18 c19"
             >
               <input
                 aria-checked="true"
                 aria-disabled="true"
                 checked=""
-                class="c15 c16"
+                class="c20 c21"
                 data-cy="branching-intervention-toggle"
                 data-testid="switch-input"
                 disabled=""
@@ -997,31 +1163,31 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 type="checkbox"
               />
               <label
-                class="c17 c18"
+                class="c22 c23"
                 for="Voice"
               >
                 <div
-                  class="c19"
+                  class="c24"
                   width="100%"
                 >
                   <div
-                    class="c20 c21"
+                    class="c25 c26"
                   >
                     <div
-                      class="c22"
+                      class="c27"
                     >
                       <p
-                        class="c23"
+                        class="c28"
                       >
                         Voice
                       </p>
                     </div>
                   </div>
                   <div
-                    class="c26"
+                    class="c31"
                   >
                     <span
-                      class="c27 c28"
+                      class="c32 c33"
                     />
                   </div>
                 </div>
@@ -1029,16 +1195,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c12"
+            class="c17"
           >
             <div
-              class="c13 c14"
+              class="c18 c19"
             >
               <input
                 aria-checked="true"
                 aria-disabled="true"
                 checked=""
-                class="c15 c16"
+                class="c20 c21"
                 data-cy="branching-intervention-toggle"
                 data-testid="switch-input"
                 disabled=""
@@ -1047,31 +1213,31 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 type="checkbox"
               />
               <label
-                class="c17 c18"
+                class="c22 c23"
                 for="Display Narrator"
               >
                 <div
-                  class="c19"
+                  class="c24"
                   width="100%"
                 >
                   <div
-                    class="c20 c21"
+                    class="c25 c26"
                   >
                     <div
-                      class="c22"
+                      class="c27"
                     >
                       <p
-                        class="c23"
+                        class="c28"
                       >
                         Display Narrator
                       </p>
                     </div>
                   </div>
                   <div
-                    class="c26"
+                    class="c31"
                   >
                     <span
-                      class="c27 c28"
+                      class="c32 c33"
                     />
                   </div>
                 </div>
@@ -1079,57 +1245,57 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <h3
-            class="c34"
+            class="c39"
           >
             Default narrator
           </h3>
           <div
-            class="c35"
+            class="c40"
           >
             <div
-              class="c36"
+              class="c41"
             >
               <div
-                class="c37"
+                class="c42"
                 width="100%"
               >
                 <div
-                  class="c38"
+                  class="c43"
                 >
                   <div
-                    class="c13 c39"
+                    class="c18 c44"
                   >
                     <input
-                      class="c40 c41"
+                      class="c45 c46"
                       disabled=""
                       id="character-setting-peedy"
                       type="radio"
                     />
                     <label
-                      class="c42 c43"
+                      class="c47 c48"
                       for="character-setting-peedy"
                     >
                       <img
-                        class="c44 "
+                        class="c49 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c20 c45"
+                        class="c25 c50"
                       >
                         <div
-                          class="c13"
+                          class="c18"
                         >
                           <div
-                            class="c20"
+                            class="c25"
                           >
                             <p
-                              class="c46"
+                              class="c51"
                             >
                               Peedy
                             </p>
                           </div>
                           <div
-                            class="c20"
+                            class="c25"
                           >
                             <img
                               src="IMAGE_MOCK"
@@ -1142,46 +1308,46 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c37"
+                class="c42"
                 width="100%"
               >
                 <div
-                  class="c38"
+                  class="c43"
                 >
                   <div
-                    class="c13 c39"
+                    class="c18 c44"
                   >
                     <input
-                      class="c40 c41"
+                      class="c45 c46"
                       disabled=""
                       id="character-setting-emmi"
                       type="radio"
                     />
                     <label
-                      class="c42 c43"
+                      class="c47 c48"
                       for="character-setting-emmi"
                     >
                       <img
-                        class="c44 "
+                        class="c49 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c20 c45"
+                        class="c25 c50"
                       >
                         <div
-                          class="c13"
+                          class="c18"
                         >
                           <div
-                            class="c20"
+                            class="c25"
                           >
                             <p
-                              class="c46"
+                              class="c51"
                             >
                               Emmi
                             </p>
                           </div>
                           <div
-                            class="c20"
+                            class="c25"
                           >
                             <img
                               src="IMAGE_MOCK"
@@ -1194,46 +1360,46 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c37"
+                class="c42"
                 width="100%"
               >
                 <div
-                  class="c38"
+                  class="c43"
                 >
                   <div
-                    class="c13 c39"
+                    class="c18 c44"
                   >
                     <input
-                      class="c40 c41"
+                      class="c45 c46"
                       disabled=""
                       id="character-setting-crystal"
                       type="radio"
                     />
                     <label
-                      class="c42 c43"
+                      class="c47 c48"
                       for="character-setting-crystal"
                     >
                       <img
-                        class="c44 "
+                        class="c49 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c20 c45"
+                        class="c25 c50"
                       >
                         <div
-                          class="c13"
+                          class="c18"
                         >
                           <div
-                            class="c20"
+                            class="c25"
                           >
                             <p
-                              class="c46"
+                              class="c51"
                             >
                               crystal
                             </p>
                           </div>
                           <div
-                            class="c20"
+                            class="c25"
                           >
                             <img
                               src="IMAGE_MOCK"

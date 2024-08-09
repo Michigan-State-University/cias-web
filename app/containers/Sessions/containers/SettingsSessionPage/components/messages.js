@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.nameLabel`,
     defaultMessage: 'Name',
   },
+  language: {
+    id: `${scope}.language`,
+    defaultMessage: 'Language',
+  },
   welcomeMessageLabel: {
     id: `${scope}.welcomeMessageLabel`,
     defaultMessage: 'Welcome message',

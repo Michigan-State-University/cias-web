@@ -4,7 +4,7 @@ import { IntlProvider } from 'react-intl';
 
 import { translationMessages } from 'i18n';
 
-import { makeSelectInterventionLanguageCode } from 'global/reducers/intervention';
+import { makeSelectSessionLanguageCode } from 'global/reducers/session';
 
 import {
   intlProviderConfig,
@@ -21,9 +21,7 @@ const QuestionDetailsLanguageProvider = ({
   keepAppLocale,
 }: Props) => {
   const appLocale = useSelector(makeSelectLocale());
-  const interventionLanguageCode = useSelector(
-    makeSelectInterventionLanguageCode(),
-  );
+  const interventionLanguageCode = useSelector(makeSelectSessionLanguageCode());
 
   const locale =
     !keepAppLocale && interventionLanguageCode
