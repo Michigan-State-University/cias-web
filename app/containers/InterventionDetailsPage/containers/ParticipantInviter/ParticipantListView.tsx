@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { SelectOption } from 'components/Select/types';
 import Tabs from 'components/Tabs';
 
-import { CopyLinkForm } from './CopyLinkForm';
+import CopyLinkForm from './CopyLinkForm';
 import {
   NormalizedHealthClinicsInfos,
   NormalizedSessions,
