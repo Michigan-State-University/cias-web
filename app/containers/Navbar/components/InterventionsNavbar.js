@@ -29,6 +29,7 @@ import {
   makeSelectSession,
   editSessionSaga,
   makeSelectSessionEditLoader,
+  makeSelectSessionLanguageCode,
 } from 'global/reducers/session';
 import { makeSelectReportsSize } from 'global/reducers/generatedReports';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
@@ -46,7 +47,6 @@ import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
 import {
   makeSelectCanCurrentUserAccessParticipantsData,
   makeSelectEditingPossible,
-  makeSelectInterventionLanguageCode,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
 import { canPreview } from 'models/Status/statusPermissions';
@@ -103,7 +103,7 @@ const InterventionNavbar = ({
   generatedReportsCount,
   canAccessParticipantsData,
   editingPossible,
-  interventionLanguageCode,
+  sessionLanguageCode,
 }) => {
   const { interventionId, sessionId } = params;
 
@@ -153,7 +153,7 @@ const InterventionNavbar = ({
       interventionId,
       sessionId,
       selectedQuestion,
-      interventionLanguageCode,
+      sessionLanguageCode,
     );
 
   return (
@@ -357,7 +357,7 @@ InterventionNavbar.propTypes = {
   generatedReportsCount: PropTypes.number,
   canAccessParticipantsData: PropTypes.bool,
   editingPossible: PropTypes.bool,
-  interventionLanguageCode: PropTypes.string,
+  sessionLanguageCode: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -373,7 +373,7 @@ const mapStateToProps = createStructuredSelector({
   generatedReportsCount: makeSelectReportsSize(),
   canAccessParticipantsData: makeSelectCanCurrentUserAccessParticipantsData(),
   editingPossible: makeSelectEditingPossible(),
-  interventionLanguageCode: makeSelectInterventionLanguageCode(),
+  sessionLanguageCode: makeSelectSessionLanguageCode(),
 });
 
 const mapDispatchToProps = {

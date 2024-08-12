@@ -13,6 +13,8 @@ import { colors, themeColors } from 'theme';
 
 import { variableNameValidator } from 'utils/validators';
 import lastKey from 'utils/getLastKey';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
+import { languageSelectOptionFormatter } from 'utils/formatters';
 
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 import { SessionTypes } from 'models/Session';
@@ -44,6 +46,7 @@ import { Row as GridRow } from 'components/ReactGridSystem';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import { TextButton } from 'components/Button';
+import ApiSelect from 'components/Select/ApiSelect';
 
 import Option from './Option';
 import messages from './messages';
@@ -53,6 +56,7 @@ import { SessionSettingsForm } from './SessionSettingsForm';
 import { getRandomString } from './utils';
 
 import { SessionSettingsColumn, SessionSettingsContainer } from '../styled';
+import { INTERVENTION_LANGUAGE_LABEL_ID } from '../../../../InterventionDetailsPage/components/Modals/InterventionSettingsModal/constants';
 
 const SessionSettings = ({
   name,
@@ -73,6 +77,7 @@ const SessionSettings = ({
   smsCodesAttributes,
   welcomeMessage,
   defaultResponse,
+  languageDetails,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
@@ -237,6 +242,33 @@ const SessionSettings = ({
                   value={name}
                   onBlur={(val) => editSession({ name: val })}
                   px={12}
+                />
+              </InputContainer>
+
+              <InputContainer mt={15}>
+                <H3 mb={5} fontWeight="regular">
+                  {formatMessage(messages.language)}
+                </H3>
+                <ApiSelect
+                  // @ts-ignore
+                  url="/v1/google/languages"
+                  dataParser={(data) =>
+                    jsonApiToArray(data, 'supportedLanguage')
+                  }
+                  optionsFormatter={languageSelectOptionFormatter}
+                  selectProps={{
+                    onChange: (value) =>
+                      editSession({ googleLanguageId: value.googleLanguageId }),
+                    value: {
+                      value: languageDetails?.languageCode,
+                      label: languageDetails?.languageName,
+                      googleLanguageId:
+                        languageDetails.googleLanguageId?.toString(),
+                    },
+                    'aria-labelledby': INTERVENTION_LANGUAGE_LABEL_ID,
+                    isDisabled: !editingPossible,
+                  }}
+                  width="100%"
                 />
               </InputContainer>
 
@@ -429,6 +461,7 @@ SessionSettings.propTypes = {
     narrator: PropTypes.bool,
   }),
   googleTtsVoice: PropTypes.object,
+  languageDetails: PropTypes.object,
   formatMessage: PropTypes.func,
   editSessionSettings: PropTypes.func,
   interventionStatus: PropTypes.string,
