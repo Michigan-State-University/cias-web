@@ -1,8 +1,12 @@
-import React, { FC, useMemo } from 'react';
-import { Form, Formik } from 'formik';
+import _ from 'lodash';
+import { Form, Formik, useFormikContext } from 'formik';
+import React, { FC, useEffect, useMemo, useState } from 'react';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import share from 'assets/svg/share.svg';
+import { makeSelectIntervention } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
 import Divider from 'components/Divider';
@@ -10,6 +14,7 @@ import Row from 'components/Row';
 import FormikSelect from 'components/FormikSelect';
 import CopyToClipboard from 'components/CopyToClipboard';
 import { SelectOption } from 'components/Select/types';
+import { Intervention } from 'models/Intervention';
 
 import { CopyLinkFormValues } from './types';
 import messages from './messages';
@@ -18,15 +23,17 @@ import { createCopyLinkFormSchema, createInviteUrl } from './utils';
 export type Props = {
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
+  intervention: Intervention;
   interventionId: string;
   interventionLanguageCode: string;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
 };
 
-export const CopyLinkForm: FC<Props> = ({
+const CopyLinkForm: FC<Props> = ({
   isModularIntervention,
   isReportingIntervention,
+  intervention,
   interventionId,
   interventionLanguageCode,
   sessionOptions,
@@ -48,6 +55,20 @@ export const CopyLinkForm: FC<Props> = ({
       ),
     [isModularIntervention, isReportingIntervention],
   );
+
+  const [sessionLanguageCode, setSessionLanguageCode] = useState('');
+
+  const SetProperSessionLanguageCode = () => {
+    const { values } = useFormikContext();
+    useEffect(() => {
+      const session = _.find(intervention.sessions, {
+        // @ts-ignore
+        id: values?.sessionOption?.value,
+      });
+      setSessionLanguageCode(session?.languageCode || '');
+    }, [values]);
+    return null;
+  };
 
   return (
     <Formik
@@ -95,7 +116,9 @@ export const CopyLinkForm: FC<Props> = ({
                 interventionId,
                 values.sessionOption?.value,
                 values.healthClinicOption?.value,
-                interventionLanguageCode,
+                sessionLanguageCode === ''
+                  ? interventionLanguageCode
+                  : sessionLanguageCode,
               )}
               icon={share}
               iconAlt={formatMessage(messages.copyLinkIconAlt)}
@@ -112,9 +135,20 @@ export const CopyLinkForm: FC<Props> = ({
                 isModularIntervention,
               })}
             </CopyToClipboard>
+            <SetProperSessionLanguageCode />
           </Column>
         </Form>
       )}
     </Formik>
   );
 };
+
+const mapStateToProps = createStructuredSelector({
+  intervention: makeSelectIntervention(),
+});
+
+const mapDispatchToProps = {};
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default withConnect(CopyLinkForm);

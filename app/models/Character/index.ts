@@ -3,6 +3,7 @@ import { LottieProps } from 'react-lottie';
 export enum CharacterType {
   EMMI = 'emmi',
   PEEDY = 'peedy',
+  CRYSTAL = 'crystal',
 }
 
 export type CharacterSize = {
@@ -42,6 +43,18 @@ export const CHARACTER_CONFIGS: Record<CharacterType, CharacterConfig> = {
   },
   [CharacterType.EMMI]: {
     name: CharacterType.EMMI,
+    size: {
+      width: 168,
+      height: 100.8,
+    },
+    border: {
+      width: 2,
+      radius: 8,
+    },
+    activeIndicatorType: ActiveIndicatorType.RECTANGLE,
+  },
+  [CharacterType.CRYSTAL]: {
+    name: CharacterType.CRYSTAL,
     size: {
       width: 168,
       height: 100.8,

@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.emmi`,
     defaultMessage: 'Emmi',
   },
+  [CharacterType.CRYSTAL]: {
+    id: `${scope}.crystal`,
+    defaultMessage: 'crystal',
+  },
 });

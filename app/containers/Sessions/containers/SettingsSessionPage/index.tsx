@@ -42,6 +42,9 @@ const SettingsSessionPage = () => {
     smsCodesAttributes,
     welcomeMessage,
     defaultResponse,
+    languageCode,
+    languageName,
+    googleLanguageId,
   } = session;
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -85,6 +88,7 @@ const SettingsSessionPage = () => {
           smsCodesAttributes={smsCodesAttributes}
           welcomeMessage={welcomeMessage}
           defaultResponse={defaultResponse}
+          languageDetails={{ googleLanguageId, languageCode, languageName }}
         />
       </Box>
     </>

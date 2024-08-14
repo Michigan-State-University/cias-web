@@ -65,6 +65,9 @@ export interface Session {
   smsCodesAttributes: Array<object>;
   welcomeMessage: string;
   defaultResponse: string;
+  languageName: string;
+  languageCode: string;
+  googleLanguageId: string;
 }
 
 export interface ClassicSession extends Session {
