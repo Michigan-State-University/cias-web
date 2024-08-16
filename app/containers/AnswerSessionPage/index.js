@@ -375,6 +375,7 @@ export function AnswerSessionPage({
       } = {},
     } = {},
     first_question: isFirstScreen,
+    question_language: questionLanguage,
   } = currentQuestion ?? {};
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
@@ -424,10 +425,12 @@ export function AnswerSessionPage({
 
   const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
   useEffect(() => {
-    if (lang) {
+    if (questionLanguage !== '') {
+      changeLocale(questionLanguage);
+    } else if (lang) {
       changeLocale(lang);
     }
-  }, [lang]);
+  }, [lang, questionLanguage]);
 
   const { sessionId, interventionId, index } = params;
 

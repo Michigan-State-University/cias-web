@@ -91,6 +91,12 @@ const makeSelectUserSessionLanguageCode = () =>
     (substate) => substate.userSession?.languageCode,
   );
 
+const makeSelectQuestionLanguageCode = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.currentQuestion?.question_language,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -106,4 +112,5 @@ export {
   makeSelectVerifyPatientDataState,
   makeSelectHfhsPatientDetail,
   makeSelectUserSessionLanguageCode,
+  makeSelectQuestionLanguageCode,
 };
