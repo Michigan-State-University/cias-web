@@ -425,7 +425,7 @@ export function AnswerSessionPage({
 
   const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
   useEffect(() => {
-    if (questionLanguage !== '') {
+    if (questionLanguage) {
       changeLocale(questionLanguage);
     } else if (lang) {
       changeLocale(lang);
