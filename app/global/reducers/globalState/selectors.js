@@ -7,7 +7,7 @@ import { makeSelectInterventionLanguageCode } from 'global/reducers/intervention
 import { makeSelectSessionLanguageCode } from 'global/reducers/session';
 import {
   makeSelectQuestionLanguageCode,
-  makeSelectUserSessionLanguageCode
+  makeSelectUserSessionLanguageCode,
 } from 'containers/AnswerSessionPage/selectors';
 import { makeSelectLocale } from 'containers/AppLanguageProvider';
 
