@@ -156,7 +156,7 @@ const AnimationRefHelper = ({
           if (block.audio_urls) {
             const base64s = await Promise.all(
               block.audio_urls.map(async (url) => {
-                const file = await fetch(`${process.env.API_URL}${url}`)
+                const file = await fetch(`${process.env.API_URL}${url}`);
                 if (file.status === 200) {
                   const contentType = file.headers.get('Content-Type');
                   const arrayBuffer = await file.arrayBuffer();
