@@ -157,15 +157,17 @@ const AnimationRefHelper = ({
             const base64s = await Promise.all(
               block.audio_urls.map(async (url) => {
                 const file = await fetch(`${process.env.API_URL}${url}`);
-                const contentType = file.headers.get('Content-Type');
-                const arrayBuffer = await file.arrayBuffer();
-                const base64String = btoa(
-                  String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                );
-                return `data:${contentType};base64,${base64String}`;
+                if (file.status === 200) {
+                  const contentType = file.headers.get('Content-Type');
+                  const arrayBuffer = await file.arrayBuffer();
+                  const base64String = btoa(
+                    String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                  );
+                  return `data:${contentType};base64,${base64String}`;
+                }
+                return '';
               }),
             );
-
             return { audios_base64: base64s, ...block };
           }
           let reflections = [];
@@ -176,12 +178,15 @@ const AnimationRefHelper = ({
                   const base64s = await Promise.all(
                     reflectionBlock.audio_urls.map(async (url) => {
                       const file = await fetch(`${process.env.API_URL}${url}`);
-                      const contentType = file.headers.get('Content-Type');
-                      const arrayBuffer = await file.arrayBuffer();
-                      const base64String = btoa(
-                        String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                      );
-                      return `data:${contentType};base64,${base64String}`;
+                      if (file.status === 200) {
+                        const contentType = file.headers.get('Content-Type');
+                        const arrayBuffer = await file.arrayBuffer();
+                        const base64String = btoa(
+                          String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                        );
+                        return `data:${contentType};base64,${base64String}`;
+                      }
+                      return '';
                     }),
                   );
 
@@ -202,12 +207,15 @@ const AnimationRefHelper = ({
                         const file = await fetch(
                           `${process.env.API_URL}${url}`,
                         );
-                        const contentType = file.headers.get('Content-Type');
-                        const arrayBuffer = await file.arrayBuffer();
-                        const base64String = btoa(
-                          String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                        );
-                        return `data:${contentType};base64,${base64String}`;
+                        if (file.status === 200) {
+                          const contentType = file.headers.get('Content-Type');
+                          const arrayBuffer = await file.arrayBuffer();
+                          const base64String = btoa(
+                            String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                          );
+                          return `data:${contentType};base64,${base64String}`;
+                        }
+                        return '';
                       }),
                     );
 
@@ -219,12 +227,15 @@ const AnimationRefHelper = ({
               const base64s = await Promise.all(
                 block.target_value.audio_urls.map(async (url) => {
                   const file = await fetch(`${process.env.API_URL}${url}`);
-                  const contentType = file.headers.get('Content-Type');
-                  const arrayBuffer = await file.arrayBuffer();
-                  const base64String = btoa(
-                    String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                  );
-                  return `data:${contentType};base64,${base64String}`;
+                  if (file.status === 200) {
+                    const contentType = file.headers.get('Content-Type');
+                    const arrayBuffer = await file.arrayBuffer();
+                    const base64String = btoa(
+                      String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                    );
+                    return `data:${contentType};base64,${base64String}`;
+                  }
+                  return '';
                 }),
               );
               targetValues = { audios_base64: base64s, ...block.target_value };
@@ -375,6 +386,7 @@ export function AnswerSessionPage({
       } = {},
     } = {},
     first_question: isFirstScreen,
+    question_language: questionLanguage,
   } = currentQuestion ?? {};
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
@@ -424,10 +436,12 @@ export function AnswerSessionPage({
 
   const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
   useEffect(() => {
-    if (lang) {
+    if (questionLanguage) {
+      changeLocale(questionLanguage);
+    } else if (lang) {
       changeLocale(lang);
     }
-  }, [lang]);
+  }, [lang, questionLanguage]);
 
   const { sessionId, interventionId, index } = params;
 

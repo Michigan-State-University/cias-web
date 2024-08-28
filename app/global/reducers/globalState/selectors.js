@@ -5,7 +5,10 @@ import { isAppLanguageSupported } from 'i18n';
 
 import { makeSelectInterventionLanguageCode } from 'global/reducers/intervention';
 import { makeSelectSessionLanguageCode } from 'global/reducers/session';
-import { makeSelectUserSessionLanguageCode } from 'containers/AnswerSessionPage/selectors';
+import {
+  makeSelectQuestionLanguageCode,
+  makeSelectUserSessionLanguageCode,
+} from 'containers/AnswerSessionPage/selectors';
 import { makeSelectLocale } from 'containers/AppLanguageProvider';
 
 import { initialState } from './reducer';
@@ -57,10 +60,11 @@ export const makeSelectInterventionElementsLanguageCode = () =>
 
 export const makeSelectSessionElementsLanguageCode = () =>
   createSelector(
+    makeSelectQuestionLanguageCode(),
     makeSelectSessionLanguageCode(),
     makeSelectUserSessionLanguageCode(),
-    (sessionLanguageCode, userSessionLanguageCode) =>
-      sessionLanguageCode ?? userSessionLanguageCode,
+    (questionLanguageCode, sessionLanguageCode, userSessionLanguageCode) =>
+      questionLanguageCode ?? sessionLanguageCode ?? userSessionLanguageCode,
   );
 
 // Hardcoded/fixed UI elements, e.g. back, skip and continue buttons
