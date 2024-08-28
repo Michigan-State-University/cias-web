@@ -160,6 +160,9 @@ const AnimationRefHelper = ({
                 if (file.status === 200) {
                   const contentType = file.headers.get('Content-Type');
                   const arrayBuffer = await file.arrayBuffer();
+                  if (arrayBuffer.byteLength === 0) {
+                    return '';
+                  }
                   const base64String = btoa(
                     String.fromCharCode(...new Uint8Array(arrayBuffer)),
                   );
@@ -181,6 +184,9 @@ const AnimationRefHelper = ({
                       if (file.status === 200) {
                         const contentType = file.headers.get('Content-Type');
                         const arrayBuffer = await file.arrayBuffer();
+                        if (arrayBuffer.byteLength === 0) {
+                          return '';
+                        }
                         const base64String = btoa(
                           String.fromCharCode(...new Uint8Array(arrayBuffer)),
                         );
@@ -210,6 +216,9 @@ const AnimationRefHelper = ({
                         if (file.status === 200) {
                           const contentType = file.headers.get('Content-Type');
                           const arrayBuffer = await file.arrayBuffer();
+                          if (arrayBuffer.byteLength === 0) {
+                            return '';
+                          }
                           const base64String = btoa(
                             String.fromCharCode(...new Uint8Array(arrayBuffer)),
                           );
@@ -230,6 +239,9 @@ const AnimationRefHelper = ({
                   if (file.status === 200) {
                     const contentType = file.headers.get('Content-Type');
                     const arrayBuffer = await file.arrayBuffer();
+                    if (arrayBuffer.byteLength === 0) {
+                      return '';
+                    }
                     const base64String = btoa(
                       String.fromCharCode(...new Uint8Array(arrayBuffer)),
                     );
