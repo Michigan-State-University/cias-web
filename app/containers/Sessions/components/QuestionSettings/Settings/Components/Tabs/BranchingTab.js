@@ -14,6 +14,7 @@ import Text from 'components/Text';
 import PlusCircle from 'components/Circle/PlusCircle';
 import HoverableBox from 'components/Box/HoverableBox';
 import BranchingLayout from 'containers/BranchingLayout';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import { questionType } from 'models/Session/QuestionTypes';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -99,23 +100,33 @@ const BranchingTab = ({
   };
 
   const extraIcon = (index) => (
-    <ImageButton
-      src={copy}
-      onClick={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        onDuplicateFormula(id, index);
-      }}
-      title={formatMessage(messages.copyFormula)}
-      disabled={disabled}
-      fill={colors.manatee}
-      iconProps={{
-        width: 16,
-        height: 16,
-        mr: 10,
-        mt: 2,
-      }}
-    />
+    <>
+      <HelpIconTooltip
+        id="formula_tooltip"
+        tooltipContent={formatMessage({
+          id: `app.GlobalMessages.formulasTooltip`,
+          defaultMessage: `For details how to construct mathematical or logical equations please visit <a href='https://www.google.com' target='_blank'>www.cias.app/resources</a>`,
+        })}
+        iconProps={{ fill: '#8C94A6' }}
+      />
+      <ImageButton
+        src={copy}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          onDuplicateFormula(id, index);
+        }}
+        title={formatMessage(messages.copyFormula)}
+        disabled={disabled}
+        fill={colors.manatee}
+        iconProps={{
+          width: 16,
+          height: 16,
+          mx: 10,
+          mt: 2,
+        }}
+      />
+    </>
   );
 
   return (

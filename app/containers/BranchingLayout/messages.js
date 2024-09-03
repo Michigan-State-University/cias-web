@@ -14,7 +14,7 @@ export default defineMessages({
   formulaPlaceholder: {
     id: `${scope}.formulaPlaceholder`,
     defaultMessage:
-      'Enter formula here... (You can use mathematical operators +, -, *, /)',
+      'Enter formula here...',
   },
   newCase: {
     id: `${scope}.newCase`,

@@ -16,6 +16,7 @@ import Select from 'components/Select';
 import Row from 'components/Row';
 import { FullWidthSwitch } from 'components/Switch';
 import Text from 'components/Text';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import { StyledInput } from 'components/Input/StyledInput';
 
@@ -143,7 +144,18 @@ const ReflectionFormulaBlock = ({
       </Row>
 
       <Row mt={20} align="center" justify="between">
-        <Text fontWeight="bold">{formatMessage(messages.formulaHeader)}</Text>
+        <Box display="flex" mt={0} mb={0} px={0} py={0}>
+          <Text fontWeight="bold">{formatMessage(messages.formulaHeader)}</Text>
+          <HelpIconTooltip
+            id="formula_tooltip"
+            mx={8}
+            tooltipContent={formatMessage({
+              id: `app.GlobalMessages.formulasTooltip`,
+              defaultMessage: `For details how to construct mathematical or logical equations please visit <a href='https://www.google.com' target='_blank'>www.cias.app/resources</a>`,
+            })}
+            iconProps={{ fill: '#8C94A6' }}
+          />
+        </Box>
         <VariableChooser
           disabled={disabled}
           onClick={(value) =>
