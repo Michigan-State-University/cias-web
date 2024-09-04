@@ -16,7 +16,6 @@ import Box from 'components/Box';
 
 import { CaseInput } from './styled';
 import messages from './messages';
-import Modal from "../Modal";
 
 const SIGNS = ['=', '<', '>', '<=', '>=', '= TRUE', '= FALSE'];
 

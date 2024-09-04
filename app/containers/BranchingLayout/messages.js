@@ -13,8 +13,7 @@ export default defineMessages({
   },
   formulaPlaceholder: {
     id: `${scope}.formulaPlaceholder`,
-    defaultMessage:
-      'Enter formula here...',
+    defaultMessage: 'Enter formula here...',
   },
   newCase: {
     id: `${scope}.newCase`,
