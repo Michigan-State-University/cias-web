@@ -32,7 +32,7 @@
   "app.GlobalMessages.variableNamePlaceholder": "Variable name...",
   "app.GlobalMessages.variableScorePlaceholder": "Score",
   "app.GlobalMessages.yes": "Yes",
-  "app.GlobalMessages.formulasTooltip": "For details how to construct mathematical or logical equations please visit <a href='https://www.google.com' target='_blank'>www.cias.app/resources</a>",
+  "app.GlobalMessages.formulasTooltip": "For details how to construct mathematical or logical equations please visit <a href='https://www.cias.app/resources' target='_blank'>www.cias.app/resources</a>",
   "app.GlobalState.defaultFileName": "downloaded_file",
   "app.GlobalState.downloadFileError": "Unable to download the file",
   "app.components.AccountSettings.activate": "Activate account",
