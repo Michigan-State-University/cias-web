@@ -25,7 +25,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   padding: 35px;
 }
 
-.c43 {
+.c42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -52,7 +52,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   top: 0px;
 }
 
-.c45 {
+.c44 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -141,7 +141,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c22 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -164,7 +164,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c30 {
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -186,7 +186,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c37 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -222,12 +222,12 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c21 {
+.c45 {
   width: auto;
   height: auto;
 }
 
-.c29 {
+.c28 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -236,7 +236,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c31 {
+.c30 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -245,7 +245,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c41 {
+.c40 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -260,7 +260,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c33 {
+.c32 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -338,7 +338,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c34 {
+.c33 {
   width: auto;
   height: auto;
   display: block;
@@ -348,7 +348,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c35 {
+.c34 {
   width: auto;
   height: auto;
   display: block;
@@ -371,7 +371,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c36 {
+.c35 {
   width: auto;
   height: auto;
   display: block;
@@ -383,11 +383,11 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c36:hover {
+.c35:hover {
   background-color: #E9F1FB;
 }
 
-.c39 {
+.c38 {
   width: auto;
   height: auto;
   display: block;
@@ -398,7 +398,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c44 {
+.c43 {
   width: auto;
   height: auto;
   display: block;
@@ -412,7 +412,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c32 {
+.c31 {
   width: auto;
   height: auto;
   display: block;
@@ -466,7 +466,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c40 {
+.c39 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -475,7 +475,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c38 {
+.c37 {
   width: 100%;
   min-height: -webkit-max-content;
   min-height: -moz-max-content;
@@ -484,32 +484,32 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
-.c38 .ql-editor {
+.c37 .ql-editor {
   font-weight: 400;
   padding: 10px;
   overflow: visible;
 }
 
-.c38 .ql-editor.ql-blank::before {
+.c37 .ql-editor.ql-blank::before {
   left: 11px;
 }
 
-.c38 .ql-picker-label svg {
+.c37 .ql-picker-label svg {
   margin-bottom: 15px !important;
 }
 
-.c38 .ql-toolbar {
+.c37 .ql-toolbar {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
 
-.c38 .ql-container {
+.c37 .ql-container {
   font-size: initial;
   font-family: DM Sans;
 }
 
-.c38 .ql-container * {
+.c37 .ql-container * {
   cursor: not-allowed;
 }
 
@@ -596,7 +596,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   margin-right: 5px;
 }
 
-.c42 {
+.c41 {
   border-radius: 5px;
   border: 1px dashed #2F3850;
   background-color: rgba(233,241,251,1);
@@ -609,16 +609,16 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   background-color: #FFFFFF;
 }
 
-.c24 {
+.c23 {
   display: none;
 }
 
-.c23:disabled + label > .c27 {
+.c22:disabled + label > .c26 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c26 {
+.c25 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -630,16 +630,16 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c26:hover {
+.c25:hover {
   cursor: pointer;
 }
 
-.c23:disabled + .c25 {
+.c22:disabled + .c24 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c28 {
+.c27 {
   margin-inline-start: 5px;
 }
 
@@ -790,7 +790,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
                 >
                   <img
                     alt="?"
-                    class="c21"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -798,32 +797,32 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c22"
+            class="c21"
             width="fit-content"
           >
             <div
               class="c5"
             >
               <input
-                class="c23 c24"
+                class="c22 c23"
                 data-cy="false"
                 disabled=""
                 id="access-radio-Intervention"
                 type="radio"
               />
               <label
-                class="c25 c26"
+                class="c24 c25"
                 for="access-radio-Intervention"
               >
                 <img
-                  class="c27 "
+                  class="c26 "
                   src="IMAGE_MOCK"
                 />
                 <div
-                  class="c1 c28"
+                  class="c1 c27"
                 >
                   <p
-                    class="c29"
+                    class="c28"
                     font-size="15"
                     font-weight="regular"
                   >
@@ -834,32 +833,32 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c22"
+            class="c21"
             width="fit-content"
           >
             <div
               class="c5"
             >
               <input
-                class="c23 c24"
+                class="c22 c23"
                 data-cy="false"
                 disabled=""
                 id="access-radio-Intervention::FlexibleOrder"
                 type="radio"
               />
               <label
-                class="c25 c26"
+                class="c24 c25"
                 for="access-radio-Intervention::FlexibleOrder"
               >
                 <img
-                  class="c27 "
+                  class="c26 "
                   src="IMAGE_MOCK"
                 />
                 <div
-                  class="c1 c28"
+                  class="c1 c27"
                 >
                   <p
-                    class="c29"
+                    class="c28"
                     font-size="15"
                     font-weight="regular"
                   >
@@ -870,32 +869,32 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c30"
+            class="c29"
             width="fit-content"
           >
             <div
               class="c5"
             >
               <input
-                class="c23 c24"
+                class="c22 c23"
                 data-cy="false"
                 disabled=""
                 id="access-radio-Intervention::FixedOrder"
                 type="radio"
               />
               <label
-                class="c25 c26"
+                class="c24 c25"
                 for="access-radio-Intervention::FixedOrder"
               >
                 <img
-                  class="c27 "
+                  class="c26 "
                   src="IMAGE_MOCK"
                 />
                 <div
-                  class="c1 c28"
+                  class="c1 c27"
                 >
                   <p
-                    class="c29"
+                    class="c28"
                     font-size="15"
                     font-weight="regular"
                   >
@@ -924,7 +923,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c22"
+            class="c21"
             width="fit-content"
           >
             <div
@@ -932,25 +931,25 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             >
               <input
                 checked=""
-                class="c23 c24"
+                class="c22 c23"
                 data-cy="access-anyone-radio"
                 disabled=""
                 id="access-radio-anyone"
                 type="radio"
               />
               <label
-                class="c25 c26"
+                class="c24 c25"
                 for="access-radio-anyone"
               >
                 <img
-                  class="c27 "
+                  class="c26 "
                   src="IMAGE_MOCK"
                 />
                 <div
-                  class="c1 c28"
+                  class="c1 c27"
                 >
                   <p
-                    class="c31"
+                    class="c30"
                     font-size="15"
                     font-weight="bold"
                   >
@@ -961,35 +960,35 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c22"
+            class="c21"
             width="fit-content"
           >
             <div
               class="c5"
             >
               <input
-                class="c23 c24"
+                class="c22 c23"
                 data-cy="false"
                 disabled=""
                 id="access-radio-registered"
                 type="radio"
               />
               <label
-                class="c25 c26"
+                class="c24 c25"
                 for="access-radio-registered"
               >
                 <img
-                  class="c27 "
+                  class="c26 "
                   src="IMAGE_MOCK"
                 />
                 <div
-                  class="c1 c28"
+                  class="c1 c27"
                 >
                   <div
                     class="c18"
                   >
                     <p
-                      class="c29"
+                      class="c28"
                       font-size="15"
                       font-weight="regular"
                     >
@@ -1006,7 +1005,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
                       >
                         <img
                           alt="?"
-                          class="c21"
                           src="IMAGE_MOCK"
                         />
                       </div>
@@ -1017,32 +1015,32 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c30"
+            class="c29"
             width="fit-content"
           >
             <div
               class="c5"
             >
               <input
-                class="c23 c24"
+                class="c22 c23"
                 data-cy="false"
                 disabled=""
                 id="access-radio-invited"
                 type="radio"
               />
               <label
-                class="c25 c26"
+                class="c24 c25"
                 for="access-radio-invited"
               >
                 <img
-                  class="c27 "
+                  class="c26 "
                   src="IMAGE_MOCK"
                 />
                 <div
-                  class="c1 c28"
+                  class="c1 c27"
                 >
                   <p
-                    class="c29"
+                    class="c28"
                     font-size="15"
                     font-weight="regular"
                   >
@@ -1057,19 +1055,19 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           class="c0"
         >
           <div
-            class="c32"
+            class="c31"
             height="100%"
             width="100%"
           >
             <p
-              class="c31"
+              class="c30"
               font-size="15"
               font-weight="bold"
             >
               Anyone with the link
             </p>
             <p
-              class="c33"
+              class="c32"
               font-size="15"
             >
               <b>
@@ -1092,10 +1090,10 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c34"
+          class="c33"
         >
           <div
-            class="c35"
+            class="c34"
             direction="row"
             display="flex"
           >
@@ -1109,17 +1107,17 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c36"
+          class="c35"
         >
           <div
-            class="c37"
+            class="c36"
             width="100%"
           >
             <div
               class="c0"
             >
               <div
-                class="quill c38"
+                class="quill c37"
               >
                 <div
                   class="ql-container ql-bubble ql-disabled"
@@ -2585,34 +2583,34 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c39 c2"
+      class="c38 c2"
     >
       <div
         class="c0"
       >
         <h2
-          class="c40"
+          class="c39"
         >
           Put logo
         </h2>
         <p
-          class="c41"
+          class="c40"
         >
           If no image is provided, no logo will be displayed.
         </p>
         <div
-          class="c42"
+          class="c41"
           style="position: relative; pointer-events: all;"
           width="100%"
         >
           <div
-            class="c43"
+            class="c42"
             display="flex"
             height="100%"
             width="100%"
           >
             <div
-              class="c44"
+              class="c43"
               disabled=""
               height="100%"
               opacity="0.5"
@@ -2620,7 +2618,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             />
           </div>
           <div
-            class="c45"
+            class="c44"
             display="flex"
           >
             <input
@@ -2632,7 +2630,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             />
             <img
               alt="image"
-              class="c21"
+              class="c45"
               src="IMAGE_MOCK"
             />
             <div

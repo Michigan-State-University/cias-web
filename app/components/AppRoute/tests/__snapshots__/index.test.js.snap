@@ -14,21 +14,6 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c6 {
-  width: auto;
-  height: auto;
-  width: 100%;
-  max-height: 51px;
-}
-
-.c8 {
-  width: auto;
-  height: auto;
-  width: 100%;
-  max-width: 200px;
-  max-height: 100px;
-}
-
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -63,6 +48,21 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  width: 100%;
+  max-height: 51px;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  width: 100%;
+  max-width: 200px;
+  max-height: 100px;
 }
 
 .c11 {

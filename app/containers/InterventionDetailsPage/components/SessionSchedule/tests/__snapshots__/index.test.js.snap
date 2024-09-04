@@ -77,11 +77,6 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   transition: transform 0.2s;
 }
 
-.c9 {
-  width: auto;
-  height: auto;
-}
-
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -178,7 +173,6 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
         >
           <img
             alt="?"
-            class="c9"
             src="IMAGE_MOCK"
           />
         </div>
