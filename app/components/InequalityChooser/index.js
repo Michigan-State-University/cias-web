@@ -61,7 +61,10 @@ const InequalityChooser = ({
   };
 
   const onSignChange = (newSign) => {
-    onChange(newSign.value, numericValue);
+    onChange(
+      newSign.value,
+      isLogicOperator(newSign.value) ? null : numericValue,
+    );
     setSign(newSign.value);
   };
 
