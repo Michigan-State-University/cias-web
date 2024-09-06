@@ -99,9 +99,9 @@ function SessionBranching({
         id="formula_tooltip"
         tooltipContent={formatMessage({
           id: `app.GlobalMessages.formulasTooltip`,
-          defaultMessage: `For details how to construct mathematical or logical equations please visit <a href='https://www.google.com' target='_blank'>www.cias.app/resources</a>`,
+          defaultMessage: `For details how to construct mathematical or logical equations please visit <a href='https://www.cias.app/resources' target='_blank'>www.cias.app/resources</a>`,
         })}
-        iconProps={{ fill: '#8C94A6' }}
+        iconProps={{ fill: colors.manatee }}
       />
       <ImageButton
         src={copy}
