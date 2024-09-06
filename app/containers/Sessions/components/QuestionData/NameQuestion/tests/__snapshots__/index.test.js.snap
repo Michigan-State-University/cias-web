@@ -13,7 +13,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   margin-top: 10px;
 }
 
-.c8 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -43,7 +43,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c7 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -55,7 +55,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c12 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -78,7 +78,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c9 {
+.c8 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -94,17 +94,17 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c9:focus {
+.c8:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c9:disabled {
+.c8:disabled {
   color: #ABBBD1;
 }
 
-.c11 {
+.c10 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -119,13 +119,13 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c11:focus {
+.c10:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c11:disabled {
+.c10:disabled {
   color: #ABBBD1;
 }
 
@@ -136,7 +136,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c14 {
+.c13 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -166,7 +166,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c6 {
+.c5 {
   width: auto;
   height: auto;
   display: block;
@@ -186,7 +186,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c10 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
@@ -213,12 +213,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c5 {
-  width: auto;
-  height: auto;
-}
-
-.c13 {
+.c12 {
   outline: none;
   border: none;
   background: transparent;
@@ -299,25 +294,24 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
             >
               <img
                 alt="?"
-                class="c5"
                 src="IMAGE_MOCK"
               />
             </div>
           </div>
         </div>
         <div
-          class="c6"
+          class="c5"
         >
           <div
-            class="c7"
+            class="c6"
             width="100%"
           >
             <div
-              class="c8"
+              class="c7"
             >
               <input
                 aria-labelledby="name-question-name"
-                class="c9"
+                class="c8"
                 dir="auto"
                 disabled=""
                 height="100%"
@@ -340,15 +334,15 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
           Spell your name how it sounds
         </p>
         <div
-          class="c8"
+          class="c7"
         >
           <div
-            class="c10"
+            class="c9"
             width="100%"
           >
             <input
               aria-label="Spell your name how it sounds"
-              class="c11"
+              class="c10"
               dir="auto"
               disabled=""
               height="100%"
@@ -359,7 +353,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
             />
           </div>
           <div
-            class="c12"
+            class="c11"
             disabled=""
             height="25"
             role="button"
@@ -367,7 +361,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
           >
             <button
               aria-label="Play audio"
-              class="c13 "
+              class="c12 "
               disabled=""
               font-weight="bold"
               title="Play audio"
@@ -378,7 +372,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
               />
             </button>
             <p
-              class="c14"
+              class="c13"
               color="#B727EA"
             >
               Try it out!

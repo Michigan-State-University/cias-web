@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { themeColors } from 'theme';
+import { themeColors, colors } from 'theme';
 
 import VariableChooser from 'containers/VariableChooser';
 import { Col, NoMarginRow, Row } from 'components/ReactGridSystem';
 import Text from 'components/Text';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import { ChartStatus } from 'global/reducers/dashboardSections';
 import { FullWidthContainer } from '../../../styled';
@@ -83,10 +84,19 @@ const ChartSettingsGeneralSection = ({
       <Row mt={36}>
         <Col>
           <NoMarginRow justify="between" width="100%">
-            <Text mb={5}>
+            <Text mb={5} display="flex">
               <Markup
                 content={formatMessage(messages.chartSettingsFormulaLabel)}
                 noWrap
+              />
+              <HelpIconTooltip
+                id="formula_tooltip"
+                mx={8}
+                tooltipContent={formatMessage({
+                  id: `app.GlobalMessages.formulasTooltip`,
+                  defaultMessage: `For details how to construct mathematical or logical equations please visit <a href='https://www.cias.app/resources' target='_blank'>www.cias.app/resources</a>`,
+                })}
+                iconProps={{ fill: colors.manatee }}
               />
             </Text>
             <VariableChooser

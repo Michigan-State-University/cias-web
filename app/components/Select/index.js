@@ -32,6 +32,7 @@ const customStyles = ({
   placeholderColorDisabled,
   valueColorActive,
   valueColorDisabled,
+  centered,
 }) => ({
   control: (provided, { isFocused }) => ({
     ...provided,
@@ -53,6 +54,9 @@ const customStyles = ({
   option: (provided) => ({
     ...provided,
     cursor: isDisabled ? 'not-allowed' : 'pointer',
+    display: centered ? 'flex' : 'box',
+    justifyContent: centered ? 'center' : '',
+    alignItems: centered ? 'center' : '',
   }),
   menuPortal: (provided) => ({ ...provided, zIndex: 999 }),
   placeholder: (provided) => ({

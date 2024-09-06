@@ -61,7 +61,8 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  min-width: 60px;
+  min-width: 75px;
+  margin-right: 10px;
   margin-left: 10px;
   cursor: pointer;
   color: unset;
@@ -73,7 +74,6 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-right: 10px;
-  margin-left: 10px;
   background-color: rgba(233,241,251,1);
   color: unset;
 }

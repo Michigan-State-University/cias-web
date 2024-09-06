@@ -31,21 +31,6 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c5 {
-  width: auto;
-  height: auto;
-}
-
-.c6 {
-  width: auto;
-  height: auto;
-  margin-left: 8px;
-  cursor: pointer;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
-}
-
 .c2 {
   font-family: DM Sans;
   font-size: 13px;
@@ -75,6 +60,16 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
+.c5 {
+  width: auto;
+  height: auto;
+  margin-left: 8px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
 <div>
   <div
     class="c0"
@@ -101,14 +96,13 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
         >
           <img
             alt="?"
-            class="c5"
             src="IMAGE_MOCK"
           />
         </div>
       </div>
       <img
         alt="arrow"
-        class="c6"
+        class="c5"
         src="IMAGE_MOCK"
         transform=""
       />
@@ -148,25 +142,6 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   color: unset;
 }
 
-.c5 {
-  width: auto;
-  height: auto;
-}
-
-.c6 {
-  width: auto;
-  height: auto;
-  margin-left: 8px;
-  cursor: pointer;
-  -webkit-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
-}
-
 .c2 {
   font-family: DM Sans;
   font-size: 13px;
@@ -178,7 +153,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c9 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -191,7 +166,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c10 {
+.c9 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -202,7 +177,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c8 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -244,7 +219,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c7 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -257,6 +232,20 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   z-index: 999;
   top: 30px;
   right: 0;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  margin-left: 8px;
+  cursor: pointer;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
 }
 
 @media only screen and (min-width:768px) {
@@ -301,27 +290,26 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
         >
           <img
             alt="?"
-            class="c5"
             src="IMAGE_MOCK"
           />
         </div>
       </div>
       <img
         alt="arrow"
-        class="c6"
+        class="c5"
         src="IMAGE_MOCK"
         transform="rotate(180deg);"
       />
     </div>
     <div
-      class="c7"
+      class="c6"
       role="listbox"
     >
       <div
-        class="c8"
+        class="c7"
       >
         <p
-          class="c9"
+          class="c8"
           color="#B727EA"
           font-weight="bold"
           role="option"
@@ -329,7 +317,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
           Label
         </p>
         <p
-          class="c10"
+          class="c9"
           font-weight="bold"
           role="option"
         >

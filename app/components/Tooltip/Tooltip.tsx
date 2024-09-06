@@ -22,7 +22,7 @@ import useOutsideClick from 'utils/useOutsideClick';
 import { TOOLTIP_PORTAL_ID } from 'containers/App/constants';
 
 import Box from 'components/Box';
-import Img from 'components/Img';
+import Icon from 'components/Icon';
 import Text from 'components/Text/Text'; // Import like that due to dependency-cycle
 import Portal from 'components/Portal';
 
@@ -136,7 +136,7 @@ const Tooltip = ({
         onTouchStart={onFocusIn}
         {...stretchContentStyle}
       >
-        {icon && <Img src={icon} alt="?" {...iconProps} />}
+        {icon && <Icon src={icon} alt="?" {...iconProps} />}
         {children && <div style={stretchContentStyle}>{children}</div>}
       </Box>
 

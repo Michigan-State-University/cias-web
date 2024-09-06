@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -17,7 +17,7 @@ import Box from 'components/Box';
 import { CaseInput } from './styled';
 import messages from './messages';
 
-const SIGNS = ['=', '<', '>', '<=', '>='];
+const SIGNS = ['=', '<', '>', '<=', '>=', '= TRUE', '= FALSE'];
 
 const InequalityChooser = ({
   onSuccessfulChange,
@@ -33,6 +33,11 @@ const InequalityChooser = ({
     label: sign,
     value: sign,
   });
+
+  const [sign, setSign] = useState(inequalityValue);
+
+  const isLogicOperator = (operator) =>
+    ['= TRUE', '= FALSE'].includes(operator);
 
   const { inequalitySign, numericValue } = useMemo(() => {
     const newNumericValue = inequalityValue
@@ -51,12 +56,16 @@ const InequalityChooser = ({
     };
   }, [inequalityValue]);
 
-  const onChange = (sign, value) => {
-    onSuccessfulChange(`${sign ?? ''}${value ?? ''}`);
+  const onChange = (newSign, value) => {
+    onSuccessfulChange(`${newSign ?? ''}${value ?? ''}`);
   };
 
   const onSignChange = (newSign) => {
-    onChange(newSign.value, numericValue);
+    onChange(
+      newSign.value,
+      isLogicOperator(newSign.value) ? null : numericValue,
+    );
+    setSign(newSign.value);
   };
 
   const onValueChange = (newValue) => {
@@ -68,8 +77,8 @@ const InequalityChooser = ({
   return (
     <>
       <Select
-        minWidth={60}
-        ml={10}
+        minWidth={isLogicOperator(sign) ? 90 : 75}
+        mx={10}
         data-cy="case-select"
         data-testid="select"
         selectProps={{
@@ -79,26 +88,29 @@ const InequalityChooser = ({
           onChange: onSignChange,
           value: inequalitySign,
           height,
+          centered: true,
         }}
       />
-      <Box bg={colors.linkWater} mx={10}>
-        <CaseInput
-          width={width}
-          height={height}
-          data-testid="input"
-          data-cy="case-value-input"
-          disabled={disabled}
-          px={0}
-          py={12}
-          textAlign="center"
-          placeholder="..."
-          value={numericValue}
-          validator={numericValidator}
-          onBlur={onValueChange}
-          aria-label={formatMessage(messages.inputLabel)}
-          bg={bg}
-        />
-      </Box>
+      {!isLogicOperator(sign) && (
+        <Box bg={colors.linkWater} mr={10}>
+          <CaseInput
+            width={width}
+            height={height}
+            data-testid="input"
+            data-cy="case-value-input"
+            disabled={disabled}
+            px={0}
+            py={12}
+            textAlign="center"
+            placeholder="..."
+            value={numericValue}
+            validator={numericValidator}
+            onBlur={onValueChange}
+            aria-label={formatMessage(messages.inputLabel)}
+            bg={bg}
+          />
+        </Box>
+      )}
     </>
   );
 };

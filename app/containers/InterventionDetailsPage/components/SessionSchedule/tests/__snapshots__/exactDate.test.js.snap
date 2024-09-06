@@ -38,7 +38,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c10 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -57,7 +57,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   margin-top: 24px;
 }
 
-.c12 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -76,7 +76,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   gap: 10px;
 }
 
-.c14 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -88,7 +88,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c18 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -145,11 +145,6 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   transition: transform 0.2s;
 }
 
-.c9 {
-  width: auto;
-  height: auto;
-}
-
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -162,7 +157,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   padding-bottom: 24px;
 }
 
-.c11 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -194,7 +189,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c13 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -203,7 +198,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c19 {
+.c18 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -213,65 +208,65 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c16 .schedule-date-picker {
+.c15 .schedule-date-picker {
   font-family: DM Sans;
   background-color: #E9F1FB;
 }
 
-.c16 .schedule-date-picker .react-datepicker__header {
+.c15 .schedule-date-picker .react-datepicker__header {
   background-color: #F8FBFF;
 }
 
-.c16 .schedule-date-picker .react-datepicker__day {
+.c15 .schedule-date-picker .react-datepicker__day {
   color: #2F3850;
 }
 
-.c16 .schedule-date-picker .react-datepicker__day:hover {
+.c15 .schedule-date-picker .react-datepicker__day:hover {
   color: #FFFFFF;
   background-color: rgba(200,102,234,0.7);
 }
 
-.c16 .schedule-date-picker .react-datepicker__day--keyboard-selected {
+.c15 .schedule-date-picker .react-datepicker__day--keyboard-selected {
   background-color: #C866EA;
 }
 
-.c16 .schedule-date-picker .react-datepicker__day--in-range,
-.c16 .schedule-date-picker .react-datepicker__day--in-selecting-range {
+.c15 .schedule-date-picker .react-datepicker__day--in-range,
+.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range {
   color: #2F3850;
   background-color: rgba(200,102,234,0.1);
 }
 
-.c15 .schedule-date-picker .react-datepicker__day--selected:not(.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c16 .schedule-date-picker .react-datepicker__day--range-start:not(.c16 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c16 .schedule-date-picker .react-datepicker__day--range-end:not(.c16 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c16 .schedule-date-picker .react-datepicker__day--selecting-range-start,
-.c16 .schedule-date-picker .react-datepicker__day--selecting-range-end {
+.c14 .schedule-date-picker .react-datepicker__day--selected:not(.c14 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c15 .schedule-date-picker .react-datepicker__day--range-start:not(.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c15 .schedule-date-picker .react-datepicker__day--range-end:not(.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c15 .schedule-date-picker .react-datepicker__day--selecting-range-start,
+.c15 .schedule-date-picker .react-datepicker__day--selecting-range-end {
   color: #FFFFFF;
   background-color: #C866EA;
 }
 
-.c16 .schedule-date-picker .react-datepicker__year-option {
+.c15 .schedule-date-picker .react-datepicker__year-option {
   background-color: #E9F1FB;
 }
 
-.c16 .schedule-date-picker .react-datepicker__month-option {
+.c15 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
 }
 
-.c16 .schedule-date-picker .react-datepicker__time-list-item:hover {
+.c15 .schedule-date-picker .react-datepicker__time-list-item:hover {
   color: #FFFFFF;
   background-color: rgba(200,102,234,0.7) !important;
 }
 
-.c16 .schedule-date-picker .react-datepicker__time-list-item--selected {
+.c15 .schedule-date-picker .react-datepicker__time-list-item--selected {
   background-color: #C866EA !important;
 }
 
-.c16 .react-datepicker-wrapper {
+.c15 .react-datepicker-wrapper {
   width: 100%;
 }
 
-.c17 {
+.c16 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -288,13 +283,13 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(47,56,80,1);
 }
 
-.c17:focus {
+.c16:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c17:disabled {
+.c16:disabled {
   color: #ABBBD1;
 }
 
@@ -377,23 +372,22 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
         >
           <img
             alt="?"
-            class="c9"
             src="IMAGE_MOCK"
           />
         </div>
       </div>
     </div>
     <div
-      class="c10"
+      class="c9"
     >
       <div
-        class="c11"
+        class="c10"
       >
         <div
-          class="c12"
+          class="c11"
         >
           <p
-            class="c13"
+            class="c12"
             font-size="15"
           >
             Send 
@@ -403,14 +397,14 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
             class="c8"
           >
             <div
-              class="c14"
+              class="c13"
               width="100%"
             >
               <div
-                class="c11"
+                class="c10"
               >
                 <div
-                  class="c15 c16"
+                  class="c14 c15"
                 >
                   <div
                     class="react-datepicker-wrapper"
@@ -420,7 +414,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                     >
                       <input
                         aria-label="MM/DD/YYYY"
-                        class="c17"
+                        class="c16"
                         color="#2F3850"
                         dir="auto"
                         font-size="15"
@@ -439,11 +433,11 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c18"
+          class="c17"
           width="100%"
         >
           <p
-            class="c19"
+            class="c18"
             color="#D2371D"
             font-size="12"
           >
