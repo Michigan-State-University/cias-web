@@ -11,7 +11,10 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import { colors, themeColors } from 'theme';
 
-import { variableNameValidator } from 'utils/validators';
+import {
+  nonWhitespaceValidator,
+  variableNameValidator,
+} from 'utils/validators';
 import lastKey from 'utils/getLastKey';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { languageSelectOptionFormatter } from 'utils/formatters';
@@ -314,6 +317,7 @@ const SessionSettings = ({
                                 value={smsCode}
                                 onBlur={(val) => updateSmsCode(val, index)}
                                 px={12}
+                                validator={nonWhitespaceValidator}
                               />
                             </Row>
                           </div>

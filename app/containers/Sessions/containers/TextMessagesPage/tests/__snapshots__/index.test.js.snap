@@ -173,11 +173,6 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: rgba(107,112,124,1);
 }
 
-.c11 {
-  width: auto;
-  height: auto;
-}
-
 .c10 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -294,6 +289,11 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   left: 0;
   top: 0;
   background-color: rgba(255,255,255,0.5);
+}
+
+.c11 {
+  width: auto;
+  height: auto;
 }
 
 .c15 {

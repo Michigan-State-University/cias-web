@@ -32,6 +32,7 @@
   "app.GlobalMessages.variableNamePlaceholder": "",
   "app.GlobalMessages.variableScorePlaceholder": "",
   "app.GlobalMessages.yes": "Sí",
+  "app.GlobalMessages.formulasTooltip": "",
   "app.GlobalState.defaultFileName": "",
   "app.GlobalState.downloadFileError": "",
   "app.components.AccountSettings.activate": "",
