@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { themeColors } from 'theme';
+import { themeColors, colors } from 'theme';
 
 import VariableChooser from 'containers/VariableChooser';
 import { Col, NoMarginRow, Row } from 'components/ReactGridSystem';
