@@ -237,7 +237,7 @@ const SettingsPanel = ({ intervention }: Props) => {
   );
 
   const disabledOptions = useMemo(
-    () => (type !== InterventionType.DEFAULT ? [] : []),
+    () => (type === InterventionType.FIXED ? [shareOptions[0].id] : []),
     [type],
   );
 
