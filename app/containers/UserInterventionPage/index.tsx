@@ -10,6 +10,7 @@ import { Redirect } from 'react-router-dom';
 
 import { RoutePath } from 'global/constants';
 
+import LocalStorageService from 'utils/localStorageService';
 import useGet from 'utils/useGet';
 
 import {
@@ -51,7 +52,6 @@ import {
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
 import { parseUserIntervention } from './utils';
-import LocalStorageService from "../../utils/localStorageService";
 
 interface Params {
   userInterventionId: string;
