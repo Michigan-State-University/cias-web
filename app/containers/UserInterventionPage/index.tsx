@@ -51,6 +51,7 @@ import {
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
 import { parseUserIntervention } from './utils';
+import LocalStorageService from "../../utils/localStorageService";
 
 interface Params {
   userInterventionId: string;
@@ -60,6 +61,9 @@ const UserInterventionPage = () => {
   const { userInterventionId } = useParams<Params>();
 
   const globalDispatch = useDispatch();
+
+  const isAuthenticated = LocalStorageService.isAuthenticated();
+  const isGuestUser = isAuthenticated && !LocalStorageService.getState();
 
   // @ts-ignore
   useInjectReducer({ key: chatWidgetReducerKey, reducer: ChatWidgetReducer });
@@ -147,7 +151,7 @@ const UserInterventionPage = () => {
 
   return (
     // @ts-ignore
-    <AppContainer mb={30}>
+    <AppContainer mb={30} width="100%">
       <Helmet>
         <title>{interventionName}</title>
       </Helmet>
@@ -193,9 +197,11 @@ const UserInterventionPage = () => {
           </Row>
         </>
       )}
-      <BackButton link to={RoutePath.DASHBOARD}>
-        {formatMessage(messages.backToInterventions)}
-      </BackButton>
+      {!isGuestUser && (
+        <BackButton link to={RoutePath.DASHBOARD}>
+          {formatMessage(messages.backToInterventions)}
+        </BackButton>
+      )}
     </AppContainer>
   );
 };
