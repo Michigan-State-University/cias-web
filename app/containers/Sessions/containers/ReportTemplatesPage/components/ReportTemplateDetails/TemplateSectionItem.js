@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-grid-system';
 import { useDispatch } from 'react-redux';
 import { useIntl } from 'react-intl';
+import { Markup } from 'interweave';
 
 import ReorderIcon from 'assets/svg/reorder-hand.svg';
 import { selectTemplateSection } from 'global/reducers/reportTemplates';
@@ -87,7 +88,7 @@ const TemplateSectionItem = ({
               <FlexRow>
                 <FlexColumn width={previewCase.imageUrl ? '67%' : '100%'}>
                   <SectionText isSelected={isSelected || isHovered}>
-                    {previewCase.content}
+                    <Markup content={previewCase.content} />
                   </SectionText>
                 </FlexColumn>
                 {previewCase.imageUrl && (
