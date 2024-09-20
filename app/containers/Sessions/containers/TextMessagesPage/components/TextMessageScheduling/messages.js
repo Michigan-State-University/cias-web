@@ -24,6 +24,10 @@ export default defineMessages({
     id: `${scope}.sendDays`,
     defaultMessage: 'days after the session is completed',
   },
+  sendDaysParticipant: {
+    id: `${scope}.sendDaysParticipant`,
+    defaultMessage: 'days after the date provided by participant',
+  },
   finishBy: {
     id: `${scope}.finishBy`,
     defaultMessage: 'finish by ',
@@ -35,5 +39,13 @@ export default defineMessages({
   stopFeatureInfo: {
     id: `${scope}.stopFeatureInfo`,
     defaultMessage: `Participants can stop all scheduled messages by responding "STOP" or resume with "START". Click <a href='https://support.twilio.com/hc/en-us/articles/223183068-Twilio-international-phone-number-availability-and-their-capabilities#sms_enabled' target='_blank'>here</a> to see supported countries.`,
+  },
+  daysAfterDateVariableInfo: {
+    id: `${scope}.daysAfterDateVariableInfo`,
+    defaultMessage: '(Date Screen variable which should be used)',
+  },
+  daysAfterDateVariableEmpty: {
+    id: `${scope}.daysAfterDateVariableEmpty`,
+    defaultMessage: 'Choose variable',
   },
 });

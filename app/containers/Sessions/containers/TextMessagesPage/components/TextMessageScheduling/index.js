@@ -14,27 +14,34 @@ import Selector from 'components/Selector';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import Badge from 'components/Badge';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import { numericValidator } from 'utils/validators';
 
-import { themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
+import { dateQuestion } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session';
 import messages from './messages';
 import { StyledInputWrapper } from './styled';
 import textMessageScheduleOptionsMessages from './textMessageScheduleOptionsMessages';
 import textMessageScheduleFrequenciesMessages from './textMessageScheduleFrequenciesMessages';
+import VariableChooser from '../../../../../VariableChooser';
 
 const TextMessageScheduling = ({
   id,
   selectedOption,
   value,
+  variableValue,
   frequency,
   endAt,
   formatMessage,
   onChangeOption,
   onChangeValue,
+  onChangeVariable,
   onChangeFrequency,
   disabled,
+  sessionId,
 }) => {
   const [frequencySettings, setFrequencySettings] = useState({
     frequency,
@@ -88,6 +95,14 @@ const TextMessageScheduling = ({
       label: formatMessage(
         textMessageScheduleOptionsMessages[
           TextMessageScheduleOption.DAYS_AFTER_FILL
+        ],
+      ),
+    },
+    [TextMessageScheduleOption.DAYS_AFTER_USER_DEFINED_TIME]: {
+      id: TextMessageScheduleOption.DAYS_AFTER_USER_DEFINED_TIME,
+      label: formatMessage(
+        textMessageScheduleOptionsMessages[
+          TextMessageScheduleOption.DAYS_AFTER_USER_DEFINED_TIME
         ],
       ),
     },
@@ -166,6 +181,53 @@ const TextMessageScheduling = ({
           <Text fontSize={15}>{formatMessage(messages.sendDays)}</Text>
         </Row>
       )}
+      {selectedOption === TextMessageScheduleOption.DAYS_AFTER_USER_DEFINED_TIME && (
+        <>
+          <Row mt={10} align="center">
+            <Text fontSize={15}>{formatMessage(messages.send)}</Text>
+            <StyledInputWrapper>
+              <ApprovableInput
+                type="singleline"
+                placeholder={formatMessage(messages.number)}
+                validator={numericValidator}
+                height={50}
+                mr={0}
+                value={value ?? ''}
+                onCheck={onChangeValue}
+                fontSize={15}
+                padding={5}
+                textAlign="center"
+                disabled={disabled}
+              />
+            </StyledInputWrapper>
+            <Text fontSize={15}>
+              {formatMessage(messages.sendDaysParticipant)}
+            </Text>
+          </Row>
+          <Row mt={10} align="center">
+            <VariableChooser
+              disabled={disabled}
+              onClick={onChangeVariable}
+              placement="left"
+              questionTypeWhitelist={[dateQuestion.id]}
+              currentSessionId={sessionId}
+              includeAllVariables
+              includeCurrentSession
+              includeNonDigitVariables
+              isMultiSession
+              sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
+            >
+              <Badge bg={themeColors.primary} color={colors.white}>
+                {variableValue ||
+                  formatMessage(messages.daysAfterDateVariableEmpty)}
+              </Badge>
+            </VariableChooser>
+            <Text ml={5}>
+              {formatMessage(messages.daysAfterDateVariableInfo)}
+            </Text>
+          </Row>
+        </>
+      )}
       <GRow style={{ width: '100%' }}>
         <GCol xl={12} xxl={6}>
           <Row width="100%" align="center" height="100%" mt={10}>
@@ -232,12 +294,15 @@ TextMessageScheduling.propTypes = {
   id: PropTypes.string,
   endAt: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  variableValue: PropTypes.string,
   frequency: PropTypes.string,
   formatMessage: PropTypes.func,
   onChangeOption: PropTypes.func,
   onChangeFrequency: PropTypes.func,
   onChangeValue: PropTypes.func,
+  onChangeVariable: PropTypes.func,
   disabled: PropTypes.bool,
+  sessionId: PropTypes.string,
 };
 
 export default TextMessageScheduling;

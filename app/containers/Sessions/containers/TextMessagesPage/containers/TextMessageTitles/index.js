@@ -44,6 +44,7 @@ const SmsTiles = ({ createTextMessage }) => {
     editingPossible,
   } = useContext(TextMessagesContext);
 
+
   const handleCreateTextMessages = () => {
     if (!editingPossible) return;
     const newTextMessage = new TextMessagesBuilder().buildNewTextMessage(
