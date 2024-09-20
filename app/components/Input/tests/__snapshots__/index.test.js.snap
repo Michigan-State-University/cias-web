@@ -278,6 +278,21 @@ exports[`<ApprovableInput /> Should render and match the snapshot as richText 1`
   border: 1px solid transparent;
 }
 
+.c2 .ql-bubble .ql-tooltip .ql-toolbar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 200px;
+}
+
 .c2 .ql-editor {
   font-weight: 400;
   padding: 10px;
@@ -290,12 +305,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as richText 1`
 
 .c2 .ql-picker-label svg {
   margin-bottom: 15px !important;
-}
-
-.c2 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
 }
 
 .c2 .ql-container {

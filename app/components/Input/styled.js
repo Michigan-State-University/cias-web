@@ -34,6 +34,13 @@ export const QuillStyled = styled(ReactQuill)`
     }}
   ${({ readOnly }) => (readOnly ? 'cursor: not-allowed' : '')};
 
+  .ql-bubble .ql-tooltip .ql-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 200px;
+  }
+
   .ql-editor {
     font-weight: 400;
     padding: 10px;
@@ -46,10 +53,6 @@ export const QuillStyled = styled(ReactQuill)`
 
   .ql-picker-label svg {
     margin-bottom: 15px !important;
-  }
-
-  .ql-toolbar {
-    width: max-content;
   }
 
   .ql-container {

@@ -47,7 +47,9 @@ import ImageUpload from 'components/ImageUpload';
 import TextButton from 'components/Button/TextButton';
 import OriginalTextHover from 'components/OriginalTextHover';
 import { ModalType, useModal } from 'components/Modal';
+import { selectQuillText } from 'components/Input/utils';
 
+import ApprovableInput from 'components/Input/ApprovableInput';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 import Option from './Option';
@@ -327,20 +329,20 @@ const SectionCaseItem = ({
                 id={`section-case-${sectionCase.id}`}
                 text={sectionCase.originalText?.content}
                 position="relative"
-                mr={-9}
                 iconProps={originalTextIconProps}
               >
-                <StyledInput
-                  aria-labelledby="section-case-content"
+                <ApprovableInput
+                  disabled={!canEdit}
                   type="multiline"
-                  rows="5"
-                  width="100%"
+                  value={sectionCase.content}
+                  onCheck={handleContentChange}
+                  onFocus={selectQuillText}
+                  autoSize
+                  richText
+                  aria-labelledby="section-case-content"
                   placeholder={formatMessage(
                     messages.sectionCaseContentPlaceholder,
                   )}
-                  value={sectionCase.content}
-                  onBlur={handleContentChange}
-                  disabled={!canEdit}
                 />
               </OriginalTextHover>
             </Box>

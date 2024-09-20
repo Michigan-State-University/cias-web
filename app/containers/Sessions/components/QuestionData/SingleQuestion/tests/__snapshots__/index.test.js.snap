@@ -167,6 +167,21 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
+.c10 .ql-bubble .ql-tooltip .ql-toolbar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 200px;
+}
+
 .c10 .ql-editor {
   font-weight: 400;
   padding: 10px;
@@ -179,12 +194,6 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
 
 .c10 .ql-picker-label svg {
   margin-bottom: 15px !important;
-}
-
-.c10 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
 }
 
 .c10 .ql-container {

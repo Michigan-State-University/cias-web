@@ -489,6 +489,21 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
+.c15 .ql-bubble .ql-tooltip .ql-toolbar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 200px;
+}
+
 .c15 .ql-editor {
   font-weight: 400;
   padding: 10px;
@@ -501,12 +516,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 
 .c15 .ql-picker-label svg {
   margin-bottom: 15px !important;
-}
-
-.c15 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
 }
 
 .c15 .ql-container {
@@ -522,6 +531,21 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
+.c18 .ql-bubble .ql-tooltip .ql-toolbar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 200px;
+}
+
 .c18 .ql-editor {
   font-weight: 400;
   padding: 10px;
@@ -534,12 +558,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 
 .c18 .ql-picker-label svg {
   margin-bottom: 15px !important;
-}
-
-.c18 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
 }
 
 .c18 .ql-container {
