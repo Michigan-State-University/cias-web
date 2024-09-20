@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
+import { formatMessage } from 'utils/intlOutsideReact';
 
 import { BULK_EDIT_SESSION_REQUEST } from '../constants';
 import {
@@ -43,9 +44,12 @@ export function* bulkEditSession({
 
     yield put(editSessionSuccess(jsonApiToObject(data, 'session')));
   } catch (error) {
+    const smsCodeError = error?.response?.data?.message.includes('sms code');
     yield call(
       toast.error,
-      formatApiErrorMessage(error, messages.editSessionError),
+      smsCodeError
+        ? formatMessage(messages.smsCodeError)
+        : formatApiErrorMessage(error, messages.editSessionError),
     );
     yield put(editSessionError(error));
   }
