@@ -4,6 +4,9 @@ export const CHANGE_SCHEDULING_TYPE =
 export const CHANGE_SCHEDULING_VALUE =
   'app/TextMessaging/TextMessagesSettings/CHANGE_SCHEDULING_VALUE';
 
+export const CHANGE_SCHEDULING_VARIABLE =
+  'app/TextMessaging/TextMessagesSettings/CHANGE_SCHEDULING_VARIABLE';
+
 export const CHANGE_SCHEDULING_FREQUENCY =
   'app/TextMessaging/TextMessagesSettings/CHANGE_SCHEDULING_FREQUENCY';
 
