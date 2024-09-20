@@ -3,6 +3,7 @@ export * from './actions';
 export {
   changeSchedulingType,
   changeSchedulingValue,
+  changeSchedulingVariable,
   changeSchedulingFrequency,
   changeFormulaValue,
   changeTileName,

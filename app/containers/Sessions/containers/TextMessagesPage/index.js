@@ -107,7 +107,7 @@ const TextMessagingPage = ({
         </Col>
         {selectedMessageId && selectedMessage && (
           <Col style={{ overflowY: 'auto' }}>
-            <TextMessageSettings />
+            <TextMessageSettings sessionId={sessionId} />
           </Col>
         )}
       </Row>

@@ -97,15 +97,6 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     }
   }, []);
 
-  if (isGuestUser) {
-    return (
-      <Row mt={50} justify="center" width="100%" dir={fixedElementsDirection}>
-        <Button onClick={reloadPage} px={20} width="auto">
-          {formatMessage(messages.completeSession)}
-        </Button>
-      </Row>
-    );
-  }
   const showModulesButtons = isModuleIntervention && !isPreview;
 
   if (showModulesButtons)
@@ -136,6 +127,16 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
         )}
       </Row>
     );
+
+  if (isGuestUser) {
+    return (
+      <Row mt={50} justify="center" width="100%" dir={fixedElementsDirection}>
+        <Button onClick={reloadPage} px={20} width="auto">
+          {formatMessage(messages.completeSession)}
+        </Button>
+      </Row>
+    );
+  }
 
   const getGoToDashboardButtonLink = () => {
     if (isPreview) return '#';
