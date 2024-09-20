@@ -14,4 +14,8 @@ export default defineMessages<TextMessageScheduleOption>({
     id: `${scope}.days_after_session_end`,
     defaultMessage: 'Send {days} days after the session is completed',
   },
+  [TextMessageScheduleOption.DAYS_AFTER_USER_DEFINED_TIME]: {
+    id: `${scope}.days_after_user_defined_time`,
+    defaultMessage: 'Send {days} days after the participant defined time',
+  },
 });

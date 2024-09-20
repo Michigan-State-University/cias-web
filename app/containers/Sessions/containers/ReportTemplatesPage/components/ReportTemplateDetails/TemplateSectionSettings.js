@@ -112,7 +112,7 @@ const TemplateSectionSettings = ({
   if (!selectedTemplateSection) return <></>;
 
   return (
-    <CardBox minHeight="100%">
+    <CardBox minHeight="100%" id="quill_boundaries">
       <DeleteModal />
 
       <Container fluid>

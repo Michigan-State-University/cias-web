@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.editSessionError`,
     defaultMessage: `Couldn't update session`,
   },
+  smsCodeError: {
+    id: `${scope}.smsCodeError`,
+    defaultMessage: `You have entered an incorrect code. Please try again.`,
+  },
 });

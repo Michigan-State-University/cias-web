@@ -8,6 +8,7 @@ import {
   CHANGE_FORMULA_USED,
   CHANGE_TYPE,
   CHANGE_INCLUDED_DATA,
+  CHANGE_SCHEDULING_VARIABLE,
 } from './constants';
 
 export const changeSchedulingType = (value) =>
@@ -20,6 +21,12 @@ export const changeSchedulingValue = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_SCHEDULING_VALUE,
     data: { value, field: 'schedulePayload' },
+  });
+
+export const changeSchedulingVariable = (value) =>
+  updateTextMessageSettingsRequest({
+    type: CHANGE_SCHEDULING_VARIABLE,
+    data: { value, field: 'scheduleVariable' },
   });
 
 export const changeSchedulingFrequency = (value) =>

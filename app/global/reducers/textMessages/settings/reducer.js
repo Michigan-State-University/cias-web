@@ -14,6 +14,7 @@ import {
   CHANGE_NO_FORMULA_TEXT,
   CHANGE_TYPE,
   CHANGE_INCLUDED_DATA,
+  CHANGE_SCHEDULING_VARIABLE,
 } from './constants';
 
 /**
@@ -25,6 +26,10 @@ const textMessageSettingsReducer = (textMessage, payload) =>
     switch (payload.type) {
       case CHANGE_SCHEDULING_VALUE:
         draft.schedulePayload = +payload.data.value;
+        break;
+
+      case CHANGE_SCHEDULING_VARIABLE:
+        draft.scheduleVariable = +payload.data.value;
         break;
 
       case CHANGE_SCHEDULING_TYPE:

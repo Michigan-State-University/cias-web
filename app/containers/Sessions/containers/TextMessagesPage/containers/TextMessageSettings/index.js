@@ -8,6 +8,7 @@ import Row from 'components/Row';
 import {
   changeSchedulingType,
   changeSchedulingValue,
+  changeSchedulingVariable,
   changeSchedulingFrequency,
   fetchVariantsAndPhonesRequest,
   removeTextMessageRequest,
@@ -43,12 +44,14 @@ import { AlertPhones } from '../../components/AlertPhones';
 const TextMessageSettings = ({
   changeSchedulingTypeAction,
   changeSchedulingValueAction,
+  changeSchedulingVariableAction,
   changeSchedulingFrequencyAction,
   fetchVariantsAndPhones,
   removeTextMessage,
   changeTileNameAction,
   cloneTextMessage,
   changeTypeAction,
+  sessionId,
 }) => {
   const {
     formatMessage,
@@ -59,6 +62,7 @@ const TextMessageSettings = ({
       schedule,
       frequency,
       schedulePayload,
+      scheduleVariable,
       formula,
       endAt,
       isUsedFormula,
@@ -142,10 +146,13 @@ const TextMessageSettings = ({
           endAt={endAt}
           formatMessage={formatMessage}
           value={schedulePayload}
+          variableValue={scheduleVariable}
           onChangeOption={changeSchedulingTypeAction}
           onChangeValue={changeSchedulingValueAction}
+          onChangeVariable={changeSchedulingVariableAction}
           onChangeFrequency={changeSchedulingFrequencyAction}
           disabled={!editingPossible}
+          sessionId={sessionId}
         />
       )}
 
@@ -181,17 +188,20 @@ const TextMessageSettings = ({
 TextMessageSettings.propTypes = {
   changeSchedulingTypeAction: PropTypes.func,
   changeSchedulingValueAction: PropTypes.func,
+  changeSchedulingVariableAction: PropTypes.func,
   changeSchedulingFrequencyAction: PropTypes.func,
   fetchVariantsAndPhones: PropTypes.func,
   removeTextMessage: PropTypes.func,
   changeTileNameAction: PropTypes.func,
   cloneTextMessage: PropTypes.func,
   changeTypeAction: PropTypes.func,
+  sessionId: PropTypes.string,
 };
 
 const mapDispatchToProps = {
   changeSchedulingTypeAction: changeSchedulingType,
   changeSchedulingValueAction: changeSchedulingValue,
+  changeSchedulingVariableAction: changeSchedulingVariable,
   changeSchedulingFrequencyAction: changeSchedulingFrequency,
   changeTileNameAction: changeTileName,
   fetchVariantsAndPhones: fetchVariantsAndPhonesRequest,
