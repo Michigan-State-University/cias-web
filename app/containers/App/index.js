@@ -433,8 +433,6 @@ export function App({ user, fetchSelfDetails }) {
           exact
           path={RoutePath.USER_INTERVENTION}
           component={UserInterventionPage}
-          protectedRoute
-          allowedRoles={[Roles.Participant, Roles.PredefinedParticipant]}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
           }}
@@ -443,8 +441,6 @@ export function App({ user, fetchSelfDetails }) {
           exact
           path={RoutePath.INTERVENTION_INVITE}
           component={UserInterventionInvitePage}
-          protectedRoute
-          allowedRoles={[Roles.Participant]}
         />
         <AppRoute
           exact
