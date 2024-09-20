@@ -181,7 +181,8 @@ const TextMessageScheduling = ({
           <Text fontSize={15}>{formatMessage(messages.sendDays)}</Text>
         </Row>
       )}
-      {selectedOption === TextMessageScheduleOption.DAYS_AFTER_USER_DEFINED_TIME && (
+      {selectedOption ===
+        TextMessageScheduleOption.DAYS_AFTER_USER_DEFINED_TIME && (
         <>
           <Row mt={10} align="center">
             <Text fontSize={15}>{formatMessage(messages.send)}</Text>
