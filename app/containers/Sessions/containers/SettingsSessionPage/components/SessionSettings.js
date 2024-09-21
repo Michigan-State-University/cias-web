@@ -50,6 +50,7 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import { TextButton } from 'components/Button';
 import ApiSelect from 'components/Select/ApiSelect';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import Option from './Option';
 import messages from './messages';
@@ -289,10 +290,19 @@ const SessionSettings = ({
                         return (
                           <div key={id}>
                             <Row justify="between" align="center">
-                              <Row justify="between" align="center">
-                                <H3 fontWeight="regular">
-                                  {formatMessage(properMessage, { clinicName })}
-                                </H3>
+                              <Row justify="between" align="center" mb={5}>
+                                <HelpIconTooltip
+                                  id="el-tooltip-sms-code-info"
+                                  tooltipContent={formatMessage(
+                                    messages.smsCodeTooltip,
+                                  )}
+                                >
+                                  <H3 fontWeight="regular">
+                                    {formatMessage(properMessage, {
+                                      clinicName,
+                                    })}
+                                  </H3>
+                                </HelpIconTooltip>
                               </Row>
                               <TextButton
                                 fontWeight="bold"
