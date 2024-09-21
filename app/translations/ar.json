@@ -1479,6 +1479,7 @@
   "app.containers.SettingsSessionPage.Components.minutes": "",
   "app.containers.SettingsSessionPage.Components.multipleFill": "",
   "app.containers.SettingsSessionPage.Components.multipleFillTooltip": "",
+  "app.containers.SettingsSessionPage.Components.smsCodeTooltip": "",
   "app.containers.SettingsSessionPage.Components.nameLabel": "",
   "app.containers.SettingsSessionPage.Components.language": "",
   "app.containers.SettingsSessionPage.Components.welcomeMessageLabel": "",
