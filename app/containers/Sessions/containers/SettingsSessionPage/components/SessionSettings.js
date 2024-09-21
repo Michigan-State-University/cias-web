@@ -50,6 +50,7 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import { TextButton } from 'components/Button';
 import ApiSelect from 'components/Select/ApiSelect';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import Option from './Option';
 import messages from './messages';
@@ -60,8 +61,6 @@ import { getRandomString } from './utils';
 
 import { SessionSettingsColumn, SessionSettingsContainer } from '../styled';
 import { INTERVENTION_LANGUAGE_LABEL_ID } from '../../../../InterventionDetailsPage/components/Modals/InterventionSettingsModal/constants';
-import Text from "../../../../../components/Text";
-import {HelpIconTooltip} from "../../../../../components/HelpIconTooltip";
 
 const SessionSettings = ({
   name,
