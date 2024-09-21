@@ -60,6 +60,8 @@ import { getRandomString } from './utils';
 
 import { SessionSettingsColumn, SessionSettingsContainer } from '../styled';
 import { INTERVENTION_LANGUAGE_LABEL_ID } from '../../../../InterventionDetailsPage/components/Modals/InterventionSettingsModal/constants';
+import Text from "../../../../../components/Text";
+import {HelpIconTooltip} from "../../../../../components/HelpIconTooltip";
 
 const SessionSettings = ({
   name,
@@ -289,10 +291,19 @@ const SessionSettings = ({
                         return (
                           <div key={id}>
                             <Row justify="between" align="center">
-                              <Row justify="between" align="center">
-                                <H3 fontWeight="regular">
-                                  {formatMessage(properMessage, { clinicName })}
-                                </H3>
+                              <Row justify="between" align="center" mb={5}>
+                                <HelpIconTooltip
+                                  id="el-tooltip-sms-code-info"
+                                  tooltipContent={formatMessage(
+                                    messages.smsCodeTooltip,
+                                  )}
+                                >
+                                  <H3 fontWeight="regular">
+                                    {formatMessage(properMessage, {
+                                      clinicName,
+                                    })}
+                                  </H3>
+                                </HelpIconTooltip>
                               </Row>
                               <TextButton
                                 fontWeight="bold"
