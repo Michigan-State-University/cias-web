@@ -13,7 +13,8 @@ import { TemplateSectionBuilder } from 'models/ReportTemplate';
 
 import DashedButton from 'components/Button/DashedButton';
 import Img from 'components/Img';
-import { StyledInput } from 'components/Input/StyledInput';
+import ApprovableInput from 'components/Input/ApprovableInput';
+import { selectQuillText } from 'components/Input/utils';
 import { DndSortable } from 'components/DragAndDrop';
 import OriginalTextHover, {
   OriginalTextIconPosition,
@@ -94,19 +95,21 @@ const ReportTemplatePreview = () => {
                     iconPosition={OriginalTextIconPosition.START}
                     marginInlineStart={10}
                   >
-                    <StyledInput
+                    <ApprovableInput
                       type="singleline"
-                      width="100%"
+                      value={singleReportTemplate.summary ?? ''}
                       placeholder={formatMessage(
                         messages.reportHeaderPlaceholder,
                       )}
-                      value={singleReportTemplate.summary ?? ''}
-                      onBlur={onSummaryChange}
-                      disabled={!canEdit}
-                      fontSize={32}
-                      maxWidth="none"
-                      fontWeight="bold"
+                      onCheck={onSummaryChange}
+                      onFocus={selectQuillText}
+                      autoSize
+                      richText
                       pl="0px"
+                      fontSize={32}
+                      fontWeight="bold"
+                      width="100%"
+                      disabled={!canEdit}
                     />
                   </OriginalTextHover>
                 </Col>
