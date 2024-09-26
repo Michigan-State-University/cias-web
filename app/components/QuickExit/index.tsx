@@ -95,18 +95,21 @@ const QuickExit = ({ isMobilePreview, beforeQuickExit }: Props) => {
 
   const isTouchScreen = useIsTouchScreen();
   const showExitButton = !isMobilePreview && (isMediumAndUp || !isTouchScreen);
+  const showOnboardingModal = localStorage.quickExitAccepted !== 'true';
 
   const [buttonOnbroading, setButtonOnbroading] = useState('');
   const [buttonOnbroadingCompleted, setButtonOnbroadingCompleted] =
     useState(false);
 
   const openButtonOnboarding = () => {
-    if (!buttonOnbroadingCompleted) setButtonOnbroading(QUICK_EXIT_BUTTON_ID);
+    if (!buttonOnbroadingCompleted && showOnboardingModal)
+      setButtonOnbroading(QUICK_EXIT_BUTTON_ID);
   };
 
   const closeButtonOnboarding = () => {
     setButtonOnbroading('');
     setButtonOnbroadingCompleted(true);
+    localStorage.quickExitAccepted = 'true';
   };
 
   const [gestureOnboarding, setGestureOnboarding] = useState(false);
@@ -114,7 +117,8 @@ const QuickExit = ({ isMobilePreview, beforeQuickExit }: Props) => {
     useState(false);
 
   const openGestureOnboarding = () => {
-    if (!gestureOnboardingCompleted) setGestureOnboarding(true);
+    if (!gestureOnboardingCompleted && showOnboardingModal)
+      setGestureOnboarding(true);
   };
 
   const closeGestureOnboarding = () => {
@@ -123,6 +127,7 @@ const QuickExit = ({ isMobilePreview, beforeQuickExit }: Props) => {
     if (showExitButton) {
       openButtonOnboarding();
     }
+    localStorage.quickExitAccepted = 'true';
   };
 
   useEffect(() => {
