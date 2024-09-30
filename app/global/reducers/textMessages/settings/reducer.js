@@ -29,7 +29,7 @@ const textMessageSettingsReducer = (textMessage, payload) =>
         break;
 
       case CHANGE_SCHEDULING_VARIABLE:
-        draft.scheduleVariable = +payload.data.value;
+        draft.scheduleVariable = payload.data.value;
         break;
 
       case CHANGE_SCHEDULING_TYPE:
