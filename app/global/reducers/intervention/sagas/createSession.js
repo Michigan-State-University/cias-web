@@ -17,8 +17,6 @@ export function* createSession({ payload: { id, lastPosition, type } }) {
     type === SessionTypes.SMS_SESSION
       ? 'New SMS Campaign'
       : `${sessionNamePrefix}New Session`;
-  const defaultResponse =
-    type === SessionTypes.SMS_SESSION ? 'Wrong message' : '';
   try {
     const {
       data: { data },
@@ -27,7 +25,6 @@ export function* createSession({ payload: { id, lastPosition, type } }) {
         type,
         name: sessionName,
         position: lastPosition + 1,
-        default_response: defaultResponse,
       },
     });
 
