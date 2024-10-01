@@ -17,7 +17,7 @@ export default defineMessages({
   },
   welcomeMessageLabel: {
     id: `${scope}.welcomeMessageLabel`,
-    defaultMessage: 'Welcome message',
+    defaultMessage: 'Default welcome message',
   },
   defaultResponseLabel: {
     id: `${scope}.defaultResponseLabel`,
