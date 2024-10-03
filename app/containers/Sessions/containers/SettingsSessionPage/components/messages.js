@@ -17,7 +17,7 @@ export default defineMessages({
   },
   welcomeMessageLabel: {
     id: `${scope}.welcomeMessageLabel`,
-    defaultMessage: 'Welcome message',
+    defaultMessage: 'Default welcome message',
   },
   defaultResponseLabel: {
     id: `${scope}.defaultResponseLabel`,
@@ -160,5 +160,10 @@ export default defineMessages({
     id: `${scope}.multipleFillTooltip`,
     defaultMessage:
       'If the session is filled multiple times by the logged-in user, the scheduling and SMS will not change. You cannot use variables from the multiple fill session in other sessions.',
+  },
+  smsCodeTooltip: {
+    id: `${scope}.smsCodeTooltip`,
+    defaultMessage:
+      'Please exercise caution when using letters or numbers that look alike (such as 1, l, i, O, or 0).',
   },
 });
