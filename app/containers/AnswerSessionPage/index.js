@@ -1138,6 +1138,7 @@ AnswerSessionPage.propTypes = {
   match: PropTypes.object,
   AnswerSessionPage: PropTypes.object,
   saveSelectedAnswer: PropTypes.func,
+  saveVideoStats: PropTypes.func,
   submitAnswerRequest: PropTypes.func,
   onStartSession: PropTypes.func,
   changeIsAnimationOngoing: PropTypes.func,
