@@ -69,6 +69,7 @@ import {
   makeSelectAnswers,
   makeSelectCurrentQuestion,
   makeSelectUserSession,
+  makeSelectVideoStats,
 } from './selectors';
 import messages from './messages';
 import { getInterventionNotAvailablePagePathFromApiError } from '../../components/InterventionNotAvailableInfo';
@@ -77,6 +78,9 @@ function* submitAnswersAsync({
   payload: { questionId, required, type: questionType, userSessionId, skipped },
 }) {
   const answers = yield select(makeSelectAnswers());
+  const allVideoStats = yield select(makeSelectVideoStats());
+  let videoStats = allVideoStats[questionId];
+  videoStats ??= {};
   let { answerBody: data } = answers[questionId];
   data ??= [];
 
@@ -104,7 +108,7 @@ function* submitAnswersAsync({
       yield axios.post(
         `/v1/user_sessions/${userSessionId}/answers`,
         objectToSnakeCase({
-          answer: { type, body: { data } },
+          answer: { type, body: { data }, videoStats },
           questionId,
           skipped,
         }),

@@ -42,12 +42,16 @@ import {
   VERIFY_PATIENT_DATA_SUCCESS,
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
+  SELECT_VIDEO_STATS,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
 
 export const selectAnswer = (answerBody, questionId) =>
   actionBuilder(SELECT_ANSWER, { answerBody, questionId });
+
+export const selectVideoStats = (videoStats, questionId) =>
+  actionBuilder(SELECT_VIDEO_STATS, { videoStats, questionId });
 
 export const submitAnswer = (
   questionId,
