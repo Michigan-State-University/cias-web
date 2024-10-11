@@ -10,9 +10,9 @@ import {
 export type Props = {
   videoUrl: string;
   disabled: boolean;
-  onStart: () => void;
-  onProgress: () => void;
-  onEnded: () => void;
+  onStart?: () => void;
+  onProgress?: () => void;
+  onEnded?: () => void;
 } & PlayerWrapperProps;
 
 const Player = ({
