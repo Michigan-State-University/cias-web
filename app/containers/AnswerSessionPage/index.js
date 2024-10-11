@@ -34,6 +34,7 @@ import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 import LocalStorageService from 'utils/localStorageService';
 import useQuery from 'utils/useQuery';
+import { arrayBufferToBase64 } from 'utils/arrayBufferToBase64';
 
 import {
   makeSelectAudioInstance,
@@ -164,9 +165,7 @@ const AnimationRefHelper = ({
                   if (arrayBuffer.byteLength === 0) {
                     return '';
                   }
-                  const base64String = btoa(
-                    String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                  );
+                  const base64String = arrayBufferToBase64(arrayBuffer);
                   return `data:${contentType};base64,${base64String}`;
                 }
                 return '';
@@ -188,9 +187,7 @@ const AnimationRefHelper = ({
                         if (arrayBuffer.byteLength === 0) {
                           return '';
                         }
-                        const base64String = btoa(
-                          String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                        );
+                        const base64String = arrayBufferToBase64(arrayBuffer);
                         return `data:${contentType};base64,${base64String}`;
                       }
                       return '';
@@ -220,9 +217,7 @@ const AnimationRefHelper = ({
                           if (arrayBuffer.byteLength === 0) {
                             return '';
                           }
-                          const base64String = btoa(
-                            String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                          );
+                          const base64String = arrayBufferToBase64(arrayBuffer);
                           return `data:${contentType};base64,${base64String}`;
                         }
                         return '';
@@ -243,9 +238,7 @@ const AnimationRefHelper = ({
                     if (arrayBuffer.byteLength === 0) {
                       return '';
                     }
-                    const base64String = btoa(
-                      String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                    );
+                    const base64String = arrayBufferToBase64(arrayBuffer);
                     return `data:${contentType};base64,${base64String}`;
                   }
                   return '';
