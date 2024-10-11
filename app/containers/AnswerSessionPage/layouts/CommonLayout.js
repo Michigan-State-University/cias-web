@@ -27,6 +27,9 @@ const CommonLayout = ({
   showOriginalText,
   shouldDisablePlayer,
   isMobile,
+  onVideoStart,
+  onVideoEnd,
+  onVideoProgress,
 }) => {
   const dynamicElementsDirection = useSelector(
     makeSelectInterventionDynamicElementsDirection(),
@@ -122,7 +125,14 @@ const CommonLayout = ({
       )}
       {settingsVideo && videoUrl && (
         <Row mt={10}>
-          <Player videoUrl={videoUrl} mt={22} disabled={shouldDisablePlayer} />
+          <Player
+            videoUrl={videoUrl}
+            mt={22}
+            disabled={shouldDisablePlayer}
+            onStart={() => onVideoStart(new Date().toString())}
+            onProgress={onVideoProgress}
+            onEnded={() => onVideoEnd(new Date().toString())}
+          />
         </Row>
       )}
       {settingsImage && imageUrl && (
@@ -161,6 +171,9 @@ CommonLayout.propTypes = {
   showOriginalText: PropTypes.bool,
   isMobile: PropTypes.bool,
   shouldDisablePlayer: PropTypes.bool,
+  onVideoStart: PropTypes.func,
+  onVideoEnd: PropTypes.func,
+  onVideoProgress: PropTypes.func,
 };
 
 export default CommonLayout;

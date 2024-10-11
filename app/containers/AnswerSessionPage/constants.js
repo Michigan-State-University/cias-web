@@ -14,6 +14,7 @@ export const SUBMIT_ANSWER_SUCCESS =
   'app/AnswerSessionPage/SUBMIT_ANSWER_SUCCESS';
 export const SUBMIT_ANSWER_ERROR = 'app/AnswerSessionPage/SUBMIT_ANSWER_ERROR';
 export const SELECT_ANSWER = 'app/AnswerSessionPage/SELECT_ANSWER';
+export const SELECT_VIDEO_STATS = 'app/AnswerSessionPage/SELECT_VIDEO_STATS';
 export const START_SESSION = 'app/AnswerSessionPage/START_SESSION';
 
 export const RESET_SESSION = 'app/AnswerSessionPage/RESET_SESSION';

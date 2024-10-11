@@ -22,6 +22,12 @@ const makeSelectAnswerSessionPage = () =>
 const makeSelectAnswers = () =>
   createSelector(selectAnswerSessionPageDomain, (substate) => substate.answers);
 
+const makeSelectVideoStats = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.videoStats,
+  );
+
 const makeSelectPreviewMode = () =>
   createSelector(
     selectAnswerSessionPageDomain,
@@ -113,4 +119,5 @@ export {
   makeSelectHfhsPatientDetail,
   makeSelectUserSessionLanguageCode,
   makeSelectQuestionLanguageCode,
+  makeSelectVideoStats,
 };
