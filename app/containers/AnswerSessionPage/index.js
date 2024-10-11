@@ -122,6 +122,7 @@ import {
   saveQuickExitEventRequest,
   fetchUserSessionRequest,
   fetchPreviousQuestionRequest,
+  selectVideoStats,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
@@ -314,6 +315,7 @@ const QUERY = {
 export function AnswerSessionPage({
   match: { params },
   saveSelectedAnswer,
+  saveVideoStats,
   submitAnswerRequest,
   onStartSession,
   changeIsAnimationOngoing,
@@ -373,6 +375,10 @@ export function AnswerSessionPage({
     confirmContinueQuestionModalVisible,
     setConfirmContinueQuestionModalVisible,
   ] = useState(false);
+
+  const [videoStart, setVideoStart] = useState(null);
+  const [videoEnd, setVideoEnd] = useState(null);
+  const [videoProgress, setVideoProgress] = useState(null);
 
   const {
     type,
@@ -459,6 +465,15 @@ export function AnswerSessionPage({
       fetchIntervention(interventionId);
     }
   }, [interventionId]);
+
+  useEffect(() => {
+    if (currentQuestionId) {
+      saveVideoStats(
+        { videoStart, videoProgress, videoEnd },
+        currentQuestionId,
+      );
+    }
+  }, [videoStart, videoProgress, videoEnd]);
 
   const previewPossible =
     !(isPreview && !canPreview(interventionStatus)) &&
@@ -706,6 +721,9 @@ export function AnswerSessionPage({
               currentQuestion={currentQuestion}
               isMobile={isMobile}
               shouldDisablePlayer={isAnimationOngoing}
+              onVideoStart={setVideoStart}
+              onVideoEnd={setVideoEnd}
+              onVideoProgress={setVideoProgress}
             />
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
@@ -1113,6 +1131,7 @@ AnswerSessionPage.propTypes = {
   match: PropTypes.object,
   AnswerSessionPage: PropTypes.object,
   saveSelectedAnswer: PropTypes.func,
+  saveVideoStats: PropTypes.func,
   submitAnswerRequest: PropTypes.func,
   onStartSession: PropTypes.func,
   changeIsAnimationOngoing: PropTypes.func,
@@ -1151,6 +1170,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   submitAnswerRequest: submitAnswer,
   saveSelectedAnswer: selectAnswer,
+  saveVideoStats: selectVideoStats,
   onStartSession: startSession,
   changeIsAnimationOngoing: changeIsAnimating,
   setFeedbackSettings: setFeedbackScreenSettings,
