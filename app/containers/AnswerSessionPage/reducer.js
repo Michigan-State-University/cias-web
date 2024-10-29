@@ -40,6 +40,7 @@ import {
   VERIFY_PATIENT_DATA_SUCCESS,
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
+  SELECT_VIDEO_STATS,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -54,6 +55,7 @@ export const initialState = {
   answersLoading: false,
   answersError: '',
   answers: {},
+  videoStats: {},
   interventionStarted: false,
   previewMode: I_PHONE_8_PLUS_MODE,
   sessionId: null,
@@ -92,6 +94,12 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case SELECT_ANSWER: {
         const { questionId, answerBody } = payload;
         draft.answers[questionId] = { answerBody };
+        break;
+      }
+
+      case SELECT_VIDEO_STATS: {
+        const { questionId, videoStats } = payload;
+        draft.videoStats[questionId] = videoStats;
         break;
       }
 
