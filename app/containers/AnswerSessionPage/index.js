@@ -355,6 +355,7 @@ export function AnswerSessionPage({
   fixedElementsDirection,
   dynamicElementsDirection,
   changeLocale,
+  skipWarningScreen = true,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -529,6 +530,32 @@ export function AnswerSessionPage({
       openModal();
     }
   }, [nextQuestionError]);
+
+  useEffect(() => {
+    if (
+      skipWarningScreen &&
+      !interventionStarted &&
+      !userSessionLoading &&
+      !nextQuestionLoading &&
+      !fetchInterventionLoading &&
+      previewPossible !== false &&
+      !isUserSessionFinished &&
+      (userSession || !isAuthenticated || isGuestUser)
+    ) {
+      startInterventionAsync();
+    }
+  }, [
+    skipWarningScreen,
+    interventionStarted,
+    userSessionLoading,
+    nextQuestionLoading,
+    fetchInterventionLoading,
+    previewPossible,
+    isUserSessionFinished,
+    userSession,
+    isAuthenticated,
+    isGuestUser,
+  ]);
 
   if (questionError) {
     const queryParams = new URLSearchParams(location.search);
@@ -854,6 +881,11 @@ export function AnswerSessionPage({
     (nextQuestionLoading || fetchPreviousQuestionLoading) &&
     interventionStarted;
 
+  const showAutoStartLoader =
+    skipWarningScreen &&
+    !interventionStarted &&
+    (userSessionLoading || nextQuestionLoading || fetchInterventionLoading);
+
   const isFullSize =
     interventionStarted &&
     currentQuestion &&
@@ -892,7 +924,8 @@ export function AnswerSessionPage({
         )}
 
         {showLoader && <Loader />}
-        {!showLoader && (
+        {showAutoStartLoader && <Loader />}
+        {!showLoader && !showAutoStartLoader && (
           <>
             <ConfirmationModal
               visible={skipQuestionModalVisible}
@@ -979,39 +1012,41 @@ export function AnswerSessionPage({
                     />
                   </Column>
                 )}
-                {!interventionStarted && !nextQuestionError && (
-                  <Column justify="center" height="100%" position="relative">
-                    <Row direction="column" align="center">
-                      <Box mx={32} maxWidth={600}>
-                        <H2 textAlign="center" mb={50}>
-                          {formatMessage(messages.fillHeader)}
-                        </H2>
-                      </Box>
-                      <StyledButton
-                        loading={userSessionLoading || nextQuestionLoading}
-                        disabled={!previewPossible}
-                        onClick={startInterventionAsync}
-                        title={buttonText()}
-                        isDesktop={isDesktop}
-                      />
-                      {showGoToDashboardButton && (
-                        <GoToDashboardButton
-                          userInterventionId={userInterventionId}
+                {!interventionStarted &&
+                  !nextQuestionError &&
+                  !skipWarningScreen && (
+                    <Column justify="center" height="100%" position="relative">
+                      <Row direction="column" align="center">
+                        <Box mx={32} maxWidth={600}>
+                          <H2 textAlign="center" mb={50}>
+                            {formatMessage(messages.fillHeader)}
+                          </H2>
+                        </Box>
+                        <StyledButton
+                          loading={userSessionLoading || nextQuestionLoading}
+                          disabled={!previewPossible}
+                          onClick={startInterventionAsync}
+                          title={buttonText()}
                           isDesktop={isDesktop}
                         />
-                      )}
-                    </Row>
-                    <Box
-                      position="absolute"
-                      bottom={isDesktop ? 48 : 90}
-                      mx={24}
-                    >
-                      <H3 textAlign="center" color={themeColors.warning}>
-                        {formatMessage(messages.wcagWarning)}
-                      </H3>
-                    </Box>
-                  </Column>
-                )}
+                        {showGoToDashboardButton && (
+                          <GoToDashboardButton
+                            userInterventionId={userInterventionId}
+                            isDesktop={isDesktop}
+                          />
+                        )}
+                      </Row>
+                      <Box
+                        position="absolute"
+                        bottom={isDesktop ? 48 : 90}
+                        mx={24}
+                      >
+                        <H3 textAlign="center" color={themeColors.warning}>
+                          {formatMessage(messages.wcagWarning)}
+                        </H3>
+                      </Box>
+                    </Column>
+                  )}
                 {interventionStarted && !nextQuestionError && (
                   <>
                     <Box
@@ -1153,6 +1188,7 @@ AnswerSessionPage.propTypes = {
   fixedElementsDirection: PropTypes.string,
   dynamicElementsDirection: PropTypes.string,
   changeLocale: PropTypes.func,
+  skipWarningScreen: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
