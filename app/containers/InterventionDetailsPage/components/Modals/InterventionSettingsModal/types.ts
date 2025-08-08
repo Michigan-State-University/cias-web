@@ -9,6 +9,7 @@ export type InterventionSettingsFormValues = {
   interventionSettings: {
     language: LanguageSelectOption;
     quickExit: boolean;
+    skipWarningScreen: boolean;
   };
   currentNarrator: CharacterType;
   links: {

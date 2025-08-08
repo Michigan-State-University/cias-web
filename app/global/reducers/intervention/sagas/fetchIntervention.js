@@ -17,11 +17,13 @@ export function* fetchIntervention({ payload: { id } }) {
     const {
       data: { data: sessions },
     } = yield call(axios.get, sessionRequestUrl);
+
     const intervention = jsonApiToObject(data, 'intervention');
+    const camelCaseIntervention = objectToCamelCase(intervention);
     const mappedSessions = sessions.map(defaultMapper);
     const camelCaseSessions = objectToCamelCase(mappedSessions);
-    intervention.sessions = orderBy(camelCaseSessions, 'position');
-    yield put(fetchInterventionSuccess(intervention));
+    camelCaseIntervention.sessions = orderBy(camelCaseSessions, 'position');
+    yield put(fetchInterventionSuccess(camelCaseIntervention));
   } catch (error) {
     yield put(fetchInterventionError(error));
   }

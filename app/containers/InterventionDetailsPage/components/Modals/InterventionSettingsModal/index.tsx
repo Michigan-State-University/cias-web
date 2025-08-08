@@ -46,6 +46,8 @@ import {
 } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
 import Text from 'components/Text';
+import Box from 'components/Box';
+import Img from 'components/Img';
 import Divider from 'components/Divider';
 import H3 from 'components/H3';
 import { LabelPosition } from 'components/Switch';
@@ -59,9 +61,11 @@ import ErrorAlert from 'components/ErrorAlert';
 import Column from 'components/Column';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
+import skipWarningScreenImage from 'assets/images/skip-warning-screen.png';
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
   INTERVENTION_QUICK_EXIT_LABEL_ID,
+  INTERVENTION_SKIP_WARNING_SCREEN_LABEL_ID,
 } from './constants';
 import messages from './messages';
 import {
@@ -131,6 +135,7 @@ const InterventionSettingsModal = ({
     sessionsSize,
     googleLanguageId,
     quickExit: initialQuickExit,
+    skipWarningScreen: initialSkipWarningScreen,
     currentNarrator: initialCurrentNarrator,
   } = originalIntervention;
 
@@ -181,6 +186,7 @@ const InterventionSettingsModal = ({
           googleLanguageId: googleLanguageId.toString(),
         },
         quickExit: initialQuickExit,
+        skipWarningScreen: initialSkipWarningScreen ?? false,
       },
       currentNarrator: initialCurrentNarrator,
       links: mapShortLinksToFormValues(shortLinksData, inOrganization),
@@ -192,6 +198,7 @@ const InterventionSettingsModal = ({
       languageName,
       googleLanguageId,
       initialQuickExit,
+      initialSkipWarningScreen,
       initialCurrentNarrator,
     ],
   );
@@ -199,6 +206,19 @@ const InterventionSettingsModal = ({
   const placeholderBase = useMemo(
     () => getPlaceholderBase(id, type, sessions?.[0]?.id),
     [type, sessionsSize, sessions?.[0]?.id],
+  );
+
+  const skipWarningTooltipContent = (
+    <Box py={8} px={8}>
+      <Text mb={12} lineHeight="20px">
+        {formatMessage(messages.skipWarningScreenHelp)}
+      </Text>
+      <Img
+        src={skipWarningScreenImage}
+        alt="Example of the warning screen being skipped"
+        style={{ width: '100%' }}
+      />
+    </Box>
   );
 
   const saveOtherSettingsAndLinks = useCallback(
@@ -314,7 +334,7 @@ const InterventionSettingsModal = ({
           handleSubmit,
           values: {
             currentNarrator,
-            interventionSettings: { language, quickExit },
+            interventionSettings: { language, quickExit, skipWarningScreen },
           },
         }) => (
           <Form>
@@ -383,6 +403,44 @@ const InterventionSettingsModal = ({
                 >
                   <Text fontWeight="bold">
                     {formatMessage(messages.interventionSettingsQuickExitLabel)}
+                  </Text>
+                </Switch>
+              </GCol>
+            </GRow>
+            <GRow mb={16}>
+              <GCol>
+                <HelpIconTooltip
+                  id="skip-warning-screen-help"
+                  tooltipContent={skipWarningTooltipContent}
+                >
+                  <H3 id={INTERVENTION_SKIP_WARNING_SCREEN_LABEL_ID}>
+                    {formatMessage(messages.skipWarningScreen)}
+                  </H3>
+                </HelpIconTooltip>
+              </GCol>
+            </GRow>
+            <GRow align="center" mb={16}>
+              <GCol>
+                <Switch
+                  checked={skipWarningScreen}
+                  onToggle={(value: boolean) => {
+                    setFieldValue(
+                      'interventionSettings.skipWarningScreen',
+                      value,
+                    );
+                  }}
+                  onBlur={() =>
+                    setFieldTouched(
+                      'interventionSettings.skipWarningScreen',
+                      true,
+                    )
+                  }
+                  id="switch-label-quick-exit-test"
+                  labelPosition={LabelPosition.Right}
+                  disabled={!editingPossible}
+                >
+                  <Text fontWeight="bold">
+                    {formatMessage(messages.skipWarningScreenLabel)}
                   </Text>
                 </Switch>
               </GCol>

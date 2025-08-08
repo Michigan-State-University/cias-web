@@ -27,6 +27,8 @@ export const createIntervention = (index = 0) => ({
       },
     ],
     shared_to: InterventionSharedTo.ANYONE,
+    quick_exit: false,
+    skip_warning_screen: false,
     sessions: [createSession(`${index}`)],
   },
   type: 'intervention',

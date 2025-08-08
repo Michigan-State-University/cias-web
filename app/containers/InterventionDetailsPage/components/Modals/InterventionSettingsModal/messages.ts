@@ -24,6 +24,19 @@ export default defineMessages({
     id: `${scope}.interventionSettingsQuickExitLabel`,
     defaultMessage: 'Turn on Quick Exit',
   },
+  skipWarningScreen: {
+    id: `${scope}.skipWarningScreen`,
+    defaultMessage: 'Initial Warning Screen',
+  },
+  skipWarningScreenLabel: {
+    id: `${scope}.skipWarningScreenLabel`,
+    defaultMessage: 'Skip initial warning screen',
+  },
+  skipWarningScreenHelp: {
+    id: `${scope}.skipWarningScreenHelp`,
+    defaultMessage:
+      'When enabled, participants will bypass the initial warning screen and go directly to the intervention content.',
+  },
   applyChangesButton: {
     id: `${scope}.applyChangesButton`,
     defaultMessage: 'Apply global changes',

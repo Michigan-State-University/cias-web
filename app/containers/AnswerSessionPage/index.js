@@ -64,6 +64,7 @@ import {
   RoutePath,
   REDIRECT_QUERY_KEY,
   INTERVENTION_LANGUAGE_QUERY_KEY,
+  SKIP_WARNING_SCREEN_QUERY_KEY,
 } from 'global/constants';
 
 import { canPreview } from 'models/Status/statusPermissions';
@@ -355,7 +356,6 @@ export function AnswerSessionPage({
   fixedElementsDirection,
   dynamicElementsDirection,
   changeLocale,
-  skipWarningScreen = true,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -424,6 +424,7 @@ export function AnswerSessionPage({
     languageCode,
     type: userSessionType,
     quickExitEnabled,
+    skipWarningScreen,
   } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
@@ -447,6 +448,18 @@ export function AnswerSessionPage({
   const location = useLocation();
 
   const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
+  const skipWarningQuery = useQuery(SKIP_WARNING_SCREEN_QUERY_KEY);
+
+  const shouldSkipWarning = useMemo(() => {
+    if (typeof skipWarningScreen === 'boolean') {
+      return skipWarningScreen;
+    }
+    if (isGuestUser) {
+      return skipWarningQuery === 'true';
+    }
+    return false;
+  }, [skipWarningScreen, isGuestUser, skipWarningQuery]);
+
   useEffect(() => {
     if (questionLanguage) {
       changeLocale(questionLanguage);
@@ -533,7 +546,7 @@ export function AnswerSessionPage({
 
   useEffect(() => {
     if (
-      skipWarningScreen &&
+      shouldSkipWarning &&
       !interventionStarted &&
       !userSessionLoading &&
       !nextQuestionLoading &&
@@ -545,7 +558,7 @@ export function AnswerSessionPage({
       startInterventionAsync();
     }
   }, [
-    skipWarningScreen,
+    shouldSkipWarning,
     interventionStarted,
     userSessionLoading,
     nextQuestionLoading,
@@ -882,7 +895,7 @@ export function AnswerSessionPage({
     interventionStarted;
 
   const showAutoStartLoader =
-    skipWarningScreen &&
+    shouldSkipWarning &&
     !interventionStarted &&
     (userSessionLoading || nextQuestionLoading || fetchInterventionLoading);
 
@@ -1014,7 +1027,7 @@ export function AnswerSessionPage({
                 )}
                 {!interventionStarted &&
                   !nextQuestionError &&
-                  !skipWarningScreen && (
+                  !shouldSkipWarning && (
                     <Column justify="center" height="100%" position="relative">
                       <Row direction="column" align="center">
                         <Box mx={32} maxWidth={600}>
@@ -1188,7 +1201,6 @@ AnswerSessionPage.propTypes = {
   fixedElementsDirection: PropTypes.string,
   dynamicElementsDirection: PropTypes.string,
   changeLocale: PropTypes.func,
-  skipWarningScreen: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
