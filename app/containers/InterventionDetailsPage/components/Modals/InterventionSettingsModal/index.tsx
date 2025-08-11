@@ -216,7 +216,9 @@ const InterventionSettingsModal = ({
       <Img
         src={skipWarningScreenImage}
         alt="Example of the Initial Warning Screen"
-        style={{ width: '100%' }}
+        style={{ width: '100%', height: 'auto' }}
+        width="275"
+        height="145"
       />
     </Box>
   );
@@ -407,7 +409,7 @@ const InterventionSettingsModal = ({
                 </Switch>
               </GCol>
             </GRow>
-            <GRow mb={16}>
+            <GRow mb={16} mt={40}>
               <GCol>
                 <HelpIconTooltip
                   id="skip-warning-screen-help"

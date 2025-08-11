@@ -30,7 +30,7 @@ export default defineMessages({
   },
   skipWarningScreenLabel: {
     id: `${scope}.skipWarningScreenLabel`,
-    defaultMessage: 'Skip initial warning screen',
+    defaultMessage: 'Skip Initial Warning Screen',
   },
   skipWarningScreenHelp: {
     id: `${scope}.skipWarningScreenHelp`,
