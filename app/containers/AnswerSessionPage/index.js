@@ -454,11 +454,8 @@ export function AnswerSessionPage({
     if (typeof skipWarningScreen === 'boolean') {
       return skipWarningScreen;
     }
-    if (isGuestUser) {
-      return skipWarningQuery === 'true';
-    }
-    return false;
-  }, [skipWarningScreen, isGuestUser, skipWarningQuery]);
+    return skipWarningQuery === 'true';
+  }, [skipWarningScreen, skipWarningQuery]);
 
   useEffect(() => {
     if (questionLanguage) {
