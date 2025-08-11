@@ -119,7 +119,7 @@ const CopyLinkForm: FC<Props> = ({
                 sessionLanguageCode === ''
                   ? interventionLanguageCode
                   : sessionLanguageCode,
-                intervention.skipWarningScreen ?? false,
+                intervention.skipWarningScreen ?? true,
               )}
               icon={share}
               iconAlt={formatMessage(messages.copyLinkIconAlt)}

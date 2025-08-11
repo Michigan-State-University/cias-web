@@ -186,7 +186,7 @@ const InterventionSettingsModal = ({
           googleLanguageId: googleLanguageId.toString(),
         },
         quickExit: initialQuickExit,
-        skipWarningScreen: initialSkipWarningScreen ?? false,
+        skipWarningScreen: initialSkipWarningScreen ?? true,
       },
       currentNarrator: initialCurrentNarrator,
       links: mapShortLinksToFormValues(shortLinksData, inOrganization),
@@ -215,7 +215,7 @@ const InterventionSettingsModal = ({
       </Text>
       <Img
         src={skipWarningScreenImage}
-        alt="Example of the warning screen being skipped"
+        alt="Example of the Initial Warning Screen"
         style={{ width: '100%' }}
       />
     </Box>

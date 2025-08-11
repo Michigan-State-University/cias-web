@@ -454,7 +454,7 @@ export function AnswerSessionPage({
     if (typeof skipWarningScreen === 'boolean') {
       return skipWarningScreen;
     }
-    return skipWarningQuery === 'true';
+    return skipWarningQuery !== 'false';
   }, [skipWarningScreen, skipWarningQuery]);
 
   useEffect(() => {

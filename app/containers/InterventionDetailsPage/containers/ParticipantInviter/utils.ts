@@ -81,8 +81,8 @@ export const createInviteUrl = (
   }
   if (!isModularIntervention) {
     queryParams.lang = interventionLanguageCode;
-    if (skipWarningScreen) {
-      queryParams.skipWarningScreen = 'true';
+    if (!skipWarningScreen) {
+      queryParams.skipWarningScreen = 'false';
     }
   }
 
