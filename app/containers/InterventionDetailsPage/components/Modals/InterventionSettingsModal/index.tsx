@@ -412,23 +412,21 @@ const InterventionSettingsModal = ({
             <GRow mb={16} mt={40}>
               <GCol>
                 <HelpIconTooltip
-                  id="skip-warning-screen-help"
+                  id="skip-warning-screen-cdh"
                   tooltipContent={skipWarningTooltipContent}
                 >
-                  <H3 id={INTERVENTION_SKIP_WARNING_SCREEN_LABEL_ID}>
-                    {formatMessage(messages.skipWarningScreen)}
-                  </H3>
+                  <H3>{formatMessage(messages.skipWarningScreen)}</H3>
                 </HelpIconTooltip>
               </GCol>
             </GRow>
             <GRow align="center" mb={16}>
               <GCol>
                 <Switch
-                  checked={skipWarningScreen}
+                  checked={!skipWarningScreen}
                   onToggle={(value: boolean) => {
                     setFieldValue(
                       'interventionSettings.skipWarningScreen',
-                      value,
+                      !value,
                     );
                   }}
                   onBlur={() =>
@@ -437,7 +435,7 @@ const InterventionSettingsModal = ({
                       true,
                     )
                   }
-                  id="switch-label-quick-exit-test"
+                  id={INTERVENTION_SKIP_WARNING_SCREEN_LABEL_ID}
                   labelPosition={LabelPosition.Right}
                   disabled={!editingPossible}
                 >

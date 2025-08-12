@@ -30,12 +30,12 @@ export default defineMessages({
   },
   skipWarningScreenLabel: {
     id: `${scope}.skipWarningScreenLabel`,
-    defaultMessage: 'Skip Initial Warning Screen',
+    defaultMessage: 'Turn on Initial Warning Screen',
   },
   skipWarningScreenHelp: {
     id: `${scope}.skipWarningScreenHelp`,
     defaultMessage:
-      'When enabled, participants will bypass the initial warning screen and go directly to the intervention content.',
+      'When enabled, participants will be presented with the initial warning screen before they can proceed to the intervention content.',
   },
   applyChangesButton: {
     id: `${scope}.applyChangesButton`,
