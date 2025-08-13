@@ -451,10 +451,11 @@ export function AnswerSessionPage({
   const skipWarningQuery = useQuery(SKIP_WARNING_SCREEN_QUERY_KEY);
 
   const shouldSkipWarning = useMemo(() => {
-    if (typeof skipWarningScreen === 'boolean') {
-      return skipWarningScreen;
-    }
-    return skipWarningQuery !== 'false';
+    const result =
+      typeof skipWarningScreen === 'boolean'
+        ? skipWarningScreen
+        : skipWarningQuery !== 'false';
+    return result;
   }, [skipWarningScreen, skipWarningQuery]);
 
   useEffect(() => {
@@ -543,6 +544,7 @@ export function AnswerSessionPage({
 
   useEffect(() => {
     if (
+      !userSessionLoading &&
       shouldSkipWarning &&
       !interventionStarted &&
       !userSessionLoading &&
@@ -550,7 +552,7 @@ export function AnswerSessionPage({
       !fetchInterventionLoading &&
       previewPossible !== false &&
       !isUserSessionFinished &&
-      (userSession || !isAuthenticated || isGuestUser)
+      (userSession || !isAuthenticated || isGuestUser || isPreview)
     ) {
       startInterventionAsync();
     }
