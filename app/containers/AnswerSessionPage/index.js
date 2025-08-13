@@ -48,6 +48,7 @@ import {
   interventionReducer,
   makeSelectInterventionId,
   makeSelectInterventionLoader,
+  makeSelectIntervention,
 } from 'global/reducers/intervention';
 import {
   editPhoneNumberQuestionSaga,
@@ -340,6 +341,7 @@ export function AnswerSessionPage({
     transitionalUserSessionId,
     fetchPreviousQuestionLoading,
   },
+  intervention,
   isPreview,
   interventionStatus,
   fetchedInterventionId,
@@ -451,12 +453,20 @@ export function AnswerSessionPage({
   const warningScreenEnabledQuery = useQuery(WARNING_SCREEN_ENABLED_QUERY_KEY);
 
   const shouldEnableWarningScreen = useMemo(() => {
-    const result =
-      typeof warningScreenEnabled === 'boolean'
-        ? warningScreenEnabled
-        : warningScreenEnabledQuery === 'true';
-    return result;
-  }, [warningScreenEnabled, warningScreenEnabledQuery]);
+    if (typeof warningScreenEnabled === 'boolean') {
+      return warningScreenEnabled;
+    }
+
+    if (isPreview) {
+      return intervention?.warningScreenEnabled ?? false;
+    }
+    return warningScreenEnabledQuery === 'true';
+  }, [
+    warningScreenEnabled,
+    isPreview,
+    intervention,
+    warningScreenEnabledQuery,
+  ]);
 
   useEffect(() => {
     if (questionLanguage) {
@@ -1185,6 +1195,7 @@ AnswerSessionPage.propTypes = {
   setFeedbackSettings: PropTypes.func,
   audioInstance: PropTypes.shape(AudioWrapper),
   isPreview: PropTypes.bool,
+  intervention: PropTypes.object,
   interventionStatus: PropTypes.string,
   fetchedInterventionId: PropTypes.string,
   fetchInterventionLoading: PropTypes.bool,
@@ -1205,6 +1216,7 @@ AnswerSessionPage.propTypes = {
 const mapStateToProps = createStructuredSelector({
   AnswerSessionPage: makeSelectAnswerSessionPage(),
   audioInstance: makeSelectAudioInstance(),
+  intervention: makeSelectIntervention(),
   interventionStatus: makeSelectInterventionStatus(),
   fetchedInterventionId: makeSelectInterventionId(),
   fetchInterventionLoading: makeSelectInterventionLoader(
