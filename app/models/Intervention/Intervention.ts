@@ -99,7 +99,7 @@ export interface Intervention extends SimpleIntervention {
   files: AppFile[];
   liveChatEnabled?: boolean;
   quickExit: boolean;
-  skipWarningScreen: boolean;
+  warningScreenEnabled: boolean;
   currentNarrator: CharacterType;
   conversationsPresent: boolean;
   conversationsTranscript: Nullable<InterventionGeneratedFile>;

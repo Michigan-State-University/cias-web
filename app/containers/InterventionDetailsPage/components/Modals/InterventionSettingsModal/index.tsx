@@ -61,11 +61,11 @@ import ErrorAlert from 'components/ErrorAlert';
 import Column from 'components/Column';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
-import skipWarningScreenImage from 'assets/images/skip-warning-screen.png';
+import warningScreenEnabledImage from 'assets/images/warning-screen-enabled.png';
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
   INTERVENTION_QUICK_EXIT_LABEL_ID,
-  INTERVENTION_SKIP_WARNING_SCREEN_LABEL_ID,
+  INTERVENTION_WARNING_SCREEN_ENABLED_LABEL_ID,
 } from './constants';
 import messages from './messages';
 import {
@@ -135,7 +135,7 @@ const InterventionSettingsModal = ({
     sessionsSize,
     googleLanguageId,
     quickExit: initialQuickExit,
-    skipWarningScreen: initialSkipWarningScreen,
+    warningScreenEnabled: initialWarningScreenEnabled,
     currentNarrator: initialCurrentNarrator,
   } = originalIntervention;
 
@@ -186,7 +186,7 @@ const InterventionSettingsModal = ({
           googleLanguageId: googleLanguageId.toString(),
         },
         quickExit: initialQuickExit,
-        skipWarningScreen: initialSkipWarningScreen ?? true,
+        warningScreenEnabled: initialWarningScreenEnabled ?? true,
       },
       currentNarrator: initialCurrentNarrator,
       links: mapShortLinksToFormValues(shortLinksData, inOrganization),
@@ -198,7 +198,7 @@ const InterventionSettingsModal = ({
       languageName,
       googleLanguageId,
       initialQuickExit,
-      initialSkipWarningScreen,
+      initialWarningScreenEnabled,
       initialCurrentNarrator,
     ],
   );
@@ -211,10 +211,10 @@ const InterventionSettingsModal = ({
   const skipWarningTooltipContent = (
     <Box py={8} px={8}>
       <Text mb={12} lineHeight="20px">
-        {formatMessage(messages.skipWarningScreenHelp)}
+        {formatMessage(messages.warningScreenEnabledHelp)}
       </Text>
       <Img
-        src={skipWarningScreenImage}
+        src={warningScreenEnabledImage}
         alt="Example of the Initial Warning Screen"
         style={{ width: '100%', height: 'auto' }}
         width="275"
@@ -336,7 +336,7 @@ const InterventionSettingsModal = ({
           handleSubmit,
           values: {
             currentNarrator,
-            interventionSettings: { language, quickExit, skipWarningScreen },
+            interventionSettings: { language, quickExit, warningScreenEnabled },
           },
         }) => (
           <Form>
@@ -415,32 +415,32 @@ const InterventionSettingsModal = ({
                   id="skip-warning-screen-cdh"
                   tooltipContent={skipWarningTooltipContent}
                 >
-                  <H3>{formatMessage(messages.skipWarningScreen)}</H3>
+                  <H3>{formatMessage(messages.warningScreenEnabled)}</H3>
                 </HelpIconTooltip>
               </GCol>
             </GRow>
             <GRow align="center" mb={16}>
               <GCol>
                 <Switch
-                  checked={!skipWarningScreen}
+                  checked={warningScreenEnabled}
                   onToggle={(value: boolean) => {
                     setFieldValue(
-                      'interventionSettings.skipWarningScreen',
-                      !value,
+                      'interventionSettings.warningScreenEnabled',
+                      value,
                     );
                   }}
                   onBlur={() =>
                     setFieldTouched(
-                      'interventionSettings.skipWarningScreen',
+                      'interventionSettings.warningScreenEnabled',
                       true,
                     )
                   }
-                  id={INTERVENTION_SKIP_WARNING_SCREEN_LABEL_ID}
+                  id={INTERVENTION_WARNING_SCREEN_ENABLED_LABEL_ID}
                   labelPosition={LabelPosition.Right}
                   disabled={!editingPossible}
                 >
                   <Text fontWeight="bold">
-                    {formatMessage(messages.skipWarningScreenLabel)}
+                    {formatMessage(messages.warningScreenEnabledLabel)}
                   </Text>
                 </Switch>
               </GCol>

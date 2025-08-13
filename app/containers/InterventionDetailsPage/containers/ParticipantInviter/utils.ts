@@ -71,7 +71,7 @@ export const createInviteUrl = (
   sessionId: Nullable<string>,
   healthClinicId: Nullable<string>,
   interventionLanguageCode: string,
-  skipWarningScreen: boolean,
+  warningScreenEnabled: boolean,
 ): string => {
   let url;
 
@@ -81,8 +81,8 @@ export const createInviteUrl = (
   }
   if (!isModularIntervention) {
     queryParams.lang = interventionLanguageCode;
-    if (!skipWarningScreen) {
-      queryParams.skipWarningScreen = 'false';
+    if (warningScreenEnabled) {
+      queryParams.warningScreenEnabled = 'true';
     }
   }
 

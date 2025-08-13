@@ -24,16 +24,16 @@ export default defineMessages({
     id: `${scope}.interventionSettingsQuickExitLabel`,
     defaultMessage: 'Turn on Quick Exit',
   },
-  skipWarningScreen: {
-    id: `${scope}.skipWarningScreen`,
+  warningScreenEnabled: {
+    id: `${scope}.warningScreenEnabled`,
     defaultMessage: 'Initial Warning Screen',
   },
-  skipWarningScreenLabel: {
-    id: `${scope}.skipWarningScreenLabel`,
+  warningScreenEnabledLabel: {
+    id: `${scope}.warningScreenEnabledLabel`,
     defaultMessage: 'Turn on Initial Warning Screen',
   },
-  skipWarningScreenHelp: {
-    id: `${scope}.skipWarningScreenHelp`,
+  warningScreenEnabledHelp: {
+    id: `${scope}.warningScreenEnabledHelp`,
     defaultMessage:
       'When enabled, participants will be presented with the initial warning screen before they can proceed to the intervention content.',
   },

@@ -1,6 +1,6 @@
 export const REDIRECT_QUERY_KEY = 'redirect_to';
 export const INTERVENTION_LANGUAGE_QUERY_KEY = 'lang';
-export const SKIP_WARNING_SCREEN_QUERY_KEY = 'skipWarningScreen';
+export const WARNING_SCREEN_ENABLED_QUERY_KEY = 'warningScreenEnabled';
 
 export enum RoutePath {
   DASHBOARD = '/',

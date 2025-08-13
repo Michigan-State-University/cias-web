@@ -64,7 +64,7 @@ import {
   RoutePath,
   REDIRECT_QUERY_KEY,
   INTERVENTION_LANGUAGE_QUERY_KEY,
-  SKIP_WARNING_SCREEN_QUERY_KEY,
+  WARNING_SCREEN_ENABLED_QUERY_KEY,
 } from 'global/constants';
 
 import { canPreview } from 'models/Status/statusPermissions';
@@ -424,7 +424,7 @@ export function AnswerSessionPage({
     languageCode,
     type: userSessionType,
     quickExitEnabled,
-    skipWarningScreen,
+    warningScreenEnabled,
   } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
@@ -448,15 +448,15 @@ export function AnswerSessionPage({
   const location = useLocation();
 
   const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
-  const skipWarningQuery = useQuery(SKIP_WARNING_SCREEN_QUERY_KEY);
+  const warningScreenEnabledQuery = useQuery(WARNING_SCREEN_ENABLED_QUERY_KEY);
 
-  const shouldSkipWarning = useMemo(() => {
+  const shouldEnableWarningScreen = useMemo(() => {
     const result =
-      typeof skipWarningScreen === 'boolean'
-        ? skipWarningScreen
-        : skipWarningQuery !== 'false';
+      typeof warningScreenEnabled === 'boolean'
+        ? warningScreenEnabled
+        : warningScreenEnabledQuery === 'true';
     return result;
-  }, [skipWarningScreen, skipWarningQuery]);
+  }, [warningScreenEnabled, warningScreenEnabledQuery]);
 
   useEffect(() => {
     if (questionLanguage) {
@@ -545,7 +545,7 @@ export function AnswerSessionPage({
   useEffect(() => {
     if (
       !userSessionLoading &&
-      shouldSkipWarning &&
+      !shouldEnableWarningScreen &&
       !interventionStarted &&
       !userSessionLoading &&
       !nextQuestionLoading &&
@@ -557,7 +557,7 @@ export function AnswerSessionPage({
       startInterventionAsync();
     }
   }, [
-    shouldSkipWarning,
+    shouldEnableWarningScreen,
     interventionStarted,
     userSessionLoading,
     nextQuestionLoading,
@@ -894,7 +894,7 @@ export function AnswerSessionPage({
     interventionStarted;
 
   const showAutoStartLoader =
-    shouldSkipWarning &&
+    !shouldEnableWarningScreen &&
     !interventionStarted &&
     (userSessionLoading || nextQuestionLoading || fetchInterventionLoading);
 
@@ -1026,7 +1026,7 @@ export function AnswerSessionPage({
                 )}
                 {!interventionStarted &&
                   !nextQuestionError &&
-                  !shouldSkipWarning && (
+                  shouldEnableWarningScreen && (
                     <Column justify="center" height="100%" position="relative">
                       <Row direction="column" align="center">
                         <Box mx={32} maxWidth={600}>
