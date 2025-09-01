@@ -249,9 +249,7 @@ export const useConversationChannel = (interventionId?: string) => {
     socketConnectionParams: { intervention_id: interventionId },
   });
   const sendMessage = (data: SendMessageData) => {
-    axios.get('/v1/ping').catch(() => {
-      console.error('Ping failed');
-    });
+    axios.get('/v1/live_chat/ping');
     channel?.perform({
       name: ConversationChannelActionName.ON_MESSAGE_SENT,
       data,
