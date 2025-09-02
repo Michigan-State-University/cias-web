@@ -18,7 +18,7 @@ jobs:
           node-version: '16.15.0'
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.npm
@@ -55,7 +55,7 @@ jobs:
           node-version: '16.15.0'
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.npm
@@ -89,7 +89,7 @@ jobs:
           node-version: '16.15.0'
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.npm
