@@ -16,7 +16,11 @@ import {
 } from 'global/reducers/auth';
 
 import messages from './messages';
-import { TIME_TO_LOGOUT, ACTIVITY_EVENTS } from './constants';
+import {
+  TIME_TO_LOGOUT,
+  ACTIVITY_EVENTS,
+  PING_THROTTLE_INTERVAL,
+} from './constants';
 
 const IdleTimer = ({ logOut, user }) => {
   const { formatMessage } = useIntl();
@@ -37,10 +41,10 @@ const IdleTimer = ({ logOut, user }) => {
 
   const sendPing = useCallback(
     throttle(
-      async () => {
-        await axios.get('/v1/auth/ping');
+      () => {
+        axios.get('/v1/auth/ping').catch(() => {});
       },
-      60000,
+      PING_THROTTLE_INTERVAL,
       { leading: true, trailing: false },
     ),
     [],
