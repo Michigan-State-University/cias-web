@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
-import axios from 'axios';
 
 import {
   SocketErrorMessageData,
@@ -249,7 +248,6 @@ export const useConversationChannel = (interventionId?: string) => {
     socketConnectionParams: { intervention_id: interventionId },
   });
   const sendMessage = (data: SendMessageData) => {
-    axios.get('/v1/live_chat/ping');
     channel?.perform({
       name: ConversationChannelActionName.ON_MESSAGE_SENT,
       data,
