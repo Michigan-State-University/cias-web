@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useIdleTimer } from 'react-idle-timer';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { toast } from 'react-toastify';
+import { throttle } from 'lodash';
 
 import {
   logOut as logOutAction,
@@ -15,7 +16,11 @@ import {
 } from 'global/reducers/auth';
 
 import messages from './messages';
-import { TIME_TO_LOGOUT } from './constants';
+import {
+  TIME_TO_LOGOUT,
+  ACTIVITY_EVENTS,
+  PING_THROTTLE_INTERVAL,
+} from './constants';
 
 const IdleTimer = ({ logOut, user }) => {
   const { formatMessage } = useIntl();
@@ -33,6 +38,21 @@ const IdleTimer = ({ logOut, user }) => {
   const handleOnActive = () => {
     toast.dismiss(LOG_OUT);
   };
+
+  const sendPing = useCallback(
+    throttle(
+      () => {
+        axios.get('/v1/auth/ping').catch(() => {});
+      },
+      PING_THROTTLE_INTERVAL,
+      { leading: true, trailing: false },
+    ),
+    [],
+  );
+
+  const handleUserActivity = useCallback(() => {
+    sendPing();
+  }, [sendPing]);
 
   const requestInterceptor = (config) => {
     reset();
@@ -58,10 +78,11 @@ const IdleTimer = ({ logOut, user }) => {
     timeout: TIME_TO_LOGOUT,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
+    onAction: handleUserActivity,
     startManually: true,
     startOnMount: false,
     stopOnIdle: true,
-    events: [],
+    events: ACTIVITY_EVENTS,
   });
 
   useEffect(() => {
