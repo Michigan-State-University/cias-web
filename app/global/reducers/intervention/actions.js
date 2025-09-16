@@ -35,6 +35,9 @@ import {
   DELETE_SESSION_REQUEST,
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
+  BULK_UPDATE_SESSIONS_REQUEST,
+  BULK_UPDATE_SESSIONS_SUCCESS,
+  BULK_UPDATE_SESSIONS_ERROR,
   EXTERNAL_COPY_SESSION_REQUEST,
   EXTERNAL_COPY_SESSION_ERROR,
   ADD_INTERVENTION_LOGO_REQUEST,
@@ -245,6 +248,13 @@ export const deleteSessionSuccess = () =>
   actionBuilder(DELETE_SESSION_SUCCESS, {});
 export const deleteSessionError = (error) =>
   actionBuilder(DELETE_SESSION_ERROR, { error });
+
+export const bulkUpdateSessionsRequest = (interventionId, sessions) =>
+  actionBuilder(BULK_UPDATE_SESSIONS_REQUEST, { interventionId, sessions });
+export const bulkUpdateSessionsSuccess = () =>
+  actionBuilder(BULK_UPDATE_SESSIONS_SUCCESS, {});
+export const bulkUpdateSessionsError = (error) =>
+  actionBuilder(BULK_UPDATE_SESSIONS_ERROR, { error });
 
 export const externalCopySessionRequest = (payload) =>
   actionBuilder(EXTERNAL_COPY_SESSION_REQUEST, payload);

@@ -54,6 +54,9 @@ import {
   DELETE_SESSION_REQUEST,
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
+  BULK_UPDATE_SESSIONS_REQUEST,
+  BULK_UPDATE_SESSIONS_SUCCESS,
+  BULK_UPDATE_SESSIONS_ERROR,
   EXTERNAL_COPY_SESSION_REQUEST,
   EXTERNAL_COPY_SESSION_ERROR,
   ADD_INTERVENTION_LOGO_REQUEST,
@@ -182,6 +185,7 @@ export const initialState = {
     activatePredefinedParticipant: false,
     sendPredefinedParticipantSmsInvitation: false,
     sendPredefinedParticipantEmailInvitation: false,
+    bulkUpdateSessionsLoading: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -197,6 +201,7 @@ export const initialState = {
     changeInterventionNarrator: null,
     editShortLinks: null,
     fetchPredefinedParticipants: null,
+    bulkUpdateSessionsError: null,
   },
 };
 
@@ -508,6 +513,18 @@ export const interventionReducer = (state = initialState, action) =>
 
       case DELETE_SESSION_ERROR:
         draft.intervention.sessions = state.cache.intervention.sessions;
+        break;
+      case BULK_UPDATE_SESSIONS_REQUEST:
+        draft.loaders.bulkUpdateSessionsLoading = true;
+        draft.errors.bulkUpdateSessionsError = null;
+        break;
+      case BULK_UPDATE_SESSIONS_SUCCESS:
+        draft.loaders.bulkUpdateSessionsLoading = false;
+        draft.errors.bulkUpdateSessionsError = null;
+        break;
+      case BULK_UPDATE_SESSIONS_ERROR:
+        draft.loaders.bulkUpdateSessionsLoading = false;
+        draft.errors.bulkUpdateSessionsError = action.payload.error;
         break;
       case EXTERNAL_COPY_SESSION_REQUEST:
         break;

@@ -24,6 +24,7 @@ import {
   makeSelectEditingPossible,
   makeSelectCanCurrentUserMakeChanges,
   makeSelectCanCurrentUserAccessParticipantsData,
+  bulkUpdateSessionsRequest,
 } from 'global/reducers/intervention';
 import { SessionSchedule } from 'models/Session';
 import {
@@ -183,24 +184,28 @@ const SettingsPanel = ({ intervention }: Props) => {
       interventionUpdate.sharedTo = InterventionSharedTo.REGISTERED;
     }
 
-    if (sessions && sessions.length > 0) {
-      const hasNonDefaultScheduling = sessions.some(
-        (session) => session.schedule !== SessionSchedule.AFTER_FILL,
-      );
+    globalDispatch(
+      editInterventionRequest(interventionUpdate, {
+        onSuccess: () => {
+          if (sessions && sessions.length > 0) {
+            const sessionsNeedingUpdate = sessions.filter(
+              (session) => session.schedule !== SessionSchedule.AFTER_FILL,
+            );
 
-      if (hasNonDefaultScheduling) {
-        const sanitizedSessions = sessions.map((session) => ({
-          ...session,
-          schedule: SessionSchedule.AFTER_FILL,
-          schedulePayload: null,
-          scheduleAt: null,
-        }));
+            if (sessionsNeedingUpdate.length > 0) {
+              const sessionUpdates = sessionsNeedingUpdate.map((session) => ({
+                id: session.id,
+                schedule: SessionSchedule.AFTER_FILL,
+              }));
 
-        interventionUpdate.sessions = sanitizedSessions;
-      }
-    }
-
-    globalDispatch(editInterventionRequest(interventionUpdate));
+              globalDispatch(
+                bulkUpdateSessionsRequest(interventionId, sessionUpdates),
+              );
+            }
+          }
+        },
+      }),
+    );
   };
 
   const updateNavigatorSetting = (isChatEnabled: boolean) => {
