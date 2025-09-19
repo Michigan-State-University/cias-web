@@ -17,7 +17,7 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { DAY_NUMBERS } from 'global/constants';
 import { themeColors } from 'theme';
 
-import { QuestionGroup } from 'models/QuestionGroup';
+import { QuestionGroup, GroupType } from 'models/QuestionGroup';
 
 import Modal from 'components/Modal';
 import H3 from 'components/H3';
@@ -146,6 +146,27 @@ const QuestionGroupSettingsModal = ({
             px={12}
           />
         </Row>
+        {questionGroup.type === GroupType.INITIAL && (
+          <>
+            <Row justify="between" align="center" mb={8}>
+              <H3>Licza powtórzeń</H3>
+            </Row>
+            <Row justify="between" align="center" mb={15}>
+              <Input
+                type="singleline"
+                inputMode="numeric"
+                value={smsSchedule?.numberOfRepetitions}
+                validator={numericValidator}
+                disabled={disabled}
+                onBlur={(v: string) =>
+                  updateSmsSchedule('numberOfRepetitions', Number(v))
+                }
+                width="100%"
+                px={12}
+              />
+            </Row>
+          </>
+        )}
         <Row justify="between" align="center" mb={8}>
           <H3>{formatMessage(messages.dayOfPeriod)}</H3>
         </Row>
