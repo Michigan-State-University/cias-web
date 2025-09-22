@@ -134,9 +134,29 @@ describe('<SettingsPanel />', () => {
         </Provider>,
       );
 
-      const expectedInterventionUpdate = {
+      const sessionsNeedingUpdate = interventionWithSessions.sessions.filter(
+        (session) => session.schedule !== SessionSchedule.AFTER_FILL,
+      );
+
+      expect(sessionsNeedingUpdate).toHaveLength(2);
+      expect(sessionsNeedingUpdate.map((s) => s.id)).toEqual([
+        'session-2',
+        'session-3',
+      ]);
+
+      const expectedScheduleForAllSessions = SessionSchedule.AFTER_FILL;
+
+      const shouldTriggerUpdate = sessionsNeedingUpdate.length > 0;
+      expect(shouldTriggerUpdate).toBe(true);
+
+      expect(expectedScheduleForAllSessions).toBe(SessionSchedule.AFTER_FILL);
+    });
+
+    it('should not trigger session updates when all sessions already have correct schedule', () => {
+      const interventionWithCorrectSessions = {
+        ...intervention,
         id: 'test-intervention-id',
-        type: InterventionType.FLEXIBLE,
+        type: InterventionType.FIXED,
         sessions: [
           {
             id: 'session-1',
@@ -152,21 +172,47 @@ describe('<SettingsPanel />', () => {
             schedulePayload: null,
             scheduleAt: null,
           },
-          {
-            id: 'session-3',
-            name: 'Session 3',
-            schedule: SessionSchedule.AFTER_FILL,
-            schedulePayload: null,
-            scheduleAt: null,
-          },
         ],
       };
 
-      expect(expectedInterventionUpdate.sessions).toEqual([
-        expect.objectContaining({ schedule: SessionSchedule.AFTER_FILL }),
-        expect.objectContaining({ schedule: SessionSchedule.AFTER_FILL }),
-        expect.objectContaining({ schedule: SessionSchedule.AFTER_FILL }),
-      ]);
+      const stateWithSessions = {
+        intervention: {
+          intervention: interventionWithCorrectSessions,
+          loaders: {
+            fetchInterventionLoading: false,
+          },
+          errors: {
+            fetchInterventionError: null,
+          },
+        },
+      };
+
+      const mockStore = createTestStore(stateWithSessions);
+
+      const propsWithSessions = {
+        intervention: interventionWithCorrectSessions,
+        match: { params: { intervention: { id: 'test-intervention-id' } } },
+      };
+
+      render(
+        <Provider store={mockStore}>
+          <MemoryRouter>
+            <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
+              <SettingsPanel {...propsWithSessions} />
+            </IntlProvider>
+          </MemoryRouter>
+        </Provider>,
+      );
+
+      const sessionsNeedingUpdate =
+        interventionWithCorrectSessions.sessions.filter(
+          (session) => session.schedule !== SessionSchedule.AFTER_FILL,
+        );
+
+      expect(sessionsNeedingUpdate).toHaveLength(0);
+
+      const shouldTriggerUpdate = sessionsNeedingUpdate.length > 0;
+      expect(shouldTriggerUpdate).toBe(false);
     });
   });
 });

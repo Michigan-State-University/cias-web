@@ -24,7 +24,7 @@ import {
   makeSelectEditingPossible,
   makeSelectCanCurrentUserMakeChanges,
   makeSelectCanCurrentUserAccessParticipantsData,
-  bulkUpdateSessionsRequest,
+  updateAllSessionsScheduleRequest,
 } from 'global/reducers/intervention';
 import { SessionSchedule } from 'models/Session';
 import {
@@ -193,13 +193,11 @@ const SettingsPanel = ({ intervention }: Props) => {
             );
 
             if (sessionsNeedingUpdate.length > 0) {
-              const sessionUpdates = sessionsNeedingUpdate.map((session) => ({
-                id: session.id,
-                schedule: SessionSchedule.AFTER_FILL,
-              }));
-
               globalDispatch(
-                bulkUpdateSessionsRequest(interventionId, sessionUpdates),
+                updateAllSessionsScheduleRequest(
+                  interventionId,
+                  SessionSchedule.AFTER_FILL,
+                ),
               );
             }
           }

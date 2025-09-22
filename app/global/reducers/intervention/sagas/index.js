@@ -10,7 +10,7 @@ import giveUserAccessSaga from './giveUserAccess';
 import fetchUsersWithAccessSaga from './fetchUsersWithAccess';
 import revokeUserAccessSaga from './revokeUserAccess';
 import deleteSessionSaga from './deleteSession';
-import bulkUpdateSessionsSaga from './bulkUpdateSessions';
+import updateAllSessionsScheduleSaga from './updateAllSessionsSchedule';
 import externalCopySessionSaga from './externalCopySession';
 import interventionLogoSaga from './interventionLogo';
 import translateInterventionSaga from './translateIntervention';
@@ -55,7 +55,7 @@ export {
   revokeUserAccessSaga,
   createSessionSaga,
   deleteSessionSaga,
-  bulkUpdateSessionsSaga,
+  updateAllSessionsScheduleSaga,
   externalCopySessionSaga,
   interventionLogoSaga,
   translateInterventionSaga,
@@ -94,7 +94,7 @@ export default function* allInterventionSagas() {
     createSessionSaga(),
     fetchUsersWithAccessSaga(),
     deleteSessionSaga(),
-    bulkUpdateSessionsSaga(),
+    updateAllSessionsScheduleSaga(),
     externalCopySessionSaga(),
     translateInterventionSaga(),
     sendInterventionInvitationsSaga(),

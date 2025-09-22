@@ -54,9 +54,9 @@ import {
   DELETE_SESSION_REQUEST,
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
-  BULK_UPDATE_SESSIONS_REQUEST,
-  BULK_UPDATE_SESSIONS_SUCCESS,
-  BULK_UPDATE_SESSIONS_ERROR,
+  UPDATE_ALL_SESSIONS_SCHEDULE_REQUEST,
+  UPDATE_ALL_SESSIONS_SCHEDULE_SUCCESS,
+  UPDATE_ALL_SESSIONS_SCHEDULE_ERROR,
   EXTERNAL_COPY_SESSION_REQUEST,
   EXTERNAL_COPY_SESSION_ERROR,
   ADD_INTERVENTION_LOGO_REQUEST,
@@ -185,7 +185,7 @@ export const initialState = {
     activatePredefinedParticipant: false,
     sendPredefinedParticipantSmsInvitation: false,
     sendPredefinedParticipantEmailInvitation: false,
-    bulkUpdateSessionsLoading: false,
+    updateAllSessionsScheduleLoading: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -201,7 +201,7 @@ export const initialState = {
     changeInterventionNarrator: null,
     editShortLinks: null,
     fetchPredefinedParticipants: null,
-    bulkUpdateSessionsError: null,
+    updateAllSessionsScheduleError: null,
   },
 };
 
@@ -514,17 +514,17 @@ export const interventionReducer = (state = initialState, action) =>
       case DELETE_SESSION_ERROR:
         draft.intervention.sessions = state.cache.intervention.sessions;
         break;
-      case BULK_UPDATE_SESSIONS_REQUEST:
-        draft.loaders.bulkUpdateSessionsLoading = true;
-        draft.errors.bulkUpdateSessionsError = null;
+      case UPDATE_ALL_SESSIONS_SCHEDULE_REQUEST:
+        draft.loaders.updateAllSessionsScheduleLoading = true;
+        draft.errors.updateAllSessionsScheduleError = null;
         break;
-      case BULK_UPDATE_SESSIONS_SUCCESS:
-        draft.loaders.bulkUpdateSessionsLoading = false;
-        draft.errors.bulkUpdateSessionsError = null;
+      case UPDATE_ALL_SESSIONS_SCHEDULE_SUCCESS:
+        draft.loaders.updateAllSessionsScheduleLoading = false;
+        draft.errors.updateAllSessionsScheduleError = null;
         break;
-      case BULK_UPDATE_SESSIONS_ERROR:
-        draft.loaders.bulkUpdateSessionsLoading = false;
-        draft.errors.bulkUpdateSessionsError = action.payload.error;
+      case UPDATE_ALL_SESSIONS_SCHEDULE_ERROR:
+        draft.loaders.updateAllSessionsScheduleLoading = false;
+        draft.errors.updateAllSessionsScheduleError = action.payload.error;
         break;
       case EXTERNAL_COPY_SESSION_REQUEST:
         break;
