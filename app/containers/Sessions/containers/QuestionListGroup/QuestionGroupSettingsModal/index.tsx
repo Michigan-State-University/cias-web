@@ -72,7 +72,7 @@ const QuestionGroupSettingsModal = ({
 
   const updateSmsSchedule = (
     path: string,
-    value: string[] | number | object | boolean,
+    value: string[] | number | object | boolean | null,
   ) => {
     const newSmsSchedule = set(smsSchedule, path, value);
     const transformedSchedule = mapKeys(newSmsSchedule, (v, k) => snakeCase(k));
@@ -149,17 +149,21 @@ const QuestionGroupSettingsModal = ({
         {questionGroup.type === GroupType.INITIAL && (
           <>
             <Row justify="between" align="center" mb={8}>
-              <H3>Licza powtórzeń</H3>
+              <H3>{formatMessage(messages.numberOfRepetitions)}</H3>
             </Row>
             <Row justify="between" align="center" mb={15}>
               <Input
                 type="singleline"
                 inputMode="numeric"
-                value={smsSchedule?.numberOfRepetitions}
+                value={
+                  smsSchedule?.numberOfRepetitions
+                    ? String(smsSchedule.numberOfRepetitions)
+                    : ''
+                }
                 validator={numericValidator}
                 disabled={disabled}
                 onBlur={(v: string) =>
-                  updateSmsSchedule('numberOfRepetitions', Number(v))
+                  updateSmsSchedule('numberOfRepetitions', v ? Number(v) : null)
                 }
                 width="100%"
                 px={12}
