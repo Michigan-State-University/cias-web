@@ -54,6 +54,9 @@ import {
   DELETE_SESSION_REQUEST,
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
+  UPDATE_ALL_SESSIONS_SCHEDULE_REQUEST,
+  UPDATE_ALL_SESSIONS_SCHEDULE_SUCCESS,
+  UPDATE_ALL_SESSIONS_SCHEDULE_ERROR,
   EXTERNAL_COPY_SESSION_REQUEST,
   EXTERNAL_COPY_SESSION_ERROR,
   ADD_INTERVENTION_LOGO_REQUEST,
@@ -182,6 +185,7 @@ export const initialState = {
     activatePredefinedParticipant: false,
     sendPredefinedParticipantSmsInvitation: false,
     sendPredefinedParticipantEmailInvitation: false,
+    updateAllSessionsScheduleLoading: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -197,6 +201,7 @@ export const initialState = {
     changeInterventionNarrator: null,
     editShortLinks: null,
     fetchPredefinedParticipants: null,
+    updateAllSessionsScheduleError: null,
   },
 };
 
@@ -508,6 +513,18 @@ export const interventionReducer = (state = initialState, action) =>
 
       case DELETE_SESSION_ERROR:
         draft.intervention.sessions = state.cache.intervention.sessions;
+        break;
+      case UPDATE_ALL_SESSIONS_SCHEDULE_REQUEST:
+        draft.loaders.updateAllSessionsScheduleLoading = true;
+        draft.errors.updateAllSessionsScheduleError = null;
+        break;
+      case UPDATE_ALL_SESSIONS_SCHEDULE_SUCCESS:
+        draft.loaders.updateAllSessionsScheduleLoading = false;
+        draft.errors.updateAllSessionsScheduleError = null;
+        break;
+      case UPDATE_ALL_SESSIONS_SCHEDULE_ERROR:
+        draft.loaders.updateAllSessionsScheduleLoading = false;
+        draft.errors.updateAllSessionsScheduleError = action.payload.error;
         break;
       case EXTERNAL_COPY_SESSION_REQUEST:
         break;
