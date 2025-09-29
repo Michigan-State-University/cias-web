@@ -1214,6 +1214,7 @@
   "app.containers.QuestionGroupSettingsModal.formula": "Formula",
   "app.containers.QuestionGroupSettingsModal.overwriteUserTimeSettings": "Overwrite participant’s preferred time",
   "app.containers.QuestionGroupSettingsModal.questionsPerDay": "Number of messages per day",
+  "app.containers.QuestionGroupSettingsModal.numberOfRepetitions": "Number of repetitions",
   "app.containers.QuestionGroupSettingsModal.time": "Time of the Message",
   "app.containers.QuestionGroupSettingsModal.timeRandom": "Random",
   "app.containers.QuestionGroupSettingsModal.timeRandomFrom": "From",
