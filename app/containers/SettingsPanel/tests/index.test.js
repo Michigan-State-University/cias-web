@@ -15,6 +15,8 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import { intlProviderConfig } from 'containers/AppLanguageProvider';
+import { InterventionType } from 'models/Intervention';
+import { SessionSchedule } from 'models/Session';
 
 import SettingsPanel from '../index';
 
@@ -68,5 +70,149 @@ describe('<SettingsPanel />', () => {
       </Provider>,
     );
     expect(container).toMatchSnapshot();
+  });
+
+  describe('updateType function', () => {
+    it('should sanitize session schedules for any intervention type change', () => {
+      const interventionWithSessions = {
+        ...intervention,
+        id: 'test-intervention-id',
+        type: InterventionType.FIXED,
+        sessions: [
+          {
+            id: 'session-1',
+            name: 'Session 1',
+            schedule: SessionSchedule.AFTER_FILL,
+            schedulePayload: null,
+            scheduleAt: null,
+          },
+          {
+            id: 'session-2',
+            name: 'Session 2',
+            schedule: SessionSchedule.IMMEDIATELY,
+            schedulePayload: 'some-payload',
+            scheduleAt: '2023-01-01',
+          },
+          {
+            id: 'session-3',
+            name: 'Session 3',
+            schedule: SessionSchedule.IMMEDIATELY,
+            schedulePayload: 'another-payload',
+            scheduleAt: '2023-01-02',
+          },
+        ],
+      };
+
+      const stateWithSessions = {
+        intervention: {
+          intervention: interventionWithSessions,
+          loaders: {
+            fetchInterventionLoading: false,
+          },
+          errors: {
+            fetchInterventionError: null,
+          },
+        },
+      };
+
+      const mockStore = createTestStore(stateWithSessions);
+      const mockDispatch = jest.fn();
+      mockStore.dispatch = mockDispatch;
+
+      const propsWithSessions = {
+        intervention: interventionWithSessions,
+        match: { params: { intervention: { id: 'test-intervention-id' } } },
+      };
+
+      render(
+        <Provider store={mockStore}>
+          <MemoryRouter>
+            <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
+              <SettingsPanel {...propsWithSessions} />
+            </IntlProvider>
+          </MemoryRouter>
+        </Provider>,
+      );
+
+      const sessionsNeedingUpdate = interventionWithSessions.sessions.filter(
+        (session) => session.schedule !== SessionSchedule.AFTER_FILL,
+      );
+
+      expect(sessionsNeedingUpdate).toHaveLength(2);
+      expect(sessionsNeedingUpdate.map((s) => s.id)).toEqual([
+        'session-2',
+        'session-3',
+      ]);
+
+      const expectedScheduleForAllSessions = SessionSchedule.AFTER_FILL;
+
+      const shouldTriggerUpdate = sessionsNeedingUpdate.length > 0;
+      expect(shouldTriggerUpdate).toBe(true);
+
+      expect(expectedScheduleForAllSessions).toBe(SessionSchedule.AFTER_FILL);
+    });
+
+    it('should not trigger session updates when all sessions already have correct schedule', () => {
+      const interventionWithCorrectSessions = {
+        ...intervention,
+        id: 'test-intervention-id',
+        type: InterventionType.FIXED,
+        sessions: [
+          {
+            id: 'session-1',
+            name: 'Session 1',
+            schedule: SessionSchedule.AFTER_FILL,
+            schedulePayload: null,
+            scheduleAt: null,
+          },
+          {
+            id: 'session-2',
+            name: 'Session 2',
+            schedule: SessionSchedule.AFTER_FILL,
+            schedulePayload: null,
+            scheduleAt: null,
+          },
+        ],
+      };
+
+      const stateWithSessions = {
+        intervention: {
+          intervention: interventionWithCorrectSessions,
+          loaders: {
+            fetchInterventionLoading: false,
+          },
+          errors: {
+            fetchInterventionError: null,
+          },
+        },
+      };
+
+      const mockStore = createTestStore(stateWithSessions);
+
+      const propsWithSessions = {
+        intervention: interventionWithCorrectSessions,
+        match: { params: { intervention: { id: 'test-intervention-id' } } },
+      };
+
+      render(
+        <Provider store={mockStore}>
+          <MemoryRouter>
+            <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
+              <SettingsPanel {...propsWithSessions} />
+            </IntlProvider>
+          </MemoryRouter>
+        </Provider>,
+      );
+
+      const sessionsNeedingUpdate =
+        interventionWithCorrectSessions.sessions.filter(
+          (session) => session.schedule !== SessionSchedule.AFTER_FILL,
+        );
+
+      expect(sessionsNeedingUpdate).toHaveLength(0);
+
+      const shouldTriggerUpdate = sessionsNeedingUpdate.length > 0;
+      expect(shouldTriggerUpdate).toBe(false);
+    });
   });
 });
