@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.questionsPerDay`,
     defaultMessage: 'Number of messages per day',
   },
+  numberOfRepetitions: {
+    id: `${scope}.numberOfRepetitions`,
+    defaultMessage: 'Number of repetitions',
+  },
   dayOfPeriod: {
     id: `${scope}.dayOfPeriod`,
     defaultMessage: 'Day of Message',

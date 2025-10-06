@@ -24,7 +24,9 @@ import {
   makeSelectEditingPossible,
   makeSelectCanCurrentUserMakeChanges,
   makeSelectCanCurrentUserAccessParticipantsData,
+  updateAllSessionsScheduleRequest,
 } from 'global/reducers/intervention';
+import { SessionSchedule } from 'models/Session';
 import {
   canChangeAccessSettings,
   canEnableChat,
@@ -132,6 +134,7 @@ const SettingsPanel = ({ intervention }: Props) => {
     conversationsPresent,
     conversationsTranscript,
     logo,
+    sessions,
   } = intervention || {};
 
   const changingAccessSettingsPossible =
@@ -168,23 +171,39 @@ const SettingsPanel = ({ intervention }: Props) => {
     globalDispatch(deleteAttachmentRequest(interventionId, fileInfo.id));
 
   const updateType = (newType: InterventionType) => {
+    const interventionUpdate: any = {
+      id: interventionId,
+      type: newType,
+    };
+
     if (
       type === InterventionType.DEFAULT &&
       newType !== InterventionType.DEFAULT &&
       sharedTo === InterventionSharedTo.ANYONE
     ) {
-      globalDispatch(
-        editInterventionRequest({
-          id: interventionId,
-          type: newType,
-          sharedTo: InterventionSharedTo.REGISTERED,
-        }),
-      );
-    } else {
-      globalDispatch(
-        editInterventionRequest({ id: interventionId, type: newType }),
-      );
+      interventionUpdate.sharedTo = InterventionSharedTo.REGISTERED;
     }
+
+    globalDispatch(
+      editInterventionRequest(interventionUpdate, {
+        onSuccess: () => {
+          if (sessions && sessions.length > 0) {
+            const sessionsNeedingUpdate = sessions.filter(
+              (session) => session.schedule !== SessionSchedule.AFTER_FILL,
+            );
+
+            if (sessionsNeedingUpdate.length > 0) {
+              globalDispatch(
+                updateAllSessionsScheduleRequest(
+                  interventionId,
+                  SessionSchedule.AFTER_FILL,
+                ),
+              );
+            }
+          }
+        },
+      }),
+    );
   };
 
   const updateNavigatorSetting = (isChatEnabled: boolean) => {
