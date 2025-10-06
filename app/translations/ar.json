@@ -1214,6 +1214,7 @@
   "app.containers.QuestionGroupSettingsModal.formula": "",
   "app.containers.QuestionGroupSettingsModal.overwriteUserTimeSettings": "",
   "app.containers.QuestionGroupSettingsModal.questionsPerDay": "",
+  "app.containers.QuestionGroupSettingsModal.numberOfRepetitions": "عدد التكرارات",
   "app.containers.QuestionGroupSettingsModal.time": "",
   "app.containers.QuestionGroupSettingsModal.timeRandom": "",
   "app.containers.QuestionGroupSettingsModal.timeRandomFrom": "",

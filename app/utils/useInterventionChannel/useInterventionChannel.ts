@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useInjectSaga } from 'redux-injectors';
 
 import { Editor } from 'models/Intervention';
+import { useSessionPing } from 'utils/useSessionPing';
 
 import {
   SocketErrorMessageData,
@@ -38,6 +39,7 @@ export type InterventionChannel = ReturnType<typeof useInterventionChannel>;
 
 export const useInterventionChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
+  const { sendPing } = useSessionPing();
 
   useInjectSaga(withRefreshInterventionDataSaga);
 
@@ -49,12 +51,14 @@ export const useInterventionChannel = (interventionId?: string) => {
     const currentEditor: Editor = objectToCamelCase(current_editor);
     dispatch(setCurrentEditor(currentEditor));
     dispatch(setStartingEditing(false));
+    sendPing();
   };
 
   const onEditingStopped = () => {
     dispatch(refreshInterventionData(interventionId!, false));
     dispatch(setCurrentEditor(null));
     dispatch(setStoppingEditing(false));
+    sendPing();
   };
 
   const onForceEditingStarted = ({
@@ -66,6 +70,7 @@ export const useInterventionChannel = (interventionId?: string) => {
     // refreshes intervention data for the user forcing editing too to get
     // latest changes made by the user that was forced to stop editing
     dispatch(refreshInterventionData(interventionId!, true));
+    sendPing();
   };
 
   const onUnexpectedError = (errorData: UnexpectedErrorData) => {
@@ -112,6 +117,7 @@ export const useInterventionChannel = (interventionId?: string) => {
 
   const startEditing = () => {
     dispatch(setStartingEditing(true));
+    sendPing();
     channel?.perform({
       name: InterventionChannelActionName.ON_EDITING_STARTED,
       data: {},
@@ -120,6 +126,7 @@ export const useInterventionChannel = (interventionId?: string) => {
 
   const stopEditing = () => {
     dispatch(setStoppingEditing(true));
+    sendPing();
     channel?.perform({
       name: InterventionChannelActionName.ON_EDITING_STOPPED,
       data: {},
@@ -128,6 +135,7 @@ export const useInterventionChannel = (interventionId?: string) => {
 
   const forceStartEditing = () => {
     dispatch(setStartingEditing(true));
+    sendPing();
     channel?.perform({
       name: InterventionChannelActionName.ON_FORCE_EDITING_STARTED,
       data: {},

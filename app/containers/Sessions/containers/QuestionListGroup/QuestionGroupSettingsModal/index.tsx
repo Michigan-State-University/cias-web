@@ -17,7 +17,7 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { DAY_NUMBERS } from 'global/constants';
 import { themeColors } from 'theme';
 
-import { QuestionGroup } from 'models/QuestionGroup';
+import { QuestionGroup, GroupType } from 'models/QuestionGroup';
 
 import Modal from 'components/Modal';
 import H3 from 'components/H3';
@@ -72,7 +72,7 @@ const QuestionGroupSettingsModal = ({
 
   const updateSmsSchedule = (
     path: string,
-    value: string[] | number | object | boolean,
+    value: string[] | number | object | boolean | null,
   ) => {
     const newSmsSchedule = set(smsSchedule, path, value);
     const transformedSchedule = mapKeys(newSmsSchedule, (v, k) => snakeCase(k));
@@ -146,6 +146,31 @@ const QuestionGroupSettingsModal = ({
             px={12}
           />
         </Row>
+        {questionGroup.type === GroupType.INITIAL && (
+          <>
+            <Row justify="between" align="center" mb={8}>
+              <H3>{formatMessage(messages.numberOfRepetitions)}</H3>
+            </Row>
+            <Row justify="between" align="center" mb={15}>
+              <Input
+                type="singleline"
+                inputMode="numeric"
+                value={
+                  smsSchedule?.numberOfRepetitions
+                    ? String(smsSchedule.numberOfRepetitions)
+                    : ''
+                }
+                validator={numericValidator}
+                disabled={disabled}
+                onBlur={(v: string) =>
+                  updateSmsSchedule('numberOfRepetitions', v ? Number(v) : null)
+                }
+                width="100%"
+                px={12}
+              />
+            </Row>
+          </>
+        )}
         <Row justify="between" align="center" mb={8}>
           <H3>{formatMessage(messages.dayOfPeriod)}</H3>
         </Row>

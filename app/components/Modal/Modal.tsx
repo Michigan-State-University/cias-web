@@ -4,13 +4,7 @@
  *
  */
 
-import React, {
-  useRef,
-  useEffect,
-  ReactElement,
-  ReactNode,
-  useMemo,
-} from 'react';
+import React, { useRef, ReactElement, ReactNode, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
@@ -88,26 +82,6 @@ const Modal = ({
   useElementLockScroll(visible && !disableScrollLock, portalId);
 
   useKeyPress(KeyCodes.ESC, handleClose);
-
-  const handleClick = (event: MouseEvent) => {
-    const { target } = event;
-    const { current: overlayCurrent } = modalOverlay;
-    const { current: contentCurrent } = modalContent;
-    if (
-      overlayCurrent &&
-      contentCurrent &&
-      overlayCurrent.contains(target as Node) &&
-      !contentCurrent.contains(target as Node)
-    )
-      handleClose();
-  };
-
-  useEffect(() => {
-    window.addEventListener('click', handleClick, false);
-    return () => {
-      window.removeEventListener('click', handleClick, false);
-    };
-  }, []);
 
   const {
     fullWidthContainerProps,
