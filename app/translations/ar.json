@@ -1215,6 +1215,8 @@
   "app.containers.QuestionGroupSettingsModal.overwriteUserTimeSettings": "",
   "app.containers.QuestionGroupSettingsModal.questionsPerDay": "",
   "app.containers.QuestionGroupSettingsModal.numberOfRepetitions": "عدد التكرارات",
+  "app.containers.QuestionGroupSettingsModal.messagesAfterLimit": "الرسائل بعد الوصول إلى حد الاستشعار",
+  "app.containers.QuestionGroupSettingsModal.messagesAfterLimitTooltip": "يحدد هذا الرقم عدد الرسائل التي سيتم إرسالها إلى المشارك قبل إغلاق جلسة المستخدم. يعمل مع \"عدد التكرارات\" الذي يحدد عدد المرات التي سيتم فيها إرسال الأسئلة من مجموعة الأسئلة الأولية. بعد إكمال جميع التكرارات، يستخدم النظام هذه القيمة لتحديد عدد الرسائل الإضافية التي يجب إرسالها من آخر مجموعة مخصصة.",
   "app.containers.QuestionGroupSettingsModal.time": "",
   "app.containers.QuestionGroupSettingsModal.timeRandom": "",
   "app.containers.QuestionGroupSettingsModal.timeRandomFrom": "",

@@ -1215,6 +1215,8 @@
   "app.containers.QuestionGroupSettingsModal.overwriteUserTimeSettings": "",
   "app.containers.QuestionGroupSettingsModal.questionsPerDay": "",
   "app.containers.QuestionGroupSettingsModal.numberOfRepetitions": "Número de repeticiones",
+  "app.containers.QuestionGroupSettingsModal.messagesAfterLimit": "Mensajes después de alcanzar el límite de detección",
+  "app.containers.QuestionGroupSettingsModal.messagesAfterLimitTooltip": "Este número define cuántos mensajes se enviarán al participante antes de cerrar la sesión del usuario. Funciona junto con \"Número de repeticiones\" que define cuántas veces se enviarán las preguntas del grupo de preguntas inicial. Después de completar todas las repeticiones, el sistema usa este valor para determinar cuántos mensajes adicionales deben enviarse desde el último grupo asignado.",
   "app.containers.QuestionGroupSettingsModal.time": "",
   "app.containers.QuestionGroupSettingsModal.timeRandom": "",
   "app.containers.QuestionGroupSettingsModal.timeRandomFrom": "",
