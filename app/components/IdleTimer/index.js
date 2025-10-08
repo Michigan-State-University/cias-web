@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { toast } from 'react-toastify';
-import { throttle } from 'lodash';
 
 import {
   logOut as logOutAction,
@@ -15,15 +14,14 @@ import {
   makeSelectUser,
 } from 'global/reducers/auth';
 
+import { useSessionPing } from 'utils/useSessionPing';
+
 import messages from './messages';
-import {
-  TIME_TO_LOGOUT,
-  ACTIVITY_EVENTS,
-  PING_THROTTLE_INTERVAL,
-} from './constants';
+import { TIME_TO_LOGOUT, ACTIVITY_EVENTS } from './constants';
 
 const IdleTimer = ({ logOut, user }) => {
   const { formatMessage } = useIntl();
+  const { sendPing } = useSessionPing();
 
   const isUserLogged = useMemo(() => Boolean(user), [user]);
 
@@ -38,17 +36,6 @@ const IdleTimer = ({ logOut, user }) => {
   const handleOnActive = () => {
     toast.dismiss(LOG_OUT);
   };
-
-  const sendPing = useCallback(
-    throttle(
-      () => {
-        axios.get('/v1/auth/ping').catch(() => {});
-      },
-      PING_THROTTLE_INTERVAL,
-      { leading: true, trailing: false },
-    ),
-    [],
-  );
 
   const handleUserActivity = useCallback(() => {
     sendPing();
