@@ -1484,6 +1484,8 @@
   "app.containers.SettingsSessionPage.Components.language": "",
   "app.containers.SettingsSessionPage.Components.welcomeMessageLabel": "",
   "app.containers.SettingsSessionPage.Components.defaultResponseLabel": "",
+  "app.containers.SettingsSessionPage.Components.completionMessageLabel": "",
+  "app.containers.SettingsSessionPage.Components.completionMessageTooltip": "",
   "app.containers.SettingsSessionPage.Components.narratorActive": "",
   "app.containers.SettingsSessionPage.Components.narratorSettings": "",
   "app.containers.SettingsSessionPage.Components.placeholder": "",
