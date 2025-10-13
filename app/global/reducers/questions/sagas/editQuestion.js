@@ -27,6 +27,7 @@ import {
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_SETTINGS,
   EDIT_QUESTION_ERROR,
+  UPDATE_VARIABLE,
 } from '../constants';
 
 import { editQuestionSuccess, editQuestionError } from '../actions';
@@ -102,6 +103,8 @@ function* editQuestion({ payload }) {
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
+  const isVariableUpdate = payload.type === UPDATE_VARIABLE;
+
   const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
     const response = yield axios.patch(requestURL, {
@@ -110,11 +113,36 @@ function* editQuestion({ payload }) {
 
     const responseQuestion = mapQuestionToStateObject(response.data.data);
 
-    return yield put(editQuestionSuccess(responseQuestion));
+    yield put(editQuestionSuccess(responseQuestion));
+
+    if (isVariableUpdate) {
+      yield call(
+        toast.success,
+        'Variable references are being updated. Please refresh the page in a moment to see the results.',
+        {
+          toastId: 'variable-update-queued',
+          autoClose: 5000,
+        },
+      );
+    }
+
+    return;
   } catch (error) {
-    yield call(toast.error, error.response?.data?.message, {
-      toastId: EDIT_QUESTION_ERROR,
-    });
+    if (error.response?.status === 422 && isVariableUpdate) {
+      yield call(
+        toast.warning,
+        error.response?.data?.message ||
+          'Cannot update session variable while references update is in progress. Please try again in a few moments.',
+        {
+          toastId: 'variable-update-in-progress',
+          autoClose: 5000,
+        },
+      );
+    } else {
+      yield call(toast.error, error.response?.data?.message, {
+        toastId: EDIT_QUESTION_ERROR,
+      });
+    }
     return yield put(editQuestionError({ error, questionId: question.id }));
   }
 }
