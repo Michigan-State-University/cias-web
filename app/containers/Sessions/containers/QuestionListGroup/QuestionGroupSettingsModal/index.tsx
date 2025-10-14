@@ -33,6 +33,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import Row from 'components/Row';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import messages from './messages';
 import { Input } from '../../../components/QuestionSettings/Settings/Components/styled';
@@ -164,6 +165,34 @@ const QuestionGroupSettingsModal = ({
                 disabled={disabled}
                 onBlur={(v: string) =>
                   updateSmsSchedule('numberOfRepetitions', v ? Number(v) : null)
+                }
+                width="100%"
+                px={12}
+              />
+            </Row>
+            <Row justify="between" align="center" mb={8}>
+              <HelpIconTooltip
+                id="messages-after-limit-tooltip"
+                tooltipContent={formatMessage(
+                  messages.messagesAfterLimitTooltip,
+                )}
+              >
+                <H3>{formatMessage(messages.messagesAfterLimit)}</H3>
+              </HelpIconTooltip>
+            </Row>
+            <Row justify="between" align="center" mb={15}>
+              <Input
+                type="singleline"
+                inputMode="numeric"
+                value={
+                  smsSchedule?.messagesAfterLimit
+                    ? String(smsSchedule.messagesAfterLimit)
+                    : ''
+                }
+                validator={numericValidator}
+                disabled={disabled}
+                onBlur={(v: string) =>
+                  updateSmsSchedule('messagesAfterLimit', v ? Number(v) : null)
                 }
                 width="100%"
                 px={12}
