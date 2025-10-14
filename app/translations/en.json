@@ -1487,6 +1487,8 @@
   "app.containers.SettingsSessionPage.Components.language": "Language",
   "app.containers.SettingsSessionPage.Components.welcomeMessageLabel": "Default welcome message",
   "app.containers.SettingsSessionPage.Components.defaultResponseLabel": "Default response for wrong message",
+  "app.containers.SettingsSessionPage.Components.completionMessageLabel": "Completion message at the end of session",
+  "app.containers.SettingsSessionPage.Components.completionMessageTooltip": "This message will be sent to participants when they complete the session. If left empty, no completion message will be sent.",
   "app.containers.SettingsSessionPage.Components.narratorActive": "Narrator Active",
   "app.containers.SettingsSessionPage.Components.narratorSettings": "Narrator Settings",
   "app.containers.SettingsSessionPage.Components.placeholder": "e-Session Name",
