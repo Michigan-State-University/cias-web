@@ -27,7 +27,6 @@ import {
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_SETTINGS,
   EDIT_QUESTION_ERROR,
-  UPDATE_VARIABLE,
 } from '../constants';
 
 import { editQuestionSuccess, editQuestionError } from '../actions';
@@ -39,6 +38,14 @@ import {
   makeSelectSelectedQuestionFromCache,
   makeSelectSelectedQuestion,
 } from '../selectors';
+
+const hasVariableKey = (obj) => {
+  if (typeof obj !== 'object' || obj === null) return false;
+  if ('variable' in obj) return true;
+  return Object.values(obj).some(hasVariableKey);
+};
+
+const hasVariableChanges = (diff) => hasVariableKey(diff);
 
 const validateVariable = (payload, question, variables) => {
   if (QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
@@ -103,7 +110,7 @@ function* editQuestion({ payload }) {
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
-  const isVariableUpdate = payload.type === UPDATE_VARIABLE;
+  const isVariableUpdate = hasVariableChanges(diff);
 
   const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
