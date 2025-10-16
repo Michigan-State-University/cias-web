@@ -16,3 +16,8 @@ false/
 #config files
 .env
 cypress.env.json
+.github/chatmodes/
+.github/context_setup/
+.github/instructions/
+.github/plan/
+.github/prompts/
