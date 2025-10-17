@@ -43,6 +43,9 @@ import {
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
   SELECT_VIDEO_STATS,
+  VERIFY_QR_CODE_REQUEST,
+  VERIFY_QR_CODE_SUCCESS,
+  VERIFY_QR_CODE_ERROR,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
@@ -170,3 +173,10 @@ export const verifyPatientDataError = (error) =>
 
 export const setHfhsPatientDetail = (hfhsPatientDetail) =>
   actionBuilder(SET_HFHS_PATIENT_DETAIL, { hfhsPatientDetail });
+
+export const verifyQRCodeRequest = (decodedString) =>
+  actionBuilder(VERIFY_QR_CODE_REQUEST, { decodedString });
+export const verifyQRCodeSuccess = () =>
+  actionBuilder(VERIFY_QR_CODE_SUCCESS, {});
+export const verifyQRCodeError = (error) =>
+  actionBuilder(VERIFY_QR_CODE_ERROR, { error });

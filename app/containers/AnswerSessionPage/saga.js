@@ -41,6 +41,7 @@ import {
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
   FETCH_PREVIOUS_QUESTION_REQUEST,
   VERIFY_PATIENT_DATA_REQUEST,
+  VERIFY_QR_CODE_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -64,6 +65,8 @@ import {
   verifyPatientDataSuccess,
   submitAnswer,
   setHfhsPatientDetail,
+  verifyQRCodeSuccess,
+  verifyQRCodeError,
 } from './actions';
 import {
   makeSelectAnswers,
@@ -400,6 +403,43 @@ function* verifyPatientData({ payload }) {
   }
 }
 
+function* verifyQRCode({ payload: { decodedString } }) {
+  const userSession = yield select(makeSelectUserSession());
+  if (!userSession) return;
+
+  const { id: userSessionId } = userSession;
+  const requestUrl = `/v1/user_sessions/${userSessionId}/hfhs_qr_verification`;
+
+  try {
+    const { data } = yield axios.post(requestUrl, {
+      qr_data: decodedString,
+    });
+
+    const hfhsPatientDetail = jsonApiToObject(data, 'hfhsPatientDetail');
+    yield put(setHfhsPatientDetail(hfhsPatientDetail));
+    yield put(verifyQRCodeSuccess());
+
+    const question = yield select(makeSelectCurrentQuestion());
+    if (question) {
+      const { sessionId } = userSession;
+      const { id: questionId, type, settings } = question;
+
+      yield put(
+        submitAnswer(
+          questionId,
+          settings?.required ?? false,
+          type,
+          sessionId,
+          userSessionId,
+          false,
+        ),
+      );
+    }
+  } catch (error) {
+    yield put(verifyQRCodeError(error));
+  }
+}
+
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
@@ -414,6 +454,7 @@ export default function* AnswerSessionPageSaga() {
   yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
   yield takeEvery(FETCH_PREVIOUS_QUESTION_REQUEST, fetchPreviousQuestion);
   yield takeLatest(VERIFY_PATIENT_DATA_REQUEST, verifyPatientData);
+  yield takeLatest(VERIFY_QR_CODE_REQUEST, verifyQRCode);
 }
 
 export function* redirectToPreviewSaga() {
