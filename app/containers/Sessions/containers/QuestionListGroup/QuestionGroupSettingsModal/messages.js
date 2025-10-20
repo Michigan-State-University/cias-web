@@ -15,6 +15,15 @@ export default defineMessages({
     id: `${scope}.numberOfRepetitions`,
     defaultMessage: 'Number of repetitions',
   },
+  messagesAfterLimit: {
+    id: `${scope}.messagesAfterLimit`,
+    defaultMessage: 'Messages after reaching sensing limit',
+  },
+  messagesAfterLimitTooltip: {
+    id: `${scope}.messagesAfterLimitTooltip`,
+    defaultMessage:
+      'This number defines how many messages will be sent to the participant before closing the user session. It works together with "Number of repetitions" which defines how many times questions from the initial question group will be sent. After completing all repetitions, the system uses this value to determine how many additional messages should be sent from the last assigned group.',
+  },
   dayOfPeriod: {
     id: `${scope}.dayOfPeriod`,
     defaultMessage: 'Day of Message',

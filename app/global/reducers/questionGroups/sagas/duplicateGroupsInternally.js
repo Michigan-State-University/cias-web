@@ -27,7 +27,10 @@ function* duplicateGroupsInternally({ payload: { questionIds, sessionId } }) {
       id: DUPLICATE_GROUPS_INTERNALLY_SUCCESS,
     });
   } catch (error) {
-    yield call(toast.error, formatMessage(messages.duplicateGroupsError), {
+    const errorMessage =
+      error?.response?.data?.message ||
+      formatMessage(messages.duplicateGroupsError);
+    yield call(toast.error, errorMessage, {
       id: DUPLICATE_GROUPS_INTERNALLY_ERROR,
     });
   }

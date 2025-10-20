@@ -81,6 +81,7 @@ const SessionSettings = ({
   smsCodesAttributes,
   welcomeMessage,
   defaultResponse,
+  completionMessage,
   languageDetails,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
@@ -359,6 +360,27 @@ const SessionSettings = ({
                       px={12}
                     />
                   </InputContainer>
+                  <InputContainer mt={15}>
+                    <Row justify="between" align="center" mb={5}>
+                      <HelpIconTooltip
+                        id="el-tooltip-completion-message-info"
+                        tooltipContent={formatMessage(
+                          messages.completionMessageTooltip,
+                        )}
+                      >
+                        <H3 fontWeight="regular">
+                          {formatMessage(messages.completionMessageLabel)}
+                        </H3>
+                      </HelpIconTooltip>
+                    </Row>
+                    <Input
+                      disabled={!editingPossible}
+                      width="100%"
+                      value={completionMessage}
+                      onBlur={(val) => editSession({ completionMessage: val })}
+                      px={12}
+                    />
+                  </InputContainer>
                 </>
               )}
 
@@ -491,6 +513,7 @@ SessionSettings.propTypes = {
   smsCodesAttributes: PropTypes.array,
   welcomeMessage: PropTypes.string,
   defaultResponse: PropTypes.string,
+  completionMessage: PropTypes.string,
 };
 
 export default compose(withConnect)(SessionSettings);

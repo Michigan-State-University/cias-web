@@ -23,6 +23,15 @@ export default defineMessages({
     id: `${scope}.defaultResponseLabel`,
     defaultMessage: 'Default response for wrong message',
   },
+  completionMessageLabel: {
+    id: `${scope}.completionMessageLabel`,
+    defaultMessage: 'Completion message at the end of session',
+  },
+  completionMessageTooltip: {
+    id: `${scope}.completionMessageTooltip`,
+    defaultMessage:
+      'This message will be sent to participants when they complete the session. If left empty, no completion message will be sent.',
+  },
   smsCodeForClinic: {
     id: `${scope}.smsCodeForClinic`,
     defaultMessage: 'SMS Code for {clinicName}',

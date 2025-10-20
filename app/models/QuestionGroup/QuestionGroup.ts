@@ -17,6 +17,7 @@ export interface QuestionGroup {
     overwriteUserTimeSettings: boolean;
     questionsPerDay: number;
     numberOfRepetitions?: number;
+    messagesAfterLimit?: number;
     dayOfPeriod: string[];
     time: { exact: string; range: { from: string; to: string } };
     patterns: { match: string }[];
