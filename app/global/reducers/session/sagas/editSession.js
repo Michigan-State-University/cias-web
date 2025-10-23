@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import pickFields from 'utils/pickFields';
+import { formatMessage } from 'utils/intlOutsideReact';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
@@ -37,7 +38,7 @@ export function* editSession({ fields, payload: { sessionId } } = {}) {
     if (isSessionVariableUpdate) {
       yield call(
         toast.success,
-        'Variable references are being updated. Please refresh the page in a moment to see the results.',
+        formatMessage(messages.sessionVariableUpdateQueued),
         {
           toastId: 'session-variable-update-queued',
           autoClose: 5000,
@@ -49,7 +50,7 @@ export function* editSession({ fields, payload: { sessionId } } = {}) {
       yield call(
         toast.warning,
         error.response?.data?.message ||
-          'Cannot update session variable while references update is in progress. Please try again in a few moments.',
+          formatMessage(messages.sessionVariableUpdateInProgress),
         {
           toastId: 'session-variable-update-in-progress',
           autoClose: 5000,

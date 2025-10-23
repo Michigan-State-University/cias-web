@@ -123,14 +123,10 @@ function* editQuestion({ payload }) {
     yield put(editQuestionSuccess(responseQuestion));
 
     if (isVariableUpdate) {
-      yield call(
-        toast.success,
-        'Variable references are being updated. Please refresh the page in a moment to see the results.',
-        {
-          toastId: 'variable-update-queued',
-          autoClose: 5000,
-        },
-      );
+      yield call(toast.success, formatMessage(messages.variableUpdateQueued), {
+        toastId: 'variable-update-queued',
+        autoClose: 5000,
+      });
     }
 
     return;
@@ -139,7 +135,7 @@ function* editQuestion({ payload }) {
       yield call(
         toast.warning,
         error.response?.data?.message ||
-          'Cannot update session variable while references update is in progress. Please try again in a few moments.',
+          formatMessage(messages.variableUpdateInProgress),
         {
           toastId: 'variable-update-in-progress',
           autoClose: 5000,
