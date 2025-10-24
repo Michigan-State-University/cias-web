@@ -39,13 +39,55 @@ import {
   makeSelectSelectedQuestion,
 } from '../selectors';
 
-const hasVariableKey = (obj) => {
-  if (typeof obj !== 'object' || obj === null) return false;
-  if ('variable' in obj) return true;
-  return Object.values(obj).some(hasVariableKey);
+const hasNonEmptyValue = (value) =>
+  value !== undefined && value !== '' && value.trim() !== '';
+
+const isVariableNameUpdate = (diff, cachedQuestion) => {
+  if (!diff.body) return false;
+
+  if (diff.body.variable?.name !== undefined) {
+    return hasNonEmptyValue(cachedQuestion?.body?.variable?.name);
+  }
+
+  if (diff.body.data && Array.isArray(diff.body.data)) {
+    return diff.body.data.some((item, index) => {
+      if (item?.variable?.name !== undefined) {
+        return hasNonEmptyValue(
+          cachedQuestion?.body?.data?.[index]?.variable?.name,
+        );
+      }
+
+      if (item?.payload?.rows && Array.isArray(item.payload.rows)) {
+        return item.payload.rows.some(
+          (row, rowIndex) =>
+            row?.variable?.name !== undefined &&
+            hasNonEmptyValue(
+              cachedQuestion?.body?.data?.[index]?.payload?.rows?.[rowIndex]
+                ?.variable?.name,
+            ),
+        );
+      }
+
+      if (item?.payload?.columns && Array.isArray(item.payload.columns)) {
+        return item.payload.columns.some(
+          (col, colIndex) =>
+            col?.variable?.name !== undefined &&
+            hasNonEmptyValue(
+              cachedQuestion?.body?.data?.[index]?.payload?.columns?.[colIndex]
+                ?.variable?.name,
+            ),
+        );
+      }
+
+      return false;
+    });
+  }
+
+  return false;
 };
 
-const hasVariableChanges = (diff) => hasVariableKey(diff);
+const hasVariableChanges = (diff, cachedQuestion) =>
+  isVariableNameUpdate(diff, cachedQuestion);
 
 const validateVariable = (payload, question, variables) => {
   if (QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
@@ -110,7 +152,7 @@ function* editQuestion({ payload }) {
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
-  const isVariableUpdate = hasVariableChanges(diff);
+  const isVariableUpdate = hasVariableChanges(diff, cachedQuestion);
 
   const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
