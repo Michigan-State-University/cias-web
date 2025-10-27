@@ -39,4 +39,14 @@ export default defineMessages({
     id: `${scope}.copySuccess`,
     defaultMessage: 'Copied screen successfully!',
   },
+  variableUpdateQueued: {
+    id: `${scope}.variableUpdateQueued`,
+    defaultMessage:
+      'Variable references are being updated. Please refresh the page in a moment to see the results.',
+  },
+  variableUpdateInProgress: {
+    id: `${scope}.variableUpdateInProgress`,
+    defaultMessage:
+      'Cannot update session variable while references update is in progress. Please try again in a few moments.',
+  },
 });
