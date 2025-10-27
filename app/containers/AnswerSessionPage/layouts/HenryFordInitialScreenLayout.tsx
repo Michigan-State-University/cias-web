@@ -31,6 +31,7 @@ import { QuestionTypes } from 'models/Question';
 
 import { nameValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
+import { formatDOB } from 'utils/hfhsDataFormatters';
 
 import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 
@@ -40,6 +41,7 @@ import FormikInput from 'components/FormikInput';
 import FormikSelect from 'components/FormikSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
+import Button from 'components/Button';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import {
   DEFAULT_COUNTRY_CODE,
@@ -126,6 +128,8 @@ export type Props = {
   continueButtonDisabled?: boolean;
   qrVerifying?: boolean;
   qrVerifyingError?: Nullable<ApiMessageError>;
+  onTogglePatientDataDisplay?: () => void;
+  showPatientDataDisplay?: boolean;
 };
 
 const HenryFordInitialScreenLayout = ({
@@ -140,6 +144,8 @@ const HenryFordInitialScreenLayout = ({
   continueButtonDisabled,
   qrVerifying = false,
   qrVerifyingError,
+  onTogglePatientDataDisplay,
+  showPatientDataDisplay,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -444,31 +450,129 @@ const HenryFordInitialScreenLayout = ({
             )}
           </Formik>
         </div>
-
         {/* @ts-ignore - Tabs component expects children with label prop */}
         <div label={formatMessage(messages.scanQRCodeTab)}>
-          <Text mb={16}>{formatMessage(messages.scanInstructions)}</Text>
-          <AztecQRScanner
-            onScan={handleQRScan}
-            onError={handleQRScanError}
-            disabled={disabled || isVerifying}
-          />
-          {qrVerifyingError && (
+          {showPatientDataDisplay && hfhsPatientDetail ? (
             <>
-              <ApiErrorMessage error={qrVerifyingError} />
-              <Box mt={12}>
-                <Text fontSize="sm" color="text.secondary">
-                  {formatMessage(messages.qrScanFailureHint)}
-                </Text>
+              <Box>
+                <Container fluid style={{ padding: 0 }}>
+                  <Row gutterWidth={24} style={{ rowGap: '24px' }}>
+                    <Col xs={12}>
+                      <Text fontSize="18px" fontWeight="bold" mb={16}>
+                        {formatMessage(messages.confirmPatientData)}
+                      </Text>
+                    </Col>
+
+                    <Col {...columnClassMap}>
+                      <Text fontSize="14px" color={colors.grey} mb={8}>
+                        {formatMessage(messages.firstName)}
+                      </Text>
+                      <Text fontSize="16px" fontWeight="medium">
+                        {hfhsPatientDetail.firstName}
+                      </Text>
+                    </Col>
+
+                    <Col {...columnClassMap}>
+                      <Text fontSize="14px" color={colors.grey} mb={8}>
+                        {formatMessage(messages.lastName)}
+                      </Text>
+                      <Text fontSize="16px" fontWeight="medium">
+                        {hfhsPatientDetail.lastName}
+                      </Text>
+                    </Col>
+
+                    <Col {...columnClassMap}>
+                      <Text fontSize="14px" color={colors.grey} mb={8}>
+                        {formatMessage(messages.phoneNumber)}
+                      </Text>
+                      <Text fontSize="16px" fontWeight="medium">
+                        {hfhsPatientDetail.phoneNumber}
+                      </Text>
+                    </Col>
+
+                    <Col {...columnClassMap}>
+                      <Text fontSize="14px" color={colors.grey} mb={8}>
+                        {formatMessage(messages.dateOfBirth)}
+                      </Text>
+                      <Text fontSize="16px" fontWeight="medium">
+                        {formatDOB(hfhsPatientDetail.dob || '')}
+                      </Text>
+                    </Col>
+                  </Row>
+                </Container>
+
+                <Container fluid style={{ padding: '32px 0 0 0' }}>
+                  <Row gutterWidth={24} style={{ rowGap: '16px' }}>
+                    <Col xs={12} sm={forceMobile ? 12 : 6}>
+                      <Button
+                        onClick={() => {
+                          if (onSubmitPatientData && hfhsPatientDetail) {
+                            onSubmitPatientData({
+                              firstName: hfhsPatientDetail.firstName,
+                              lastName: hfhsPatientDetail.lastName,
+                              phoneNumber: hfhsPatientDetail.phoneNumber,
+                              phoneType: hfhsPatientDetail.phoneType,
+                              dob: hfhsPatientDetail.dob,
+                              sex: hfhsPatientDetail.sex,
+                              zipCode: hfhsPatientDetail.zipCode,
+                            });
+                          }
+                        }}
+                        loading={verifying}
+                        disabled={
+                          !hfhsPatientDetail ||
+                          continueButtonDisabled ||
+                          isVerifying
+                        }
+                        width="100%"
+                      >
+                        {formatMessage(messages.continue)}
+                      </Button>
+                    </Col>
+                    <Col xs={12} sm={forceMobile ? 12 : 6}>
+                      <Button
+                        variant="secondary"
+                        onClick={() => {
+                          if (onTogglePatientDataDisplay) {
+                            onTogglePatientDataDisplay();
+                          }
+                        }}
+                        disabled={isVerifying}
+                        width="100%"
+                      >
+                        {formatMessage(messages.rescan)}
+                      </Button>
+                    </Col>
+                  </Row>
+                </Container>
               </Box>
             </>
-          )}
-          {qrVerifying && (
-            <Box mt={20}>
-              <Text fontStyle="italic">
-                {formatMessage(messages.verifyingQRCode)}
-              </Text>
-            </Box>
+          ) : (
+            <>
+              <Text mb={16}>{formatMessage(messages.scanInstructions)}</Text>
+              <AztecQRScanner
+                onScan={handleQRScan}
+                onError={handleQRScanError}
+                disabled={disabled || isVerifying}
+              />
+              {qrVerifyingError && (
+                <>
+                  <ApiErrorMessage error={qrVerifyingError} />
+                  <Box mt={12}>
+                    <Text fontSize="sm" color="text.secondary">
+                      {formatMessage(messages.qrScanFailureHint)}
+                    </Text>
+                  </Box>
+                </>
+              )}
+              {qrVerifying && (
+                <Box mt={20}>
+                  <Text fontStyle="italic">
+                    {formatMessage(messages.verifyingQRCode)}
+                  </Text>
+                </Box>
+              )}
+            </>
           )}
         </div>
       </Tabs>

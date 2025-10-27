@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { HenryFordInitialScreenDTO } from 'models/Question';
@@ -10,7 +9,6 @@ import { RootState } from 'global/reducers';
 import HenryFordInitialScreenLayout from '../layouts/HenryFordInitialScreenLayout';
 
 import { SharedProps } from '../types';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { verifyPatientDataRequest, verifyQRCodeRequest } from '../actions';
 import {
   makeSelectHfhsPatientDetail,
@@ -35,6 +33,15 @@ const HenryFordInitialScreen = ({
     makeSelectVerifyQRCodeState(),
   );
 
+  const [showPatientDataDisplay, setShowPatientDataDisplay] = useState(false);
+
+  // Show display when patient detail is loaded
+  useEffect(() => {
+    if (hfhsPatientDetail) {
+      setShowPatientDataDisplay(true);
+    }
+  }, [hfhsPatientDetail]);
+
   const patientDetailProvided = Boolean(hfhsPatientDetail);
 
   const handleSubmitPatientData = (patientData: HfhsPatientData) => {
@@ -46,12 +53,15 @@ const HenryFordInitialScreen = ({
   };
 
   const handleQRCodeScan = (decodedString: string) => {
-    // if (isPreview || patientDetailProvided) {
-    //   saveAnswer(false);
-    //   return;
-    // }
-    // dispatch(verifyQRCodeRequest(decodedString));
-    console.log('Here is decoded string from QR scan:', decodedString);
+    if (isPreview) {
+      saveAnswer(false);
+      return;
+    }
+    dispatch(verifyQRCodeRequest(decodedString));
+  };
+
+  const handleTogglePatientDataDisplay = () => {
+    setShowPatientDataDisplay(!showPatientDataDisplay);
   };
 
   return (
@@ -65,6 +75,8 @@ const HenryFordInitialScreen = ({
       qrVerifyingError={qrVerifyingError}
       hfhsPatientDetail={hfhsPatientDetail}
       disabled={patientDetailProvided || disabled}
+      onTogglePatientDataDisplay={handleTogglePatientDataDisplay}
+      showPatientDataDisplay={showPatientDataDisplay}
     />
   );
 };

@@ -407,34 +407,21 @@ function* verifyQRCode({ payload: { decodedString } }) {
   const userSession = yield select(makeSelectUserSession());
   if (!userSession) return;
 
-  const { id: userSessionId } = userSession;
-  const requestUrl = `/v1/user_sessions/${userSessionId}/hfhs_qr_verification`;
+  const requestUrl = `/v1/henry_ford/verify_by_code`;
 
   try {
     const { data } = yield axios.post(requestUrl, {
-      qr_data: decodedString,
+      hfhs_patient_data: { barcode: decodedString },
     });
 
-    const hfhsPatientDetail = jsonApiToObject(data, 'hfhsPatientDetail');
+    console.log('verifyQRCode response data:', data);
+    const hfhsPatientDetail = jsonApiToObject(
+      data,
+      'hfhsPatientDetailAnonymized',
+    );
+    console.log('Parsed hfhsPatientDetail:', hfhsPatientDetail);
     yield put(setHfhsPatientDetail(hfhsPatientDetail));
     yield put(verifyQRCodeSuccess());
-
-    const question = yield select(makeSelectCurrentQuestion());
-    if (question) {
-      const { sessionId } = userSession;
-      const { id: questionId, type, settings } = question;
-
-      yield put(
-        submitAnswer(
-          questionId,
-          settings?.required ?? false,
-          type,
-          sessionId,
-          userSessionId,
-          false,
-        ),
-      );
-    }
   } catch (error) {
     yield put(verifyQRCodeError(error));
   }
