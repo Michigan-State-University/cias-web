@@ -39,6 +39,56 @@ import {
   makeSelectSelectedQuestion,
 } from '../selectors';
 
+const hasNonEmptyValue = (value) =>
+  value !== undefined && value !== '' && value.trim() !== '';
+
+const isVariableNameUpdate = (diff, cachedQuestion) => {
+  if (!diff.body) return false;
+
+  if (diff.body.variable?.name !== undefined) {
+    return hasNonEmptyValue(cachedQuestion?.body?.variable?.name);
+  }
+
+  if (diff.body.data && Array.isArray(diff.body.data)) {
+    return diff.body.data.some((item, index) => {
+      if (item?.variable?.name !== undefined) {
+        return hasNonEmptyValue(
+          cachedQuestion?.body?.data?.[index]?.variable?.name,
+        );
+      }
+
+      if (item?.payload?.rows && Array.isArray(item.payload.rows)) {
+        return item.payload.rows.some(
+          (row, rowIndex) =>
+            row?.variable?.name !== undefined &&
+            hasNonEmptyValue(
+              cachedQuestion?.body?.data?.[index]?.payload?.rows?.[rowIndex]
+                ?.variable?.name,
+            ),
+        );
+      }
+
+      if (item?.payload?.columns && Array.isArray(item.payload.columns)) {
+        return item.payload.columns.some(
+          (col, colIndex) =>
+            col?.variable?.name !== undefined &&
+            hasNonEmptyValue(
+              cachedQuestion?.body?.data?.[index]?.payload?.columns?.[colIndex]
+                ?.variable?.name,
+            ),
+        );
+      }
+
+      return false;
+    });
+  }
+
+  return false;
+};
+
+const hasVariableChanges = (diff, cachedQuestion) =>
+  isVariableNameUpdate(diff, cachedQuestion);
+
 const validateVariable = (payload, question, variables) => {
   if (QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
     return;
@@ -102,6 +152,8 @@ function* editQuestion({ payload }) {
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
+  const isVariableUpdate = hasVariableChanges(diff, cachedQuestion);
+
   const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
     const response = yield axios.patch(requestURL, {
@@ -110,11 +162,32 @@ function* editQuestion({ payload }) {
 
     const responseQuestion = mapQuestionToStateObject(response.data.data);
 
-    return yield put(editQuestionSuccess(responseQuestion));
+    yield put(editQuestionSuccess(responseQuestion));
+
+    if (isVariableUpdate) {
+      yield call(toast.success, formatMessage(messages.variableUpdateQueued), {
+        toastId: 'variable-update-queued',
+        autoClose: 5000,
+      });
+    }
+
+    return;
   } catch (error) {
-    yield call(toast.error, error.response?.data?.message, {
-      toastId: EDIT_QUESTION_ERROR,
-    });
+    if (error.response?.status === 422 && isVariableUpdate) {
+      yield call(
+        toast.warning,
+        error.response?.data?.message ||
+          formatMessage(messages.variableUpdateInProgress),
+        {
+          toastId: 'variable-update-in-progress',
+          autoClose: 5000,
+        },
+      );
+    } else {
+      yield call(toast.error, error.response?.data?.message, {
+        toastId: EDIT_QUESTION_ERROR,
+      });
+    }
     return yield put(editQuestionError({ error, questionId: question.id }));
   }
 }
