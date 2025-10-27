@@ -72,6 +72,7 @@ const TextMessageSettings = ({
       type,
     },
     selectedMessageState: { uploadAttachmentLoading, uploadAttachmentError },
+    interventionId,
   } = useContext(TextMessagesContext);
 
   useEffect(() => {
@@ -153,6 +154,7 @@ const TextMessageSettings = ({
           onChangeFrequency={changeSchedulingFrequencyAction}
           disabled={!editingPossible}
           sessionId={sessionId}
+          interventionId={interventionId}
         />
       )}
 
