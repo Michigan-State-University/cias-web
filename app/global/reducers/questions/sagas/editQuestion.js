@@ -39,55 +39,53 @@ import {
   makeSelectSelectedQuestion,
 } from '../selectors';
 
-const hasNonEmptyValue = (value) =>
-  value !== undefined && value !== '' && value.trim() !== '';
+const getVariableNamesSet = (question) => {
+  if (!question?.body || !question?.type) return new Set();
 
-const isVariableNameUpdate = (diff, cachedQuestion) => {
-  if (!diff.body) return false;
+  const names = [];
 
-  if (diff.body.variable?.name !== undefined) {
-    return hasNonEmptyValue(cachedQuestion?.body?.variable?.name);
-  }
-
-  if (diff.body.data && Array.isArray(diff.body.data)) {
-    return diff.body.data.some((item, index) => {
-      if (item?.variable?.name !== undefined) {
-        return hasNonEmptyValue(
-          cachedQuestion?.body?.data?.[index]?.variable?.name,
-        );
+  if (question.type === multiQuestion.id) {
+    question.body.data?.forEach((item) => {
+      if (item?.variable?.name) {
+        names.push(item.variable.name);
       }
-
-      if (item?.payload?.rows && Array.isArray(item.payload.rows)) {
-        return item.payload.rows.some(
-          (row, rowIndex) =>
-            row?.variable?.name !== undefined &&
-            hasNonEmptyValue(
-              cachedQuestion?.body?.data?.[index]?.payload?.rows?.[rowIndex]
-                ?.variable?.name,
-            ),
-        );
-      }
-
-      if (item?.payload?.columns && Array.isArray(item.payload.columns)) {
-        return item.payload.columns.some(
-          (col, colIndex) =>
-            col?.variable?.name !== undefined &&
-            hasNonEmptyValue(
-              cachedQuestion?.body?.data?.[index]?.payload?.columns?.[colIndex]
-                ?.variable?.name,
-            ),
-        );
-      }
-
-      return false;
     });
+  } else if (question.type === gridQuestion.id) {
+    question.body.data?.[0]?.payload?.rows?.forEach((row) => {
+      if (row?.variable?.name) {
+        names.push(row.variable.name);
+      }
+    });
+  } else if (!QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
+    if (question.body.variable?.name) {
+      names.push(question.body.variable.name);
+    }
   }
 
-  return false;
+  return new Set(names);
 };
 
-const hasVariableChanges = (diff, cachedQuestion) =>
-  isVariableNameUpdate(diff, cachedQuestion);
+const isVariableNameUpdate = (diff, cachedQuestion, currentQuestion) => {
+  if (!diff.body) return false;
+
+  const oldVariables = getVariableNamesSet(cachedQuestion);
+  const newVariables = getVariableNamesSet(currentQuestion);
+
+  if (oldVariables.size === 0) return false;
+
+  const oldVarsArray = [...oldVariables];
+  const newVarsArray = [...newVariables];
+
+  if (newVariables.size > oldVariables.size) {
+    return oldVarsArray.some((oldVar) => !newVariables.has(oldVar));
+  }
+
+  if (oldVariables.size !== newVariables.size) {
+    return true;
+  }
+
+  return newVarsArray.some((varName) => !oldVariables.has(varName));
+};
 
 const validateVariable = (payload, question, variables) => {
   if (QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
@@ -152,7 +150,7 @@ function* editQuestion({ payload }) {
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
-  const isVariableUpdate = hasVariableChanges(diff, cachedQuestion);
+  const isVariableUpdate = isVariableNameUpdate(diff, cachedQuestion, question);
 
   const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
