@@ -42,6 +42,7 @@ const SettingsSessionPage = () => {
     smsCodesAttributes,
     welcomeMessage,
     defaultResponse,
+    completionMessage,
     languageCode,
     languageName,
     googleLanguageId,
@@ -88,6 +89,7 @@ const SettingsSessionPage = () => {
           smsCodesAttributes={smsCodesAttributes}
           welcomeMessage={welcomeMessage}
           defaultResponse={defaultResponse}
+          completionMessage={completionMessage}
           languageDetails={{ googleLanguageId, languageCode, languageName }}
         />
       </Box>
