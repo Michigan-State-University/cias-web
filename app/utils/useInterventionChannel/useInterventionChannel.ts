@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useInjectSaga } from 'redux-injectors';
+import { useIntl } from 'react-intl';
 
 import { Editor } from 'models/Intervention';
 import { useSessionPing } from 'utils/useSessionPing';
@@ -34,12 +35,14 @@ import {
   InterventionChannelActionName,
   InterventionChannelMessageTopic,
 } from './constants';
+import messages from './messages';
 
 export type InterventionChannel = ReturnType<typeof useInterventionChannel>;
 
 export const useInterventionChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
   const { sendPing } = useSessionPing();
+  const { formatMessage } = useIntl();
 
   useInjectSaga(withRefreshInterventionDataSaga);
 
@@ -126,7 +129,7 @@ export const useInterventionChannel = (interventionId?: string) => {
       });
     } catch (error) {
       dispatch(setStartingEditing(false));
-      toast.error('An error occurred while starting Edit Mode.');
+      toast.error(formatMessage(messages.startEditModeError));
     }
   };
 
@@ -141,7 +144,7 @@ export const useInterventionChannel = (interventionId?: string) => {
       });
     } catch (error) {
       dispatch(setStoppingEditing(false));
-      toast.error('An error occurred while stopping Edit Mode.');
+      toast.error(formatMessage(messages.stopEditModeError));
     }
   };
 
@@ -156,7 +159,7 @@ export const useInterventionChannel = (interventionId?: string) => {
       });
     } catch (error) {
       dispatch(setStartingEditing(false));
-      toast.error('An error occurred while starting Edit Mode.');
+      toast.error(formatMessage(messages.startEditModeError));
     }
   };
 
