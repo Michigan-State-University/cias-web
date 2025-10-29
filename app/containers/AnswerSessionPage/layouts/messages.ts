@@ -207,4 +207,16 @@ export default defineMessages({
     defaultMessage:
       'Having trouble scanning? You can switch to the "Enter Manually" tab to enter your information.',
   },
+  confirmPatientData: {
+    id: `${scope}.confirmPatientData`,
+    defaultMessage: 'Please confirm the patient information',
+  },
+  continue: {
+    id: `${scope}.continue`,
+    defaultMessage: 'Continue',
+  },
+  rescan: {
+    id: `${scope}.rescan`,
+    defaultMessage: 'Rescan QR Code',
+  },
 });

@@ -65,6 +65,7 @@ import {
   verifyPatientDataSuccess,
   submitAnswer,
   setHfhsPatientDetail,
+  setHfhsPatientDetailAnonymized,
   verifyQRCodeSuccess,
   verifyQRCodeError,
 } from './actions';
@@ -407,34 +408,20 @@ function* verifyQRCode({ payload: { decodedString } }) {
   const userSession = yield select(makeSelectUserSession());
   if (!userSession) return;
 
-  const { id: userSessionId } = userSession;
-  const requestUrl = `/v1/user_sessions/${userSessionId}/hfhs_qr_verification`;
+  const requestUrl = `/v1/henry_ford/verify_by_code`;
 
   try {
     const { data } = yield axios.post(requestUrl, {
-      qr_data: decodedString,
+      hfhs_patient_data: { barcode: decodedString },
     });
 
-    const hfhsPatientDetail = jsonApiToObject(data, 'hfhsPatientDetail');
-    yield put(setHfhsPatientDetail(hfhsPatientDetail));
+    const hfhsPatientDetailAnonymized = jsonApiToObject(
+      data,
+      'hfhsPatientDetailAnonymized',
+    );
+
+    yield put(setHfhsPatientDetailAnonymized(hfhsPatientDetailAnonymized));
     yield put(verifyQRCodeSuccess());
-
-    const question = yield select(makeSelectCurrentQuestion());
-    if (question) {
-      const { sessionId } = userSession;
-      const { id: questionId, type, settings } = question;
-
-      yield put(
-        submitAnswer(
-          questionId,
-          settings?.required ?? false,
-          type,
-          sessionId,
-          userSessionId,
-          false,
-        ),
-      );
-    }
   } catch (error) {
     yield put(verifyQRCodeError(error));
   }

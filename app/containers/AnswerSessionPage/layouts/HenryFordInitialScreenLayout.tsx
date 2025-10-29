@@ -31,6 +31,7 @@ import { QuestionTypes } from 'models/Question';
 
 import { nameValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
+import { formatDOB } from 'utils/hfhsDataFormatters';
 
 import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 
@@ -40,6 +41,7 @@ import FormikInput from 'components/FormikInput';
 import FormikSelect from 'components/FormikSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
+import Button from 'components/Button';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import {
   DEFAULT_COUNTRY_CODE,
@@ -122,10 +124,13 @@ export type Props = {
   verifying?: boolean;
   verifyingError?: Nullable<ApiMessageError>;
   hfhsPatientDetail?: Nullable<HfhsPatientDetail>;
+  hfhsPatientDetailAnonymized?: Nullable<HfhsPatientDetail>;
   previewMedicalNumberInput?: boolean;
   continueButtonDisabled?: boolean;
   qrVerifying?: boolean;
   qrVerifyingError?: Nullable<ApiMessageError>;
+  onTogglePatientDataDisplay?: () => void;
+  showPatientDataDisplay?: boolean;
 };
 
 const HenryFordInitialScreenLayout = ({
@@ -136,10 +141,13 @@ const HenryFordInitialScreenLayout = ({
   verifying = false,
   verifyingError,
   hfhsPatientDetail,
+  hfhsPatientDetailAnonymized,
   previewMedicalNumberInput,
   continueButtonDisabled,
   qrVerifying = false,
   qrVerifyingError,
+  onTogglePatientDataDisplay,
+  showPatientDataDisplay,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -156,6 +164,8 @@ const HenryFordInitialScreenLayout = ({
   );
 
   const isVerifying = verifying || manualVerifying || qrVerifying;
+
+  const isManualInputDisabled = disabled || showPatientDataDisplay;
 
   const columnClassMap: ScreenClassMap<number> = {
     xs: 12,
@@ -264,9 +274,8 @@ const HenryFordInitialScreenLayout = ({
     }
   };
 
-  // Handle QR scan errors
   const handleQRScanError = () => {
-    console.log('QR scan error occurred');
+    // Error handling is done by the QR scanner component
   };
 
   return (
@@ -300,7 +309,10 @@ const HenryFordInitialScreenLayout = ({
                             messages.firstNamePlaceholder,
                           )}
                           type="text"
-                          inputProps={{ ...inputStyles, disabled }}
+                          inputProps={{
+                            ...inputStyles,
+                            disabled: isManualInputDisabled,
+                          }}
                         />
                       </Col>
                       <Col {...columnClassMap}>
@@ -311,7 +323,10 @@ const HenryFordInitialScreenLayout = ({
                             messages.lastNamePlaceholder,
                           )}
                           type="text"
-                          inputProps={{ ...inputStyles, disabled }}
+                          inputProps={{
+                            ...inputStyles,
+                            disabled: isManualInputDisabled,
+                          }}
                         />
                       </Col>
                       <Col {...columnClassMap}>
@@ -323,7 +338,7 @@ const HenryFordInitialScreenLayout = ({
                           inputProps={{
                             ...inputStyles,
                             ...selectStyles,
-                            isDisabled: disabled,
+                            isDisabled: isManualInputDisabled,
                             placeholder: formatMessage(messages.sexPlaceholder),
                           }}
                         />
@@ -333,7 +348,7 @@ const HenryFordInitialScreenLayout = ({
                           formikKey="dobDate"
                           label={formatMessage(messages.dateOfBirth)}
                           inputProps={inputStyles}
-                          disabled={disabled}
+                          disabled={isManualInputDisabled}
                           datePickerProps={{
                             maxDate: new Date(),
                           }}
@@ -347,7 +362,10 @@ const HenryFordInitialScreenLayout = ({
                             messages.zipCodePlaceholder,
                           )}
                           type="text"
-                          inputProps={{ ...inputStyles, disabled }}
+                          inputProps={{
+                            ...inputStyles,
+                            disabled: isManualInputDisabled,
+                          }}
                         />
                       </Col>
                       <Col {...columnClassMap}>
@@ -362,7 +380,7 @@ const HenryFordInitialScreenLayout = ({
                             placeholder: formatMessage(
                               messages.phoneTypePlaceholder,
                             ),
-                            isDisabled: disabled,
+                            isDisabled: isManualInputDisabled,
                           }}
                         />
                       </Col>
@@ -372,13 +390,16 @@ const HenryFordInitialScreenLayout = ({
                           numberKey="number"
                           prefixLabel={messages.phoneNumberPrefix}
                           phoneLabel={messages.phoneNumber}
-                          disabled={disabled}
+                          disabled={isManualInputDisabled}
                           prefixInputProps={{
                             ...inputStyles,
                             ...selectStyles,
-                            isDisabled: disabled,
+                            isDisabled: isManualInputDisabled,
                           }}
-                          numberInputProps={{ ...inputStyles, disabled }}
+                          numberInputProps={{
+                            ...inputStyles,
+                            disabled: isManualInputDisabled,
+                          }}
                         />
                       </Col>
                     </Row>
@@ -415,7 +436,7 @@ const HenryFordInitialScreenLayout = ({
                             type="text"
                             inputProps={{
                               ...inputStyles,
-                              disabled,
+                              disabled: isManualInputDisabled,
                             }}
                           />
                         </Col>
@@ -444,31 +465,126 @@ const HenryFordInitialScreenLayout = ({
             )}
           </Formik>
         </div>
-
         {/* @ts-ignore - Tabs component expects children with label prop */}
         <div label={formatMessage(messages.scanQRCodeTab)}>
-          <Text mb={16}>{formatMessage(messages.scanInstructions)}</Text>
-          <AztecQRScanner
-            onScan={handleQRScan}
-            onError={handleQRScanError}
-            disabled={disabled || isVerifying}
-          />
-          {qrVerifyingError && (
+          {showPatientDataDisplay && hfhsPatientDetailAnonymized ? (
             <>
-              <ApiErrorMessage error={qrVerifyingError} />
-              <Box mt={12}>
-                <Text fontSize="sm" color="text.secondary">
-                  {formatMessage(messages.qrScanFailureHint)}
-                </Text>
+              <Box>
+                <Container fluid style={{ padding: 0 }}>
+                  <Row gutterWidth={24} style={{ rowGap: '24px' }}>
+                    <Col xs={12}>
+                      <Text fontSize="18px" fontWeight="bold" mb={16}>
+                        {formatMessage(messages.confirmPatientData)}
+                      </Text>
+                    </Col>
+
+                    <Col {...columnClassMap}>
+                      <Text fontSize="14px" color={colors.grey} mb={8}>
+                        {formatMessage(messages.firstName)}
+                      </Text>
+                      <Text fontSize="16px" fontWeight="medium">
+                        {hfhsPatientDetailAnonymized.firstName}
+                      </Text>
+                    </Col>
+
+                    <Col {...columnClassMap}>
+                      <Text fontSize="14px" color={colors.grey} mb={8}>
+                        {formatMessage(messages.lastName)}
+                      </Text>
+                      <Text fontSize="16px" fontWeight="medium">
+                        {hfhsPatientDetailAnonymized.lastName}
+                      </Text>
+                    </Col>
+
+                    <Col {...columnClassMap}>
+                      <Text fontSize="14px" color={colors.grey} mb={8}>
+                        {formatMessage(messages.phoneNumber)}
+                      </Text>
+                      <Text fontSize="16px" fontWeight="medium">
+                        {hfhsPatientDetailAnonymized.phoneNumber}
+                      </Text>
+                    </Col>
+
+                    <Col {...columnClassMap}>
+                      <Text fontSize="14px" color={colors.grey} mb={8}>
+                        {formatMessage(messages.dateOfBirth)}
+                      </Text>
+                      <Text fontSize="16px" fontWeight="medium">
+                        {formatDOB(hfhsPatientDetailAnonymized.dob || '')}
+                      </Text>
+                    </Col>
+                  </Row>
+                </Container>
+
+                <Container fluid style={{ padding: '32px 0 0 0' }}>
+                  <Row gutterWidth={24} style={{ rowGap: '16px' }}>
+                    <Col xs={12} sm={forceMobile ? 12 : 6}>
+                      <Button
+                        onClick={() => {
+                          if (
+                            onSubmitPatientData &&
+                            hfhsPatientDetailAnonymized
+                          ) {
+                            onSubmitPatientData({
+                              id: hfhsPatientDetailAnonymized.id,
+                            });
+                          }
+                        }}
+                        loading={qrVerifying}
+                        disabled={
+                          !hfhsPatientDetailAnonymized ||
+                          continueButtonDisabled ||
+                          isVerifying
+                        }
+                        width="100%"
+                      >
+                        {formatMessage(messages.continue)}
+                      </Button>
+                    </Col>
+                    <Col xs={12} sm={forceMobile ? 12 : 6}>
+                      <Button
+                        variant="secondary"
+                        onClick={() => {
+                          if (onTogglePatientDataDisplay) {
+                            onTogglePatientDataDisplay();
+                          }
+                        }}
+                        disabled={isVerifying}
+                        width="100%"
+                      >
+                        {formatMessage(messages.rescan)}
+                      </Button>
+                    </Col>
+                  </Row>
+                </Container>
               </Box>
             </>
-          )}
-          {qrVerifying && (
-            <Box mt={20}>
-              <Text fontStyle="italic">
-                {formatMessage(messages.verifyingQRCode)}
-              </Text>
-            </Box>
+          ) : (
+            <>
+              <Text mb={16}>{formatMessage(messages.scanInstructions)}</Text>
+              <AztecQRScanner
+                onScan={handleQRScan}
+                onError={handleQRScanError}
+                disabled={disabled || isVerifying || showPatientDataDisplay}
+              />
+              {qrVerifyingError && (
+                <>
+                  <ApiErrorMessage error={qrVerifyingError} />
+                  <Box mt={12}>
+                    <Text fontSize="sm" color="text.secondary">
+                      {formatMessage(messages.qrScanFailureHint)}
+                    </Text>
+                  </Box>
+                </>
+              )}
+              {qrVerifying && (
+                <Box mt={20}>
+                  <Text fontStyle="italic">
+                    {formatMessage(messages.verifyingQRCode)}
+                  </Text>
+                </Box>
+              )}
+            </>
           )}
         </div>
       </Tabs>
