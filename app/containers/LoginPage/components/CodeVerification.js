@@ -12,6 +12,7 @@ import { themeColors } from 'theme';
 import { Col, Container, Row } from 'components/ReactGridSystem';
 import Text from 'components/Text';
 import FormikInput from 'components/FormikInput';
+import FormikCheckbox from 'components/FormikCheckbox';
 import Button from 'components/Button';
 import ErrorAlert from 'components/ErrorAlert';
 import FormikForm from 'components/FormikForm';
@@ -24,13 +25,24 @@ const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
   useInjectSaga({ key: 'verificationCode', saga: verifyCodeSaga });
   const { formatMessage } = useIntl();
 
+  const getRememberBrowserDefault = () => {
+    if (typeof window !== 'undefined') {
+      const stored = sessionStorage.getItem('rememberBrowser');
+      return stored === 'true';
+    }
+    return false;
+  };
+
   const validationSchema = useMemo(
     () => generateVerificationCodeValidationSchema(formatMessage),
     [],
   );
 
-  const onSubmit = ({ verificationCode }, actions) => {
-    verifyCode(verificationCode);
+  const onSubmit = ({ verificationCode, rememberBrowser }, actions) => {
+    verifyCode(verificationCode, rememberBrowser);
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('rememberBrowser');
+    }
     actions.setSubmitting(false);
   };
 
@@ -58,7 +70,10 @@ const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
           </Text>
           <Formik
             validationSchema={validationSchema}
-            initialValues={{ verificationCode: '' }}
+            initialValues={{
+              verificationCode: '',
+              rememberBrowser: getRememberBrowserDefault(),
+            }}
             onSubmit={onSubmit}
           >
             {({ handleSubmit, values, isValid, isSubmitting }) => {
@@ -79,6 +94,14 @@ const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
                     inputProps={{ width: '100%', height: 46 }}
                     my={10}
                   />
+
+                  <Row mt={20} mb={20}>
+                    <FormikCheckbox formikKey="rememberBrowser">
+                      <Text fontSize={14} lineHeight="1.5em">
+                        {formatMessage(messages.rememberBrowserLabel)}
+                      </Text>
+                    </FormikCheckbox>
+                  </Row>
 
                   <Button
                     disabled={isSubmitDisabled}

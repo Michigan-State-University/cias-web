@@ -20,6 +20,7 @@ import {
   verificationCodeNeeded,
 } from '../actions';
 import { LOGIN_REQUEST } from '../constants';
+import { makeSelectTemporaryVerificationCode } from '../selectors';
 
 function* login({ payload: { email, password } }) {
   const requestURL = `v1/auth/sign_in`;
@@ -27,7 +28,12 @@ function* login({ payload: { email, password } }) {
   try {
     let config = {};
     const userStorageController = new UserStorageController(email);
-    const verificationCode = userStorageController.getVerificationCode();
+    const temporaryVerificationCode = yield select(
+      makeSelectTemporaryVerificationCode(),
+    );
+    const storedVerificationCode = userStorageController.getVerificationCode();
+    const verificationCode =
+      temporaryVerificationCode || storedVerificationCode;
 
     if (verificationCode)
       config = {
