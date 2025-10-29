@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useInjectSaga } from 'redux-injectors';
+import { useIntl } from 'react-intl';
 
 import { Editor } from 'models/Intervention';
 import { useSessionPing } from 'utils/useSessionPing';
@@ -34,12 +35,14 @@ import {
   InterventionChannelActionName,
   InterventionChannelMessageTopic,
 } from './constants';
+import messages from './messages';
 
 export type InterventionChannel = ReturnType<typeof useInterventionChannel>;
 
 export const useInterventionChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
   const { sendPing } = useSessionPing();
+  const { formatMessage } = useIntl();
 
   useInjectSaga(withRefreshInterventionDataSaga);
 
@@ -115,31 +118,49 @@ export const useInterventionChannel = (interventionId?: string) => {
     onUnsubscribe,
   });
 
-  const startEditing = () => {
+  const startEditing = async () => {
     dispatch(setStartingEditing(true));
     sendPing();
-    channel?.perform({
-      name: InterventionChannelActionName.ON_EDITING_STARTED,
-      data: {},
-    });
+
+    try {
+      await channel?.perform({
+        name: InterventionChannelActionName.ON_EDITING_STARTED,
+        data: {},
+      });
+    } catch (error) {
+      dispatch(setStartingEditing(false));
+      toast.error(formatMessage(messages.startEditModeError));
+    }
   };
 
-  const stopEditing = () => {
+  const stopEditing = async () => {
     dispatch(setStoppingEditing(true));
     sendPing();
-    channel?.perform({
-      name: InterventionChannelActionName.ON_EDITING_STOPPED,
-      data: {},
-    });
+
+    try {
+      await channel?.perform({
+        name: InterventionChannelActionName.ON_EDITING_STOPPED,
+        data: {},
+      });
+    } catch (error) {
+      dispatch(setStoppingEditing(false));
+      toast.error(formatMessage(messages.stopEditModeError));
+    }
   };
 
-  const forceStartEditing = () => {
+  const forceStartEditing = async () => {
     dispatch(setStartingEditing(true));
     sendPing();
-    channel?.perform({
-      name: InterventionChannelActionName.ON_FORCE_EDITING_STARTED,
-      data: {},
-    });
+
+    try {
+      await channel?.perform({
+        name: InterventionChannelActionName.ON_FORCE_EDITING_STARTED,
+        data: {},
+      });
+    } catch (error) {
+      dispatch(setStartingEditing(false));
+      toast.error(formatMessage(messages.startEditModeError));
+    }
   };
 
   return {
