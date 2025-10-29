@@ -124,6 +124,7 @@ export type Props = {
   verifying?: boolean;
   verifyingError?: Nullable<ApiMessageError>;
   hfhsPatientDetail?: Nullable<HfhsPatientDetail>;
+  hfhsPatientDetailAnonymized?: Nullable<HfhsPatientDetail>;
   previewMedicalNumberInput?: boolean;
   continueButtonDisabled?: boolean;
   qrVerifying?: boolean;
@@ -140,6 +141,7 @@ const HenryFordInitialScreenLayout = ({
   verifying = false,
   verifyingError,
   hfhsPatientDetail,
+  hfhsPatientDetailAnonymized,
   previewMedicalNumberInput,
   continueButtonDisabled,
   qrVerifying = false,
@@ -162,6 +164,8 @@ const HenryFordInitialScreenLayout = ({
   );
 
   const isVerifying = verifying || manualVerifying || qrVerifying;
+
+  const isManualInputDisabled = disabled || showPatientDataDisplay;
 
   const columnClassMap: ScreenClassMap<number> = {
     xs: 12,
@@ -270,9 +274,8 @@ const HenryFordInitialScreenLayout = ({
     }
   };
 
-  // Handle QR scan errors
   const handleQRScanError = () => {
-    console.log('QR scan error occurred');
+    // Error handling is done by the QR scanner component
   };
 
   return (
@@ -306,7 +309,10 @@ const HenryFordInitialScreenLayout = ({
                             messages.firstNamePlaceholder,
                           )}
                           type="text"
-                          inputProps={{ ...inputStyles, disabled }}
+                          inputProps={{
+                            ...inputStyles,
+                            disabled: isManualInputDisabled,
+                          }}
                         />
                       </Col>
                       <Col {...columnClassMap}>
@@ -317,7 +323,10 @@ const HenryFordInitialScreenLayout = ({
                             messages.lastNamePlaceholder,
                           )}
                           type="text"
-                          inputProps={{ ...inputStyles, disabled }}
+                          inputProps={{
+                            ...inputStyles,
+                            disabled: isManualInputDisabled,
+                          }}
                         />
                       </Col>
                       <Col {...columnClassMap}>
@@ -329,7 +338,7 @@ const HenryFordInitialScreenLayout = ({
                           inputProps={{
                             ...inputStyles,
                             ...selectStyles,
-                            isDisabled: disabled,
+                            isDisabled: isManualInputDisabled,
                             placeholder: formatMessage(messages.sexPlaceholder),
                           }}
                         />
@@ -339,7 +348,7 @@ const HenryFordInitialScreenLayout = ({
                           formikKey="dobDate"
                           label={formatMessage(messages.dateOfBirth)}
                           inputProps={inputStyles}
-                          disabled={disabled}
+                          disabled={isManualInputDisabled}
                           datePickerProps={{
                             maxDate: new Date(),
                           }}
@@ -353,7 +362,10 @@ const HenryFordInitialScreenLayout = ({
                             messages.zipCodePlaceholder,
                           )}
                           type="text"
-                          inputProps={{ ...inputStyles, disabled }}
+                          inputProps={{
+                            ...inputStyles,
+                            disabled: isManualInputDisabled,
+                          }}
                         />
                       </Col>
                       <Col {...columnClassMap}>
@@ -368,7 +380,7 @@ const HenryFordInitialScreenLayout = ({
                             placeholder: formatMessage(
                               messages.phoneTypePlaceholder,
                             ),
-                            isDisabled: disabled,
+                            isDisabled: isManualInputDisabled,
                           }}
                         />
                       </Col>
@@ -378,13 +390,16 @@ const HenryFordInitialScreenLayout = ({
                           numberKey="number"
                           prefixLabel={messages.phoneNumberPrefix}
                           phoneLabel={messages.phoneNumber}
-                          disabled={disabled}
+                          disabled={isManualInputDisabled}
                           prefixInputProps={{
                             ...inputStyles,
                             ...selectStyles,
-                            isDisabled: disabled,
+                            isDisabled: isManualInputDisabled,
                           }}
-                          numberInputProps={{ ...inputStyles, disabled }}
+                          numberInputProps={{
+                            ...inputStyles,
+                            disabled: isManualInputDisabled,
+                          }}
                         />
                       </Col>
                     </Row>
@@ -421,7 +436,7 @@ const HenryFordInitialScreenLayout = ({
                             type="text"
                             inputProps={{
                               ...inputStyles,
-                              disabled,
+                              disabled: isManualInputDisabled,
                             }}
                           />
                         </Col>
@@ -452,7 +467,7 @@ const HenryFordInitialScreenLayout = ({
         </div>
         {/* @ts-ignore - Tabs component expects children with label prop */}
         <div label={formatMessage(messages.scanQRCodeTab)}>
-          {showPatientDataDisplay && hfhsPatientDetail ? (
+          {showPatientDataDisplay && hfhsPatientDetailAnonymized ? (
             <>
               <Box>
                 <Container fluid style={{ padding: 0 }}>
@@ -468,7 +483,7 @@ const HenryFordInitialScreenLayout = ({
                         {formatMessage(messages.firstName)}
                       </Text>
                       <Text fontSize="16px" fontWeight="medium">
-                        {hfhsPatientDetail.firstName}
+                        {hfhsPatientDetailAnonymized.firstName}
                       </Text>
                     </Col>
 
@@ -477,7 +492,7 @@ const HenryFordInitialScreenLayout = ({
                         {formatMessage(messages.lastName)}
                       </Text>
                       <Text fontSize="16px" fontWeight="medium">
-                        {hfhsPatientDetail.lastName}
+                        {hfhsPatientDetailAnonymized.lastName}
                       </Text>
                     </Col>
 
@@ -486,7 +501,7 @@ const HenryFordInitialScreenLayout = ({
                         {formatMessage(messages.phoneNumber)}
                       </Text>
                       <Text fontSize="16px" fontWeight="medium">
-                        {hfhsPatientDetail.phoneNumber}
+                        {hfhsPatientDetailAnonymized.phoneNumber}
                       </Text>
                     </Col>
 
@@ -495,7 +510,7 @@ const HenryFordInitialScreenLayout = ({
                         {formatMessage(messages.dateOfBirth)}
                       </Text>
                       <Text fontSize="16px" fontWeight="medium">
-                        {formatDOB(hfhsPatientDetail.dob || '')}
+                        {formatDOB(hfhsPatientDetailAnonymized.dob || '')}
                       </Text>
                     </Col>
                   </Row>
@@ -506,21 +521,18 @@ const HenryFordInitialScreenLayout = ({
                     <Col xs={12} sm={forceMobile ? 12 : 6}>
                       <Button
                         onClick={() => {
-                          if (onSubmitPatientData && hfhsPatientDetail) {
+                          if (
+                            onSubmitPatientData &&
+                            hfhsPatientDetailAnonymized
+                          ) {
                             onSubmitPatientData({
-                              firstName: hfhsPatientDetail.firstName,
-                              lastName: hfhsPatientDetail.lastName,
-                              phoneNumber: hfhsPatientDetail.phoneNumber,
-                              phoneType: hfhsPatientDetail.phoneType,
-                              dob: hfhsPatientDetail.dob,
-                              sex: hfhsPatientDetail.sex,
-                              zipCode: hfhsPatientDetail.zipCode,
+                              id: hfhsPatientDetailAnonymized.id,
                             });
                           }
                         }}
-                        loading={verifying}
+                        loading={qrVerifying}
                         disabled={
-                          !hfhsPatientDetail ||
+                          !hfhsPatientDetailAnonymized ||
                           continueButtonDisabled ||
                           isVerifying
                         }
@@ -553,7 +565,7 @@ const HenryFordInitialScreenLayout = ({
               <AztecQRScanner
                 onScan={handleQRScan}
                 onError={handleQRScanError}
-                disabled={disabled || isVerifying}
+                disabled={disabled || isVerifying || showPatientDataDisplay}
               />
               {qrVerifyingError && (
                 <>

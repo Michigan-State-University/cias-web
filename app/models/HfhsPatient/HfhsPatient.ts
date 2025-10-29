@@ -3,6 +3,7 @@ import { PhoneType } from './PhoneType';
 
 // Used when verifying patient on the HF initial screen
 export type HfhsPatientData = {
+  id?: string;
   firstName?: string;
   lastName?: string;
   dob?: string;

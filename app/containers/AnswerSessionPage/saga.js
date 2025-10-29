@@ -65,6 +65,7 @@ import {
   verifyPatientDataSuccess,
   submitAnswer,
   setHfhsPatientDetail,
+  setHfhsPatientDetailAnonymized,
   verifyQRCodeSuccess,
   verifyQRCodeError,
 } from './actions';
@@ -414,13 +415,12 @@ function* verifyQRCode({ payload: { decodedString } }) {
       hfhs_patient_data: { barcode: decodedString },
     });
 
-    console.log('verifyQRCode response data:', data);
-    const hfhsPatientDetail = jsonApiToObject(
+    const hfhsPatientDetailAnonymized = jsonApiToObject(
       data,
       'hfhsPatientDetailAnonymized',
     );
-    console.log('Parsed hfhsPatientDetail:', hfhsPatientDetail);
-    yield put(setHfhsPatientDetail(hfhsPatientDetail));
+
+    yield put(setHfhsPatientDetailAnonymized(hfhsPatientDetailAnonymized));
     yield put(verifyQRCodeSuccess());
   } catch (error) {
     yield put(verifyQRCodeError(error));
