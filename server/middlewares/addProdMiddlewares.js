@@ -9,6 +9,14 @@ module.exports = function addProdMiddlewares(app, options) {
   // compression middleware compresses your server responses which makes them
   // smaller (applies also to assets). You can read more about that technique
   // and other good practices on official Express.js docs http://mxs.is/googmy
+  app.use((req, res, next) => {
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
+
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    next();
+  });
   app.use(compression());
   app.use(publicPath, express.static(outputPath));
 
