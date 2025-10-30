@@ -185,4 +185,26 @@ export default defineMessages({
     defaultMessage:
       'Participant will be asked to provide their medical record number <bold>if the above data is incorrect.</bold>',
   },
+  enterManuallyTab: {
+    id: `${scope}.enterManuallyTab`,
+    defaultMessage: 'Enter Manually',
+  },
+  scanQRCodeTab: {
+    id: `${scope}.scanQRCodeTab`,
+    defaultMessage: 'Scan QR Code',
+  },
+  scanInstructions: {
+    id: `${scope}.scanInstructions`,
+    defaultMessage:
+      'Click the button below to launch your camera and scan the Aztec code',
+  },
+  verifyingQRCode: {
+    id: `${scope}.verifyingQRCode`,
+    defaultMessage: 'Verifying QR code data...',
+  },
+  qrScanFailureHint: {
+    id: `${scope}.qrScanFailureHint`,
+    defaultMessage:
+      'Having trouble scanning? You can switch to the "Enter Manually" tab to enter your information.',
+  },
 });

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,10 +10,12 @@ import { RootState } from 'global/reducers';
 import HenryFordInitialScreenLayout from '../layouts/HenryFordInitialScreenLayout';
 
 import { SharedProps } from '../types';
-import { verifyPatientDataRequest } from '../actions';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { verifyPatientDataRequest, verifyQRCodeRequest } from '../actions';
 import {
   makeSelectHfhsPatientDetail,
   makeSelectVerifyPatientDataState,
+  makeSelectVerifyQRCodeState,
 } from '../selectors';
 
 const HenryFordInitialScreen = ({
@@ -28,6 +31,9 @@ const HenryFordInitialScreen = ({
     makeSelectHfhsPatientDetail(),
   );
   const { loading, error } = useSelector(makeSelectVerifyPatientDataState());
+  const { loading: qrVerifying, error: qrVerifyingError } = useSelector(
+    makeSelectVerifyQRCodeState(),
+  );
 
   const patientDetailProvided = Boolean(hfhsPatientDetail);
 
@@ -39,12 +45,24 @@ const HenryFordInitialScreen = ({
     dispatch(verifyPatientDataRequest(patientData));
   };
 
+  const handleQRCodeScan = (decodedString: string) => {
+    // if (isPreview || patientDetailProvided) {
+    //   saveAnswer(false);
+    //   return;
+    // }
+    // dispatch(verifyQRCodeRequest(decodedString));
+    console.log('Here is decoded string from QR scan:', decodedString);
+  };
+
   return (
     <HenryFordInitialScreenLayout
       forceMobile={isMobilePreview}
       onSubmitPatientData={handleSubmitPatientData}
+      onQRCodeScan={handleQRCodeScan}
       verifying={loading || continueButtonLoading}
       verifyingError={error}
+      qrVerifying={qrVerifying}
+      qrVerifyingError={qrVerifyingError}
       hfhsPatientDetail={hfhsPatientDetail}
       disabled={patientDetailProvided || disabled}
     />
