@@ -36,7 +36,7 @@ import setNewPasswordSaga from './saga';
 import { setNewPasswordReducer } from './reducer';
 import { shouldRedirectToLogin } from './utils';
 
-const passwordLength = 8;
+const passwordLength = 12;
 
 const validationSchema = (formatMessage) =>
   Yup.object().shape({
@@ -44,7 +44,7 @@ const validationSchema = (formatMessage) =>
       .required(formatMessage(messages.passwordRequired))
       .min(
         passwordLength,
-        formatMessage(messages.passwordLength, { length: 8 }),
+        formatMessage(messages.passwordLength, { length: 12 }),
       )
       .test(
         'password',

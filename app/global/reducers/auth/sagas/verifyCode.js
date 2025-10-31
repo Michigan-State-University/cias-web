@@ -11,7 +11,7 @@ import { VERIFICATION_CODE_REQUEST } from '../constants';
 import { makeSelectLoginFormData } from '../selectors';
 import messages from '../messages';
 
-function* verifyCode({ payload: { verificationCode } }) {
+function* verifyCode({ payload: { verificationCode, rememberBrowser } }) {
   const requestURL = `/v1/users/confirm_logging_code`;
 
   const { email } = yield select(makeSelectLoginFormData());
@@ -29,10 +29,14 @@ function* verifyCode({ payload: { verificationCode } }) {
     );
 
     const userStorageController = new UserStorageController(email);
-    userStorageController.setVerificationCode(verification_code);
+    if (rememberBrowser) {
+      userStorageController.setVerificationCode(verification_code);
+    }
 
     yield delay(300);
-    yield put(verificationCodeSuccess());
+    // eslint-disable-next-line camelcase
+    const codeForState = rememberBrowser ? null : verification_code;
+    yield put(verificationCodeSuccess(codeForState));
   } catch (error) {
     yield delay(300);
 

@@ -15,7 +15,7 @@ export const urlRegex = new RegExp(
 export const simpleUrlRegex = /^https?:\/\//;
 
 export const passwordRegex =
-  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/;
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{12,}$/;
 
 export const numericRegex = /^[0-9\b]+$/;
 
