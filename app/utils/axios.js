@@ -42,6 +42,8 @@ const isGuestRequest = (locationUrl, method, requestUrl) =>
 axios.interceptors.request.use(
   (config) => {
     config.baseURL = process.env.API_URL;
+    config.withCredentials = true;
+
     const { method, url } = config;
     let headers;
     if (isGuestRequest(window.location.pathname, method, url)) {
@@ -49,6 +51,10 @@ axios.interceptors.request.use(
     } else {
       headers = LocalStorageService.getHeaders();
     }
+
+    // NOTE: HTTP-only verification code cookie will be automatically sent by browser
+    // No need to manually add it to headers - the cookie is included in the request automatically
+
     config.headers = objectToCamelKebabCase({
       ...headers,
       ...config.headers,
