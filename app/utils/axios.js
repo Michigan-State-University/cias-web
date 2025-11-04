@@ -52,9 +52,6 @@ axios.interceptors.request.use(
       headers = LocalStorageService.getHeaders();
     }
 
-    // NOTE: HTTP-only verification code cookie will be automatically sent by browser
-    // No need to manually add it to headers - the cookie is included in the request automatically
-
     config.headers = objectToCamelKebabCase({
       ...headers,
       ...config.headers,
