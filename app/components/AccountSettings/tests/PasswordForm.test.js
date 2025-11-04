@@ -78,8 +78,8 @@ describe('<PasswordForm />', () => {
       </IntlProvider>,
     );
 
-    const oldPassword = 'Password1!';
-    const newPassword = 'Password2!';
+    const oldPassword = 'OldPassword1!';
+    const newPassword = 'NewPassword2!';
 
     const oldPasswordInput = getByPlaceholderText('Your old password');
     fireEvent.change(oldPasswordInput, { target: { value: oldPassword } });
