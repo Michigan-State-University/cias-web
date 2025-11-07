@@ -840,13 +840,13 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
           >
             <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
             >
               <div
                 style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
               >
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c5"
@@ -864,7 +864,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c7"
@@ -882,7 +882,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c8"
@@ -900,7 +900,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c9"
@@ -918,7 +918,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c10"
@@ -936,7 +936,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c11"
@@ -954,7 +954,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c7"
@@ -972,7 +972,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c12"
@@ -990,7 +990,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c13"
@@ -1012,7 +1012,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   width="25"
                 />
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c15"
@@ -1037,7 +1037,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               </div>
             </div>
             <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-top: 10px;"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-top: 10px;"
             >
               <div
                 class="c22"
@@ -2186,13 +2186,13 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
           >
             <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
             >
               <div
                 style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
               >
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c4"
@@ -2210,7 +2210,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c6"
@@ -2228,7 +2228,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c7"
@@ -2246,7 +2246,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c8"
@@ -2264,7 +2264,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c9"
@@ -2282,7 +2282,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c10"
@@ -2300,7 +2300,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c6"
@@ -2318,7 +2318,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c11"
@@ -2336,7 +2336,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c12"
@@ -2358,7 +2358,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   width="25"
                 />
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
                 >
                   <div
                     class="c14"
@@ -2383,7 +2383,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               </div>
             </div>
             <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-top: 10px;"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-top: 10px;"
             >
               <div
                 class="c21"

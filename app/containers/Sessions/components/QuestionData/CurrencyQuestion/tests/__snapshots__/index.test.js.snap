@@ -103,7 +103,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
       style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: flex-end; justify-content: flex-start; padding: 26px;"
     >
       <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 20px;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-bottom: 20px;"
       >
         <label
           for="currencyCodeLabel"
@@ -154,13 +154,13 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
                       disabled=""
                       id="currencyCodeLabel"
                       spellcheck="false"
-                      style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                      style="box-sizing: content-box; width: 2px; background: 0px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px; color: inherit;"
                       tabindex="0"
                       type="text"
                       value=""
                     />
                     <div
-                      style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                      style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; letter-spacing: normal; text-transform: none;"
                     />
                   </div>
                 </div>
@@ -185,7 +185,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 66.66666666666667%; flex-basis: 66.66666666666667%; flex-grow: 0; flex-shrink: 0; max-width: 66.66666666666667%; margin-left: 0%; margin-bottom: 20px;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 66.66666666666667%; flex-basis: 66.66666666666667%; flex-grow: 0; flex-shrink: 0; max-width: 66.66666666666667%; margin-left: 0%; right: auto; left: auto; margin-bottom: 20px;"
       >
         <label
           for="currencyAmountLabel"

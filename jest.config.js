@@ -26,7 +26,7 @@ module.exports = {
   },
   setupFilesAfterEnv: [
     '<rootDir>/internals/testing/test-bundler.js',
-    '@testing-library/jest-dom/extend-expect',
+    '@testing-library/jest-dom',
     '<rootDir>/jest.setup.js',
     'jest-extended/all',
   ],

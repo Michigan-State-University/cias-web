@@ -735,7 +735,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   <svg
                     height="128"
                     preserveAspectRatio="xMidYMid meet"
-                    style="width: 100%; height: 100%; transform: translate3d(0,0,0);"
+                    style="width: 100%; height: 100%; transform: translate3d(0,0,0); content-visibility: visible;"
                     viewBox="0 0 160 128"
                     width="160"
                     xmlns="http://www.w3.org/2000/svg"
