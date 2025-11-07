@@ -35,6 +35,9 @@ import {
   DELETE_SESSION_REQUEST,
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
+  UPDATE_ALL_SESSIONS_SCHEDULE_REQUEST,
+  UPDATE_ALL_SESSIONS_SCHEDULE_SUCCESS,
+  UPDATE_ALL_SESSIONS_SCHEDULE_ERROR,
   EXTERNAL_COPY_SESSION_REQUEST,
   EXTERNAL_COPY_SESSION_ERROR,
   ADD_INTERVENTION_LOGO_REQUEST,
@@ -245,6 +248,23 @@ export const deleteSessionSuccess = () =>
   actionBuilder(DELETE_SESSION_SUCCESS, {});
 export const deleteSessionError = (error) =>
   actionBuilder(DELETE_SESSION_ERROR, { error });
+
+export const updateAllSessionsScheduleRequest = (
+  interventionId,
+  schedule,
+  schedulePayload = null,
+  scheduleAt = null,
+) =>
+  actionBuilder(UPDATE_ALL_SESSIONS_SCHEDULE_REQUEST, {
+    interventionId,
+    schedule,
+    schedulePayload,
+    scheduleAt,
+  });
+export const updateAllSessionsScheduleSuccess = () =>
+  actionBuilder(UPDATE_ALL_SESSIONS_SCHEDULE_SUCCESS, {});
+export const updateAllSessionsScheduleError = (error) =>
+  actionBuilder(UPDATE_ALL_SESSIONS_SCHEDULE_ERROR, { error });
 
 export const externalCopySessionRequest = (payload) =>
   actionBuilder(EXTERNAL_COPY_SESSION_REQUEST, payload);

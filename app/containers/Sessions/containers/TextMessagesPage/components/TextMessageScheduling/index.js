@@ -42,6 +42,7 @@ const TextMessageScheduling = ({
   onChangeFrequency,
   disabled,
   sessionId,
+  interventionId,
 }) => {
   const [frequencySettings, setFrequencySettings] = useState({
     frequency,
@@ -212,6 +213,7 @@ const TextMessageScheduling = ({
               placement="left"
               questionTypeWhitelist={[dateQuestion.id]}
               currentSessionId={sessionId}
+              currentInterventionId={interventionId}
               includeAllVariables
               includeCurrentSession
               includeNonDigitVariables
@@ -304,6 +306,7 @@ TextMessageScheduling.propTypes = {
   onChangeVariable: PropTypes.func,
   disabled: PropTypes.bool,
   sessionId: PropTypes.string,
+  interventionId: PropTypes.string,
 };
 
 export default TextMessageScheduling;

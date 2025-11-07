@@ -67,6 +67,7 @@ export const initialState = {
   termsNotAccepted: false,
   termsNotAcceptedExtraFields: null,
   verificationCodeSuccess: false,
+  temporaryVerificationCode: null,
   loginFormData: {
     email: '',
     password: '',
@@ -279,11 +280,13 @@ export const authReducer = (state = initialState, { type, payload }) =>
           email: '',
           password: '',
         };
+        draft.temporaryVerificationCode = null;
         draft.errors.loginError = '';
         draft.loaders.loginLoading = false;
         break;
 
       case LOGIN_ERROR:
+        draft.temporaryVerificationCode = null;
         draft.loaders.loginLoading = false;
         draft.errors.loginError = payload.error;
         break;
@@ -300,11 +303,13 @@ export const authReducer = (state = initialState, { type, payload }) =>
 
       case VERIFICATION_CODE_SUCCESS:
         draft.verificationCodeSuccess = true;
+        draft.temporaryVerificationCode = payload.verificationCode || null;
         draft.loaders.verificationCodeLoading = false;
         draft.errors.verificationCodeError = null;
         break;
 
       case VERIFICATION_CODE_ERROR:
+        draft.temporaryVerificationCode = null;
         draft.loaders.verificationCodeLoading = false;
         draft.errors.verificationCodeError = payload.error;
         break;

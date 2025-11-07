@@ -39,6 +39,54 @@ import {
   makeSelectSelectedQuestion,
 } from '../selectors';
 
+const getVariableNamesSet = (question) => {
+  if (!question?.body || !question?.type) return new Set();
+
+  const names = [];
+
+  if (question.type === multiQuestion.id) {
+    question.body.data?.forEach((item) => {
+      if (item?.variable?.name) {
+        names.push(item.variable.name);
+      }
+    });
+  } else if (question.type === gridQuestion.id) {
+    question.body.data?.[0]?.payload?.rows?.forEach((row) => {
+      if (row?.variable?.name) {
+        names.push(row.variable.name);
+      }
+    });
+  } else if (!QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
+    if (question.body.variable?.name) {
+      names.push(question.body.variable.name);
+    }
+  }
+
+  return new Set(names);
+};
+
+const isVariableNameUpdate = (diff, cachedQuestion, currentQuestion) => {
+  if (!diff.body) return false;
+
+  const oldVariables = getVariableNamesSet(cachedQuestion);
+  const newVariables = getVariableNamesSet(currentQuestion);
+
+  if (oldVariables.size === 0) return false;
+
+  const oldVarsArray = [...oldVariables];
+  const newVarsArray = [...newVariables];
+
+  if (newVariables.size > oldVariables.size) {
+    return oldVarsArray.some((oldVar) => !newVariables.has(oldVar));
+  }
+
+  if (oldVariables.size !== newVariables.size) {
+    return true;
+  }
+
+  return newVarsArray.some((varName) => !oldVariables.has(varName));
+};
+
 const validateVariable = (payload, question, variables) => {
   if (QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
     return;
@@ -102,6 +150,8 @@ function* editQuestion({ payload }) {
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
+  const isVariableUpdate = isVariableNameUpdate(diff, cachedQuestion, question);
+
   const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
     const response = yield axios.patch(requestURL, {
@@ -110,11 +160,32 @@ function* editQuestion({ payload }) {
 
     const responseQuestion = mapQuestionToStateObject(response.data.data);
 
-    return yield put(editQuestionSuccess(responseQuestion));
+    yield put(editQuestionSuccess(responseQuestion));
+
+    if (isVariableUpdate) {
+      yield call(toast.success, formatMessage(messages.variableUpdateQueued), {
+        toastId: 'variable-update-queued',
+        autoClose: 5000,
+      });
+    }
+
+    return;
   } catch (error) {
-    yield call(toast.error, error.response?.data?.message, {
-      toastId: EDIT_QUESTION_ERROR,
-    });
+    if (error.response?.status === 422 && isVariableUpdate) {
+      yield call(
+        toast.warning,
+        error.response?.data?.message ||
+          formatMessage(messages.variableUpdateInProgress),
+        {
+          toastId: 'variable-update-in-progress',
+          autoClose: 5000,
+        },
+      );
+    } else {
+      yield call(toast.error, error.response?.data?.message, {
+        toastId: EDIT_QUESTION_ERROR,
+      });
+    }
     return yield put(editQuestionError({ error, questionId: question.id }));
   }
 }
