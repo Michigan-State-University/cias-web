@@ -739,7 +739,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
         cursor="pointer"
       >
         <div
-          class=" css-2b097c-container"
+          class="css-2b097c-container"
         >
           <span
             aria-atomic="false"
@@ -748,18 +748,18 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             class="css-1f43avz-a11yText-A11yText"
           />
           <div
-            class=" css-4iyz22-control"
+            class="css-4iyz22-control"
           >
             <div
-              class=" css-g1d714-ValueContainer"
+              class="css-1hwfws3"
             >
               <div
-                class=" css-1uccc91-singleValue"
+                class="css-1uccc91-singleValue"
               >
                 Rest
               </div>
               <div
-                class="css-b8ldur-Input"
+                class="css-1g6gooi"
               >
                 <div
                   class=""
@@ -784,11 +784,11 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class=" css-1hb7zxy-IndicatorsContainer"
+              class="css-1wy0on6"
             >
               <div
                 aria-hidden="true"
-                class=" css-tlfecz-indicatorContainer"
+                class="css-tlfecz-indicatorContainer"
               >
                 <img
                   alt="arrow"
@@ -990,7 +990,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             data-testid="select"
           >
             <div
-              class=" css-2b097c-container"
+              class="css-2b097c-container"
             >
               <span
                 aria-atomic="false"
@@ -999,18 +999,18 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
                 class="css-1f43avz-a11yText-A11yText"
               />
               <div
-                class=" css-1isrrs2-control"
+                class="css-1isrrs2-control"
               >
                 <div
-                  class=" css-g1d714-ValueContainer"
+                  class="css-1hwfws3"
                 >
                   <div
-                    class=" css-1uccc91-singleValue"
+                    class="css-1uccc91-singleValue"
                   >
                     =
                   </div>
                   <div
-                    class="css-b8ldur-Input"
+                    class="css-1g6gooi"
                   >
                     <div
                       class=""
@@ -1035,11 +1035,11 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
                   </div>
                 </div>
                 <div
-                  class=" css-1hb7zxy-IndicatorsContainer"
+                  class="css-1wy0on6"
                 >
                   <div
                     aria-hidden="true"
-                    class=" css-tlfecz-indicatorContainer"
+                    class="css-tlfecz-indicatorContainer"
                   >
                     <img
                       alt="arrow"

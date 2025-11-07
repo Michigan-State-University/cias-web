@@ -774,7 +774,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <div
-                class=" css-14jk2my-container"
+                class="css-14jk2my-container"
               >
                 <span
                   aria-atomic="false"
@@ -783,16 +783,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                   class="css-1f43avz-a11yText-A11yText"
                 />
                 <div
-                  class=" css-vz7ypb-control"
+                  class="css-vz7ypb-control"
                 >
                   <div
-                    class=" css-g1d714-ValueContainer"
+                    class="css-1hwfws3"
                   >
                     <div
-                      class=" css-107lb6w-singleValue"
+                      class="css-107lb6w-singleValue"
                     />
                     <div
-                      class="css-1bwsx9e-Input"
+                      class="css-mry1rc"
                     >
                       <div
                         class=""
@@ -819,7 +819,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     </div>
                   </div>
                   <div
-                    class=" css-1hb7zxy-IndicatorsContainer"
+                    class="css-1wy0on6"
                   >
                     <div
                       class="c11"
@@ -834,7 +834,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     </div>
                     <div
                       aria-hidden="true"
-                      class=" css-tlfecz-indicatorContainer"
+                      class="css-tlfecz-indicatorContainer"
                     >
                       <img
                         alt="arrow"
