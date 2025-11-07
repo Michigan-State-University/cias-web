@@ -65,6 +65,7 @@ export interface Session {
   smsCodesAttributes: Array<object>;
   welcomeMessage: string;
   defaultResponse: string;
+  completionMessage: string;
   languageName: string;
   languageCode: string;
   googleLanguageId: string;

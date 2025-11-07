@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import pickFields from 'utils/pickFields';
+import { formatMessage } from 'utils/intlOutsideReact';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
@@ -25,17 +26,42 @@ export function* editSession({ fields, payload: { sessionId } } = {}) {
 
   const patchDifference = pickFields(session, fields);
 
+  const isSessionVariableUpdate = fields && fields.includes('variable');
+
   try {
     const { data } = yield call(axios.put, requestURL, {
       session: patchDifference,
     });
 
     yield put(editSessionSuccess(jsonApiToObject(data, 'session')));
+
+    if (isSessionVariableUpdate) {
+      yield call(
+        toast.success,
+        formatMessage(messages.sessionVariableUpdateQueued),
+        {
+          toastId: 'session-variable-update-queued',
+          autoClose: 5000,
+        },
+      );
+    }
   } catch (error) {
-    yield call(
-      toast.error,
-      formatApiErrorMessage(error, messages.editSessionError),
-    );
+    if (error.response?.status === 422 && isSessionVariableUpdate) {
+      yield call(
+        toast.warning,
+        error.response?.data?.message ||
+          formatMessage(messages.sessionVariableUpdateInProgress),
+        {
+          toastId: 'session-variable-update-in-progress',
+          autoClose: 5000,
+        },
+      );
+    } else {
+      yield call(
+        toast.error,
+        formatApiErrorMessage(error, messages.editSessionError),
+      );
+    }
     yield put(editSessionError(error));
   }
 }

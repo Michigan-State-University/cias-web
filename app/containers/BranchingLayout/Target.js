@@ -49,7 +49,6 @@ const Target = ({
               width={56}
               height={50}
               disabled={disabled}
-              px={0}
               py={12}
               textAlign="center"
               placeholder=".."
@@ -58,7 +57,7 @@ const Target = ({
               onBlur={(probability) =>
                 onUpdateTarget({ probability }, formulaIndex)
               }
-              sufix="%"
+              sufix=" %"
             />
           </Box>
         )}

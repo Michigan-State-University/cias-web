@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useIdleTimer } from 'react-idle-timer';
 import axios from 'axios';
@@ -14,11 +14,14 @@ import {
   makeSelectUser,
 } from 'global/reducers/auth';
 
+import { useSessionPing } from 'utils/useSessionPing';
+
 import messages from './messages';
-import { TIME_TO_LOGOUT } from './constants';
+import { TIME_TO_LOGOUT, ACTIVITY_EVENTS } from './constants';
 
 const IdleTimer = ({ logOut, user }) => {
   const { formatMessage } = useIntl();
+  const { sendPing } = useSessionPing();
 
   const isUserLogged = useMemo(() => Boolean(user), [user]);
 
@@ -33,6 +36,10 @@ const IdleTimer = ({ logOut, user }) => {
   const handleOnActive = () => {
     toast.dismiss(LOG_OUT);
   };
+
+  const handleUserActivity = useCallback(() => {
+    sendPing();
+  }, [sendPing]);
 
   const requestInterceptor = (config) => {
     reset();
@@ -58,10 +65,11 @@ const IdleTimer = ({ logOut, user }) => {
     timeout: TIME_TO_LOGOUT,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
+    onAction: handleUserActivity,
     startManually: true,
     startOnMount: false,
     stopOnIdle: true,
-    events: [],
+    events: ACTIVITY_EVENTS,
   });
 
   useEffect(() => {

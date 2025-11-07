@@ -17,7 +17,7 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { DAY_NUMBERS } from 'global/constants';
 import { themeColors } from 'theme';
 
-import { QuestionGroup } from 'models/QuestionGroup';
+import { QuestionGroup, GroupType } from 'models/QuestionGroup';
 
 import Modal from 'components/Modal';
 import H3 from 'components/H3';
@@ -33,6 +33,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import Row from 'components/Row';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import messages from './messages';
 import { Input } from '../../../components/QuestionSettings/Settings/Components/styled';
@@ -72,7 +73,7 @@ const QuestionGroupSettingsModal = ({
 
   const updateSmsSchedule = (
     path: string,
-    value: string[] | number | object | boolean,
+    value: string[] | number | object | boolean | null,
   ) => {
     const newSmsSchedule = set(smsSchedule, path, value);
     const transformedSchedule = mapKeys(newSmsSchedule, (v, k) => snakeCase(k));
@@ -146,6 +147,59 @@ const QuestionGroupSettingsModal = ({
             px={12}
           />
         </Row>
+        {questionGroup.type === GroupType.INITIAL && (
+          <>
+            <Row justify="between" align="center" mb={8}>
+              <H3>{formatMessage(messages.numberOfRepetitions)}</H3>
+            </Row>
+            <Row justify="between" align="center" mb={15}>
+              <Input
+                type="singleline"
+                inputMode="numeric"
+                value={
+                  smsSchedule?.numberOfRepetitions
+                    ? String(smsSchedule.numberOfRepetitions)
+                    : ''
+                }
+                validator={numericValidator}
+                disabled={disabled}
+                onBlur={(v: string) =>
+                  updateSmsSchedule('numberOfRepetitions', v ? Number(v) : null)
+                }
+                width="100%"
+                px={12}
+              />
+            </Row>
+            <Row justify="between" align="center" mb={8}>
+              <HelpIconTooltip
+                id="messages-after-limit-tooltip"
+                tooltipContent={formatMessage(
+                  messages.messagesAfterLimitTooltip,
+                )}
+              >
+                <H3>{formatMessage(messages.messagesAfterLimit)}</H3>
+              </HelpIconTooltip>
+            </Row>
+            <Row justify="between" align="center" mb={15}>
+              <Input
+                type="singleline"
+                inputMode="numeric"
+                value={
+                  smsSchedule?.messagesAfterLimit
+                    ? String(smsSchedule.messagesAfterLimit)
+                    : ''
+                }
+                validator={numericValidator}
+                disabled={disabled}
+                onBlur={(v: string) =>
+                  updateSmsSchedule('messagesAfterLimit', v ? Number(v) : null)
+                }
+                width="100%"
+                px={12}
+              />
+            </Row>
+          </>
+        )}
         <Row justify="between" align="center" mb={8}>
           <H3>{formatMessage(messages.dayOfPeriod)}</H3>
         </Row>

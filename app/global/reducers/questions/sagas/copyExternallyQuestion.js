@@ -44,7 +44,11 @@ function* copyExternallyQuestion({
       toastId: COPY_EXTERNALLY_QUESTION_SUCCESS,
     });
   } catch (error) {
-    yield call(toast.error, formatMessage(messages.copyError), {
+    const errorMessage =
+      error?.response?.status === 422 && error?.response?.data?.message
+        ? error.response.data.message
+        : formatMessage(messages.copyError);
+    yield call(toast.error, errorMessage, {
       toastId: COPY_EXTERNALLY_QUESTION_ERROR,
     });
     yield put(copyExternallyQuestionError(error));

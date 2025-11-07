@@ -15,4 +15,14 @@ export default defineMessages({
     id: `${scope}.smsCodeError`,
     defaultMessage: `You have entered an incorrect code. Please try again.`,
   },
+  sessionVariableUpdateQueued: {
+    id: `${scope}.sessionVariableUpdateQueued`,
+    defaultMessage:
+      'Variable references are being updated. Please refresh the page in a moment to see the results.',
+  },
+  sessionVariableUpdateInProgress: {
+    id: `${scope}.sessionVariableUpdateInProgress`,
+    defaultMessage:
+      'Cannot update session variable while references update is in progress. Please try again in a few moments.',
+  },
 });
