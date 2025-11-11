@@ -27,11 +27,7 @@ describe('<FormikSelect />', () => {
         initialValues={{ test: { label: 'option', value: 'option' } }}
         onSubmit={jest.fn()}
       >
-        {() => (
-          <>
-            <FormikSelect {...props} />
-          </>
-        )}
+        {() => <FormikSelect {...props} />}
       </Formik>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -43,11 +39,7 @@ describe('<FormikSelect />', () => {
         initialValues={{ test: { label: 'option', value: 'option' } }}
         onSubmit={jest.fn()}
       >
-        {() => (
-          <>
-            <FormikSelect {...props} />
-          </>
-        )}
+        {() => <FormikSelect {...props} />}
       </Formik>,
     );
     expect(container).toMatchSnapshot();

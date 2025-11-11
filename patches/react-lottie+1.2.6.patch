@@ -1,0 +1,31 @@
+diff --git a/node_modules/react-lottie/dist/index.js b/node_modules/react-lottie/dist/index.js
+index 63bcbcc..a8598a1 100644
+--- a/node_modules/react-lottie/dist/index.js
++++ b/node_modules/react-lottie/dist/index.js
+@@ -98,20 +98,16 @@ var Lottie = function (_React$Component) {
+       this.setSpeed();
+     }
+   }, {
+-    key: 'componentWillUpdate',
+-    value: function componentWillUpdate(nextProps /* , nextState */) {
++    key: 'componentDidUpdate',
++    value: function componentDidUpdate(prevProps) {
+       /* Recreate the animation handle if the data is changed */
+-      if (this.options.animationData !== nextProps.options.animationData) {
+-        this.deRegisterEvents(this.props.eventListeners);
++      if (this.options.animationData !== this.props.options.animationData) {
++        this.deRegisterEvents(prevProps.eventListeners);
+         this.destroy();
+-        this.options = (0, _extends3.default)({}, this.options, nextProps.options);
++        this.options = (0, _extends3.default)({}, this.options, this.props.options);
+         this.anim = _lottieWeb2.default.loadAnimation(this.options);
+-        this.registerEvents(nextProps.eventListeners);
++        this.registerEvents(this.props.eventListeners);
+       }
+-    }
+-  }, {
+-    key: 'componentDidUpdate',
+-    value: function componentDidUpdate() {
+       if (this.props.isStopped) {
+         this.stop();
+       } else if (this.props.segments) {

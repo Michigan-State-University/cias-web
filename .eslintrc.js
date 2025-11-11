@@ -80,7 +80,16 @@ const baseRules = {
 module.exports = {
   root: true,
   parser: '@babel/eslint-parser',
-  extends: ['airbnb', 'plugin:prettier/recommended'],
+  // Replaced deprecated/slow-to-update Airbnb configs with focused recommended sets
+  // keeping Prettier integration. Provides React 17 compatibility without peer dep friction.
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:import/recommended',
+    'plugin:prettier/recommended',
+  ],
   plugins: [
     'prettier',
     'redux-saga',
@@ -88,6 +97,7 @@ module.exports = {
     'react-hooks',
     'jsx-a11y',
     'jsdoc',
+    'import',
   ],
   env: {
     jest: true,
@@ -105,6 +115,7 @@ module.exports = {
   },
   rules: baseRules,
   settings: {
+    react: { version: 'detect' },
     'import/resolver': {
       webpack: {
         config: './internals/webpack/webpack.prod.babel.js',
@@ -139,12 +150,22 @@ module.exports = {
         sourceType: 'module',
         project: './tsconfig.json',
       },
-      extends: ['airbnb', 'airbnb-typescript', 'plugin:prettier/recommended'],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:jsx-a11y/recommended',
+        'plugin:import/recommended',
+        'plugin:import/typescript',
+        'plugin:prettier/recommended',
+      ],
       plugins: ['@typescript-eslint', 'import'],
       settings: {
+        react: { version: 'detect' },
         'import/resolver': {
           typescript: {
-            alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+            alwaysTryTypes: true,
             project: './tsconfig.json',
           },
         },
@@ -154,6 +175,12 @@ module.exports = {
       },
       rules: {
         ...baseRules,
+        // Prefer TS-aware unused vars rule
+        'no-unused-vars': 0,
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+        ],
         '@typescript-eslint/no-var-requires': 0,
         '@typescript-eslint/ban-ts-comment': 0,
         '@typescript-eslint/no-use-before-define': 0,
