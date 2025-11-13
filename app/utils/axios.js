@@ -42,6 +42,8 @@ const isGuestRequest = (locationUrl, method, requestUrl) =>
 axios.interceptors.request.use(
   (config) => {
     config.baseURL = process.env.API_URL;
+    config.withCredentials = true;
+
     const { method, url } = config;
     let headers;
     if (isGuestRequest(window.location.pathname, method, url)) {
@@ -49,6 +51,7 @@ axios.interceptors.request.use(
     } else {
       headers = LocalStorageService.getHeaders();
     }
+
     config.headers = objectToCamelKebabCase({
       ...headers,
       ...config.headers,
