@@ -48,7 +48,8 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     userInterventionId,
   } = userSession;
   // @ts-ignore
-  const { next_session_id: nextSessionId } = question;
+  const { next_session_id: nextSessionId, settings } = question;
+  const showDashboardButton = settings?.show_dashboard_button ?? false;
 
   const isModuleIntervention =
     interventionType === InterventionType.FIXED ||
@@ -160,21 +161,23 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
           </Button>
         </StyledLink>
       )}
-      <StyledLink to={getGoToDashboardButtonLink()}>
-        <Button
-          onClick={isPreview ? closeCurrentTab : undefined}
-          px={20}
-          width="100%"
-        >
-          {formatMessage(
-            messages[
-              isPreview && sharedTo === InterventionSharedTo.ANYONE
-                ? 'completeSession'
-                : 'goToDashboard'
-            ],
-          )}
-        </Button>
-      </StyledLink>
+      {showDashboardButton && (
+        <StyledLink to={getGoToDashboardButtonLink()}>
+          <Button
+            onClick={isPreview ? closeCurrentTab : undefined}
+            px={20}
+            width="100%"
+          >
+            {formatMessage(
+              messages[
+                isPreview && sharedTo === InterventionSharedTo.ANYONE
+                  ? 'completeSession'
+                  : 'goToDashboard'
+              ],
+            )}
+          </Button>
+        </StyledLink>
+      )}
     </Row>
   );
 };

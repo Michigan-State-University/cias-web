@@ -57,7 +57,7 @@ export default defineMessages({
   },
   goToDashboard: {
     id: `${scope}.goToDashboard`,
-    defaultMessage: 'Go to dashboard',
+    defaultMessage: 'My Dashboard',
   },
   goToSessionMap: {
     id: `${scope}.goToSessionMap`,
