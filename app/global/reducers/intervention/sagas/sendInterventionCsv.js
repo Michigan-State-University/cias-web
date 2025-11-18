@@ -17,7 +17,6 @@ export function* sendInterventionCsv({
 }) {
   let requestURL = `v1/interventions/${id}/answers.csv`;
 
-  // Add query parameters for date range and timezone if provided
   const params = new URLSearchParams();
   if (startDate) {
     params.append('start_datetime', startDate.toISOString());

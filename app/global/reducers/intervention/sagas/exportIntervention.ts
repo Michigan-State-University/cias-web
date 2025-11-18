@@ -20,7 +20,6 @@ function* exportIntervention({
 }: ReturnType<typeof exportInterventionRequest>) {
   let url = `v1/interventions/${interventionId}/export`;
 
-  // Add query parameters for date range and timezone if provided
   const params = new URLSearchParams();
   if (startDate) {
     params.append('start_datetime', startDate.toISOString());
