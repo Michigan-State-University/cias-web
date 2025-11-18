@@ -16,9 +16,26 @@ import {
 } from '../constants';
 
 function* exportIntervention({
-  payload: { interventionId, onSuccess },
+  payload: { interventionId, onSuccess, startDate, endDate, timezone },
 }: ReturnType<typeof exportInterventionRequest>) {
-  const url = `v1/interventions/${interventionId}/export`;
+  let url = `v1/interventions/${interventionId}/export`;
+
+  // Add query parameters for date range and timezone if provided
+  const params = new URLSearchParams();
+  if (startDate) {
+    params.append('start_datetime', startDate.toISOString());
+  }
+  if (endDate) {
+    params.append('end_datetime', endDate.toISOString());
+  }
+  if (timezone) {
+    params.append('timezone', timezone);
+  }
+
+  const queryString = params.toString();
+  if (queryString) {
+    url = `${url}?${queryString}`;
+  }
 
   try {
     yield call(axios.post, url);

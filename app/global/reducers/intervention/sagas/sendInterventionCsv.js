@@ -12,8 +12,28 @@ import {
 } from '../actions';
 import messages from '../messages';
 
-export function* sendInterventionCsv({ payload: { id, onSuccess } }) {
-  const requestURL = `v1/interventions/${id}/answers.csv`;
+export function* sendInterventionCsv({
+  payload: { id, onSuccess, startDate, endDate, timezone },
+}) {
+  let requestURL = `v1/interventions/${id}/answers.csv`;
+
+  // Add query parameters for date range and timezone if provided
+  const params = new URLSearchParams();
+  if (startDate) {
+    params.append('start_datetime', startDate.toISOString());
+  }
+  if (endDate) {
+    params.append('end_datetime', endDate.toISOString());
+  }
+  if (timezone) {
+    params.append('timezone', timezone);
+  }
+
+  const queryString = params.toString();
+  if (queryString) {
+    requestURL = `${requestURL}?${queryString}`;
+  }
+
   try {
     const {
       data: { message },
