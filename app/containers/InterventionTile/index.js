@@ -17,6 +17,7 @@ import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
+import InfoIcon from 'assets/svg/grey-question-mark.svg';
 
 import { colors } from 'theme';
 
@@ -59,6 +60,7 @@ import Modal from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
+import Box from 'components/Box';
 import {
   useHenryFordBranchingInfoModal,
   HenryFordBranchingInfoType,
@@ -113,6 +115,7 @@ const InterventionTile = ({
     clearSensitiveDataScheduledAt,
     starred,
     exportedData,
+    note,
   } = tileData || {};
 
   const { starInterventionLoading, unstarInterventionLoading } =
@@ -355,14 +358,31 @@ const InterventionTile = ({
               )}
             </Heading>
 
-            <EllipsisText
-              text={name}
-              fontSize={18}
-              fontWeight="bold"
-              lineHeight={1.3}
-              lines={2}
-              dir="auto"
-            />
+            <Box position="relative" pr={30}>
+              <EllipsisText
+                text={name}
+                fontSize={18}
+                fontWeight="bold"
+                lineHeight={1.3}
+                lines={2}
+                dir="auto"
+              />
+              {note && (
+                <Box position="absolute" top={0} right={0}>
+                  <Tooltip
+                    id={`${id}-intervention-info-tooltip`}
+                    content={
+                      <Column>
+                        <Text fontWeight="bold" mb={5}>
+                          {note}
+                        </Text>
+                      </Column>
+                    }
+                    icon={InfoIcon}
+                  />
+                </Box>
+              )}
+            </Box>
           </Column>
 
           <Row justify="between">
