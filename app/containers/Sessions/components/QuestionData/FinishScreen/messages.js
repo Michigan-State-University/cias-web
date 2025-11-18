@@ -5,7 +5,7 @@ export const scope = 'app.containers.FinishScreen';
 export default defineMessages({
   dashboard: {
     id: `${scope}.dashboard`,
-    defaultMessage: 'Go to dashboard',
+    defaultMessage: 'My Dashboard',
   },
   tooltip: {
     id: `${scope}.tooltip`,
