@@ -59,6 +59,10 @@ export default defineMessages({
     id: `${scope}.goToDashboard`,
     defaultMessage: 'My Dashboard',
   },
+  fillAgain: {
+    id: `${scope}.fillAgain`,
+    defaultMessage: 'Fill again',
+  },
   goToSessionMap: {
     id: `${scope}.goToSessionMap`,
     defaultMessage: 'Go to session map',
