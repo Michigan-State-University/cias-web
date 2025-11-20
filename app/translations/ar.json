@@ -541,6 +541,7 @@
   "app.containers.Answer.layouts.firstNamePlaceholder": "",
   "app.containers.Answer.layouts.goBackToModules": "→ العودة إلى عرض الوحدات",
   "app.containers.Answer.layouts.goToDashboard": "لوحة التحكم الخاصة بي",
+  "app.containers.Answer.layouts.fillAgain": "املأ مرة أخرى",
   "app.containers.Answer.layouts.goToNextModule": "انتقل إلى الوحدة التالية",
   "app.containers.Answer.layouts.goToSessionMap": "انتقل إلى خريطة الجلسة",
   "app.containers.Answer.layouts.gridLabel": "",

@@ -541,6 +541,7 @@
   "app.containers.Answer.layouts.firstNamePlaceholder": "Introduce tu nombre aquí",
   "app.containers.Answer.layouts.goBackToModules": "← Volver a la vista de módulos",
   "app.containers.Answer.layouts.goToDashboard": "Mi Panel",
+  "app.containers.Answer.layouts.fillAgain": "Rellenar de nuevo",
   "app.containers.Answer.layouts.goToNextModule": "Ir al módulo siguiente",
   "app.containers.Answer.layouts.goToSessionMap": "Ir al mapa de la sesión",
   "app.containers.Answer.layouts.gridLabel": "Pregunta {questionIndex} y respuesta {answerIndex}",
