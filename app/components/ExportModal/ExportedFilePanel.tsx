@@ -29,49 +29,42 @@ export const ExportedFilePanel = ({ file, onExport, loading }: Props) => {
   const { generatedAt, filename, url } = file;
 
   return (
-    <>
-      <Column
-        px={24}
-        py={32}
-        border={`1px solid ${themeColors.highlight}`}
-        borderRadius={8}
-      >
-        <Text fontSize={15} fontWeight="medium">
-          {formatMessage(messages.fileBoxLabel)}
-        </Text>
-        <FileBox
-          name={filename}
-          url={url}
-          showDownloadIcon
-          marginBlockStart={16}
-        />
-        <Text
-          fontSize={12}
-          opacity={0.6}
-          lineHeight={1.3}
-          marginBlockStart={16}
-        >
-          {formatMessage(messages.fileGeneratedAt, {
-            date: dayjs(generatedAt).format(FILE_GENERATION_TIME_FORMAT),
-          })}
-        </Text>
-        <Row marginBlockStart={40} gap={12} justify="center">
-          <FileDownload url={url} fileName={filename}>
-            <Button width="auto" px={32}>
-              {formatMessage(messages.downloadFileButtonLabel)}
-            </Button>
-          </FileDownload>
-          <Button
-            width="auto"
-            inverted
-            px={32}
-            onClick={onExport}
-            loading={loading}
-          >
-            {formatMessage(messages.updateFileButtonLabel)}
+    <Column
+      px={24}
+      py={32}
+      border={`1px solid ${themeColors.highlight}`}
+      borderRadius={8}
+    >
+      <Text fontSize={15} fontWeight="medium">
+        {formatMessage(messages.fileBoxLabel)}
+      </Text>
+      <FileBox
+        name={filename}
+        url={url}
+        showDownloadIcon
+        marginBlockStart={16}
+      />
+      <Text fontSize={12} opacity={0.6} lineHeight={1.3} marginBlockStart={16}>
+        {formatMessage(messages.fileGeneratedAt, {
+          date: dayjs(generatedAt).format(FILE_GENERATION_TIME_FORMAT),
+        })}
+      </Text>
+      <Row marginBlockStart={40} gap={12} justify="center">
+        <FileDownload url={url} fileName={filename}>
+          <Button width="auto" px={32}>
+            {formatMessage(messages.downloadFileButtonLabel)}
           </Button>
-        </Row>
-      </Column>
-    </>
+        </FileDownload>
+        <Button
+          width="auto"
+          inverted
+          px={32}
+          onClick={onExport}
+          loading={loading}
+        >
+          {formatMessage(messages.updateFileButtonLabel)}
+        </Button>
+      </Row>
+    </Column>
   );
 };

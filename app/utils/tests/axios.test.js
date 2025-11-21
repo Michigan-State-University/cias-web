@@ -81,9 +81,8 @@ describe('axios response test', () => {
       },
     };
 
-    const result = await axios.interceptors.response.handlers[0].fulfilled(
-      response200,
-    );
+    const result =
+      await axios.interceptors.response.handlers[0].fulfilled(response200);
 
     expect(LocalStorageService.setHeaders).toHaveBeenCalledTimes(1);
     expect(LocalStorageService.setHeaders).toHaveBeenCalledWith(
@@ -104,9 +103,8 @@ describe('axios response test', () => {
       },
     };
 
-    const result = await axios.interceptors.response.handlers[0].fulfilled(
-      responseSignIn,
-    );
+    const result =
+      await axios.interceptors.response.handlers[0].fulfilled(responseSignIn);
 
     expect(LocalStorageService.setHeaders).toHaveBeenCalledTimes(1);
     expect(LocalStorageService.setHeaders).toHaveBeenCalledWith(

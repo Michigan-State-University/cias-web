@@ -26,11 +26,7 @@ describe('<FormikInput />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
-        {() => (
-          <>
-            <FormikInput {...props} />
-          </>
-        )}
+        {() => <FormikInput {...props} />}
       </Formik>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -39,11 +35,7 @@ describe('<FormikInput />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
-        {() => (
-          <>
-            <FormikInput {...props} />
-          </>
-        )}
+        {() => <FormikInput {...props} />}
       </Formik>,
     );
     expect(container).toMatchSnapshot();

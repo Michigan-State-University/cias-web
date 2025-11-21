@@ -1,6 +1,7 @@
 import produce from 'immer';
 import { getType } from 'typesafe-actions';
 import { deleteItemById, updateItemById } from 'utils/reduxUtils';
+import { EventData } from 'models/Tlfb';
 
 import {
   addNewTlfbEventRequest,
@@ -77,10 +78,14 @@ export const tlfbReducer = (
         const {
           payload: { dayKey, eventId, name },
         } = action;
-        updateItemById(draft.days[dayKey]?.events || [], eventId, (el) => ({
-          ...el,
-          name,
-        }));
+        updateItemById(
+          draft.days[dayKey]?.events || [],
+          eventId,
+          (el: EventData) => ({
+            ...el,
+            name,
+          }),
+        );
         break;
       }
 

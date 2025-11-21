@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   width: auto;

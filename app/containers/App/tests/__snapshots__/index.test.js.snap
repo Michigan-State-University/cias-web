@@ -908,7 +908,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
       style="margin-left: 0px; margin-right: 0px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; max-width: 100%; margin-left: 0%;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; flex-basis: unset; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
       >
         <div
           class="c18"
@@ -1013,7 +1013,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
       >
         <div
           class="c34"
@@ -1068,69 +1068,74 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                 style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
               >
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
                 >
                   <div
                     style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
                   >
                     <div
-                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
                     >
                       <div
                         class="c42"
                         cursor="pointer"
                       >
                         <div
-                          class=" css-2b097c-container"
+                          class="css-b62m3t-container"
                         >
+                          <span
+                            class="css-1f43avz-a11yText-A11yText"
+                            id="react-select-2-live-region"
+                          />
                           <span
                             aria-atomic="false"
                             aria-live="polite"
                             aria-relevant="additions text"
                             class="css-1f43avz-a11yText-A11yText"
+                            role="log"
                           />
                           <div
-                            class=" css-4iyz22-control"
+                            class="css-1eyhby5-control"
                           >
                             <div
-                              class=" css-g1d714-ValueContainer"
+                              class="css-hlgwow"
                             >
                               <div
-                                class=" css-1jyq7ds-placeholder"
+                                class="css-16cmxim-placeholder"
+                                id="react-select-2-placeholder"
                               >
                                 All interventions
                               </div>
                               <div
-                                class="css-b8ldur-Input"
+                                class="css-19bb58m"
+                                data-value=""
                               >
-                                <div
+                                <input
+                                  aria-activedescendant=""
+                                  aria-autocomplete="list"
+                                  aria-describedby="react-select-2-placeholder"
+                                  aria-expanded="false"
+                                  aria-haspopup="true"
+                                  autocapitalize="none"
+                                  autocomplete="off"
+                                  autocorrect="off"
                                   class=""
-                                  style="display: inline-block;"
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autocapitalize="none"
-                                    autocomplete="off"
-                                    autocorrect="off"
-                                    id="react-select-2-input"
-                                    spellcheck="false"
-                                    style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                                    tabindex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                                  />
-                                </div>
+                                  id="react-select-2-input"
+                                  role="combobox"
+                                  spellcheck="false"
+                                  style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                                  tabindex="0"
+                                  type="text"
+                                  value=""
+                                />
                               </div>
                             </div>
                             <div
-                              class=" css-1hb7zxy-IndicatorsContainer"
+                              class="css-1wy0on6"
                             >
                               <div
                                 aria-hidden="true"
-                                class=" css-tlfecz-indicatorContainer"
+                                class="css-1xc3v61-indicatorContainer"
                               >
                                 <img
                                   alt="arrow"
@@ -1147,43 +1152,50 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
                 >
                   <div
                     style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
                   >
                     <div
-                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
                     >
                       <div
                         class="c42"
                         cursor="pointer"
                       >
                         <div
-                          class=" css-2b097c-container"
+                          class="css-b62m3t-container"
                         >
+                          <span
+                            class="css-1f43avz-a11yText-A11yText"
+                            id="react-select-3-live-region"
+                          />
                           <span
                             aria-atomic="false"
                             aria-live="polite"
                             aria-relevant="additions text"
                             class="css-1f43avz-a11yText-A11yText"
+                            role="log"
                           />
                           <div
-                            class=" css-pqwieh-control"
+                            class="css-rikfxi-control"
                           >
                             <div
-                              class=" css-g1d714-ValueContainer"
+                              class="css-1dyz3mf"
                             >
                               <div
-                                class="css-1rhbuit-multiValue"
+                                class="css-1p3m7a8-multiValue"
                               >
                                 <div
-                                  class="css-12jo7m5"
+                                  class="css-9jq23d"
                                 >
                                   Draft
                                 </div>
                                 <div
-                                  class="css-xb97g8"
+                                  aria-label="Remove Draft"
+                                  class="css-v7duua"
+                                  role="button"
                                 >
                                   <svg
                                     aria-hidden="true"
@@ -1200,15 +1212,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                                 </div>
                               </div>
                               <div
-                                class="css-1rhbuit-multiValue"
+                                class="css-1p3m7a8-multiValue"
                               >
                                 <div
-                                  class="css-12jo7m5"
+                                  class="css-9jq23d"
                                 >
                                   Paused
                                 </div>
                                 <div
-                                  class="css-xb97g8"
+                                  aria-label="Remove Paused"
+                                  class="css-v7duua"
+                                  role="button"
                                 >
                                   <svg
                                     aria-hidden="true"
@@ -1225,15 +1239,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                                 </div>
                               </div>
                               <div
-                                class="css-1rhbuit-multiValue"
+                                class="css-1p3m7a8-multiValue"
                               >
                                 <div
-                                  class="css-12jo7m5"
+                                  class="css-9jq23d"
                                 >
                                   Published
                                 </div>
                                 <div
-                                  class="css-xb97g8"
+                                  aria-label="Remove Published"
+                                  class="css-v7duua"
+                                  role="button"
                                 >
                                   <svg
                                     aria-hidden="true"
@@ -1250,36 +1266,34 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                                 </div>
                               </div>
                               <div
-                                class="css-b8ldur-Input"
+                                class="css-19bb58m"
+                                data-value=""
                               >
-                                <div
+                                <input
+                                  aria-activedescendant=""
+                                  aria-autocomplete="list"
+                                  aria-expanded="false"
+                                  aria-haspopup="true"
+                                  autocapitalize="none"
+                                  autocomplete="off"
+                                  autocorrect="off"
                                   class=""
-                                  style="display: inline-block;"
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autocapitalize="none"
-                                    autocomplete="off"
-                                    autocorrect="off"
-                                    id="react-select-3-input"
-                                    spellcheck="false"
-                                    style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                                    tabindex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                                  />
-                                </div>
+                                  id="react-select-3-input"
+                                  role="combobox"
+                                  spellcheck="false"
+                                  style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                                  tabindex="0"
+                                  type="text"
+                                  value=""
+                                />
                               </div>
                             </div>
                             <div
-                              class=" css-1hb7zxy-IndicatorsContainer"
+                              class="css-1wy0on6"
                             >
                               <div
                                 aria-hidden="true"
-                                class=" css-tlfecz-indicatorContainer"
+                                class="css-1xc3v61-indicatorContainer"
                               >
                                 <svg
                                   aria-hidden="true"
@@ -1296,7 +1310,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                               </div>
                               <div
                                 aria-hidden="true"
-                                class=" css-tlfecz-indicatorContainer"
+                                class="css-1xc3v61-indicatorContainer"
                               >
                                 <img
                                   alt="arrow"
@@ -1313,7 +1327,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
                 >
                   <div
                     style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start; height: 100%;"
@@ -1321,7 +1335,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                     <div
                       align="start"
                       class="c44"
-                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
                     >
                       <div
                         class="c45"
@@ -1351,13 +1365,13 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                   </div>
                 </div>
                 <div
-                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
                 >
                   <div
                     style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
                   >
                     <div
-                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
                     >
                       <div
                         class="c53"

@@ -687,11 +687,11 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
               <div
                 class="c9 c10"
                 height="fit-content"
+                role="presentation"
               >
                 <input
-                  accept="image/jpg, image/png, image/jpeg"
-                  autocomplete="off"
-                  style="display: none;"
+                  accept=""
+                  style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
                   tabindex="-1"
                   type="file"
                 />
@@ -816,56 +816,59 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             data-testid="select"
           >
             <div
-              class=" css-2b097c-container"
+              class="css-b62m3t-container"
             >
+              <span
+                class="css-1f43avz-a11yText-A11yText"
+                id="react-select-4-live-region"
+              />
               <span
                 aria-atomic="false"
                 aria-live="polite"
                 aria-relevant="additions text"
                 class="css-1f43avz-a11yText-A11yText"
+                role="log"
               />
               <div
-                class=" css-4iyz22-control"
+                class="css-1eyhby5-control"
               >
                 <div
-                  class=" css-g1d714-ValueContainer"
+                  class="css-hlgwow"
                 >
                   <div
-                    class=" css-1uccc91-singleValue"
+                    class="css-1dimb5e-singleValue"
                   >
                     America/New_York (UTC -04:00)
                   </div>
                   <div
-                    class="css-b8ldur-Input"
+                    class="css-19bb58m"
+                    data-value=""
                   >
-                    <div
+                    <input
+                      aria-activedescendant=""
+                      aria-autocomplete="list"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      autocapitalize="none"
+                      autocomplete="off"
+                      autocorrect="off"
                       class=""
-                      style="display: inline-block;"
-                    >
-                      <input
-                        aria-autocomplete="list"
-                        autocapitalize="none"
-                        autocomplete="off"
-                        autocorrect="off"
-                        id="timeZone"
-                        spellcheck="false"
-                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                        tabindex="0"
-                        type="text"
-                        value=""
-                      />
-                      <div
-                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                      />
-                    </div>
+                      id="timeZone"
+                      role="combobox"
+                      spellcheck="false"
+                      style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                      tabindex="0"
+                      type="text"
+                      value=""
+                    />
                   </div>
                 </div>
                 <div
-                  class=" css-1hb7zxy-IndicatorsContainer"
+                  class="css-1wy0on6"
                 >
                   <div
                     aria-hidden="true"
-                    class=" css-tlfecz-indicatorContainer"
+                    class="css-1xc3v61-indicatorContainer"
                   >
                     <img
                       alt="arrow"
@@ -927,30 +930,36 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                   data-testid="select"
                 >
                   <div
-                    class=" css-2b097c-container"
+                    class="css-b62m3t-container"
                   >
+                    <span
+                      class="css-1f43avz-a11yText-A11yText"
+                      id="react-select-5-live-region"
+                    />
                     <span
                       aria-atomic="false"
                       aria-live="polite"
                       aria-relevant="additions text"
                       class="css-1f43avz-a11yText-A11yText"
+                      role="log"
                     />
                     <div
-                      class=" css-4iyz22-control"
+                      class="css-1eyhby5-control"
                     >
                       <div
-                        class=" css-g1d714-ValueContainer"
+                        class="css-hlgwow"
                       >
                         <div
-                          class=" css-1uccc91-singleValue"
+                          class="css-1dimb5e-singleValue"
                         >
                           <div
                             class="c31"
                           >
                             <img
                               alt="US"
-                              src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
-                              style="height: 24px; width: 24px; display: inline-block;"
+                              height="24"
+                              src="https://cdn.jsdelivr.net/gh/umidbekk/react-flag-kit@1/assets/US.svg"
+                              width="24"
                             />
                             <p
                               class="c32"
@@ -961,36 +970,34 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                           </div>
                         </div>
                         <div
-                          class="css-b8ldur-Input"
+                          class="css-19bb58m"
+                          data-value=""
                         >
-                          <div
+                          <input
+                            aria-activedescendant=""
+                            aria-autocomplete="list"
+                            aria-expanded="false"
+                            aria-haspopup="true"
+                            autocapitalize="none"
+                            autocomplete="off"
+                            autocorrect="off"
                             class=""
-                            style="display: inline-block;"
-                          >
-                            <input
-                              aria-autocomplete="list"
-                              autocapitalize="none"
-                              autocomplete="off"
-                              autocorrect="off"
-                              id="iso"
-                              spellcheck="false"
-                              style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                              tabindex="0"
-                              type="text"
-                              value=""
-                            />
-                            <div
-                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                            />
-                          </div>
+                            id="iso"
+                            role="combobox"
+                            spellcheck="false"
+                            style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                            tabindex="0"
+                            type="text"
+                            value=""
+                          />
                         </div>
                       </div>
                       <div
-                        class=" css-1hb7zxy-IndicatorsContainer"
+                        class="css-1wy0on6"
                       >
                         <div
                           aria-hidden="true"
-                          class=" css-tlfecz-indicatorContainer"
+                          class="css-1xc3v61-indicatorContainer"
                         >
                           <img
                             alt="arrow"

@@ -74,15 +74,15 @@ const ReflectionBlock = ({
   const currentSessionQuestions: QuestionDTO[] = useSelector(
     makeSelectQuestions(),
   );
-  const normalizedQuestionGroups: NormalizedData<QuestionGroup> = useSelector(
+  const normalizedQuestionGroups = useSelector(
     makeSelectNormalizedQuestionGroups(),
-  );
+  ) as NormalizedData<QuestionGroup>;
   const currentQuestion: Nullable<QuestionDTO> = useSelector(
     makeSelectSelectedQuestion(),
   );
-  const currentQuestionGroup: Nullable<QuestionGroup> = useSelector(
+  const currentQuestionGroup = useSelector(
     makeSelectSelectedQuestionGroup(),
-  );
+  ) as Nullable<QuestionGroup>;
   const currentSession: Nullable<Session> = useSelector(makeSelectSession());
 
   const currentSessionPreviousQuestions = useMemo(
@@ -117,7 +117,7 @@ const ReflectionBlock = ({
     return findQuestionById(
       currentSessionPreviousQuestions,
       reflectedQuestionId,
-    );
+    ) as Nullable<QuestionDTO>;
   }, [reflectedQuestionId, reflectedOtherSessionId]);
 
   const reflectedOtherSessionQuestionSubtitleUrl =

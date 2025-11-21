@@ -423,7 +423,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   style="justify-content: center;"
 >
   <div
-    style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 66.66666666666667%; flex-basis: 66.66666666666667%; flex-grow: 0; flex-shrink: 0; max-width: 66.66666666666667%; margin-left: 0%; overflow-y: auto;"
+    style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 66.66666666666667%; flex-basis: 66.66666666666667%; flex-grow: 0; flex-shrink: 0; max-width: 66.66666666666667%; margin-left: 0%; right: auto; left: auto; overflow-y: auto;"
   >
     <div
       class=""
@@ -436,7 +436,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
         <div
           align="start"
           class="c2"
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
         >
           <div
             class="c3"
@@ -456,7 +456,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
         <div
           align="start"
           class="c2"
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-bottom: 10px;"
         >
           <div
             class="c5"

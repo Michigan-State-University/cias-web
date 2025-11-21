@@ -8,12 +8,11 @@ export const normalizeArrayToObject = <
 >(
   array: TItem[],
   itemIdKey: TIdKey,
-) =>
+): { [key: string]: TItem } =>
   array.reduce((normalized, item) => {
+    const key = String(item[itemIdKey]);
     // Param reassign used for improving performance
     // eslint-disable-next-line no-param-reassign
-    normalized[item[itemIdKey]] = item;
+    normalized[key] = item;
     return normalized;
-    // Ts-ignore used as linter does not recognize that TItem[TIdKey] can be a key
-    // @ts-ignore
-  }, {} as Record<TItem[TIdKey], TItem>);
+  }, {} as { [key: string]: TItem });

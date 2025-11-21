@@ -21,11 +21,9 @@ export const InterventionNotAvailablePage = () => {
   }
 
   return (
-    <>
-      <InterventionNotAvailableInfo
-        reason={reason as InterventionNotAvailableReason}
-      />
-    </>
+    <InterventionNotAvailableInfo
+      reason={reason as InterventionNotAvailableReason}
+    />
   );
 };
 

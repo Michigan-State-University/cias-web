@@ -111,30 +111,34 @@ module.exports = (options) => ({
             maxSize: 10 * 1024,
           },
         },
-        use: [
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                enabled: false,
-                // NOTE: mozjpeg is disabled as it causes errors in some Linux environments
-                // Try enabling it in your environment by switching the config to:
-                // enabled: true,
-                // progressive: true,
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              optipng: {
-                optimizationLevel: 7,
-              },
-              pngquant: {
-                quality: [0.65, 0.9],
-                speed: 4,
-              },
-            },
-          },
-        ],
+        // NOTE: image-webpack-loader temporarily disabled due to ajv@8 incompatibility
+        // with its nested dependencies (ajv-keywords@3.x). Images will still work but
+        // won't be optimized. Can be re-enabled after updating to image-minimizer-webpack-plugin
+        // or when image-webpack-loader updates its dependencies.
+        // use: [
+        //   {
+        //     loader: 'image-webpack-loader',
+        //     options: {
+        //       mozjpeg: {
+        //         enabled: false,
+        //         // NOTE: mozjpeg is disabled as it causes errors in some Linux environments
+        //         // Try enabling it in your environment by switching the config to:
+        //         // enabled: true,
+        //         // progressive: true,
+        //       },
+        //       gifsicle: {
+        //         interlaced: false,
+        //       },
+        //       optipng: {
+        //         optimizationLevel: 7,
+        //       },
+        //       pngquant: {
+        //         quality: [0.65, 0.9],
+        //         speed: 4,
+        //       },
+        //     },
+        //   },
+        // ],
       },
 
       {

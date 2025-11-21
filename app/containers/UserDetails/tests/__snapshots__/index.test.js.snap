@@ -684,7 +684,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
       style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
       >
         <div
           class="c6"
@@ -721,11 +721,11 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                     <div
                       class="c15 c16"
                       height="fit-content"
+                      role="presentation"
                     >
                       <input
-                        accept="image/jpg, image/png, image/jpeg"
-                        autocomplete="off"
-                        style="display: none;"
+                        accept=""
+                        style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
                         tabindex="-1"
                         type="file"
                       />
@@ -886,30 +886,37 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                         disabled=""
                       >
                         <div
-                          class=" css-14jk2my-container"
+                          class="css-3iigni-container"
                         >
+                          <span
+                            class="css-1f43avz-a11yText-A11yText"
+                            id="react-select-3-live-region"
+                          />
                           <span
                             aria-atomic="false"
                             aria-live="polite"
                             aria-relevant="additions text"
                             class="css-1f43avz-a11yText-A11yText"
+                            role="log"
                           />
                           <div
-                            class=" css-vz7ypb-control"
+                            aria-disabled="true"
+                            class="css-al67jj-control"
                           >
                             <div
-                              class=" css-g1d714-ValueContainer"
+                              class="css-hlgwow"
                             >
                               <div
-                                class=" css-107lb6w-singleValue"
+                                class="css-olqui2-singleValue"
                               >
                                 <div
                                   class="c35"
                                 >
                                   <img
                                     alt="US"
-                                    src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
-                                    style="height: 24px; width: 24px; display: inline-block;"
+                                    height="24"
+                                    src="https://cdn.jsdelivr.net/gh/umidbekk/react-flag-kit@1/assets/US.svg"
+                                    width="24"
                                   />
                                   <p
                                     class="c36"
@@ -920,37 +927,35 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                                 </div>
                               </div>
                               <div
-                                class="css-1bwsx9e-Input"
+                                class="css-1mkvw8y"
+                                data-value=""
                               >
-                                <div
+                                <input
+                                  aria-activedescendant=""
+                                  aria-autocomplete="list"
+                                  aria-expanded="false"
+                                  aria-haspopup="true"
+                                  autocapitalize="none"
+                                  autocomplete="off"
+                                  autocorrect="off"
                                   class=""
-                                  style="display: inline-block;"
-                                >
-                                  <input
-                                    aria-autocomplete="list"
-                                    autocapitalize="none"
-                                    autocomplete="off"
-                                    autocorrect="off"
-                                    disabled=""
-                                    id="iso"
-                                    spellcheck="false"
-                                    style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                                    tabindex="0"
-                                    type="text"
-                                    value=""
-                                  />
-                                  <div
-                                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                                  />
-                                </div>
+                                  disabled=""
+                                  id="iso"
+                                  role="combobox"
+                                  spellcheck="false"
+                                  style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                                  tabindex="0"
+                                  type="text"
+                                  value=""
+                                />
                               </div>
                             </div>
                             <div
-                              class=" css-1hb7zxy-IndicatorsContainer"
+                              class="css-1wy0on6"
                             >
                               <div
                                 aria-hidden="true"
-                                class=" css-tlfecz-indicatorContainer"
+                                class="css-1xc3v61-indicatorContainer"
                               >
                                 <img
                                   alt="arrow"

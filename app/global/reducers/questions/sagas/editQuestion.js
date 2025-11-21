@@ -168,8 +168,6 @@ function* editQuestion({ payload }) {
         autoClose: 5000,
       });
     }
-
-    return;
   } catch (error) {
     if (error.response?.status === 422 && isVariableUpdate) {
       yield call(

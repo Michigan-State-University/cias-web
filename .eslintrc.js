@@ -75,6 +75,8 @@ const baseRules = {
   'react/jsx-props-no-spreading': 0,
   'react/jsx-fragments': 1,
   'react/react-in-jsx-scope': 0,
+  'import/no-import-module-exports': 0,
+  'react/function-component-definition': 0,
 };
 
 module.exports = {

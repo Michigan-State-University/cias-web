@@ -129,6 +129,10 @@ const useAnimationHelper: TUseAnimationHelper = (
     }
   };
 
+  const changeBlockWrapper = () => {
+    changeBlock();
+  };
+
   const reverseAnimation = (): void => {
     setTimeout(() => {
       if (animationRef.current) {
@@ -137,7 +141,7 @@ const useAnimationHelper: TUseAnimationHelper = (
           anim.setDirection(-1);
           anim.play();
           anim.removeEventListener('complete', reverseAnimation);
-          anim.addEventListener('complete', changeBlock);
+          anim.addEventListener('complete', changeBlockWrapper);
         } else {
           anim.removeEventListener('complete', reverseAnimation);
           changeBlock();
@@ -169,7 +173,7 @@ const useAnimationHelper: TUseAnimationHelper = (
     () => {
       if (animationRef.current) {
         const { anim } = animationRef.current;
-        anim.removeEventListener('complete', changeBlock);
+        anim.removeEventListener('complete', changeBlockWrapper);
       }
     };
 

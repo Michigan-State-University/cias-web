@@ -734,7 +734,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       <div
         align="start"
         class="c2 c3"
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto;"
       >
         <div
           class="c4"
@@ -774,52 +774,56 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <div
-                class=" css-14jk2my-container"
+                class="css-3iigni-container"
               >
+                <span
+                  class="css-1f43avz-a11yText-A11yText"
+                  id="react-select-3-live-region"
+                />
                 <span
                   aria-atomic="false"
                   aria-live="polite"
                   aria-relevant="additions text"
                   class="css-1f43avz-a11yText-A11yText"
+                  role="log"
                 />
                 <div
-                  class=" css-vz7ypb-control"
+                  aria-disabled="true"
+                  class="css-al67jj-control"
                 >
                   <div
-                    class=" css-g1d714-ValueContainer"
+                    class="css-hlgwow"
                   >
                     <div
-                      class=" css-107lb6w-singleValue"
+                      class="css-olqui2-singleValue"
                     />
                     <div
-                      class="css-1bwsx9e-Input"
+                      class="css-1mkvw8y"
+                      data-value=""
                     >
-                      <div
+                      <input
+                        aria-activedescendant=""
+                        aria-autocomplete="list"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        aria-labelledby="select-label-intervention-language"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
                         class=""
-                        style="display: inline-block;"
-                      >
-                        <input
-                          aria-autocomplete="list"
-                          aria-labelledby="select-label-intervention-language"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          disabled=""
-                          id="react-select-3-input"
-                          spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                        <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                        />
-                      </div>
+                        disabled=""
+                        id="react-select-3-input"
+                        role="combobox"
+                        spellcheck="false"
+                        style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
                     </div>
                   </div>
                   <div
-                    class=" css-1hb7zxy-IndicatorsContainer"
+                    class="css-1wy0on6"
                   >
                     <div
                       class="c11"
@@ -834,7 +838,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     </div>
                     <div
                       aria-hidden="true"
-                      class=" css-tlfecz-indicatorContainer"
+                      class="css-1xc3v61-indicatorContainer"
                     >
                       <img
                         alt="arrow"
@@ -1075,7 +1079,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       <div
         align="start"
         class="c2 c3"
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto;"
       >
         <div
           class="c4"
