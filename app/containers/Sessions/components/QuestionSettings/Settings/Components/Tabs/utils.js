@@ -28,6 +28,9 @@ export const orderSettings = (settings) =>
     ...(!isNullOrUndefined(settings.start_autofinish_timer) && {
       start_autofinish_timer: settings.start_autofinish_timer,
     }),
+    ...(!isNullOrUndefined(settings.show_dashboard_button) && {
+      show_dashboard_button: settings.show_dashboard_button,
+    }),
     ...(!isNullOrUndefined(settings.show_number) && {
       show_number: settings.show_number,
     }),
