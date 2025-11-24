@@ -108,11 +108,9 @@ module.exports = {
   rules: baseRules,
   settings: {
     'import/resolver': {
-      webpack: {
-        config: './internals/webpack/webpack.prod.babel.js',
-      },
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        paths: [path.resolve(__dirname, 'app')],
       },
     },
     jsdoc: {
