@@ -971,7 +971,7 @@
   "app.containers.InterventionDetailsPage.containers.ParticipantInviter.InviteParticipantModalViews.UPLOAD_EMAILS": "Bulk e-mail upload",
   "app.containers.InterventionPage.clearFiltersText": "Reset filters to default values",
   "app.containers.InterventionPage.createIntervention": "Create a new intervention",
-  "app.containers.InterventionPage.filter": "Filter by name",
+  "app.containers.InterventionPage.filter": "Filter by name or note",
   "app.containers.InterventionPage.hideArchived": "Hide Archived",
   "app.containers.InterventionPage.importIntervention": "Import Intervention",
   "app.containers.InterventionPage.myInterventions": "My Dashboard",

@@ -76,7 +76,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c14 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -88,7 +88,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c18 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -142,7 +142,17 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c15 {
+.c14 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  padding-right: 30px;
+  color: unset;
+}
+
+.c16 {
   width: auto;
   height: auto;
   display: block;
@@ -152,7 +162,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c16 {
+.c17 {
   width: auto;
   height: auto;
   display: block;
@@ -160,7 +170,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c19 {
+.c20 {
   width: auto;
   height: auto;
   display: block;
@@ -183,7 +193,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c17 {
+.c18 {
   position: relative;
   width: 100%;
   font-size: 18px;
@@ -297,14 +307,14 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   display: inline-block;
 }
 
-.c20 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c20 > * {
+.c21 > * {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -398,60 +408,64 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
         </div>
         <div
           class="c14"
-          dir="auto"
-          width="100%"
         >
           <div
             class="c15"
-            display="inline"
+            dir="auto"
             width="100%"
           >
             <div
               class="c16"
-              data-for="Name"
-              data-tip=""
+              display="inline"
+              width="100%"
             >
-              <div>
-                <span
-                  class="c17"
-                  data-for="Name"
-                  data-tip="Name"
-                  font-size="18"
-                  font-weight="bold"
-                  lineheight="1.3"
-                  theme="[object Object]"
-                  width="0"
-                >
-                  <span />
-                  <span>
-                    Name
-                  </span>
+              <div
+                class="c17"
+                data-for="Name"
+                data-tip=""
+              >
+                <div>
                   <span
-                    style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                    class="c18"
+                    data-for="Name"
+                    data-tip="Name"
+                    font-size="18"
+                    font-weight="bold"
+                    lineheight="1.3"
+                    theme="[object Object]"
+                    width="0"
                   >
-                    …
+                    <span />
+                    <span>
+                      Name
+                    </span>
+                    <span
+                      style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                    >
+                      …
+                    </span>
                   </span>
-                </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="c18"
+        class="c19"
       >
         <div
-          class="c19"
+          class="c20"
           display="flex"
         >
           <div
-            class="c16"
+            class="c17"
             data-for="test-id-tile-tooltip"
             data-tip=""
           >
             <div>
               <div
-                class="c20"
+                class="c21"
               >
                 <div
                   class="c5"
