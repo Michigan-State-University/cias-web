@@ -38,6 +38,8 @@ import {
 } from 'models/Intervention';
 import { AppFile } from 'models/File';
 
+import { colors, themeColors, borders, paddings } from 'theme';
+
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import Loader from 'components/Loader';
@@ -135,6 +137,7 @@ const SettingsPanel = ({ intervention }: Props) => {
     conversationsTranscript,
     logo,
     sessions,
+    note,
   } = intervention || {};
 
   const changingAccessSettingsPossible =
@@ -166,6 +169,9 @@ const SettingsPanel = ({ intervention }: Props) => {
     globalDispatch(
       editInterventionRequest({ id: interventionId, additionalText: text }),
     );
+
+  const updateNote = (text: string) =>
+    globalDispatch(editInterventionRequest({ id: interventionId, note: text }));
 
   const deleteFile = (fileInfo: AppFile) =>
     globalDispatch(deleteAttachmentRequest(interventionId, fileInfo.id));
@@ -313,6 +319,46 @@ const SettingsPanel = ({ intervention }: Props) => {
               interventionId={interventionId!}
             />
           )}
+          <Box mt={40} mb={25}>
+            <H2 id="intervention-note">
+              <FormattedMessage {...messages.interventionNote} />
+            </H2>
+          </Box>
+          <Box
+            bg={colors.zirkon}
+            borderRadius={borders.borderRadius}
+            padding={paddings.small}
+            borderStyle={borders.borderStyle}
+            borderWidth={borders.borderWidth}
+            borderColor={themeColors.highlight}
+            css={`
+              transition: border-color 0.2s;
+              &:focus-within {
+                border-color: ${themeColors.primary};
+              }
+              .ql-container,
+              .quill,
+              .ql-editor,
+              div[class*='QuillStyled'] {
+                border: none !important;
+              }
+              div[class*='QuillStyled'][class*='focused'] {
+                border: none !important;
+              }
+            `}
+          >
+            <ApprovableInput
+              disabled={!changingAccessSettingsPossible}
+              type="multiline"
+              value={note || ''}
+              onCheck={updateNote}
+              onFocus={selectQuillText}
+              autoSize
+              transparent
+              aria-labelledby="intervention-note"
+              placeholder={formatMessage(messages.interventionNotePlaceholder)}
+            />
+          </Box>
           <InterventionRadioPanel
             radioPanelTitle={
               <FormattedMessage {...messages.interventionType} />

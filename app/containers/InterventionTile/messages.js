@@ -121,4 +121,8 @@ export default defineMessages({
     id: `${scope}.unstarIntervention`,
     defaultMessage: 'Unstar intervention',
   },
+  note: {
+    id: `${scope}.note`,
+    defaultMessage: 'Note',
+  },
 });
