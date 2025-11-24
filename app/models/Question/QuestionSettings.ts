@@ -18,6 +18,10 @@ export interface StartAutofinishTimerSetting {
   startAutofinishTimer: boolean;
 }
 
+export interface ShowDashboardButtonSetting {
+  showDashboardButton: boolean;
+}
+
 export interface SingleQuestionSettings
   extends QuestionBaseSettings,
     RequiredSetting,
@@ -76,7 +80,9 @@ export interface FeedbackQuestionSettings
   extends QuestionBaseSettings,
     StartAutofinishTimerSetting {}
 
-export interface FinishQuestionSettings extends QuestionBaseSettings {}
+export interface FinishQuestionSettings
+  extends QuestionBaseSettings,
+    ShowDashboardButtonSetting {}
 
 export interface PhoneQuestionSettings
   extends QuestionBaseSettings,

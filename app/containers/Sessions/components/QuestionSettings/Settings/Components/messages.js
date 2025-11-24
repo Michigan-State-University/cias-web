@@ -198,4 +198,13 @@ export default defineMessages({
     id: `${scope}.copyFormula`,
     defaultMessage: 'Copy formula',
   },
+  show_dashboard_button: {
+    id: `${scope}.show_dashboard_button`,
+    defaultMessage: 'My Dashboard Button',
+  },
+  show_dashboard_button_tooltip_text: {
+    id: `${scope}.show_dashboard_button_tooltip_text`,
+    defaultMessage:
+      'Toggle on if you have registered participants and want them to access participant reports, uploaded resources or re-fill the session.',
+  },
 });
