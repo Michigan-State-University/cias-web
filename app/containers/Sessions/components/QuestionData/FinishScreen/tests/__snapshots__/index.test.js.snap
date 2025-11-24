@@ -80,7 +80,7 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
       radius="100px"
       width="auto"
     >
-      Go to dashboard
+      My Dashboard
     </button>
   </div>
 </div>
