@@ -11,13 +11,13 @@ import { createStructuredSelector } from 'reselect';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { FaCircleInfo } from 'react-icons/fa6';
 
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
-import InfoIcon from 'assets/svg/grey-question-mark.svg';
 
 import { colors } from 'theme';
 
@@ -378,8 +378,13 @@ const InterventionTile = ({
                         </Text>
                       </Column>
                     }
-                    icon={InfoIcon}
-                  />
+                  >
+                    <FaCircleInfo
+                      size={16}
+                      color={colors.logan}
+                      style={{ cursor: 'pointer' }}
+                    />
+                  </Tooltip>
                 </Box>
               )}
             </Box>
