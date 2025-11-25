@@ -18,7 +18,14 @@ export function* downloadFile({ payload: { fileUrl, fileName } }) {
     let data;
 
     if (cachedFile) data = cachedFile;
-    else ({ data } = yield call(axios.get, fileUrl, { responseType: 'blob' }));
+    else {
+      const requestConfig = {
+        responseType: 'blob',
+        withCredentials: false,
+      };
+
+      ({ data } = yield call(axios.get, fileUrl, requestConfig));
+    }
 
     fileDownload(
       data,
