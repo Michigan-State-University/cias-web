@@ -16,25 +16,9 @@ import {
 } from '../constants';
 
 function* exportIntervention({
-  payload: { interventionId, onSuccess, startDate, endDate, timezone },
+  payload: { interventionId, onSuccess },
 }: ReturnType<typeof exportInterventionRequest>) {
-  let url = `v1/interventions/${interventionId}/export`;
-
-  const params = new URLSearchParams();
-  if (startDate) {
-    params.append('start_datetime', startDate.toISOString());
-  }
-  if (endDate) {
-    params.append('end_datetime', endDate.toISOString());
-  }
-  if (timezone) {
-    params.append('timezone', timezone);
-  }
-
-  const queryString = params.toString();
-  if (queryString) {
-    url = `${url}?${queryString}`;
-  }
+  const url = `v1/interventions/${interventionId}/export`;
 
   try {
     yield call(axios.post, url);

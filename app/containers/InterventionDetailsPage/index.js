@@ -246,8 +246,7 @@ export function InterventionDetailsPage({
         ...csv,
         url: `${process.env.API_URL}/v1/interventions/${interventionId}/csv_attachment`,
       },
-      onExport: (onSuccess, startDate, endDate, timezone) =>
-        sendCsv(id, onSuccess, startDate, endDate, timezone),
+      onExport: (onSuccess) => sendCsv(id, onSuccess),
       exportLoaderSelector: makeSelectInterventionLoader('sendCsvLoading'),
     });
 

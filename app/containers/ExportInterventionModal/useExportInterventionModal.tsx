@@ -29,16 +29,8 @@ export const useExportInterventionModal = (
   useInjectSaga(withExportInterventionSaga);
 
   const handleExportIntervention = useCallback(
-    (onSuccess, startDate, endDate, timezone) => {
-      dispatch(
-        exportInterventionRequest(
-          interventionId,
-          onSuccess,
-          startDate,
-          endDate,
-          timezone,
-        ),
-      );
+    (onSuccess) => {
+      dispatch(exportInterventionRequest(interventionId, onSuccess));
     },
     [interventionId],
   );

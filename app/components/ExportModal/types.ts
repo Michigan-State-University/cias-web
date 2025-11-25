@@ -12,11 +12,6 @@ export type ExportModalState = {
   fileGeneratedDescription: string;
   generateButtonTitle: string;
   file: Nullable<ExportModalFile>;
-  onExport: (
-    onSuccess: () => void,
-    startDate?: Date | null,
-    endDate?: Date | null,
-    timezone?: string,
-  ) => void;
+  onExport: (onSuccess: () => void) => void;
   exportLoaderSelector: Parameters<typeof useSelector>[0];
 };

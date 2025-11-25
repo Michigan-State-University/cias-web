@@ -10,7 +10,7 @@ export const useExportModal = ({ title, ...state }: ExportModalState) => {
     () => ({
       title,
       width: 500,
-      height: 700,
+      height: 522,
       stretchContent: true,
     }),
     [title],
