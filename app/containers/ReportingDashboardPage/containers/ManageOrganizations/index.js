@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { memo, useCallback, useContext, useEffect } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+} from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -83,17 +89,27 @@ const ManageOrganizations = ({
     );
   }, [noOrganizations, organizationId, organizationsLoader]);
 
+  const contextValue = useMemo(
+    () => ({
+      organization,
+      loaders,
+      errors,
+      shouldRefetch,
+      selectedEntity,
+      showDeletedEntities,
+    }),
+    [
+      organization,
+      loaders,
+      errors,
+      shouldRefetch,
+      selectedEntity,
+      showDeletedEntities,
+    ],
+  );
+
   return (
-    <ManageOrganizationsContext.Provider
-      value={{
-        organization,
-        loaders,
-        errors,
-        shouldRefetch,
-        selectedEntity,
-        showDeletedEntities,
-      }}
-    >
+    <ManageOrganizationsContext.Provider value={contextValue}>
       <Helmet>
         <title>{formatMessage(messages.manageOrganizations)}</title>
       </Helmet>

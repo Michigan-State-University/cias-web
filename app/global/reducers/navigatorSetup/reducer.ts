@@ -82,7 +82,7 @@ export const initialState: NavigatorSetupState = {
   error: null,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 export const navigatorSetupReducer = (
   state: NavigatorSetupState = initialState,
   { type, payload }: NavigatorSetupAction,

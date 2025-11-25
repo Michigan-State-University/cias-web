@@ -96,13 +96,10 @@ export const formatPhoneNumberForHfhs = ({
 }: Pick<PhoneAttributes, 'number' | 'iso'>) => {
   const parsedPhone = parsePhoneNumberFromString(number, iso);
   if (!parsedPhone) return '';
-  return parsedPhone
-    .formatInternational()
-    .replace(new RegExp(' ', 'g'), '-')
-    .slice(1);
+  return parsedPhone.formatInternational().replace(/ /g, '-').slice(1);
 };
 
 export const parsePhoneNumberFromHfhs = (number: string) => {
-  const phone = `+${number.replace(new RegExp('-', 'g'), ' ')}`;
+  const phone = `+${number.replace(/-/g, ' ')}`;
   return parsePhoneNumberFromString(phone);
 };

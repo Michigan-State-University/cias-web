@@ -6,6 +6,27 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import GridChild from './GridChild';
 import InfiniteLoader from './InfiniteLoader';
 
+const Cell = memo(
+  ({ gutterWidth, gutterHeight, columnCount, children, ...gridProps }) => (
+    <GridChild
+      {...gridProps}
+      gutterWidth={gutterWidth}
+      gutterHeight={gutterHeight}
+      columnCount={columnCount}
+    >
+      {children}
+    </GridChild>
+  ),
+  areEqual,
+);
+
+Cell.propTypes = {
+  gutterWidth: PropTypes.number,
+  gutterHeight: PropTypes.number,
+  columnCount: PropTypes.number,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+};
+
 const VirtualGrid = forwardRef(
   (
     {
@@ -32,6 +53,20 @@ const VirtualGrid = forwardRef(
       [items, itemsStates],
     );
 
+    const cellRenderer = useCallback(
+      (gridProps) => (
+        <Cell
+          {...gridProps}
+          gutterWidth={gutterWidth}
+          gutterHeight={gutterHeight}
+          columnCount={columnCount}
+        >
+          {children}
+        </Cell>
+      ),
+      [children, gutterWidth, gutterHeight, columnCount],
+    );
+
     const renderInfiniteLoader = (
       { onItemsRendered, ref: virtualGridRef },
       gridProps,
@@ -55,22 +90,10 @@ const VirtualGrid = forwardRef(
       });
 
     const renderGrid = useCallback(
-      (gridProps) => <FixedSizeGrid {...gridProps}>{renderCell}</FixedSizeGrid>,
-      [],
-    );
-
-    const renderCell = memo(
       (gridProps) => (
-        <GridChild
-          {...gridProps}
-          gutterWidth={gutterWidth}
-          gutterHeight={gutterHeight}
-          columnCount={columnCount}
-        >
-          {children}
-        </GridChild>
+        <FixedSizeGrid {...gridProps}>{cellRenderer}</FixedSizeGrid>
       ),
-      areEqual,
+      [cellRenderer],
     );
 
     return (

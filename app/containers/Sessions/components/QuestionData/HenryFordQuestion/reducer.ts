@@ -4,7 +4,7 @@ import { UPDATE_VARIABLE } from 'global/reducers/questions/constants';
 import { HenryFordQuestionDTO } from 'models/Question';
 import { ADD, UPDATE_ANSWER, REMOVE, REORDER } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 const henryFordQuestionReducer = (
   question: HenryFordQuestionDTO,
   payload: any,

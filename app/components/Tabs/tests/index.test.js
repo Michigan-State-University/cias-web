@@ -36,8 +36,12 @@ describe('<Tabs />', () => {
     } = render(
       <MemoryRouter>
         <Tabs>
-          <div renderAsLink={<Link to="/url1">Url1</Link>} />
-          <div renderAsLink={<Link to="/url2">Url2</Link>} />
+          <div>
+            <Link to="/url1">Url1</Link>
+          </div>
+          <div>
+            <Link to="/url2">Url2</Link>
+          </div>
         </Tabs>
       </MemoryRouter>,
     );

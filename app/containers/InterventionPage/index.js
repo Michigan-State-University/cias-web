@@ -56,6 +56,8 @@ import { SharedFilter } from './StarredFilter';
 
 const INITIAL_FETCH_LIMIT = 15;
 
+const importModalContentRenderer = (props) => <ImportModalContent {...props} />;
+
 export function InterventionPage({
   fetchInterventionsRequest: fetchInterventions,
   interventionsReducerState: {
@@ -117,7 +119,7 @@ export function InterventionPage({
 
   const { openModal: openImportModal, Modal: ImportModal } = useModal({
     type: ModalType.Modal,
-    modalContentRenderer: (props) => <ImportModalContent {...props} />,
+    modalContentRenderer: importModalContentRenderer,
     props: {
       title: formatMessage(messages.importIntervention),
       width: 520,

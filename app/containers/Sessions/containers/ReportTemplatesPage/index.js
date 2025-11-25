@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -73,26 +73,40 @@ const ReportTemplatesPage = ({
     if (loaders.shouldRefetch) fetchReportTemplates(sessionId);
   }, [loaders.shouldRefetch]);
 
+  const contextValue = useMemo(
+    () => ({
+      reportTemplates,
+      singleReportTemplate,
+      loaders,
+      errors,
+      selectedReportId,
+      sessionId,
+      interventionId,
+      selectedTemplateSectionId,
+      selectedTemplateSection,
+      canEdit: editingPossible,
+    }),
+    [
+      reportTemplates,
+      singleReportTemplate,
+      loaders,
+      errors,
+      selectedReportId,
+      sessionId,
+      interventionId,
+      selectedTemplateSectionId,
+      selectedTemplateSection,
+      editingPossible,
+    ],
+  );
+
   return (
     <>
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
       <Column overflow="hidden" height="100%">
-        <ReportTemplatesContext.Provider
-          value={{
-            reportTemplates,
-            singleReportTemplate,
-            loaders,
-            errors,
-            selectedReportId,
-            sessionId,
-            interventionId,
-            selectedTemplateSectionId,
-            selectedTemplateSection,
-            canEdit: editingPossible,
-          }}
-        >
+        <ReportTemplatesContext.Provider value={contextValue}>
           <ReportTemplatesList />
           <ReportTemplateDetails />
         </ReportTemplatesContext.Provider>

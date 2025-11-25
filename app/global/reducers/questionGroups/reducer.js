@@ -43,7 +43,7 @@ export const initialState = {
   questionsGroupsSaving: false,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const questionGroupsReducer = (state = initialState, { type, payload }) =>
   produce(state, (draft) => {
     if (SAVING_ACTIONS.includes(type)) draft.questionsGroupsSaving = true;

@@ -17,7 +17,7 @@ describe('<ParticipantReportsPage />', () => {
   let store;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore(browserHistory, {});
   });
 
   it('should render and match the snapshot', () => {

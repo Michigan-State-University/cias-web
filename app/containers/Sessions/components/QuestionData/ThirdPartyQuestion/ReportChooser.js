@@ -41,7 +41,7 @@ const ReportChooser = ({
   }
 
   if (isNarratorTab) {
-    return <></>;
+    return null;
   }
 
   return (

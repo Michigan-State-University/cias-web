@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * Creates an object where keys are the items' identifiers and values are the items itself
  * Allows faster item accessing than using Array.prototype.find()

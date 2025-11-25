@@ -80,7 +80,7 @@ const ConfirmationModal = <T,>({
     if (closeOnConfirm) onClose();
   }, [confirmAction, closeOnConfirm, onClose, modalState]);
 
-  if (!visible) return <></>;
+  if (!visible) return null;
 
   const getIcon = () => {
     switch (icon) {

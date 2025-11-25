@@ -212,7 +212,7 @@ const PopoverModal = ({
       handleClose();
   };
 
-  if (!referenceElement) return <></>;
+  if (!referenceElement) return null;
 
   return (
     <Portal id={portalId ?? MODAL_PORTAL_ID} ref={portalRef}>

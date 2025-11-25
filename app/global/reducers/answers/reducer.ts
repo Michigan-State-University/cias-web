@@ -20,7 +20,7 @@ export const initialState: AnswersState = {
   },
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 export const answersReducer = (
   state: AnswersState = initialState,
   action: AnswersAction,

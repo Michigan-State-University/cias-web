@@ -50,7 +50,7 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
       );
     }
 
-    if (!answer) return <></>;
+    if (!answer) return null;
 
     switch (answer.type) {
       case AnswerType.SINGLE:
@@ -103,7 +103,7 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
       case AnswerType.PHONE:
         return <PhoneUserAnswer answer={answer} />;
       default:
-        return <></>;
+        return null;
     }
   };
 

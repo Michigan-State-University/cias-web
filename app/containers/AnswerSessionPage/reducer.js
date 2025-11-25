@@ -82,7 +82,7 @@ export const initialState = {
   hfhsPatientDetail: null,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
   produce(state, (draft) => {
     switch (type) {

@@ -114,7 +114,7 @@ const Modal = ({
     return {};
   }, [stretchContent]);
 
-  if (!visible) return <></>;
+  if (!visible) return null;
 
   return (
     <Portal id={portalId || MODAL_PORTAL_ID}>

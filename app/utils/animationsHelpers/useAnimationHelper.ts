@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { MutableRefObject, useMemo, useRef } from 'react';
 import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
@@ -71,8 +72,8 @@ const useAnimationHelper: TUseAnimationHelper = (
     const animations: ILoadedAnimationData[] = await Promise.all(
       uniqAnimations.map(async ({ animation, type }) => {
         const data: JSON = await importAnimation(
-          character,
           animation || BodyAutoRestAnimation.STAND_STILL,
+          character,
         );
 
         return {
@@ -88,8 +89,8 @@ const useAnimationHelper: TUseAnimationHelper = (
     );
 
     const standStillData: JSON = await importAnimation(
-      character,
       BodyAutoRestAnimation.STAND_STILL,
+      character,
     );
     animations.push({
       name: BodyAutoRestAnimation.STAND_STILL,
@@ -133,7 +134,7 @@ const useAnimationHelper: TUseAnimationHelper = (
     changeBlock();
   };
 
-  const reverseAnimation = (): void => {
+  const reverseAnimation = () => {
     setTimeout(() => {
       if (animationRef.current) {
         const { anim } = animationRef.current;

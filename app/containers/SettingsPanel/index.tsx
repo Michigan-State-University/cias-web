@@ -78,6 +78,18 @@ interface Props {
   intervention: Nullable<Intervention>;
 }
 
+interface NavigatorSettingsModalContentProps {
+  interventionId: string;
+  disabled: boolean;
+}
+
+const NavigatorSettingsModalContent = ({
+  interventionId,
+  disabled,
+}: NavigatorSettingsModalContentProps) => (
+  <NavigatorSettingsModal interventionId={interventionId} disabled={disabled} />
+);
+
 const SettingsPanel = ({ intervention }: Props) => {
   const {
     loaders: {
@@ -142,15 +154,20 @@ const SettingsPanel = ({ intervention }: Props) => {
   const changingChatSettingsPossible =
     canCurrentUserMakeChanges && canEnableChat(status);
 
+  const modalContentRenderer = useCallback(
+    () => (
+      <NavigatorSettingsModalContent
+        interventionId={intervention!.id}
+        disabled={!changingChatSettingsPossible}
+      />
+    ),
+    [intervention?.id, changingChatSettingsPossible],
+  );
+
   const { openModal: openNavigatorSettingModal, Modal: NavigatorSettingModal } =
     useModal({
       type: ModalType.Modal,
-      modalContentRenderer: () => (
-        <NavigatorSettingsModal
-          interventionId={intervention!.id}
-          disabled={!changingChatSettingsPossible}
-        />
-      ),
+      modalContentRenderer,
       props: modalProps,
     });
 

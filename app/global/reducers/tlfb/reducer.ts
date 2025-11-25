@@ -45,7 +45,7 @@ export const initialState: TlfbState = {
   answerSavedSuccessfully: false,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 export const tlfbReducer = (
   state: TlfbState = initialState,
   action: TlfbAction,

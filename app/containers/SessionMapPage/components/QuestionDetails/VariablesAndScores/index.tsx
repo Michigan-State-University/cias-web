@@ -99,7 +99,7 @@ const VariablesAndScores = ({ question }: Props): JSX.Element => {
           </Column>
         );
       default:
-        return <></>;
+        return null;
     }
   };
 

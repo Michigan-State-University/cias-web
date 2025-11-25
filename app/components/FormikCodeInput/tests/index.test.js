@@ -6,7 +6,7 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 
 import { testRender } from 'utils/testUtils';
