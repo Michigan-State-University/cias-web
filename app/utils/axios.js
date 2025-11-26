@@ -42,7 +42,6 @@ const isGuestRequest = (locationUrl, method, requestUrl) =>
 axios.interceptors.request.use(
   (config) => {
     config.baseURL = process.env.API_URL;
-    config.withCredentials = true;
 
     const { method, url } = config;
     let headers;
