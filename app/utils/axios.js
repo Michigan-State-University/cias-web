@@ -43,12 +43,6 @@ axios.interceptors.request.use(
   (config) => {
     config.baseURL = process.env.API_URL;
 
-    // withCredentials is set to false by default to prevent CORS issues with redirects (e.g., API -> S3)
-    // For authentication endpoints, withCredentials must be explicitly set to true in the request config
-    if (config.withCredentials === undefined) {
-      config.withCredentials = false;
-    }
-
     const { method, url } = config;
     let headers;
     if (isGuestRequest(window.location.pathname, method, url)) {
