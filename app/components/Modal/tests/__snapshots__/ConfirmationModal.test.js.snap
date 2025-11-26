@@ -111,19 +111,6 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  padding-right: 20px;
-  padding-left: 20px;
-}
-
 .c15 {
   width: 100%;
   height: 40px;
@@ -164,6 +151,19 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .c5 {
@@ -534,19 +534,6 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   color: #2F3850;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  padding-right: 20px;
-  padding-left: 20px;
-}
-
 .c17 {
   padding: 20px;
   width: 100%;
@@ -608,6 +595,19 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .c5 {

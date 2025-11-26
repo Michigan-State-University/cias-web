@@ -173,31 +173,6 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: rgba(107,112,124,1);
 }
 
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  opacity: 0.5;
-}
-
 .c20 {
   position: relative;
   width: 100%;
@@ -267,6 +242,31 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   border-color: #B727EA transparent #B727EA transparent;
   -webkit-animation: hAjVGa 1.2s linear infinite;
   animation: hAjVGa 1.2s linear infinite;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  opacity: 0.5;
 }
 
 .c7 {

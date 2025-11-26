@@ -234,36 +234,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   border-top: 1px solid #D5DEEA;
 }
 
-.c24 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  width: 100%;
-}
-
-.c28 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
 .c33 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -348,6 +318,36 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   background-color: #B727EA;
   color: #FFFFFF;
   border: 1px solid transparent;
+}
+
+.c24 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+}
+
+.c28 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .c44 {

@@ -602,25 +602,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c30 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-  padding-left: 20px;
-}
-
 .c3 {
   margin: 0;
   font-family: DM Sans;
@@ -704,6 +685,25 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   cursor: pointer;
   color: #2F3850;
   text-align: start;
+}
+
+.c30 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding-left: 20px;
 }
 
 .c26 {
@@ -1969,25 +1969,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c29 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-  padding-left: 20px;
-}
-
 .c3 {
   margin: 0;
   font-family: DM Sans;
@@ -2057,6 +2038,25 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   cursor: pointer;
   color: #2F3850;
   text-align: start;
+}
+
+.c29 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding-left: 20px;
 }
 
 .c25 {
