@@ -11,6 +11,8 @@ import { downloadFileSuccess, downloadFileError } from '../actions';
 import messages from '../messages';
 import { makeSelectFile } from '../selectors';
 
+const axiosForDownload = axios.create();
+
 export function* downloadFile({ payload: { fileUrl, fileName } }) {
   const cachedFile = yield select(makeSelectFile(fileUrl));
 
@@ -24,7 +26,7 @@ export function* downloadFile({ payload: { fileUrl, fileName } }) {
         withCredentials: false,
       };
 
-      ({ data } = yield call(axios.get, fileUrl, requestConfig));
+      ({ data } = yield call(axiosForDownload.get, fileUrl, requestConfig));
     }
 
     fileDownload(
