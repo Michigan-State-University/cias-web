@@ -81,6 +81,7 @@ import AccessibilityStatementPage from 'containers/AccessibiltyStatementPage/Loa
 import ChatWidget from 'containers/ChatWidget';
 import NavigatorAvailabilityModal from 'containers/NavigatorAvailabilityModal';
 import InterventionNotAvailablePage from 'containers/InterventionNotAvailablePage/Loadable';
+import SessionCompletedPage from 'containers/SessionCompletedPage/Loadable';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -607,6 +608,11 @@ export function App({ user, fetchSelfDetails }) {
           exact
           path={RoutePath.INTERVENTION_NOT_AVAILABLE}
           component={InterventionNotAvailablePage}
+        />
+        <AppRoute
+          exact
+          path={RoutePath.SESSION_COMPLETED}
+          component={SessionCompletedPage}
         />
         <AppRoute path={WILDCARD_PATH}>
           <Redirect to={RoutePath.NOT_FOUND} />

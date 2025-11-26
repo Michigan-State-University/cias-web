@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { FaCircleInfo } from 'react-icons/fa6';
 
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
@@ -59,6 +60,7 @@ import Modal from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
+import Box from 'components/Box';
 import {
   useHenryFordBranchingInfoModal,
   HenryFordBranchingInfoType,
@@ -113,6 +115,7 @@ const InterventionTile = ({
     clearSensitiveDataScheduledAt,
     starred,
     exportedData,
+    note,
   } = tileData || {};
 
   const { starInterventionLoading, unstarInterventionLoading } =
@@ -355,14 +358,36 @@ const InterventionTile = ({
               )}
             </Heading>
 
-            <EllipsisText
-              text={name}
-              fontSize={18}
-              fontWeight="bold"
-              lineHeight={1.3}
-              lines={2}
-              dir="auto"
-            />
+            <Box position="relative" pr={30}>
+              <EllipsisText
+                text={name}
+                fontSize={18}
+                fontWeight="bold"
+                lineHeight={1.3}
+                lines={2}
+                dir="auto"
+              />
+              {note && (
+                <Box position="absolute" top={0} right={0}>
+                  <Tooltip
+                    id={`${id}-intervention-info-tooltip`}
+                    content={
+                      <Column>
+                        <Text fontWeight="bold" mb={5}>
+                          {note}
+                        </Text>
+                      </Column>
+                    }
+                  >
+                    <FaCircleInfo
+                      size={16}
+                      color={colors.logan}
+                      style={{ cursor: 'pointer' }}
+                    />
+                  </Tooltip>
+                </Box>
+              )}
+            </Box>
           </Column>
 
           <Row justify="between">

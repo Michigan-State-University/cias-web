@@ -306,7 +306,7 @@ export default defineMessages({
   },
   goToDashboard: {
     id: `${scope}.goToDashboard`,
-    defaultMessage: 'Go to Dashboard',
+    defaultMessage: 'My Dashboard',
   },
   submitAnswerError: {
     id: `${scope}.submitAnswerError`,

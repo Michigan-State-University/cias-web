@@ -8,20 +8,15 @@ import { FILE_GENERATION_TIME_FORMAT } from 'utils/dayjs';
 import Column from 'components/Column';
 import Text from 'components/Text';
 import FileBox from 'components/FileBox';
-import Row from 'components/Row';
-import { Button } from 'components/Button';
-import FileDownload from 'components/FileDownload';
 
 import { ExportModalFile } from './types';
 import messages from './messages';
 
 export type Props = {
   file: Nullable<ExportModalFile>;
-  onExport: () => void;
-  loading: boolean;
 };
 
-export const ExportedFilePanel = ({ file, onExport, loading }: Props) => {
+export const ExportedFilePanel = ({ file }: Props) => {
   const { formatMessage } = useIntl();
 
   if (!file) return null;
@@ -49,22 +44,6 @@ export const ExportedFilePanel = ({ file, onExport, loading }: Props) => {
           date: dayjs(generatedAt).format(FILE_GENERATION_TIME_FORMAT),
         })}
       </Text>
-      <Row marginBlockStart={40} gap={12} justify="center">
-        <FileDownload url={url} fileName={filename}>
-          <Button width="auto" px={32}>
-            {formatMessage(messages.downloadFileButtonLabel)}
-          </Button>
-        </FileDownload>
-        <Button
-          width="auto"
-          inverted
-          px={32}
-          onClick={onExport}
-          loading={loading}
-        >
-          {formatMessage(messages.updateFileButtonLabel)}
-        </Button>
-      </Row>
     </Column>
   );
 };

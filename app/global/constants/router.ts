@@ -40,6 +40,7 @@ export enum RoutePath {
   VERIFY_SMS_LINK = '/link/:slug',
   NOT_FOUND = '/not-found-page',
   INTERVENTION_NOT_AVAILABLE = '/not-available',
+  SESSION_COMPLETED = '/session-completed',
 }
 
 export const ALL_ROUTE_PATHS = Object.values(RoutePath);

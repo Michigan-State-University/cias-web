@@ -145,6 +145,7 @@
     "react-flow-renderer": "9.7.4",
     "react-grid-system": "7.1.2",
     "react-helmet": "6.1.0",
+    "react-icons": "^5.5.0",
     "react-idle-timer": "4.6.4",
     "react-inlinesvg": "2.2.2",
     "react-intl": "^6.8.5",
