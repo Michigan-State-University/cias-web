@@ -249,6 +249,7 @@ export function InterventionDetailsPage({
       onExport: (onSuccess, startDate, endDate, timezone) =>
         sendCsv(id, onSuccess, startDate, endDate, timezone),
       exportLoaderSelector: makeSelectInterventionLoader('sendCsvLoading'),
+      showDateTimeFilters: true,
     });
 
   const onShareExternally = () => {

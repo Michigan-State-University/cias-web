@@ -19,4 +19,5 @@ export type ExportModalState = {
     timezone?: string,
   ) => void;
   exportLoaderSelector: Parameters<typeof useSelector>[0];
+  showDateTimeFilters?: boolean;
 };

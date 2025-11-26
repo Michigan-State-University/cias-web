@@ -24,6 +24,7 @@ function* verifyCode({ payload: { verificationCode, rememberBrowser } }) {
       objectToSnakeCase({ verificationCode, email, rememberBrowser }),
       {
         headers: { Uid: email },
+        withCredentials: true,
       },
     );
 

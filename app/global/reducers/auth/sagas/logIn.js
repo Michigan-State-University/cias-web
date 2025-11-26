@@ -38,7 +38,9 @@ function* login({ payload: { email, password } }) {
       requestBody.verification_code = temporaryVerificationCode;
     }
 
-    const { data } = yield axios.post(requestURL, requestBody);
+    const { data } = yield axios.post(requestURL, requestBody, {
+      withCredentials: true,
+    });
     const mappedUser = mapCurrentUser(data);
     yield call(LocalStorageService.setState, { user: { ...mappedUser } });
     yield put(logIn(mappedUser));

@@ -26,6 +26,7 @@ export const ExportModalContent = ({
     file,
     onExport,
     exportLoaderSelector,
+    showDateTimeFilters = false,
   },
   closeModal,
 }: ModalContentRendererProps<ExportModalState>) => {
@@ -70,62 +71,66 @@ export const ExportModalContent = ({
 
           <ExportedFilePanel file={file} />
 
-          <Column width="100%" gap={15}>
-            <Row width="100%" gap={15}>
-              <Column width="100%">
-                <Text mb={8} fontWeight="bold" fontSize={13}>
-                  {formatMessage(messages.startDateLabel)}
-                </Text>
-                <LocalizedDatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  showTimeSelect
-                  timeIntervals={15}
-                  dateFormat="MM/dd/yyyy, h:mm aa"
-                  placeholderText={formatMessage(messages.startDatePlaceholder)}
-                  customInput={<DateInput width="100%" height={45} />}
-                  maxDate={endDate || undefined}
-                  isClearable
-                />
-              </Column>
+          {showDateTimeFilters && (
+            <Column width="100%" gap={15}>
+              <Row width="100%" gap={15}>
+                <Column width="100%">
+                  <Text mb={8} fontWeight="bold" fontSize={13}>
+                    {formatMessage(messages.startDateLabel)}
+                  </Text>
+                  <LocalizedDatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    showTimeSelect
+                    timeIntervals={15}
+                    dateFormat="MM/dd/yyyy, h:mm aa"
+                    placeholderText={formatMessage(
+                      messages.startDatePlaceholder,
+                    )}
+                    customInput={<DateInput width="100%" height={45} />}
+                    maxDate={endDate || undefined}
+                    isClearable
+                  />
+                </Column>
+
+                <Column width="100%">
+                  <Text mb={8} fontWeight="bold" fontSize={13}>
+                    {formatMessage(messages.endDateLabel)}
+                  </Text>
+                  <LocalizedDatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    showTimeSelect
+                    timeIntervals={15}
+                    dateFormat="MM/dd/yyyy, h:mm aa"
+                    placeholderText={formatMessage(messages.endDatePlaceholder)}
+                    customInput={<DateInput width="100%" height={45} />}
+                    minDate={startDate || undefined}
+                    isClearable
+                  />
+                </Column>
+              </Row>
 
               <Column width="100%">
                 <Text mb={8} fontWeight="bold" fontSize={13}>
-                  {formatMessage(messages.endDateLabel)}
+                  {formatMessage(messages.timezoneLabel)}
                 </Text>
-                <LocalizedDatePicker
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                  showTimeSelect
-                  timeIntervals={15}
-                  dateFormat="MM/dd/yyyy, h:mm aa"
-                  placeholderText={formatMessage(messages.endDatePlaceholder)}
-                  customInput={<DateInput width="100%" height={45} />}
-                  minDate={startDate || undefined}
-                  isClearable
+                <Select
+                  {...({
+                    selectProps: {
+                      value: timezone,
+                      onChange: (
+                        selected: { value: string; label: string } | null,
+                      ) => setTimezone(selected),
+                      options: timezoneOptions,
+                      placeholder: formatMessage(messages.timezoneLabel),
+                      isSearchable: true,
+                    },
+                  } as any)}
                 />
               </Column>
-            </Row>
-
-            <Column width="100%">
-              <Text mb={8} fontWeight="bold" fontSize={13}>
-                {formatMessage(messages.timezoneLabel)}
-              </Text>
-              <Select
-                {...({
-                  selectProps: {
-                    value: timezone,
-                    onChange: (
-                      selected: { value: string; label: string } | null,
-                    ) => setTimezone(selected),
-                    options: timezoneOptions,
-                    placeholder: formatMessage(messages.timezoneLabel),
-                    isSearchable: true,
-                  },
-                } as any)}
-              />
             </Column>
-          </Column>
+          )}
 
           <Button
             width="auto"
