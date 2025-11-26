@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { put, takeLatest, call, select, delay } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import fileDownload from 'js-file-download';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { getFileNameFromUrl } from 'utils/getFileNameFromUrl';
+import LocalStorageService from 'utils/localStorageService';
 
 import { DOWNLOAD_FILE_REQUEST, DOWNLOAD_FILE_ERROR } from '../constants';
 import { downloadFileSuccess, downloadFileError } from '../actions';
@@ -17,6 +17,46 @@ const isApiUrl = (url) => {
     url.startsWith(apiUrl) || url.startsWith('/v1/') || url.startsWith('/api/')
   );
 };
+
+function* downloadFromApi(url) {
+  const headers = LocalStorageService.getHeaders();
+
+  const response = yield call(fetch, url, {
+    method: 'GET',
+    credentials: 'include',
+    redirect: 'manual',
+    headers: {
+      'Access-Token': headers['Access-Token'],
+      Client: headers.Client,
+      Uid: headers.Uid,
+    },
+  });
+
+  if (response.type === 'opaqueredirect' || response.status === 0) {
+    throw new Error(
+      'Cannot manually handle redirect - browser security restriction',
+    );
+  }
+
+  if (
+    response.status === 302 ||
+    response.status === 301 ||
+    response.status === 307
+  ) {
+    const s3Url = response.headers.get('Location');
+    if (s3Url) {
+      return yield call(downloadFromExternalUrl, s3Url);
+    }
+    throw new Error('No redirect location provided');
+  }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const blob = yield call([response, 'blob']);
+  return blob;
+}
 
 function* downloadFromExternalUrl(url) {
   const response = yield call(fetch, url, {
@@ -40,25 +80,7 @@ export function* downloadFile({ payload: { fileUrl, fileName } }) {
 
     if (cachedFile) data = cachedFile;
     else if (isApiUrl(fileUrl)) {
-      const requestConfig = {
-        responseType: 'blob',
-        maxRedirects: 0,
-        validateStatus: (status) =>
-          status === 302 || (status >= 200 && status < 300),
-      };
-
-      const response = yield call(axios.get, fileUrl, requestConfig);
-
-      if (response.status === 302) {
-        const s3Url = response.headers.location;
-        if (s3Url) {
-          data = yield call(downloadFromExternalUrl, s3Url);
-        } else {
-          throw new Error('No redirect location provided');
-        }
-      } else {
-        data = response.data;
-      }
+      data = yield call(downloadFromApi, fileUrl);
     } else {
       data = yield call(downloadFromExternalUrl, fileUrl);
     }
