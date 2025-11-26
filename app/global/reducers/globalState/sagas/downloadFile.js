@@ -11,7 +11,16 @@ import { downloadFileSuccess, downloadFileError } from '../actions';
 import messages from '../messages';
 import { makeSelectFile } from '../selectors';
 
-const axiosForDownload = axios.create();
+const axiosWithoutCredentials = axios.create({
+  withCredentials: false,
+});
+
+const isApiUrl = (url) => {
+  const apiUrl = process.env.API_URL;
+  return (
+    url.startsWith(apiUrl) || url.startsWith('/v1/') || url.startsWith('/api/')
+  );
+};
 
 export function* downloadFile({ payload: { fileUrl, fileName } }) {
   const cachedFile = yield select(makeSelectFile(fileUrl));
@@ -23,10 +32,11 @@ export function* downloadFile({ payload: { fileUrl, fileName } }) {
     else {
       const requestConfig = {
         responseType: 'blob',
-        withCredentials: false,
       };
 
-      ({ data } = yield call(axiosForDownload.get, fileUrl, requestConfig));
+      const axiosInstance = isApiUrl(fileUrl) ? axios : axiosWithoutCredentials;
+
+      ({ data } = yield call(axiosInstance.get, fileUrl, requestConfig));
     }
 
     fileDownload(
