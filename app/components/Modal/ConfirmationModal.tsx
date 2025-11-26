@@ -74,7 +74,7 @@ const ConfirmationModal = <T,>({
   titleStyles,
   modalState,
   ...modalProps
-}: Props<T>): JSX.Element => {
+}: Props<T>): JSX.Element | null => {
   const onConfirm = useCallback(() => {
     confirmAction(modalState);
     if (closeOnConfirm) onClose();

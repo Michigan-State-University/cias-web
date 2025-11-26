@@ -68,7 +68,7 @@ const Modal = ({
   stretchContent,
   contentContainerProps,
   ...stylesProps
-}: Props): JSX.Element => {
+}: Props): JSX.Element | null => {
   const { formatMessage } = useIntl();
 
   const handleClose = () => {
