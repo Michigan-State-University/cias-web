@@ -47,20 +47,17 @@ export function* downloadFile({ payload: { fileUrl, fileName } }) {
           status === 302 || (status >= 200 && status < 300),
       };
 
-      try {
-        const response = yield call(axios.get, fileUrl, requestConfig);
-        data = response.data;
-      } catch (error) {
-        if (error.response && error.response.status === 302) {
-          const s3Url = error.response.headers.location;
-          if (s3Url) {
-            data = yield call(downloadFromExternalUrl, s3Url);
-          } else {
-            throw new Error('No redirect location provided');
-          }
+      const response = yield call(axios.get, fileUrl, requestConfig);
+
+      if (response.status === 302) {
+        const s3Url = response.headers.location;
+        if (s3Url) {
+          data = yield call(downloadFromExternalUrl, s3Url);
         } else {
-          throw error;
+          throw new Error('No redirect location provided');
         }
+      } else {
+        data = response.data;
       }
     } else {
       data = yield call(downloadFromExternalUrl, fileUrl);
