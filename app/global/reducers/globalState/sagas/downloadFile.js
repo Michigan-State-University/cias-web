@@ -11,16 +11,26 @@ import { downloadFileSuccess, downloadFileError } from '../actions';
 import messages from '../messages';
 import { makeSelectFile } from '../selectors';
 
-const axiosWithoutCredentials = axios.create({
-  withCredentials: false,
-});
-
 const isApiUrl = (url) => {
   const apiUrl = process.env.API_URL;
   return (
     url.startsWith(apiUrl) || url.startsWith('/v1/') || url.startsWith('/api/')
   );
 };
+
+function* downloadFromExternalUrl(url) {
+  const response = yield call(fetch, url, {
+    method: 'GET',
+    credentials: 'omit',
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const blob = yield call([response, 'blob']);
+  return blob;
+}
 
 export function* downloadFile({ payload: { fileUrl, fileName } }) {
   const cachedFile = yield select(makeSelectFile(fileUrl));
@@ -29,14 +39,31 @@ export function* downloadFile({ payload: { fileUrl, fileName } }) {
     let data;
 
     if (cachedFile) data = cachedFile;
-    else {
+    else if (isApiUrl(fileUrl)) {
       const requestConfig = {
         responseType: 'blob',
+        maxRedirects: 0,
+        validateStatus: (status) =>
+          status === 302 || (status >= 200 && status < 300),
       };
 
-      const axiosInstance = isApiUrl(fileUrl) ? axios : axiosWithoutCredentials;
-
-      ({ data } = yield call(axiosInstance.get, fileUrl, requestConfig));
+      try {
+        const response = yield call(axios.get, fileUrl, requestConfig);
+        data = response.data;
+      } catch (error) {
+        if (error.response && error.response.status === 302) {
+          const s3Url = error.response.headers.location;
+          if (s3Url) {
+            data = yield call(downloadFromExternalUrl, s3Url);
+          } else {
+            throw new Error('No redirect location provided');
+          }
+        } else {
+          throw error;
+        }
+      }
+    } else {
+      data = yield call(downloadFromExternalUrl, fileUrl);
     }
 
     fileDownload(
