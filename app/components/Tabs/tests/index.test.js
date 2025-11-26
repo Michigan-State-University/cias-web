@@ -36,12 +36,10 @@ describe('<Tabs />', () => {
     } = render(
       <MemoryRouter>
         <Tabs>
-          <div>
-            <Link to="/url1">Url1</Link>
-          </div>
-          <div>
-            <Link to="/url2">Url2</Link>
-          </div>
+          {/* eslint-disable-next-line react/no-unknown-property */}
+          <div renderAsLink={<Link to="/url1">Url1</Link>} />
+          {/* eslint-disable-next-line react/no-unknown-property */}
+          <div renderAsLink={<Link to="/url2">Url2</Link>} />
         </Tabs>
       </MemoryRouter>,
     );
