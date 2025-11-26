@@ -43,6 +43,13 @@ axios.interceptors.request.use(
   (config) => {
     config.baseURL = process.env.API_URL;
 
+    const isExternalRequest =
+      config.url &&
+      (config.url.startsWith('http://') || config.url.startsWith('https://')) &&
+      !config.url.startsWith(process.env.API_URL);
+
+    config.withCredentials = !isExternalRequest;
+
     const { method, url } = config;
     let headers;
     if (isGuestRequest(window.location.pathname, method, url)) {
