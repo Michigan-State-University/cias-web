@@ -410,7 +410,6 @@ export function InterventionDetailsPage({
     });
 
   const handleRemoveTag = (tagId) => {
-    console.log('handleRemoveTag called with:', { interventionId, tagId });
     unassignTag(interventionId, tagId);
   };
 
