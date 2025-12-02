@@ -25,6 +25,7 @@ import {
   sendPredefinedParticipantSmsInvitationSaga,
   sendPredefinedParticipantEmailInvitationSaga,
 } from 'global/reducers/intervention/sagas';
+import unassignTagSaga from 'global/reducers/intervention/sagas/unassignTag';
 
 export default function* interventionDetailsPageSagas() {
   yield all([
@@ -48,6 +49,7 @@ export default function* interventionDetailsPageSagas() {
     activatePredefinedParticipantSaga(),
     sendPredefinedParticipantSmsInvitationSaga(),
     sendPredefinedParticipantEmailInvitationSaga(),
+    unassignTagSaga(),
   ]);
 }
 

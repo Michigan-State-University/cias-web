@@ -18,6 +18,8 @@ import { filter, isEmpty, concat } from 'lodash';
 
 import { colors, themeColors } from 'theme';
 
+import { TbTagPlus } from 'react-icons/tb';
+
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import GearIcon from 'assets/svg/gear-wo-background.svg';
@@ -57,6 +59,7 @@ import {
   makeSelectCanCurrentUserAccessParticipantsData,
   fetchInterventionSaga,
   makeSelectIsCurrentUserEditor,
+  unassignTagRequest,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -105,6 +108,8 @@ import {
   InterventionSettingsModal,
   useThirdPartyToolsAccessModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
+  AssignTagModal,
+  ASSIGN_TAG_MODAL_WIDTH,
 } from './components/Modals';
 import messages from './messages';
 import { InterventionDetailsPageContext } from './utils';
@@ -135,6 +140,7 @@ export function InterventionDetailsPage({
   editingPossible,
   isCurrentUserInterventionOwner,
   canAccessParticipantsData,
+  unassignTag,
 }) {
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
@@ -165,6 +171,7 @@ export function InterventionDetailsPage({
     sensitiveDataState,
     clearSensitiveDataScheduledAt,
     exportedData,
+    tags,
   } = intervention || {};
 
   const showSessionCreateButton = canEdit(status);
@@ -183,12 +190,16 @@ export function InterventionDetailsPage({
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
 
+  const [assignTagModalVisible, setAssignTagModalVisible] = useState(false);
+
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
   const closeAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(false);
   const openAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(true);
+  const closeAssignTagModal = () => setAssignTagModalVisible(false);
+  const openAssignTagModal = () => setAssignTagModalVisible(true);
   const handleCopyIntervention = () => copyIntervention({ interventionId: id });
   const handleDeleteSession = (sessionId) => {
     deleteSession(sessionId, id);
@@ -332,6 +343,13 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
+    {
+      id: 'assignTag',
+      label: formatMessage(messages.assignTag),
+      icon: TbTagPlus,
+      action: openAssignTagModal,
+      color: colors.bluewood,
+    },
     ...(isAdmin || hfhsAccess
       ? [
           {
@@ -390,6 +408,11 @@ export function InterventionDetailsPage({
       status: newStatus,
       id: interventionId,
     });
+
+  const handleRemoveTag = (tagId) => {
+    console.log('handleRemoveTag called with:', { interventionId, tagId });
+    unassignTag(interventionId, tagId);
+  };
 
   const createSessionCall = (sessionType) =>
     createSession(interventionId, sessions.length, sessionType);
@@ -601,6 +624,19 @@ export function InterventionDetailsPage({
               />
             </Modal>
 
+            <Modal
+              title={formatMessage(messages.assignTag)}
+              onClose={closeAssignTagModal}
+              visible={assignTagModalVisible}
+              width={ASSIGN_TAG_MODAL_WIDTH}
+            >
+              <AssignTagModal
+                interventionId={interventionId}
+                onClose={closeAssignTagModal}
+                onSuccess={() => fetchIntervention(interventionId)}
+              />
+            </Modal>
+
             <CollaboratorsModal />
             <ClearInterventionDataModal />
 
@@ -626,6 +662,8 @@ export function InterventionDetailsPage({
               sessions={sortedSessions ?? []}
               openExportCsvModal={openExportCsvModal}
               canAccessParticipantsData={canAccessParticipantsData}
+              tags={tags}
+              onRemoveTag={handleRemoveTag}
             />
 
             <GRow>
@@ -697,6 +735,7 @@ InterventionDetailsPage.propTypes = {
   editingPossible: PropTypes.bool,
   isCurrentUserInterventionOwner: PropTypes.bool,
   canAccessParticipantsData: PropTypes.bool,
+  unassignTag: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -728,6 +767,7 @@ const mapDispatchToProps = {
   deleteSession: deleteSessionRequest,
   externalCopySession: externalCopySessionRequest,
   editSession: editSessionRequest,
+  unassignTag: unassignTagRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
