@@ -101,6 +101,16 @@ export const VERIFY_PATIENT_DATA_ERROR =
 export const SET_HFHS_PATIENT_DETAIL =
   'app/AnswerSessionPage/SET_HFHS_PATIENT_DETAIL';
 
+export const SET_HFHS_PATIENT_DETAIL_ANONYMIZED =
+  'app/AnswerSessionPage/SET_HFHS_PATIENT_DETAIL_ANONYMIZED';
+
+export const VERIFY_QR_CODE_REQUEST =
+  'app/AnswerSessionPage/VERIFY_QR_CODE_REQUEST';
+export const VERIFY_QR_CODE_SUCCESS =
+  'app/AnswerSessionPage/VERIFY_QR_CODE_SUCCESS';
+export const VERIFY_QR_CODE_ERROR =
+  'app/AnswerSessionPage/VERIFY_QR_CODE_ERROR';
+
 export const QUESTION_TITLE_ID = 'question-title';
 
 export const QUESTION_SUBTITLE_ID = 'question-subtitle';

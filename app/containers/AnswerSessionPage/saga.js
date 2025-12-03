@@ -41,6 +41,7 @@ import {
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
   FETCH_PREVIOUS_QUESTION_REQUEST,
   VERIFY_PATIENT_DATA_REQUEST,
+  VERIFY_QR_CODE_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -64,6 +65,9 @@ import {
   verifyPatientDataSuccess,
   submitAnswer,
   setHfhsPatientDetail,
+  setHfhsPatientDetailAnonymized,
+  verifyQRCodeSuccess,
+  verifyQRCodeError,
 } from './actions';
 import {
   makeSelectAnswers,
@@ -400,6 +404,29 @@ function* verifyPatientData({ payload }) {
   }
 }
 
+function* verifyQRCode({ payload: { decodedString } }) {
+  const userSession = yield select(makeSelectUserSession());
+  if (!userSession) return;
+
+  const requestUrl = `/v1/henry_ford/verify_by_code`;
+
+  try {
+    const { data } = yield axios.post(requestUrl, {
+      hfhs_patient_data: { barcode: decodedString },
+    });
+
+    const hfhsPatientDetailAnonymized = jsonApiToObject(
+      data,
+      'hfhsPatientDetailAnonymized',
+    );
+
+    yield put(setHfhsPatientDetailAnonymized(hfhsPatientDetailAnonymized));
+    yield put(verifyQRCodeSuccess());
+  } catch (error) {
+    yield put(verifyQRCodeError(error));
+  }
+}
+
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
@@ -414,6 +441,7 @@ export default function* AnswerSessionPageSaga() {
   yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
   yield takeEvery(FETCH_PREVIOUS_QUESTION_REQUEST, fetchPreviousQuestion);
   yield takeLatest(VERIFY_PATIENT_DATA_REQUEST, verifyPatientData);
+  yield takeLatest(VERIFY_QR_CODE_REQUEST, verifyQRCode);
 }
 
 export function* redirectToPreviewSaga() {

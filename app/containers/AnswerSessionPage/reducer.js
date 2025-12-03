@@ -40,7 +40,11 @@ import {
   VERIFY_PATIENT_DATA_SUCCESS,
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
+  SET_HFHS_PATIENT_DETAIL_ANONYMIZED,
   SELECT_VIDEO_STATS,
+  VERIFY_QR_CODE_REQUEST,
+  VERIFY_QR_CODE_SUCCESS,
+  VERIFY_QR_CODE_ERROR,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -80,6 +84,9 @@ export const initialState = {
   verifyPatientDataLoading: false,
   verifyPatientDataError: null,
   hfhsPatientDetail: null,
+  hfhsPatientDetailAnonymized: null,
+  verifyQRCodeLoading: false,
+  verifyQRCodeError: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -295,6 +302,27 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case SET_HFHS_PATIENT_DETAIL: {
         draft.hfhsPatientDetail = payload.hfhsPatientDetail;
+        break;
+      }
+
+      case SET_HFHS_PATIENT_DETAIL_ANONYMIZED: {
+        draft.hfhsPatientDetailAnonymized = payload.hfhsPatientDetailAnonymized;
+        break;
+      }
+
+      case VERIFY_QR_CODE_REQUEST: {
+        draft.verifyQRCodeLoading = true;
+        draft.verifyQRCodeError = null;
+        break;
+      }
+      case VERIFY_QR_CODE_SUCCESS: {
+        draft.verifyQRCodeLoading = false;
+        draft.verifyQRCodeError = null;
+        break;
+      }
+      case VERIFY_QR_CODE_ERROR: {
+        draft.verifyQRCodeLoading = false;
+        draft.verifyQRCodeError = payload.error;
         break;
       }
     }

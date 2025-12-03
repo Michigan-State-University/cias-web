@@ -91,6 +91,12 @@ const makeSelectHfhsPatientDetail = () =>
     ({ hfhsPatientDetail }) => hfhsPatientDetail,
   );
 
+const makeSelectHfhsPatientDetailAnonymized = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    ({ hfhsPatientDetailAnonymized }) => hfhsPatientDetailAnonymized,
+  );
+
 const makeSelectUserSessionLanguageCode = () =>
   createSelector(
     selectAnswerSessionPageDomain,
@@ -101,6 +107,15 @@ const makeSelectQuestionLanguageCode = () =>
   createSelector(
     selectAnswerSessionPageDomain,
     (substate) => substate.currentQuestion?.question_language,
+  );
+
+const makeSelectVerifyQRCodeState = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    ({ verifyQRCodeLoading, verifyQRCodeError }) => ({
+      loading: verifyQRCodeLoading,
+      error: verifyQRCodeError,
+    }),
   );
 
 export default makeSelectAnswerSessionPage;
@@ -117,7 +132,9 @@ export {
   makeSelectShowTextReadingControls,
   makeSelectVerifyPatientDataState,
   makeSelectHfhsPatientDetail,
+  makeSelectHfhsPatientDetailAnonymized,
   makeSelectUserSessionLanguageCode,
   makeSelectQuestionLanguageCode,
   makeSelectVideoStats,
+  makeSelectVerifyQRCodeState,
 };
