@@ -42,6 +42,7 @@ import {
   VERIFY_PATIENT_DATA_SUCCESS,
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
+  SET_HFHS_PATIENT_DETAIL_ANONYMIZED,
   SELECT_VIDEO_STATS,
   VERIFY_QR_CODE_REQUEST,
   VERIFY_QR_CODE_SUCCESS,
@@ -173,6 +174,11 @@ export const verifyPatientDataError = (error) =>
 
 export const setHfhsPatientDetail = (hfhsPatientDetail) =>
   actionBuilder(SET_HFHS_PATIENT_DETAIL, { hfhsPatientDetail });
+
+export const setHfhsPatientDetailAnonymized = (hfhsPatientDetailAnonymized) =>
+  actionBuilder(SET_HFHS_PATIENT_DETAIL_ANONYMIZED, {
+    hfhsPatientDetailAnonymized,
+  });
 
 export const verifyQRCodeRequest = (decodedString) =>
   actionBuilder(VERIFY_QR_CODE_REQUEST, { decodedString });

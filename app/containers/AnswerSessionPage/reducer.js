@@ -40,6 +40,7 @@ import {
   VERIFY_PATIENT_DATA_SUCCESS,
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
+  SET_HFHS_PATIENT_DETAIL_ANONYMIZED,
   SELECT_VIDEO_STATS,
   VERIFY_QR_CODE_REQUEST,
   VERIFY_QR_CODE_SUCCESS,
@@ -83,6 +84,7 @@ export const initialState = {
   verifyPatientDataLoading: false,
   verifyPatientDataError: null,
   hfhsPatientDetail: null,
+  hfhsPatientDetailAnonymized: null,
   verifyQRCodeLoading: false,
   verifyQRCodeError: null,
 };
@@ -300,6 +302,11 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case SET_HFHS_PATIENT_DETAIL: {
         draft.hfhsPatientDetail = payload.hfhsPatientDetail;
+        break;
+      }
+
+      case SET_HFHS_PATIENT_DETAIL_ANONYMIZED: {
+        draft.hfhsPatientDetailAnonymized = payload.hfhsPatientDetailAnonymized;
         break;
       }
 

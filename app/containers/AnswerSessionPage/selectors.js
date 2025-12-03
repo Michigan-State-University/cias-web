@@ -91,6 +91,12 @@ const makeSelectHfhsPatientDetail = () =>
     ({ hfhsPatientDetail }) => hfhsPatientDetail,
   );
 
+const makeSelectHfhsPatientDetailAnonymized = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    ({ hfhsPatientDetailAnonymized }) => hfhsPatientDetailAnonymized,
+  );
+
 const makeSelectUserSessionLanguageCode = () =>
   createSelector(
     selectAnswerSessionPageDomain,
@@ -126,6 +132,7 @@ export {
   makeSelectShowTextReadingControls,
   makeSelectVerifyPatientDataState,
   makeSelectHfhsPatientDetail,
+  makeSelectHfhsPatientDetailAnonymized,
   makeSelectUserSessionLanguageCode,
   makeSelectQuestionLanguageCode,
   makeSelectVideoStats,
