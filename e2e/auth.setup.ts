@@ -8,9 +8,9 @@ setup('authenticate as admin', async ({ page }) => {
   const password = process.env.E2E_PASSWORD;
   const verificationCode = process.env.E2E_VERIFICATION_CODE;
 
-  if (!adminEmail || !password) {
+  if (!adminEmail || !password || !verificationCode) {
     throw new Error(
-      'E2E_ADMIN_EMAIL and E2E_PASSWORD environment variables must be set',
+      'E2E_ADMIN_EMAIL, E2E_VERIFICATION_CODE and E2E_PASSWORD environment variables must be set',
     );
   }
 
@@ -35,17 +35,8 @@ setup('authenticate as admin', async ({ page }) => {
   ]);
 
   if (result === '2fa') {
-    if (verificationCode) {
-      await verificationInput.fill(verificationCode);
-      await page.locator('[data-cy="verification-submit-button"]').click();
-    } else {
-      // In headed mode, wait for manual code entry
-      console.log('\n⚠️  2FA Required: Please enter the verification code manually in the browser.\n');
-      console.log('💡 Tip: Set E2E_VERIFICATION_CODE environment variable to automate this.\n');
-
-      // Wait for user to complete verification (up to 2 minutes)
-      await page.waitForURL(/\/$|\/\?/, { timeout: 120000 });
-    }
+    await verificationInput.fill(verificationCode);
+    await page.locator('[data-cy="verification-submit-button"]').click();
   }
 
   // Verify we're on the dashboard (root URL, not login)
