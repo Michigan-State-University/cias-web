@@ -19,7 +19,9 @@ export const getSessionMapUserPreviewUrl = (userSessionId: string): string => {
   return `${sessionUrl}/map?userSessionId=${userSessionId}`;
 };
 
-export const getNextSessionUrl = (sessionId: string): string => {
+export const getNextSessionUrl = (sessionId: Nullable<string>): string => {
+  if (!sessionId) return '';
+
   const {
     location: { pathname },
   } = window;

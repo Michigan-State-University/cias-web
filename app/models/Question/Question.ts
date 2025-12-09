@@ -164,7 +164,10 @@ export type FinishQuestion = GenericQuestion<
   QuestionTypes.FINISH,
   FinishQuestionBody,
   FinishQuestionSettings
->;
+> & {
+  nextSessionId?: Nullable<string>;
+  sessionMultipleFill?: Nullable<boolean>;
+};
 export type FinishQuestionDTO = CamelToSnake<FinishQuestion>;
 
 export type PhoneQuestion = GenericQuestion<
