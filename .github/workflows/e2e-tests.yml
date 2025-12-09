@@ -1,10 +1,6 @@
 name: E2E Tests
 
-on:
-  pull_request:
-    branches: [dev, main, CIAS30-4041-Update-node-to-v18]
-  push:
-    branches: [dev]
+on: push
 
 env:
   E2E_ADMIN_EMAIL: ${{ secrets.E2E_ADMIN_EMAIL }}
@@ -34,17 +30,8 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps webkit chromium firefox
 
-      - name: Start frontend dev server
-        run: |
-          npm start &
-          npx wait-on http://localhost:4200 --timeout 120000
-        env:
-          API_URL: https://cias-api-staging.herokuapp.com
-
       - name: Run Playwright tests
         run: npx playwright test --project=webkit --workers=1
-        env:
-          BASE_URL: http://localhost:4200
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
