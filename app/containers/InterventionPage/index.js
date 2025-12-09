@@ -245,6 +245,7 @@ export function InterventionPage({
                   placeholder={formatMessage(messages.filter)}
                   aria-label={formatMessage(messages.searchInterventionsLabel)}
                   debounceTime={300}
+                  data-cy="intervention-search-input"
                 />
               </Col>
             </Row>

@@ -320,7 +320,7 @@ const InterventionTile = ({
       <ClearInterventionDataModal />
       <ExportInterventionModal />
 
-      <StyledLink to={link}>
+      <StyledLink to={link} data-cy={`intervention-tile-${id}`}>
         <TileContainer gap={8}>
           <Column>
             <Heading>
@@ -347,6 +347,7 @@ const InterventionTile = ({
                     loading={
                       starInterventionLoading || unstarInterventionLoading
                     }
+                    interventionId={id}
                   />
                   <div onClick={preventDefault}>
                     <Dropdown
@@ -366,6 +367,7 @@ const InterventionTile = ({
                 lineHeight={1.3}
                 lines={2}
                 dir="auto"
+                data-cy="intervention-tile-name"
               />
               {note && (
                 <Box position="absolute" top={0} right={0}>

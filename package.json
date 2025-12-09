@@ -49,6 +49,12 @@
     "test:local": "cross-env NODE_ENV=test jest --watch",
     "cy:open": "cypress open",
     "cy:test": "cypress run --headless --browser chrome",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:headed": "playwright test --headed",
+    "e2e:debug": "playwright test --debug",
+    "e2e:codegen": "playwright codegen http://localhost:4200",
+    "e2e:report": "playwright show-report",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
     "heroku-postbuild": "npm run build"
@@ -195,6 +201,7 @@
     "@babel/preset-typescript": "^7.26.0",
     "@babel/register": "^7.25.9",
     "@cypress/webpack-preprocessor": "^6.0.2",
+    "@playwright/test": "^1.57.0",
     "@sentry/webpack-plugin": "1.18.8",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^12.1.5",
@@ -223,6 +230,7 @@
     "@types/yup": "0.29.13",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "ajv": "^8.17.1",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-dynamic-import-node": "2.3.3",
@@ -302,7 +310,10 @@
     "eslint": {
       "ajv": "^6.12.6"
     },
-    "ajv": "^8.17.1",
+    "schema-utils": {
+      "ajv": "^8.17.1",
+      "ajv-keywords": "^5.1.0"
+    },
     "braces": "^3.0.3",
     "cross-spawn": "^7.0.6",
     "on-headers": "^1.1.0"
