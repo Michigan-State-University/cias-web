@@ -1,8 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
 
-/**
- * Page Object Model for the Dashboard page
- */
 export class DashboardPage {
   readonly page: Page;
   readonly createInterventionButton: Locator;
@@ -18,7 +15,6 @@ export class DashboardPage {
 
   async goto() {
     await this.page.goto('/');
-    // Wait for dashboard to load
     await this.page.waitForSelector('[data-cy="create-intervention-button"]', {
       timeout: 30000,
     });
@@ -26,63 +22,39 @@ export class DashboardPage {
 
   async createIntervention() {
     await this.createInterventionButton.click();
-    // Wait for the intervention to be created and page to navigate
     await this.page.waitForURL(/\/interventions\/.*/, { timeout: 30000 });
   }
 
-  /**
-   * Search for interventions by name or note
-   */
   async searchInterventions(searchText: string) {
     await this.searchInput.locator('input').fill(searchText);
-    // Wait for debounce and API response
     await this.page.waitForTimeout(500);
   }
 
-  /**
-   * Clear the search input
-   */
   async clearSearch() {
     await this.searchInput.locator('input').fill('');
     await this.page.waitForTimeout(500);
   }
 
-  /**
-   * Get an intervention tile by its ID
-   */
   getInterventionTile(interventionId: string): Locator {
     return this.page.locator(`[data-cy="intervention-tile-${interventionId}"]`);
   }
 
-  /**
-   * Get all visible intervention tiles
-   */
   getVisibleInterventionTiles(): Locator {
     return this.page.locator('[data-cy^="intervention-tile-"]');
   }
 
-  /**
-   * Get the first intervention tile
-   */
   getFirstInterventionTile(): Locator {
     return this.page.locator('[data-cy^="intervention-tile-"]').first();
   }
 
-  /**
-   * Star an intervention by its ID
-   */
   async starIntervention(interventionId: string) {
     const starButton = this.page.locator(
       `[data-cy="star-intervention-${interventionId}"]`,
     );
     await starButton.click();
-    // Wait for API response
     await this.page.waitForTimeout(500);
   }
 
-  /**
-   * Check if an intervention is starred
-   */
   async isInterventionStarred(interventionId: string): Promise<boolean> {
     const starButton = this.page.locator(
       `[data-cy="star-intervention-${interventionId}"]`,
@@ -95,9 +67,6 @@ export class DashboardPage {
     return fill !== 'inherit' && fill !== 'none' && fill !== '';
   }
 
-  /**
-   * Open the dropdown menu for an intervention
-   */
   async openInterventionDropdown(interventionId: string) {
     const dropdown = this.page.locator(
       `[data-cy="dropdown-trigger-intervention-list-item-options-${interventionId}"]`,
@@ -105,28 +74,18 @@ export class DashboardPage {
     await dropdown.click();
   }
 
-  /**
-   * Duplicate an intervention from the dashboard
-   */
   async duplicateIntervention(interventionId: string) {
     await this.openInterventionDropdown(interventionId);
     await this.page
       .locator('[data-cy="dropdown-option-duplicateHere"]')
       .click();
-    // Wait for duplication to complete
     await this.page.waitForTimeout(1000);
   }
 
-  /**
-   * Get the count of visible intervention tiles
-   */
   async getVisibleInterventionCount(): Promise<number> {
     return this.getVisibleInterventionTiles().count();
   }
 
-  /**
-   * Check if an intervention with the given name is visible
-   */
   async isInterventionVisible(name: string): Promise<boolean> {
     const tile = this.page.locator(
       `[data-cy="intervention-tile-name"]:has-text("${name}")`,
@@ -134,9 +93,6 @@ export class DashboardPage {
     return tile.isVisible();
   }
 
-  /**
-   * Wait for interventions to load
-   */
   async waitForInterventionsToLoad() {
     // Wait for at least one intervention tile or the "no results" message
     await this.page
@@ -145,20 +101,12 @@ export class DashboardPage {
       .waitFor({ timeout: 10000 });
   }
 
-  /**
-   * Get intervention ID from the URL after creating an intervention
-   */
   async getInterventionIdFromUrl(): Promise<string> {
     const url = this.page.url();
     const match = url.match(/\/interventions\/([^/]+)/);
     return match ? match[1] : '';
   }
 
-  /**
-   * Filter interventions by status using the status filter dropdown
-   * @param statuses Array of status values to filter by (e.g., ['Draft', 'Published', 'Paused'])
-   * @param clearFirst Whether to clear existing selections first (default: true)
-   */
   async filterByStatus(statuses: string[], clearFirst: boolean = true) {
     const statusFilter = this.page.locator('[data-cy="intervention-status-filter"]');
     const selectInput = statusFilter.locator('#status-filter-input');
@@ -180,14 +128,10 @@ export class DashboardPage {
       });
       await option.first().click();
 
-      // Wait for the filter to be applied
       await this.page.waitForTimeout(500);
     }
   }
 
-  /**
-   * Clear status filter - removes all selected statuses
-   */
   async clearStatusFilter() {
     const statusFilter = this.page.locator('[data-cy="intervention-status-filter"]');
     
@@ -210,10 +154,6 @@ export class DashboardPage {
     await this.page.waitForTimeout(300);
   }
 
-  /**
-   * Get currently selected status filter values
-   * @returns Array of selected status labels
-   */
   async getSelectedStatusFilters(): Promise<string[]> {
     const statusFilter = this.page.locator('[data-cy="intervention-status-filter"]');
     // Get all remove buttons by their accessible name pattern
@@ -232,9 +172,6 @@ export class DashboardPage {
     return values;
   }
 
-  /**
-   * Get the status filter container
-   */
   getStatusFilter() {
     return this.page.locator('[data-cy="intervention-status-filter"]');
   }
