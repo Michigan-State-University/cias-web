@@ -5,12 +5,12 @@ const authFile = path.join(__dirname, '.auth/admin.json');
 
 setup('authenticate as admin', async ({ page }) => {
   const adminEmail = process.env.E2E_ADMIN_EMAIL;
-  const password = process.env.E2E_PASSWORD;
+  const password = process.env.E2E_ADMIN_PASSWORD;
   const verificationCode = process.env.E2E_VERIFICATION_CODE;
 
   if (!adminEmail || !password || !verificationCode) {
     throw new Error(
-      'E2E_ADMIN_EMAIL, E2E_VERIFICATION_CODE and E2E_PASSWORD environment variables must be set',
+      'E2E_ADMIN_EMAIL, E2E_VERIFICATION_CODE and E2E_ADMIN_PASSWORD environment variables must be set',
     );
   }
 
