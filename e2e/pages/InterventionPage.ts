@@ -14,13 +14,11 @@ export enum InterventionType {
   FLEXIBLE = 'Intervention::FlexibleOrder',
 }
 
-/**
- * Page Object Model for the Intervention page
- */
 export class InterventionPage {
   readonly page: Page;
   readonly createSessionButton: Locator;
   readonly backButton: Locator;
+  readonly nameInput: Locator;
   readonly noteInput: Locator;
   readonly settingsPanel: Locator;
 
@@ -28,6 +26,7 @@ export class InterventionPage {
     this.page = page;
     this.createSessionButton = page.locator('[data-cy="create-session-button"]');
     this.backButton = page.locator('[data-cy="back-intervention-button"]');
+    this.nameInput = page.locator('[data-cy="intervention-name-input"]');
     this.noteInput = page.locator('[data-cy="intervention-note-input"]');
     this.settingsPanel = page.locator('[data-cy="intervention-settings-panel"]');
   }
@@ -77,11 +76,9 @@ export class InterventionPage {
     // Click the create session button in the dialog
     await createSessionDialogButton.click();
 
-    // Wait for session to be created
     const response = await responsePromise;
     expect(response.status()).toBe(201);
 
-    // Wait for dialog to close
     await this.page.waitForTimeout(1000);
   }
 
@@ -103,17 +100,11 @@ export class InterventionPage {
     await this.backButton.click();
   }
 
-  /**
-   * Get the number of sessions in the intervention
-   */
   async getSessionCount(): Promise<number> {
     const sessions = this.page.locator('[data-cy^="enter-session-"]');
     return sessions.count();
   }
 
-  /**
-   * Delete a session by its index
-   */
   async deleteSession(sessionIndex: number) {
     // We need to find the session ID from the dropdown trigger
     // The sessions have data-cy="enter-session-{index}" and the dropdown is in the same container
@@ -132,7 +123,6 @@ export class InterventionPage {
     const deleteOption = this.page.locator('[data-cy="dropdown-option-delete"]');
     await deleteOption.waitFor({ state: 'visible', timeout: 5000 });
 
-    // Intercept the DELETE API call
     const responsePromise = this.page.waitForResponse(
       (response) =>
         response.url().includes('/sessions/') &&
@@ -147,13 +137,9 @@ export class InterventionPage {
       await confirmButton.click();
     }
 
-    // Wait for the session to be deleted
     await responsePromise;
   }
 
-  /**
-   * Duplicate a session by its index (duplicate here - creates copy in same intervention)
-   */
   async duplicateSession(sessionIndex: number) {
     // Find all dropdown triggers (session options menus) and click the one at the specified index
     const dropdownTriggers = this.page.locator('[data-cy^="dropdown-trigger-session-list-item-options"]');
@@ -163,7 +149,6 @@ export class InterventionPage {
     const duplicateOption = this.page.locator('[data-cy="dropdown-option-duplicate"]');
     await duplicateOption.waitFor({ state: 'visible', timeout: 5000 });
 
-    // Start waiting for API response before clicking (POST /sessions/:id/clone)
     const responsePromise = this.page.waitForResponse(
       (response) =>
         response.url().includes('/sessions/') &&
@@ -174,28 +159,20 @@ export class InterventionPage {
 
     await duplicateOption.click();
 
-    // Wait for the session clone API to complete
     await responsePromise;
   }
 
-  /**
-   * Add a note to the intervention
-   */
   async addNote(noteText: string) {
-    // Wait for the note input to be visible
     await this.noteInput.waitFor({ state: 'visible', timeout: 10000 });
 
-    // Find the textarea inside the note input container
     const textarea = this.noteInput.locator('textarea');
     
-    // Click and fill the textarea
     await textarea.click();
     await textarea.fill(noteText);
 
     // Click outside to trigger the save (blur triggers save in ApprovableInput)
     await this.page.locator('h2:has-text("Note")').click();
 
-    // Wait for API response
     await this.page.waitForResponse(
       (response) =>
         response.url().includes('/interventions/') &&
@@ -205,18 +182,12 @@ export class InterventionPage {
     );
   }
 
-  /**
-   * Get the current note text
-   */
   async getNoteText(): Promise<string> {
     await this.noteInput.waitFor({ state: 'visible', timeout: 10000 });
     const textarea = this.noteInput.locator('textarea');
     return textarea.inputValue();
   }
 
-  /**
-   * Change the access settings for the intervention
-   */
   async changeAccessSettings(accessType: InterventionAccessType) {
     // Click on the label instead of the hidden radio input
     const labelSelector = `label[for="access-radio-${accessType}"]`;
@@ -232,7 +203,6 @@ export class InterventionPage {
       return;
     }
 
-    // Start listening for response before clicking
     const responsePromise = this.page.waitForResponse(
       (response) =>
         response.url().includes('/interventions/') &&
@@ -243,13 +213,9 @@ export class InterventionPage {
 
     await label.click();
 
-    // Wait for the API call to complete
     await responsePromise;
   }
 
-  /**
-   * Check which access setting is currently selected
-   */
   async getSelectedAccessSetting(): Promise<InterventionAccessType | null> {
     // Check each access type radio to find the selected one
     const accessTypes: InterventionAccessType[] = [
@@ -267,9 +233,6 @@ export class InterventionPage {
     return null;
   }
 
-  /**
-   * Change the intervention type (Normal, Flexible, Fixed)
-   */
   async changeInterventionType(type: InterventionType) {
     // Click on the label instead of the hidden radio input
     const labelSelector = `label[for="access-radio-${type}"]`;
@@ -278,7 +241,6 @@ export class InterventionPage {
     await label.waitFor({ state: 'visible', timeout: 10000 });
     await label.click();
 
-    // Wait for the API call to complete
     await this.page.waitForResponse(
       (response) =>
         response.url().includes('/interventions/') &&
@@ -288,16 +250,12 @@ export class InterventionPage {
     );
   }
 
-  /**
-   * Add specific participants for invited access
-   */
   async addInvitedParticipant(email: string) {
     // The hidden input for adding emails
     const emailInput = this.page.locator('[data-cy="hidden-input"]');
     await emailInput.fill(email);
     await emailInput.press('Enter');
 
-    // Wait for the API call to complete
     await this.page.waitForResponse(
       (response) =>
         response.url().includes('/interventions/') && response.status() === 200,
@@ -305,9 +263,6 @@ export class InterventionPage {
     );
   }
 
-  /**
-   * Check if session schedule options are visible for a session
-   */
   async isSessionScheduleVisible(sessionIndex: number): Promise<boolean> {
     // Session schedule is shown for sessions after the first one
     // Each session with schedule has [data-cy="session-schedule"]
@@ -328,9 +283,6 @@ export class InterventionPage {
     return false;
   }
 
-  /**
-   * Check if estimate time input is visible for a session
-   */
   async isEstimateTimeVisible(sessionIndex: number): Promise<boolean> {
     const estimateElements = this.page.locator('[data-cy="session-estimate-time"]');
     const count = await estimateElements.count();
@@ -341,9 +293,6 @@ export class InterventionPage {
     return false;
   }
 
-  /**
-   * Get the session schedule selector for a specific session
-   */
   getSessionScheduleSelector(sessionIndex: number) {
     // Find the session tile first, then look for schedule selector within its container
     // The session tiles are in a list, and each has schedule options
@@ -353,23 +302,15 @@ export class InterventionPage {
     return sessionSchedules.nth(sessionIndex > 0 ? sessionIndex - 1 : 0).locator('[data-cy="session-schedule-selector"]');
   }
 
-  /**
-   * Get the estimate time input for a specific session
-   */
   getEstimateTimeInput(sessionIndex: number) {
     // Find all estimate time inputs and get the one at the specified index
     const estimateInputs = this.page.locator('[data-cy="session-estimate-time-input"]');
     return estimateInputs.nth(sessionIndex);
   }
 
-  /**
-   * Set estimate time for a session
-   */
   async setEstimateTime(sessionIndex: number, minutes: string) {
     const input = this.getEstimateTimeInput(sessionIndex);
     
-    // Start waiting for response before filling input
-    // Note: The app uses PUT for session updates, not PATCH
     const responsePromise = this.page.waitForResponse(
       (response) =>
         response.url().includes('/sessions/') &&
@@ -381,22 +322,15 @@ export class InterventionPage {
     await input.fill(minutes);
     await input.blur();
 
-    // Wait for API response
     await responsePromise;
   }
 
-  /**
-   * Get the current intervention status
-   */
   async getInterventionStatus(): Promise<string> {
     const statusLabel = this.page.locator('[data-cy="intervention-status"]');
     await statusLabel.waitFor({ state: 'visible', timeout: 10000 });
     return (await statusLabel.textContent()) || '';
   }
 
-  /**
-   * Open the status dropdown
-   */
   async openStatusDropdown() {
     const dropdown = this.page.locator(
       '[data-cy="dropdown-trigger-intervention-status-dropdown"]',
@@ -404,9 +338,6 @@ export class InterventionPage {
     await dropdown.click();
   }
 
-  /**
-   * Publish the intervention
-   */
   async publishIntervention() {
     await this.openStatusDropdown();
 
@@ -419,7 +350,6 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    // Wait for API response
     await this.page.waitForResponse(
       (response) =>
         response.url().includes('/interventions/') &&
@@ -428,13 +358,9 @@ export class InterventionPage {
       { timeout: 10000 },
     );
 
-    // Wait for status to update
     await this.page.waitForTimeout(500);
   }
 
-  /**
-   * Pause the intervention (only available when published)
-   */
   async pauseIntervention() {
     await this.openStatusDropdown();
 
@@ -447,7 +373,6 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    // Wait for API response
     await this.page.waitForResponse(
       (response) =>
         response.url().includes('/interventions/') &&
@@ -456,13 +381,9 @@ export class InterventionPage {
       { timeout: 10000 },
     );
 
-    // Wait for status to update
     await this.page.waitForTimeout(500);
   }
 
-  /**
-   * Archive the intervention (only available when draft or closed)
-   */
   async archiveIntervention() {
     await this.openStatusDropdown();
 
@@ -475,7 +396,6 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    // Wait for API response
     await this.page.waitForResponse(
       (response) =>
         response.url().includes('/interventions/') &&
@@ -484,13 +404,10 @@ export class InterventionPage {
       { timeout: 10000 },
     );
 
-    // Wait for status to update
+
     await this.page.waitForTimeout(500);
   }
 
-  /**
-   * Reactivate a paused intervention
-   */
   async reactivateIntervention() {
     await this.openStatusDropdown();
 
@@ -503,7 +420,6 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    // Wait for API response
     await this.page.waitForResponse(
       (response) =>
         response.url().includes('/interventions/') &&
@@ -512,13 +428,9 @@ export class InterventionPage {
       { timeout: 10000 },
     );
 
-    // Wait for status to update
     await this.page.waitForTimeout(500);
   }
 
-  /**
-   * Close the intervention (only available when published or paused)
-   */
   async closeIntervention() {
     await this.openStatusDropdown();
 
@@ -540,7 +452,29 @@ export class InterventionPage {
       { timeout: 10000 },
     );
 
-    // Wait for status to update
     await this.page.waitForTimeout(500);
+  }
+
+  async getInterventionName(): Promise<string> {
+    await this.nameInput.waitFor({ state: 'visible', timeout: 10000 });
+    const input = this.nameInput;
+    return input.inputValue();
+  }
+
+  async editInterventionName(newName: string) {
+    await this.nameInput.waitFor({ state: 'visible', timeout: 10000 });
+    
+    await this.nameInput.fill(newName);
+    
+    // Trigger blur by pressing Tab or clicking outside - this should trigger the save
+    await this.nameInput.press('Tab');
+    
+    await this.page.waitForResponse(
+      (response) =>
+        response.url().includes('/interventions/') &&
+        response.request().method() === 'PATCH' &&
+        response.status() === 200,
+      { timeout: 10000 },
+    );
   }
 }
