@@ -223,6 +223,7 @@
     "@types/yup": "0.29.13",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "ajv": "^8.17.1",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-dynamic-import-node": "2.3.3",
@@ -302,7 +303,10 @@
     "eslint": {
       "ajv": "^6.12.6"
     },
-    "ajv": "^8.17.1",
+    "schema-utils": {
+      "ajv": "^8.17.1",
+      "ajv-keywords": "^5.1.0"
+    },
     "braces": "^3.0.3",
     "cross-spawn": "^7.0.6",
     "on-headers": "^1.1.0"
