@@ -50,6 +50,7 @@
     "cy:open": "cypress open",
     "cy:test": "cypress run --headless --browser chrome",
     "e2e": "playwright test",
+    "e2e:setup": "playwright test --project=setup",
     "e2e:ui": "playwright test --ui",
     "e2e:headed": "playwright test --headed",
     "e2e:debug": "playwright test --debug",

@@ -15,6 +15,11 @@ export class DashboardPage {
 
   async goto() {
     await this.page.goto('/');
+
+    if (this.page.url().includes('/login')) {
+      throw new Error('Authentication failed - redirected to login page. Run auth setup again.');
+    }
+
     await this.page.waitForSelector('[data-cy="create-intervention-button"]', {
       timeout: 30000,
     });

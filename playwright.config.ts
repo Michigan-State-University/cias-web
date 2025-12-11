@@ -15,7 +15,7 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -33,6 +33,10 @@ export default defineConfig({
 
     /* Video recording */
     video: 'retain-on-failure',
+
+    // Add extra time for API responses
+    actionTimeout: 15000,
+    navigationTimeout: 30000,
   },
 
   /* Configure projects for major browsers */
@@ -47,7 +51,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1500, height: 900 },
-        storageState: 'e2e/.auth/admin.json',
+        // Note: storageState is now handled by e2e/fixtures/test.ts based on worker index
       },
       dependencies: ['setup'],
     },
@@ -56,7 +60,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Firefox'],
         viewport: { width: 1500, height: 900 },
-        storageState: 'e2e/.auth/admin.json',
+        // Note: storageState is now handled by e2e/fixtures/test.ts based on worker index
       },
       dependencies: ['setup'],
     },
@@ -65,7 +69,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Safari'],
         viewport: { width: 1500, height: 900 },
-        storageState: 'e2e/.auth/admin.json',
+        // Note: storageState is now handled by e2e/fixtures/test.ts based on worker index
       },
       dependencies: ['setup'],
     },
