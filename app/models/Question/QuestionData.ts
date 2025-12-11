@@ -42,8 +42,7 @@ export interface MultipleQuestionData extends QuestionPayloadData<string> {
 
 export interface FreeResponseQuestionData extends QuestionPayloadData<string> {}
 
-export interface ThirdPartyReportQuestionData
-  extends QuestionPayloadData<string> {
+export interface ThirdPartyReportQuestionData extends QuestionPayloadData<string> {
   value: string;
   reportTemplateIds: string[];
   numericValue: string;
@@ -57,18 +56,15 @@ export interface NameQuestionData extends QuestionPayloadData<string> {}
 
 export interface NumberQuestionData extends QuestionPayloadData<string> {}
 
-export interface GridQuestionData
-  extends QuestionPayloadData<GridQuestionPayload> {}
+export interface GridQuestionData extends QuestionPayloadData<GridQuestionPayload> {}
 
-export interface SliderQuestionData
-  extends QuestionPayloadData<SliderQuestionPayload> {}
+export interface SliderQuestionData extends QuestionPayloadData<SliderQuestionPayload> {}
 
 export type InformationOnlyQuestionData = never;
 
 export interface ExternalLinkQuestionData extends QuestionPayloadData<string> {}
 
-export interface FeedbackQuestionData
-  extends QuestionPayloadData<FeedbackQuestionPayload> {
+export interface FeedbackQuestionData extends QuestionPayloadData<FeedbackQuestionPayload> {
   spectrum: FeedbackSpectrum;
 }
 
@@ -78,19 +74,15 @@ export interface PhoneQuestionData extends QuestionPayloadData<string> {}
 
 export interface DateQuestionData extends QuestionPayloadData<string> {}
 
-export interface ParticipantReportQuestionData
-  extends QuestionPayloadData<string> {}
+export interface ParticipantReportQuestionData extends QuestionPayloadData<string> {}
 
 export interface CurrencyQuestionData extends QuestionPayloadData<string> {}
 
-export interface TlfbConfigData
-  extends QuestionPayloadData<TlfbConfigPayload> {}
+export interface TlfbConfigData extends QuestionPayloadData<TlfbConfigPayload> {}
 
-export interface TlfbEventsData
-  extends QuestionPayloadData<TlfbEventsPayload> {}
+export interface TlfbEventsData extends QuestionPayloadData<TlfbEventsPayload> {}
 
-export interface TlfbQuestionData
-  extends QuestionPayloadData<TlfbQuestionPayload> {}
+export interface TlfbQuestionData extends QuestionPayloadData<TlfbQuestionPayload> {}
 
 export interface HenryFordQuestionData extends SingleQuestionData {
   hfhValue: string;
