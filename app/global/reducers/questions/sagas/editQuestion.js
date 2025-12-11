@@ -87,6 +87,61 @@ const isVariableNameUpdate = (diff, cachedQuestion, currentQuestion) => {
   return newVarsArray.some((varName) => !oldVariables.has(varName));
 };
 
+const normalizePayload = (payload) => {
+  if (!payload || typeof payload !== 'string') return '';
+  return payload.replace(/<p>|<\/p>/g, '').trim();
+};
+
+const getAnswerOptionsMap = (question) => {
+  const optionsMap = new Map();
+  if (!question?.body || !question?.type) return optionsMap;
+
+  let optionsList = [];
+  if (question.type === multiQuestion.id) {
+    optionsList = question.body.data || [];
+  } else if (question.type === gridQuestion.id) {
+    optionsList = get(question, ['body', 'data', '0', 'payload', 'rows'], []);
+  }
+
+  optionsList.forEach((option) => {
+    const varName = get(option, ['variable', 'name']);
+    const rawPayload = get(option, 'payload');
+    if (varName) {
+      optionsMap.set(varName, normalizePayload(rawPayload));
+    }
+  });
+  return optionsMap;
+};
+
+const isAnswerOptionWithVariableUpdate = (cachedQuestion, currentQuestion) => {
+  const { type } = currentQuestion;
+
+  if (type !== multiQuestion.id && type !== gridQuestion.id) {
+    return false;
+  }
+
+  const oldOptionsMap = getAnswerOptionsMap(cachedQuestion);
+  const newOptionsMap = getAnswerOptionsMap(currentQuestion);
+
+  if (oldOptionsMap.size === 0) {
+    return false;
+  }
+
+  const oldOptionsArray = Array.from(oldOptionsMap.entries());
+
+  return oldOptionsArray.some(([varName, oldNormalizedPayload]) => {
+    if (newOptionsMap.has(varName)) {
+      const newNormalizedPayload = newOptionsMap.get(varName);
+
+      return (
+        oldNormalizedPayload !== newNormalizedPayload &&
+        oldNormalizedPayload.length > 0
+      );
+    }
+    return false;
+  });
+};
+
 const validateVariable = (payload, question, variables) => {
   if (QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
     return;
@@ -152,6 +207,11 @@ function* editQuestion({ payload }) {
 
   const isVariableUpdate = isVariableNameUpdate(diff, cachedQuestion, question);
 
+  const isAnswerOptionUpdate = isAnswerOptionWithVariableUpdate(
+    cachedQuestion,
+    question,
+  );
+
   const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
     const response = yield axios.patch(requestURL, {
@@ -168,6 +228,18 @@ function* editQuestion({ payload }) {
         autoClose: 5000,
       });
     }
+    if (isAnswerOptionUpdate) {
+      yield call(
+        toast.success,
+        formatMessage(messages.answerOptionUpdateQueued),
+        {
+          toastId: 'answer-option-update-queued',
+          autoClose: 5000,
+        },
+      );
+    }
+
+    return;
   } catch (error) {
     if (error.response?.status === 422 && isVariableUpdate) {
       yield call(
@@ -176,6 +248,16 @@ function* editQuestion({ payload }) {
           formatMessage(messages.variableUpdateInProgress),
         {
           toastId: 'variable-update-in-progress',
+          autoClose: 5000,
+        },
+      );
+    } else if (error.response?.status === 422 && isAnswerOptionUpdate) {
+      yield call(
+        toast.warning,
+        error.response?.data?.message ||
+          formatMessage(messages.answerOptionUpdateInProgress),
+        {
+          toastId: 'answer-option-update-in-progress',
           autoClose: 5000,
         },
       );
