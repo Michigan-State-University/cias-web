@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import axios from 'axios';
 import CreatableSelect from 'react-select/creatable';
@@ -35,6 +35,7 @@ const DEBOUNCE_DELAY = 500;
 
 const AssignTagModal = ({ interventionId, onClose, onSuccess }: Props) => {
   const { formatMessage } = useIntl();
+  const selectRef = useRef<any>(null);
   const [selectedTags, setSelectedTags] = useState<TagOption[]>([]);
   const [tagOptions, setTagOptions] = useState<TagOption[]>([]);
   const [isLoadingTags, setIsLoadingTags] = useState(false);
@@ -58,6 +59,7 @@ const AssignTagModal = ({ interventionId, onClose, onSuccess }: Props) => {
         const params = new URLSearchParams({
           start_index: startIndex.toString(),
           end_index: endIndex.toString(),
+          intervention_id: interventionId,
         });
 
         if (search) {
@@ -83,7 +85,7 @@ const AssignTagModal = ({ interventionId, onClose, onSuccess }: Props) => {
         setIsLoadingTags(false);
       }
     },
-    [formatMessage],
+    [formatMessage, interventionId],
   );
 
   useEffect(() => {
@@ -96,7 +98,7 @@ const AssignTagModal = ({ interventionId, onClose, onSuccess }: Props) => {
     (newInputValue: string, { action }: any) => {
       if (action === 'input-change') {
         setInputValue(newInputValue);
-      } else if (action === 'menu-close') {
+      } else if (action === 'menu-close' || action === 'set-value') {
         setInputValue('');
       }
       return newInputValue;
@@ -119,6 +121,10 @@ const AssignTagModal = ({ interventionId, onClose, onSuccess }: Props) => {
       setCurrentPage(0);
       setHasMoreTags(true);
       fetchTags('', 0, false);
+
+      if (selectRef.current) {
+        selectRef.current.blur();
+      }
     },
     [selectedTags, fetchTags],
   );
@@ -212,6 +218,7 @@ const AssignTagModal = ({ interventionId, onClose, onSuccess }: Props) => {
     <Box p={20}>
       <Box mb={20}>
         <CreatableSelect
+          ref={selectRef}
           isMulti
           options={tagOptions}
           value={selectedTags}
