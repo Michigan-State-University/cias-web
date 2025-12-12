@@ -110,6 +110,15 @@ import {
   shouldFetchSelfDetailsByUserRoles,
 } from './utils';
 
+// Preview components defined outside App to avoid recreation on every render
+const AnswerSessionPageComponent = ({ match }) => (
+  <AnswerSessionPage match={match} isPreview />
+);
+
+AnswerSessionPageComponent.propTypes = {
+  match: PropTypes.object,
+};
+
 export function App({ user, fetchSelfDetails }) {
   const { locale, formatMessage } = useIntl();
   const { pathname, search } = useLocation();
@@ -221,8 +230,13 @@ export function App({ user, fetchSelfDetails }) {
     }
   };
 
+  const rolesContextValue = useMemo(
+    () => ({ userRoles: user?.roles || [] }),
+    [user?.roles],
+  );
+
   return (
-    <RolesManagerContext.Provider value={{ userRoles: user?.roles || [] }}>
+    <RolesManagerContext.Provider value={rolesContextValue}>
       <ApiQueryMessageHandler />
       <IdleTimer />
 
@@ -490,9 +504,7 @@ export function App({ user, fetchSelfDetails }) {
           exact
           key="previewFromStart"
           path={RoutePath.PREVIEW_SESSION_FROM_CURRENT}
-          component={({ match }) => (
-            <AnswerSessionPage match={match} isPreview />
-          )}
+          component={AnswerSessionPageComponent}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
           navbarProps={{
@@ -503,9 +515,7 @@ export function App({ user, fetchSelfDetails }) {
         <AppRoute
           key="previewFromCurrent"
           path={RoutePath.PREVIEW_SESSION_FROM_INDEX}
-          component={({ match }) => (
-            <AnswerSessionPage match={match} isPreview />
-          )}
+          component={AnswerSessionPageComponent}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
           navbarProps={{

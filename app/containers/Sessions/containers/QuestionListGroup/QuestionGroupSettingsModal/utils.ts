@@ -7,9 +7,9 @@ export const parseTime = (t: string) => {
   }
   const d = new Date();
   const time = t.match(/(\d+)(?::(\d\d))?\s*([Pp]?)/);
-  const minutes = parseInt(get(time, '[2]'), 10);
+  const minutes = parseInt(get(time, '[2]', '0'), 10);
   const ampm = get(time, '[3]');
-  let hours = parseInt(get(time, '[1]'), 10);
+  let hours = parseInt(get(time, '[1]', '0'), 10);
   if (hours === 12 && !ampm) {
     hours = 0;
   } else {

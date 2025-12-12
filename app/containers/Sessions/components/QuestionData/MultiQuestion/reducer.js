@@ -2,7 +2,7 @@ import { calculateNextValue } from 'utils/sequenceUtils';
 
 import { ADD, UPDATE, REMOVE, REORDER } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const multiQuestionReducer = (question, payload) => {
   switch (payload.type) {
     case ADD:

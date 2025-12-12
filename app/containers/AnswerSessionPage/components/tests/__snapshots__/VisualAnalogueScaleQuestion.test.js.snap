@@ -139,7 +139,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
             />
             <div
               class="rc-slider-track"
-              style="background-color: rgb(183, 39, 234); left: 0%; width: 0%;"
+              style="background-color: rgb(183, 39, 234); left: 0%; right: auto; width: 0%;"
             />
             <div
               class="rc-slider-step"
@@ -158,7 +158,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
               dragging="false"
               index="0"
               role="slider"
-              style="border-color: #b727ea; box-shadow: none; border-width: 3px; left: 0%; transform: translateX(-50%);"
+              style="border-color: rgb(183, 39, 234); box-shadow: none; border-width: 3px; left: 0%; right: auto; transform: translateX(-50%);"
               tabindex="0"
             >
               <div

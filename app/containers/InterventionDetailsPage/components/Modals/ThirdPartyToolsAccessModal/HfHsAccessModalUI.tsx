@@ -75,27 +75,23 @@ const Component = ({
           </FlexRow>
         )}
         {hfhsAccess && (
-          <>
-            <FlexRow width="100%" mt={canChangeAccess && 40}>
-              <FormikApiSelect
-                formikKey="locationIds"
-                label={formatMessage(messages.clinicLocations)}
-                url="/v1/henry_ford/clinic_locations"
-                dataParser={clinicLocationsDataParser}
-                optionsFormatter={clinicLocationsOptionsFormatter}
-                defaultFetchErrorMessage={messages.fetchClinicLocationsError}
-                width="100%"
-                selectProps={{
-                  placeholder: formatMessage(
-                    messages.clinicLocationsPlaceholder,
-                  ),
-                  isMulti: true,
-                }}
-                ref={selectRef}
-                disabled={disabled}
-              />
-            </FlexRow>
-          </>
+          <FlexRow width="100%" mt={canChangeAccess && 40}>
+            <FormikApiSelect
+              formikKey="locationIds"
+              label={formatMessage(messages.clinicLocations)}
+              url="/v1/henry_ford/clinic_locations"
+              dataParser={clinicLocationsDataParser}
+              optionsFormatter={clinicLocationsOptionsFormatter}
+              defaultFetchErrorMessage={messages.fetchClinicLocationsError}
+              width="100%"
+              selectProps={{
+                placeholder: formatMessage(messages.clinicLocationsPlaceholder),
+                isMulti: true,
+              }}
+              ref={selectRef}
+              disabled={disabled}
+            />
+          </FlexRow>
         )}
         {canChangeAccess && (
           <FlexRow mt={56}>

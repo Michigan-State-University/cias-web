@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { boxShadows, colors } from 'theme';
@@ -25,6 +25,8 @@ const ArrowDropdown = ({
   const buttonRef = useRef(null);
   useOutsideClick(dropdown, () => setOpen && setOpen(false), isOpened);
 
+  const contextValue = useMemo(() => ({ ref: buttonRef }), []);
+
   return (
     <ArrowDropdownWrapper ref={dropdown} width={width}>
       <Dropdown
@@ -45,7 +47,7 @@ const ArrowDropdown = ({
         {...(isOpened ? { zIndex: 1 } : { display: 'none' })}
         {...(positionFrom === 'right' && { right: '0' })}
       >
-        <ArrowDropdownContext.Provider value={{ ref: buttonRef }}>
+        <ArrowDropdownContext.Provider value={contextValue}>
           {children}
         </ArrowDropdownContext.Provider>
       </Box>

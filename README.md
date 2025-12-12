@@ -61,8 +61,8 @@ Our goal is for cost to never be a barrier. This code is available to anyone at 
 
 ### Requirements:
 
-- [`Node.js` (v14 or later)](https://nodejs.org/en/download)*
-- compatible [`npm` version (v6 or later)](https://github.com/npm/cli)*
+- [`Node.js` (v18 or later)](https://nodejs.org/en/download)*
+- compatible [`npm` version (v9 or later)](https://github.com/npm/cli)*
 
 *we suggest using node.js version management utility, for instance [nvm](https://github.com/nvm-sh/nvm)
 

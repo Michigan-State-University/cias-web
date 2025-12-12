@@ -30,34 +30,32 @@ export const StarButton: FC<Props> = ({ starred, onClick, loading }) => {
   };
 
   return (
-    <>
-      <TextButton
-        onClick={handleClick}
-        buttonProps={{
-          padding: ICON_PADDING,
-          title: formatMessage(
-            messages[starred ? 'unstarIntervention' : 'starIntervention'],
-          ),
-          hoverColor: colors.aliceBlue,
-          stroke: starred ? colors.grandis : colors.manatee,
-          fill: starred ? colors.grandis : 'inherit',
-          hoverStroke: !starred && colors.bluewood,
-          borderRadius: 8,
-          borderWidth: BORDER_WIDTH,
-          showFocus: true,
-        }}
-        spinnerProps={{
-          size: ICON_SIZE,
-        }}
-        loading={loading}
-      >
-        <Icon
-          src={StarIcon}
-          width={ICON_SIZE}
-          height={ICON_SIZE}
-          alt={formatMessage(messages.starIconAlt)}
-        />
-      </TextButton>
-    </>
+    <TextButton
+      onClick={handleClick}
+      buttonProps={{
+        padding: ICON_PADDING,
+        title: formatMessage(
+          messages[starred ? 'unstarIntervention' : 'starIntervention'],
+        ),
+        hoverColor: colors.aliceBlue,
+        stroke: starred ? colors.grandis : colors.manatee,
+        fill: starred ? colors.grandis : 'inherit',
+        hoverStroke: !starred && colors.bluewood,
+        borderRadius: 8,
+        borderWidth: BORDER_WIDTH,
+        showFocus: true,
+      }}
+      spinnerProps={{
+        size: ICON_SIZE,
+      }}
+      loading={loading}
+    >
+      <Icon
+        src={StarIcon}
+        width={ICON_SIZE}
+        height={ICON_SIZE}
+        alt={formatMessage(messages.starIconAlt)}
+      />
+    </TextButton>
   );
 };

@@ -111,7 +111,7 @@ const NarratorTab = ({
   };
 
   if (!narrator) {
-    return <></>;
+    return null;
   }
 
   const onCreateBlock = (type: NarratorBlockTypes) => {

@@ -7,33 +7,31 @@ import Icon from 'components/Icon';
 import EllipsisText from 'components/Text/EllipsisText';
 
 const ReportingDashboardItem = ({ active, redirect, icon, name, alt, id }) => (
-  <>
-    <Box
-      clickable
-      bg={active ? themeColors.secondary : ''}
-      bgOpacity={active ? 0.2 : 1}
-      onClick={redirect}
-      key={id}
-      padding={10}
-      display="flex"
-      align="center"
-      mb={5}
-    >
-      <Icon
-        fill={active ? themeColors.secondary : ''}
-        mr={10}
-        src={icon}
-        alt={alt}
+  <Box
+    clickable
+    bg={active ? themeColors.secondary : ''}
+    bgOpacity={active ? 0.2 : 1}
+    onClick={redirect}
+    key={id}
+    padding={10}
+    display="flex"
+    align="center"
+    mb={5}
+  >
+    <Icon
+      fill={active ? themeColors.secondary : ''}
+      mr={10}
+      src={icon}
+      alt={alt}
+    />
+    <Box width="calc(100% - 40px)">
+      <EllipsisText
+        color={active ? themeColors.secondary : ''}
+        fontWeight="bold"
+        text={name}
       />
-      <Box width="calc(100% - 40px)">
-        <EllipsisText
-          color={active ? themeColors.secondary : ''}
-          fontWeight="bold"
-          text={name}
-        />
-      </Box>
     </Box>
-  </>
+  </Box>
 );
 
 ReportingDashboardItem.propTypes = {

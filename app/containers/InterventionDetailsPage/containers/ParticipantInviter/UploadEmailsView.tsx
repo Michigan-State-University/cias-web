@@ -137,20 +137,18 @@ export const UploadEmailsView: FC<Props> = ({
         </CsvFileReader>
       </Row>
       {initialFormValues && (
-        <>
-          <Column flex={1}>
-            <InviteEmailParticipantsForm
-              initialFormValues={initialFormValues}
-              isModularIntervention={isModularIntervention}
-              isReportingIntervention={isReportingIntervention}
-              sessionOptions={sessionOptions}
-              healthClinicOptions={healthClinicOptions}
-              onSubmit={handleSubmit}
-              submitting={submitting}
-              normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
-            />
-          </Column>
-        </>
+        <Column flex={1}>
+          <InviteEmailParticipantsForm
+            initialFormValues={initialFormValues}
+            isModularIntervention={isModularIntervention}
+            isReportingIntervention={isReportingIntervention}
+            sessionOptions={sessionOptions}
+            healthClinicOptions={healthClinicOptions}
+            onSubmit={handleSubmit}
+            submitting={submitting}
+            normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+          />
+        </Column>
       )}
     </Column>
   );

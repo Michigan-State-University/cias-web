@@ -22,7 +22,7 @@ export const initialState: NotificationsState = {
   navigatorAvailability: null,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 export const notificationsReducer: Reducer<
   NotificationsState,
   NotificationsAction

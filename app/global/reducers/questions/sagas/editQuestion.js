@@ -238,8 +238,6 @@ function* editQuestion({ payload }) {
         },
       );
     }
-
-    return;
   } catch (error) {
     if (error.response?.status === 422 && isVariableUpdate) {
       yield call(

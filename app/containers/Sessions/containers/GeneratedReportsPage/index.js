@@ -44,15 +44,13 @@ const GeneratedReportsPage = ({
   }, [sessionId, interventionId]);
 
   return (
-    <>
-      <AppContainer pageTitle={formatMessage(messages.pageTitle)}>
-        <ReportsList
-          match={match}
-          disableFilter={disableFilter}
-          sessionId={sessionId}
-        />
-      </AppContainer>
-    </>
+    <AppContainer pageTitle={formatMessage(messages.pageTitle)}>
+      <ReportsList
+        match={match}
+        disableFilter={disableFilter}
+        sessionId={sessionId}
+      />
+    </AppContainer>
   );
 };
 

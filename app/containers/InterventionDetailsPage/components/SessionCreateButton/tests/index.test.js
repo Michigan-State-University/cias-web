@@ -22,7 +22,7 @@ describe('<SessionCreateButton />', () => {
   let store;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore(browserHistory, {});
     createModalForTests();
   });
   it('Expect to not log errors in console', () => {

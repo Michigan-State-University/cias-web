@@ -92,46 +92,40 @@ const NewSubstanceGroupModal = ({
   }, [visible]);
 
   return (
-    <>
-      <Formik
-        validationSchema={validationSchema(formatMessage)}
-        initialValues={initialValues(substanceGroup)}
-        onSubmit={onSubmit}
-        enableReinitialize
-      >
-        {({ handleSubmit, resetForm, isValid }) => (
-          <>
-            <EditModal
-              visible={modalVisible}
-              title={formatMessage(
-                messages[editMode ? 'editSubstanceGroup' : 'addSubstanceGroup'],
-              )}
-              description={formatMessage(messages.addSubstanceGroupDescription)}
-              onClose={handleClose(resetForm)}
-              confirmButtonMessage={formatMessage(
-                messages[editMode ? 'saveChanges' : 'addGroup'],
-              )}
-              onSubmit={handleSubmit}
-              disabled={!isValid}
-              loading={loading}
-              width={440}
-            >
-              <FormikInput
-                data-testid="substance-group-name"
-                formikKey="name"
-                placeholder={formatMessage(
-                  messages.substanceGroupNamePlaceholder,
-                )}
-                label={formatMessage(messages.substanceGroupName)}
-                type="text"
-                inputProps={inputProps}
-                mr={16}
-              />
-            </EditModal>
-          </>
-        )}
-      </Formik>
-    </>
+    <Formik
+      validationSchema={validationSchema(formatMessage)}
+      initialValues={initialValues(substanceGroup)}
+      onSubmit={onSubmit}
+      enableReinitialize
+    >
+      {({ handleSubmit, resetForm, isValid }) => (
+        <EditModal
+          visible={modalVisible}
+          title={formatMessage(
+            messages[editMode ? 'editSubstanceGroup' : 'addSubstanceGroup'],
+          )}
+          description={formatMessage(messages.addSubstanceGroupDescription)}
+          onClose={handleClose(resetForm)}
+          confirmButtonMessage={formatMessage(
+            messages[editMode ? 'saveChanges' : 'addGroup'],
+          )}
+          onSubmit={handleSubmit}
+          disabled={!isValid}
+          loading={loading}
+          width={440}
+        >
+          <FormikInput
+            data-testid="substance-group-name"
+            formikKey="name"
+            placeholder={formatMessage(messages.substanceGroupNamePlaceholder)}
+            label={formatMessage(messages.substanceGroupName)}
+            type="text"
+            inputProps={inputProps}
+            mr={16}
+          />
+        </EditModal>
+      )}
+    </Formik>
   );
 };
 

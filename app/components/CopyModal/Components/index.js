@@ -219,7 +219,7 @@ const CopyChooser = ({
           />
         );
       default:
-        return <></>;
+        return null;
     }
   };
 

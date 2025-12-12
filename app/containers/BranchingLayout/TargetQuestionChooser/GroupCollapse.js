@@ -19,7 +19,7 @@ import FinishGroupItem from './FinishGroupItem';
 const GroupCollapse = ({ questionGroup, questions, questionListItemProps }) => {
   const [openCollapsable, setOpenCollapsable] = useState(false);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
-  if (questions.length === 0) return <></>;
+  if (questions.length === 0) return null;
   if (questionGroup.type === GroupType.FINISH) {
     const question = questions[0];
     return <FinishGroupItem question={question} {...questionListItemProps} />;

@@ -553,17 +553,20 @@ export function InterventionDetailsPage({
     </DraggedTest>
   );
 
+  const contextValue = useMemo(
+    () => ({
+      canEdit: editingPossible,
+    }),
+    [editingPossible],
+  );
+
   if (fetchInterventionLoading) return <Loader />;
 
   if (fetchInterventionError)
     return <ErrorAlert errorText={fetchInterventionError} fullPage />;
 
   return (
-    <InterventionDetailsPageContext.Provider
-      value={{
-        canEdit: editingPossible,
-      }}
-    >
+    <InterventionDetailsPageContext.Provider value={contextValue}>
       <Column height="100%">
         <CollaborationPanel />
         <Row overflowY="auto">

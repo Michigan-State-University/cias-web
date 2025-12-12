@@ -1013,99 +1013,93 @@ export function AnswerSessionPage({
                   </Column>
                 )}
                 {interventionStarted && !nextQuestionError && (
-                  <>
+                  <Box
+                    id={ANSWER_SESSION_CONTAINER_ID}
+                    position="relative"
+                    height="100%"
+                    maxHeight="100vh"
+                    width="100%"
+                    borderRadius="0px"
+                    display="flex"
+                    direction="column"
+                  >
                     <Box
-                      id={ANSWER_SESSION_CONTAINER_ID}
-                      position="relative"
-                      height="100%"
-                      maxHeight="100vh"
                       width="100%"
-                      borderRadius="0px"
+                      overflow={isMobilePreview ? 'auto' : undefined}
+                      filled
                       display="flex"
                       direction="column"
                     >
-                      <Box
+                      <Row
+                        padding={!isDesktop || isMobile ? 30 : 0}
+                        pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
+                        pt={
+                          isMobile && extraSpaceForNarrator && !logoUrl
+                            ? 0
+                            : undefined
+                        }
                         width="100%"
-                        overflow={isMobilePreview ? 'auto' : undefined}
-                        filled
-                        display="flex"
-                        direction="column"
                       >
-                        <Row
-                          padding={!isDesktop || isMobile ? 30 : 0}
-                          pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
-                          pt={
-                            isMobile && extraSpaceForNarrator && !logoUrl
-                              ? 0
-                              : undefined
+                        {!isDesktop && (
+                          <Row>
+                            <Img
+                              maxHeight={elements.interventionLogoSize.height}
+                              maxWidth={elements.interventionLogoSize.width}
+                              src={logoUrl}
+                              aria-label={imageAlt}
+                            />
+                          </Row>
+                        )}
+                        {renderQuestionTranscript(true)}
+                      </Row>
+
+                      {transitionalUserSessionId && (
+                        <BranchingScreen
+                          resetTransitionalUserSessionId={
+                            resetTransitionalUserSessionId
                           }
-                          width="100%"
-                        >
-                          {!isDesktop && (
-                            <Row>
-                              <Img
-                                maxHeight={elements.interventionLogoSize.height}
-                                maxWidth={elements.interventionLogoSize.width}
-                                src={logoUrl}
-                                aria-label={imageAlt}
-                              />
-                            </Row>
-                          )}
-                          {renderQuestionTranscript(true)}
-                        </Row>
-
-                        {transitionalUserSessionId && (
-                          <BranchingScreen
-                            resetTransitionalUserSessionId={
-                              resetTransitionalUserSessionId
-                            }
-                          />
-                        )}
-
-                        {!nextQuestionLoading &&
-                          currentQuestion &&
-                          !transitionalUserSessionId && (
-                            <ScreenWrapper isFullSize={isFullSize}>
-                              {isNarratorPositionFixed && renderQuestion()}
-                              {!isNarratorPositionFixed && (
-                                <AnimationRefHelper
-                                  currentQuestion={currentQuestion}
-                                  currentQuestionId={currentQuestionId}
-                                  previewMode={previewMode}
-                                  changeIsAnimationOngoing={
-                                    changeIsAnimationOngoing
-                                  }
-                                  setFeedbackSettings={setFeedbackSettings}
-                                  feedbackScreenSettings={
-                                    feedbackScreenSettings
-                                  }
-                                  audioInstance={audioInstance}
-                                  dynamicElementsDirection={
-                                    dynamicElementsDirection
-                                  }
-                                >
-                                  {renderQuestion()}
-                                </AnimationRefHelper>
-                              )}
-                            </ScreenWrapper>
-                          )}
-
-                        {answersError && (
-                          <ErrorAlert errorText={answersError} />
-                        )}
-                      </Box>
-                      {isMobilePreview && (
-                        <AnswerSessionPageFooter
-                          settings={{
-                            showTextTranscript,
-                            showTextReadingControls,
-                          }}
-                          isMobilePreview
-                          isPreview={isPreview}
                         />
                       )}
+
+                      {!nextQuestionLoading &&
+                        currentQuestion &&
+                        !transitionalUserSessionId && (
+                          <ScreenWrapper isFullSize={isFullSize}>
+                            {isNarratorPositionFixed && renderQuestion()}
+                            {!isNarratorPositionFixed && (
+                              <AnimationRefHelper
+                                currentQuestion={currentQuestion}
+                                currentQuestionId={currentQuestionId}
+                                previewMode={previewMode}
+                                changeIsAnimationOngoing={
+                                  changeIsAnimationOngoing
+                                }
+                                setFeedbackSettings={setFeedbackSettings}
+                                feedbackScreenSettings={feedbackScreenSettings}
+                                audioInstance={audioInstance}
+                                dynamicElementsDirection={
+                                  dynamicElementsDirection
+                                }
+                              >
+                                {renderQuestion()}
+                              </AnimationRefHelper>
+                            )}
+                          </ScreenWrapper>
+                        )}
+
+                      {answersError && <ErrorAlert errorText={answersError} />}
                     </Box>
-                  </>
+                    {isMobilePreview && (
+                      <AnswerSessionPageFooter
+                        settings={{
+                          showTextTranscript,
+                          showTextReadingControls,
+                        }}
+                        isMobilePreview
+                        isPreview={isPreview}
+                      />
+                    )}
+                  </Box>
                 )}
               </AnswerOuterContainer>
             </Box>

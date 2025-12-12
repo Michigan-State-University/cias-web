@@ -193,7 +193,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
         style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-end;"
       >
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
           <button
             aria-label="Filters"
@@ -221,7 +221,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
           </button>
         </div>
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
           <div
             class="c8"
@@ -469,7 +469,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
         style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-end;"
       >
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
           <button
             aria-label="Filters"
@@ -497,7 +497,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
           </button>
         </div>
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
           <div
             class="c8"
@@ -745,7 +745,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
         style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-end;"
       >
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
           <button
             aria-label="Filters"
@@ -773,7 +773,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
           </button>
         </div>
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
           <div
             class="c8"

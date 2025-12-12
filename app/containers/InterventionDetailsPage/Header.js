@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Row as GRow, Col as GCol, useScreenClass } from 'react-grid-system';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
@@ -30,6 +30,21 @@ import { StatusLabel, InterventionOptions } from './styled';
 import messages from './messages';
 import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
 import { ParticipantsInviter } from './containers/ParticipantInviter';
+
+const CounterText = ({ children, hasWarning }) => (
+  <span
+    style={{
+      color: hasWarning ? themeColors.warning : themeColors.success,
+    }}
+  >
+    {children}
+  </span>
+);
+
+CounterText.propTypes = {
+  children: PropTypes.node,
+  hasWarning: PropTypes.bool,
+};
 
 const Header = ({
   status,
@@ -87,6 +102,15 @@ const Header = ({
   }, [organizationId]);
 
   const isWrappedLayout = !['xl', 'xxl'].includes(screenClass);
+
+  const counterRenderer = useCallback(
+    (chunks) => (
+      <CounterText hasWarning={hasSmallNumberOfCatMhSessionsRemaining}>
+        {chunks}
+      </CounterText>
+    ),
+    [hasSmallNumberOfCatMhSessionsRemaining],
+  );
 
   const interventionStatus = (
     <Row align="center" gap={12}>
@@ -199,17 +223,7 @@ const Header = ({
                     current: testsLeft ?? 0,
                     initial: catMhPool ?? 0,
                     used: createdCatMhSessionCount,
-                    counter: (chunks) => (
-                      <span
-                        style={{
-                          color: hasSmallNumberOfCatMhSessionsRemaining
-                            ? themeColors.warning
-                            : themeColors.success,
-                        }}
-                      >
-                        {chunks}
-                      </span>
-                    ),
+                    counter: counterRenderer,
                   })}
                 </HelpIconTooltip>
               </Row>

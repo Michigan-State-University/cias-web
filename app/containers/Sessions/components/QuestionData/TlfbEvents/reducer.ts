@@ -1,7 +1,7 @@
 import { TlfbEventsDTO } from 'models/Question';
 import { UPDATE_SCREEN_QUESTION, UPDATE_SCREEN_TITLE } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 const tlfbEventsReducer = (
   question: TlfbEventsDTO,
   payload: { data: { value: string }; type: string },

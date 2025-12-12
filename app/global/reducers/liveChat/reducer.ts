@@ -76,7 +76,7 @@ export const initialState: LiveChatState = {
   },
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 export const liveChatReducer = (
   state: LiveChatState = initialState,
   { type, payload }: LiveChatAction,
