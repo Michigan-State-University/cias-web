@@ -4,3 +4,4 @@ export {
   InterventionAccessType,
   InterventionType,
 } from './InterventionPage';
+export { SessionPage } from './SessionPage';

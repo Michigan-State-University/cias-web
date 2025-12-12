@@ -1,0 +1,111 @@
+import { Page, Locator, expect } from '@playwright/test';
+
+/**
+ * Page Object Model for Session-related actions
+ * Handles interactions within a specific session (questions, settings, etc.)
+ */
+export class SessionPage {
+  readonly page: Page;
+  readonly backToInterventionButton: Locator;
+  readonly sessionNameInput: Locator;
+  readonly contentTab: Locator;
+  readonly settingsTab: Locator;
+  readonly branchingTab: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.backToInterventionButton = page.locator('[data-cy="back-intervention-button"]');
+    this.sessionNameInput = page.locator('[data-cy="session-name-input"]');
+    this.contentTab = page.locator('a:has-text("Content")');
+    this.settingsTab = page.locator('a:has-text("Settings")');
+    this.branchingTab = page.locator('a:has-text("Branching")');
+  }
+
+  /**
+   * Navigate to a specific session by ID
+   */
+  async goto(interventionId: string, sessionId: string) {
+    await this.page.goto(`/interventions/${interventionId}/sessions/${sessionId}/edit`);
+    // Wait for the session page to be ready by checking for key elements
+    await this.verifySessionPageLoaded();
+  }
+
+  /**
+   * Go back to the intervention details page
+   */
+  async goBackToIntervention() {
+    await this.backToInterventionButton.click();
+    await this.page.waitForURL(/\/interventions\/[^\/]+$/, { timeout: 10000 });
+  }
+
+  /**
+   * Update the session name
+   */
+  async updateSessionName(newName: string) {
+    await this.sessionNameInput.waitFor({ state: 'visible', timeout: 10000 });
+    
+    const input = this.sessionNameInput.locator('input');
+    await input.click();
+    await input.fill(newName);
+    
+    // Trigger blur to save
+    await this.page.keyboard.press('Tab');
+    
+    // Wait for API call to complete
+    await this.page.waitForResponse(
+      (response) =>
+        response.url().includes('/sessions/') &&
+        response.request().method() === 'PATCH' &&
+        response.status() === 200,
+      { timeout: 10000 },
+    );
+  }
+
+  /**
+   * Get the current session name
+   */
+  async getSessionName(): Promise<string> {
+    await this.sessionNameInput.waitFor({ state: 'visible', timeout: 10000 });
+    const input = this.sessionNameInput.locator('input');
+    return input.inputValue();
+  }
+
+  /**
+   * Navigate to session settings tab
+   */
+  async goToSettings() {
+    await this.settingsTab.click();
+    await this.page.waitForURL(/\/settings$/, { timeout: 10000 });
+  }
+
+  /**
+   * Navigate to session branching tab
+   */
+  async goToBranching() {
+    await this.branchingTab.click();
+    await this.page.waitForURL(/\/branching$/, { timeout: 10000 });
+  }
+
+  /**
+   * Navigate to session content (edit) tab
+   */
+  async goToContent() {
+    await this.contentTab.click();
+    await this.page.waitForURL(/\/edit$/, { timeout: 10000 });
+  }
+
+  /**
+   * Verify that the session page is loaded correctly
+   */
+  async verifySessionPageLoaded() {
+    await expect(this.sessionNameInput).toBeVisible();
+    await expect(this.backToInterventionButton).toBeVisible();
+  }
+
+  /**
+   * Check if we're currently on a session page
+   */
+  async isOnSessionPage(): Promise<boolean> {
+    return this.page.url().includes('/sessions/');
+  }
+}
