@@ -95,7 +95,7 @@ function TileRenderer({
 
 TileRenderer.propTypes = {
   elements: PropTypes.any,
-  elementsStates: PropTypes.instanceOf(Map),
+  elementsStates: PropTypes.object,
   onCreateCall: PropTypes.func,
   createLoading: PropTypes.bool,
   newLabel: PropTypes.string,
