@@ -114,6 +114,10 @@ export default defineMessages({
     id: `${scope}.assignOrganization`,
     defaultMessage: 'Assign Organization',
   },
+  assignTag: {
+    id: `${scope}.assignTag`,
+    defaultMessage: 'Assign tag',
+  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: 'Intervention: {name}',

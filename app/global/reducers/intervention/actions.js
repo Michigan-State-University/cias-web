@@ -126,6 +126,9 @@ import {
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR,
+  UNASSIGN_TAG_REQUEST,
+  UNASSIGN_TAG_SUCCESS,
+  UNASSIGN_TAG_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -619,3 +622,17 @@ export const sendPredefinedParticipantEmailInvitationSuccess = (
   });
 export const sendPredefinedParticipantEmailInvitationError = () =>
   actionBuilder(SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR, {});
+
+export const unassignTagRequest = (interventionId, tagId) => {
+  console.log('unassignTagRequest action creator called:', {
+    interventionId,
+    tagId,
+  }); // eslint-disable-line no-console
+  const action = actionBuilder(UNASSIGN_TAG_REQUEST, { interventionId, tagId });
+  console.log('Action created:', action); // eslint-disable-line no-console
+  return action;
+};
+export const unassignTagSuccess = (tagId) =>
+  actionBuilder(UNASSIGN_TAG_SUCCESS, { tagId });
+export const unassignTagError = (error) =>
+  actionBuilder(UNASSIGN_TAG_ERROR, { error });

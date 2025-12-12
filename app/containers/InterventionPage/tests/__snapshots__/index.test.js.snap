@@ -1,14 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<InterventionPage /> Should render and match the snapshot with interventions 1`] = `
-.c17 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: #2F3850;
-}
-
 .c5 {
   width: auto;
   height: auto;
@@ -29,16 +21,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   color: unset;
 }
 
-.c7 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  cursor: pointer;
-  color: unset;
-}
-
-.c21 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -69,46 +52,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   gap: 8px;
 }
 
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
 .c0 {
   height: 100% !important;
   display: -webkit-box;
@@ -126,14 +69,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   max-width: 960px !important;
 }
 
-.c8 {
-  width: auto;
-  height: auto;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
-}
-
 .c4 {
   margin: 0;
   font-family: DM Sans;
@@ -142,42 +77,27 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   color: #2F3850;
 }
 
-.c12 {
-  display: none;
-}
-
-.c16 {
-  margin-inline-end: 5px;
-  border-radius: 5px;
-}
-
-.c11:disabled + label > .c15 {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+.c7 {
   width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer !important;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  width: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 16px;
+  padding-left: 16px;
 }
 
-.c14:hover {
-  cursor: pointer;
-}
-
-.c11:disabled + .c13 {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.c19 {
+.c9 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -189,17 +109,17 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   color: #2F3850;
 }
 
-.c19:focus {
+.c9:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c19:disabled {
+.c9:disabled {
   color: #ABBBD1;
 }
 
-.c18 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -211,7 +131,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   position: relative;
 }
 
-.c20 {
+.c10 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -270,333 +190,56 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
     >
       <div
-        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-end;"
       >
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
-          <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+          <button
+            aria-label="Filters"
+            class="c7"
+            color="primary"
+            radius="100px"
+            width="auto"
           >
-            <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
+            <svg
+              color="white"
+              fill="currentColor"
+              height="20"
+              stroke="currentColor"
+              stroke-width="0"
+              style="color: white;"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <div
-                class="c7"
-                cursor="pointer"
-              >
-                <div
-                  class="css-b62m3t-container"
-                >
-                  <span
-                    class="css-1f43avz-a11yText-A11yText"
-                    id="react-select-8-live-region"
-                  />
-                  <span
-                    aria-atomic="false"
-                    aria-live="polite"
-                    aria-relevant="additions text"
-                    class="css-1f43avz-a11yText-A11yText"
-                    role="log"
-                  />
-                  <div
-                    class="css-1eyhby5-control"
-                  >
-                    <div
-                      class="css-hlgwow"
-                    >
-                      <div
-                        class="css-16cmxim-placeholder"
-                        id="react-select-8-placeholder"
-                      >
-                        All interventions
-                      </div>
-                      <div
-                        class="css-19bb58m"
-                        data-value=""
-                      >
-                        <input
-                          aria-activedescendant=""
-                          aria-autocomplete="list"
-                          aria-describedby="react-select-8-placeholder"
-                          aria-expanded="false"
-                          aria-haspopup="true"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          class=""
-                          id="react-select-8-input"
-                          role="combobox"
-                          spellcheck="false"
-                          style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="css-1wy0on6"
-                    >
-                      <div
-                        aria-hidden="true"
-                        class="css-1xc3v61-indicatorContainer"
-                      >
-                        <img
-                          alt="arrow"
-                          class="c8"
-                          src="IMAGE_MOCK"
-                          transform=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              <path
+                d="M6 9.5C6.93191 9.5 7.71496 10.1374 7.93699 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7455 13.8231 11.9496 13.5899 11.9919L13.5 12L7.93673 12.001C7.71435 12.8631 6.93155 13.5 6 13.5C5.06845 13.5 4.28565 12.8631 4.06327 12.001L2.5 12C2.22386 12 2 11.7761 2 11.5C2 11.2545 2.17688 11.0504 2.41012 11.0081L2.5 11H4.06301C4.28504 10.1374 5.06809 9.5 6 9.5ZM6 10.5C5.44772 10.5 5 10.9477 5 11.5C5 12.0523 5.44772 12.5 6 12.5C6.55228 12.5 7 12.0523 7 11.5C7 10.9477 6.55228 10.5 6 10.5ZM10 2.5C10.9319 2.5 11.715 3.13738 11.937 3.99998L13.5 4C13.7761 4 14 4.22386 14 4.5C14 4.74546 13.8231 4.94961 13.5899 4.99194L13.5 5L11.9367 5.00102C11.7144 5.86312 10.9316 6.5 10 6.5C9.06845 6.5 8.28565 5.86312 8.06327 5.00102L2.5 5C2.22386 5 2 4.77614 2 4.5C2 4.25454 2.17688 4.05039 2.41012 4.00806L2.5 4L8.06301 3.99998C8.28504 3.13738 9.06809 2.5 10 2.5ZM10 3.5C9.44772 3.5 9 3.94772 9 4.5C9 5.05228 9.44772 5.5 10 5.5C10.5523 5.5 11 5.05228 11 4.5C11 3.94772 10.5523 3.5 10 3.5Z"
+              />
+            </svg>
+            Filters
+          </button>
         </div>
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
           <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+            class="c8"
           >
-            <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
-            >
-              <div
-                class="c7"
-                cursor="pointer"
-              >
-                <div
-                  class="css-b62m3t-container"
-                >
-                  <span
-                    class="css-1f43avz-a11yText-A11yText"
-                    id="react-select-9-live-region"
-                  />
-                  <span
-                    aria-atomic="false"
-                    aria-live="polite"
-                    aria-relevant="additions text"
-                    class="css-1f43avz-a11yText-A11yText"
-                    role="log"
-                  />
-                  <div
-                    class="css-rikfxi-control"
-                  >
-                    <div
-                      class="css-1dyz3mf"
-                    >
-                      <div
-                        class="css-1p3m7a8-multiValue"
-                      >
-                        <div
-                          class="css-9jq23d"
-                        >
-                          Draft
-                        </div>
-                        <div
-                          aria-label="Remove Draft"
-                          class="css-v7duua"
-                          role="button"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="css-tj5bde-Svg"
-                            focusable="false"
-                            height="14"
-                            viewBox="0 0 20 20"
-                            width="14"
-                          >
-                            <path
-                              d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        class="css-1p3m7a8-multiValue"
-                      >
-                        <div
-                          class="css-9jq23d"
-                        >
-                          Paused
-                        </div>
-                        <div
-                          aria-label="Remove Paused"
-                          class="css-v7duua"
-                          role="button"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="css-tj5bde-Svg"
-                            focusable="false"
-                            height="14"
-                            viewBox="0 0 20 20"
-                            width="14"
-                          >
-                            <path
-                              d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        class="css-1p3m7a8-multiValue"
-                      >
-                        <div
-                          class="css-9jq23d"
-                        >
-                          Published
-                        </div>
-                        <div
-                          aria-label="Remove Published"
-                          class="css-v7duua"
-                          role="button"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="css-tj5bde-Svg"
-                            focusable="false"
-                            height="14"
-                            viewBox="0 0 20 20"
-                            width="14"
-                          >
-                            <path
-                              d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        class="css-19bb58m"
-                        data-value=""
-                      >
-                        <input
-                          aria-activedescendant=""
-                          aria-autocomplete="list"
-                          aria-expanded="false"
-                          aria-haspopup="true"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          class=""
-                          id="react-select-9-input"
-                          role="combobox"
-                          spellcheck="false"
-                          style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="css-1wy0on6"
-                    >
-                      <div
-                        aria-hidden="true"
-                        class="css-1xc3v61-indicatorContainer"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="css-tj5bde-Svg"
-                          focusable="false"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          width="20"
-                        >
-                          <path
-                            d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                          />
-                        </svg>
-                      </div>
-                      <div
-                        aria-hidden="true"
-                        class="css-1xc3v61-indicatorContainer"
-                      >
-                        <img
-                          alt="arrow"
-                          class="c8"
-                          src="IMAGE_MOCK"
-                          transform=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
-        >
-          <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start; height: 100%;"
-          >
-            <div
-              align="start"
+            <input
+              aria-label="Filter Interventions by name"
               class="c9"
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
-            >
-              <div
-                class="c10"
-              >
-                <input
-                  class="c11 c12"
-                  id="intervetions-starred-filter"
-                  type="checkbox"
-                />
-                <label
-                  class="c13 c14"
-                  for="intervetions-starred-filter"
-                >
-                  <img
-                    class="c15 c16"
-                    src="IMAGE_MOCK"
-                  />
-                  <p
-                    class="c17"
-                    font-weight="bold"
-                  >
-                    Show only starred
-                  </p>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
-        >
-          <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
-          >
-            <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
-            >
-              <div
-                class="c18"
-              >
-                <input
-                  aria-label="Filter Interventions by name"
-                  class="c19"
-                  dir="auto"
-                  placeholder="Filter by name"
-                  type="text"
-                  width="100%"
-                />
-                <img
-                  alt="search"
-                  class="c20"
-                  src="IMAGE_MOCK"
-                />
-                
-              </div>
-            </div>
+              dir="auto"
+              placeholder="Filter by name"
+              type="text"
+              width="100%"
+            />
+            <img
+              alt="search"
+              class="c10"
+              src="IMAGE_MOCK"
+            />
+            
           </div>
         </div>
       </div>
@@ -605,7 +248,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
       />
     </div>
     <div
-      class="c21"
+      class="c11"
     >
       <div
         class="virtual-grid-auto-sizer"
@@ -634,14 +277,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
 `;
 
 exports[`<InterventionPage /> Should render and match the snapshot with loader 1`] = `
-.c17 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: #2F3850;
-}
-
 .c5 {
   width: auto;
   height: auto;
@@ -662,16 +297,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   color: unset;
 }
 
-.c7 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  cursor: pointer;
-  color: unset;
-}
-
-.c21 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -702,46 +328,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   gap: 8px;
 }
 
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
 .c0 {
   height: 100% !important;
   display: -webkit-box;
@@ -759,14 +345,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   max-width: 960px !important;
 }
 
-.c8 {
-  width: auto;
-  height: auto;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
-}
-
 .c4 {
   margin: 0;
   font-family: DM Sans;
@@ -775,42 +353,27 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   color: #2F3850;
 }
 
-.c12 {
-  display: none;
-}
-
-.c16 {
-  margin-inline-end: 5px;
-  border-radius: 5px;
-}
-
-.c11:disabled + label > .c15 {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+.c7 {
   width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer !important;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  width: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 16px;
+  padding-left: 16px;
 }
 
-.c14:hover {
-  cursor: pointer;
-}
-
-.c11:disabled + .c13 {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.c19 {
+.c9 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -822,17 +385,17 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   color: #2F3850;
 }
 
-.c19:focus {
+.c9:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c19:disabled {
+.c9:disabled {
   color: #ABBBD1;
 }
 
-.c18 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -844,7 +407,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   position: relative;
 }
 
-.c20 {
+.c10 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -903,333 +466,56 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
     >
       <div
-        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-end;"
       >
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
-          <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+          <button
+            aria-label="Filters"
+            class="c7"
+            color="primary"
+            radius="100px"
+            width="auto"
           >
-            <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
+            <svg
+              color="white"
+              fill="currentColor"
+              height="20"
+              stroke="currentColor"
+              stroke-width="0"
+              style="color: white;"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <div
-                class="c7"
-                cursor="pointer"
-              >
-                <div
-                  class="css-b62m3t-container"
-                >
-                  <span
-                    class="css-1f43avz-a11yText-A11yText"
-                    id="react-select-4-live-region"
-                  />
-                  <span
-                    aria-atomic="false"
-                    aria-live="polite"
-                    aria-relevant="additions text"
-                    class="css-1f43avz-a11yText-A11yText"
-                    role="log"
-                  />
-                  <div
-                    class="css-1eyhby5-control"
-                  >
-                    <div
-                      class="css-hlgwow"
-                    >
-                      <div
-                        class="css-16cmxim-placeholder"
-                        id="react-select-4-placeholder"
-                      >
-                        All interventions
-                      </div>
-                      <div
-                        class="css-19bb58m"
-                        data-value=""
-                      >
-                        <input
-                          aria-activedescendant=""
-                          aria-autocomplete="list"
-                          aria-describedby="react-select-4-placeholder"
-                          aria-expanded="false"
-                          aria-haspopup="true"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          class=""
-                          id="react-select-4-input"
-                          role="combobox"
-                          spellcheck="false"
-                          style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="css-1wy0on6"
-                    >
-                      <div
-                        aria-hidden="true"
-                        class="css-1xc3v61-indicatorContainer"
-                      >
-                        <img
-                          alt="arrow"
-                          class="c8"
-                          src="IMAGE_MOCK"
-                          transform=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              <path
+                d="M6 9.5C6.93191 9.5 7.71496 10.1374 7.93699 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7455 13.8231 11.9496 13.5899 11.9919L13.5 12L7.93673 12.001C7.71435 12.8631 6.93155 13.5 6 13.5C5.06845 13.5 4.28565 12.8631 4.06327 12.001L2.5 12C2.22386 12 2 11.7761 2 11.5C2 11.2545 2.17688 11.0504 2.41012 11.0081L2.5 11H4.06301C4.28504 10.1374 5.06809 9.5 6 9.5ZM6 10.5C5.44772 10.5 5 10.9477 5 11.5C5 12.0523 5.44772 12.5 6 12.5C6.55228 12.5 7 12.0523 7 11.5C7 10.9477 6.55228 10.5 6 10.5ZM10 2.5C10.9319 2.5 11.715 3.13738 11.937 3.99998L13.5 4C13.7761 4 14 4.22386 14 4.5C14 4.74546 13.8231 4.94961 13.5899 4.99194L13.5 5L11.9367 5.00102C11.7144 5.86312 10.9316 6.5 10 6.5C9.06845 6.5 8.28565 5.86312 8.06327 5.00102L2.5 5C2.22386 5 2 4.77614 2 4.5C2 4.25454 2.17688 4.05039 2.41012 4.00806L2.5 4L8.06301 3.99998C8.28504 3.13738 9.06809 2.5 10 2.5ZM10 3.5C9.44772 3.5 9 3.94772 9 4.5C9 5.05228 9.44772 5.5 10 5.5C10.5523 5.5 11 5.05228 11 4.5C11 3.94772 10.5523 3.5 10 3.5Z"
+              />
+            </svg>
+            Filters
+          </button>
         </div>
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
           <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+            class="c8"
           >
-            <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
-            >
-              <div
-                class="c7"
-                cursor="pointer"
-              >
-                <div
-                  class="css-b62m3t-container"
-                >
-                  <span
-                    class="css-1f43avz-a11yText-A11yText"
-                    id="react-select-5-live-region"
-                  />
-                  <span
-                    aria-atomic="false"
-                    aria-live="polite"
-                    aria-relevant="additions text"
-                    class="css-1f43avz-a11yText-A11yText"
-                    role="log"
-                  />
-                  <div
-                    class="css-rikfxi-control"
-                  >
-                    <div
-                      class="css-1dyz3mf"
-                    >
-                      <div
-                        class="css-1p3m7a8-multiValue"
-                      >
-                        <div
-                          class="css-9jq23d"
-                        >
-                          Draft
-                        </div>
-                        <div
-                          aria-label="Remove Draft"
-                          class="css-v7duua"
-                          role="button"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="css-tj5bde-Svg"
-                            focusable="false"
-                            height="14"
-                            viewBox="0 0 20 20"
-                            width="14"
-                          >
-                            <path
-                              d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        class="css-1p3m7a8-multiValue"
-                      >
-                        <div
-                          class="css-9jq23d"
-                        >
-                          Paused
-                        </div>
-                        <div
-                          aria-label="Remove Paused"
-                          class="css-v7duua"
-                          role="button"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="css-tj5bde-Svg"
-                            focusable="false"
-                            height="14"
-                            viewBox="0 0 20 20"
-                            width="14"
-                          >
-                            <path
-                              d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        class="css-1p3m7a8-multiValue"
-                      >
-                        <div
-                          class="css-9jq23d"
-                        >
-                          Published
-                        </div>
-                        <div
-                          aria-label="Remove Published"
-                          class="css-v7duua"
-                          role="button"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="css-tj5bde-Svg"
-                            focusable="false"
-                            height="14"
-                            viewBox="0 0 20 20"
-                            width="14"
-                          >
-                            <path
-                              d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        class="css-19bb58m"
-                        data-value=""
-                      >
-                        <input
-                          aria-activedescendant=""
-                          aria-autocomplete="list"
-                          aria-expanded="false"
-                          aria-haspopup="true"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          class=""
-                          id="react-select-5-input"
-                          role="combobox"
-                          spellcheck="false"
-                          style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="css-1wy0on6"
-                    >
-                      <div
-                        aria-hidden="true"
-                        class="css-1xc3v61-indicatorContainer"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="css-tj5bde-Svg"
-                          focusable="false"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          width="20"
-                        >
-                          <path
-                            d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                          />
-                        </svg>
-                      </div>
-                      <div
-                        aria-hidden="true"
-                        class="css-1xc3v61-indicatorContainer"
-                      >
-                        <img
-                          alt="arrow"
-                          class="c8"
-                          src="IMAGE_MOCK"
-                          transform=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
-        >
-          <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start; height: 100%;"
-          >
-            <div
-              align="start"
+            <input
+              aria-label="Filter Interventions by name"
               class="c9"
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
-            >
-              <div
-                class="c10"
-              >
-                <input
-                  class="c11 c12"
-                  id="intervetions-starred-filter"
-                  type="checkbox"
-                />
-                <label
-                  class="c13 c14"
-                  for="intervetions-starred-filter"
-                >
-                  <img
-                    class="c15 c16"
-                    src="IMAGE_MOCK"
-                  />
-                  <p
-                    class="c17"
-                    font-weight="bold"
-                  >
-                    Show only starred
-                  </p>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
-        >
-          <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
-          >
-            <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
-            >
-              <div
-                class="c18"
-              >
-                <input
-                  aria-label="Filter Interventions by name"
-                  class="c19"
-                  dir="auto"
-                  placeholder="Filter by name"
-                  type="text"
-                  width="100%"
-                />
-                <img
-                  alt="search"
-                  class="c20"
-                  src="IMAGE_MOCK"
-                />
-                
-              </div>
-            </div>
+              dir="auto"
+              placeholder="Filter by name"
+              type="text"
+              width="100%"
+            />
+            <img
+              alt="search"
+              class="c10"
+              src="IMAGE_MOCK"
+            />
+            
           </div>
         </div>
       </div>
@@ -1238,7 +524,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
       />
     </div>
     <div
-      class="c21"
+      class="c11"
     >
       <div
         class="virtual-grid-auto-sizer"
@@ -1267,14 +553,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
 `;
 
 exports[`<InterventionPage /> Should render and match the snapshot without interventions 1`] = `
-.c17 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: #2F3850;
-}
-
 .c5 {
   width: auto;
   height: auto;
@@ -1295,16 +573,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   color: unset;
 }
 
-.c7 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  cursor: pointer;
-  color: unset;
-}
-
-.c21 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -1335,46 +604,6 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   gap: 8px;
 }
 
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
 .c0 {
   height: 100% !important;
   display: -webkit-box;
@@ -1392,14 +621,6 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   max-width: 960px !important;
 }
 
-.c8 {
-  width: auto;
-  height: auto;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
-}
-
 .c4 {
   margin: 0;
   font-family: DM Sans;
@@ -1408,42 +629,27 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   color: #2F3850;
 }
 
-.c12 {
-  display: none;
-}
-
-.c16 {
-  margin-inline-end: 5px;
-  border-radius: 5px;
-}
-
-.c11:disabled + label > .c15 {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+.c7 {
   width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer !important;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  width: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 16px;
+  padding-left: 16px;
 }
 
-.c14:hover {
-  cursor: pointer;
-}
-
-.c11:disabled + .c13 {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.c19 {
+.c9 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -1455,17 +661,17 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   color: #2F3850;
 }
 
-.c19:focus {
+.c9:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c19:disabled {
+.c9:disabled {
   color: #ABBBD1;
 }
 
-.c18 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1477,7 +683,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   position: relative;
 }
 
-.c20 {
+.c10 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -1536,333 +742,56 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
     >
       <div
-        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-end;"
       >
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
-          <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+          <button
+            aria-label="Filters"
+            class="c7"
+            color="primary"
+            radius="100px"
+            width="auto"
           >
-            <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
+            <svg
+              color="white"
+              fill="currentColor"
+              height="20"
+              stroke="currentColor"
+              stroke-width="0"
+              style="color: white;"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <div
-                class="c7"
-                cursor="pointer"
-              >
-                <div
-                  class="css-b62m3t-container"
-                >
-                  <span
-                    class="css-1f43avz-a11yText-A11yText"
-                    id="react-select-6-live-region"
-                  />
-                  <span
-                    aria-atomic="false"
-                    aria-live="polite"
-                    aria-relevant="additions text"
-                    class="css-1f43avz-a11yText-A11yText"
-                    role="log"
-                  />
-                  <div
-                    class="css-1eyhby5-control"
-                  >
-                    <div
-                      class="css-hlgwow"
-                    >
-                      <div
-                        class="css-16cmxim-placeholder"
-                        id="react-select-6-placeholder"
-                      >
-                        All interventions
-                      </div>
-                      <div
-                        class="css-19bb58m"
-                        data-value=""
-                      >
-                        <input
-                          aria-activedescendant=""
-                          aria-autocomplete="list"
-                          aria-describedby="react-select-6-placeholder"
-                          aria-expanded="false"
-                          aria-haspopup="true"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          class=""
-                          id="react-select-6-input"
-                          role="combobox"
-                          spellcheck="false"
-                          style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="css-1wy0on6"
-                    >
-                      <div
-                        aria-hidden="true"
-                        class="css-1xc3v61-indicatorContainer"
-                      >
-                        <img
-                          alt="arrow"
-                          class="c8"
-                          src="IMAGE_MOCK"
-                          transform=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              <path
+                d="M6 9.5C6.93191 9.5 7.71496 10.1374 7.93699 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7455 13.8231 11.9496 13.5899 11.9919L13.5 12L7.93673 12.001C7.71435 12.8631 6.93155 13.5 6 13.5C5.06845 13.5 4.28565 12.8631 4.06327 12.001L2.5 12C2.22386 12 2 11.7761 2 11.5C2 11.2545 2.17688 11.0504 2.41012 11.0081L2.5 11H4.06301C4.28504 10.1374 5.06809 9.5 6 9.5ZM6 10.5C5.44772 10.5 5 10.9477 5 11.5C5 12.0523 5.44772 12.5 6 12.5C6.55228 12.5 7 12.0523 7 11.5C7 10.9477 6.55228 10.5 6 10.5ZM10 2.5C10.9319 2.5 11.715 3.13738 11.937 3.99998L13.5 4C13.7761 4 14 4.22386 14 4.5C14 4.74546 13.8231 4.94961 13.5899 4.99194L13.5 5L11.9367 5.00102C11.7144 5.86312 10.9316 6.5 10 6.5C9.06845 6.5 8.28565 5.86312 8.06327 5.00102L2.5 5C2.22386 5 2 4.77614 2 4.5C2 4.25454 2.17688 4.05039 2.41012 4.00806L2.5 4L8.06301 3.99998C8.28504 3.13738 9.06809 2.5 10 2.5ZM10 3.5C9.44772 3.5 9 3.94772 9 4.5C9 5.05228 9.44772 5.5 10 5.5C10.5523 5.5 11 5.05228 11 4.5C11 3.94772 10.5523 3.5 10 3.5Z"
+              />
+            </svg>
+            Filters
+          </button>
         </div>
         <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
         >
           <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+            class="c8"
           >
-            <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
-            >
-              <div
-                class="c7"
-                cursor="pointer"
-              >
-                <div
-                  class="css-b62m3t-container"
-                >
-                  <span
-                    class="css-1f43avz-a11yText-A11yText"
-                    id="react-select-7-live-region"
-                  />
-                  <span
-                    aria-atomic="false"
-                    aria-live="polite"
-                    aria-relevant="additions text"
-                    class="css-1f43avz-a11yText-A11yText"
-                    role="log"
-                  />
-                  <div
-                    class="css-rikfxi-control"
-                  >
-                    <div
-                      class="css-1dyz3mf"
-                    >
-                      <div
-                        class="css-1p3m7a8-multiValue"
-                      >
-                        <div
-                          class="css-9jq23d"
-                        >
-                          Draft
-                        </div>
-                        <div
-                          aria-label="Remove Draft"
-                          class="css-v7duua"
-                          role="button"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="css-tj5bde-Svg"
-                            focusable="false"
-                            height="14"
-                            viewBox="0 0 20 20"
-                            width="14"
-                          >
-                            <path
-                              d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        class="css-1p3m7a8-multiValue"
-                      >
-                        <div
-                          class="css-9jq23d"
-                        >
-                          Paused
-                        </div>
-                        <div
-                          aria-label="Remove Paused"
-                          class="css-v7duua"
-                          role="button"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="css-tj5bde-Svg"
-                            focusable="false"
-                            height="14"
-                            viewBox="0 0 20 20"
-                            width="14"
-                          >
-                            <path
-                              d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        class="css-1p3m7a8-multiValue"
-                      >
-                        <div
-                          class="css-9jq23d"
-                        >
-                          Published
-                        </div>
-                        <div
-                          aria-label="Remove Published"
-                          class="css-v7duua"
-                          role="button"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="css-tj5bde-Svg"
-                            focusable="false"
-                            height="14"
-                            viewBox="0 0 20 20"
-                            width="14"
-                          >
-                            <path
-                              d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        class="css-19bb58m"
-                        data-value=""
-                      >
-                        <input
-                          aria-activedescendant=""
-                          aria-autocomplete="list"
-                          aria-expanded="false"
-                          aria-haspopup="true"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          class=""
-                          id="react-select-7-input"
-                          role="combobox"
-                          spellcheck="false"
-                          style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="css-1wy0on6"
-                    >
-                      <div
-                        aria-hidden="true"
-                        class="css-1xc3v61-indicatorContainer"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="css-tj5bde-Svg"
-                          focusable="false"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          width="20"
-                        >
-                          <path
-                            d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
-                          />
-                        </svg>
-                      </div>
-                      <div
-                        aria-hidden="true"
-                        class="css-1xc3v61-indicatorContainer"
-                      >
-                        <img
-                          alt="arrow"
-                          class="c8"
-                          src="IMAGE_MOCK"
-                          transform=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
-        >
-          <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start; height: 100%;"
-          >
-            <div
-              align="start"
+            <input
+              aria-label="Filter Interventions by name"
               class="c9"
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
-            >
-              <div
-                class="c10"
-              >
-                <input
-                  class="c11 c12"
-                  id="intervetions-starred-filter"
-                  type="checkbox"
-                />
-                <label
-                  class="c13 c14"
-                  for="intervetions-starred-filter"
-                >
-                  <img
-                    class="c15 c16"
-                    src="IMAGE_MOCK"
-                  />
-                  <p
-                    class="c17"
-                    font-weight="bold"
-                  >
-                    Show only starred
-                  </p>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; right: auto; left: auto; margin-top: 10px; margin-bottom: 10px;"
-        >
-          <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
-          >
-            <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
-            >
-              <div
-                class="c18"
-              >
-                <input
-                  aria-label="Filter Interventions by name"
-                  class="c19"
-                  dir="auto"
-                  placeholder="Filter by name"
-                  type="text"
-                  width="100%"
-                />
-                <img
-                  alt="search"
-                  class="c20"
-                  src="IMAGE_MOCK"
-                />
-                
-              </div>
-            </div>
+              dir="auto"
+              placeholder="Filter by name"
+              type="text"
+              width="100%"
+            />
+            <img
+              alt="search"
+              class="c10"
+              src="IMAGE_MOCK"
+            />
+            
           </div>
         </div>
       </div>
@@ -1871,7 +800,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
       />
     </div>
     <div
-      class="c21"
+      class="c11"
     >
       <div
         class="virtual-grid-auto-sizer"
