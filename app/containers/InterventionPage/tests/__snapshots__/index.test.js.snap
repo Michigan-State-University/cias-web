@@ -225,6 +225,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
         >
           <div
             class="c8"
+            data-cy="intervention-search-input"
           >
             <input
               aria-label="Filter Interventions by name"
@@ -501,6 +502,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
         >
           <div
             class="c8"
+            data-cy="intervention-search-input"
           >
             <input
               aria-label="Filter Interventions by name"
@@ -777,6 +779,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
         >
           <div
             class="c8"
+            data-cy="intervention-search-input"
           >
             <input
               aria-label="Filter Interventions by name"

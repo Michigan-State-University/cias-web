@@ -1020,6 +1020,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                 >
                   <div
                     class="c43"
+                    data-cy="intervention-search-input"
                   >
                     <input
                       aria-label="Filter Interventions by name"
