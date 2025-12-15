@@ -165,7 +165,6 @@ export const FileUpload = ({
     const formats = Array.isArray(acceptedFormats)
       ? acceptedFormats
       : [acceptedFormats];
-    // Create Accept object with each MIME type as a key with empty extensions array
     const result: Record<string, string[]> = {};
     formats.forEach((format) => {
       if (!result[format]) {

@@ -433,7 +433,7 @@ const InterventionTile = ({
 
 InterventionTile.propTypes = {
   tileData: PropTypes.object,
-  tileState: PropTypes.instanceOf(Map),
+  tileState: PropTypes.object,
   intl: PropTypes.object,
   participantView: PropTypes.bool,
   link: PropTypes.string,

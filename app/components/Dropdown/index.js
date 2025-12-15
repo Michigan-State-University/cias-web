@@ -123,15 +123,20 @@ const Dropdown = ({
                   onClick={() => !option.disabled && callAction(option.action)}
                   align="center"
                 >
-                  {option.icon && (
-                    <Icon
-                      src={option.icon}
-                      fill={colors.greyishBlue}
-                      alt="icon"
-                      mr={4}
-                      width={24}
-                    />
-                  )}
+                  {option.icon &&
+                    (typeof option.icon === 'string' ? (
+                      <Icon
+                        src={option.icon}
+                        fill={colors.greyishBlue}
+                        alt="icon"
+                        mr={4}
+                        width={24}
+                      />
+                    ) : (
+                      <Box mr={4} display="flex" align="center">
+                        <option.icon size={24} color={colors.greyishBlue} />
+                      </Box>
+                    ))}
                   <StyledComment
                     color={option.color || colors.bluewood}
                     whiteSpace="nowrap"

@@ -114,6 +114,10 @@ export default defineMessages({
     id: `${scope}.assignOrganization`,
     defaultMessage: 'Assign Organization',
   },
+  assignTag: {
+    id: `${scope}.assignTag`,
+    defaultMessage: 'Assign tag',
+  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: 'Intervention: {name}',
@@ -124,7 +128,7 @@ export default defineMessages({
   },
   catMhCounter: {
     id: `${scope}.catMhCounter`,
-    defaultMessage: `<bold>CAT-MH™ License</bold>: {catMhLicenseType, select, limited {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)} unlimited {Unlimited (<counter>{used}</counter> <space></space> tests used)}}`,
+    defaultMessage: `<bold>CAT-MH™ License:</bold> {catMhLicenseType, select, limited {Limited (<counter>{used}/{initial}</counter> tests used)} unlimited {Unlimited (<counter>{used}</counter> tests used)} other {}}`,
   },
   catMhCountInfo: {
     id: `${scope}.catMhCountInfo`,
