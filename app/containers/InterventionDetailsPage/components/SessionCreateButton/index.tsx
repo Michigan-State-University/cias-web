@@ -46,7 +46,9 @@ const SessionCreateButton = ({
   const canCreateSmsSession = () => {
     if (process.env.DISABLED_SMS_CAMPAIGN === 'true') {
       return includes(
-        process.env.ALLOWED_USERS_FOR_SMS_CAMPAIGNS?.split(', '),
+        process.env.ALLOWED_USERS_FOR_SMS_CAMPAIGNS?.split(',').map((id) =>
+          id.trim(),
+        ),
         user.id,
       );
     }
