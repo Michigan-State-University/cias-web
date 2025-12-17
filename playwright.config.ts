@@ -17,7 +17,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: 0,
   /* Maximum time one test can run for */
-  timeout: 40000,
+  timeout: 30000,
   /* Configure workers.
    */
   workers: process.env.CI ? 1 : parseInt(process.env.E2E_WORKER_COUNT || '5', 10),
