@@ -98,6 +98,14 @@ export class DashboardPage {
     return tile.isVisible();
   }
 
+  async openInterventionByName(name: string) {
+    const tile = this.page.locator(
+      `[data-cy="intervention-tile-name"]:has-text("${name}")`,
+    );
+    await tile.click();
+    await this.page.waitForURL(/\/interventions\/.*/, { timeout: 30000 });
+  }
+
   async waitForInterventionsToLoad() {
     // Wait for at least one intervention tile or the "no results" message
     await this.page

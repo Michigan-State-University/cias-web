@@ -162,6 +162,45 @@ export class InterventionPage {
     await responsePromise;
   }
 
+  async duplicateSessionInternally(sessionIndex: number, targetInterventionName: string) {
+    // Find all dropdown triggers (session options menus) and click the one at the specified index
+    const dropdownTriggers = this.page.locator('[data-cy^="dropdown-trigger-session-list-item-options"]');
+    await dropdownTriggers.nth(sessionIndex).click();
+
+    // Wait for dropdown to open and click "Duplicate internally" option (id: copy)
+    const duplicateInternallyOption = this.page.locator('[data-cy="dropdown-option-copy"]');
+    await duplicateInternallyOption.waitFor({ state: 'visible', timeout: 5000 });
+    await duplicateInternallyOption.click();
+
+    // Wait for the modal to appear
+    await this.page.locator('[role="dialog"]').waitFor({ state: 'visible', timeout: 5000 });
+
+    // Wait for interventions to load in the modal
+    await this.page.waitForTimeout(2000);
+
+    // Find and click the target intervention in the modal by text content
+    // Try multiple selector strategies to find the intervention
+    const targetInterventionRow = this.page
+      .locator('[role="dialog"]')
+      .getByText(targetInterventionName, { exact: false });
+    
+    await targetInterventionRow.waitFor({ state: 'visible', timeout: 10000 });
+    await targetInterventionRow.click();
+
+    // Wait for sessions view to load in the modal (no sessions in target intervention)
+    await this.page.waitForTimeout(2000);
+
+    // Now click the paste button - the button might trigger the API differently
+    const pasteButton = this.page.locator('button:has-text("Paste session in this intervention")');
+    
+    // Wait for button and click - don't wait for API response as it might auto-close modal
+    await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
+    await pasteButton.click();
+
+    // Wait for modal to close (indicates success)
+    await this.page.locator('[role="dialog"]').waitFor({ state: 'hidden', timeout: 10000 });
+  }
+
   async addNote(noteText: string) {
     await this.noteInput.waitFor({ state: 'visible', timeout: 10000 });
 
