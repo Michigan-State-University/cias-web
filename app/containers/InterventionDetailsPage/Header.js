@@ -23,6 +23,7 @@ import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import { Button } from 'components/Button';
 import Column from 'components/Column';
+import { TagList } from 'components/Tag';
 
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
@@ -67,6 +68,8 @@ const Header = ({
   sessions,
   openExportCsvModal,
   canAccessParticipantsData,
+  tags,
+  onRemoveTag,
 }) => {
   const { formatMessage } = useIntl();
   const screenClass = useScreenClass();
@@ -166,6 +169,14 @@ const Header = ({
               sessions={sessions}
             />
           </Row>
+          {tags && tags.length > 0 && (
+            <TagList
+              tags={tags}
+              mt={8}
+              onRemoveTag={onRemoveTag}
+              disabled={!editingPossible}
+            />
+          )}
           {!isWrappedLayout && interventionStatus}
         </Column>
 
@@ -249,6 +260,13 @@ Header.propTypes = {
   sessions: PropTypes.array,
   openExportCsvModal: PropTypes.func,
   canAccessParticipantsData: PropTypes.bool,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  ),
+  onRemoveTag: PropTypes.func,
 };
 
 export default Header;

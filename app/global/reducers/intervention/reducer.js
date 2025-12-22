@@ -141,6 +141,9 @@ import {
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR,
+  UNASSIGN_TAG_REQUEST,
+  UNASSIGN_TAG_SUCCESS,
+  UNASSIGN_TAG_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -910,6 +913,25 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR: {
         draft.loaders.sendPredefinedParticipantEmailInvitation = false;
+        break;
+      }
+      case UNASSIGN_TAG_REQUEST: {
+        draft.loaders.unassignTag = true;
+        draft.errors.unassignTag = null;
+        break;
+      }
+      case UNASSIGN_TAG_SUCCESS: {
+        draft.loaders.unassignTag = false;
+        if (draft.intervention && draft.intervention.tags) {
+          draft.intervention.tags = draft.intervention.tags.filter(
+            (tag) => tag.id !== action.payload.tagId,
+          );
+        }
+        break;
+      }
+      case UNASSIGN_TAG_ERROR: {
+        draft.loaders.unassignTag = false;
+        draft.errors.unassignTag = action.payload.error;
         break;
       }
     }

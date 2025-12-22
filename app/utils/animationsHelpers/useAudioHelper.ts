@@ -335,11 +335,11 @@ const useAudioHelper: TUseAudioHelper = (
   const shouldOmitSentence = (fetchedAudios: string[]): boolean =>
     Boolean(
       fetchedAudios.length &&
-        currentData &&
-        currentData.text &&
-        ['.', '?', '!', ','].includes(
-          currentData.text[currentData.currentAudioIndex],
-        ),
+      currentData &&
+      currentData.text &&
+      ['.', '?', '!', ','].includes(
+        currentData.text[currentData.currentAudioIndex],
+      ),
     );
 
   const nextBlock = (): void => {

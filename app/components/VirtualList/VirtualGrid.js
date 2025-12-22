@@ -132,7 +132,7 @@ VirtualGrid.propTypes = {
   gutterHeight: PropTypes.number,
   gutterWidth: PropTypes.number,
   items: PropTypes.arrayOf(PropTypes.object),
-  itemsStates: PropTypes.instanceOf(Map),
+  itemsStates: PropTypes.object,
   infiniteLoader: PropTypes.object,
 };
 

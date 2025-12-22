@@ -112,19 +112,64 @@ export class DashboardPage {
     return match ? match[1] : '';
   }
 
+  // FiltersModal methods
+  async openFiltersModal() {
+    // Click the filters button (has VscSettings icon)
+    const filtersButton = this.page.getByRole('button', { name: /filters/i });
+    await filtersButton.click();
+    
+    // Wait for modal to be visible
+    await this.page.locator('[role="dialog"]').waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.waitForTimeout(500);
+  }
+
+  async closeFiltersModal() {
+    // Click close button or press Escape
+    const closeButton = this.page.locator('[role="dialog"]').getByRole('button', { name: /close/i });
+    if (await closeButton.isVisible({ timeout: 1000 }).catch(() => false)) {
+      await closeButton.click();
+    } else {
+      await this.page.keyboard.press('Escape');
+    }
+    await this.page.waitForTimeout(500);
+  }
+
+  async applyFilters() {
+    // Click outside the select to close any open dropdowns
+    // Click on the modal header/title area which is safe
+    const modalHeader = this.page.locator('[role="dialog"]').locator('h2, h3, [class*="ModalHeader"]').first();
+    if (await modalHeader.isVisible({ timeout: 1000 }).catch(() => false)) {
+      await modalHeader.click();
+      await this.page.waitForTimeout(300);
+    }
+    
+    // Press Escape as backup to close dropdowns
+    await this.page.keyboard.press('Escape');
+    await this.page.waitForTimeout(300);
+    
+    // Click the Apply button in the modal
+    const applyButton = this.page.locator('[role="dialog"]').getByRole('button', { name: /apply/i });
+    await applyButton.click({ timeout: 10000 });
+    
+    // Wait for modal to close and filters to be applied
+    await this.page.locator('[role="dialog"]').waitFor({ state: 'hidden', timeout: 5000 });
+    await this.page.waitForTimeout(1000); // Wait for interventions to reload with filters
+  }
+
   async filterByStatus(statuses: string[], clearFirst: boolean = true) {
     const statusFilter = this.page.locator('[data-cy="intervention-status-filter"]');
     const selectInput = statusFilter.locator('#status-filter-input');
 
     // Clear existing selections if requested
     if (clearFirst) {
-      await this.clearStatusFilter();
+      await this.clearStatusFilterInModal();
       await this.page.waitForTimeout(300);
     }
 
     for (const status of statuses) {
       // Click on the select input to open the dropdown
       await selectInput.click();
+      await this.page.waitForTimeout(300);
 
       // Find and click the option with the matching status
       // ReactSelect creates options with role="option"
@@ -133,23 +178,29 @@ export class DashboardPage {
       });
       await option.first().click();
 
-      await this.page.waitForTimeout(500);
+      // Wait for the option to be selected
+      await this.page.waitForTimeout(300);
+      
+      // Close the dropdown by pressing Escape
+      await this.page.keyboard.press('Escape');
+      await this.page.waitForTimeout(300);
     }
   }
 
-  async clearStatusFilter() {
+  async clearStatusFilterInModal() {
     const statusFilter = this.page.locator('[data-cy="intervention-status-filter"]');
     
-    // Try clicking the clear all button first (the X indicator)
-    const clearButton = statusFilter.locator('[class*="clearIndicator"], svg[height="20"][width="20"]').first();
-    if (await clearButton.isVisible({ timeout: 1000 }).catch(() => false)) {
-      await clearButton.click();
+    // React-select has a clear indicator (X button) that clears all selections
+    const clearIndicator = statusFilter.locator('[class*="clearIndicator"]');
+    
+    if (await clearIndicator.isVisible({ timeout: 1000 }).catch(() => false)) {
+      await clearIndicator.click();
       await this.page.waitForTimeout(500);
       return;
     }
 
-    // Fallback: remove each selected value one by one
-    const removeButtons = statusFilter.getByRole('button', { name: /^Remove / });
+    // Fallback: remove each value individually by clicking the remove button on each multi-value
+    const removeButtons = statusFilter.locator('[class*="multiValueRemove"]');
     let count = await removeButtons.count();
     while (count > 0) {
       await removeButtons.first().click();
@@ -159,21 +210,37 @@ export class DashboardPage {
     await this.page.waitForTimeout(300);
   }
 
-  async getSelectedStatusFilters(): Promise<string[]> {
+  async getSelectedStatusFiltersInModal(): Promise<string[]> {
     const statusFilter = this.page.locator('[data-cy="intervention-status-filter"]');
-    // Get all remove buttons by their accessible name pattern
-    const removeButtons = statusFilter.getByRole('button', { name: /^Remove / });
-    const count = await removeButtons.count();
+    
+    // Wait for the select to be visible
+    await statusFilter.waitFor({ state: 'visible', timeout: 5000 });
+    
+    // React-select renders selected values in divs with class containing 'multiValue'
+    const multiValues = statusFilter.locator('[class*="multiValue"]');
+    
+    // Wait a bit for values to render
+    await this.page.waitForTimeout(500);
+    
+    const count = await multiValues.count();
+    
+    // If no values are selected, return empty array
+    if (count === 0) {
+      return [];
+    }
+    
     const values: string[] = [];
     for (let i = 0; i < count; i++) {
-      const name = await removeButtons.nth(i).getAttribute('aria-label') || 
-                   await removeButtons.nth(i).textContent();
-      if (name) {
-        // Extract status name from "Remove Draft", "Remove Paused", etc.
-        const status = name.replace('Remove ', '').trim();
-        if (status) values.push(status);
+      // Get the label part of the multi-value (not the remove button)
+      const label = multiValues.nth(i).locator('[class*="multiValueLabel"]');
+      
+      // Use allTextContents to avoid timeout issues
+      const texts = await label.allTextContents();
+      if (texts.length > 0 && texts[0]) {
+        values.push(texts[0].trim());
       }
     }
+    
     return values;
   }
 

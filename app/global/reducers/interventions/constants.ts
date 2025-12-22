@@ -12,6 +12,7 @@ export const MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE = {
   statuses: INITIAL_STATUSES_FILTER_VALUE,
   sharing: null,
   starred: false,
+  tagIds: [],
 };
 
 export const FETCH_INTERVENTIONS_REQUEST =

@@ -50,11 +50,20 @@ const ImageUpload = ({
 
   const handleRemove = () => onDeleteImage();
 
-  let dropzoneAcceptedFormats = acceptedFormats
-    .map((format) => `image/${format.toLowerCase()}`)
-    .join(', ');
+  const dropzoneAccept = {};
+  acceptedFormats.forEach((format) => {
+    const mimeType = `image/${format.toLowerCase()}`;
+    if (!dropzoneAccept[mimeType]) {
+      dropzoneAccept[mimeType] = [];
+    }
+    dropzoneAccept[mimeType].push(`.${format.toLowerCase()}`);
+  });
+
   if (acceptedFormats.includes('JPG')) {
-    dropzoneAcceptedFormats += ', image/jpeg';
+    if (!dropzoneAccept['image/jpeg']) {
+      dropzoneAccept['image/jpeg'] = [];
+    }
+    dropzoneAccept['image/jpeg'].push('.jpeg', '.jpg');
   }
 
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
@@ -62,7 +71,7 @@ const ImageUpload = ({
     onDropRejected: handleReject,
     multiple: false,
     noKeyboard: true,
-    accept: dropzoneAcceptedFormats,
+    accept: dropzoneAccept,
     noClick: true,
     maxSize: MAX_FILE_SIZE,
   });

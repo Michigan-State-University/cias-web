@@ -19,7 +19,7 @@ export const test = base.extend<{}, { workerStorageState: string }>({
       // Verify the auth file exists
       if (!fs.existsSync(authFile)) {
         throw new Error(
-          `Auth file ${authFile} does not exist. Run 'npm run test:e2e:setup' to create worker-specific auth files.`
+          `Auth file ${authFile} does not exist. Run 'npm run e2e:setup' to create worker-specific auth files.`
         );
       }
       
@@ -42,6 +42,9 @@ export const test = base.extend<{}, { workerStorageState: string }>({
   page: async ({ context, workerStorageState }, use, testInfo) => {
     const page = await context.newPage();
     
+    // Track if we're updating tokens to prevent race conditions
+    let isUpdatingTokens = false;
+    
     // Intercept responses to update auth tokens when they change
     page.on('response', async (response) => {
       const headers = response.headers();
@@ -49,12 +52,24 @@ export const test = base.extend<{}, { workerStorageState: string }>({
       const client = headers['client'];
       const uid = headers['uid'];
       
-      // If new tokens are provided, update the storage state file
-      if (accessToken && client && uid) {
+      // If new tokens are provided, update both localStorage and the storage state file
+      if (accessToken && client && uid && !isUpdatingTokens) {
+        isUpdatingTokens = true;
         try {
-          const storageState = await context.storageState();
+          // First, update the browser's localStorage immediately
+          await page.evaluate(({ accessToken, client, uid }) => {
+            const currentHeaders = JSON.parse(localStorage.getItem('headers') || '{}');
+            const updatedHeaders = {
+              ...currentHeaders,
+              'Access-Token': accessToken,
+              'Client': client,
+              'Uid': uid,
+            };
+            localStorage.setItem('headers', JSON.stringify(updatedHeaders));
+          }, { accessToken, client, uid });
           
-          // Update the headers in localStorage
+          // Then update the storage state file for persistence
+          const storageState = await context.storageState();
           const origin = storageState.origins.find(o => o.origin.includes(process.env.E2E_BASE_URL || 'localhost:4200'));
           if (origin) {
             const headersItem = origin.localStorage.find(item => item.name === 'headers');
@@ -74,6 +89,8 @@ export const test = base.extend<{}, { workerStorageState: string }>({
         } catch (error) {
           // Silently fail - token update is best-effort
          console.warn(`Failed to update tokens for worker ${testInfo.workerIndex}:`, error instanceof Error ? error.message : String(error));
+        } finally {
+          isUpdatingTokens = false;
         }
       }
     });

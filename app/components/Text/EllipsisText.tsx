@@ -1,5 +1,5 @@
 import React, { memo, ReactNode, useRef, useState } from 'react';
-import { sanitize } from 'dompurify';
+import DOMPurify from 'dompurify';
 
 import Tooltip from 'components/Tooltip/Tooltip';
 import Row from 'components/Row';
@@ -50,7 +50,7 @@ const EllipsisText = ({
   };
 
   const plainText = isHtml ? htmlToPlainText(text) : text;
-  const purifiedHtmlText = isHtml ? sanitize(text) : '';
+  const purifiedHtmlText = isHtml ? DOMPurify.sanitize(text) : '';
 
   return (
     <Row width="100%" dir={dir}>
