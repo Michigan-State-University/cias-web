@@ -86,8 +86,6 @@ export const useConversationChannel = (interventionId?: string) => {
     const { lastMessage, liveChatInterlocutors, id } =
       newConversation.conversation;
 
-    if (!lastMessage) return;
-
     const isGuest = !currentUserId;
     const isCreatedByCurrentUser =
       liveChatInterlocutors[lastMessage.interlocutorId].userId ===
