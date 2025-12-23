@@ -2,8 +2,13 @@ import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Load environment variables from .env file
 dotenv.config({ path: path.resolve(__dirname, '.env') });
+console.log('🔧 Playwright config loaded');
+console.log(`Base URL: ${process.env.E2E_BASE_URL || 'http://localhost:4200'}`);
+console.log(`WebServer command: npm run start`);
+console.log(`WebServer URL: http://localhost:4200`);
+console.log(`CI mode: ${!!process.env.CI}`);
+console.log('');
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -84,5 +89,7 @@ export default defineConfig({
     url: 'http://localhost:4200',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
+    stdout: 'pipe',
+    stderr: 'pipe',
   },
 });

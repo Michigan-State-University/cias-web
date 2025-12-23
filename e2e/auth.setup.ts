@@ -42,6 +42,12 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
   if (AUTH_DELAY_MS > 0) {
     console.log(`Delay between auth attempts: ${AUTH_DELAY_MS}ms`);
   }
+  console.log(`Email pattern: ${emailPattern}`);
+  console.log(`Password provided: ${!!password}`);
+  console.log(`Verification code provided: ${!!verificationCode}`);
+  console.log(`Base URL: ${process.env.E2E_BASE_URL || 'http://localhost:4200'}`);
+  console.log(`API URL: ${process.env.API_URL}`);
+  console.log('');
 
   // Authenticate each admin account separately
   for (let workerIndex = 0; workerIndex < WORKER_COUNT; workerIndex++) {
@@ -53,13 +59,16 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
     const page = await context.newPage();
 
     try {
+      console.log(`🌐 Navigating to login page...`);
       // Navigate to login page
       await page.goto('/');
 
+      console.log(`📝 Filling login form for ${adminEmail}...`);
       // Fill in login form
       await page.locator('[data-cy="login-email-input"]').fill(adminEmail);
       await page.locator('[data-cy="login-password-input"]').fill(password);
 
+      console.log(`🔐 Clicking login button...`);
       // Click login button
       await page.locator('[data-cy="login-submit-button"]').click();
 
@@ -69,6 +78,7 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
       // Check if 2FA verification is needed
       const verificationInput = page.locator('[data-cy="verification-code-input"]');
       
+      console.log(`⏳ Waiting for login response...`);
       // Wait for either verification code input or dashboard navigation
       const result = await Promise.race([
         verificationInput.waitFor({ state: 'visible', timeout: 20000 }).then(() => '2fa'),
@@ -83,21 +93,27 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
       }
 
       if (result === 'timeout') {
+        console.error(`❌ Timeout waiting for login response for ${adminEmail}`);
+        console.error(`Current URL: ${page.url()}`);
+        const pageContent = await page.textContent('body');
+        console.error(`Page contains login form: ${pageContent?.includes('login')}`);
         throw new Error(`Timeout waiting for login response for ${adminEmail}`);
       }
 
       if (result === '2fa') {
+        console.log(`🔢 2FA required, entering verification code...`);
         await verificationInput.fill(verificationCode);
         await page.locator('[data-cy="verification-submit-button"]').click();
       }
 
+      console.log(`✅ Verifying dashboard access...`);
       // Verify we're on the dashboard (root URL, not login)
       await expect(page).not.toHaveURL(/\/login/, { timeout: 30000 });
 
       // Save the authenticated state for this worker
       const workerAuthFile = path.join(authDir, `admin-worker-${workerIndex}.json`);
       await context.storageState({ path: workerAuthFile });
-      console.log(`✓ Created auth file: admin-worker-${workerIndex}.json`);
+      console.log(`✅ Created auth file: admin-worker-${workerIndex}.json`);
     } catch (error) {
       // Log error with screenshot for debugging
       console.error(`✗ Failed to authenticate ${adminEmail}:`);
