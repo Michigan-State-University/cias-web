@@ -71,7 +71,7 @@
     "@anycable/web": "0.3.2",
     "@babel/polyfill": "7.12.1",
     "@dnd-kit/core": "5.0.3",
-    "@dnd-kit/sortable": "6.0.1",
+    "@dnd-kit/sortable": "10.0.0",
     "@floating-ui/react-dom": "0.6.0",
     "@formatjs/intl-datetimeformat": "^6.18.2",
     "@formatjs/intl-displaynames": "^6.8.13",
