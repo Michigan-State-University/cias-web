@@ -993,6 +993,7 @@ export function AnswerSessionPage({
                         onClick={startInterventionAsync}
                         title={buttonText()}
                         isDesktop={isDesktop}
+                        data-cy="start-preview-button"
                       />
                       {showGoToDashboardButton && (
                         <GoToDashboardButton
