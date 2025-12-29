@@ -74,4 +74,35 @@ export class SessionPage {
   async isOnSessionPage(): Promise<boolean> {
     return this.page.url().includes('/sessions/');
   }
+
+  /**
+   * Click the "+ Add new screen" button
+   */
+  async clickAddNewScreen() {
+    const addScreenButton = this.page.locator('[data-cy="add-screen-button"]');
+    await addScreenButton.waitFor({ state: 'visible', timeout: 10000 });
+    await addScreenButton.click();
+  }
+
+  /**
+   * Select a question type from the question type chooser
+   */
+  async selectQuestionType(questionType: 'single' | 'multiple' | 'text' | 'other') {
+    const questionTypeSelector = this.page.locator(`[data-cy="question-type-${questionType}"]`);
+    await questionTypeSelector.waitFor({ state: 'visible', timeout: 5000 });
+    await questionTypeSelector.click();
+  }
+
+  /**
+   * Wait for a question to be created via API
+   */
+  async waitForQuestionCreated() {
+    return this.page.waitForResponse(
+      (response) =>
+        response.url().includes('/question_groups') &&
+        response.request().method() === 'POST' &&
+        response.status() === 201,
+      { timeout: 15000 }
+    );
+  }
 }

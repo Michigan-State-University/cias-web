@@ -2,7 +2,7 @@ import { test, expect } from '../fixtures/test';
 import { DashboardPage, InterventionPage } from '../pages';
 
 test.describe('Session Creation', () => {
-
+  
   test('should create an intervention with 3 sessions', async ({ page }) => {
     const dashboardPage = new DashboardPage(page);
     const interventionPage = new InterventionPage(page);
