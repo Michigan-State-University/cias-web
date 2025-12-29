@@ -246,6 +246,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   >
     <div
       class="c1 "
+      data-cy="question-list-item-test-1"
       width="100%"
     >
       <div

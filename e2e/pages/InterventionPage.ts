@@ -162,6 +162,35 @@ export class InterventionPage {
     await responsePromise;
   }
 
+  async duplicateSessionInternally(sessionIndex: number, targetInterventionName: string) {
+    const dropdownTriggers = this.page.locator('[data-cy^="dropdown-trigger-session-list-item-options"]');
+    await dropdownTriggers.nth(sessionIndex).click();
+
+    const duplicateInternallyOption = this.page.locator('[data-cy="dropdown-option-copy"]');
+    await duplicateInternallyOption.waitFor({ state: 'visible', timeout: 5000 });
+    await duplicateInternallyOption.click();
+
+    await this.page.locator('[role="dialog"]').waitFor({ state: 'visible', timeout: 5000 });
+
+    await this.page.waitForTimeout(2000);
+
+    const targetInterventionRow = this.page
+      .locator('[role="dialog"]')
+      .getByText(targetInterventionName, { exact: false });
+    
+    await targetInterventionRow.waitFor({ state: 'visible', timeout: 10000 });
+    await targetInterventionRow.click();
+
+    await this.page.waitForTimeout(2000);
+
+    const pasteButton = this.page.locator('button:has-text("Paste session in this intervention")');
+
+    await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
+    await pasteButton.click();
+
+    await this.page.locator('[role="dialog"]').waitFor({ state: 'hidden', timeout: 10000 });
+  }
+
   async addNote(noteText: string) {
     await this.noteInput.waitFor({ state: 'visible', timeout: 10000 });
 
