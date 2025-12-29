@@ -10,8 +10,8 @@
   "license": "GPL-3.0-or-later",
   "engineStrict": true,
   "engines": {
-    "npm": ">=9.0.0",
-    "node": "18.x"
+    "npm": ">=10.0.0",
+    "node": "22.x"
   },
   "author": "Michigan State University <cias@msu.edu> (https://www.cias.app/)",
   "scripts": {
@@ -207,7 +207,7 @@
     "@types/lodash": "^4.17.13",
     "@types/logrocket-react": "^3.0.3",
     "@types/mime": "^3.0.4",
-    "@types/node": "^18.19.68",
+    "@types/node": "^22.10.0",
     "@types/pathfinding": "^0.0.9",
     "@types/react": "^17.0.83",
     "@types/react-beautiful-dnd": "^13.1.8",
