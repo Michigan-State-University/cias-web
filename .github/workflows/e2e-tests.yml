@@ -48,13 +48,29 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps webkit chromium firefox
 
+      # Build the frontend from current branch code
+      # The built app will connect to staging API (set via API_URL)
+      - name: Build application
+        run: npm run build
+        env:
+          API_URL: https://cias-api-staging.herokuapp.com
+          WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
+          NODE_ENV: production
+          WEB_URL: http://localhost:4200
+
+      # Run tests against locally-served frontend (current branch) + staging API
       - name: Run Playwright tests
         run: npx playwright test --project=webkit --workers=1
         env:
           API_URL: https://cias-api-staging.herokuapp.com
-          E2E_ADMIN_EMAIL: ${{ vars.E2E_ADMIN_EMAIL }}
-          E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
+          WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
+          E2E_BASE_URL: http://localhost:4200
+          WEB_URL: http://localhost:4200
+          E2E_ADMIN_EMAIL_PATTERN: ${{ vars.E2E_ADMIN_EMAIL_PATTERN }}
+          E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
           E2E_VERIFICATION_CODE: ${{ secrets.E2E_VERIFICATION_CODE }}
+          E2E_WORKER_COUNT: ${{ vars.E2E_WORKER_COUNT }}
+          E2E_AUTH_SETUP_DELAY_MS: ${{ vars.E2E_AUTH_SETUP_DELAY_MS }}
 
       - name: Upload test results
         uses: actions/upload-artifact@v4

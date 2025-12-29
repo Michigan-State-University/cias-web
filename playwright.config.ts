@@ -84,10 +84,20 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
+  webServer: process.env.CI ? {
+    // In CI, serve the pre-built production bundle from current branch
+    // The frontend will connect to API_URL from environment (staging API)
+    command: 'npm run start:prod',
+    url: 'http://localhost:4200',
+    reuseExistingServer: false,
+    timeout: 30 * 1000,
+    stdout: 'pipe',
+    stderr: 'pipe',
+  } : {
+    // Locally, run the dev server with current branch code
     command: 'npm run start',
     url: 'http://localhost:4200',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: true,
     timeout: 120 * 1000,
     stdout: 'pipe',
     stderr: 'pipe',
