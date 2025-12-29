@@ -10,7 +10,10 @@ export const createTestStore = (initialState) => {
     ...initialState,
   });
 
-  store.runSaga = () => {};
+  store.runSaga = () => ({
+    cancel: () => {},
+    toPromise: () => Promise.resolve(),
+  });
   store.injectedReducers = {};
   store.injectedSagas = {};
   store.createReducer = createReducer;
