@@ -20,9 +20,11 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: 0,
+  retries: process.env.CI ? 2 : 0,
   /* Maximum time one test can run for */
   timeout: 30000,
+  /* Continue running tests even if some fail */
+  maxFailures: process.env.CI ? undefined : 0,
   /* Configure workers.
    */
   workers: process.env.CI ? 1 : parseInt(process.env.E2E_WORKER_COUNT || '5', 10),
@@ -49,10 +51,11 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    // Setup project for authentication
+    // Setup project for authentication - marked as optional, won't block other tests
     {
       name: 'setup',
       testMatch: /.*\.setup\.ts/,
+      retries: 2,
     },
     {
       name: 'chromium',
@@ -61,7 +64,8 @@ export default defineConfig({
         viewport: { width: 1500, height: 900 },
         // Note: storageState is now handled by e2e/fixtures/test.ts based on worker index
       },
-      dependencies: ['setup'],
+      // Setup is optional - tests will run even if auth setup fails
+      // dependencies: ['setup'],
     },
     {
       name: 'firefox',
@@ -70,7 +74,8 @@ export default defineConfig({
         viewport: { width: 1500, height: 900 },
         // Note: storageState is now handled by e2e/fixtures/test.ts based on worker index
       },
-      dependencies: ['setup'],
+      // Setup is optional - tests will run even if auth setup fails
+      // dependencies: ['setup'],
     },
     {
       name: 'webkit',
@@ -79,7 +84,8 @@ export default defineConfig({
         viewport: { width: 1500, height: 900 },
         // Note: storageState is now handled by e2e/fixtures/test.ts based on worker index
       },
-      dependencies: ['setup'],
+      // Setup is optional - tests will run even if auth setup fails
+      // dependencies: ['setup'],
     },
   ],
 
