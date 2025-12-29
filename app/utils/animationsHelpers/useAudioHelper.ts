@@ -5,7 +5,6 @@ import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
 import * as Sentry from '@sentry/browser';
 import type { LottieRef } from 'react-lottie';
-import { Severity } from '@sentry/react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -299,10 +298,7 @@ const useAudioHelper: TUseAudioHelper = (
         reflection_index: currentData?.currentReflectionIndex,
       },
     });
-    Sentry.captureMessage(
-      `Issue with audio with text: ${text}`,
-      Severity.Error,
-    );
+    Sentry.captureMessage(`Issue with audio with text: ${text}`, 'error');
   };
 
   const handleSpeech = (fetchedAudios: string[]): void => {
