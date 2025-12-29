@@ -58,18 +58,6 @@ jobs:
           NODE_ENV: production
           WEB_URL: http://localhost:4200
 
-      - name: Verify build output
-        run: |
-          echo "✅ Build directory contents:"
-          ls -la build/ | head -20
-          echo ""
-          echo "🔍 Checking if API_URL is in bundle..."
-          if grep -r "cias-api-staging.herokuapp.com" build/*.js 2>/dev/null | head -5; then
-            echo "✅ API_URL found in bundle"
-          else
-            echo "⚠️ API_URL NOT found in bundle - this may cause connection issues"
-          fi
-
       # Run tests against locally-served frontend (current branch) + staging API
       - name: Run Playwright tests
         run: npx playwright test --project=webkit --workers=1
