@@ -3484,6 +3484,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   >
     <div
       class="c17"
+      data-cy="add-answer-button"
     >
       <div
         class="c18"
