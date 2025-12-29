@@ -58,6 +58,19 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
+    // Capture console errors from the page
+    const consoleErrors: string[] = [];
+    page.on('console', msg => {
+      if (msg.type() === 'error') {
+        consoleErrors.push(`Console Error: ${msg.text()}`);
+      }
+    });
+    
+    // Capture network request failures
+    page.on('requestfailed', request => {
+      consoleErrors.push(`Network Error: ${request.url()} - ${request.failure()?.errorText}`);
+    });
+
     try {
       console.log(`🌐 Navigating to login page...`);
       // Navigate to login page
@@ -97,6 +110,15 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
         console.error(`Current URL: ${page.url()}`);
         const pageContent = await page.textContent('body');
         console.error(`Page contains login form: ${pageContent?.includes('login')}`);
+        
+        // Log captured console errors
+        if (consoleErrors.length > 0) {
+          console.error(`\n📋 Browser console and network errors:`);
+          consoleErrors.forEach(err => console.error(`  - ${err}`));
+        } else {
+          console.error(`\n📋 No browser console or network errors captured`);
+        }
+        
         throw new Error(`Timeout waiting for login response for ${adminEmail}`);
       }
 
