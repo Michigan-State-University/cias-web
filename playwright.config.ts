@@ -64,8 +64,7 @@ export default defineConfig({
         viewport: { width: 1500, height: 900 },
         // Note: storageState is now handled by e2e/fixtures/test.ts based on worker index
       },
-      // Setup is optional - tests will run even if auth setup fails
-      // dependencies: ['setup'],
+      dependencies: ['setup'],
     },
     {
       name: 'firefox',
@@ -74,8 +73,7 @@ export default defineConfig({
         viewport: { width: 1500, height: 900 },
         // Note: storageState is now handled by e2e/fixtures/test.ts based on worker index
       },
-      // Setup is optional - tests will run even if auth setup fails
-      // dependencies: ['setup'],
+      dependencies: ['setup'],
     },
     {
       name: 'webkit',
@@ -84,8 +82,7 @@ export default defineConfig({
         viewport: { width: 1500, height: 900 },
         // Note: storageState is now handled by e2e/fixtures/test.ts based on worker index
       },
-      // Setup is optional - tests will run even if auth setup fails
-      // dependencies: ['setup'],
+      dependencies: ['setup'],
     },
   ],
 
