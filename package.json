@@ -79,7 +79,7 @@
     "@formatjs/intl-listformat": "^7.7.13",
     "@formatjs/intl-locale": "^4.2.13",
     "@formatjs/intl-numberformat": "^8.15.6",
-    "@formatjs/intl-pluralrules": "^5.4.6",
+    "@formatjs/intl-pluralrules": "^6.0.4",
     "@formatjs/intl-relativetimeformat": "^11.4.13",
     "@rehooks/local-storage": "2.4.4",
     "@sentry/react": "10.30.0",
