@@ -50,7 +50,7 @@ export default defineMessages({
   },
   chartSettingsHeader: {
     id: `${scope}.chartSettingsHeader`,
-    defaultMessage: `{chartType, select, bar_chart {Bar Chart Settings} percentage_bar_chart {Bar Chart Settings} pie_chart {Pie Chart Settings}}`,
+    defaultMessage: `{chartType, select, bar_chart {Bar Chart Settings} percentage_bar_chart {Bar Chart Settings} pie_chart {Pie Chart Settings} other {}}`,
   },
   chartSettingsDelete: {
     id: `${scope}.chartSettingsDelete`,
@@ -156,7 +156,7 @@ export default defineMessages({
   },
   chartStatus: {
     id: `${scope}.chartStatus`,
-    defaultMessage: `{chartStatus, select, draft {Draft} data_collection {Data Collection} published {Published}}`,
+    defaultMessage: `{chartStatus, select, draft {Draft} data_collection {Data Collection} published {Published} other {}}`,
   },
   noChartsData: {
     id: `${scope}.noChartsData`,
