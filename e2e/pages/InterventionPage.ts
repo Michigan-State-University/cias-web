@@ -186,8 +186,20 @@ export class InterventionPage {
     const pasteButton = this.page.locator('button:has-text("Paste session in this intervention")');
 
     await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
+    
+    // Wait for the API response that duplicates the session internally
+    const responsePromise = this.page.waitForResponse(
+      (response) =>
+        response.url().includes('/sessions/') &&
+        response.url().includes('/duplicate') &&
+        response.request().method() === 'POST' &&
+        response.status() === 200,
+      { timeout: 15000 },
+    );
+    
     await pasteButton.click();
 
+    await responsePromise;
     await this.page.locator('[role="dialog"]').waitFor({ state: 'hidden', timeout: 10000 });
   }
 
