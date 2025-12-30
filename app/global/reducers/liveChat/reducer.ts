@@ -208,7 +208,9 @@ export const liveChatReducer = (
             interventionConversation;
         }
         draft.activeConversations[conversation.id] = conversation;
-        draft.messages[conversation.id] = [conversation.lastMessage];
+        if (conversation.lastMessage) {
+          draft.messages[conversation.id] = [conversation.lastMessage];
+        }
         break;
       }
       case getType(setGuestInterlocutorId): {
