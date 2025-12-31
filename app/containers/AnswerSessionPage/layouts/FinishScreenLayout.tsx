@@ -51,7 +51,6 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     logoUrl,
     imageAlt,
   } = userSession;
-  // @ts-ignore
   const {
     next_session_id: nextSessionId,
     settings,

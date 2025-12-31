@@ -21,3 +21,12 @@ cypress.env.json
 .github/instructions/
 .github/plan/
 .github/prompts/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+/e2e/.auth/
+/.auth/

@@ -708,6 +708,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
           >
             <div
               class="c10"
+              data-cy="question-type-single"
             >
               <div
                 class="c11"
@@ -730,6 +731,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-multiple"
             >
               <div
                 class="c11"
@@ -752,6 +754,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-freeresponse"
             >
               <div
                 class="c11"
@@ -774,6 +777,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-date"
             >
               <div
                 class="c11"
@@ -796,6 +800,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-name"
             >
               <div
                 class="c11"
@@ -818,6 +823,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-currency"
             >
               <div
                 class="c11"
@@ -840,6 +846,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-number"
             >
               <div
                 class="c11"
@@ -862,6 +869,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-grid"
             >
               <div
                 class="c11"
@@ -884,6 +892,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-slider"
             >
               <div
                 class="c11"
@@ -906,6 +915,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-information"
             >
               <div
                 class="c11"
@@ -928,6 +938,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-externallink"
             >
               <div
                 class="c11"
@@ -950,6 +961,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-feedback"
             >
               <div
                 class="c11"
@@ -972,6 +984,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-participantreport"
             >
               <div
                 class="c11"
@@ -994,6 +1007,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-thirdparty"
             >
               <div
                 class="c11"
@@ -1016,6 +1030,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-phone"
             >
               <div
                 class="c11"
@@ -1038,6 +1053,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
+              data-cy="question-type-tlfb"
             >
               <div
                 class="c11"
