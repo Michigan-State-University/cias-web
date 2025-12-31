@@ -115,7 +115,7 @@ const Header = ({
   const interventionStatus = (
     <Row align="center" gap={12}>
       <Box>
-        <StatusLabel status={status}>
+        <StatusLabel status={status} data-cy="intervention-status">
           {status && formatMessage(interventionStatusesMessages[status])}
         </StatusLabel>
       </Box>
@@ -157,6 +157,7 @@ const Header = ({
               onFocus={selectInputText}
               maxWidth="none"
               autoComplete="off"
+              data-cy="intervention-name-input"
             />
             <ParticipantsInviter
               interventionId={interventionId}
