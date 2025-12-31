@@ -37,6 +37,10 @@ import {
   ParsedEmailsCsv,
   ReportingInterventionInviteEmailParticipantsFormValues,
   UploadedEmailsCsvData,
+  PredefinedParticipantCsvRow,
+  UploadedPredefinedParticipantsCsvData,
+  ParsedPredefinedParticipantCsvRow,
+  InvitePredefinedParticipantsFormValues,
 } from './types';
 import messages from './messages';
 
@@ -411,3 +415,108 @@ export const getPredefinedParticipantUrl = (slug: string): string =>
 
 export const formatInvitationSentAt = (invitationSentAt: Nullable<string>) =>
   invitationSentAt && dayjs(invitationSentAt).format('L LT');
+
+const parseBooleanFromCsv = (value?: string): boolean => {
+  if (!value) return false;
+  const normalized = value.toLowerCase().trim();
+  return normalized === 'true' || normalized === 'yes' || normalized === '1';
+};
+
+export const parsePredefinedParticipantsCsv = (
+  data: UploadedPredefinedParticipantsCsvData,
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
+  isReportingIntervention: boolean,
+): ParsedPredefinedParticipantCsvRow[] => {
+  const dataRows = data
+    .map((result) => result.data)
+    .filter(
+      (row) =>
+        row &&
+        Object.keys(row).some((key) => {
+          const value = row[key as keyof PredefinedParticipantCsvRow];
+          return typeof value === 'string' && value.trim();
+        }),
+    );
+
+  return dataRows.map((row) => {
+    let healthClinicOption: SelectOption<string> | null = null;
+
+    if (isReportingIntervention) {
+      const healthClinicId = row.healthClinicId?.trim();
+      if (healthClinicId && normalizedHealthClinicsInfos[healthClinicId]) {
+        const clinic = normalizedHealthClinicsInfos[healthClinicId];
+        healthClinicOption = {
+          value: healthClinicId,
+          label: clinic.healthClinicName,
+        };
+      }
+    }
+
+    return {
+      firstName: row.firstName?.trim() || '',
+      lastName: row.lastName?.trim() || '',
+      email: row.email?.trim() || '',
+      externalId: row.externalId?.trim() || '',
+      iso: row.phoneCountryCode?.trim() || '',
+      number: row.phoneNumber?.trim() || '',
+      emailNotification: parseBooleanFromCsv(row.emailNotification),
+      smsNotification: parseBooleanFromCsv(row.smsNotification),
+      healthClinicOption,
+    };
+  });
+};
+
+export const generatePredefinedParticipantsExampleCsv = (
+  healthClinicOptions: SelectOption<string>[],
+  isReportingIntervention: boolean,
+): PredefinedParticipantCsvRow[] => {
+  if (isReportingIntervention) {
+    return healthClinicOptions.map(
+      ({ value: healthClinicId, label: healthClinicName }, index) => ({
+        firstName: `FirstName${index + 1}`,
+        lastName: `LastName${index + 1}`,
+        email: `participant${index + 1}@example.com`,
+        externalId: `EXT00${index + 1}`,
+        phoneCountryCode: '+1',
+        phoneNumber: `555123456${index}`,
+        emailNotification: 'true',
+        smsNotification: 'false',
+        healthClinicId,
+        healthClinicName,
+      }),
+    );
+  }
+
+  return [...Array(3)].map((_, index) => ({
+    firstName: `FirstName${index + 1}`,
+    lastName: `LastName${index + 1}`,
+    email: `participant${index + 1}@example.com`,
+    externalId: `EXT00${index + 1}`,
+    phoneCountryCode: '+1',
+    phoneNumber: `555123456${index}`,
+    emailNotification: 'true',
+    smsNotification: 'false',
+  }));
+};
+
+export const prepareBulkCreatePredefinedParticipantsPayload = (
+  values: InvitePredefinedParticipantsFormValues,
+  interventionId: string,
+) => ({
+  interventionId,
+  participants: values.participants.map((participant) => ({
+    firstName: participant.firstName || undefined,
+    lastName: participant.lastName || undefined,
+    email: participant.email || undefined,
+    externalId: participant.externalId || undefined,
+    phone: participant.number
+      ? {
+          iso: participant.iso,
+          number: participant.number,
+        }
+      : undefined,
+    emailNotification: participant.emailNotification,
+    smsNotification: participant.smsNotification,
+    healthClinicId: participant.healthClinicOption?.value || undefined,
+  })),
+});

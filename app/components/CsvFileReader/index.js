@@ -26,6 +26,7 @@ const CsvFileReader = ({
   onUpload,
   intl: { formatMessage },
   disabled,
+  config,
 }) => {
   const readerRef = useRef(null);
 
@@ -49,6 +50,7 @@ const CsvFileReader = ({
       noClick
       style={styles}
       noProgressBar
+      config={config}
     >
       {() => (
         <Row disabled={disabled} align="center" clickable onClick={handleOpen}>
@@ -71,6 +73,7 @@ CsvFileReader.propTypes = {
   onUpload: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
   disabled: PropTypes.bool,
+  config: PropTypes.object,
 };
 
 export default compose(injectIntl)(CsvFileReader);

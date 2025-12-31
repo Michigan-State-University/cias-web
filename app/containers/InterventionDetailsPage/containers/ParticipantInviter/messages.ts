@@ -113,6 +113,10 @@ export default defineMessages({
     id: `${scope}.uploadEmailsButtonTitle`,
     defaultMessage: `Upload e-mails`,
   },
+  uploadPredefinedParticipantsButtonTitle: {
+    id: `${scope}.uploadPredefinedParticipantsButtonTitle`,
+    defaultMessage: `Upload predefined participants`,
+  },
   uploadEmailsInfo: {
     id: `${scope}.uploadEmailsInfo`,
     defaultMessage: `Upload CSV file with e-mail to upload multiple e-mails at once. To prepare correct format, use the file template.`,
@@ -128,6 +132,10 @@ export default defineMessages({
   csvUploadLabel: {
     id: `${scope}.csvUploadLabel`,
     defaultMessage: 'Upload e-mails',
+  },
+  predefinedParticipantsUploadLabel: {
+    id: `${scope}.predefinedParticipantsUploadLabel`,
+    defaultMessage: 'Upload predefined participants',
   },
   addClinicButtonTitle: {
     id: `${scope}.addClinicButtonTitle`,
@@ -270,5 +278,29 @@ export default defineMessages({
   predefinedParticipantResendEmailInvitationButtonTitle: {
     id: `${scope}.predefinedParticipantResendEmailInvitationButtonTitle`,
     defaultMessage: `Resend e-mail invitation`,
+  },
+  uploadPredefinedParticipantsInfo: {
+    id: `${scope}.uploadPredefinedParticipantsInfo`,
+    defaultMessage: `Upload a CSV file containing predefined participant information. Download the example file to see the required format.`,
+  },
+  examplePredefinedParticipantsCsvFilename: {
+    id: `${scope}.examplePredefinedParticipantsCsvFilename`,
+    defaultMessage: `{name}-predefined-participants-example`,
+  },
+  reviewPredefinedParticipants: {
+    id: `${scope}.reviewPredefinedParticipants`,
+    defaultMessage: `Review {count} predefined {count, plural, one {participant} other {participants}}`,
+  },
+  createPredefinedParticipants: {
+    id: `${scope}.createPredefinedParticipants`,
+    defaultMessage: `Create {count} {count, plural, one {participant} other {participants}}`,
+  },
+  participantNumber: {
+    id: `${scope}.participantNumber`,
+    defaultMessage: `Participant #{number}`,
+  },
+  bulkUploadPredefinedParticipants: {
+    id: `${scope}.bulkUploadPredefinedParticipants`,
+    defaultMessage: `Bulk Upload via CSV`,
   },
 });
