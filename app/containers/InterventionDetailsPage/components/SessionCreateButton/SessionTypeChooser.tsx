@@ -55,6 +55,7 @@ const SessionTypeChooser = ({
             border={`1px solid ${colors.linkWater}`}
             background={isChecked ? colors.zirkon : colors.white}
             borderRadius={5}
+            data-cy={`session-type-option-${type}`}
           >
             <Radio
               id={`session-type-chooser-${type}`}
@@ -84,6 +85,7 @@ const SessionTypeChooser = ({
           width={150}
           mt={20}
           onClick={() => onCreateSession(selectedSessionType)}
+          data-cy="create-session-submit-button"
         >
           {formatMessage(messages.create)}
         </Button>

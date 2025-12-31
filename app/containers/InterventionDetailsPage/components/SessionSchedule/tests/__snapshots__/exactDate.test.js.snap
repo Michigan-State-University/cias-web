@@ -328,6 +328,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
 <div>
   <div
     class="c0"
+    data-cy="session-schedule"
   >
     <p
       class="c1"
@@ -341,6 +342,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c3"
+        data-cy="session-schedule-selector"
       >
         <div
           class="c4"

@@ -67,7 +67,11 @@ const LoginForm = ({
               placeholder={formatMessage(messages.emailPlaceholder)}
               type="text"
               label={formatMessage(messages.emailLabel)}
-              {...sharedProps}
+              inputProps={{
+                ...sharedProps.inputProps,
+                'data-cy': 'login-email-input',
+              }}
+              mb={20}
             />
             <LinkButton
               tabIndex={-1}
@@ -84,7 +88,11 @@ const LoginForm = ({
               placeholder={formatMessage(messages.passwordPlaceholder)}
               type="password"
               label={formatMessage(messages.passwordLabel)}
-              {...sharedProps}
+              inputProps={{
+                ...sharedProps.inputProps,
+                'data-cy': 'login-password-input',
+              }}
+              mb={20}
             />
             <Button
               height={46}
@@ -93,6 +101,7 @@ const LoginForm = ({
               title={formatMessage(messages.loginButton)}
               onClick={handleSubmit}
               type="submit"
+              data-cy="login-submit-button"
             />
             <Row width="100%">
               <Divider mr={15} mt={40} />

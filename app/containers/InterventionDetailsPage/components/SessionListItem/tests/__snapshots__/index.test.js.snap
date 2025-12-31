@@ -478,6 +478,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
           >
             <div
               class="c17"
+              data-cy="dropdown-trigger-session-list-item-options-1"
               id="session-list-item-options-1"
             >
               <img
@@ -498,6 +499,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
       </div>
       <div
         class="c21"
+        data-cy="session-estimate-time"
         display="flex"
       >
         <p
@@ -509,6 +511,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
         <input
           aria-labelledby="estimate-time-label"
           class="c23"
+          data-cy="session-estimate-time-input"
           dir="auto"
           placeholder="0"
           type="text"

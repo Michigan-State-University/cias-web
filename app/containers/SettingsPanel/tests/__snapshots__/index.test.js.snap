@@ -776,6 +776,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
 <div>
   <div
     class="c0"
+    data-cy="intervention-settings-panel"
   >
     <div
       class="c1 c2"
@@ -842,6 +843,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
         </div>
         <div
           class="c18 c19"
+          data-cy="intervention-note-input"
         >
           <div
             class="c20"
