@@ -135,7 +135,7 @@ export type ParsedPredefinedParticipantCsvRow = {
   lastName: string;
   email: string;
   externalId: string;
-  iso: string;
+  iso: Nullable<SelectOption<CountryCode>>;
   number: string;
   emailNotification: boolean;
   smsNotification: boolean;

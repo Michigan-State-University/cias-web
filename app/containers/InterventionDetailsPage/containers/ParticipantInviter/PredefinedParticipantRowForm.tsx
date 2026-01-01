@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
+import { getCountryCallingCode } from 'libphonenumber-js';
 
 import { colors, themeColors } from 'theme';
 import { formatPhone } from 'utils/phone';
@@ -29,9 +30,15 @@ export const PredefinedParticipantRowForm: FC<Props> = ({
     participant.externalId ||
     '';
 
-  const phone = participant.number
-    ? formatPhone({ prefix: participant.iso, number: participant.number })
-    : '';
+  const phone =
+    participant.number && participant.iso
+      ? (() =>
+          formatPhone({
+            prefix: `+${getCountryCallingCode(participant.iso.value)}`,
+            number: participant.number,
+            iso: participant.iso.value,
+          }))()
+      : '';
 
   return (
     <StripedTR

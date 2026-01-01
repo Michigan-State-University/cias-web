@@ -452,13 +452,17 @@ export const parsePredefinedParticipantsCsv = (
       }
     }
 
+    const phoneIso = row.phoneCountryCode?.trim() || '';
+    const phoneNumber = row.phoneNumber?.trim() || '';
+    const phoneAttributes = getInitialValues(phoneNumber, phoneIso as any);
+
     return {
       firstName: row.firstName?.trim() || '',
       lastName: row.lastName?.trim() || '',
       email: row.email?.trim() || '',
       externalId: row.externalId?.trim() || '',
-      iso: row.phoneCountryCode?.trim() || '',
-      number: row.phoneNumber?.trim() || '',
+      iso: phoneAttributes.iso,
+      number: phoneAttributes.number,
       emailNotification: parseBooleanFromCsv(row.emailNotification),
       smsNotification: parseBooleanFromCsv(row.smsNotification),
       healthClinicOption,
@@ -534,12 +538,10 @@ export const prepareBulkCreatePredefinedParticipantsPayload = (
     lastName: participant.lastName || undefined,
     email: participant.email || undefined,
     externalId: participant.externalId || undefined,
-    phone: participant.number
-      ? {
-          iso: participant.iso,
-          number: participant.number,
-        }
-      : undefined,
+    phoneAttributes:
+      participant.number && participant.iso
+        ? getPhoneAttributes(participant.number, participant.iso)
+        : null,
     emailNotification: participant.emailNotification,
     smsNotification: participant.smsNotification,
     healthClinicId: participant.healthClinicOption?.value || undefined,
