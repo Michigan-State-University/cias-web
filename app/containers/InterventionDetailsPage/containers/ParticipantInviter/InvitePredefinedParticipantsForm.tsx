@@ -3,26 +3,32 @@ import { Form, Formik, FormikConfig, FieldArray } from 'formik';
 import { useIntl } from 'react-intl';
 
 import Row from 'components/Row';
-import { Button } from 'components/Button';
+import { Button, TextButton } from 'components/Button';
 import Text from 'components/Text';
 import Box from 'components/Box';
 import { Table, TBody, TH, THead, TR } from 'components/Table';
 
+import { themeColors } from 'theme';
 import messages from './messages';
 import { InvitePredefinedParticipantsFormValues } from './types';
 import { PredefinedParticipantRowForm } from './PredefinedParticipantRowForm';
+import { TEXT_BUTTON_PROPS } from './constants';
 
 export type Props = {
   initialFormValues: InvitePredefinedParticipantsFormValues;
   isReportingIntervention: boolean;
   onSubmit: FormikConfig<InvitePredefinedParticipantsFormValues>['onSubmit'];
   submitting: boolean;
+  onParticipantsChange?: (
+    participants: InvitePredefinedParticipantsFormValues['participants'],
+  ) => void;
 };
 
 export const InvitePredefinedParticipantsForm: FC<Props> = ({
   initialFormValues,
   onSubmit,
   submitting,
+  onParticipantsChange,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -32,7 +38,7 @@ export const InvitePredefinedParticipantsForm: FC<Props> = ({
       onSubmit={onSubmit}
       enableReinitialize
     >
-      {({ values, handleSubmit }) => (
+      {({ values, handleSubmit, setFieldValue }) => (
         <Form
           style={{
             height: '100%',
@@ -77,7 +83,16 @@ export const InvitePredefinedParticipantsForm: FC<Props> = ({
                         <PredefinedParticipantRowForm
                           key={index}
                           participant={participant}
-                          onRemove={() => remove(index)}
+                          onRemove={() => {
+                            remove(index);
+                            if (onParticipantsChange) {
+                              const updatedParticipants =
+                                values.participants.filter(
+                                  (_, i) => i !== index,
+                                );
+                              onParticipantsChange(updatedParticipants);
+                            }
+                          }}
                         />
                       ))}
                     </>
@@ -88,6 +103,16 @@ export const InvitePredefinedParticipantsForm: FC<Props> = ({
           </Box>
 
           <Row justify="end" gap={16}>
+            <TextButton
+              buttonProps={{ ...TEXT_BUTTON_PROPS, color: themeColors.warning }}
+              onClick={() => {
+                setFieldValue('participants', []);
+                onParticipantsChange?.([]);
+              }}
+              disabled={submitting}
+            >
+              {formatMessage(messages.removeAllParticipants)}
+            </TextButton>
             <Button
               width="auto"
               px={24}

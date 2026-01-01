@@ -303,4 +303,12 @@ export default defineMessages({
     id: `${scope}.bulkUploadPredefinedParticipants`,
     defaultMessage: `Bulk Upload via CSV`,
   },
+  removeParticipantRow: {
+    id: `${scope}.removeParticipantRow`,
+    defaultMessage: 'Remove',
+  },
+  removeAllParticipants: {
+    id: `${scope}.removeAllParticipants`,
+    defaultMessage: 'Remove all participants',
+  },
 });

@@ -499,6 +499,31 @@ export const generatePredefinedParticipantsExampleCsv = (
   }));
 };
 
+export const mergePredefinedParticipants = (
+  existingParticipants: ParsedPredefinedParticipantCsvRow[],
+  newParticipants: ParsedPredefinedParticipantCsvRow[],
+): ParsedPredefinedParticipantCsvRow[] => {
+  const participantMap = new Map<string, ParsedPredefinedParticipantCsvRow>();
+
+  existingParticipants.forEach((participant) => {
+    const key =
+      participant.email.trim().toLowerCase() || participant.externalId.trim();
+    if (key) {
+      participantMap.set(key, participant);
+    }
+  });
+
+  newParticipants.forEach((participant) => {
+    const key =
+      participant.email.trim().toLowerCase() || participant.externalId.trim();
+    if (key) {
+      participantMap.set(key, participant);
+    }
+  });
+
+  return Array.from(participantMap.values());
+};
+
 export const prepareBulkCreatePredefinedParticipantsPayload = (
   values: InvitePredefinedParticipantsFormValues,
   interventionId: string,

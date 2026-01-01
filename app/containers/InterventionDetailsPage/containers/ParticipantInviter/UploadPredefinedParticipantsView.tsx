@@ -16,10 +16,10 @@ import Row from 'components/Row';
 
 import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
-  InvitePredefinedParticipantsFormValues,
   NormalizedHealthClinicsInfos,
   ParticipantInvitationType,
   UploadedPredefinedParticipantsCsvData,
+  ParsedPredefinedParticipantCsvRow,
 } from './types';
 import {
   InvitePredefinedParticipantsForm,
@@ -30,6 +30,7 @@ import {
   parsePredefinedParticipantsCsv,
   generatePredefinedParticipantsExampleCsv,
   prepareBulkCreatePredefinedParticipantsPayload,
+  mergePredefinedParticipants,
 } from './utils';
 
 export type Props = {
@@ -80,8 +81,9 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
     [healthClinicOptions, isReportingIntervention],
   );
 
-  const [initialFormValues, setInitialFormValues] =
-    useState<Nullable<InvitePredefinedParticipantsFormValues>>(null);
+  const [participants, setParticipants] = useState<
+    ParsedPredefinedParticipantCsvRow[]
+  >([]);
 
   const handleUpload = (data: UploadedPredefinedParticipantsCsvData) => {
     const parsedParticipants = parsePredefinedParticipantsCsv(
@@ -90,9 +92,9 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
       isReportingIntervention,
     );
 
-    setInitialFormValues({
-      participants: parsedParticipants,
-    });
+    setParticipants((prevParticipants) =>
+      mergePredefinedParticipants(prevParticipants, parsedParticipants),
+    );
   };
 
   return (
@@ -126,13 +128,14 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
         </CsvFileReader>
       </Row>
 
-      {initialFormValues && (
-        <Column flex={1}>
+      {participants.length > 0 && (
+        <Column flex={1} gap={16}>
           <InvitePredefinedParticipantsForm
-            initialFormValues={initialFormValues}
+            initialFormValues={{ participants }}
             isReportingIntervention={isReportingIntervention}
             onSubmit={handleSubmit}
             submitting={submitting}
+            onParticipantsChange={setParticipants}
           />
         </Column>
       )}

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
 import { formatPhone } from 'utils/phone';
@@ -10,6 +11,7 @@ import Row from 'components/Row';
 
 import { ParsedPredefinedParticipantCsvRow } from './types';
 import { TEXT_BUTTON_PROPS } from './constants';
+import messages from './messages';
 
 export type Props = {
   participant: ParsedPredefinedParticipantCsvRow;
@@ -20,6 +22,8 @@ export const PredefinedParticipantRowForm: FC<Props> = ({
   participant,
   onRemove,
 }) => {
+  const { formatMessage } = useIntl();
+
   const fullName =
     [participant.firstName, participant.lastName].filter(Boolean).join(' ') ||
     participant.externalId ||
@@ -36,14 +40,14 @@ export const PredefinedParticipantRowForm: FC<Props> = ({
       color={colors.aliceBlueSaturated}
       bg={colors.white}
     >
-      <NoMaxWidthTD padding={8} width="40%">
-        <EllipsisText text={fullName} fontSize={15} />
+      <NoMaxWidthTD padding={8} width="30%">
+        <EllipsisText text={fullName} fontSize={12} />
       </NoMaxWidthTD>
       <NoMaxWidthTD padding={8} width="30%">
-        <EllipsisText text={participant.email || ''} fontSize={15} />
+        <EllipsisText text={participant.email || ''} fontSize={12} />
       </NoMaxWidthTD>
-      <NoMaxWidthTD padding={8} width="20%">
-        <EllipsisText text={phone} fontSize={15} />
+      <NoMaxWidthTD padding={8} width="30%">
+        <EllipsisText text={phone} fontSize={12} />
       </NoMaxWidthTD>
       <NoMaxWidthTD padding={8} width="10%">
         <Row justify="end">
@@ -51,7 +55,7 @@ export const PredefinedParticipantRowForm: FC<Props> = ({
             buttonProps={{ ...TEXT_BUTTON_PROPS, color: themeColors.warning }}
             onClick={onRemove}
           >
-            Remove
+            {formatMessage(messages.removeParticipantRow)}
           </TextButton>
         </Row>
       </NoMaxWidthTD>
