@@ -491,6 +491,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             >
               <input
                 class="c15"
+                data-cy="login-email-input"
                 dir="auto"
                 height="46"
                 id="email"
@@ -533,6 +534,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             >
               <input
                 class="c15"
+                data-cy="login-password-input"
                 dir="auto"
                 height="46"
                 id="password"
@@ -547,6 +549,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           <button
             class="c18"
             color="primary"
+            data-cy="login-submit-button"
             height="46"
             radius="100px"
             type="submit"

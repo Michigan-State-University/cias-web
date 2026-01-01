@@ -39,7 +39,11 @@ const VariableInput = ({
   const editingPossible = canEdit(interventionStatus);
 
   return (
-    <Row display="flex" hidden={isNarratorTab}>
+    <Row
+      display="flex"
+      hidden={isNarratorTab}
+      data-cy={`question-variable-input-${questionId}`}
+    >
       <BadgeInput
         disabled={!editingPossible || disabled}
         px={0}

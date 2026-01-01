@@ -341,6 +341,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
 <div>
   <a
     class="c0"
+    data-cy="intervention-tile-test-id"
     href="/"
   >
     <div
@@ -377,6 +378,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
           >
             <button
               class="c10"
+              data-cy="star-intervention-test-id"
               fill="inherit"
               font-weight="bold"
               stroke="#8C94A6"
@@ -394,6 +396,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c12"
+                  data-cy="dropdown-trigger-intervention-list-item-options-test-id"
                   id="intervention-list-item-options-test-id"
                 >
                   <img
@@ -427,6 +430,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
                 <div>
                   <span
                     class="c18"
+                    data-cy="intervention-tile-name"
                     data-for="Name"
                     data-tip="Name"
                     font-size="18"
