@@ -223,6 +223,7 @@ const MultiQuestion = ({
                           display="flex"
                           align="center"
                           justify="center"
+                          hidden={hovered !== index}
                         >
                           <LuImage
                             size={20}
