@@ -5,14 +5,14 @@
  * Dependency tree: https://formatjs.io/docs/polyfills/
  */
 
-import { shouldPolyfill as shouldPolyfillGetCanonicalLocales } from '@formatjs/intl-getcanonicallocales/should-polyfill';
-import { shouldPolyfill as shouldPolyfillLocale } from '@formatjs/intl-locale/should-polyfill';
-import { shouldPolyfill as shouldPolyfillDisplayNames } from '@formatjs/intl-displaynames/should-polyfill';
-import { shouldPolyfill as shouldPolyfillListFormat } from '@formatjs/intl-listformat/should-polyfill';
+import { shouldPolyfill as shouldPolyfillGetCanonicalLocales } from '@formatjs/intl-getcanonicallocales/should-polyfill.js';
+import { shouldPolyfill as shouldPolyfillLocale } from '@formatjs/intl-locale/should-polyfill.js';
+import { shouldPolyfill as shouldPolyfillDisplayNames } from '@formatjs/intl-displaynames/should-polyfill.js';
+import { shouldPolyfill as shouldPolyfillListFormat } from '@formatjs/intl-listformat/should-polyfill.js';
 import { shouldPolyfill as shouldPolyfillPluralRules } from '@formatjs/intl-pluralrules/should-polyfill.js';
-import { shouldPolyfill as shouldPolyfillNumberFormat } from '@formatjs/intl-numberformat/should-polyfill';
-import { shouldPolyfill as shouldPolyfillDateTimeFormat } from '@formatjs/intl-datetimeformat/should-polyfill';
-import { shouldPolyfill as shouldPolyfillRelativeTimeFormat } from '@formatjs/intl-relativetimeformat/should-polyfill';
+import { shouldPolyfill as shouldPolyfillNumberFormat } from '@formatjs/intl-numberformat/should-polyfill.js';
+import { shouldPolyfill as shouldPolyfillDateTimeFormat } from '@formatjs/intl-datetimeformat/should-polyfill.js';
+import { shouldPolyfill as shouldPolyfillRelativeTimeFormat } from '@formatjs/intl-relativetimeformat/should-polyfill.js';
 
 const polyfillIntl = async () => {
   if (!window.Intl) {
@@ -72,7 +72,7 @@ const polyfillPluralRules = async () => {
 
 const polyfillNumberFormat = async () => {
   if (shouldPolyfillNumberFormat())
-    await import('@formatjs/intl-numberformat/polyfill');
+    await import('@formatjs/intl-numberformat/polyfill.js');
 
   if (Intl.NumberFormat.polyfilled) {
     // ! Add every used language
@@ -84,7 +84,7 @@ const polyfillNumberFormat = async () => {
 
 const polyfillRelativeTimeFormat = async () => {
   if (shouldPolyfillRelativeTimeFormat())
-    await import('@formatjs/intl-relativetimeformat/polyfill');
+    await import('@formatjs/intl-relativetimeformat/polyfill.js');
 
   if (Intl.RelativeTimeFormat.polyfilled) {
     // ! Add every used language
