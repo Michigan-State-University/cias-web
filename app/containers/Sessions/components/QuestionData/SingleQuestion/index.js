@@ -186,6 +186,7 @@ const SingleQuestion = ({
                         hidden={isNarratorTab}
                       >
                         <FlexibleWidthApprovableInput
+                          data-cy={`answer-input-${index}`}
                           fontSize={18}
                           type="singleline"
                           placeholder={formatMessage(messages.placeholder, {
@@ -299,7 +300,12 @@ const SingleQuestion = ({
         )}
       </DndSortable>
       <Row hidden={isNarratorTabOrEditNotPossible}>
-        <HoverableBox paddingInline={21} paddingBlock={14} onClick={addAnswer}>
+        <HoverableBox
+          paddingInline={21}
+          paddingBlock={14}
+          onClick={addAnswer}
+          data-cy="add-answer-button"
+        >
           <Box>
             <Row align="center">
               <PlusCircle marginInlineEnd={12} />

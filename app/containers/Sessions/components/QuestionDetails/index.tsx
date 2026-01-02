@@ -67,6 +67,7 @@ const QuestionDetails = (props: QuestionDetailsProps) => (
     overflow="scroll"
     padding={30}
     bg={colors.zirkon}
+    data-cy="question-details"
   >
     <RenderQuestionDetails {...props} />
   </Box>

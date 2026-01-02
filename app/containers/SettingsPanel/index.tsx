@@ -303,7 +303,7 @@ const SettingsPanel = ({ intervention }: Props) => {
   if (!intervention) return null;
 
   return (
-    <Column>
+    <Column data-cy="intervention-settings-panel">
       <NavigatorSettingModal />
       <StyledBox>
         <Column width="100%" padding={35}>
@@ -342,6 +342,7 @@ const SettingsPanel = ({ intervention }: Props) => {
             </H2>
           </Box>
           <Box
+            data-cy="intervention-note-input"
             bg={colors.zirkon}
             borderRadius={borders.borderRadius}
             padding={paddings.small}

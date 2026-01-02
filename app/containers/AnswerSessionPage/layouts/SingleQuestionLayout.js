@@ -61,6 +61,7 @@ const SingleQuestionLayout = ({
                 handleClick(value, index, hfhValue);
               }}
               disabled={disabled}
+              data-cy={`single-question-answer-${index}`}
             >
               <Radio
                 id={ariaInputId}

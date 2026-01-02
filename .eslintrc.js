@@ -124,6 +124,8 @@ module.exports = {
     'cypress/support/*.ts',
     'app/utils/libraries/*',
     '.vscode/.history/**/*',
+    'e2e/**/*',
+    'playwright.config.ts',
   ],
   globals: {
     cy: 'readonly',

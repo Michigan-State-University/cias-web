@@ -78,6 +78,7 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   <button
     class="c2"
     color="secondary"
+    data-cy="open-preview-button"
     display="flex"
     height="35"
     radius="100px"
@@ -173,6 +174,7 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
   <button
     class="c2"
     color="secondary"
+    data-cy="open-preview-button"
     disabled=""
     display="flex"
     height="35"

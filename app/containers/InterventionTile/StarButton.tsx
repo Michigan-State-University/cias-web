@@ -18,9 +18,15 @@ export type Props = {
   starred: boolean;
   onClick: (newChange: boolean) => void;
   loading?: boolean;
+  interventionId?: string;
 };
 
-export const StarButton: FC<Props> = ({ starred, onClick, loading }) => {
+export const StarButton: FC<Props> = ({
+  starred,
+  onClick,
+  loading,
+  interventionId,
+}) => {
   const { formatMessage } = useIntl();
 
   const handleClick: MouseEventHandler = (e) => {
@@ -44,6 +50,9 @@ export const StarButton: FC<Props> = ({ starred, onClick, loading }) => {
         borderRadius: 8,
         borderWidth: BORDER_WIDTH,
         showFocus: true,
+        'data-cy': interventionId
+          ? `star-intervention-${interventionId}`
+          : 'star-intervention',
       }}
       spinnerProps={{
         size: ICON_SIZE,
