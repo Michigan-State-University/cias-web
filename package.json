@@ -110,7 +110,7 @@
     "express": "^4.21.2",
     "fontfaceobserver": "2.1.0",
     "formik": "^2.4.6",
-    "framer-motion": "6.2.9",
+    "framer-motion": "^6.5.1",
     "he": "1.2.0",
     "history": "4.9.0",
     "hoist-non-react-statics": "3.3.0",
