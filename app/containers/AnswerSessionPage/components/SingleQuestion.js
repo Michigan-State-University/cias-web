@@ -20,6 +20,7 @@ const SingleQuestion = ({
     },
     settings: { proceed_button: proceedButton },
     id,
+    answer_images: answerImages = [],
   } = question;
 
   useEffect(() => {
@@ -50,6 +51,7 @@ const SingleQuestion = ({
       isMobile={isMobile}
       disabled={disabled}
       dynamicElementsDirection={dynamicElementsDirection}
+      answerImages={answerImages}
     />
   );
 };

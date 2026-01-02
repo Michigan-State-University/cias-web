@@ -11,6 +11,7 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Box from 'components/Box';
 import AudioTextPreview from 'components/AudioTextPreview';
 import MarkupContainer from 'components/MarkupContainer';
+import Img from 'components/Img';
 
 const margin = 21;
 
@@ -22,14 +23,25 @@ const SingleQuestionLayout = ({
   isMobile,
   disabled,
   dynamicElementsDirection,
+  answerImages = [],
 }) => (
   <Column dir={dynamicElementsDirection}>
     <Box>
       {data.map((questionAnswer, index) => {
-        const { payload, value, hfh_value: hfhValue } = questionAnswer;
+        const {
+          payload,
+          value,
+          hfh_value: hfhValue,
+          id: answerId,
+        } = questionAnswer;
         const isChecked = selectedAnswerIndex === index;
         const ariaInputId = `answer-${index + 1}`;
         const key = `question-${questionId}-el-${index}`;
+
+        // Find the image for this answer
+        const answerImage = answerImages.find(
+          (img) => img.answer_id === answerId,
+        );
 
         return (
           <Row key={key} marginBlockEnd={12} align="center">
@@ -55,9 +67,21 @@ const SingleQuestionLayout = ({
                 data-cy={`single-question-${index}-checkbox`}
                 checked={isChecked}
               >
-                <MarkupContainer>
-                  <Markup content={payload} noWrap />
-                </MarkupContainer>
+                <Column>
+                  {answerImage && (
+                    <Box marginBlockEnd={8}>
+                      <Img
+                        src={answerImage.url}
+                        alt={answerImage.alt || `Answer ${index + 1} image`}
+                        maxWidth="200px"
+                        height="auto"
+                      />
+                    </Box>
+                  )}
+                  <MarkupContainer>
+                    <Markup content={payload} noWrap />
+                  </MarkupContainer>
+                </Column>
               </Radio>
             </HoverableBox>
             {isMobile && (
@@ -81,6 +105,14 @@ SingleQuestionLayout.propTypes = {
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
   dynamicElementsDirection: PropTypes.string,
+  answerImages: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      url: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+      answer_id: PropTypes.string.isRequired,
+    }),
+  ),
 };
 
 export default SingleQuestionLayout;

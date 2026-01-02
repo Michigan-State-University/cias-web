@@ -35,6 +35,12 @@ import {
   DELETE_QUESTION_IMAGE_REQUEST,
   DELETE_QUESTION_IMAGE_SUCCESS,
   DELETE_QUESTION_IMAGE_ERROR,
+  ADD_ANSWER_IMAGE_REQUEST,
+  ADD_ANSWER_IMAGE_SUCCESS,
+  ADD_ANSWER_IMAGE_ERROR,
+  DELETE_ANSWER_IMAGE_REQUEST,
+  DELETE_ANSWER_IMAGE_SUCCESS,
+  DELETE_ANSWER_IMAGE_ERROR,
   COPY_QUESTION_REQUEST,
   COPY_QUESTION_SUCCESS,
   COPY_QUESTION_ERROR,
@@ -240,6 +246,26 @@ export const questionsReducer = (state = initialState, action) =>
           draft.questions,
           action.payload.questionId,
         );
+        editQuestionErrorCommon(draft, action.payload);
+        break;
+
+      case ADD_ANSWER_IMAGE_REQUEST:
+        draft.loaders.updateQuestionLoading = true;
+        break;
+      case ADD_ANSWER_IMAGE_SUCCESS:
+        editQuestionSuccessCommon(draft, action.payload);
+        break;
+      case ADD_ANSWER_IMAGE_ERROR:
+        editQuestionErrorCommon(draft, action.payload);
+        break;
+
+      case DELETE_ANSWER_IMAGE_REQUEST:
+        draft.loaders.updateQuestionLoading = true;
+        break;
+      case DELETE_ANSWER_IMAGE_SUCCESS:
+        editQuestionSuccessCommon(draft, action.payload);
+        break;
+      case DELETE_ANSWER_IMAGE_ERROR:
         editQuestionErrorCommon(draft, action.payload);
         break;
 
