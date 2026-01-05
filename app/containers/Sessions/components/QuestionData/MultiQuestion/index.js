@@ -86,7 +86,8 @@ const MultiQuestion = ({
       );
   }, [checkboxButtonRef.current]);
 
-  const { answer_images: answerImages = [] } = selectedQuestion;
+  const { answer_images: answerImages = [], original_text: originalText } =
+    selectedQuestion;
 
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
@@ -96,6 +97,32 @@ const MultiQuestion = ({
 
   const hasAnswerImage = (answerId) =>
     answerImages.some((img) => img.answer_id === answerId);
+
+  const getOriginalAnswerImageText = (answerId) => {
+    if (!originalText || typeof originalText !== 'object') {
+      return undefined;
+    }
+
+    const answerImagesArray =
+      originalText.answer_images || originalText.answerImages;
+
+    if (!Array.isArray(answerImagesArray) || answerImagesArray.length === 0) {
+      return undefined;
+    }
+
+    const matchingEntry = answerImagesArray.find(
+      (entry) =>
+        entry && typeof entry === 'object' && entry.answer_id === answerId,
+    );
+
+    if (!matchingEntry) return undefined;
+
+    const text = matchingEntry.description;
+
+    return text && typeof text === 'string' && text.trim() !== ''
+      ? text
+      : undefined;
+  };
 
   const onDragEnd = (_, items, hasChanged) => {
     if (!hasChanged) return;
@@ -159,27 +186,42 @@ const MultiQuestion = ({
                             height="auto"
                             borderRadius={4}
                           />
-                          <Box mt={8} bg={colors.linkWaterDark}>
-                            <ApprovableInput
-                              type="multiline"
-                              value={
-                                answerImages.find(
-                                  (img) => img.answer_id === item.id,
-                                )?.alt ?? ''
-                              }
-                              onCheck={(description) =>
-                                updateAnswerImage(
-                                  selectedQuestion.id,
-                                  item.id,
-                                  description,
-                                )
-                              }
-                              placeholder={formatMessage(
-                                questionImageMessages.logoDescriptionPlaceholder,
-                              )}
-                              rows="2"
-                              disabled={isNarratorTabOrEditNotPossible}
-                            />
+                          <Box
+                            mt={8}
+                            bg={colors.linkWaterDark}
+                            position="relative"
+                          >
+                            <OriginalTextHover
+                              id={`question-${selectedQuestion.id}-answer-${index}-image`}
+                              text={getOriginalAnswerImageText(item.id)}
+                              hidden={isNarratorTab}
+                              iconProps={{
+                                position: 'absolute',
+                                right: 8,
+                                bottom: 8,
+                              }}
+                            >
+                              <ApprovableInput
+                                type="multiline"
+                                value={
+                                  answerImages.find(
+                                    (img) => img.answer_id === item.id,
+                                  )?.alt ?? ''
+                                }
+                                onCheck={(description) =>
+                                  updateAnswerImage(
+                                    selectedQuestion.id,
+                                    item.id,
+                                    description,
+                                  )
+                                }
+                                placeholder={formatMessage(
+                                  questionImageMessages.logoDescriptionPlaceholder,
+                                )}
+                                rows="2"
+                                disabled={isNarratorTabOrEditNotPossible}
+                              />
+                            </OriginalTextHover>
                           </Box>
                         </Box>
                       )}
@@ -250,6 +292,7 @@ const MultiQuestion = ({
                           display="flex"
                           align="center"
                           justify="center"
+                          hidden={hovered !== index}
                         >
                           <MdOutlineHideImage
                             size={20}
