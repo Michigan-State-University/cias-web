@@ -51,8 +51,9 @@ axios.interceptors.request.use(
       headers = LocalStorageService.getHeaders();
     }
 
-    if (process.env.CI_E2E_TOKEN) {
-      headers['end-to-end-secure-token'] = process.env.CI_E2E_TOKEN || '';
+    if (process.env.ADDITIONAL_ORIGIN_SECURE_TOKEN) {
+      headers['Additional-Origin-Secure-Token'] =
+        process.env.ADDITIONAL_ORIGIN_SECURE_TOKEN || '';
     }
 
     config.headers = objectToCamelKebabCase({
