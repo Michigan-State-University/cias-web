@@ -71,6 +71,7 @@ jobs:
           E2E_VERIFICATION_CODE: ${{ secrets.E2E_VERIFICATION_CODE }}
           E2E_WORKER_COUNT: ${{ vars.E2E_WORKER_COUNT }}
           E2E_AUTH_SETUP_DELAY_MS: ${{ vars.E2E_AUTH_SETUP_DELAY_MS }}
+          ADDITIONAL_ORIGIN_SECURE_TOKEN: ${{ secrets.ADDITIONAL_ORIGIN_SECURE_TOKEN }}
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
