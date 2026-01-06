@@ -6,6 +6,7 @@ import { TextMessageVariant } from './TextMessageVariant';
 import { TextMessageType } from './TextMessageType';
 import { TextMessageScheduleOption } from './TextMessageScheduleOption';
 import { TextMessageScheduleFrequency } from './TextMessageScheduleFrequency';
+import { SmsSendTimeType } from './SmsSendTimeType';
 
 export interface TextMessageOriginalText {
   noFormulaText: string;
@@ -16,6 +17,12 @@ export interface TextMessageIncludeOptions {
   includeLastName: Nullable<boolean>;
   includePhoneNumber: Nullable<boolean>;
   includeEmail: Nullable<boolean>;
+}
+
+export interface SmsSendTimeDetails {
+  time?: string;
+  from?: string;
+  to?: string;
 }
 
 export type TextMessage = {
@@ -35,4 +42,6 @@ export type TextMessage = {
   phones?: Phone[];
   smsLinks?: SmsLink[];
   noFormulaAttachment: Nullable<AppFile>;
+  smsSendTimeType: SmsSendTimeType;
+  smsSendTimeDetails: Nullable<SmsSendTimeDetails>;
 } & TextMessageIncludeOptions;
