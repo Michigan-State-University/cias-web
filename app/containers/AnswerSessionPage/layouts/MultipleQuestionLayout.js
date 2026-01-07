@@ -18,55 +18,101 @@ const MultipleQuestionLayout = ({
   questionId,
   check,
   selectedAnswersIndex,
+  noneOfAboveAnswerIndex,
   isMobile,
   disabled,
   dynamicElementsDirection,
 }) => (
   <Column dir={dynamicElementsDirection}>
-    {data.map((questionAnswer, index) => {
-      const {
-        payload,
-        variable: { name, value },
-      } = questionAnswer;
-      const isChecked = selectedAnswersIndex.includes(index);
-      const ariaInputId = `answer-${index + 1}`;
-      const key = `question-${questionId}-el-${index}`;
+    {data
+      .filter((item, index) => index !== noneOfAboveAnswerIndex)
+      .map((questionAnswer, index) => {
+        const {
+          payload,
+          variable: { name, value },
+        } = questionAnswer;
+        const isChecked = selectedAnswersIndex.includes(index);
+        const ariaInputId = `answer-${index + 1}`;
+        const key = `question-${questionId}-el-${index}`;
 
-      return (
-        <Row key={key} marginBlockEnd={10}>
-          {!isMobile && (
-            <AudioTextPreview
-              text={htmlToPlainText(payload)}
-              previewKey={key}
-            />
-          )}
-          <HoverableBox
-            paddingInline={margin}
-            paddingBlock={14}
-            filled
-            clickable
-            disabled={disabled}
-          >
-            <Checkbox
-              id={ariaInputId}
-              checked={isChecked}
-              onChange={() => check(value, name, index)}
+        return (
+          <Row key={key} marginBlockEnd={10}>
+            {!isMobile && (
+              <AudioTextPreview
+                text={htmlToPlainText(payload)}
+                previewKey={key}
+              />
+            )}
+            <HoverableBox
+              paddingInline={margin}
+              paddingBlock={14}
+              filled
+              clickable
               disabled={disabled}
             >
-              <MarkupContainer>
-                <Markup content={payload} noWrap />
-              </MarkupContainer>
-            </Checkbox>
-          </HoverableBox>
-          {isMobile && (
-            <AudioTextPreview
-              text={htmlToPlainText(payload)}
-              previewKey={key}
-            />
-          )}
-        </Row>
-      );
-    })}
+              <Checkbox
+                id={ariaInputId}
+                checked={isChecked}
+                onChange={() => check(value, name, index)}
+                disabled={disabled}
+              >
+                <MarkupContainer>
+                  <Markup content={payload} noWrap />
+                </MarkupContainer>
+              </Checkbox>
+            </HoverableBox>
+            {isMobile && (
+              <AudioTextPreview
+                text={htmlToPlainText(payload)}
+                previewKey={key}
+              />
+            )}
+          </Row>
+        );
+      })}
+    {noneOfAboveAnswerIndex !== -1 && (
+      <Row
+        key={`question-${questionId}-el-${noneOfAboveAnswerIndex}`}
+        marginBlockEnd={10}
+      >
+        {!isMobile && (
+          <AudioTextPreview
+            text={htmlToPlainText(data[noneOfAboveAnswerIndex].payload)}
+            previewKey={`question-${questionId}-el-${noneOfAboveAnswerIndex}`}
+          />
+        )}
+        <HoverableBox
+          paddingInline={margin}
+          paddingBlock={14}
+          filled
+          clickable
+          disabled={disabled}
+        >
+          <Checkbox
+            id={`answer-${noneOfAboveAnswerIndex + 1}`}
+            checked={selectedAnswersIndex.includes(noneOfAboveAnswerIndex)}
+            onChange={() =>
+              check(
+                data[noneOfAboveAnswerIndex].variable.value,
+                data[noneOfAboveAnswerIndex].variable.name,
+                noneOfAboveAnswerIndex,
+              )
+            }
+            disabled={disabled}
+          >
+            <MarkupContainer>
+              <Markup content={data[noneOfAboveAnswerIndex].payload} noWrap />
+            </MarkupContainer>
+          </Checkbox>
+        </HoverableBox>
+        {isMobile && (
+          <AudioTextPreview
+            text={htmlToPlainText(data[noneOfAboveAnswerIndex].payload)}
+            previewKey={`question-${questionId}-el-${noneOfAboveAnswerIndex}`}
+          />
+        )}
+      </Row>
+    )}
   </Column>
 );
 
@@ -75,6 +121,7 @@ MultipleQuestionLayout.propTypes = {
   questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   check: PropTypes.func,
   selectedAnswersIndex: PropTypes.array,
+  noneOfAboveAnswerIndex: PropTypes.number,
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
   dynamicElementsDirection: PropTypes.string,

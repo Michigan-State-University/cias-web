@@ -8,6 +8,7 @@ import { injectIntl } from 'react-intl';
 import ReorderIcon from 'assets/svg/reorder-hand.svg';
 import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
+import checkboxRed from 'assets/svg/checkbox-red.svg';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
@@ -70,6 +71,14 @@ const MultiQuestion = ({
     reorderAnswers(items);
   };
 
+  const noneOfAboveAnswerIndex = selectedQuestion.body.data.findIndex(
+    (item) => item.none_of_above,
+  );
+  const noneOfAboveAnswer =
+    noneOfAboveAnswerIndex !== -1
+      ? selectedQuestion.body.data[noneOfAboveAnswerIndex]
+      : null;
+
   return (
     <Column mt={10}>
       <DndSortable
@@ -77,119 +86,121 @@ const MultiQuestion = ({
         items={selectedQuestion.body.data}
         selector={null}
       >
-        {({ item, index, dragHandleProps }) => (
-          <Row dir={dynamicElementsDirection}>
-            <HoverableBox
-              hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
-              paddingInline={21}
-              paddingBlock={14}
-              width="100%"
-              onMouseEnter={handleMouseEnter(index)}
-              onMouseLeave={() => setHovered(-1)}
-              clickable={false}
-            >
-              <Column>
-                <Row
-                  align="center"
-                  justify="between"
-                  marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
-                >
-                  <Row width="90%">
-                    {!isNarratorTabOrEditNotPossible && (
-                      <Img
-                        alt={formatMessage(messages.reorderIconAlt, {
-                          index,
-                        })}
-                        marginInlineEnd={10}
-                        src={ReorderIcon}
-                        disabled={false}
-                        cursor="grab"
-                        {...dragHandleProps}
-                      />
-                    )}
+        {({ item, index, dragHandleProps }) =>
+          index === noneOfAboveAnswerIndex ? null : (
+            <Row dir={dynamicElementsDirection}>
+              <HoverableBox
+                hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
+                paddingInline={21}
+                paddingBlock={14}
+                width="100%"
+                onMouseEnter={handleMouseEnter(index)}
+                onMouseLeave={() => setHovered(-1)}
+                clickable={false}
+              >
+                <Column>
+                  <Row
+                    align="center"
+                    justify="between"
+                    marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
+                  >
+                    <Row width="90%">
+                      {!isNarratorTabOrEditNotPossible && (
+                        <Img
+                          alt={formatMessage(messages.reorderIconAlt, {
+                            index,
+                          })}
+                          marginInlineEnd={10}
+                          src={ReorderIcon}
+                          disabled={false}
+                          cursor="grab"
+                          {...dragHandleProps}
+                        />
+                      )}
 
-                    <Img
-                      ref={checkboxButtonRef}
-                      src={checkbox}
-                      marginInlineEnd={CHECKBOX_MARGIN}
-                    />
-                    <OriginalTextHover
-                      id={`question-${selectedQuestion.id}-answer-${index}`}
-                      text={item?.original_text}
-                      hidden={isNarratorTab}
-                    >
-                      <FlexibleWidthApprovableInput
-                        fontSize={18}
-                        type="singleline"
-                        placeholder={formatMessage(messages.placeholder, {
-                          index: index + 1,
-                        })}
-                        value={item.payload}
-                        onCheck={(newTitle) =>
-                          updateAnswer(index, { ...item, payload: newTitle })
-                        }
-                        richText
-                        disabled={isNarratorTabOrEditNotPossible}
-                        emptyWidth={105}
+                      <Img
+                        ref={checkboxButtonRef}
+                        src={checkbox}
+                        marginInlineEnd={CHECKBOX_MARGIN}
                       />
-                    </OriginalTextHover>
+                      <OriginalTextHover
+                        id={`question-${selectedQuestion.id}-answer-${index}`}
+                        text={item?.original_text}
+                        hidden={isNarratorTab}
+                      >
+                        <FlexibleWidthApprovableInput
+                          fontSize={18}
+                          type="singleline"
+                          placeholder={formatMessage(messages.placeholder, {
+                            index: index + 1,
+                          })}
+                          value={item.payload}
+                          onCheck={(newTitle) =>
+                            updateAnswer(index, { ...item, payload: newTitle })
+                          }
+                          richText
+                          disabled={isNarratorTabOrEditNotPossible}
+                          emptyWidth={105}
+                        />
+                      </OriginalTextHover>
+                    </Row>
+                    <Row>
+                      <Box
+                        onClick={() => removeAnswer(index)}
+                        hidden={hovered !== index}
+                        clickable
+                      >
+                        <Img src={bin} marginInlineEnd={16} />
+                      </Box>
+                    </Row>
                   </Row>
-                  <Row>
-                    <Box
-                      onClick={() => removeAnswer(index)}
-                      hidden={hovered !== index}
-                      clickable
-                    >
-                      <Img src={bin} marginInlineEnd={16} />
-                    </Box>
+                  <Row align="center" display="flex" hidden={isNarratorTab}>
+                    <Row marginInlineStart={`${leftMargin}px`} gap={10}>
+                      <BadgeInput
+                        disabled={!editingPossible}
+                        paddingInline={0}
+                        paddingBlock={12}
+                        textAlign="center"
+                        validator={variableNameValidator}
+                        placeholder={formatMessage(
+                          globalMessages.variableNamePlaceholder,
+                        )}
+                        value={item.variable.name}
+                        color={colors.jungleGreen}
+                        onBlur={(val) =>
+                          updateAnswer(index, {
+                            ...item,
+                            variable: { ...item.variable, name: val },
+                          })
+                        }
+                        autoComplete="off"
+                      />
+                      <BadgeInput
+                        disabled={!editingPossible}
+                        paddingInline={0}
+                        paddingBlock={12}
+                        textAlign="center"
+                        validator={numericValidator}
+                        keyboard="tel"
+                        placeholder={formatMessage(
+                          globalMessages.variableScorePlaceholder,
+                        )}
+                        value={item.variable.value}
+                        color={colors.azure}
+                        onBlur={(val) =>
+                          updateAnswer(index, {
+                            ...item,
+                            variable: { ...item.variable, value: val },
+                          })
+                        }
+                      />
+                    </Row>
                   </Row>
-                </Row>
-                <Row align="center" display="flex" hidden={isNarratorTab}>
-                  <Row marginInlineStart={`${leftMargin}px`} gap={10}>
-                    <BadgeInput
-                      disabled={!editingPossible}
-                      paddingInline={0}
-                      paddingBlock={12}
-                      textAlign="center"
-                      validator={variableNameValidator}
-                      placeholder={formatMessage(
-                        globalMessages.variableNamePlaceholder,
-                      )}
-                      value={item.variable.name}
-                      color={colors.jungleGreen}
-                      onBlur={(val) =>
-                        updateAnswer(index, {
-                          ...item,
-                          variable: { ...item.variable, name: val },
-                        })
-                      }
-                      autoComplete="off"
-                    />
-                    <BadgeInput
-                      disabled={!editingPossible}
-                      paddingInline={0}
-                      paddingBlock={12}
-                      textAlign="center"
-                      validator={numericValidator}
-                      keyboard="tel"
-                      placeholder={formatMessage(
-                        globalMessages.variableScorePlaceholder,
-                      )}
-                      value={item.variable.value}
-                      color={colors.azure}
-                      onBlur={(val) =>
-                        updateAnswer(index, {
-                          ...item,
-                          variable: { ...item.variable, value: val },
-                        })
-                      }
-                    />
-                  </Row>
-                </Row>
-              </Column>
-            </HoverableBox>
-          </Row>
-        )}
+                </Column>
+              </HoverableBox>
+            </Row>
+          )
+        }
       </DndSortable>
       <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox paddingInline={21} paddingBlock={14} onClick={addAnswer}>
@@ -203,6 +214,100 @@ const MultiQuestion = ({
           </Box>
         </HoverableBox>
       </Row>
+      {noneOfAboveAnswer && (
+        <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
+          <HoverableBox
+            hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
+            paddingInline={21}
+            paddingBlock={14}
+            width="100%"
+            onMouseEnter={() => setHovered(-1)}
+            onMouseLeave={() => setHovered(-1)}
+            clickable={false}
+          >
+            <Column>
+              <Row
+                align="center"
+                justify="between"
+                marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
+              >
+                <Row width="90%">
+                  <Img
+                    ref={checkboxButtonRef}
+                    src={checkboxRed}
+                    marginInlineEnd={CHECKBOX_MARGIN}
+                  />
+                  <OriginalTextHover
+                    id={`question-${selectedQuestion.id}-answer-${noneOfAboveAnswerIndex}`}
+                    text={noneOfAboveAnswer?.original_text}
+                    hidden={isNarratorTab}
+                  >
+                    <FlexibleWidthApprovableInput
+                      fontSize={18}
+                      type="singleline"
+                      placeholder={formatMessage(
+                        messages.noneOfAbovePlaceholder,
+                      )}
+                      value={noneOfAboveAnswer.payload}
+                      onCheck={(newTitle) =>
+                        updateAnswer(noneOfAboveAnswerIndex, {
+                          ...noneOfAboveAnswer,
+                          payload: newTitle,
+                        })
+                      }
+                      richText
+                      disabled={isNarratorTabOrEditNotPossible}
+                      emptyWidth={140}
+                    />
+                  </OriginalTextHover>
+                </Row>
+              </Row>
+              <Row align="center" display="flex" hidden={isNarratorTab}>
+                <Row marginInlineStart={`${leftMargin}px`} gap={10}>
+                  <BadgeInput
+                    disabled={!editingPossible}
+                    paddingInline={0}
+                    paddingBlock={12}
+                    textAlign="center"
+                    validator={variableNameValidator}
+                    placeholder={formatMessage(
+                      globalMessages.variableNamePlaceholder,
+                    )}
+                    value={noneOfAboveAnswer.variable.name}
+                    color={colors.jungleGreen}
+                    onBlur={(val) =>
+                      updateAnswer(noneOfAboveAnswerIndex, {
+                        ...noneOfAboveAnswer,
+                        variable: { ...noneOfAboveAnswer.variable, name: val },
+                      })
+                    }
+                    autoComplete="off"
+                  />
+                  <BadgeInput
+                    disabled={!editingPossible}
+                    paddingInline={0}
+                    paddingBlock={12}
+                    textAlign="center"
+                    validator={numericValidator}
+                    keyboard="tel"
+                    placeholder={formatMessage(
+                      globalMessages.variableScorePlaceholder,
+                    )}
+                    value={noneOfAboveAnswer.variable.value}
+                    color={colors.azure}
+                    onBlur={(val) =>
+                      updateAnswer(noneOfAboveAnswerIndex, {
+                        ...noneOfAboveAnswer,
+                        variable: { ...noneOfAboveAnswer.variable, value: val },
+                      })
+                    }
+                  />
+                </Row>
+              </Row>
+            </Column>
+          </HoverableBox>
+        </Row>
+      )}
     </Column>
   );
 };
