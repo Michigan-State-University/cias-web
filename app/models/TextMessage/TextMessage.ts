@@ -31,6 +31,7 @@ export type TextMessage = {
   sessionId: string;
   schedule: TextMessageScheduleOption;
   schedulePayload: number;
+  scheduleVariable?: string;
   frequency: TextMessageScheduleFrequency;
   endAt: Nullable<string>;
   formula: Nullable<string>;
