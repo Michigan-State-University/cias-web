@@ -27,6 +27,7 @@ import {
   getInitialValues,
   getPhoneAttributes,
   phoneNumberSchema,
+  parsePhoneFromCsv,
 } from 'components/FormikPhoneNumberInput';
 
 import {
@@ -452,9 +453,10 @@ export const parsePredefinedParticipantsCsv = (
       }
     }
 
-    const phoneIso = row.phoneCountryCode?.trim() || '';
-    const phoneNumber = row.phoneNumber?.trim() || '';
-    const phoneAttributes = getInitialValues(phoneNumber, phoneIso as any);
+    const phoneAttributes = parsePhoneFromCsv(
+      row.phoneCountryCode,
+      row.phoneNumber,
+    );
 
     return {
       firstName: row.firstName?.trim() || '',
@@ -481,7 +483,7 @@ export const generatePredefinedParticipantsExampleCsv = (
         lastName: `LastName${index + 1}`,
         email: `participant${index + 1}@example.com`,
         externalId: `EXT00${index + 1}`,
-        phoneCountryCode: '+1',
+        phoneCountryCode: index % 2 === 0 ? '+1' : 'US',
         phoneNumber: `555123456${index}`,
         emailNotification: 'true',
         smsNotification: 'false',
@@ -496,7 +498,7 @@ export const generatePredefinedParticipantsExampleCsv = (
     lastName: `LastName${index + 1}`,
     email: `participant${index + 1}@example.com`,
     externalId: `EXT00${index + 1}`,
-    phoneCountryCode: '+1',
+    phoneCountryCode: index % 2 === 0 ? '+1' : 'US',
     phoneNumber: `555123456${index}`,
     emailNotification: 'true',
     smsNotification: 'false',

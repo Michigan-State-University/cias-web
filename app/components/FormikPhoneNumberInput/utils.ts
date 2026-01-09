@@ -112,3 +112,27 @@ export const getPhoneAttributes = (
     prefix: prefixValue,
   };
 };
+
+export const parsePhoneFromCsv = (
+  phoneCountryCode: string | undefined,
+  phoneNumber: string | undefined,
+) => {
+  const trimmedCode = phoneCountryCode?.trim();
+  const trimmedNumber = phoneNumber?.trim();
+
+  if (!trimmedCode || !trimmedNumber) {
+    return getInitialValues(null, null);
+  }
+
+  if (trimmedCode.startsWith('+')) {
+    const fullNumber = `${trimmedCode}${trimmedNumber}`;
+    const parsed = parsePhoneNumber(fullNumber);
+
+    if (parsed) {
+      return getInitialValues(parsed.nationalNumber as string, parsed.country);
+    }
+    return getInitialValues(null, null);
+  }
+
+  return getInitialValues(trimmedNumber, trimmedCode as any);
+};
