@@ -215,7 +215,7 @@ const MultiQuestion = ({
         </HoverableBox>
       </Row>
       {noneOfAboveAnswer && (
-        <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
+        <Row display="flex">
           <HoverableBox
             hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
             paddingInline={21}

@@ -10,6 +10,13 @@ import {
 } from './constants';
 
 /* eslint-disable default-case, no-param-reassign, default-param-last */
+
+const moveNoneOfAboveToEnd = (data) => {
+  const noneOfAboveItems = data.filter((item) => item.none_of_above);
+  const regularItems = data.filter((item) => !item.none_of_above);
+  return [...regularItems, ...noneOfAboveItems];
+};
+
 const multiQuestionReducer = (question, payload) => {
   switch (payload.type) {
     case ADD:
@@ -26,6 +33,7 @@ const multiQuestionReducer = (question, payload) => {
         },
         payload: '',
       });
+      question.body.data = moveNoneOfAboveToEnd(question.body.data);
       return question;
     case ADD_NONE_OF_THE_ABOVE:
       if (!question.body.data) {
