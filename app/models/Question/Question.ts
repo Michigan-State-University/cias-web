@@ -79,6 +79,12 @@ export interface GenericQuestion<
   originalText: QuestionOriginalText;
   imageUrl: Nullable<string>;
   imageAlt: Nullable<string>;
+  answerImages: Array<{
+    id: string;
+    url: string;
+    alt: Nullable<string>;
+    answerId: string;
+  }>;
   firstQuestion: boolean;
 }
 

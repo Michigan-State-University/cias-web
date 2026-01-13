@@ -82,20 +82,20 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   }, [organizationId]);
 
-  const sessionOptions: (SelectOption<string> & { type: string })[] =
-    useMemo(() => {
-      if (isModularIntervention) return [];
-      return sessions.map(({ id, name, type }) => ({
+  const sessionOptions: (SelectOption<string> & { type: string })[] = useMemo(
+    () =>
+      sessions.map(({ id, name, type }) => ({
         value: id,
         label: name,
         type,
-      }));
-    }, [isModularIntervention, sessions]);
+      })),
+    [sessions],
+  );
 
-  const normalizedSessions: NormalizedSessions = useMemo(() => {
-    if (isModularIntervention) return {};
-    return normalizeArrayToObject(sessions, 'id');
-  }, [isModularIntervention, sessions]);
+  const normalizedSessions: NormalizedSessions = useMemo(
+    () => normalizeArrayToObject(sessions, 'id'),
+    [sessions],
+  );
 
   const healthClinicOptions: SelectOption<string>[] = useMemo(() => {
     const options: SelectOption<string>[] = [];

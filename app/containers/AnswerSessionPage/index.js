@@ -123,6 +123,7 @@ import {
   fetchUserSessionRequest,
   fetchPreviousQuestionRequest,
   selectVideoStats,
+  verifyPidRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
@@ -355,6 +356,7 @@ export function AnswerSessionPage({
   fixedElementsDirection,
   dynamicElementsDirection,
   changeLocale,
+  verifyPid,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -446,6 +448,8 @@ export function AnswerSessionPage({
   const location = useLocation();
 
   const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
+  const pid = useQuery('pid');
+
   useEffect(() => {
     if (questionLanguage) {
       changeLocale(questionLanguage);
@@ -478,6 +482,12 @@ export function AnswerSessionPage({
   const previewPossible =
     !(isPreview && !canPreview(interventionStatus)) &&
     (!isUserSessionFinished || (isGuestUser && isUserSessionFinished));
+
+  useEffect(() => {
+    if (pid && !isPreview) {
+      verifyPid(pid);
+    }
+  }, [pid, isPreview, verifyPid]);
 
   useEffect(() => {
     if (isAuthenticated && !userSession) {
@@ -1148,6 +1158,7 @@ AnswerSessionPage.propTypes = {
   fixedElementsDirection: PropTypes.string,
   dynamicElementsDirection: PropTypes.string,
   changeLocale: PropTypes.func,
+  verifyPid: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -1179,6 +1190,7 @@ const mapDispatchToProps = {
   saveQuickExitEvent: saveQuickExitEventRequest,
   fetchPreviousQuestion: fetchPreviousQuestionRequest,
   changeLocale: changeLocaleAction,
+  verifyPid: verifyPidRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

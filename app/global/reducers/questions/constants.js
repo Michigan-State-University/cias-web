@@ -41,6 +41,27 @@ export const UPDATE_QUESTION_IMAGE_SUCCESS =
 export const UPDATE_QUESTION_IMAGE_ERROR =
   'app/EditSessionPage/UPDATE_QUESTION_IMAGE_ERROR';
 
+export const ADD_ANSWER_IMAGE_REQUEST =
+  'app/EditSessionPage/ADD_ANSWER_IMAGE_REQUEST';
+export const ADD_ANSWER_IMAGE_SUCCESS =
+  'app/EditSessionPage/ADD_ANSWER_IMAGE_SUCCESS';
+export const ADD_ANSWER_IMAGE_ERROR =
+  'app/EditSessionPage/ADD_ANSWER_IMAGE_ERROR';
+
+export const DELETE_ANSWER_IMAGE_REQUEST =
+  'app/EditSessionPage/DELETE_ANSWER_IMAGE_REQUEST';
+export const DELETE_ANSWER_IMAGE_SUCCESS =
+  'app/EditSessionPage/DELETE_ANSWER_IMAGE_SUCCESS';
+export const DELETE_ANSWER_IMAGE_ERROR =
+  'app/EditSessionPage/DELETE_ANSWER_IMAGE_ERROR';
+
+export const UPDATE_ANSWER_IMAGE_REQUEST =
+  'app/EditSessionPage/UPDATE_ANSWER_IMAGE_REQUEST';
+export const UPDATE_ANSWER_IMAGE_SUCCESS =
+  'app/EditSessionPage/UPDATE_ANSWER_IMAGE_SUCCESS';
+export const UPDATE_ANSWER_IMAGE_ERROR =
+  'app/EditSessionPage/UPDATE_ANSWER_IMAGE_ERROR';
+
 export const COPY_QUESTION_REQUEST =
   'app/EditSessionPage/COPY_QUESTION_REQUEST';
 export const COPY_QUESTION_SUCCESS =

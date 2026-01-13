@@ -925,6 +925,8 @@
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.clinicSelectLabel": "",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.clinicSelectPlaceholder": "",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copyLinkButtonTitle": "",
+  "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copyInterventionLinkButtonTitle": "",
+  "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copySessionLinkButtonTitle": "",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copyLinkIconAlt": "",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copyPredefinedParticipanyUrlButtonTitle": "",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.createPredefinedParticipants": "",

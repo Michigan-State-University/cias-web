@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Markup } from 'interweave';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
+import { getAnswerImageSize } from 'utils/getAnswerImageSize';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Checkbox from 'components/Checkbox';
 import HoverableBox from 'components/Box/HoverableBox';
 import AudioTextPreview from 'components/AudioTextPreview';
-import MarkupContainer from 'components/MarkupContainer';
+
+import AnswerContent from '../components/AnswerContent';
 
 const margin = 21;
 
@@ -21,16 +22,23 @@ const MultipleQuestionLayout = ({
   isMobile,
   disabled,
   dynamicElementsDirection,
+  answerImages = [],
+  answerImageSize = 'medium',
 }) => (
   <Column dir={dynamicElementsDirection}>
     {data.map((questionAnswer, index) => {
       const {
         payload,
         variable: { name, value },
+        id: answerId,
       } = questionAnswer;
       const isChecked = selectedAnswersIndex.includes(index);
       const ariaInputId = `answer-${index + 1}`;
       const key = `question-${questionId}-el-${index}`;
+
+      const answerImage = answerImages.find(
+        (img) => img.answer_id === answerId,
+      );
 
       return (
         <Row key={key} marginBlockEnd={10}>
@@ -53,9 +61,12 @@ const MultipleQuestionLayout = ({
               onChange={() => check(value, name, index)}
               disabled={disabled}
             >
-              <MarkupContainer>
-                <Markup content={payload} noWrap />
-              </MarkupContainer>
+              <AnswerContent
+                answerImage={answerImage}
+                payload={payload}
+                index={index}
+                imageMaxWidth={getAnswerImageSize(answerImageSize)}
+              />
             </Checkbox>
           </HoverableBox>
           {isMobile && (
@@ -78,6 +89,15 @@ MultipleQuestionLayout.propTypes = {
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
   dynamicElementsDirection: PropTypes.string,
+  answerImages: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      url: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+      answer_id: PropTypes.string.isRequired,
+    }),
+  ),
+  answerImageSize: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 export default MultipleQuestionLayout;
