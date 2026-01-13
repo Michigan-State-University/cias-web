@@ -31,12 +31,16 @@ export interface QuestionPayloadData<TPayload extends QuestionPayload> {
 }
 
 export interface SingleQuestionData extends QuestionPayloadData<string> {
+  id?: string;
   value: string;
+  imageId?: string;
   originalText?: string;
 }
 
 export interface MultipleQuestionData extends QuestionPayloadData<string> {
+  id?: string;
   variable: QuestionDataVariable;
+  imageId?: string;
   originalText?: string;
 }
 
@@ -46,6 +50,7 @@ export interface ThirdPartyReportQuestionData extends QuestionPayloadData<string
   value: string;
   reportTemplateIds: string[];
   numericValue: string;
+  imageId?: string;
   originalText?: string;
 }
 
