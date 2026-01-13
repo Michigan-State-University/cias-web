@@ -3,6 +3,7 @@ import { IntlShape } from 'react-intl';
 import parsePhoneNumber, {
   formatIncompletePhoneNumber,
   getCountryCallingCode,
+  getCountries,
   isValidNumber,
   NumberFormat,
 } from 'libphonenumber-js';
@@ -117,22 +118,36 @@ export const parsePhoneFromCsv = (
   phoneCountryCode: string | undefined,
   phoneNumber: string | undefined,
 ) => {
-  const trimmedCode = phoneCountryCode?.trim();
-  const trimmedNumber = phoneNumber?.trim();
+  try {
+    const trimmedCode = phoneCountryCode?.trim();
+    const trimmedNumber = phoneNumber?.trim();
 
-  if (!trimmedCode || !trimmedNumber) {
-    return getInitialValues(null, null);
-  }
-
-  if (trimmedCode.startsWith('+')) {
-    const fullNumber = `${trimmedCode}${trimmedNumber}`;
-    const parsed = parsePhoneNumber(fullNumber);
-
-    if (parsed) {
-      return getInitialValues(parsed.nationalNumber as string, parsed.country);
+    if (!trimmedCode || !trimmedNumber) {
+      return getInitialValues(null, null);
     }
+
+    if (trimmedCode.startsWith('+')) {
+      const fullNumber = `${trimmedCode}${trimmedNumber}`;
+      const parsed = parsePhoneNumber(fullNumber);
+
+      if (parsed) {
+        return getInitialValues(
+          parsed.nationalNumber as string,
+          parsed.country,
+        );
+      }
+      return getInitialValues(null, null);
+    }
+
+    // Validate that the country code is a valid ISO country code
+    const upperCaseCode = trimmedCode.toUpperCase();
+    const validCountries = getCountries();
+    if (!validCountries.includes(upperCaseCode as CountryCode)) {
+      return getInitialValues(null, null);
+    }
+
+    return getInitialValues(trimmedNumber, upperCaseCode as CountryCode);
+  } catch {
     return getInitialValues(null, null);
   }
-
-  return getInitialValues(trimmedNumber, trimmedCode as any);
 };

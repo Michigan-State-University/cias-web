@@ -19,7 +19,7 @@ import { themeColors } from 'theme';
 
 import messages from './messages';
 import styles from './styled';
-import { CSV_FILE_UPLOAD_ERROR } from './constants';
+import { CSV_FILE_UPLOAD_ERROR, MAX_CSV_FILE_SIZE_BYTES } from './constants';
 
 const CsvFileReader = ({
   children,
@@ -27,6 +27,7 @@ const CsvFileReader = ({
   intl: { formatMessage },
   disabled,
   config,
+  maxFileSizeBytes = MAX_CSV_FILE_SIZE_BYTES,
 }) => {
   const readerRef = useRef(null);
 
@@ -40,11 +41,25 @@ const CsvFileReader = ({
       toastId: CSV_FILE_UPLOAD_ERROR,
     });
 
+  const handleDrop = (data, file) => {
+    if (maxFileSizeBytes && file?.size > maxFileSizeBytes) {
+      const maxSizeMB = Math.round(maxFileSizeBytes / (1024 * 1024));
+      toast.error(
+        formatMessage(messages.fileTooLarge, { maxSize: maxSizeMB }),
+        {
+          toastId: CSV_FILE_UPLOAD_ERROR,
+        },
+      );
+      return;
+    }
+    onUpload(data, file);
+  };
+
   return (
     <CSVReader
       disabled
       ref={readerRef}
-      onDrop={onUpload}
+      onDrop={handleDrop}
       onError={handleError}
       noDrag
       noClick
@@ -74,6 +89,7 @@ CsvFileReader.propTypes = {
   intl: PropTypes.shape(IntlShape),
   disabled: PropTypes.bool,
   config: PropTypes.object,
+  maxFileSizeBytes: PropTypes.number,
 };
 
 export default compose(injectIntl)(CsvFileReader);

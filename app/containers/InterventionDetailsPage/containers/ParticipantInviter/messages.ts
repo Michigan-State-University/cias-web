@@ -311,4 +311,14 @@ export default defineMessages({
     id: `${scope}.removeAllParticipants`,
     defaultMessage: 'Remove all participants',
   },
+  csvParsingError: {
+    id: `${scope}.csvParsingError`,
+    defaultMessage:
+      'An error occurred while parsing the CSV file. Please check the file format and try again.',
+  },
+  csvInvalidPhoneNumbers: {
+    id: `${scope}.csvInvalidPhoneNumbers`,
+    defaultMessage:
+      '{count, plural, one {# phone number} other {# phone numbers}} could not be parsed due to invalid country code or phone number format.',
+  },
 });

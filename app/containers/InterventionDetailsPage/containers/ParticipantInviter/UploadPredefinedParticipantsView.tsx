@@ -1,6 +1,7 @@
 import React, { FC, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import {
   makeSelectInterventionLoader,
@@ -86,15 +87,28 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
   >([]);
 
   const handleUpload = (data: UploadedPredefinedParticipantsCsvData) => {
-    const parsedParticipants = parsePredefinedParticipantsCsv(
-      data,
-      normalizedHealthClinicsInfos,
-      isReportingIntervention,
-    );
+    try {
+      const { participants: parsedParticipants, invalidPhoneCount } =
+        parsePredefinedParticipantsCsv(
+          data,
+          normalizedHealthClinicsInfos,
+          isReportingIntervention,
+        );
 
-    setParticipants((prevParticipants) =>
-      mergePredefinedParticipants(prevParticipants, parsedParticipants),
-    );
+      if (invalidPhoneCount > 0) {
+        toast.warning(
+          formatMessage(messages.csvInvalidPhoneNumbers, {
+            count: invalidPhoneCount,
+          }),
+        );
+      }
+
+      setParticipants((prevParticipants) =>
+        mergePredefinedParticipants(prevParticipants, parsedParticipants),
+      );
+    } catch (error) {
+      toast.error(formatMessage(messages.csvParsingError));
+    }
   };
 
   return (

@@ -423,11 +423,16 @@ const parseBooleanFromCsv = (value?: string): boolean => {
   return normalized === 'true' || normalized === 'yes' || normalized === '1';
 };
 
+export type ParsePredefinedParticipantsCsvResult = {
+  participants: ParsedPredefinedParticipantCsvRow[];
+  invalidPhoneCount: number;
+};
+
 export const parsePredefinedParticipantsCsv = (
   data: UploadedPredefinedParticipantsCsvData,
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
   isReportingIntervention: boolean,
-): ParsedPredefinedParticipantCsvRow[] => {
+): ParsePredefinedParticipantsCsvResult => {
   const dataRows = data
     .map((result) => result.data)
     .filter(
@@ -439,7 +444,9 @@ export const parsePredefinedParticipantsCsv = (
         }),
     );
 
-  return dataRows.map((row) => {
+  let invalidPhoneCount = 0;
+
+  const participants = dataRows.map((row) => {
     let healthClinicOption: SelectOption<string> | null = null;
 
     if (isReportingIntervention) {
@@ -458,6 +465,13 @@ export const parsePredefinedParticipantsCsv = (
       row.phoneNumber,
     );
 
+    const hasPhoneData =
+      (row.phoneCountryCode?.trim() || row.phoneNumber?.trim()) && true;
+    const phoneParsingFailed = hasPhoneData && !phoneAttributes.number;
+    if (phoneParsingFailed) {
+      invalidPhoneCount += 1;
+    }
+
     return {
       firstName: row.firstName?.trim() || '',
       lastName: row.lastName?.trim() || '',
@@ -470,6 +484,8 @@ export const parsePredefinedParticipantsCsv = (
       healthClinicOption,
     };
   });
+
+  return { participants, invalidPhoneCount };
 };
 
 export const generatePredefinedParticipantsExampleCsv = (

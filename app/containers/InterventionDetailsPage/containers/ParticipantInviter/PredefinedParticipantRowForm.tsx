@@ -30,15 +30,18 @@ export const PredefinedParticipantRowForm: FC<Props> = ({
     participant.externalId ||
     '';
 
-  const phone =
-    participant.number && participant.iso
-      ? (() =>
-          formatPhone({
-            prefix: `+${getCountryCallingCode(participant.iso.value)}`,
-            number: participant.number,
-            iso: participant.iso.value,
-          }))()
-      : '';
+  let phone = '';
+  if (participant.number && participant.iso) {
+    try {
+      phone = formatPhone({
+        prefix: `+${getCountryCallingCode(participant.iso.value)}`,
+        number: participant.number,
+        iso: participant.iso.value,
+      });
+    } catch {
+      // Invalid country code, leave phone empty
+    }
+  }
 
   return (
     <StripedTR
