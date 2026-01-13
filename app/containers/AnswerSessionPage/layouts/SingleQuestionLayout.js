@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
+import { getAnswerImageSize } from 'utils/getAnswerImageSize';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -24,6 +25,7 @@ const SingleQuestionLayout = ({
   disabled,
   dynamicElementsDirection,
   answerImages = [],
+  answerImageSize = 'medium',
 }) => (
   <Column dir={dynamicElementsDirection}>
     <Box>
@@ -74,7 +76,7 @@ const SingleQuestionLayout = ({
                       <Img
                         src={answerImage.url}
                         alt={answerImage.alt || `Answer ${index + 1} image`}
-                        maxWidth="200px"
+                        maxWidth={getAnswerImageSize(answerImageSize)}
                         height="auto"
                       />
                     </Box>
@@ -114,6 +116,7 @@ SingleQuestionLayout.propTypes = {
       answer_id: PropTypes.string.isRequired,
     }),
   ),
+  answerImageSize: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 export default SingleQuestionLayout;

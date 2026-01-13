@@ -36,6 +36,7 @@ import OriginalTextHover from 'components/OriginalTextHover';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { DndSortable } from 'components/DragAndDrop';
 import { ModalType, useModal } from 'components/Modal';
+import { getAnswerImageSize } from 'utils/getAnswerImageSize';
 
 import AnswerImageUploadModal from '../AnswerImageUpload';
 import questionImageMessages from '../../QuestionImage/messages';
@@ -180,7 +181,10 @@ const SingleQuestion = ({
                                 (img) => img.answer_id === item.id,
                               )?.url
                             }
-                            maxWidth="200px"
+                            maxWidth={getAnswerImageSize(
+                              selectedQuestion.settings?.answer_image_size ||
+                                'medium',
+                            )}
                             height="auto"
                             borderRadius={4}
                           />
