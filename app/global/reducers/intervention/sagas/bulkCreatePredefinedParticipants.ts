@@ -38,7 +38,6 @@ function* bulkCreatePredefinedParticipants({
       'predefinedParticipant',
     );
 
-    console.log('Created predefined participants:', predefinedParticipants);
     yield put(bulkCreatePredefinedParticipantsSuccess(predefinedParticipants));
     yield call(
       toast.success,
