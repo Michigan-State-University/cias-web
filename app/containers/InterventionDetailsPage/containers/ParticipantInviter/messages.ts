@@ -33,6 +33,14 @@ export default defineMessages({
     defaultMessage:
       'Copy URL link to this {isModularIntervention, select, true {intervention} false {session} other {}}',
   },
+  copyInterventionLinkButtonTitle: {
+    id: `${scope}.copyInterventionLinkButtonTitle`,
+    defaultMessage: 'Copy URL link to this intervention',
+  },
+  copySessionLinkButtonTitle: {
+    id: `${scope}.copySessionLinkButtonTitle`,
+    defaultMessage: 'Copy URL link to this session',
+  },
   noParticipantsInfo: {
     id: `${scope}.noParticipantsInfo`,
     defaultMessage: `There are no {invitationType, select, EMAIL {e-mail} PREDEFINED {predefined} other {}} participants yet`,

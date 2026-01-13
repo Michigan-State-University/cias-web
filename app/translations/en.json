@@ -913,6 +913,8 @@
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.clinicSelectLabel": "Clinic",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.clinicSelectPlaceholder": "Select clinic",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copyLinkButtonTitle": "Copy URL link to this {isModularIntervention, select, true {intervention} false {session} other {}}",
+  "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copyInterventionLinkButtonTitle": "Copy URL link to this intervention",
+  "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copySessionLinkButtonTitle": "Copy URL link to this session",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copyLinkIconAlt": "Copy URL link icon",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copyPredefinedParticipanyUrlButtonTitle": "Copy predefined participant invitation URL",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.creatingPredefinedParticipantsNotPossibleMessage": "Predefined participants can be created in draft and published interventions only",
