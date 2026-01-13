@@ -69,7 +69,7 @@ export const InvitePredefinedParticipantsForm: FC<Props> = ({
                   </TH>
                   <TH padding={8}>
                     <Text textAlign="left" fontWeight="bold">
-                      Phone
+                      {formatMessage(messages.phoneInputLabel)}
                     </Text>
                   </TH>
                   <TH width={110}></TH>

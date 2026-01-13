@@ -185,6 +185,10 @@ export default defineMessages({
     id: `${scope}.emailInputPlaceholder`,
     defaultMessage: `Enter participant e-mail`,
   },
+  phoneInputLabel: {
+    id: `${scope}.phoneInputLabel`,
+    defaultMessage: `Phone`,
+  },
   externalIdInputLabel: {
     id: `${scope}.externalIdInputLabel`,
     defaultMessage: `Participant ID`,
