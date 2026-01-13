@@ -1,9 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
 
 import { borders, colors } from 'theme';
 
@@ -15,14 +12,6 @@ import Row from 'components/Row';
 import Column from 'components/Column';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
-import {
-  ADD_NONE_OF_THE_ABOVE,
-  REMOVE_NONE_OF_THE_ABOVE,
-} from 'containers/Sessions/components/QuestionData/MultiQuestion/constants';
-import {
-  makeSelectSelectedQuestion,
-  updateQuestionData,
-} from 'global/reducers/questions';
 import { Input } from '../styled';
 import messages from '../messages';
 import { getSettingOptionTooltipText } from './utils';
@@ -34,8 +23,6 @@ const SettingsOption = ({
   disabled,
   isLast,
   session,
-  addNoneOfAboveAnswer,
-  removeNoneOfAboveAnswer,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -96,15 +83,7 @@ const SettingsOption = ({
             id={index}
             disabled={disabled || optionDisabled()}
             checked={setting}
-            onToggle={(answer) => {
-              if (answer) {
-                handleUpdate(true);
-                addNoneOfAboveAnswer();
-              } else {
-                handleUpdate(false);
-                removeNoneOfAboveAnswer();
-              }
-            }}
+            onToggle={handleUpdate}
           >
             <HelpIconTooltip
               id={`question-settings-option-tooltip-${index}`}
@@ -164,20 +143,6 @@ SettingsOption.propTypes = {
   disabled: PropTypes.bool,
   isLast: PropTypes.bool,
   session: PropTypes.object,
-  addNoneOfAboveAnswer: PropTypes.func.isRequired,
-  removeNoneOfAboveAnswer: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
-  selectedQuestion: makeSelectSelectedQuestion(),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  addNoneOfAboveAnswer: () =>
-    dispatch(updateQuestionData({ type: ADD_NONE_OF_THE_ABOVE })),
-  removeNoneOfAboveAnswer: () =>
-    dispatch(updateQuestionData({ type: REMOVE_NONE_OF_THE_ABOVE })),
-});
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export default memo(compose(withConnect)(SettingsOption));
+export default memo(SettingsOption);
