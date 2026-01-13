@@ -27,10 +27,14 @@ export interface SingleQuestionSettings
     QuestionBaseSettings,
     RequiredSetting,
     ProceedButtonSetting,
-    StartAutofinishTimerSetting {}
+    StartAutofinishTimerSetting {
+  answerImageSize?: 'small' | 'medium' | 'large';
+}
 
 export interface MultipleQuestionSettings
-  extends QuestionBaseSettings, RequiredSetting, StartAutofinishTimerSetting {}
+  extends QuestionBaseSettings, RequiredSetting, StartAutofinishTimerSetting {
+  answerImageSize?: 'small' | 'medium' | 'large';
+}
 
 export interface FreeResponseQuestionSettings
   extends QuestionBaseSettings, RequiredSetting, StartAutofinishTimerSetting {

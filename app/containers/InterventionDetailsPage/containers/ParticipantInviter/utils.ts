@@ -48,13 +48,7 @@ export const createCopyLinkFormSchema = (
   isReportingIntervention: boolean,
 ) =>
   Yup.object().shape({
-    ...(isModularIntervention
-      ? {}
-      : {
-          sessionOption: Yup.object()
-            .required(formatMessage(validatorsMessages.required))
-            .nullable(),
-        }),
+    sessionOption: Yup.object().nullable(),
     ...(isReportingIntervention
       ? {
           healthClinicOption: Yup.object()
