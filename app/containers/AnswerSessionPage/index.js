@@ -487,7 +487,7 @@ export function AnswerSessionPage({
     if (pid && !isPreview) {
       verifyPid(pid);
     }
-  }, [pid, isPreview]);
+  }, [pid, isPreview, verifyPid]);
 
   useEffect(() => {
     if (isAuthenticated && !userSession) {

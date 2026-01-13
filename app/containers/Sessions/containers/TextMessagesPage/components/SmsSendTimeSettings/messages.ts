@@ -35,4 +35,8 @@ export default defineMessages({
     id: `${scope}.time`,
     defaultMessage: 'Time',
   },
+  invalidTimeRange: {
+    id: `${scope}.invalidTimeRange`,
+    defaultMessage: '"From" time must be before "To" time',
+  },
 });

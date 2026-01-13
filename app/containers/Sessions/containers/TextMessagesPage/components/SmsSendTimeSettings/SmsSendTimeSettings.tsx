@@ -11,12 +11,21 @@ import Text from 'components/Text';
 import { DateInput } from 'components/Input/DateInput';
 import { LocalizedDatePicker } from 'components/DatePicker';
 
+import { themeColors } from 'theme';
+
 import {
   parseTime24,
   getTimeString24,
 } from '../../../QuestionListGroup/QuestionGroupSettingsModal/utils';
 
 import messages from './messages';
+import {
+  validateTimeRange,
+  calculateMinToTime,
+  getMaxDayTime,
+  createDefaultTime,
+  createDefaultTimeRange,
+} from './utils';
 
 export type Props = {
   smsSendTimeType: SmsSendTimeType;
@@ -53,6 +62,21 @@ const SmsSendTimeSettingsComponent = ({
     [formatMessage],
   );
 
+  const timeRangeError = useMemo(() => {
+    if (smsSendTimeType !== SmsSendTimeType.TIME_RANGE) return null;
+
+    const isValid = validateTimeRange(
+      smsSendTimeDetails?.from,
+      smsSendTimeDetails?.to,
+    );
+
+    if (!isValid) {
+      return formatMessage(messages.invalidTimeRange);
+    }
+
+    return null;
+  }, [smsSendTimeType, smsSendTimeDetails, formatMessage]);
+
   const handleSelectChange = (optionId: SmsSendTimeType) => {
     onSmsSendTimeTypeChange(optionId);
 
@@ -60,20 +84,16 @@ const SmsSendTimeSettingsComponent = ({
       optionId === SmsSendTimeType.SPECIFIC_TIME &&
       !smsSendTimeDetails?.time
     ) {
-      const defaultTime = new Date();
-      defaultTime.setHours(13, 0, 0, 0);
+      const defaultTime = createDefaultTime();
       onSmsSendTimeDetailsChange({ time: getTimeString24(defaultTime) });
     } else if (
       optionId === SmsSendTimeType.TIME_RANGE &&
       (!smsSendTimeDetails?.from || !smsSendTimeDetails?.to)
     ) {
-      const defaultFrom = new Date();
-      defaultFrom.setHours(13, 0, 0, 0);
-      const defaultTo = new Date();
-      defaultTo.setHours(14, 0, 0, 0);
+      const { from, to } = createDefaultTimeRange();
       onSmsSendTimeDetailsChange({
-        from: getTimeString24(defaultFrom),
-        to: getTimeString24(defaultTo),
+        from: getTimeString24(from),
+        to: getTimeString24(to),
       });
     }
   };
@@ -102,10 +122,22 @@ const SmsSendTimeSettingsComponent = ({
     }
   };
 
+  // Calculate minimum time for "to" field (from time + 10 minutes)
+  const minToTime = useMemo(
+    () => calculateMinToTime(smsSendTimeDetails?.from),
+    [smsSendTimeDetails?.from],
+  );
+
   return (
     <>
       <Row width="100%" align="center" height="100%" mt={10}>
-        <Text fontWeight="bold" mr={5} fontSize={15}>
+        <Text
+          fontWeight="bold"
+          mr={5}
+          fontSize={15}
+          id="sms-send-time-type-label"
+          as="label"
+        >
           {formatMessage(messages.timeOfTheMessage)}
         </Text>
         <Selector
@@ -113,6 +145,7 @@ const SmsSendTimeSettingsComponent = ({
           setOption={handleSelectChange}
           activeOption={ALL_TIME_TYPES[smsSendTimeType]}
           disabled={disabled}
+          ariaLabel={formatMessage(messages.timeOfTheMessage)}
         />
       </Row>
 
@@ -148,62 +181,75 @@ const SmsSendTimeSettingsComponent = ({
       )}
 
       {smsSendTimeType === SmsSendTimeType.TIME_RANGE && (
-        <Row mt={10} gap={8}>
-          <Column>
-            <label htmlFor="time_range_from">
-              <Text
-                mb={5}
-                fontSize="12px"
-                fontWeight="bold"
-                width="fit-content"
-              >
-                {formatMessage(messages.from)}
+        <>
+          <Row mt={10} gap={8}>
+            <Column>
+              <label htmlFor="time_range_from">
+                <Text
+                  mb={5}
+                  fontSize="12px"
+                  fontWeight="bold"
+                  width="fit-content"
+                >
+                  {formatMessage(messages.from)}
+                </Text>
+              </label>
+              <LocalizedDatePicker
+                id="time_range_from"
+                selected={parseTime24(smsSendTimeDetails?.from || '')}
+                onChange={handleFromChange}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={10}
+                timeFormat="HH:mm"
+                calendarClassName="schedule-date-picker"
+                customInput={
+                  <DateInput id="time_range_from_picker" width="100%" />
+                }
+                timeCaption={formatMessage(messages.time)}
+                dateFormat="HH:mm"
+                disabled={disabled}
+              />
+            </Column>
+            <Column>
+              <label htmlFor="time_range_to">
+                <Text
+                  mb={5}
+                  fontSize="12px"
+                  fontWeight="bold"
+                  width="fit-content"
+                >
+                  {formatMessage(messages.to)}
+                </Text>
+              </label>
+              <LocalizedDatePicker
+                id="time_range_to"
+                selected={parseTime24(smsSendTimeDetails?.to || '')}
+                onChange={handleToChange}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={10}
+                timeFormat="HH:mm"
+                calendarClassName="schedule-date-picker"
+                customInput={
+                  <DateInput id="time_range_to_picker" width="100%" />
+                }
+                timeCaption={formatMessage(messages.time)}
+                dateFormat="HH:mm"
+                disabled={disabled}
+                minTime={minToTime}
+                maxTime={getMaxDayTime()}
+              />
+            </Column>
+          </Row>
+          {timeRangeError && (
+            <Row mt={5}>
+              <Text fontSize={13} color={themeColors.warning}>
+                {timeRangeError}
               </Text>
-            </label>
-            <LocalizedDatePicker
-              id="time_range_from"
-              selected={parseTime24(smsSendTimeDetails?.from || '')}
-              onChange={handleFromChange}
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={10}
-              timeFormat="HH:mm"
-              calendarClassName="schedule-date-picker"
-              customInput={
-                <DateInput id="time_range_from_picker" width="100%" />
-              }
-              timeCaption={formatMessage(messages.time)}
-              dateFormat="HH:mm"
-              disabled={disabled}
-            />
-          </Column>
-          <Column>
-            <label htmlFor="time_range_to">
-              <Text
-                mb={5}
-                fontSize="12px"
-                fontWeight="bold"
-                width="fit-content"
-              >
-                {formatMessage(messages.to)}
-              </Text>
-            </label>
-            <LocalizedDatePicker
-              id="time_range_to"
-              selected={parseTime24(smsSendTimeDetails?.to || '')}
-              onChange={handleToChange}
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={10}
-              timeFormat="HH:mm"
-              calendarClassName="schedule-date-picker"
-              customInput={<DateInput id="time_range_to_picker" width="100%" />}
-              timeCaption={formatMessage(messages.time)}
-              dateFormat="HH:mm"
-              disabled={disabled}
-            />
-          </Column>
-        </Row>
+            </Row>
+          )}
+        </>
       )}
     </>
   );
