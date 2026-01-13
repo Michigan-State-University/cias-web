@@ -10,6 +10,7 @@ import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 import Row from 'components/Row';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import Select from 'components/Select';
 
 import { Input } from '../styled';
 import messages from '../messages';
@@ -72,7 +73,33 @@ const SettingsOption = ({
     [index, setting, disabled, isNullableNumericSettings],
   );
 
+  const selectInput = useCallback(() => {
+    const options = ['small', 'medium', 'large'].map((size) => ({
+      value: size,
+      label: formatMessage(messages[`${index}_${size}`]),
+    }));
+
+    return (
+      <>
+        <H3>{formatMessage(messages[`${index}`])}</H3>
+        <Select
+          selectProps={{
+            value: options.find((opt) => opt.value === setting) || options[1],
+            onChange: (selectedOption) => handleUpdate(selectedOption.value),
+            options,
+            isDisabled: disabled,
+            'data-cy': `${index}-select`,
+          }}
+        />
+      </>
+    );
+  }, [index, setting, disabled, handleUpdate, formatMessage]);
+
   const renderSetting = () => {
+    if (index === 'answer_image_size') {
+      return selectInput();
+    }
+
     if (isNullableNumericSettings) return numericInput();
     switch (setting?.constructor) {
       case Number:
@@ -116,7 +143,11 @@ const SettingsOption = ({
 
 SettingsOption.propTypes = {
   onUpdate: PropTypes.func,
-  setting: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+  setting: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   index: PropTypes.string,
   disabled: PropTypes.bool,
   isLast: PropTypes.bool,
