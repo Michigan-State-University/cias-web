@@ -65,7 +65,7 @@ const AnswerImageUploadModal = ({ closeModal, answerId }) => {
         image={imageUrl}
         onAddImage={handleAddImage}
         onDeleteImage={handleDeleteImage}
-        acceptedFormats={['JPG', 'PNG', 'GIF']}
+        acceptedFormats={['JPG', 'PNG', 'GIF', 'HEIC']}
         loading={loading}
       />
       {error && <ErrorAlert errorText={error} mt={16} />}

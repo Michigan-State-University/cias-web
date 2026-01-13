@@ -40,6 +40,10 @@ import { getAnswerImageSize } from 'utils/getAnswerImageSize';
 
 import AnswerImageUploadModal from '../AnswerImageUpload';
 import questionImageMessages from '../../QuestionImage/messages';
+import {
+  hasAnswerImage as checkHasAnswerImage,
+  getOriginalAnswerImageText as getOriginalAnswerImageTextHelper,
+} from '../answerImageHelpers';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 import { reorderAnswersAction } from './actions';
@@ -99,33 +103,10 @@ const SingleQuestion = ({
   };
 
   const hasAnswerImage = (answerId) =>
-    answerImages.some((img) => img.answer_id === answerId);
+    checkHasAnswerImage(answerImages, answerId);
 
-  const getOriginalAnswerImageText = (answerId) => {
-    if (!originalText || typeof originalText !== 'object') {
-      return undefined;
-    }
-
-    const answerImagesArray =
-      originalText.answer_images || originalText.answerImages;
-
-    if (!Array.isArray(answerImagesArray) || answerImagesArray.length === 0) {
-      return undefined;
-    }
-
-    const matchingEntry = answerImagesArray.find(
-      (entry) =>
-        entry && typeof entry === 'object' && entry.answer_id === answerId,
-    );
-
-    if (!matchingEntry) return undefined;
-
-    const text = matchingEntry.description;
-
-    return text && typeof text === 'string' && text.trim() !== ''
-      ? text
-      : undefined;
-  };
+  const getOriginalAnswerImageText = (answerId) =>
+    getOriginalAnswerImageTextHelper(originalText, answerId);
 
   const onDragEnd = (_, items, hasChanged) => {
     if (!hasChanged) return;

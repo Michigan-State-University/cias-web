@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Markup } from 'interweave';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { getAnswerImageSize } from 'utils/getAnswerImageSize';
@@ -9,10 +8,9 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Checkbox from 'components/Checkbox';
 import HoverableBox from 'components/Box/HoverableBox';
-import Box from 'components/Box';
 import AudioTextPreview from 'components/AudioTextPreview';
-import MarkupContainer from 'components/MarkupContainer';
-import Img from 'components/Img';
+
+import AnswerContent from '../components/AnswerContent';
 
 const margin = 21;
 
@@ -38,7 +36,6 @@ const MultipleQuestionLayout = ({
       const ariaInputId = `answer-${index + 1}`;
       const key = `question-${questionId}-el-${index}`;
 
-      // Find the image for this answer
       const answerImage = answerImages.find(
         (img) => img.answer_id === answerId,
       );
@@ -64,21 +61,12 @@ const MultipleQuestionLayout = ({
               onChange={() => check(value, name, index)}
               disabled={disabled}
             >
-              <Column>
-                {answerImage && (
-                  <Box marginBlockEnd={8}>
-                    <Img
-                      src={answerImage.url}
-                      alt={answerImage.alt || `Answer ${index + 1} image`}
-                      maxWidth={getAnswerImageSize(answerImageSize)}
-                      height="auto"
-                    />
-                  </Box>
-                )}
-                <MarkupContainer>
-                  <Markup content={payload} noWrap />
-                </MarkupContainer>
-              </Column>
+              <AnswerContent
+                answerImage={answerImage}
+                payload={payload}
+                index={index}
+                imageMaxWidth={getAnswerImageSize(answerImageSize)}
+              />
             </Checkbox>
           </HoverableBox>
           {isMobile && (
