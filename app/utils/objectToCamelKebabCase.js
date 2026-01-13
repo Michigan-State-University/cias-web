@@ -3,6 +3,6 @@ import replace from 'lodash/replace';
 import { mapKeysDeep } from 'utils/mapKeysDeep';
 
 const objectToCamelKebabCase = (obj) =>
-  mapKeysDeep(obj, (_, key) => replace(startCase(key), ' ', '-'));
+  mapKeysDeep(obj, (_, key) => replace(startCase(key), / /g, '-'));
 
 export default objectToCamelKebabCase;
