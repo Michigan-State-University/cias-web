@@ -17,6 +17,8 @@ const MultipleQuestion = ({
   const {
     body: { data },
     id,
+    answer_images: answerImages = [],
+    settings: { answer_image_size: answerImageSize } = {},
   } = question;
 
   useEffect(() => {
@@ -75,6 +77,8 @@ const MultipleQuestion = ({
       isMobile={isMobile}
       disabled={disabled}
       dynamicElementsDirection={dynamicElementsDirection}
+      answerImages={answerImages}
+      answerImageSize={answerImageSize}
     />
   );
 };

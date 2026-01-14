@@ -26,4 +26,8 @@ export default defineMessages({
     id: `${scope}.UPLOAD_EMAILS`,
     defaultMessage: 'Bulk e-mail upload',
   },
+  [InviteParticipantModalView.UPLOAD_PREDEFINED_PARTICIPANTS]: {
+    id: `${scope}.UPLOAD_PREDEFINED_PARTICIPANTS`,
+    defaultMessage: 'Bulk predefined participants upload',
+  },
 });

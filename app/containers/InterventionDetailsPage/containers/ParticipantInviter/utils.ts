@@ -27,6 +27,7 @@ import {
   getInitialValues,
   getPhoneAttributes,
   phoneNumberSchema,
+  parsePhoneFromCsv,
 } from 'components/FormikPhoneNumberInput';
 
 import {
@@ -37,6 +38,10 @@ import {
   ParsedEmailsCsv,
   ReportingInterventionInviteEmailParticipantsFormValues,
   UploadedEmailsCsvData,
+  PredefinedParticipantCsvRow,
+  UploadedPredefinedParticipantsCsvData,
+  ParsedPredefinedParticipantCsvRow,
+  InvitePredefinedParticipantsFormValues,
 } from './types';
 import messages from './messages';
 
@@ -48,13 +53,7 @@ export const createCopyLinkFormSchema = (
   isReportingIntervention: boolean,
 ) =>
   Yup.object().shape({
-    ...(isModularIntervention
-      ? {}
-      : {
-          sessionOption: Yup.object()
-            .required(formatMessage(validatorsMessages.required))
-            .nullable(),
-        }),
+    sessionOption: Yup.object().nullable(),
     ...(isReportingIntervention
       ? {
           healthClinicOption: Yup.object()
@@ -411,3 +410,152 @@ export const getPredefinedParticipantUrl = (slug: string): string =>
 
 export const formatInvitationSentAt = (invitationSentAt: Nullable<string>) =>
   invitationSentAt && dayjs(invitationSentAt).format('L LT');
+
+const parseBooleanFromCsv = (value?: string): boolean => {
+  if (!value) return false;
+  const normalized = value.toLowerCase().trim();
+  return normalized === 'true' || normalized === 'yes' || normalized === '1';
+};
+
+export type ParsePredefinedParticipantsCsvResult = {
+  participants: ParsedPredefinedParticipantCsvRow[];
+  invalidPhoneCount: number;
+};
+
+export const parsePredefinedParticipantsCsv = (
+  data: UploadedPredefinedParticipantsCsvData,
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
+  isReportingIntervention: boolean,
+): ParsePredefinedParticipantsCsvResult => {
+  const dataRows = data
+    .map((result) => result.data)
+    .filter(
+      (row) =>
+        row &&
+        Object.keys(row).some((key) => {
+          const value = row[key as keyof PredefinedParticipantCsvRow];
+          return typeof value === 'string' && value.trim();
+        }),
+    );
+
+  let invalidPhoneCount = 0;
+
+  const participants = dataRows.map((row) => {
+    let healthClinicOption: SelectOption<string> | null = null;
+
+    if (isReportingIntervention) {
+      const healthClinicId = row.healthClinicId?.trim();
+      if (healthClinicId && normalizedHealthClinicsInfos[healthClinicId]) {
+        const clinic = normalizedHealthClinicsInfos[healthClinicId];
+        healthClinicOption = {
+          value: healthClinicId,
+          label: clinic.healthClinicName,
+        };
+      }
+    }
+
+    const phoneAttributes = parsePhoneFromCsv(
+      row.phoneCountryCode,
+      row.phoneNumber,
+    );
+
+    const hasPhoneData =
+      (row.phoneCountryCode?.trim() || row.phoneNumber?.trim()) && true;
+    const phoneParsingFailed = hasPhoneData && !phoneAttributes.number;
+    if (phoneParsingFailed) {
+      invalidPhoneCount += 1;
+    }
+
+    return {
+      firstName: row.firstName?.trim() || '',
+      lastName: row.lastName?.trim() || '',
+      email: row.email?.trim() || '',
+      externalId: row.externalId?.trim() || '',
+      iso: phoneAttributes.iso,
+      number: phoneAttributes.number,
+      emailNotification: parseBooleanFromCsv(row.emailNotification),
+      smsNotification: parseBooleanFromCsv(row.smsNotification),
+      healthClinicOption,
+    };
+  });
+
+  return { participants, invalidPhoneCount };
+};
+
+export const generatePredefinedParticipantsExampleCsv = (
+  healthClinicOptions: SelectOption<string>[],
+  isReportingIntervention: boolean,
+): PredefinedParticipantCsvRow[] => {
+  if (isReportingIntervention) {
+    return healthClinicOptions.map(
+      ({ value: healthClinicId, label: healthClinicName }, index) => ({
+        firstName: `FirstName${index + 1}`,
+        lastName: `LastName${index + 1}`,
+        email: `participant${index + 1}@example.com`,
+        externalId: `EXT00${index + 1}`,
+        phoneCountryCode: index % 2 === 0 ? '+1' : 'US',
+        phoneNumber: `555123456${index}`,
+        emailNotification: 'true',
+        smsNotification: 'false',
+        healthClinicId,
+        healthClinicName,
+      }),
+    );
+  }
+
+  return [...Array(3)].map((_, index) => ({
+    firstName: `FirstName${index + 1}`,
+    lastName: `LastName${index + 1}`,
+    email: `participant${index + 1}@example.com`,
+    externalId: `EXT00${index + 1}`,
+    phoneCountryCode: index % 2 === 0 ? '+1' : 'US',
+    phoneNumber: `555123456${index}`,
+    emailNotification: 'true',
+    smsNotification: 'false',
+  }));
+};
+
+export const mergePredefinedParticipants = (
+  existingParticipants: ParsedPredefinedParticipantCsvRow[],
+  newParticipants: ParsedPredefinedParticipantCsvRow[],
+): ParsedPredefinedParticipantCsvRow[] => {
+  const participantMap = new Map<string, ParsedPredefinedParticipantCsvRow>();
+
+  existingParticipants.forEach((participant) => {
+    const key =
+      participant.email.trim().toLowerCase() || participant.externalId.trim();
+    if (key) {
+      participantMap.set(key, participant);
+    }
+  });
+
+  newParticipants.forEach((participant) => {
+    const key =
+      participant.email.trim().toLowerCase() || participant.externalId.trim();
+    if (key) {
+      participantMap.set(key, participant);
+    }
+  });
+
+  return Array.from(participantMap.values());
+};
+
+export const prepareBulkCreatePredefinedParticipantsPayload = (
+  values: InvitePredefinedParticipantsFormValues,
+  interventionId: string,
+) => ({
+  interventionId,
+  participants: values.participants.map((participant) => ({
+    firstName: participant.firstName || undefined,
+    lastName: participant.lastName || undefined,
+    email: participant.email || undefined,
+    externalId: participant.externalId || undefined,
+    phoneAttributes:
+      participant.number && participant.iso
+        ? getPhoneAttributes(participant.number, participant.iso)
+        : null,
+    emailNotification: participant.emailNotification,
+    smsNotification: participant.smsNotification,
+    healthClinicId: participant.healthClinicOption?.value || undefined,
+  })),
+});

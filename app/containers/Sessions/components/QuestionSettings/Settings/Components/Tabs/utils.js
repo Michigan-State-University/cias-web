@@ -46,6 +46,9 @@ export const orderSettings = (settings) =>
     ...('max_length' in settings && {
       max_length: settings.max_length,
     }),
+    ...('answer_image_size' in settings && {
+      answer_image_size: settings.answer_image_size ?? 'medium',
+    }),
   };
 
 export const getSettingOptionTooltipText = (formatMessage, setting) => {

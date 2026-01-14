@@ -6,7 +6,11 @@ import { connect, useSelector } from 'react-redux';
 
 import { colors, borders } from 'theme';
 import lastKey from 'utils/getLastKey';
-import { feedbackQuestion } from 'models/Session/QuestionTypes';
+import {
+  feedbackQuestion,
+  singleQuestion,
+  multiQuestion,
+} from 'models/Session/QuestionTypes';
 
 import { makeSelectSession } from 'global/reducers/session';
 
@@ -18,7 +22,15 @@ import { updateSettings as updateQuestionSettings } from '../../actions';
 import { orderSettings } from './utils';
 
 const SettingsTab = ({ settings, type, onQuestionToggle, id, disabled }) => {
-  const orderedSettings = orderSettings(settings);
+  const settingsWithDefaults =
+    type === singleQuestion.id || type === multiQuestion.id
+      ? {
+          ...settings,
+          answer_image_size: settings?.answer_image_size ?? 'medium',
+        }
+      : settings;
+
+  const orderedSettings = orderSettings(settingsWithDefaults);
   const last = lastKey(orderedSettings);
 
   const session = useSelector(makeSelectSession());

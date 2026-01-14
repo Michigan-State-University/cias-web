@@ -43,6 +43,9 @@ import {
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
   SELECT_VIDEO_STATS,
+  VERIFY_PID_REQUEST,
+  VERIFY_PID_SUCCESS,
+  VERIFY_PID_ERROR,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
@@ -170,3 +173,10 @@ export const verifyPatientDataError = (error) =>
 
 export const setHfhsPatientDetail = (hfhsPatientDetail) =>
   actionBuilder(SET_HFHS_PATIENT_DETAIL, { hfhsPatientDetail });
+
+export const verifyPidRequest = (pid) =>
+  actionBuilder(VERIFY_PID_REQUEST, { pid });
+export const verifyPidSuccess = (user) =>
+  actionBuilder(VERIFY_PID_SUCCESS, { user });
+export const verifyPidError = (error) =>
+  actionBuilder(VERIFY_PID_ERROR, { error });
