@@ -24,7 +24,6 @@ import { updateConversationTranscript } from 'global/reducers/liveChat';
 import {
   refetchInterventions,
   updateInterventionListItemById,
-  resetImportModalState,
 } from 'global/reducers/interventions';
 
 import {
@@ -80,11 +79,7 @@ export const useNotificationChannel = () => {
         );
         break;
       }
-      case NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION: {
-        dispatch(refetchInterventions());
-        dispatch(resetImportModalState());
-        break;
-      }
+      case NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION:
       case NotificationEvent.NEW_COLLABORATOR_ADDED: {
         dispatch(refetchInterventions());
         break;
