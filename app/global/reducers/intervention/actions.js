@@ -126,6 +126,9 @@ import {
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_REQUEST,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR,
   UNASSIGN_TAG_REQUEST,
   UNASSIGN_TAG_SUCCESS,
   UNASSIGN_TAG_ERROR,
@@ -622,6 +625,23 @@ export const sendPredefinedParticipantEmailInvitationSuccess = (
   });
 export const sendPredefinedParticipantEmailInvitationError = () =>
   actionBuilder(SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR, {});
+
+export const bulkCreatePredefinedParticipantsRequest = (
+  interventionId,
+  data,
+  onSuccess,
+) =>
+  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_REQUEST, {
+    interventionId,
+    data,
+    onSuccess,
+  });
+export const bulkCreatePredefinedParticipantsSuccess = (participants) =>
+  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS, {
+    participants,
+  });
+export const bulkCreatePredefinedParticipantsError = (error) =>
+  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR, { error });
 
 export const unassignTagRequest = (interventionId, tagId) => {
   console.log('unassignTagRequest action creator called:', {

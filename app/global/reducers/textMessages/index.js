@@ -10,6 +10,8 @@ export {
   changeFormulaUsed,
   changeNoFormulaText,
   changeType,
+  changeSmsSendTimeType,
+  changeSmsSendTimeDetails,
 } from './settings/actions';
 
 export { changeFormulaMatch, changeContent } from './variants/actions';

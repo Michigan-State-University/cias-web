@@ -27,3 +27,30 @@ export const getTimeString = (date: Date | null) => {
   const seconds = newTime.split(':')[2].replace(amPm, '');
   return newTime.replace(`:${seconds}`, ' ');
 };
+
+export const parseTime24 = (t: string) => {
+  if (!t) {
+    return null;
+  }
+  const d = new Date();
+  const time = t.match(/(\d+):(\d\d)/);
+  if (!time) {
+    return null;
+  }
+  const hours = parseInt(time[1], 10);
+  const minutes = parseInt(time[2], 10);
+  d.setHours(hours);
+  d.setMinutes(minutes);
+  d.setSeconds(0);
+  d.setMilliseconds(0);
+  return d;
+};
+
+export const getTimeString24 = (date: Date | null) => {
+  if (!date) {
+    return '';
+  }
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+};

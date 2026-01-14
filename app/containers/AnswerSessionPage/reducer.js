@@ -41,6 +41,9 @@ import {
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
   SELECT_VIDEO_STATS,
+  VERIFY_PID_REQUEST,
+  VERIFY_PID_SUCCESS,
+  VERIFY_PID_ERROR,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -80,6 +83,8 @@ export const initialState = {
   verifyPatientDataLoading: false,
   verifyPatientDataError: null,
   hfhsPatientDetail: null,
+  verifyPidLoading: false,
+  verifyPidError: null,
 };
 
 /* eslint-disable default-case, no-param-reassign, default-param-last */
@@ -295,6 +300,22 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case SET_HFHS_PATIENT_DETAIL: {
         draft.hfhsPatientDetail = payload.hfhsPatientDetail;
+        break;
+      }
+
+      case VERIFY_PID_REQUEST: {
+        draft.verifyPidLoading = true;
+        draft.verifyPidError = null;
+        break;
+      }
+      case VERIFY_PID_SUCCESS: {
+        draft.verifyPidLoading = false;
+        draft.verifyPidError = null;
+        break;
+      }
+      case VERIFY_PID_ERROR: {
+        draft.verifyPidLoading = false;
+        draft.verifyPidError = payload.error;
         break;
       }
     }

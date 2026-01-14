@@ -207,4 +207,20 @@ export default defineMessages({
     defaultMessage:
       'Toggle on if you have registered participants and want them to access participant reports, uploaded resources or re-fill the session.',
   },
+  answer_image_size: {
+    id: `${scope}.answer_image_size`,
+    defaultMessage: 'Answer Image Size',
+  },
+  answer_image_size_small: {
+    id: `${scope}.answer_image_size_small`,
+    defaultMessage: 'Small',
+  },
+  answer_image_size_medium: {
+    id: `${scope}.answer_image_size_medium`,
+    defaultMessage: 'Medium',
+  },
+  answer_image_size_large: {
+    id: `${scope}.answer_image_size_large`,
+    defaultMessage: 'Large',
+  },
 });
