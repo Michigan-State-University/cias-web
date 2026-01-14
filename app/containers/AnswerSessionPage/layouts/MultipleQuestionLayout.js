@@ -20,7 +20,6 @@ const MultipleQuestionLayout = ({
   check,
   selectedAnswersIndex,
   noneOfAboveAnswerIndex,
-  noneOfAboveAnswerImage,
   isMobile,
   disabled,
   dynamicElementsDirection,
@@ -113,7 +112,9 @@ const MultipleQuestionLayout = ({
             disabled={disabled}
           >
             <AnswerContent
-              answerImage={noneOfAboveAnswerImage}
+              answerImage={answerImages.find(
+                (img) => img.answer_id === data[noneOfAboveAnswerIndex].id,
+              )}
               payload={data[noneOfAboveAnswerIndex].payload}
               index={noneOfAboveAnswerIndex}
               imageMaxWidth={getAnswerImageSize(answerImageSize)}
@@ -137,12 +138,6 @@ MultipleQuestionLayout.propTypes = {
   check: PropTypes.func,
   selectedAnswersIndex: PropTypes.array,
   noneOfAboveAnswerIndex: PropTypes.number,
-  noneOfAboveAnswerImage: PropTypes.shape({
-    id: PropTypes.string,
-    url: PropTypes.string.isRequired,
-    alt: PropTypes.string,
-    answer_id: PropTypes.string.isRequired,
-  }),
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
   dynamicElementsDirection: PropTypes.string,

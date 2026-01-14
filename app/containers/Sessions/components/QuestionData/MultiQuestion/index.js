@@ -377,7 +377,7 @@ const MultiQuestion = ({
             paddingInline={21}
             paddingBlock={14}
             width="100%"
-            onMouseEnter={() => setHovered(-1)}
+            onMouseEnter={() => setHovered(noneOfAboveAnswerIndex)}
             onMouseLeave={() => setHovered(-1)}
             clickable={false}
           >
