@@ -141,6 +141,9 @@ import {
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_REQUEST,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR,
   UNASSIGN_TAG_REQUEST,
   UNASSIGN_TAG_SUCCESS,
   UNASSIGN_TAG_ERROR,
@@ -188,6 +191,7 @@ export const initialState = {
     activatePredefinedParticipant: false,
     sendPredefinedParticipantSmsInvitation: false,
     sendPredefinedParticipantEmailInvitation: false,
+    bulkCreatePredefinedParticipants: false,
     updateAllSessionsScheduleLoading: false,
   },
   errors: {
@@ -204,6 +208,7 @@ export const initialState = {
     changeInterventionNarrator: null,
     editShortLinks: null,
     fetchPredefinedParticipants: null,
+    bulkCreatePredefinedParticipants: null,
     updateAllSessionsScheduleError: null,
   },
 };
@@ -915,6 +920,23 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.sendPredefinedParticipantEmailInvitation = false;
         break;
       }
+
+      case BULK_CREATE_PREDEFINED_PARTICIPANTS_REQUEST: {
+        draft.loaders.bulkCreatePredefinedParticipants = true;
+        draft.errors.bulkCreatePredefinedParticipants = null;
+        break;
+      }
+      case BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS: {
+        draft.loaders.bulkCreatePredefinedParticipants = false;
+        break;
+      }
+      case BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR: {
+        const { error } = action.payload;
+        draft.loaders.bulkCreatePredefinedParticipants = false;
+        draft.errors.bulkCreatePredefinedParticipants = error;
+        break;
+      }
+
       case UNASSIGN_TAG_REQUEST: {
         draft.loaders.unassignTag = true;
         draft.errors.unassignTag = null;
