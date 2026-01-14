@@ -10,6 +10,7 @@ import { ParticipantInvitationType } from './types';
 import messages from './messages';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { UploadEmailsButton } from './UploadEmailsButton';
+import { UploadPredefinedParticipantsButton } from './UploadPredefinedParticipantsButton';
 
 export type Props = {
   invitationType: ParticipantInvitationType;
@@ -17,6 +18,7 @@ export type Props = {
   invitingPossible: boolean;
   invitingNotPossibleMessage?: string;
   onUploadEmails?: () => void;
+  onUploadPredefinedParticipants?: () => void;
 };
 
 export const NoParticipantsInfo: FC<Props> = ({
@@ -25,6 +27,7 @@ export const NoParticipantsInfo: FC<Props> = ({
   invitingPossible,
   invitingNotPossibleMessage,
   onUploadEmails,
+  onUploadPredefinedParticipants,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -46,6 +49,12 @@ export const NoParticipantsInfo: FC<Props> = ({
       {invitingPossible && onUploadEmails && (
         <UploadEmailsButton
           onClick={onUploadEmails}
+          disabled={!invitingPossible}
+        />
+      )}
+      {invitingPossible && onUploadPredefinedParticipants && (
+        <UploadPredefinedParticipantsButton
+          onClick={onUploadPredefinedParticipants}
           disabled={!invitingPossible}
         />
       )}

@@ -198,4 +198,12 @@ export default defineMessages({
     id: `${scope}.sendPredefinedParticipantEmailInvitationError`,
     defaultMessage: 'Unable to send e-mail invitation.',
   },
+  bulkCreatePredefinedParticipantsSuccess: {
+    id: `${scope}.bulkCreatePredefinedParticipantsSuccess`,
+    defaultMessage: 'Predefined participants have been successfully created.',
+  },
+  bulkCreatePredefinedParticipantsError: {
+    id: `${scope}.bulkCreatePredefinedParticipantsError`,
+    defaultMessage: 'Unable to create predefined participants.',
+  },
 });
