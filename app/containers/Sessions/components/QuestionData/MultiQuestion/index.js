@@ -11,6 +11,7 @@ import { LuImage } from 'react-icons/lu';
 import ReorderIcon from 'assets/svg/reorder-hand.svg';
 import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
+import checkboxRed from 'assets/svg/checkbox-red.svg';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
@@ -112,6 +113,14 @@ const MultiQuestion = ({
     reorderAnswers(items);
   };
 
+  const noneOfAboveAnswerIndex = selectedQuestion.body.data.findIndex(
+    (item) => item.none_of_above,
+  );
+  const noneOfAboveAnswer =
+    noneOfAboveAnswerIndex !== -1
+      ? selectedQuestion.body.data[noneOfAboveAnswerIndex]
+      : null;
+
   return (
     <Column mt={10}>
       <DndSortable
@@ -119,230 +128,235 @@ const MultiQuestion = ({
         items={selectedQuestion.body.data}
         selector={null}
       >
-        {({ item, index, dragHandleProps }) => (
-          <Row dir={dynamicElementsDirection}>
-            <HoverableBox
-              hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
-              paddingInline={21}
-              paddingBlock={14}
-              width="100%"
-              onMouseEnter={handleMouseEnter(index)}
-              onMouseLeave={() => setHovered(-1)}
-              clickable={false}
-            >
-              <Column>
-                <Row
-                  align="center"
-                  justify="between"
-                  marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
-                >
-                  <Row width="90%">
-                    {!isNarratorTabOrEditNotPossible && (
-                      <Img
-                        alt={formatMessage(messages.reorderIconAlt, {
-                          index,
-                        })}
-                        marginInlineEnd={10}
-                        src={ReorderIcon}
-                        disabled={false}
-                        cursor="grab"
-                        {...dragHandleProps}
-                      />
-                    )}
-
-                    <Img
-                      ref={checkboxButtonRef}
-                      src={checkbox}
-                      marginInlineEnd={CHECKBOX_MARGIN}
-                    />
-                    <Column width="100%">
-                      {hasAnswerImage(item.id) && (
-                        <Box marginBlockEnd={8}>
-                          <Img
-                            src={
-                              answerImages.find(
-                                (img) => img.answer_id === item.id,
-                              )?.url
-                            }
-                            maxWidth={getAnswerImageSize(
-                              selectedQuestion.settings?.answer_image_size ||
-                                'medium',
-                            )}
-                            height="auto"
-                            borderRadius={4}
-                          />
-                          <Box
-                            mt={8}
-                            bg={colors.linkWaterDark}
-                            position="relative"
-                          >
-                            <OriginalTextHover
-                              id={`question-${selectedQuestion.id}-answer-${index}-image`}
-                              text={getOriginalAnswerImageText(item.id)}
-                              hidden={isNarratorTab}
-                              iconProps={{
-                                position: 'absolute',
-                                right: 8,
-                                bottom: 8,
-                              }}
-                            >
-                              <ApprovableInput
-                                type="multiline"
-                                value={
-                                  answerImages.find(
-                                    (img) => img.answer_id === item.id,
-                                  )?.alt ?? ''
-                                }
-                                onCheck={(description) =>
-                                  updateAnswerImage(
-                                    selectedQuestion.id,
-                                    item.id,
-                                    description,
-                                  )
-                                }
-                                placeholder={formatMessage(
-                                  questionImageMessages.logoDescriptionPlaceholder,
-                                )}
-                                rows="2"
-                                disabled={isNarratorTabOrEditNotPossible}
-                              />
-                            </OriginalTextHover>
-                          </Box>
-                        </Box>
-                      )}
-                      <OriginalTextHover
-                        id={`question-${selectedQuestion.id}-answer-${index}`}
-                        text={item?.original_text}
-                        hidden={isNarratorTab}
-                      >
-                        <FlexibleWidthApprovableInput
-                          fontSize={18}
-                          type="singleline"
-                          placeholder={formatMessage(messages.placeholder, {
-                            index: index + 1,
+        {({ item, index, dragHandleProps }) =>
+          index === noneOfAboveAnswerIndex ? null : (
+            <Row dir={dynamicElementsDirection}>
+              <HoverableBox
+                hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
+                paddingInline={21}
+                paddingBlock={14}
+                width="100%"
+                onMouseEnter={handleMouseEnter(index)}
+                onMouseLeave={() => setHovered(-1)}
+                clickable={false}
+              >
+                <Column>
+                  <Row
+                    align="center"
+                    justify="between"
+                    marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
+                  >
+                    <Row width="90%">
+                      {!isNarratorTabOrEditNotPossible && (
+                        <Img
+                          alt={formatMessage(messages.reorderIconAlt, {
+                            index,
                           })}
-                          value={item.payload}
-                          onCheck={(newTitle) =>
-                            updateAnswer(index, { ...item, payload: newTitle })
-                          }
-                          richText
-                          disabled={isNarratorTabOrEditNotPossible}
-                          emptyWidth={105}
+                          marginInlineEnd={10}
+                          src={ReorderIcon}
+                          disabled={false}
+                          cursor="grab"
+                          {...dragHandleProps}
                         />
-                      </OriginalTextHover>
-                    </Column>
-                  </Row>
-                  <Row>
-                    {!hasAnswerImage(item.id) &&
-                      item.id &&
-                      !isNarratorTabOrEditNotPossible && (
-                        <Box
-                          onClick={() => {
-                            setSelectedAnswerId(item.id);
-                            openImageModal();
-                          }}
-                          clickable
-                          marginInlineEnd={8}
-                          bg={colors.jungleGreen}
-                          borderRadius="5px"
-                          width="35px"
-                          height="35px"
-                          display="flex"
-                          align="center"
-                          justify="center"
-                          hidden={hovered !== index}
+                      )}
+
+                      <Img
+                        ref={checkboxButtonRef}
+                        src={checkbox}
+                        marginInlineEnd={CHECKBOX_MARGIN}
+                      />
+                      <Column width="100%">
+                        {hasAnswerImage(item.id) && (
+                          <Box marginBlockEnd={8}>
+                            <Img
+                              src={
+                                answerImages.find(
+                                  (img) => img.answer_id === item.id,
+                                )?.url
+                              }
+                              maxWidth={getAnswerImageSize(
+                                selectedQuestion.settings?.answer_image_size ||
+                                  'medium',
+                              )}
+                              height="auto"
+                              borderRadius={4}
+                            />
+                            <Box
+                              mt={8}
+                              bg={colors.linkWaterDark}
+                              position="relative"
+                            >
+                              <OriginalTextHover
+                                id={`question-${selectedQuestion.id}-answer-${index}-image`}
+                                text={getOriginalAnswerImageText(item.id)}
+                                hidden={isNarratorTab}
+                                iconProps={{
+                                  position: 'absolute',
+                                  right: 8,
+                                  bottom: 8,
+                                }}
+                              >
+                                <ApprovableInput
+                                  type="multiline"
+                                  value={
+                                    answerImages.find(
+                                      (img) => img.answer_id === item.id,
+                                    )?.alt ?? ''
+                                  }
+                                  onCheck={(description) =>
+                                    updateAnswerImage(
+                                      selectedQuestion.id,
+                                      item.id,
+                                      description,
+                                    )
+                                  }
+                                  placeholder={formatMessage(
+                                    questionImageMessages.logoDescriptionPlaceholder,
+                                  )}
+                                  rows="2"
+                                  disabled={isNarratorTabOrEditNotPossible}
+                                />
+                              </OriginalTextHover>
+                            </Box>
+                          </Box>
+                        )}
+                        <OriginalTextHover
+                          id={`question-${selectedQuestion.id}-answer-${index}`}
+                          text={item?.original_text}
+                          hidden={isNarratorTab}
                         >
-                          <LuImage
-                            size={20}
-                            color="white"
-                            alt={formatMessage(messages.addImageIconAlt, {
+                          <FlexibleWidthApprovableInput
+                            fontSize={18}
+                            type="singleline"
+                            placeholder={formatMessage(messages.placeholder, {
                               index: index + 1,
                             })}
+                            value={item.payload}
+                            onCheck={(newTitle) =>
+                              updateAnswer(index, {
+                                ...item,
+                                payload: newTitle,
+                              })
+                            }
+                            richText
+                            disabled={isNarratorTabOrEditNotPossible}
+                            emptyWidth={105}
                           />
-                        </Box>
-                      )}
-                    {hasAnswerImage(item.id) &&
-                      item.id &&
-                      !isNarratorTabOrEditNotPossible && (
-                        <Box
-                          onClick={() => {
-                            deleteAnswerImage(selectedQuestion.id, item.id);
-                          }}
-                          clickable
-                          marginInlineEnd={8}
-                          bg={colors.burntSienna}
-                          borderRadius="5px"
-                          width="35px"
-                          height="35px"
-                          display="flex"
-                          align="center"
-                          justify="center"
-                          hidden={hovered !== index}
-                        >
-                          <MdOutlineHideImage
-                            size={20}
-                            color="white"
-                            alt={formatMessage(messages.deleteImageIconAlt, {
-                              index: index + 1,
-                            })}
-                          />
-                        </Box>
-                      )}
-                    <Box
-                      onClick={() => removeAnswer(index)}
-                      hidden={hovered !== index}
-                      clickable
-                    >
-                      <Img src={bin} marginInlineEnd={16} />
-                    </Box>
+                        </OriginalTextHover>
+                      </Column>
+                    </Row>
+                    <Row>
+                      {!hasAnswerImage(item.id) &&
+                        item.id &&
+                        !isNarratorTabOrEditNotPossible && (
+                          <Box
+                            onClick={() => {
+                              setSelectedAnswerId(item.id);
+                              openImageModal();
+                            }}
+                            clickable
+                            marginInlineEnd={8}
+                            bg={colors.jungleGreen}
+                            borderRadius="5px"
+                            width="35px"
+                            height="35px"
+                            display="flex"
+                            align="center"
+                            justify="center"
+                            hidden={hovered !== index}
+                          >
+                            <LuImage
+                              size={20}
+                              color="white"
+                              alt={formatMessage(messages.addImageIconAlt, {
+                                index: index + 1,
+                              })}
+                            />
+                          </Box>
+                        )}
+                      {hasAnswerImage(item.id) &&
+                        item.id &&
+                        !isNarratorTabOrEditNotPossible && (
+                          <Box
+                            onClick={() => {
+                              deleteAnswerImage(selectedQuestion.id, item.id);
+                            }}
+                            clickable
+                            marginInlineEnd={8}
+                            bg={colors.burntSienna}
+                            borderRadius="5px"
+                            width="35px"
+                            height="35px"
+                            display="flex"
+                            align="center"
+                            justify="center"
+                            hidden={hovered !== index}
+                          >
+                            <MdOutlineHideImage
+                              size={20}
+                              color="white"
+                              alt={formatMessage(messages.deleteImageIconAlt, {
+                                index: index + 1,
+                              })}
+                            />
+                          </Box>
+                        )}
+                      <Box
+                        onClick={() => removeAnswer(index)}
+                        hidden={hovered !== index}
+                        clickable
+                      >
+                        <Img src={bin} marginInlineEnd={16} />
+                      </Box>
+                    </Row>
                   </Row>
-                </Row>
-                <Row align="center" display="flex" hidden={isNarratorTab}>
-                  <Row marginInlineStart={`${leftMargin}px`} gap={10}>
-                    <BadgeInput
-                      disabled={!editingPossible}
-                      paddingInline={0}
-                      paddingBlock={12}
-                      textAlign="center"
-                      validator={variableNameValidator}
-                      placeholder={formatMessage(
-                        globalMessages.variableNamePlaceholder,
-                      )}
-                      value={item.variable.name}
-                      color={colors.jungleGreen}
-                      onBlur={(val) =>
-                        updateAnswer(index, {
-                          ...item,
-                          variable: { ...item.variable, name: val },
-                        })
-                      }
-                      autoComplete="off"
-                    />
-                    <BadgeInput
-                      disabled={!editingPossible}
-                      paddingInline={0}
-                      paddingBlock={12}
-                      textAlign="center"
-                      validator={numericValidator}
-                      keyboard="tel"
-                      placeholder={formatMessage(
-                        globalMessages.variableScorePlaceholder,
-                      )}
-                      value={item.variable.value}
-                      color={colors.azure}
-                      onBlur={(val) =>
-                        updateAnswer(index, {
-                          ...item,
-                          variable: { ...item.variable, value: val },
-                        })
-                      }
-                    />
+                  <Row align="center" display="flex" hidden={isNarratorTab}>
+                    <Row marginInlineStart={`${leftMargin}px`} gap={10}>
+                      <BadgeInput
+                        disabled={!editingPossible}
+                        paddingInline={0}
+                        paddingBlock={12}
+                        textAlign="center"
+                        validator={variableNameValidator}
+                        placeholder={formatMessage(
+                          globalMessages.variableNamePlaceholder,
+                        )}
+                        value={item.variable.name}
+                        color={colors.jungleGreen}
+                        onBlur={(val) =>
+                          updateAnswer(index, {
+                            ...item,
+                            variable: { ...item.variable, name: val },
+                          })
+                        }
+                        autoComplete="off"
+                      />
+                      <BadgeInput
+                        disabled={!editingPossible}
+                        paddingInline={0}
+                        paddingBlock={12}
+                        textAlign="center"
+                        validator={numericValidator}
+                        keyboard="tel"
+                        placeholder={formatMessage(
+                          globalMessages.variableScorePlaceholder,
+                        )}
+                        value={item.variable.value}
+                        color={colors.azure}
+                        onBlur={(val) =>
+                          updateAnswer(index, {
+                            ...item,
+                            variable: { ...item.variable, value: val },
+                          })
+                        }
+                      />
+                    </Row>
                   </Row>
-                </Row>
-              </Column>
-            </HoverableBox>
-          </Row>
-        )}
+                </Column>
+              </HoverableBox>
+            </Row>
+          )
+        }
       </DndSortable>
       <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox paddingInline={21} paddingBlock={14} onClick={addAnswer}>
@@ -356,6 +370,219 @@ const MultiQuestion = ({
           </Box>
         </HoverableBox>
       </Row>
+      {noneOfAboveAnswer && (
+        <Row display="flex">
+          <HoverableBox
+            hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
+            paddingInline={21}
+            paddingBlock={14}
+            width="100%"
+            onMouseEnter={() => setHovered(noneOfAboveAnswerIndex)}
+            onMouseLeave={() => setHovered(-1)}
+            clickable={false}
+          >
+            <Column>
+              <Row
+                align="center"
+                justify="between"
+                marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
+              >
+                <Row width="90%">
+                  <Img
+                    ref={checkboxButtonRef}
+                    src={checkboxRed}
+                    marginInlineEnd={CHECKBOX_MARGIN}
+                  />
+                  <Column width="100%">
+                    {hasAnswerImage(noneOfAboveAnswer.id) && (
+                      <Box marginBlockEnd={8}>
+                        <Img
+                          src={
+                            answerImages.find(
+                              (img) => img.answer_id === noneOfAboveAnswer.id,
+                            )?.url
+                          }
+                          maxWidth={getAnswerImageSize(
+                            selectedQuestion.settings?.answer_image_size ||
+                              'medium',
+                          )}
+                          height="auto"
+                          borderRadius={4}
+                        />
+                        <Box
+                          mt={8}
+                          bg={colors.linkWaterDark}
+                          position="relative"
+                        >
+                          <OriginalTextHover
+                            id={`question-${selectedQuestion.id}-answer-${noneOfAboveAnswerIndex}-image`}
+                            text={getOriginalAnswerImageText(
+                              noneOfAboveAnswer.id,
+                            )}
+                            hidden={isNarratorTab}
+                            iconProps={{
+                              position: 'absolute',
+                              right: 8,
+                              bottom: 8,
+                            }}
+                          >
+                            <ApprovableInput
+                              type="multiline"
+                              value={
+                                answerImages.find(
+                                  (img) =>
+                                    img.answer_id === noneOfAboveAnswer.id,
+                                )?.alt ?? ''
+                              }
+                              onCheck={(description) =>
+                                updateAnswerImage(
+                                  selectedQuestion.id,
+                                  noneOfAboveAnswer.id,
+                                  description,
+                                )
+                              }
+                              placeholder={formatMessage(
+                                questionImageMessages.logoDescriptionPlaceholder,
+                              )}
+                              rows="2"
+                              disabled={isNarratorTabOrEditNotPossible}
+                            />
+                          </OriginalTextHover>
+                        </Box>
+                      </Box>
+                    )}
+                    <OriginalTextHover
+                      id={`question-${selectedQuestion.id}-answer-${noneOfAboveAnswerIndex}`}
+                      text={noneOfAboveAnswer?.original_text}
+                      hidden={isNarratorTab}
+                    >
+                      <FlexibleWidthApprovableInput
+                        fontSize={18}
+                        type="singleline"
+                        placeholder={formatMessage(
+                          messages.noneOfAbovePlaceholder,
+                        )}
+                        value={noneOfAboveAnswer.payload}
+                        onCheck={(newTitle) =>
+                          updateAnswer(noneOfAboveAnswerIndex, {
+                            ...noneOfAboveAnswer,
+                            payload: newTitle,
+                          })
+                        }
+                        richText
+                        disabled={isNarratorTabOrEditNotPossible}
+                        emptyWidth={140}
+                      />
+                    </OriginalTextHover>
+                  </Column>
+                </Row>
+                <Row>
+                  {!hasAnswerImage(noneOfAboveAnswer.id) &&
+                    noneOfAboveAnswer.id &&
+                    !isNarratorTabOrEditNotPossible && (
+                      <Box
+                        onClick={() => {
+                          setSelectedAnswerId(noneOfAboveAnswer.id);
+                          openImageModal();
+                        }}
+                        clickable
+                        marginInlineEnd={8}
+                        bg={colors.jungleGreen}
+                        borderRadius="5px"
+                        width="35px"
+                        height="35px"
+                        display="flex"
+                        align="center"
+                        justify="center"
+                        hidden={hovered !== noneOfAboveAnswerIndex}
+                      >
+                        <LuImage
+                          size={20}
+                          color="white"
+                          alt={formatMessage(messages.addImageIconAlt, {
+                            index: noneOfAboveAnswerIndex + 1,
+                          })}
+                        />
+                      </Box>
+                    )}
+                  {hasAnswerImage(noneOfAboveAnswer.id) &&
+                    noneOfAboveAnswer.id &&
+                    !isNarratorTabOrEditNotPossible && (
+                      <Box
+                        onClick={() => {
+                          deleteAnswerImage(
+                            selectedQuestion.id,
+                            noneOfAboveAnswer.id,
+                          );
+                        }}
+                        clickable
+                        marginInlineEnd={8}
+                        bg={colors.burntSienna}
+                        borderRadius="5px"
+                        width="35px"
+                        height="35px"
+                        display="flex"
+                        align="center"
+                        justify="center"
+                        hidden={hovered !== noneOfAboveAnswerIndex}
+                      >
+                        <MdOutlineHideImage
+                          size={20}
+                          color="white"
+                          alt={formatMessage(messages.deleteImageIconAlt, {
+                            index: noneOfAboveAnswerIndex + 1,
+                          })}
+                        />
+                      </Box>
+                    )}
+                </Row>
+              </Row>
+              <Row align="center" display="flex" hidden={isNarratorTab}>
+                <Row marginInlineStart={`${leftMargin}px`} gap={10}>
+                  <BadgeInput
+                    disabled={!editingPossible}
+                    paddingInline={0}
+                    paddingBlock={12}
+                    textAlign="center"
+                    validator={variableNameValidator}
+                    placeholder={formatMessage(
+                      globalMessages.variableNamePlaceholder,
+                    )}
+                    value={noneOfAboveAnswer.variable.name}
+                    color={colors.jungleGreen}
+                    onBlur={(val) =>
+                      updateAnswer(noneOfAboveAnswerIndex, {
+                        ...noneOfAboveAnswer,
+                        variable: { ...noneOfAboveAnswer.variable, name: val },
+                      })
+                    }
+                    autoComplete="off"
+                  />
+                  <BadgeInput
+                    disabled={!editingPossible}
+                    paddingInline={0}
+                    paddingBlock={12}
+                    textAlign="center"
+                    validator={numericValidator}
+                    keyboard="tel"
+                    placeholder={formatMessage(
+                      globalMessages.variableScorePlaceholder,
+                    )}
+                    value={noneOfAboveAnswer.variable.value}
+                    color={colors.azure}
+                    onBlur={(val) =>
+                      updateAnswer(noneOfAboveAnswerIndex, {
+                        ...noneOfAboveAnswer,
+                        variable: { ...noneOfAboveAnswer.variable, value: val },
+                      })
+                    }
+                  />
+                </Row>
+              </Row>
+            </Column>
+          </HoverableBox>
+        </Row>
+      )}
       <ImageModal />
     </Column>
   );

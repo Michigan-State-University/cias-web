@@ -12,6 +12,7 @@ const MultipleQuestion = ({
   dynamicElementsDirection,
 }) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState([]);
+  const [noneOfAboveAnswerIndex, setNoneOfAboveAnswerIndex] = useState(-1);
 
   const {
     body: { data },
@@ -21,6 +22,7 @@ const MultipleQuestion = ({
   } = question;
 
   useEffect(() => {
+    setNoneOfAboveAnswerIndex(data.findIndex((item) => item.none_of_above));
     setSelectedAnswersIndex(
       answerBody.length ? answerBody.map((answer) => answer.index) : [],
     );
@@ -42,16 +44,36 @@ const MultipleQuestion = ({
         answerBody.filter((item) => item.var !== selectedAnswer.var),
       );
     } else {
+      if (noneOfAboveAnswerIndex === index) {
+        setSelectedAnswersIndex([index]);
+        selectAnswer([selectedAnswer]);
+        return;
+      }
+      if (selectedAnswersIndex.includes(noneOfAboveAnswerIndex)) {
+        setSelectedAnswersIndex(
+          [
+            ...selectedAnswersIndex.filter(
+              (item) => item !== noneOfAboveAnswerIndex,
+            ),
+            index,
+          ],
+          selectAnswer([...answerBody, selectedAnswer]),
+        );
+        return;
+      }
+
       setSelectedAnswersIndex([...selectedAnswersIndex, index]);
       selectAnswer([...answerBody, selectedAnswer]);
     }
   };
+
   return (
     <MultipleQuestionLayout
       data={data}
       questionId={id}
       check={check}
       selectedAnswersIndex={selectedAnswersIndex}
+      noneOfAboveAnswerIndex={noneOfAboveAnswerIndex}
       isMobile={isMobile}
       disabled={disabled}
       dynamicElementsDirection={dynamicElementsDirection}

@@ -47,6 +47,10 @@ export default defineMessages({
     id: `${scope}.required`,
     defaultMessage: 'Required',
   },
+  none_of_above: {
+    id: `${scope}.none_of_above`,
+    defaultMessage: 'Add "None of the above" option',
+  },
   start_autofinish_timer: {
     id: `${scope}.start_autofinish_timer`,
     defaultMessage: 'Fire report if get this far',

@@ -25,6 +25,9 @@ export const orderSettings = (settings) =>
     ...(!isNullOrUndefined(settings.required) && {
       required: settings.required,
     }),
+    ...(!isNullOrUndefined(settings.none_of_above) && {
+      none_of_above: settings.none_of_above,
+    }),
     ...(!isNullOrUndefined(settings.start_autofinish_timer) && {
       start_autofinish_timer: settings.start_autofinish_timer,
     }),

@@ -7,6 +7,10 @@ export default defineMessages({
     id: `${scope}.placeholder`,
     defaultMessage: 'Answer {index}',
   },
+  noneOfAbovePlaceholder: {
+    id: `${scope}.noneOfAbovePlaceholder`,
+    defaultMessage: 'None of the above',
+  },
   addAnswer: {
     id: `${scope}.addAnswer`,
     defaultMessage: 'Add new answer',

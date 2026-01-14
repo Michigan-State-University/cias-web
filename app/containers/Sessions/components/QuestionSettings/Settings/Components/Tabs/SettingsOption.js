@@ -9,6 +9,7 @@ import { numericValidator } from 'utils/validators';
 import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 import Row from 'components/Row';
+import Column from 'components/Column';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import Select from 'components/Select';
 
@@ -101,6 +102,27 @@ const SettingsOption = ({
     }
 
     if (isNullableNumericSettings) return numericInput();
+
+    if (index === 'none_of_above') {
+      return (
+        <Column>
+          <FullWidthSwitch
+            id={index}
+            disabled={disabled || optionDisabled()}
+            checked={setting}
+            onToggle={handleUpdate}
+          >
+            <HelpIconTooltip
+              id={`question-settings-option-tooltip-${index}`}
+              tooltipContent={tooltipText}
+            >
+              <H3>{formatMessage(messages[`${index}`])}</H3>
+            </HelpIconTooltip>
+          </FullWidthSwitch>
+        </Column>
+      );
+    }
+
     switch (setting?.constructor) {
       case Number:
         return numericInput();
