@@ -116,7 +116,7 @@ export default defineMessages({
   },
   chartSettingsChartValuesDescription: {
     id: `${scope}.chartSettingsChartValuesDescription`,
-    defaultMessage: `{chartType, select, bar_chart {The maximum Y-axis value will be the highest number of participants that match the criteria over the given time period} percentage_bar_chart {The maximum Y-axis value will be 100%}}`,
+    defaultMessage: `{chartType, select, bar_chart {The maximum Y-axis value will be the highest number of participants that match the criteria over the given time period} percentage_bar_chart {The maximum Y-axis value will be 100%} other {}}`,
   },
   chartSettingsTrendLineOption: {
     id: `${scope}.chartSettingsTrendLineOption`,

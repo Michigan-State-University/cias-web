@@ -140,7 +140,7 @@
   "app.components.DashboardSetup.chartFormulaOtherCase": "If results don’t match any cases then label is",
   "app.components.DashboardSetup.chartSettingsAddVariable": "Add variable",
   "app.components.DashboardSetup.chartSettingsChartValues": "<b>Chart Values</b>",
-  "app.components.DashboardSetup.chartSettingsChartValuesDescription": "{chartType, select, bar_chart {The maximum Y-axis value will be the highest number of participants that match the criteria over the given time period} percentage_bar_chart {The maximum Y-axis value will be 100%}}",
+  "app.components.DashboardSetup.chartSettingsChartValuesDescription": "{chartType, select, bar_chart {The maximum Y-axis value will be the highest number of participants that match the criteria over the given time period} percentage_bar_chart {The maximum Y-axis value will be 100%} other {}}",
   "app.components.DashboardSetup.chartSettingsChartValuesNumericOption": "Numeric",
   "app.components.DashboardSetup.chartSettingsChartValuesPercentageOption": "Percentage",
   "app.components.DashboardSetup.chartSettingsCopy": "Duplicate chart",
