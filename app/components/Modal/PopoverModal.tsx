@@ -87,7 +87,7 @@ const PopoverModal = ({
   hideArrow,
   shiftPadding = 16,
   zIndex = ZIndex.POPOVER_MODAL,
-}: Props): JSX.Element => {
+}: Props): JSX.Element | null => {
   const arrowRef = useRef<HTMLElement>();
   const portalRef = useRef<HTMLElement>(null);
 
@@ -128,7 +128,6 @@ const PopoverModal = ({
   // must be synchronous to properly detect outside clicks
   useLayoutEffect(() => {
     if (!referenceElement) {
-      reference(null);
       return;
     }
 
@@ -212,7 +211,7 @@ const PopoverModal = ({
       handleClose();
   };
 
-  if (!referenceElement) return <></>;
+  if (!referenceElement) return null;
 
   return (
     <Portal id={portalId ?? MODAL_PORTAL_ID} ref={portalRef}>

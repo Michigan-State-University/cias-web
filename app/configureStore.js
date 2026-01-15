@@ -13,7 +13,7 @@ import { loadState } from 'utils/persist';
 import { createInjectorsEnhancer } from 'redux-injectors';
 import createReducer from './reducers';
 
-export default function configureStore(initialState = {}, history) {
+export default function configureStore(history, initialState = {}) {
   let composeEnhancers = compose;
   const reduxSagaMonitorOptions = {};
 
@@ -80,4 +80,4 @@ const { user } = loadState() ?? {};
 
 const initialStore = { auth: { ...authReducerInitialState, user } };
 
-export const store = configureStore(initialStore, utilsHistory);
+export const store = configureStore(utilsHistory, initialStore);

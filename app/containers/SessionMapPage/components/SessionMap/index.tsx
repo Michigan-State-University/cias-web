@@ -193,26 +193,24 @@ const SessionMap = ({
   };
 
   return (
-    <>
-      <ReactFlowGraph {...sessionMapGraphProps} id={SESSION_MAP_ID}>
-        <ReactFlowArrowHead
-          type={SessionMapHeadType.BASE}
-          color={SESSION_MAP_COLORS.edgeBase}
-        />
-        <ReactFlowArrowHead
-          type={SessionMapHeadType.HIGHLIGHTED}
-          color={SESSION_MAP_COLORS.selectedLight}
-        />
-        <ReactFlowArrowHead
-          type={SessionMapHeadType.DIRECT_CONNECTION}
-          color={SESSION_MAP_COLORS.selected}
-        />
-        <ReactFlowArrowHead
-          type={SessionMapHeadType.GRAYED_OUT}
-          color={SESSION_MAP_COLORS.grayedOut}
-        />
-      </ReactFlowGraph>
-    </>
+    <ReactFlowGraph {...sessionMapGraphProps} id={SESSION_MAP_ID}>
+      <ReactFlowArrowHead
+        type={SessionMapHeadType.BASE}
+        color={SESSION_MAP_COLORS.edgeBase}
+      />
+      <ReactFlowArrowHead
+        type={SessionMapHeadType.HIGHLIGHTED}
+        color={SESSION_MAP_COLORS.selectedLight}
+      />
+      <ReactFlowArrowHead
+        type={SessionMapHeadType.DIRECT_CONNECTION}
+        color={SESSION_MAP_COLORS.selected}
+      />
+      <ReactFlowArrowHead
+        type={SessionMapHeadType.GRAYED_OUT}
+        color={SESSION_MAP_COLORS.grayedOut}
+      />
+    </ReactFlowGraph>
   );
 };
 

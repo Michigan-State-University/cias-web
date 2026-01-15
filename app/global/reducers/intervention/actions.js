@@ -126,6 +126,12 @@ import {
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_REQUEST,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR,
+  UNASSIGN_TAG_REQUEST,
+  UNASSIGN_TAG_SUCCESS,
+  UNASSIGN_TAG_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -135,8 +141,20 @@ export const fetchInterventionSuccess = (intervention) =>
 export const fetchInterventionError = (error) =>
   actionBuilder(FETCH_INTERVENTION_ERROR, { error });
 
-export const sendInterventionCsvRequest = (id, onSuccess) =>
-  actionBuilder(SEND_INTERVENTION_CSV_REQUEST, { id, onSuccess });
+export const sendInterventionCsvRequest = (
+  id,
+  onSuccess,
+  startDate,
+  endDate,
+  timezone,
+) =>
+  actionBuilder(SEND_INTERVENTION_CSV_REQUEST, {
+    id,
+    onSuccess,
+    startDate,
+    endDate,
+    timezone,
+  });
 export const sendInterventionCsvSuccess = (message) =>
   actionBuilder(SEND_INTERVENTION_CSV_SUCCESS, { message });
 export const sendInterventionCsvError = (error) =>
@@ -343,8 +361,20 @@ export const updateInterventionConversationsTranscript = (transcript) =>
     transcript,
   });
 
-export const exportInterventionRequest = (interventionId, onSuccess) =>
-  actionBuilder(EXPORT_INTERVENTION_REQUEST, { interventionId, onSuccess });
+export const exportInterventionRequest = (
+  interventionId,
+  onSuccess,
+  startDate,
+  endDate,
+  timezone,
+) =>
+  actionBuilder(EXPORT_INTERVENTION_REQUEST, {
+    interventionId,
+    onSuccess,
+    startDate,
+    endDate,
+    timezone,
+  });
 export const exportInterventionSuccess = () =>
   actionBuilder(EXPORT_INTERVENTION_SUCCESS, {});
 export const exportInterventionError = (error) =>
@@ -595,3 +625,34 @@ export const sendPredefinedParticipantEmailInvitationSuccess = (
   });
 export const sendPredefinedParticipantEmailInvitationError = () =>
   actionBuilder(SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR, {});
+
+export const bulkCreatePredefinedParticipantsRequest = (
+  interventionId,
+  data,
+  onSuccess,
+) =>
+  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_REQUEST, {
+    interventionId,
+    data,
+    onSuccess,
+  });
+export const bulkCreatePredefinedParticipantsSuccess = (participants) =>
+  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS, {
+    participants,
+  });
+export const bulkCreatePredefinedParticipantsError = (error) =>
+  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR, { error });
+
+export const unassignTagRequest = (interventionId, tagId) => {
+  console.log('unassignTagRequest action creator called:', {
+    interventionId,
+    tagId,
+  }); // eslint-disable-line no-console
+  const action = actionBuilder(UNASSIGN_TAG_REQUEST, { interventionId, tagId });
+  console.log('Action created:', action); // eslint-disable-line no-console
+  return action;
+};
+export const unassignTagSuccess = (tagId) =>
+  actionBuilder(UNASSIGN_TAG_SUCCESS, { tagId });
+export const unassignTagError = (error) =>
+  actionBuilder(UNASSIGN_TAG_ERROR, { error });

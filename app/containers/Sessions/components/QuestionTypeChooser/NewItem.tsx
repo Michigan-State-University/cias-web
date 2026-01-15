@@ -18,6 +18,7 @@ type Props = {
   color: string;
   isGroup?: boolean;
   conditionalAppearanceConfig?: ConditionalAppearanceConfig;
+  questionTypeId?: string;
 };
 
 const NewItem = ({
@@ -26,6 +27,7 @@ const NewItem = ({
   isGroup,
   color,
   conditionalAppearanceConfig = {},
+  questionTypeId,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -33,8 +35,18 @@ const NewItem = ({
 
   if (hidden) return null;
 
+  // Generate data-cy attribute from questionTypeId (e.g., "Question::Single" -> "question-type-single")
+  const dataCy = questionTypeId
+    ? `question-type-${questionTypeId.split('::')[1]?.toLowerCase() || questionTypeId.toLowerCase()}`
+    : undefined;
+
   return (
-    <HoverableBox onClick={handleClick} padding={8} disabled={disabled}>
+    <HoverableBox
+      onClick={handleClick}
+      padding={8}
+      disabled={disabled}
+      data-cy={dataCy}
+    >
       <Row justify="between">
         <Row align="center">
           <DotCircle mr={18} bg={color} opacity={disabled ? 0.5 : 1} />

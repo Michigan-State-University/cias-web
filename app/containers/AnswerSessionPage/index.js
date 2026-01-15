@@ -123,6 +123,7 @@ import {
   fetchUserSessionRequest,
   fetchPreviousQuestionRequest,
   selectVideoStats,
+  verifyPidRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
@@ -355,6 +356,7 @@ export function AnswerSessionPage({
   fixedElementsDirection,
   dynamicElementsDirection,
   changeLocale,
+  verifyPid,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -446,6 +448,8 @@ export function AnswerSessionPage({
   const location = useLocation();
 
   const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
+  const pid = useQuery('pid');
+
   useEffect(() => {
     if (questionLanguage) {
       changeLocale(questionLanguage);
@@ -478,6 +482,12 @@ export function AnswerSessionPage({
   const previewPossible =
     !(isPreview && !canPreview(interventionStatus)) &&
     (!isUserSessionFinished || (isGuestUser && isUserSessionFinished));
+
+  useEffect(() => {
+    if (pid && !isPreview) {
+      verifyPid(pid);
+    }
+  }, [pid, isPreview, verifyPid]);
 
   useEffect(() => {
     if (isAuthenticated && !userSession) {
@@ -993,6 +1003,7 @@ export function AnswerSessionPage({
                         onClick={startInterventionAsync}
                         title={buttonText()}
                         isDesktop={isDesktop}
+                        data-cy="start-preview-button"
                       />
                       {showGoToDashboardButton && (
                         <GoToDashboardButton
@@ -1013,99 +1024,93 @@ export function AnswerSessionPage({
                   </Column>
                 )}
                 {interventionStarted && !nextQuestionError && (
-                  <>
+                  <Box
+                    id={ANSWER_SESSION_CONTAINER_ID}
+                    position="relative"
+                    height="100%"
+                    maxHeight="100vh"
+                    width="100%"
+                    borderRadius="0px"
+                    display="flex"
+                    direction="column"
+                  >
                     <Box
-                      id={ANSWER_SESSION_CONTAINER_ID}
-                      position="relative"
-                      height="100%"
-                      maxHeight="100vh"
                       width="100%"
-                      borderRadius="0px"
+                      overflow={isMobilePreview ? 'auto' : undefined}
+                      filled
                       display="flex"
                       direction="column"
                     >
-                      <Box
+                      <Row
+                        padding={!isDesktop || isMobile ? 30 : 0}
+                        pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
+                        pt={
+                          isMobile && extraSpaceForNarrator && !logoUrl
+                            ? 0
+                            : undefined
+                        }
                         width="100%"
-                        overflow={isMobilePreview ? 'auto' : undefined}
-                        filled
-                        display="flex"
-                        direction="column"
                       >
-                        <Row
-                          padding={!isDesktop || isMobile ? 30 : 0}
-                          pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
-                          pt={
-                            isMobile && extraSpaceForNarrator && !logoUrl
-                              ? 0
-                              : undefined
+                        {!isDesktop && (
+                          <Row>
+                            <Img
+                              maxHeight={elements.interventionLogoSize.height}
+                              maxWidth={elements.interventionLogoSize.width}
+                              src={logoUrl}
+                              aria-label={imageAlt}
+                            />
+                          </Row>
+                        )}
+                        {renderQuestionTranscript(true)}
+                      </Row>
+
+                      {transitionalUserSessionId && (
+                        <BranchingScreen
+                          resetTransitionalUserSessionId={
+                            resetTransitionalUserSessionId
                           }
-                          width="100%"
-                        >
-                          {!isDesktop && (
-                            <Row>
-                              <Img
-                                maxHeight={elements.interventionLogoSize.height}
-                                maxWidth={elements.interventionLogoSize.width}
-                                src={logoUrl}
-                                aria-label={imageAlt}
-                              />
-                            </Row>
-                          )}
-                          {renderQuestionTranscript(true)}
-                        </Row>
-
-                        {transitionalUserSessionId && (
-                          <BranchingScreen
-                            resetTransitionalUserSessionId={
-                              resetTransitionalUserSessionId
-                            }
-                          />
-                        )}
-
-                        {!nextQuestionLoading &&
-                          currentQuestion &&
-                          !transitionalUserSessionId && (
-                            <ScreenWrapper isFullSize={isFullSize}>
-                              {isNarratorPositionFixed && renderQuestion()}
-                              {!isNarratorPositionFixed && (
-                                <AnimationRefHelper
-                                  currentQuestion={currentQuestion}
-                                  currentQuestionId={currentQuestionId}
-                                  previewMode={previewMode}
-                                  changeIsAnimationOngoing={
-                                    changeIsAnimationOngoing
-                                  }
-                                  setFeedbackSettings={setFeedbackSettings}
-                                  feedbackScreenSettings={
-                                    feedbackScreenSettings
-                                  }
-                                  audioInstance={audioInstance}
-                                  dynamicElementsDirection={
-                                    dynamicElementsDirection
-                                  }
-                                >
-                                  {renderQuestion()}
-                                </AnimationRefHelper>
-                              )}
-                            </ScreenWrapper>
-                          )}
-
-                        {answersError && (
-                          <ErrorAlert errorText={answersError} />
-                        )}
-                      </Box>
-                      {isMobilePreview && (
-                        <AnswerSessionPageFooter
-                          settings={{
-                            showTextTranscript,
-                            showTextReadingControls,
-                          }}
-                          isMobilePreview
-                          isPreview={isPreview}
                         />
                       )}
+
+                      {!nextQuestionLoading &&
+                        currentQuestion &&
+                        !transitionalUserSessionId && (
+                          <ScreenWrapper isFullSize={isFullSize}>
+                            {isNarratorPositionFixed && renderQuestion()}
+                            {!isNarratorPositionFixed && (
+                              <AnimationRefHelper
+                                currentQuestion={currentQuestion}
+                                currentQuestionId={currentQuestionId}
+                                previewMode={previewMode}
+                                changeIsAnimationOngoing={
+                                  changeIsAnimationOngoing
+                                }
+                                setFeedbackSettings={setFeedbackSettings}
+                                feedbackScreenSettings={feedbackScreenSettings}
+                                audioInstance={audioInstance}
+                                dynamicElementsDirection={
+                                  dynamicElementsDirection
+                                }
+                              >
+                                {renderQuestion()}
+                              </AnimationRefHelper>
+                            )}
+                          </ScreenWrapper>
+                        )}
+
+                      {answersError && <ErrorAlert errorText={answersError} />}
                     </Box>
-                  </>
+                    {isMobilePreview && (
+                      <AnswerSessionPageFooter
+                        settings={{
+                          showTextTranscript,
+                          showTextReadingControls,
+                        }}
+                        isMobilePreview
+                        isPreview={isPreview}
+                      />
+                    )}
+                  </Box>
                 )}
               </AnswerOuterContainer>
             </Box>
@@ -1153,6 +1158,7 @@ AnswerSessionPage.propTypes = {
   fixedElementsDirection: PropTypes.string,
   dynamicElementsDirection: PropTypes.string,
   changeLocale: PropTypes.func,
+  verifyPid: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -1184,6 +1190,7 @@ const mapDispatchToProps = {
   saveQuickExitEvent: saveQuickExitEventRequest,
   fetchPreviousQuestion: fetchPreviousQuestionRequest,
   changeLocale: changeLocaleAction,
+  verifyPid: verifyPidRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

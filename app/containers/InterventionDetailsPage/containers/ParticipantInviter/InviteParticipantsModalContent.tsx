@@ -35,6 +35,7 @@ import { UploadEmailsView } from './UploadEmailsView';
 import messages from './messages';
 import { CreatePredefinedParticipantView } from './CreatePredefinedParticipantView';
 import { ManagePredefinedParticipantView } from './ManagePredefinedParticipantView';
+import { UploadPredefinedParticipantsView } from './UploadPredefinedParticipantsView';
 
 export type Props = {
   interventionId: string;
@@ -81,20 +82,20 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   }, [organizationId]);
 
-  const sessionOptions: (SelectOption<string> & { type: string })[] =
-    useMemo(() => {
-      if (isModularIntervention) return [];
-      return sessions.map(({ id, name, type }) => ({
+  const sessionOptions: (SelectOption<string> & { type: string })[] = useMemo(
+    () =>
+      sessions.map(({ id, name, type }) => ({
         value: id,
         label: name,
         type,
-      }));
-    }, [isModularIntervention, sessions]);
+      })),
+    [sessions],
+  );
 
-  const normalizedSessions: NormalizedSessions = useMemo(() => {
-    if (isModularIntervention) return {};
-    return normalizeArrayToObject(sessions, 'id');
-  }, [isModularIntervention, sessions]);
+  const normalizedSessions: NormalizedSessions = useMemo(
+    () => normalizeArrayToObject(sessions, 'id'),
+    [sessions],
+  );
 
   const healthClinicOptions: SelectOption<string>[] = useMemo(() => {
     const options: SelectOption<string>[] = [];
@@ -154,6 +155,12 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     } else if (invitationType === ParticipantInvitationType.PREDEFINED) {
       setCurrentView({
         view: InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT,
+      });
+    } else if (
+      invitationType === ParticipantInvitationType.PREDEFINED_CSV_UPLOAD
+    ) {
+      setCurrentView({
+        view: InviteParticipantModalView.UPLOAD_PREDEFINED_PARTICIPANTS,
       });
     }
   };
@@ -264,6 +271,17 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
               invitingPossible={invitingPossible}
+            />
+          )}
+          {view ===
+            InviteParticipantModalView.UPLOAD_PREDEFINED_PARTICIPANTS && (
+            <UploadPredefinedParticipantsView
+              interventionName={interventionName}
+              isReportingIntervention={isReportingIntervention}
+              interventionId={interventionId}
+              healthClinicOptions={healthClinicOptions}
+              normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+              onBack={handleBack}
             />
           )}
         </>

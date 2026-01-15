@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Row as GRow, Col as GCol, useScreenClass } from 'react-grid-system';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
@@ -23,12 +23,28 @@ import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import { Button } from 'components/Button';
 import Column from 'components/Column';
+import { TagList } from 'components/Tag';
 
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
 import messages from './messages';
 import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
 import { ParticipantsInviter } from './containers/ParticipantInviter';
+
+const CounterText = ({ children, hasWarning }) => (
+  <span
+    style={{
+      color: hasWarning ? themeColors.warning : themeColors.success,
+    }}
+  >
+    {children}
+  </span>
+);
+
+CounterText.propTypes = {
+  children: PropTypes.node,
+  hasWarning: PropTypes.bool,
+};
 
 const Header = ({
   status,
@@ -52,6 +68,8 @@ const Header = ({
   sessions,
   openExportCsvModal,
   canAccessParticipantsData,
+  tags,
+  onRemoveTag,
 }) => {
   const { formatMessage } = useIntl();
   const screenClass = useScreenClass();
@@ -85,10 +103,19 @@ const Header = ({
 
   const isWrappedLayout = !['xl', 'xxl'].includes(screenClass);
 
+  const counterRenderer = useCallback(
+    (chunks) => (
+      <CounterText hasWarning={hasSmallNumberOfCatMhSessionsRemaining}>
+        {chunks}
+      </CounterText>
+    ),
+    [hasSmallNumberOfCatMhSessionsRemaining],
+  );
+
   const interventionStatus = (
     <Row align="center" gap={12}>
       <Box>
-        <StatusLabel status={status}>
+        <StatusLabel status={status} data-cy="intervention-status">
           {status && formatMessage(interventionStatusesMessages[status])}
         </StatusLabel>
       </Box>
@@ -130,6 +157,7 @@ const Header = ({
               onFocus={selectInputText}
               maxWidth="none"
               autoComplete="off"
+              data-cy="intervention-name-input"
             />
             <ParticipantsInviter
               interventionId={interventionId}
@@ -141,6 +169,14 @@ const Header = ({
               sessions={sessions}
             />
           </Row>
+          {tags && tags.length > 0 && (
+            <TagList
+              tags={tags}
+              mt={8}
+              onRemoveTag={onRemoveTag}
+              disabled={!editingPossible}
+            />
+          )}
           {!isWrappedLayout && interventionStatus}
         </Column>
 
@@ -188,17 +224,7 @@ const Header = ({
                     current: testsLeft ?? 0,
                     initial: catMhPool ?? 0,
                     used: createdCatMhSessionCount,
-                    counter: (chunks) => (
-                      <span
-                        style={{
-                          color: hasSmallNumberOfCatMhSessionsRemaining
-                            ? themeColors.warning
-                            : themeColors.success,
-                        }}
-                      >
-                        {chunks}
-                      </span>
-                    ),
+                    counter: counterRenderer,
                   })}
                 </HelpIconTooltip>
               </Row>
@@ -234,6 +260,13 @@ Header.propTypes = {
   sessions: PropTypes.array,
   openExportCsvModal: PropTypes.func,
   canAccessParticipantsData: PropTypes.bool,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  ),
+  onRemoveTag: PropTypes.func,
 };
 
 export default Header;

@@ -131,7 +131,10 @@ describe('<InterventionPage />', () => {
         },
       },
     });
-    store.runSaga = () => {};
+    store.runSaga = () => ({
+      cancel: () => {},
+      toPromise: () => Promise.resolve(),
+    });
     store.injectedReducers = {};
     store.injectedSagas = {};
     const { container } = render(

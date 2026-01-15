@@ -305,13 +305,20 @@ function SessionListItem({
                 </Row>
 
                 {interventionType !== InterventionType.DEFAULT && (
-                  <Row px={24} mb={24} display="flex" align="center">
+                  <Row
+                    px={24}
+                    mb={24}
+                    display="flex"
+                    align="center"
+                    data-cy="session-estimate-time"
+                  >
                     <Text id={WCAG_ARIA_LABEL_ID}>
                       {formatMessage(messages.estimateTime)}
                     </Text>
                     <Input
                       transparent={false}
                       aria-labelledby={WCAG_ARIA_LABEL_ID}
+                      data-cy="session-estimate-time-input"
                       value={estimatedTimeValue}
                       onBlur={handleUpdateEstimatedTime}
                       mx={5}

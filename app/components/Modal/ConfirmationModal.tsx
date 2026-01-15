@@ -74,13 +74,13 @@ const ConfirmationModal = <T,>({
   titleStyles,
   modalState,
   ...modalProps
-}: Props<T>): JSX.Element => {
+}: Props<T>): JSX.Element | null => {
   const onConfirm = useCallback(() => {
     confirmAction(modalState);
     if (closeOnConfirm) onClose();
   }, [confirmAction, closeOnConfirm, onClose, modalState]);
 
-  if (!visible) return <></>;
+  if (!visible) return null;
 
   const getIcon = () => {
     switch (icon) {

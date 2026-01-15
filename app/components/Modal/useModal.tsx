@@ -82,7 +82,7 @@ export const useModal = <
   );
 
   const renderModal = useCallback(() => {
-    if (!isModalVisible) return <></>;
+    if (!isModalVisible) return null;
 
     switch (type) {
       case ModalType.ConfirmationModal:

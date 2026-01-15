@@ -22,6 +22,7 @@ const Selector = ({
   selectOptionPlaceholder,
   disabled,
   ariaLabel,
+  'data-cy': dataCy,
 }) => {
   const selector = useRef(null);
 
@@ -33,7 +34,7 @@ const Selector = ({
   const toggleActive = () => setIsActive(!isActive);
 
   return (
-    <Box position="relative" ref={selector}>
+    <Box position="relative" ref={selector} data-cy={dataCy}>
       <Row align="center" role="button">
         <HeaderComponent disabled={disabled} onClick={toggleActive}>
           {selectedOption.label}
@@ -92,6 +93,7 @@ Selector.propTypes = {
   selectOptionPlaceholder: PropTypes.string,
   disabled: PropTypes.bool,
   ariaLabel: PropTypes.string,
+  'data-cy': PropTypes.string,
 };
 
 Selector.defaultProps = {

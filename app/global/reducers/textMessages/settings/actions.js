@@ -9,6 +9,8 @@ import {
   CHANGE_TYPE,
   CHANGE_INCLUDED_DATA,
   CHANGE_SCHEDULING_VARIABLE,
+  CHANGE_SMS_SEND_TIME_TYPE,
+  CHANGE_SMS_SEND_TIME_DETAILS,
 } from './constants';
 
 export const changeSchedulingType = (value) =>
@@ -68,4 +70,16 @@ export const changeIncludedData = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_INCLUDED_DATA,
     data: { value },
+  });
+
+export const changeSmsSendTimeType = (value) =>
+  updateTextMessageSettingsRequest({
+    type: CHANGE_SMS_SEND_TIME_TYPE,
+    data: { value, field: 'smsSendTimeType' },
+  });
+
+export const changeSmsSendTimeDetails = (value) =>
+  updateTextMessageSettingsRequest({
+    type: CHANGE_SMS_SEND_TIME_DETAILS,
+    data: { value, field: 'smsSendTimeDetails' },
   });

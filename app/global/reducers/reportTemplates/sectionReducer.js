@@ -25,6 +25,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
+// eslint-disable-next-line default-param-last
 const templateSectionReducer = (state = initialState, { type, payload }) =>
   produce(state, (draft) => {
     switch (type) {

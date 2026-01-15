@@ -2,7 +2,7 @@ import { UPDATE_VARIABLE } from 'global/reducers/questions/constants';
 
 import { ADD, UPDATE_ANSWER, REMOVE, REORDER } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const thirdPartyQuestionReducer = (question, payload) => {
   switch (payload.type) {
     case ADD:

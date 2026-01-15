@@ -79,15 +79,13 @@ const ErrorPage = ({ intl: { formatMessage }, error, resetError }) => {
           </Row>
 
           {process.env.APP_STAGE === appStages.dev.id && error && (
-            <>
-              <Row style={{ marginBottom: 30 }}>
-                <Col align="center">
-                  <Text mt={10} fontSize={18} textAlign="center">
-                    <Markup content={error.toString()} noWrap />
-                  </Text>
-                </Col>
-              </Row>
-            </>
+            <Row style={{ marginBottom: 30 }}>
+              <Col align="center">
+                <Text mt={10} fontSize={18} textAlign="center">
+                  <Markup content={error.toString()} noWrap />
+                </Text>
+              </Col>
+            </Row>
           )}
 
           <Row justify="around">

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Circle /> circle should match the snapshot 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   border-radius: 50%;
@@ -120,7 +120,7 @@ Object {
 `;
 
 exports[`<Circle /> plus circle should match the snapshot 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c0 {
   border-radius: 50%;

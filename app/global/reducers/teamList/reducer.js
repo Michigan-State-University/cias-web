@@ -48,7 +48,7 @@ export const initialState = {
   },
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const teamListReducer = (state = initialState, { type, payload }) =>
   produce(state, (draft) => {
     switch (type) {

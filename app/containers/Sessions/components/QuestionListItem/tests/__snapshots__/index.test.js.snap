@@ -246,6 +246,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   >
     <div
       class="c1 "
+      data-cy="question-list-item-test-1"
       width="100%"
     >
       <div
@@ -293,6 +294,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
           >
             <div
               class="c13"
+              data-cy="dropdown-trigger-question-list-item-options-test-1"
               id="question-list-item-options-test-1"
             >
               <img

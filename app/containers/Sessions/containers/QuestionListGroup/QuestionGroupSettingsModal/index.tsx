@@ -87,9 +87,11 @@ const QuestionGroupSettingsModal = ({
     updateQuestionGroup({ formulas }, sessionId, id);
   };
 
-  const specificQuestionsTime = get(smsSchedule, 'time.exact', false);
-  const randomQuestionsTime = get(smsSchedule, 'time.range', false);
-  const fromFirstQuestion = get(smsSchedule, 'startFromFirstQuestion', false);
+  const specificQuestionsTime = Boolean(get(smsSchedule, 'time.exact', false));
+  const randomQuestionsTime = Boolean(get(smsSchedule, 'time.range', false));
+  const fromFirstQuestion = Boolean(
+    get(smsSchedule, 'startFromFirstQuestion', false),
+  );
 
   const handleAddNewFormula = () =>
     updateQuestionGroup(
@@ -123,380 +125,374 @@ const QuestionGroupSettingsModal = ({
         );
 
   return (
-    <>
-      <Modal
-        visible={modalVisible}
-        title={title}
-        onClose={handleModalClose}
-        maxWidth={1500}
-      >
-        <Row justify="between" align="center" mb={8}>
-          <H3>{formatMessage(messages.questionsPerDay)}</H3>
-        </Row>
-        <Row justify="between" align="center" mb={15}>
-          <Input
-            type="singleline"
-            inputMode="numeric"
-            value={smsSchedule?.questionsPerDay}
-            validator={numericValidator}
-            disabled={disabled}
-            onBlur={(v: string) =>
-              updateSmsSchedule('questionsPerDay', Number(v))
-            }
-            width="100%"
-            px={12}
-          />
-        </Row>
-        {questionGroup.type === GroupType.INITIAL && (
-          <>
-            <Row justify="between" align="center" mb={8}>
-              <H3>{formatMessage(messages.numberOfRepetitions)}</H3>
-            </Row>
-            <Row justify="between" align="center" mb={15}>
-              <Input
-                type="singleline"
-                inputMode="numeric"
-                value={
-                  smsSchedule?.numberOfRepetitions
-                    ? String(smsSchedule.numberOfRepetitions)
-                    : ''
-                }
-                validator={numericValidator}
-                disabled={disabled}
-                onBlur={(v: string) =>
-                  updateSmsSchedule('numberOfRepetitions', v ? Number(v) : null)
-                }
-                width="100%"
-                px={12}
-              />
-            </Row>
-            <Row justify="between" align="center" mb={8}>
-              <HelpIconTooltip
-                id="messages-after-limit-tooltip"
-                tooltipContent={formatMessage(
-                  messages.messagesAfterLimitTooltip,
-                )}
-              >
-                <H3>{formatMessage(messages.messagesAfterLimit)}</H3>
-              </HelpIconTooltip>
-            </Row>
-            <Row justify="between" align="center" mb={15}>
-              <Input
-                type="singleline"
-                inputMode="numeric"
-                value={
-                  smsSchedule?.messagesAfterLimit
-                    ? String(smsSchedule.messagesAfterLimit)
-                    : ''
-                }
-                validator={numericValidator}
-                disabled={disabled}
-                onBlur={(v: string) =>
-                  updateSmsSchedule('messagesAfterLimit', v ? Number(v) : null)
-                }
-                width="100%"
-                px={12}
-              />
-            </Row>
-          </>
-        )}
-        <Row justify="between" align="center" mb={8}>
-          <H3>{formatMessage(messages.dayOfPeriod)}</H3>
-        </Row>
-        <Row justify="between" align="center" mb={15}>
-          {DAY_NUMBERS.map((dayNumber) => (
-            <Checkbox
-              id={`day-of-period-${dayNumber}`}
-              checked={includes(smsSchedule?.dayOfPeriod, dayNumber)}
-              key={dayNumber}
-              inlineLabel={false}
-              disabled={disabled}
-              onChange={(selected) =>
-                handleDayCheckboxSelection(selected, dayNumber)
-              }
-            >
-              {dayOfWeekAsString(Number(dayNumber))}
-            </Checkbox>
-          ))}
-        </Row>
-        <Row justify="between" align="center" mb={8}>
-          <H3>{formatMessage(messages.time)}</H3>
-        </Row>
-        <Row justify="between" align="center" mb={15}>
-          <Column gap={12}>
-            <Radio
-              id="specified"
-              onChange={() => updateSmsSchedule('time', { exact: '8:00 AM' })}
-              checked={specificQuestionsTime}
-              disabled={disabled}
-            >
-              <Text>{formatMessage(messages.timeSpecified)}</Text>
-            </Radio>
-            <Radio
-              id="random"
-              onChange={() =>
-                updateSmsSchedule('time', {
-                  range: { from: '8:00 AM', to: '9:00 AM' },
-                })
-              }
-              checked={randomQuestionsTime}
-              disabled={disabled}
-            >
-              <Text>{formatMessage(messages.timeRandom)}</Text>
-            </Radio>
-          </Column>
-        </Row>
-        {specificQuestionsTime && (
+    <Modal
+      visible={modalVisible}
+      title={title}
+      onClose={handleModalClose}
+      maxWidth={1500}
+    >
+      <Row justify="between" align="center" mb={8}>
+        <H3>{formatMessage(messages.questionsPerDay)}</H3>
+      </Row>
+      <Row justify="between" align="center" mb={15}>
+        <Input
+          type="singleline"
+          inputMode="numeric"
+          value={smsSchedule?.questionsPerDay}
+          validator={numericValidator}
+          disabled={disabled}
+          onBlur={(v: string) =>
+            updateSmsSchedule('questionsPerDay', Number(v))
+          }
+          width="100%"
+          px={12}
+        />
+      </Row>
+      {questionGroup.type === GroupType.INITIAL && (
+        <>
           <Row justify="between" align="center" mb={8}>
-            <Column>
-              <label htmlFor="exact_time_picker">
-                <Text
-                  mb={5}
-                  fontSize="12px"
-                  fontWeight="bold"
-                  width="fit-content"
-                >
-                  {formatMessage(messages.timeSpecifiedLabel)}
-                </Text>
-              </label>
-              <LocalizedDatePicker
-                selected={parseTime(smsSchedule.time.exact)}
-                onChange={(date) =>
-                  updateSmsSchedule('time', { exact: getTimeString(date) })
-                }
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={10}
-                calendarClassName="schedule-date-picker"
-                customInput={<DateInput id="exact_time_picker" width="100%" />}
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-                disabled={disabled}
-              />
-            </Column>
+            <H3>{formatMessage(messages.numberOfRepetitions)}</H3>
           </Row>
-        )}
-        {randomQuestionsTime && (
-          <Row justify="between" align="center" mb={8}>
-            <Column mr={4}>
-              <label htmlFor="random_from_time_picker">
-                <Text
-                  mb={5}
-                  fontSize="12px"
-                  fontWeight="bold"
-                  width="fit-content"
-                >
-                  {formatMessage(messages.timeRandomFrom)}
-                </Text>
-              </label>
-              <LocalizedDatePicker
-                selected={parseTime(smsSchedule.time.range.from)}
-                onChange={(date) =>
-                  updateSmsSchedule('time', {
-                    range: {
-                      from: getTimeString(date),
-                      to: smsSchedule.time.range.to,
-                    },
-                  })
-                }
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={10}
-                calendarClassName="schedule-date-picker"
-                customInput={
-                  <DateInput id="random_from_time_picker" width="100%" />
-                }
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-                disabled={disabled}
-              />
-            </Column>
-            <Column ml={4}>
-              <label htmlFor="random_to_time_picker">
-                <Text
-                  mb={5}
-                  fontSize="12px"
-                  fontWeight="bold"
-                  width="fit-content"
-                >
-                  {formatMessage(messages.timeRandomTo)}
-                </Text>
-              </label>
-              <LocalizedDatePicker
-                selected={parseTime(smsSchedule.time.range.to)}
-                onChange={(date) =>
-                  updateSmsSchedule('time', {
-                    range: {
-                      from: smsSchedule.time.range.from,
-                      to: getTimeString(date),
-                    },
-                  })
-                }
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={10}
-                calendarClassName="schedule-date-picker"
-                customInput={
-                  <DateInput id="random_to_time_picker" width="100%" />
-                }
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-                disabled={disabled}
-              />
-            </Column>
-          </Row>
-        )}
-        {(randomQuestionsTime || specificQuestionsTime) && (
           <Row justify="between" align="center" mb={15}>
-            <Checkbox
-              id="overwrite_user_time_settings"
-              checked={smsSchedule.overwriteUserTimeSettings}
-              disabled={disabled}
-              onChange={(selected) =>
-                selected
-                  ? updateSmsSchedule('overwriteUserTimeSettings', true)
-                  : updateSmsSchedule('overwriteUserTimeSettings', false)
+            <Input
+              type="singleline"
+              inputMode="numeric"
+              value={
+                smsSchedule?.numberOfRepetitions
+                  ? String(smsSchedule.numberOfRepetitions)
+                  : ''
               }
-            >
-              {formatMessage(messages.overwriteUserTimeSettings)}
-            </Checkbox>
+              validator={numericValidator}
+              disabled={disabled}
+              onBlur={(v: string) =>
+                updateSmsSchedule('numberOfRepetitions', v ? Number(v) : null)
+              }
+              width="100%"
+              px={12}
+            />
           </Row>
-        )}
-        <Row justify="between" align="center" mb={8}>
-          <H3>{formatMessage(messages.sendingOrder)}</H3>
-        </Row>
-        <Row justify="between" align="center" mb={15}>
-          <Column gap={12}>
-            <Radio
-              id="fromLastAnswer"
-              onChange={() =>
-                updateSmsSchedule('startFromFirstQuestion', false)
+          <Row justify="between" align="center" mb={8}>
+            <HelpIconTooltip
+              id="messages-after-limit-tooltip"
+              tooltipContent={formatMessage(messages.messagesAfterLimitTooltip)}
+            >
+              <H3>{formatMessage(messages.messagesAfterLimit)}</H3>
+            </HelpIconTooltip>
+          </Row>
+          <Row justify="between" align="center" mb={15}>
+            <Input
+              type="singleline"
+              inputMode="numeric"
+              value={
+                smsSchedule?.messagesAfterLimit
+                  ? String(smsSchedule.messagesAfterLimit)
+                  : ''
               }
-              checked={!fromFirstQuestion}
+              validator={numericValidator}
               disabled={disabled}
-            >
-              <Text>{formatMessage(messages.fromLastAnswer)}</Text>
-            </Radio>
-            <Radio
-              id="fromFirstQuestion"
-              onChange={() => updateSmsSchedule('startFromFirstQuestion', true)}
-              checked={fromFirstQuestion}
-              disabled={disabled}
-            >
-              <Text>{formatMessage(messages.fromFirstQuestion)}</Text>
-            </Radio>
-          </Column>
-        </Row>
-        <Row justify="between" align="center" mb={8}>
-          <H3>{formatMessage(messages.conditions)}</H3>
-        </Row>
-        {formulas?.length > 0 &&
-          formulas.map(
-            (
-              formula: { payload: string; patterns: Array<{ match: string }> },
-              index: number,
-            ) => (
-              <>
-                <Row justify="between" align="center" key={index}>
-                  {formatMessage(messages.formula)}
-                  <div>
-                    <VariableChooser
-                      currentSessionId={sessionId}
-                      disabled={disabled}
-                      currentInterventionId={interventionId}
-                      onClick={(value: string) =>
-                        updateFormulas(
-                          index,
-                          'payload',
-                          `${formula.payload}${value}`,
-                        )
-                      }
-                      includeAllVariables
-                      includeCurrentQuestion
-                      includeAllSessions
-                      includeCurrentSession
-                      isMultiSession
-                      // @ts-ignore
-                      selectedQuestion={null}
-                      setIsOpen={setIsVariableChooserOpen}
-                    >
-                      <Text
-                        fontWeight="bold"
-                        color={themeColors.secondary}
-                        hoverDecoration="underline"
-                      >
-                        {formatMessage(messages.addVariable)}
-                      </Text>
-                    </VariableChooser>
-                  </div>
-                </Row>
-                <Row justify="between" align="center" mb={8}>
-                  <Input
-                    placeholder="Enter formula here..."
-                    type="singleline"
-                    value={formula?.payload || ''}
-                    onBlur={(val: string) =>
-                      updateFormulas(index, 'payload', val)
-                    }
-                    width="100%"
-                    disabled={disabled}
-                    px={12}
-                    forceBlur={isVariableChooserOpen}
-                  />
-                </Row>
-                <Row justify="between" align="center" mb={15}>
-                  If
-                  <InequalityChooser
-                    height={50}
-                    width={200}
-                    disabled={disabled}
-                    onSuccessfulChange={(value) =>
-                      updateFormulas(index, 'patterns[0].match', value)
-                    }
-                    inequalityValue={formula.patterns[0].match}
-                  />
-                  <Img
-                    ml={10}
-                    src={binNoBg}
-                    onClick={() => {
-                      formulas.splice(index, 1);
-                      updateQuestionGroup(
-                        {
-                          formulas,
-                        },
-                        sessionId,
-                        id,
-                      );
-                    }}
-                    clickable
-                    width="20px"
-                    height="20px"
-                  />
-                </Row>
-              </>
-            ),
-          )}
-        <Row justify="between" align="center" mb={8}>
-          <HoverableBox
-            px={21}
-            py={14}
-            width="100%"
-            style={{ display: 'flex', justifyContent: 'center' }}
-            onClick={handleAddNewFormula}
+              onBlur={(v: string) =>
+                updateSmsSchedule('messagesAfterLimit', v ? Number(v) : null)
+              }
+              width="100%"
+              px={12}
+            />
+          </Row>
+        </>
+      )}
+      <Row justify="between" align="center" mb={8}>
+        <H3>{formatMessage(messages.dayOfPeriod)}</H3>
+      </Row>
+      <Row justify="between" align="center" mb={15}>
+        {DAY_NUMBERS.map((dayNumber) => (
+          <Checkbox
+            id={`day-of-period-${dayNumber}`}
+            checked={includes(smsSchedule?.dayOfPeriod, dayNumber)}
+            key={dayNumber}
+            inlineLabel={false}
+            disabled={disabled}
+            onChange={(selected) =>
+              handleDayCheckboxSelection(selected, dayNumber)
+            }
+          >
+            {dayOfWeekAsString(Number(dayNumber))}
+          </Checkbox>
+        ))}
+      </Row>
+      <Row justify="between" align="center" mb={8}>
+        <H3>{formatMessage(messages.time)}</H3>
+      </Row>
+      <Row justify="between" align="center" mb={15}>
+        <Column gap={12}>
+          <Radio
+            id="specified"
+            onChange={() => updateSmsSchedule('time', { exact: '8:00 AM' })}
+            checked={specificQuestionsTime}
             disabled={disabled}
           >
-            <Box>
-              <Row align="center">
-                <PlusCircle mr={12} />
-                <Text fontWeight="bold" color={themeColors.secondary}>
-                  <FormattedMessage {...messages.addNewFormula} />
-                </Text>
-              </Row>
-            </Box>
-          </HoverableBox>
+            <Text>{formatMessage(messages.timeSpecified)}</Text>
+          </Radio>
+          <Radio
+            id="random"
+            onChange={() =>
+              updateSmsSchedule('time', {
+                range: { from: '8:00 AM', to: '9:00 AM' },
+              })
+            }
+            checked={randomQuestionsTime}
+            disabled={disabled}
+          >
+            <Text>{formatMessage(messages.timeRandom)}</Text>
+          </Radio>
+        </Column>
+      </Row>
+      {specificQuestionsTime && (
+        <Row justify="between" align="center" mb={8}>
+          <Column>
+            <label htmlFor="exact_time_picker">
+              <Text
+                mb={5}
+                fontSize="12px"
+                fontWeight="bold"
+                width="fit-content"
+              >
+                {formatMessage(messages.timeSpecifiedLabel)}
+              </Text>
+            </label>
+            <LocalizedDatePicker
+              selected={parseTime(smsSchedule.time.exact)}
+              onChange={(date: Date | null) =>
+                updateSmsSchedule('time', { exact: getTimeString(date) })
+              }
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={10}
+              calendarClassName="schedule-date-picker"
+              customInput={<DateInput id="exact_time_picker" width="100%" />}
+              timeCaption="Time"
+              dateFormat="h:mm aa"
+              disabled={disabled}
+            />
+          </Column>
         </Row>
-      </Modal>
-    </>
+      )}
+      {randomQuestionsTime && (
+        <Row justify="between" align="center" mb={8}>
+          <Column mr={4}>
+            <label htmlFor="random_from_time_picker">
+              <Text
+                mb={5}
+                fontSize="12px"
+                fontWeight="bold"
+                width="fit-content"
+              >
+                {formatMessage(messages.timeRandomFrom)}
+              </Text>
+            </label>
+            <LocalizedDatePicker
+              selected={parseTime(smsSchedule.time.range.from)}
+              onChange={(date: Date | null) =>
+                updateSmsSchedule('time', {
+                  range: {
+                    from: getTimeString(date),
+                    to: smsSchedule.time.range.to,
+                  },
+                })
+              }
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={10}
+              calendarClassName="schedule-date-picker"
+              customInput={
+                <DateInput id="random_from_time_picker" width="100%" />
+              }
+              timeCaption="Time"
+              dateFormat="h:mm aa"
+              disabled={disabled}
+            />
+          </Column>
+          <Column ml={4}>
+            <label htmlFor="random_to_time_picker">
+              <Text
+                mb={5}
+                fontSize="12px"
+                fontWeight="bold"
+                width="fit-content"
+              >
+                {formatMessage(messages.timeRandomTo)}
+              </Text>
+            </label>
+            <LocalizedDatePicker
+              selected={parseTime(smsSchedule.time.range.to)}
+              onChange={(date: Date | null) =>
+                updateSmsSchedule('time', {
+                  range: {
+                    from: smsSchedule.time.range.from,
+                    to: getTimeString(date),
+                  },
+                })
+              }
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={10}
+              calendarClassName="schedule-date-picker"
+              customInput={
+                <DateInput id="random_to_time_picker" width="100%" />
+              }
+              timeCaption="Time"
+              dateFormat="h:mm aa"
+              disabled={disabled}
+            />
+          </Column>
+        </Row>
+      )}
+      {(randomQuestionsTime || specificQuestionsTime) && (
+        <Row justify="between" align="center" mb={15}>
+          <Checkbox
+            id="overwrite_user_time_settings"
+            checked={smsSchedule.overwriteUserTimeSettings}
+            disabled={disabled}
+            onChange={(selected) =>
+              selected
+                ? updateSmsSchedule('overwriteUserTimeSettings', true)
+                : updateSmsSchedule('overwriteUserTimeSettings', false)
+            }
+          >
+            {formatMessage(messages.overwriteUserTimeSettings)}
+          </Checkbox>
+        </Row>
+      )}
+      <Row justify="between" align="center" mb={8}>
+        <H3>{formatMessage(messages.sendingOrder)}</H3>
+      </Row>
+      <Row justify="between" align="center" mb={15}>
+        <Column gap={12}>
+          <Radio
+            id="fromLastAnswer"
+            onChange={() => updateSmsSchedule('startFromFirstQuestion', false)}
+            checked={!fromFirstQuestion}
+            disabled={disabled}
+          >
+            <Text>{formatMessage(messages.fromLastAnswer)}</Text>
+          </Radio>
+          <Radio
+            id="fromFirstQuestion"
+            onChange={() => updateSmsSchedule('startFromFirstQuestion', true)}
+            checked={fromFirstQuestion}
+            disabled={disabled}
+          >
+            <Text>{formatMessage(messages.fromFirstQuestion)}</Text>
+          </Radio>
+        </Column>
+      </Row>
+      <Row justify="between" align="center" mb={8}>
+        <H3>{formatMessage(messages.conditions)}</H3>
+      </Row>
+      {formulas?.length > 0 &&
+        formulas.map(
+          (
+            formula: { payload: string; patterns: Array<{ match: string }> },
+            index: number,
+          ) => (
+            <>
+              <Row justify="between" align="center" key={index}>
+                {formatMessage(messages.formula)}
+                <div>
+                  <VariableChooser
+                    currentSessionId={sessionId}
+                    disabled={disabled}
+                    currentInterventionId={interventionId}
+                    onClick={(value: string) =>
+                      updateFormulas(
+                        index,
+                        'payload',
+                        `${formula.payload}${value}`,
+                      )
+                    }
+                    includeAllVariables
+                    includeCurrentQuestion
+                    includeAllSessions
+                    includeCurrentSession
+                    isMultiSession
+                    // @ts-ignore
+                    selectedQuestion={null}
+                    setIsOpen={setIsVariableChooserOpen}
+                  >
+                    <Text
+                      fontWeight="bold"
+                      color={themeColors.secondary}
+                      hoverDecoration="underline"
+                    >
+                      {formatMessage(messages.addVariable)}
+                    </Text>
+                  </VariableChooser>
+                </div>
+              </Row>
+              <Row justify="between" align="center" mb={8}>
+                <Input
+                  placeholder="Enter formula here..."
+                  type="singleline"
+                  value={formula?.payload || ''}
+                  onBlur={(val: string) =>
+                    updateFormulas(index, 'payload', val)
+                  }
+                  width="100%"
+                  disabled={disabled}
+                  px={12}
+                  forceBlur={isVariableChooserOpen}
+                />
+              </Row>
+              <Row justify="between" align="center" mb={15}>
+                If
+                <InequalityChooser
+                  height={50}
+                  width={200}
+                  disabled={disabled}
+                  onSuccessfulChange={(value) =>
+                    updateFormulas(index, 'patterns[0].match', value)
+                  }
+                  inequalityValue={formula.patterns[0].match}
+                />
+                <Img
+                  ml={10}
+                  src={binNoBg}
+                  onClick={() => {
+                    formulas.splice(index, 1);
+                    updateQuestionGroup(
+                      {
+                        formulas,
+                      },
+                      sessionId,
+                      id,
+                    );
+                  }}
+                  clickable
+                  width="20px"
+                  height="20px"
+                />
+              </Row>
+            </>
+          ),
+        )}
+      <Row justify="between" align="center" mb={8}>
+        <HoverableBox
+          px={21}
+          py={14}
+          width="100%"
+          style={{ display: 'flex', justifyContent: 'center' }}
+          onClick={handleAddNewFormula}
+          disabled={disabled}
+        >
+          <Box>
+            <Row align="center">
+              <PlusCircle mr={12} />
+              <Text fontWeight="bold" color={themeColors.secondary}>
+                <FormattedMessage {...messages.addNewFormula} />
+              </Text>
+            </Row>
+          </Box>
+        </HoverableBox>
+      </Row>
+    </Modal>
   );
 };
 

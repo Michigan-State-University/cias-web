@@ -116,7 +116,7 @@ const saved = [
   UPDATE_NARRATOR_SUCCESS,
 ];
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const sessionReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     if (saving.includes(action.type)) draft.sessionSaving = true;

@@ -258,6 +258,7 @@ const QuestionListItem = ({
         border={`1px solid ${
           checked ? colors.electricPurple : colors.smokeWhite
         }`}
+        data-cy={`question-list-item-${id}`}
       >
         <Row justify="between" ref={questionRef}>
           {manage && isManageableScreen && (

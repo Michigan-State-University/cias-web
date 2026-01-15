@@ -119,16 +119,16 @@ export const getQuestionDataByType = (
         data: [],
       };
 
-    default:
-      return {
-        variable: { name: '' },
-        data: [{ payload: '' }],
-      };
-
     case QuestionTypes.HENRY_FORD_QUESTION:
       return {
         variable: { name: '' },
         data: [{ payload: '', value: '1', hfh_value: '' }],
+      };
+
+    default:
+      return {
+        variable: { name: '' },
+        data: [{ payload: '' }],
       };
   }
 };

@@ -7,7 +7,7 @@ import {
 } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
-const clinicReducer = (state = null, action) =>
+const clinicReducer = (state = null, action = null) =>
   produce(state, () => {
     const { type, payload } = action;
 

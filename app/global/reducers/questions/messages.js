@@ -47,6 +47,16 @@ export default defineMessages({
   variableUpdateInProgress: {
     id: `${scope}.variableUpdateInProgress`,
     defaultMessage:
-      'Cannot update session variable while references update is in progress. Please try again in a few moments.',
+      'Cannot update question variable while references update is in progress. Please try again in a few moments.',
+  },
+  answerOptionUpdateQueued: {
+    id: `${scope}.answerOptionUpdateQueued`,
+    defaultMessage:
+      'Answer option references are being updated. Please refresh the page in a moment to see the results.',
+  },
+  answerOptionUpdateInProgress: {
+    id: `${scope}.answerOptionUpdateInProgress`,
+    defaultMessage:
+      'Cannot update question answer option while references update is in progress. Please try again in a few moments.',
   },
 });
