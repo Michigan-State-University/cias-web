@@ -29,7 +29,7 @@ export const initialState = {
   },
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const organizationsReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     draft.organization = organizationReducer(state.organization, action);

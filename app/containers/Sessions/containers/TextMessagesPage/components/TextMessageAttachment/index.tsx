@@ -56,55 +56,51 @@ export const TextMessageAttachment: React.FC<Props> = ({
   );
 
   return (
-    <>
-      <FileUpload
-        acceptedFormats={MMS_ACCEPTED_FILE_FORMATS}
-        label={formatMessage(messages.attachmentLabel)}
-        loading={loading}
-        value={attachment}
-        onUpload={onAdd}
-        onRemoveFile={onDelete}
-        error={error?.response?.data?.message}
-        disabled={!editingPossible}
-        maxSize={MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE}
-        maxSizeMap={MMS_MAX_LARGE_IMAGE_FILE_SIZE_MAP}
-        tooltipContent={
-          <Column align="start">
-            <Text>
-              {formatMessage(messages.maxLargeImageFileSize, {
-                formats: formattedLargeImageFileFormats,
-                maxSize: byteSize(MMS_MAX_FILE_SIZE, {
-                  precision: 2,
-                }).toString(),
-              })}
-            </Text>
-            <Text mt={12}>
-              {formatMessage(messages.maxOtherFileSize, {
-                maxSize: byteSize(MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE, {
-                  precision: 0,
-                }).toString(),
-              })}
-            </Text>
-            {!allFormatsVisible && (
-              <TextButton
-                buttonProps={{ py: 16, px: 0, color: themeColors.secondary }}
-                onClick={() => setAllFormatsVisible(true)}
-              >
-                {formatMessage(messages.viewAllSupportedFileFormats)}
-              </TextButton>
-            )}
-            {allFormatsVisible && (
-              <>
-                <Text mt={12}>
-                  {formatMessage(messages.allSupportedFormats)}
-                </Text>
-                <Text opacity={0.8}>{formattedAcceptedFileFormats}</Text>
-              </>
-            )}
-          </Column>
-        }
-        onHideTooltip={() => setAllFormatsVisible(false)}
-      />
-    </>
+    <FileUpload
+      acceptedFormats={MMS_ACCEPTED_FILE_FORMATS}
+      label={formatMessage(messages.attachmentLabel)}
+      loading={loading}
+      value={attachment}
+      onUpload={onAdd}
+      onRemoveFile={onDelete}
+      error={(error?.response?.data as { message?: string })?.message}
+      disabled={!editingPossible}
+      maxSize={MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE}
+      maxSizeMap={MMS_MAX_LARGE_IMAGE_FILE_SIZE_MAP}
+      tooltipContent={
+        <Column align="start">
+          <Text>
+            {formatMessage(messages.maxLargeImageFileSize, {
+              formats: formattedLargeImageFileFormats,
+              maxSize: byteSize(MMS_MAX_FILE_SIZE, {
+                precision: 2,
+              }).toString(),
+            })}
+          </Text>
+          <Text mt={12}>
+            {formatMessage(messages.maxOtherFileSize, {
+              maxSize: byteSize(MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE, {
+                precision: 0,
+              }).toString(),
+            })}
+          </Text>
+          {!allFormatsVisible && (
+            <TextButton
+              buttonProps={{ py: 16, px: 0, color: themeColors.secondary }}
+              onClick={() => setAllFormatsVisible(true)}
+            >
+              {formatMessage(messages.viewAllSupportedFileFormats)}
+            </TextButton>
+          )}
+          {allFormatsVisible && (
+            <>
+              <Text mt={12}>{formatMessage(messages.allSupportedFormats)}</Text>
+              <Text opacity={0.8}>{formattedAcceptedFileFormats}</Text>
+            </>
+          )}
+        </Column>
+      }
+      onHideTooltip={() => setAllFormatsVisible(false)}
+    />
   );
 };

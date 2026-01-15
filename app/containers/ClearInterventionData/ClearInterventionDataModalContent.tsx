@@ -36,192 +36,189 @@ import {
 import { createClearConversationDataFormValidationSchema } from './utils';
 import { DELAY_INPUT_ID } from './constants';
 
-export const ClearInterventionDataModalContent: ModalContentRenderer<ClearInterventionDataModalState> =
-  ({ closeModal, modalState }) => {
-    const { formatMessage } = useIntl();
-    const dispatch = useDispatch();
+export const ClearInterventionDataModalContent: ModalContentRenderer<
+  ClearInterventionDataModalState
+> = ({ closeModal, modalState }) => {
+  const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
 
-    useInjectSaga(withClearInterventionDataSaga);
+  useInjectSaga(withClearInterventionDataSaga);
 
-    const validationSchema = useMemo(
-      () => createClearConversationDataFormValidationSchema(),
-      [],
+  const validationSchema = useMemo(
+    () => createClearConversationDataFormValidationSchema(),
+    [],
+  );
+
+  const {
+    initialSensitiveDataState,
+    initialClearSensitiveDataScheduledAt,
+    interventionId,
+  } = modalState ?? {};
+  const [showConfirmAction, setShowConfirmAction] = useState(false);
+
+  const [{ sensitiveDataState, clearSensitiveDataScheduledAt }, setState] =
+    useState({
+      sensitiveDataState: initialSensitiveDataState!,
+      clearSensitiveDataScheduledAt: initialClearSensitiveDataScheduledAt,
+    });
+
+  const clearInterventionDataLoading = useSelector(
+    makeSelectInterventionLoader('clearInterventionData'),
+  );
+
+  const onSubmit: FormikConfig<ClearInterventionDataFormValues>['onSubmit'] =
+    useCallback(
+      ({ delay }) => {
+        if (sensitiveDataState !== SensitiveDataState.COLLECTED) {
+          closeModal();
+          return;
+        }
+
+        if (!showConfirmAction) {
+          setShowConfirmAction(true);
+          return;
+        }
+
+        dispatch(clearInterventionDataRequest(interventionId, delay, setState));
+      },
+      [sensitiveDataState, interventionId, setState, showConfirmAction],
     );
 
-    const {
-      initialSensitiveDataState,
-      initialClearSensitiveDataScheduledAt,
-      interventionId,
-    } = modalState ?? {};
-    const [showConfirmAction, setShowConfirmAction] = useState(false);
+  const isClearanceScheduledForFuture =
+    clearSensitiveDataScheduledAt &&
+    dayjs(clearSensitiveDataScheduledAt).isAfter(dayjs());
 
-    const [{ sensitiveDataState, clearSensitiveDataScheduledAt }, setState] =
-      useState({
-        sensitiveDataState: initialSensitiveDataState!,
-        clearSensitiveDataScheduledAt: initialClearSensitiveDataScheduledAt,
-      });
-
-    const clearInterventionDataLoading = useSelector(
-      makeSelectInterventionLoader('clearInterventionData'),
-    );
-
-    const onSubmit: FormikConfig<ClearInterventionDataFormValues>['onSubmit'] =
-      useCallback(
-        ({ delay }) => {
-          if (sensitiveDataState !== SensitiveDataState.COLLECTED) {
-            closeModal();
-            return;
-          }
-
-          if (!showConfirmAction) {
-            setShowConfirmAction(true);
-            return;
-          }
-
-          dispatch(
-            clearInterventionDataRequest(interventionId, delay, setState),
-          );
-        },
-        [sensitiveDataState, interventionId, setState, showConfirmAction],
-      );
-
-    const isClearanceScheduledForFuture =
-      clearSensitiveDataScheduledAt &&
-      dayjs(clearSensitiveDataScheduledAt).isAfter(dayjs());
-
-    return (
-      <Formik
-        validationSchema={validationSchema}
-        initialValues={{ delay: '5' }}
-        onSubmit={onSubmit}
-      >
-        {({ isValid, errors, handleSubmit }) => (
-          <Form>
-            <Box
-              display="flex"
-              direction="column"
-              align="center"
-              mt={32}
-              gap={32}
-              textAlign="center"
-            >
-              {sensitiveDataState === SensitiveDataState.COLLECTED && (
-                <>
-                  {!showConfirmAction && (
-                    <>
-                      <Text fontSize={15} lineHeight={1.5}>
-                        {formatMessage(messages.clearDataConfirmationContent)}
-                      </Text>
-                      <Column>
-                        <Row align="center" justify="center" gap={12}>
-                          <label htmlFor={DELAY_INPUT_ID}>
-                            <Text fontSize={15} lineHeight={1.5}>
-                              {formatMessage(messages.deleteDataIn)}
-                            </Text>
-                          </label>
-                          <FormikInput
-                            formikKey="delay"
-                            hideErrorMessages
-                            id={DELAY_INPUT_ID}
-                            width={70}
-                            inputProps={{
-                              width: 70,
-                              // @ts-ignore
-                              keyboard: 'number',
-                              background: colors.lightDivider,
-                              min: 0,
-                            }}
-                          />
+  return (
+    <Formik
+      validationSchema={validationSchema}
+      initialValues={{ delay: '5' }}
+      onSubmit={onSubmit}
+    >
+      {({ isValid, errors, handleSubmit }) => (
+        <Form>
+          <Box
+            display="flex"
+            direction="column"
+            align="center"
+            mt={32}
+            gap={32}
+            textAlign="center"
+          >
+            {sensitiveDataState === SensitiveDataState.COLLECTED && (
+              <>
+                {!showConfirmAction && (
+                  <>
+                    <Text fontSize={15} lineHeight={1.5}>
+                      {formatMessage(messages.clearDataConfirmationContent)}
+                    </Text>
+                    <Column>
+                      <Row align="center" justify="center" gap={12}>
+                        <label htmlFor={DELAY_INPUT_ID}>
                           <Text fontSize={15} lineHeight={1.5}>
-                            {formatMessage(messages.days)}
+                            {formatMessage(messages.deleteDataIn)}
                           </Text>
-                        </Row>
-                        {!isValid && <ErrorText>{errors.delay}</ErrorText>}
-                      </Column>
-                      <Text fontSize={15} lineHeight={1.5} opacity={0.7}>
-                        {formatMessage(messages.clearDataConfirmationNote)}
-                      </Text>
-                    </>
-                  )}
-                  {showConfirmAction && (
-                    <>
-                      <H2>
-                        {formatMessage(messages.clearDataConfirmationTitle)}
-                      </H2>
-                      <Text fontSize={15} lineHeight={1.5}>
-                        {formatMessage(
-                          messages.clearDataConfirmationDescription,
-                        )}
-                      </Text>
-                    </>
-                  )}
-                </>
-              )}
-              {sensitiveDataState === SensitiveDataState.MARKED_TO_REMOVE && (
-                <>
-                  <Text fontSize={20} fontWeight="bold" lineHeight={1.3}>
-                    {formatMessage(messages.markedToRemoveTitle)}
-                  </Text>
-                  <Text fontSize={15} lineHeight={1.5}>
-                    {formatMessage(messages.markedToRemoveContentFirst)}
-                    <br />
-                    {isClearanceScheduledForFuture &&
-                      formatMessage(messages.markedToRemoveContentSecond, {
-                        time: dayjs(clearSensitiveDataScheduledAt)
-                          .locale(CustomDayjsLocale.EN_LONG_RELATIVE_TIME)
-                          .fromNow(false),
-                      })}
-                  </Text>
-                </>
-              )}
-              {sensitiveDataState === SensitiveDataState.REMOVED && (
-                <>
-                  <Text fontSize={20} fontWeight="bold" lineHeight={1.3}>
-                    {formatMessage(messages.removedTitle)}
-                  </Text>
-                  <Text fontSize={15} lineHeight={1.5}>
-                    {formatMessage(messages.removedContent)}
-                  </Text>
-                </>
-              )}
-            </Box>
-            <Row mt={42} gap={16} align="center" justify="center">
-              {sensitiveDataState === SensitiveDataState.COLLECTED && (
-                <Button
-                  inverted
-                  hoverable
-                  onClick={closeModal}
-                  width="auto"
-                  py={0}
-                  px={30}
-                >
-                  {formatMessage(globalMessages.cancel)}
-                </Button>
-              )}
+                        </label>
+                        <FormikInput
+                          formikKey="delay"
+                          hideErrorMessages
+                          id={DELAY_INPUT_ID}
+                          width={70}
+                          inputProps={{
+                            width: 70,
+                            // @ts-ignore
+                            keyboard: 'number',
+                            background: colors.lightDivider,
+                            min: 0,
+                          }}
+                        />
+                        <Text fontSize={15} lineHeight={1.5}>
+                          {formatMessage(messages.days)}
+                        </Text>
+                      </Row>
+                      {!isValid && <ErrorText>{errors.delay}</ErrorText>}
+                    </Column>
+                    <Text fontSize={15} lineHeight={1.5} opacity={0.7}>
+                      {formatMessage(messages.clearDataConfirmationNote)}
+                    </Text>
+                  </>
+                )}
+                {showConfirmAction && (
+                  <>
+                    <H2>
+                      {formatMessage(messages.clearDataConfirmationTitle)}
+                    </H2>
+                    <Text fontSize={15} lineHeight={1.5}>
+                      {formatMessage(messages.clearDataConfirmationDescription)}
+                    </Text>
+                  </>
+                )}
+              </>
+            )}
+            {sensitiveDataState === SensitiveDataState.MARKED_TO_REMOVE && (
+              <>
+                <Text fontSize={20} fontWeight="bold" lineHeight={1.3}>
+                  {formatMessage(messages.markedToRemoveTitle)}
+                </Text>
+                <Text fontSize={15} lineHeight={1.5}>
+                  {formatMessage(messages.markedToRemoveContentFirst)}
+                  <br />
+                  {isClearanceScheduledForFuture &&
+                    formatMessage(messages.markedToRemoveContentSecond, {
+                      time: dayjs(clearSensitiveDataScheduledAt)
+                        .locale(CustomDayjsLocale.EN_LONG_RELATIVE_TIME)
+                        .fromNow(false),
+                    })}
+                </Text>
+              </>
+            )}
+            {sensitiveDataState === SensitiveDataState.REMOVED && (
+              <>
+                <Text fontSize={20} fontWeight="bold" lineHeight={1.3}>
+                  {formatMessage(messages.removedTitle)}
+                </Text>
+                <Text fontSize={15} lineHeight={1.5}>
+                  {formatMessage(messages.removedContent)}
+                </Text>
+              </>
+            )}
+          </Box>
+          <Row mt={42} gap={16} align="center" justify="center">
+            {sensitiveDataState === SensitiveDataState.COLLECTED && (
               <Button
+                inverted
                 hoverable
-                onClick={handleSubmit}
-                disabled={!isValid}
-                loading={clearInterventionDataLoading}
+                onClick={closeModal}
                 width="auto"
                 py={0}
                 px={30}
-                color={
-                  sensitiveDataState === SensitiveDataState.COLLECTED
-                    ? 'warning'
-                    : 'primary'
-                }
-                type="submit"
               >
-                {formatMessage(
-                  sensitiveDataState === SensitiveDataState.COLLECTED
-                    ? messages.clearData
-                    : globalMessages.iUnderstand,
-                )}
+                {formatMessage(globalMessages.cancel)}
               </Button>
-            </Row>
-          </Form>
-        )}
-      </Formik>
-    );
-  };
+            )}
+            <Button
+              hoverable
+              onClick={handleSubmit}
+              disabled={!isValid}
+              loading={clearInterventionDataLoading}
+              width="auto"
+              py={0}
+              px={30}
+              color={
+                sensitiveDataState === SensitiveDataState.COLLECTED
+                  ? 'warning'
+                  : 'primary'
+              }
+              type="submit"
+            >
+              {formatMessage(
+                sensitiveDataState === SensitiveDataState.COLLECTED
+                  ? messages.clearData
+                  : globalMessages.iUnderstand,
+              )}
+            </Button>
+          </Row>
+        </Form>
+      )}
+    </Formik>
+  );
+};

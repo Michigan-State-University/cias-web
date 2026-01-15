@@ -18,7 +18,7 @@ import {
 } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
-const healthSystemReducer = (state = null, action) =>
+const healthSystemReducer = (state = null, action = null) =>
   produce(state, (draft) => {
     const { type, payload } = action;
 

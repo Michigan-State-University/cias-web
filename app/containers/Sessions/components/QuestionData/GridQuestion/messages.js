@@ -23,4 +23,12 @@ export default defineMessages({
     id: `${scope}.reorderIconAlt`,
     defaultMessage: 'Reorder icon {index}',
   },
+  deleteColumn: {
+    id: `${scope}.deleteColumn`,
+    defaultMessage: 'Delete column {index}',
+  },
+  deleteRow: {
+    id: `${scope}.deleteRow`,
+    defaultMessage: 'Delete row {index}',
+  },
 });

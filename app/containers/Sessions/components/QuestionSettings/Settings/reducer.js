@@ -5,6 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { instantiateBlockForType } from 'models/Session/utils';
 import { getNarratorPositionForANewBlock } from 'utils/getNarratorPosition';
 import { removeAt } from 'utils/arrayUtils';
+import { calculateNextValue } from 'utils/sequenceUtils';
 
 import {
   UPDATE_QUESTION_SETTINGS,
@@ -43,6 +44,35 @@ const questionSettingsReducer = (question, { type, data }, allQuestions) =>
         const { property, value } = data;
 
         draft.settings[property] = value;
+
+        // Handle none_of_above answer data when the setting changes
+        if (property === 'none_of_above') {
+          if (!draft.body.data) {
+            draft.body.data = [];
+          }
+
+          if (value) {
+            const hasNoneOfAbove = draft.body.data.some(
+              (item) => item.none_of_above,
+            );
+            if (!hasNoneOfAbove) {
+              draft.body.data.push({
+                variable: {
+                  name: '',
+                  value: `${calculateNextValue(
+                    draft.body.data.map(({ variable: { value: v } }) => +v),
+                  )}`,
+                },
+                payload: '',
+                none_of_above: true,
+              });
+            }
+          } else {
+            draft.body.data = draft.body.data.filter(
+              (item) => !item.none_of_above,
+            );
+          }
+        }
         break;
       }
 

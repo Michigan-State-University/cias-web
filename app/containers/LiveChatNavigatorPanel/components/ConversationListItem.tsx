@@ -21,17 +21,23 @@ export const ConversationListItem = ({
 }: Props) => {
   const {
     id: conversationId,
-    lastMessage: {
-      isRead,
-      interlocutorId: messageInterlocutorId,
-      createdAt,
-      content,
-    },
+    lastMessage,
     liveChatInterlocutors,
     archivedAt,
   } = conversation;
 
   const handleClick = () => onClick(conversationId);
+
+  if (!lastMessage) {
+    return null;
+  }
+
+  const {
+    isRead,
+    interlocutorId: messageInterlocutorId,
+    createdAt,
+    content,
+  } = lastMessage;
 
   const otherInterlocutor = Object.values(liveChatInterlocutors).find(
     ({ userId }) => userId !== currentUserId,

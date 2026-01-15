@@ -11,7 +11,6 @@ import objectToCamelCase from 'utils/objectToCamelCase';
 import { getRedirectPathFromQueryParams } from 'utils/router';
 
 import { makeSelectLocation } from 'containers/App/selectors';
-import { UserStorageController } from '../UserStorageController';
 import {
   logIn,
   loginError,
@@ -26,28 +25,22 @@ function* login({ payload: { email, password } }) {
   const requestURL = `v1/auth/sign_in`;
   const location = yield select(makeSelectLocation());
   try {
-    let config = {};
-    const userStorageController = new UserStorageController(email);
     const temporaryVerificationCode = yield select(
       makeSelectTemporaryVerificationCode(),
     );
-    const storedVerificationCode = userStorageController.getVerificationCode();
-    const verificationCode =
-      temporaryVerificationCode || storedVerificationCode;
 
-    if (verificationCode)
-      config = {
-        headers: { 'Verification-Code': verificationCode },
-      };
+    const requestBody = {
+      email,
+      password,
+    };
 
-    const { data } = yield axios.post(
-      requestURL,
-      {
-        email,
-        password,
-      },
-      config,
-    );
+    if (temporaryVerificationCode) {
+      requestBody.verification_code = temporaryVerificationCode;
+    }
+
+    const { data } = yield axios.post(requestURL, requestBody, {
+      withCredentials: true,
+    });
     const mappedUser = mapCurrentUser(data);
     yield call(LocalStorageService.setState, { user: { ...mappedUser } });
     yield put(logIn(mappedUser));

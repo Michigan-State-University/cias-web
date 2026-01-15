@@ -225,6 +225,49 @@ const VariableChooser = ({
     isOpen,
   ]);
 
+  const contextValue = useMemo(
+    () => ({
+      currentSessionId,
+      currentInterventionId,
+      selectedInterventionId,
+      selectedSessionId,
+      currentView,
+      includeAllSessions,
+      includeAllVariables,
+      includeCurrentQuestion,
+      includeCurrentSession,
+      includeNonDigitVariables,
+      isMultiIntervention,
+      isMultiSession,
+      organizationId,
+      questionTypeWhitelist,
+      selectedQuestion,
+      setCurrentView,
+      sessionTypesWhiteList,
+      currentSessionPreviousQuestions,
+    }),
+    [
+      currentSessionId,
+      currentInterventionId,
+      selectedInterventionId,
+      selectedSessionId,
+      currentView,
+      includeAllSessions,
+      includeAllVariables,
+      includeCurrentQuestion,
+      includeCurrentSession,
+      includeNonDigitVariables,
+      isMultiIntervention,
+      isMultiSession,
+      organizationId,
+      questionTypeWhitelist,
+      selectedQuestion,
+      setCurrentView,
+      sessionTypesWhiteList,
+      currentSessionPreviousQuestions,
+    ],
+  );
+
   return (
     <Box position="relative" ref={variableChooser}>
       <Box onClick={toggle} disabled={disabled} clickable>
@@ -241,28 +284,7 @@ const VariableChooser = ({
       >
         <Row>
           <Box padding={8} filled maxWidth="100%">
-            <VariableChooserContext.Provider
-              value={{
-                currentSessionId,
-                currentInterventionId,
-                selectedInterventionId,
-                selectedSessionId,
-                currentView,
-                includeAllSessions,
-                includeAllVariables,
-                includeCurrentQuestion,
-                includeCurrentSession,
-                includeNonDigitVariables,
-                isMultiIntervention,
-                isMultiSession,
-                organizationId,
-                questionTypeWhitelist,
-                selectedQuestion,
-                setCurrentView,
-                sessionTypesWhiteList,
-                currentSessionPreviousQuestions,
-              }}
-            >
+            <VariableChooserContext.Provider value={contextValue}>
               {displayContent()}
             </VariableChooserContext.Provider>
           </Box>

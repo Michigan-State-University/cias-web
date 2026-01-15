@@ -2,7 +2,6 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import { UserStorageController } from 'global/reducers/auth';
 import { loginSuccess, logIn } from 'global/reducers/auth/actions';
 
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -32,9 +31,6 @@ function* registerFromInvitation({ payload }) {
 
     const mappedUser = mapCurrentUser(data);
     yield call(LocalStorageService.setState, { user: { ...mappedUser } });
-
-    const userStorageController = new UserStorageController(email);
-    userStorageController.setVerificationCode(data.verification_code);
 
     yield put(registerFromInvitationSuccess());
 

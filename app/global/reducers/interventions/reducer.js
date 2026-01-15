@@ -50,7 +50,7 @@ export const initialState = {
   },
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const interventionsReducer = (state = initialState, { type, payload }) =>
   produce(state, (draft) => {
     const updateInterventionListItemStateById = (interventionId, changes) => {

@@ -21,7 +21,7 @@ export const initialState = {
   previewKey: null,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 const AudioPreviewReducer: Reducer<State> = (
   state = initialState,
   { payload, type }: AnyAction,

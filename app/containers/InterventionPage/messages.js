@@ -72,4 +72,40 @@ export default defineMessages({
     id: `${scope}.starredFilterLabel`,
     defaultMessage: `Show only starred`,
   },
+  filtersModalTitle: {
+    id: `${scope}.filtersModalTitle`,
+    defaultMessage: `Filters`,
+  },
+  filtersButton: {
+    id: `${scope}.filtersButton`,
+    defaultMessage: `Filters`,
+  },
+  shareFilterLabel: {
+    id: `${scope}.shareFilterLabel`,
+    defaultMessage: `Share Filter`,
+  },
+  statusFilterLabel: {
+    id: `${scope}.statusFilterLabel`,
+    defaultMessage: `Status Filter`,
+  },
+  applyFilters: {
+    id: `${scope}.applyFilters`,
+    defaultMessage: `Apply Filters`,
+  },
+  clearFilters: {
+    id: `${scope}.clearFilters`,
+    defaultMessage: `Clear Filters`,
+  },
+  tagFilterLabel: {
+    id: `${scope}.tagFilterLabel`,
+    defaultMessage: `Tag Filter`,
+  },
+  tagFilterPlaceholder: {
+    id: `${scope}.tagFilterPlaceholder`,
+    defaultMessage: `Search tags...`,
+  },
+  noTagsFound: {
+    id: `${scope}.noTagsFound`,
+    defaultMessage: `No tags found`,
+  },
 });

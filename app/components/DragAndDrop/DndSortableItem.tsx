@@ -29,7 +29,7 @@ const Component = <T,>({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id, data: item });
+  } = useSortable({ id, data: item as any });
 
   const style = useMemo(
     () => ({

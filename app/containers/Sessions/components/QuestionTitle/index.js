@@ -40,6 +40,7 @@ const QuestionTitle = ({
       clickable={false}
       padded
       dir={dynamicElementsDirection}
+      data-cy="question-title-input"
     >
       <OriginalTextHover id={`question-${id}-title`} text={originalText?.title}>
         <FlexibleWidthApprovableInput

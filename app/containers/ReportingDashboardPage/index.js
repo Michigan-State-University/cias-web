@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 
@@ -11,10 +11,13 @@ import { VIEW, ReportingDashboardPageContext } from './constants';
 const ReportingDashboardPage = ({ view, organizableId }) => {
   const { organizationId } = useParams();
 
+  const contextValue = useMemo(
+    () => ({ organizationId, organizableId }),
+    [organizationId, organizableId],
+  );
+
   const withContext = (component) => (
-    <ReportingDashboardPageContext.Provider
-      value={{ organizationId, organizableId }}
-    >
+    <ReportingDashboardPageContext.Provider value={contextValue}>
       {component}
     </ReportingDashboardPageContext.Provider>
   );

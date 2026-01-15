@@ -90,7 +90,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c38 {
+.c36 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -216,7 +216,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c36 {
+.c37 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -225,35 +225,9 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #E9F1FB;
 }
 
 .c39 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-}
-
-.c41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -281,60 +255,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c37 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: #2F3850;
-}
-
-.c50 {
+.c48 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
   white-space: nowrap;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c40 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  gap: 8px;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.c42 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
 }
 
 .c12 {
@@ -365,6 +291,46 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-color: #B727EA transparent #B727EA transparent;
   -webkit-animation: hAjVGa 1.2s linear infinite;
   animation: hAjVGa 1.2s linear infinite;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c38 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c40 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .c2 {
@@ -455,16 +421,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c45 {
+.c43 {
   display: none;
 }
 
-.c44:disabled + label > .c48 {
+.c42:disabled + label > .c46 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c47 {
+.c45 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -476,27 +442,27 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c47:hover {
+.c45:hover {
   cursor: pointer;
 }
 
-.c44:disabled + .c46 {
+.c42:disabled + .c44 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c49 {
+.c47 {
   margin-inline-start: 5px;
 }
 
-.c43 {
+.c41 {
   width: 100%;
   padding: 16px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
 }
 
-.c43 label {
+.c41 label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -734,7 +700,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       <div
         align="start"
         class="c2 c3"
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto;"
       >
         <div
           class="c4"
@@ -755,7 +721,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
               disabled=""
               placeholder="e-Session Name"
               type="text"
-              value="e-Session Name"
+              value=""
               width="100%"
             />
           </div>
@@ -774,52 +740,56 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <div
-                class=" css-14jk2my-container"
+                class="css-3iigni-container"
               >
+                <span
+                  class="css-1f43avz-a11yText-A11yText"
+                  id="react-select-3-live-region"
+                />
                 <span
                   aria-atomic="false"
                   aria-live="polite"
                   aria-relevant="additions text"
                   class="css-1f43avz-a11yText-A11yText"
+                  role="log"
                 />
                 <div
-                  class=" css-vz7ypb-control"
+                  aria-disabled="true"
+                  class="css-al67jj-control"
                 >
                   <div
-                    class=" css-g1d714-ValueContainer"
+                    class="css-hlgwow"
                   >
                     <div
-                      class=" css-107lb6w-singleValue"
+                      class="css-olqui2-singleValue"
                     />
                     <div
-                      class="css-1bwsx9e-Input"
+                      class="css-1mkvw8y"
+                      data-value=""
                     >
-                      <div
+                      <input
+                        aria-activedescendant=""
+                        aria-autocomplete="list"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        aria-labelledby="select-label-intervention-language"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
                         class=""
-                        style="display: inline-block;"
-                      >
-                        <input
-                          aria-autocomplete="list"
-                          aria-labelledby="select-label-intervention-language"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          disabled=""
-                          id="react-select-3-input"
-                          spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                        <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                        />
-                      </div>
+                        disabled=""
+                        id="react-select-3-input"
+                        role="combobox"
+                        spellcheck="false"
+                        style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
                     </div>
                   </div>
                   <div
-                    class=" css-1hb7zxy-IndicatorsContainer"
+                    class="css-1wy0on6"
                   >
                     <div
                       class="c11"
@@ -834,7 +804,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     </div>
                     <div
                       aria-hidden="true"
-                      class=" css-tlfecz-indicatorContainer"
+                      class="css-1xc3v61-indicatorContainer"
                     >
                       <img
                         alt="arrow"
@@ -1075,7 +1045,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       <div
         align="start"
         class="c2 c3"
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; right: auto; left: auto;"
       >
         <div
           class="c4"
@@ -1085,194 +1055,43 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           >
             Narrator Settings
           </h3>
-          <div
-            class="c36"
-          >
-            <div
-              class="c18 c19"
-            >
-              <input
-                aria-checked="true"
-                aria-disabled="true"
-                checked=""
-                class="c20 c21"
-                data-cy="branching-intervention-toggle"
-                data-testid="switch-input"
-                disabled=""
-                id="Narrator Active"
-                role="switch"
-                type="checkbox"
-              />
-              <label
-                class="c22 c23"
-                for="Narrator Active"
-              >
-                <div
-                  class="c24"
-                  width="100%"
-                >
-                  <div
-                    class="c25 c26"
-                  >
-                    <div
-                      class="c27"
-                    >
-                      <p
-                        class="c37"
-                        font-weight="bold"
-                      >
-                        Narrator Active
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    class="c30"
-                  >
-                    <span
-                      class="c31 c32"
-                    />
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div
-            class="c36"
-          >
-            <div
-              class="c18 c19"
-            >
-              <input
-                aria-checked="true"
-                aria-disabled="true"
-                checked=""
-                class="c20 c21"
-                data-cy="branching-intervention-toggle"
-                data-testid="switch-input"
-                disabled=""
-                id="Voice"
-                role="switch"
-                type="checkbox"
-              />
-              <label
-                class="c22 c23"
-                for="Voice"
-              >
-                <div
-                  class="c24"
-                  width="100%"
-                >
-                  <div
-                    class="c25 c26"
-                  >
-                    <div
-                      class="c27"
-                    >
-                      <p
-                        class="c28"
-                      >
-                        Voice
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    class="c30"
-                  >
-                    <span
-                      class="c31 c32"
-                    />
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div
-            class="c17"
-          >
-            <div
-              class="c18 c19"
-            >
-              <input
-                aria-checked="true"
-                aria-disabled="true"
-                checked=""
-                class="c20 c21"
-                data-cy="branching-intervention-toggle"
-                data-testid="switch-input"
-                disabled=""
-                id="Display Narrator"
-                role="switch"
-                type="checkbox"
-              />
-              <label
-                class="c22 c23"
-                for="Display Narrator"
-              >
-                <div
-                  class="c24"
-                  width="100%"
-                >
-                  <div
-                    class="c25 c26"
-                  >
-                    <div
-                      class="c27"
-                    >
-                      <p
-                        class="c28"
-                      >
-                        Display Narrator
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    class="c30"
-                  >
-                    <span
-                      class="c31 c32"
-                    />
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
           <h3
-            class="c38"
+            class="c36"
           >
             Default narrator
           </h3>
           <div
-            class="c39"
+            class="c37"
           >
             <div
-              class="c40"
+              class="c38"
             >
               <div
-                class="c41"
+                class="c39"
                 width="100%"
               >
                 <div
-                  class="c42"
+                  class="c40"
                 >
                   <div
-                    class="c18 c43"
+                    class="c18 c41"
                   >
                     <input
-                      class="c44 c45"
+                      class="c42 c43"
                       disabled=""
                       id="character-setting-peedy"
                       type="radio"
                     />
                     <label
-                      class="c46 c47"
+                      class="c44 c45"
                       for="character-setting-peedy"
                     >
                       <img
-                        class="c48 "
+                        class="c46 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c25 c49"
+                        class="c25 c47"
                       >
                         <div
                           class="c18"
@@ -1281,7 +1100,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                             class="c25"
                           >
                             <p
-                              class="c50"
+                              class="c48"
                             >
                               Peedy
                             </p>
@@ -1300,31 +1119,31 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c41"
+                class="c39"
                 width="100%"
               >
                 <div
-                  class="c42"
+                  class="c40"
                 >
                   <div
-                    class="c18 c43"
+                    class="c18 c41"
                   >
                     <input
-                      class="c44 c45"
+                      class="c42 c43"
                       disabled=""
                       id="character-setting-emmi"
                       type="radio"
                     />
                     <label
-                      class="c46 c47"
+                      class="c44 c45"
                       for="character-setting-emmi"
                     >
                       <img
-                        class="c48 "
+                        class="c46 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c25 c49"
+                        class="c25 c47"
                       >
                         <div
                           class="c18"
@@ -1333,7 +1152,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                             class="c25"
                           >
                             <p
-                              class="c50"
+                              class="c48"
                             >
                               Emmi
                             </p>
@@ -1352,31 +1171,31 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c41"
+                class="c39"
                 width="100%"
               >
                 <div
-                  class="c42"
+                  class="c40"
                 >
                   <div
-                    class="c18 c43"
+                    class="c18 c41"
                   >
                     <input
-                      class="c44 c45"
+                      class="c42 c43"
                       disabled=""
                       id="character-setting-crystal"
                       type="radio"
                     />
                     <label
-                      class="c46 c47"
+                      class="c44 c45"
                       for="character-setting-crystal"
                     >
                       <img
-                        class="c48 "
+                        class="c46 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c25 c49"
+                        class="c25 c47"
                       >
                         <div
                           class="c18"
@@ -1385,7 +1204,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                             class="c25"
                           >
                             <p
-                              class="c50"
+                              class="c48"
                             >
                               crystal
                             </p>

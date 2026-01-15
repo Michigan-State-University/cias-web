@@ -107,7 +107,7 @@ exports[`<Notification /> should match the snapshot 1`] = `
       <div
         align="start"
         class="c1"
-        style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; padding: 8px;"
       >
         <div
           style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
@@ -115,7 +115,7 @@ exports[`<Notification /> should match the snapshot 1`] = `
           <div
             align="start"
             class="c1"
-            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%; right: auto; left: auto;"
           >
             <div
               class="c2"
@@ -131,7 +131,7 @@ exports[`<Notification /> should match the snapshot 1`] = `
           <div
             align="start"
             class="c1"
-            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%; right: auto; left: auto;"
           >
             <p
               class="c4"
@@ -152,7 +152,7 @@ exports[`<Notification /> should match the snapshot 1`] = `
       <div
         align="end"
         class="c6"
-        style="box-sizing: border-box; min-height: 1px; position: relative; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 0px;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto; padding: 0px;"
       />
     </div>
   </div>

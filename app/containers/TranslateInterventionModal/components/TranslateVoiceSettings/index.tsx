@@ -98,20 +98,20 @@ const TranslateVoiceSettings = ({
     </Text>
   );
 
-  return isFetching ? (
-    <Spinner color={themeColors.secondary} size={66} />
-  ) : (
-    <>
-      {error ? (
-        // @ts-ignore
-        <ErrorAlert errorText={error} />
-      ) : (
-        <>
-          {voiceOptions.length ? renderVoiceSettings() : renderNoNarratorText()}
-        </>
-      )}
-    </>
-  );
+  if (isFetching) {
+    return <Spinner color={themeColors.secondary} size={66} />;
+  }
+
+  if (error) {
+    // @ts-ignore
+    return <ErrorAlert errorText={error} />;
+  }
+
+  if (voiceOptions.length) {
+    return renderVoiceSettings();
+  }
+
+  return renderNoNarratorText();
 };
 
 export default TranslateVoiceSettings;

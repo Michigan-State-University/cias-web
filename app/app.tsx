@@ -150,9 +150,8 @@ if (process.env.LOGROCKET_ENV) {
 
   // Add custom param to Sentry to easily identify corresponding session in Logrocket
   LogRocket.getSessionURL((sessionURL) => {
-    Sentry.configureScope((scope) => {
-      scope.setExtra('sessionURL', sessionURL);
-    });
+    const scope = Sentry.getCurrentScope();
+    scope.setExtra('sessionURL', sessionURL);
   });
 }
 

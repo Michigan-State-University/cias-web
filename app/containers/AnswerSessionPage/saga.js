@@ -41,6 +41,7 @@ import {
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
   FETCH_PREVIOUS_QUESTION_REQUEST,
   VERIFY_PATIENT_DATA_REQUEST,
+  VERIFY_PID_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -64,6 +65,9 @@ import {
   verifyPatientDataSuccess,
   submitAnswer,
   setHfhsPatientDetail,
+  verifyPidSuccess,
+  verifyPidError,
+  fetchUserSessionRequest,
 } from './actions';
 import {
   makeSelectAnswers,
@@ -400,7 +404,47 @@ function* verifyPatientData({ payload }) {
   }
 }
 
-// Individual exports for testing
+function* verifyPid({ payload: { pid } }) {
+  const requestUrl = `/v1/predefined_participants/verify`;
+  const requestBody = objectToSnakeCase({ slug: pid });
+
+  const currentUserRoles = LocalStorageService.getHeaders();
+  const clearHeaders =
+    !currentUserRoles || Object.keys(currentUserRoles).length === 0;
+
+  if (clearHeaders) {
+    LocalStorageService.clearHeaders();
+  }
+
+  try {
+    const { data } = yield call(axios.post, requestUrl, requestBody);
+    const { user } = data;
+
+    const mappedUser = jsonApiToObject({ data: user }, 'user');
+    yield call(LocalStorageService.setState, { user: mappedUser });
+    yield put(verifyPidSuccess(mappedUser));
+
+    const location = yield select(makeSelectLocation());
+    const { pathname } = location;
+
+    const sessionIdMatch = pathname.match(/sessions\/([^/]+)\/fill/);
+    if (sessionIdMatch) {
+      const sessionId = sessionIdMatch[1];
+
+      const isAuthenticated = LocalStorageService.isAuthenticated();
+      if (isAuthenticated) {
+        yield put(fetchUserSessionRequest(sessionId));
+      }
+    }
+  } catch (error) {
+    yield put(verifyPidError(error));
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+    }
+  }
+}
+
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
   yield takeLatest(RESET_SESSION, resetSession);
@@ -414,6 +458,7 @@ export default function* AnswerSessionPageSaga() {
   yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
   yield takeEvery(FETCH_PREVIOUS_QUESTION_REQUEST, fetchPreviousQuestion);
   yield takeLatest(VERIFY_PATIENT_DATA_REQUEST, verifyPatientData);
+  yield takeLatest(VERIFY_PID_REQUEST, verifyPid);
 }
 
 export function* redirectToPreviewSaga() {

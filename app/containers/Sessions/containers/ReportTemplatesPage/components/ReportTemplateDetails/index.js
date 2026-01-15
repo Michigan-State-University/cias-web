@@ -43,7 +43,7 @@ const ReportTemplateDetails = ({
 
   if (fetchSingleReportTemplateLoading) return <Loader type="inline" />;
 
-  if (!singleReportTemplate) return <></>;
+  if (!singleReportTemplate) return null;
 
   return (
     <Container
