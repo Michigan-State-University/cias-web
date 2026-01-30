@@ -6,7 +6,6 @@
  */
 export const getAnswerImageSize = (size, isMobile = false) => {
   if (isMobile) {
-    // Mobile sizes
     switch (size) {
       case 'small':
         return { maxHeight: '70px', maxWidth: '200px' };
@@ -18,7 +17,6 @@ export const getAnswerImageSize = (size, isMobile = false) => {
     }
   }
 
-  // Desktop sizes
   switch (size) {
     case 'small':
       return { maxHeight: '100px', maxWidth: '330px' };
