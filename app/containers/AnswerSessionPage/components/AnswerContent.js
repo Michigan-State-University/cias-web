@@ -7,14 +7,16 @@ import Box from 'components/Box';
 import MarkupContainer from 'components/MarkupContainer';
 import Img from 'components/Img';
 
-const AnswerContent = ({ answerImage, payload, index, imageMaxWidth }) => (
+const AnswerContent = ({ answerImage, payload, index, imageSize }) => (
   <Column>
     {answerImage && (
       <Box marginBlockEnd={8}>
         <Img
           src={answerImage.url}
           alt={answerImage.alt || `Answer ${index + 1} image`}
-          maxWidth={imageMaxWidth}
+          maxWidth={imageSize.maxWidth}
+          maxHeight={imageSize.maxHeight}
+          width="auto"
           height="auto"
         />
       </Box>
@@ -34,7 +36,10 @@ AnswerContent.propTypes = {
   }),
   payload: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  imageMaxWidth: PropTypes.string.isRequired,
+  imageSize: PropTypes.shape({
+    maxWidth: PropTypes.string.isRequired,
+    maxHeight: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default AnswerContent;

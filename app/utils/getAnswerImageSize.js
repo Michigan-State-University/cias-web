@@ -1,17 +1,32 @@
 /**
  * Maps answer image size setting to pixel values
  * @param {string} size - The size setting: 'small', 'medium', or 'large'
- * @returns {string} The pixel value for the max width
+ * @param {boolean} isMobile - Whether the device is mobile
+ * @returns {object} Object containing maxWidth and maxHeight pixel values
  */
-export const getAnswerImageSize = (size) => {
+export const getAnswerImageSize = (size, isMobile = false) => {
+  if (isMobile) {
+    // Mobile sizes
+    switch (size) {
+      case 'small':
+        return { maxHeight: '70px', maxWidth: '200px' };
+      case 'large':
+        return { maxHeight: '280px', maxWidth: '260px' };
+      case 'medium':
+      default:
+        return { maxHeight: '140px', maxWidth: '230px' };
+    }
+  }
+
+  // Desktop sizes
   switch (size) {
     case 'small':
-      return '150px';
+      return { maxHeight: '100px', maxWidth: '330px' };
     case 'large':
-      return '400px';
+      return { maxHeight: '300px', maxWidth: '450px' };
     case 'medium':
     default:
-      return '300px';
+      return { maxHeight: '180px', maxWidth: '390px' };
   }
 };
 

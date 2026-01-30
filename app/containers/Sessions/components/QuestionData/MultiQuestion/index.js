@@ -174,10 +174,12 @@ const MultiQuestion = ({
                                   (img) => img.answer_id === item.id,
                                 )?.url
                               }
-                              maxWidth={getAnswerImageSize(
+                              {...getAnswerImageSize(
                                 selectedQuestion.settings?.answer_image_size ||
                                   'medium',
+                                false,
                               )}
+                              width="auto"
                               height="auto"
                               borderRadius={4}
                             />
@@ -402,10 +404,12 @@ const MultiQuestion = ({
                               (img) => img.answer_id === noneOfAboveAnswer.id,
                             )?.url
                           }
-                          maxWidth={getAnswerImageSize(
+                          {...getAnswerImageSize(
                             selectedQuestion.settings?.answer_image_size ||
                               'medium',
+                            false,
                           )}
+                          width="auto"
                           height="auto"
                           borderRadius={4}
                         />
