@@ -176,7 +176,7 @@ function SessionSchedule({
     }
   };
   return (
-    <Column pb={24}>
+    <Column pb={24} data-cy="session-schedule">
       <Text mb={12} textOpacity={0.6} color={colors.bluewood} fontSize={13}>
         {formatMessage(messages.info)}
       </Text>
@@ -194,6 +194,7 @@ function SessionSchedule({
           )}
           rightPosition="315"
           setOption={(id) => changeType(id, sessionId)}
+          data-cy="session-schedule-selector"
         />
       </HelpIconTooltip>
       {selectedScheduleOption && shouldRenderOption() && (

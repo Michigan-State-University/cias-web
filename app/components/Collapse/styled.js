@@ -17,7 +17,9 @@ export const StyledCollapseLabel = styled.div.attrs({
   cursor: pointer;
   width: 100%;
   .animated-img {
-    transition: transform 0.3s, height 4s;
+    transition:
+      transform 0.3s,
+      height 4s;
     transform: ${({ isOpened }) =>
       isOpened ? 'rotate0deg);' : 'rotate(180deg)'};
   }

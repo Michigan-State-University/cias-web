@@ -49,7 +49,11 @@ const Dropdown = ({
       {...restProps}
     >
       {trigger === 'icon' && (
-        <ImageContainer onClick={handleClick} id={id}>
+        <ImageContainer
+          onClick={handleClick}
+          id={id}
+          data-cy={`dropdown-trigger-${id}`}
+        >
           <Img src={DotsIcon} alt="dots" />
         </ImageContainer>
       )}
@@ -57,6 +61,7 @@ const Dropdown = ({
         <TextButton
           buttonProps={{
             color: themeColors.secondary,
+            'data-cy': `dropdown-trigger-${id}`,
             ...buttonTriggerProps,
           }}
           disabled={disabled}
@@ -72,6 +77,7 @@ const Dropdown = ({
           disabled={disabled}
           onClick={handleClick}
           id={id}
+          data-cy={`dropdown-trigger-${id}`}
           loading={loading}
           px={24}
           display="flex"
@@ -112,19 +118,25 @@ const Dropdown = ({
                 <StyledRow
                   disabled={option.disabled}
                   key={`el-dropdown-${option.id}`}
+                  data-cy={`dropdown-option-${option.id}`}
                   padding={8}
                   onClick={() => !option.disabled && callAction(option.action)}
                   align="center"
                 >
-                  {option.icon && (
-                    <Icon
-                      src={option.icon}
-                      fill={colors.greyishBlue}
-                      alt="icon"
-                      mr={4}
-                      width={24}
-                    />
-                  )}
+                  {option.icon &&
+                    (typeof option.icon === 'string' ? (
+                      <Icon
+                        src={option.icon}
+                        fill={colors.greyishBlue}
+                        alt="icon"
+                        mr={4}
+                        width={24}
+                      />
+                    ) : (
+                      <Box mr={4} display="flex" align="center">
+                        <option.icon size={24} color={colors.greyishBlue} />
+                      </Box>
+                    ))}
                   <StyledComment
                     color={option.color || colors.bluewood}
                     whiteSpace="nowrap"

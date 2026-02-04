@@ -22,7 +22,7 @@ describe('<PreviewButton />', () => {
   };
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore(browserHistory, {});
   });
 
   it('Should render and match the snapshot', () => {

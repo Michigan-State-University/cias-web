@@ -3,6 +3,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -52,8 +53,13 @@ const ChartSettings = ({
     if (isChangingStatus && !editChartLoader) setIsChangingStatus(false);
   }, [editChartLoader]);
 
+  const contextValue = useMemo(
+    () => ({ statusPermissions }),
+    [statusPermissions],
+  );
+
   const wrapper = (component) => (
-    <ChartSettingsContext.Provider value={{ statusPermissions }}>
+    <ChartSettingsContext.Provider value={contextValue}>
       <SettingsContainer>
         <Row>
           <Col align="end" mb={30}>

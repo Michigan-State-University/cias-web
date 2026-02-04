@@ -91,7 +91,11 @@ const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
                     )}
                     type="text"
                     label={formatMessage(messages.codeVerificationLabel)}
-                    inputProps={{ width: '100%', height: 46 }}
+                    inputProps={{
+                      width: '100%',
+                      height: 46,
+                      'data-cy': 'verification-code-input',
+                    }}
                     my={10}
                   />
 
@@ -111,6 +115,7 @@ const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
                     title={formatMessage(messages.codeVerificationButton)}
                     onClick={handleSubmit}
                     type="submit"
+                    data-cy="verification-submit-button"
                   />
                 </FormikForm>
               );

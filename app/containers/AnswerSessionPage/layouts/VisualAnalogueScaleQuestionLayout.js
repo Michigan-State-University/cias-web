@@ -30,11 +30,11 @@ const VisualAnalogueScaleQuestionLayout = ({
 
   const labels = {
     [rangeStart]: {
-      label: <>{startValue}</>,
+      label: startValue,
       style: visualAnalogScaleLabelStyles,
     },
     [rangeEnd]: {
-      label: <>{endValue}</>,
+      label: endValue,
       style: visualAnalogScaleLabelStyles,
     },
   };

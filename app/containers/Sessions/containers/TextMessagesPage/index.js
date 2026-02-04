@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'react-grid-system';
 import { compose } from 'redux';
@@ -75,22 +75,37 @@ const TextMessagingPage = ({
     fetchSession({ sessionId, interventionId });
   }, [interventionId, sessionId]);
 
+  const contextValue = useMemo(
+    () => ({
+      formatMessage,
+      textMessages,
+      loaders,
+      errors,
+      selectedMessageId,
+      changeSelectedId,
+      sessionId,
+      selectedMessage,
+      selectedMessageState,
+      editingPossible,
+      interventionId,
+    }),
+    [
+      formatMessage,
+      textMessages,
+      loaders,
+      errors,
+      selectedMessageId,
+      changeSelectedId,
+      sessionId,
+      selectedMessage,
+      selectedMessageState,
+      editingPossible,
+      interventionId,
+    ],
+  );
+
   return (
-    <TextMessagesContext.Provider
-      value={{
-        formatMessage,
-        textMessages,
-        loaders,
-        errors,
-        selectedMessageId,
-        changeSelectedId,
-        sessionId,
-        selectedMessage,
-        selectedMessageState,
-        editingPossible,
-        interventionId,
-      }}
-    >
+    <TextMessagesContext.Provider value={contextValue}>
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>

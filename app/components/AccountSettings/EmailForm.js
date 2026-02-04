@@ -60,79 +60,77 @@ const EmailForm = ({
   }, [loading]);
 
   return (
-    <>
-      <Formik
-        validationSchema={validationSchema(formatMessage)}
-        initialValues={initialValues(user)}
-        onSubmit={onSubmit}
-      >
-        {({ handleSubmit, values }) => {
-          const inputProps = {
-            height: 46,
-            width: '100%',
-          };
-          return (
-            <>
-              <Modal
-                visible={modalVisible}
-                title={formatMessage(messages.changeYourEmail)}
-                onClose={handleClose}
-                maxWidth={500}
-              >
-                <Column>
-                  <H3 mb={30}>
-                    <FormattedMessage {...messages.modalDescription} />
-                  </H3>
-                  <FormikInput
-                    data-testid="password-confirmation"
-                    formikKey="passwordConfirmation"
-                    placeholder={formatMessage(messages.password)}
-                    label={formatMessage(messages.passwordLabel)}
-                    type="password"
-                    inputProps={inputProps}
-                  />
-                  <Row width="100%" mt={30}>
-                    <Button
-                      data-testid="close-button"
-                      mr={20}
-                      inverted
-                      hoverable
-                      onClick={handleClose}
-                      type="button"
-                    >
-                      <FormattedMessage {...messages.cancel} />
-                    </Button>
-                    <Button
-                      hoverable
-                      onClick={handleSubmit}
-                      type="button"
-                      loading={loading}
-                      data-testid="confirm-button"
-                    >
-                      <FormattedMessage {...messages.changeEmail} />
-                    </Button>
-                  </Row>
-                  {error && <ErrorAlert mt={25} errorText={error} />}
-                </Column>
-              </Modal>
-              <Row width="100%">
+    <Formik
+      validationSchema={validationSchema(formatMessage)}
+      initialValues={initialValues(user)}
+      onSubmit={onSubmit}
+    >
+      {({ handleSubmit, values }) => {
+        const inputProps = {
+          height: 46,
+          width: '100%',
+        };
+        return (
+          <>
+            <Modal
+              visible={modalVisible}
+              title={formatMessage(messages.changeYourEmail)}
+              onClose={handleClose}
+              maxWidth={500}
+            >
+              <Column>
+                <H3 mb={30}>
+                  <FormattedMessage {...messages.modalDescription} />
+                </H3>
                 <FormikInput
-                  data-testid="email-input"
-                  formikKey="email"
-                  placeholder={formatMessage(messages.email)}
-                  label={formatMessage(messages.emailLabel)}
-                  type="text"
-                  inputProps={{
-                    onBlur: handleBlur(values.email),
-                    ...inputProps,
-                  }}
+                  data-testid="password-confirmation"
+                  formikKey="passwordConfirmation"
+                  placeholder={formatMessage(messages.password)}
+                  label={formatMessage(messages.passwordLabel)}
+                  type="password"
+                  inputProps={inputProps}
                 />
-              </Row>
-            </>
-          );
-        }}
-      </Formik>
-    </>
+                <Row width="100%" mt={30}>
+                  <Button
+                    data-testid="close-button"
+                    mr={20}
+                    inverted
+                    hoverable
+                    onClick={handleClose}
+                    type="button"
+                  >
+                    <FormattedMessage {...messages.cancel} />
+                  </Button>
+                  <Button
+                    hoverable
+                    onClick={handleSubmit}
+                    type="button"
+                    loading={loading}
+                    data-testid="confirm-button"
+                  >
+                    <FormattedMessage {...messages.changeEmail} />
+                  </Button>
+                </Row>
+                {error && <ErrorAlert mt={25} errorText={error} />}
+              </Column>
+            </Modal>
+            <Row width="100%">
+              <FormikInput
+                data-testid="email-input"
+                formikKey="email"
+                placeholder={formatMessage(messages.email)}
+                label={formatMessage(messages.emailLabel)}
+                type="text"
+                inputProps={{
+                  onBlur: handleBlur(values.email),
+                  ...inputProps,
+                }}
+              />
+            </Row>
+          </>
+        );
+      }}
+    </Formik>
   );
 };
 

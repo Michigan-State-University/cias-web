@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
-.c2 {
+.c1 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -14,7 +14,7 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  width: 100%;
+  width: auto;
   padding-right: 20px;
   padding-left: 20px;
 }
@@ -38,30 +38,20 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c1 {
-  font-weight: bold;
-  width: auto;
-}
-
 <div>
   <div
     class="c0"
     dir="ltr"
     width="100%"
   >
-    <a
+    <button
       class="c1"
-      href="/user_interventions/undefined"
+      color="primary"
+      radius="100px"
+      width="auto"
     >
-      <button
-        class="c2"
-        color="primary"
-        radius="100px"
-        width="100%"
-      >
-        Go to dashboard
-      </button>
-    </a>
+      Complete Session
+    </button>
   </div>
 </div>
 `;

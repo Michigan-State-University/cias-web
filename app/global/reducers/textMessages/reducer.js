@@ -114,7 +114,7 @@ export const initialState = {
   filters: INITIAL_FILTERS,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 export const textMessagesReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     const { payload } = action;

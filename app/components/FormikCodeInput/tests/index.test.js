@@ -6,7 +6,7 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 
 import { testRender } from 'utils/testUtils';
@@ -27,11 +27,7 @@ describe('<FormikCodeInput />', () => {
     const spy = jest.spyOn(global.console, 'error');
     testRender(
       <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
-        {() => (
-          <>
-            <FormikCodeInput {...props} />
-          </>
-        )}
+        {() => <FormikCodeInput {...props} />}
       </Formik>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -40,11 +36,7 @@ describe('<FormikCodeInput />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = testRender(
       <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
-        {() => (
-          <>
-            <FormikCodeInput {...props} />
-          </>
-        )}
+        {() => <FormikCodeInput {...props} />}
       </Formik>,
     );
     expect(container).toMatchSnapshot();

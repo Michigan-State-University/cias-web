@@ -44,7 +44,7 @@ const FeedbackQuestionLayout = ({
 
   const labels = {
     0: {
-      label: <>{startValue}</>,
+      label: startValue,
       style: visualAnalogScaleLabelStyles,
     },
     ...(showSpectrum
@@ -52,19 +52,19 @@ const FeedbackQuestionLayout = ({
           ...(targetNumber
             ? {
                 [lowerPosition]: {
-                  label: <>{targetNumber}</>,
+                  label: targetNumber,
                   style: visualAnalogScaleBoldLabelStyles,
                 },
               }
             : {}),
           [higherPosition]: {
-            label: <>{higherValue}</>,
+            label: higherValue,
             style: visualAnalogScaleBoldLabelStyles,
           },
         }
       : {}),
     100: {
-      label: <>{endValue}</>,
+      label: endValue,
       style: visualAnalogScaleLabelStyles,
     },
   };

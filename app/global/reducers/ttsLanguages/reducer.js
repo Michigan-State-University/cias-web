@@ -17,7 +17,7 @@ export const initialState = {
   voices: {},
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const ttsLanguageReducer = (state = initialState, { type, payload }) =>
   produce(state, (draft) => {
     switch (type) {

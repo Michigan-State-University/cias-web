@@ -76,7 +76,7 @@ export const initialState: LiveChatState = {
   },
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 export const liveChatReducer = (
   state: LiveChatState = initialState,
   { type, payload }: LiveChatAction,
@@ -208,7 +208,9 @@ export const liveChatReducer = (
             interventionConversation;
         }
         draft.activeConversations[conversation.id] = conversation;
-        draft.messages[conversation.id] = [conversation.lastMessage];
+        if (conversation.lastMessage) {
+          draft.messages[conversation.id] = [conversation.lastMessage];
+        }
         break;
       }
       case getType(setGuestInterlocutorId): {

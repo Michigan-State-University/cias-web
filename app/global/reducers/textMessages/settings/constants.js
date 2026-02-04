@@ -26,3 +26,9 @@ export const CHANGE_TYPE = 'app/TextMessaging/TextMessagesSettings/CHANGE_TYPE';
 
 export const CHANGE_INCLUDED_DATA =
   'app/TextMessaging/TextMessagesSettings/CHANGE_INCLUDED_DATA';
+
+export const CHANGE_SMS_SEND_TIME_TYPE =
+  'app/TextMessaging/TextMessagesSettings/CHANGE_SMS_SEND_TIME_TYPE';
+
+export const CHANGE_SMS_SEND_TIME_DETAILS =
+  'app/TextMessaging/TextMessagesSettings/CHANGE_SMS_SEND_TIME_DETAILS';

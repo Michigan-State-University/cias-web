@@ -75,6 +75,8 @@ const baseRules = {
   'react/jsx-props-no-spreading': 0,
   'react/jsx-fragments': 1,
   'react/react-in-jsx-scope': 0,
+  'import/no-import-module-exports': 0,
+  'react/function-component-definition': 0,
 };
 
 module.exports = {
@@ -106,11 +108,9 @@ module.exports = {
   rules: baseRules,
   settings: {
     'import/resolver': {
-      webpack: {
-        config: './internals/webpack/webpack.prod.babel.js',
-      },
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        paths: [path.resolve(__dirname, 'app')],
       },
     },
     jsdoc: {
@@ -124,6 +124,8 @@ module.exports = {
     'cypress/support/*.ts',
     'app/utils/libraries/*',
     '.vscode/.history/**/*',
+    'e2e/**/*',
+    'playwright.config.ts',
   ],
   globals: {
     cy: 'readonly',

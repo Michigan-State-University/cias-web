@@ -97,13 +97,11 @@ const PaginationHandler = ({
       )}
 
       {!isLastPage && (
-        <>
-          <H1
-            aria-label={formatMessage(messages.paginationNextPageAriaLabel)}
-            cursor="pointer"
-            onClick={changePage(nextPage)}
-          >{`>`}</H1>
-        </>
+        <H1
+          aria-label={formatMessage(messages.paginationNextPageAriaLabel)}
+          cursor="pointer"
+          onClick={changePage(nextPage)}
+        >{`>`}</H1>
       )}
     </Row>
   );

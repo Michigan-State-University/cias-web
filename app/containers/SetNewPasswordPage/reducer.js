@@ -16,7 +16,7 @@ export const initialState = {
   setNewPasswordLoading: false,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 export const setNewPasswordReducer = (
   state = initialState,
   { type, payload },

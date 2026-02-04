@@ -47,14 +47,14 @@ import { ModalType, useModal } from 'components/Modal';
 import { TextButton } from 'components/Button';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
-import StatusFilter from './StatusFilter';
 import messages from './messages';
 import { InitialRow } from './styled';
 import ImportModalContent from './ImportModalContent';
-import ShareFilter from './ShareFilter';
-import { SharedFilter } from './StarredFilter';
+import FiltersModal from './FiltersModal';
 
 const INITIAL_FETCH_LIMIT = 15;
+
+const importModalContentRenderer = (props) => <ImportModalContent {...props} />;
 
 export function InterventionPage({
   fetchInterventionsRequest: fetchInterventions,
@@ -76,22 +76,14 @@ export function InterventionPage({
 }) {
   const { teamName } = user ?? {};
 
-  const { name, statuses, sharing, starred } = mainDashboardFilterData;
-
-  const handleSharingFilterChange = (value) => {
-    changeMainDashboardFilterData({ sharing: value });
-  };
-
-  const handleStatusesFilterChange = (value) => {
-    changeMainDashboardFilterData({ statuses: value });
-  };
-
-  const handleStarredFilterChange = (value) => {
-    changeMainDashboardFilterData({ starred: value });
-  };
+  const { name, statuses, sharing, starred, tagIds } = mainDashboardFilterData;
 
   const handleNameFilterChange = (event) => {
     changeMainDashboardFilterData({ name: event.target.value.trim() });
+  };
+
+  const handleFiltersApply = (filters) => {
+    changeMainDashboardFilterData(filters);
   };
 
   useEffect(() => {
@@ -117,7 +109,7 @@ export function InterventionPage({
 
   const { openModal: openImportModal, Modal: ImportModal } = useModal({
     type: ModalType.Modal,
-    modalContentRenderer: (props) => <ImportModalContent {...props} />,
+    modalContentRenderer: importModalContentRenderer,
     props: {
       title: formatMessage(messages.importIntervention),
       width: 520,
@@ -185,67 +177,28 @@ export function InterventionPage({
       </InitialRow>
 
       <InitialRow fluid>
-        <Row>
-          <Col
-            xs={12}
-            md={6}
-            xxl={4}
-            style={{ marginTop: 10, marginBottom: 10 }}
-          >
-            <Row justify="start" align="center">
-              <ShareFilter
-                onChange={handleSharingFilterChange}
-                formatMessage={formatMessage}
-                active={sharing}
-              />
-            </Row>
-          </Col>
-          <Col
-            xs={12}
-            md={6}
-            xxl={4}
-            style={{ marginTop: 10, marginBottom: 10 }}
-          >
-            <Row justify="start" align="center">
-              <StatusFilter
-                onChange={handleStatusesFilterChange}
-                formatMessage={formatMessage}
-                active={statuses}
-              />
-            </Row>
+        <Row align="center" justify="end">
+          <Col xs={12} sm="content" style={{ marginTop: 10, marginBottom: 10 }}>
+            <FiltersModal
+              currentFilters={{ sharing, statuses, starred, tagIds }}
+              onApplyFilters={handleFiltersApply}
+            />
           </Col>
           <Col
             xs={12}
             sm={6}
-            md={3}
-            xxl={2}
+            md={5}
+            lg={4}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
-            <Row justify="start" align="center" style={{ height: '100%' }}>
-              <SharedFilter
-                value={starred}
-                onChange={handleStarredFilterChange}
-              />
-            </Row>
-          </Col>
-          <Col
-            xs={12}
-            sm={6}
-            md={3}
-            xxl={2}
-            style={{ marginTop: 10, marginBottom: 10 }}
-          >
-            <Row align="center">
-              <Col>
-                <SearchInput
-                  value={name}
-                  onChange={handleNameFilterChange}
-                  placeholder={formatMessage(messages.filter)}
-                  aria-label={formatMessage(messages.searchInterventionsLabel)}
-                  debounceTime={300}
-                />
-              </Col>
-            </Row>
+            <SearchInput
+              value={name}
+              onChange={handleNameFilterChange}
+              placeholder={formatMessage(messages.filter)}
+              aria-label={formatMessage(messages.searchInterventionsLabel)}
+              debounceTime={300}
+              data-cy="intervention-search-input"
+            />
           </Col>
         </Row>
       </InitialRow>

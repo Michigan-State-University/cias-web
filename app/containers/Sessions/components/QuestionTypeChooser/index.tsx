@@ -181,6 +181,7 @@ const QuestionTypeChooser = ({
                   handleClick={() => handleClick(id)}
                   title={formatMessage(questionTypesMessages[id])}
                   conditionalAppearanceConfig={conditionalAppearanceConfigs[id]}
+                  questionTypeId={id}
                 />
               ))}
               {sessionType === SessionTypes.CLASSIC_SESSION &&
@@ -191,6 +192,7 @@ const QuestionTypeChooser = ({
                     handleClick={() => handleClick(id)}
                     title={formatMessage(questionGroupTypeMessages[id])}
                     isGroup
+                    questionTypeId={id}
                   />
                 ))}
             </ScrollFogBox>

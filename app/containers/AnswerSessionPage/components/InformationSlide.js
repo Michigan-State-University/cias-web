@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const InformationSlide = ({ selectAnswer }) => {
   useEffect(() => selectAnswer(), []);
-  return <></>;
+  return null;
 };
 
 InformationSlide.propTypes = {

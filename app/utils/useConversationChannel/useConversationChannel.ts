@@ -87,9 +87,10 @@ export const useConversationChannel = (interventionId?: string) => {
       newConversation.conversation;
 
     const isGuest = !currentUserId;
-    const isCreatedByCurrentUser =
-      liveChatInterlocutors[lastMessage.interlocutorId].userId ===
-      currentUserId;
+    const isCreatedByCurrentUser = lastMessage
+      ? liveChatInterlocutors[lastMessage.interlocutorId].userId ===
+        currentUserId
+      : false;
 
     // if user is not logged in and receives conversation_created message it means that this user created this conversation
     if (isGuest || isCreatedByCurrentUser) {
@@ -99,7 +100,7 @@ export const useConversationChannel = (interventionId?: string) => {
       dispatch(setCallOutNavigatorUnlockTime(null));
     }
 
-    if (isGuest) {
+    if (isGuest && lastMessage) {
       dispatch(setGuestInterlocutorId(lastMessage.interlocutorId));
     }
   };

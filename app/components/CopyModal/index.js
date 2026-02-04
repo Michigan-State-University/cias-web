@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, IntlShape } from 'react-intl';
 import { compose } from 'redux';
@@ -43,8 +43,13 @@ const CopyModal = ({
     onClose();
   };
 
+  const contextValue = useMemo(
+    () => ({ interventionStatusFilter }),
+    [interventionStatusFilter],
+  );
+
   return (
-    <CopyModalContext.Provider value={{ interventionStatusFilter }}>
+    <CopyModalContext.Provider value={contextValue}>
       <Modal
         visible={visible}
         onClose={onClose}
