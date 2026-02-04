@@ -68,7 +68,7 @@ const MultipleQuestionLayout = ({
                   answerImage={answerImage}
                   payload={payload}
                   index={index}
-                  imageMaxWidth={getAnswerImageSize(answerImageSize)}
+                  imageSize={getAnswerImageSize(answerImageSize, isMobile)}
                 />
               </Checkbox>
             </HoverableBox>
@@ -117,7 +117,7 @@ const MultipleQuestionLayout = ({
               )}
               payload={data[noneOfAboveAnswerIndex].payload}
               index={noneOfAboveAnswerIndex}
-              imageMaxWidth={getAnswerImageSize(answerImageSize)}
+              imageSize={getAnswerImageSize(answerImageSize, isMobile)}
             />
           </Checkbox>
         </HoverableBox>
