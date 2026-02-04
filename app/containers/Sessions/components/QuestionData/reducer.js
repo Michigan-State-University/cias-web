@@ -39,7 +39,7 @@ import tlfbEventsReducer from './TlfbEvents/reducer';
 import tlfbQuestionsReducer from './TlfbQuestion/reducer';
 import henryFordQuestionReducer from './HenryFordQuestion/reducer';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const questionDataReducer = (question, data) => {
   switch (question.type) {
     case thirdPartyQuestion.id:

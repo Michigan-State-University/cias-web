@@ -109,7 +109,7 @@ const TemplateSectionSettings = ({
     reorderSectionCases(selectedTemplateSectionId, reorderedVariants);
   };
 
-  if (!selectedTemplateSection) return <></>;
+  if (!selectedTemplateSection) return null;
 
   return (
     <CardBox minHeight="100%" id="quill_boundaries">

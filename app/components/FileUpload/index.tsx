@@ -159,6 +159,21 @@ export const FileUpload = ({
     return formatMimeFileFormat(acceptedFormats) ?? '';
   }, [acceptedFormats]);
 
+  // Convert string or string[] to Accept type (Record<string, string[]>)
+  const acceptObject = useMemo(() => {
+    if (!acceptedFormats) return undefined;
+    const formats = Array.isArray(acceptedFormats)
+      ? acceptedFormats
+      : [acceptedFormats];
+    const result: Record<string, string[]> = {};
+    formats.forEach((format) => {
+      if (!result[format]) {
+        result[format] = [];
+      }
+    });
+    return result;
+  }, [acceptedFormats]);
+
   const handleReject: DropzoneOptions['onDropRejected'] = (fileRejections) => {
     setInputError(
       formatFileErrorMessage(
@@ -174,7 +189,7 @@ export const FileUpload = ({
     onDropRejected: handleReject,
     multiple,
     noKeyboard: true,
-    accept: acceptedFormats,
+    accept: acceptObject,
     noClick: true,
     disabled,
   });

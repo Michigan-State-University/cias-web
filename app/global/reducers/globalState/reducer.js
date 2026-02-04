@@ -29,16 +29,20 @@ export const initialState = {
   navbarHeight: elements.navbarHeight,
 };
 
+// eslint-disable-next-line default-param-last
 export const globalStateReducer = (state = initialState, { payload, type }) =>
   produce(state, (draft) => {
     switch (type) {
       case DOWNLOAD_FILE_REQUEST:
       case DOWNLOAD_FILE_SUCCESS:
       case DOWNLOAD_FILE_ERROR:
-        draft.fileDownload = fileDownloadReducer(state.fileDownload, {
-          payload,
-          type,
-        });
+        draft.fileDownload = fileDownloadReducer(
+          {
+            payload,
+            type,
+          },
+          state.fileDownload,
+        );
         break;
 
       case LOCATION_CHANGE:

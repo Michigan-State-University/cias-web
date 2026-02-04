@@ -60,6 +60,15 @@ import {
   StyledCircle,
 } from './styled';
 
+// eslint-disable-next-line no-unused-vars
+const TabItem = ({ renderAsLink, linkMatch, children }) => children || null;
+
+TabItem.propTypes = {
+  renderAsLink: PropTypes.node,
+  linkMatch: PropTypes.string,
+  children: PropTypes.node,
+};
+
 const getActiveTab = (path, formatMessage) => {
   if (path.includes('/edit')) return formatMessage(messages.content);
   if (path.includes('/settings')) return formatMessage(messages.settings);
@@ -181,6 +190,7 @@ const InterventionNavbar = ({
           onFocus={selectInputText}
           maxWidth={280}
           autoComplete="off"
+          data-cy="session-name-input"
         />
       </Row>
       <Tabs
@@ -191,7 +201,7 @@ const InterventionNavbar = ({
         controlled
         minWidth={310}
       >
-        <div
+        <TabItem
           renderAsLink={
             <StyledLink
               to={parametrizeRoutePath(RoutePath.EDIT_SESSION, {
@@ -203,7 +213,7 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        <div
+        <TabItem
           renderAsLink={
             <StyledLink
               to={parametrizeRoutePath(RoutePath.SESSION_SETTINGS, {
@@ -216,7 +226,7 @@ const InterventionNavbar = ({
           }
         />
         {isClassicSession && (
-          <div
+          <TabItem
             linkMatch={formatMessage(messages.reportTemplates)}
             renderAsLink={
               <StyledLink
@@ -240,7 +250,7 @@ const InterventionNavbar = ({
           />
         )}
         {canAccessParticipantsData && isClassicSession && (
-          <div
+          <TabItem
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
               <StyledLink
@@ -264,7 +274,7 @@ const InterventionNavbar = ({
           />
         )}
         {isClassicSession && (
-          <div
+          <TabItem
             linkMatch={formatMessage(messages.smsMessaging)}
             renderAsLink={
               <StyledLink
@@ -288,7 +298,7 @@ const InterventionNavbar = ({
           />
         )}
         {isClassicSession && (
-          <div
+          <TabItem
             renderAsLink={
               <StyledLink
                 to={parametrizeRoutePath(RoutePath.SESSION_MAP, {

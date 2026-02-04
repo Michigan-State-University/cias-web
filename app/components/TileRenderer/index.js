@@ -49,23 +49,27 @@ function TileRenderer({
     }
   }, [screenClass]);
 
+  const elementsLength = elements?.length ?? 0;
   const rowCount = useMemo(
-    () => Math.ceil((elements?.length + 1) / columnCount),
-    [columnCount, elements?.length],
+    () => Math.ceil((elementsLength + 1) / columnCount),
+    [columnCount, elementsLength],
+  );
+
+  const contextValue = useMemo(
+    () => ({
+      NewInterventionButton: (
+        <NewButton
+          onClick={() => onCreateCall()}
+          loading={createLoading}
+          label={newLabel}
+        />
+      ),
+    }),
+    [onCreateCall, createLoading, newLabel],
   );
 
   return (
-    <TilesContext.Provider
-      value={{
-        NewInterventionButton: (
-          <NewButton
-            onClick={() => onCreateCall()}
-            loading={createLoading}
-            label={newLabel}
-          />
-        ),
-      }}
-    >
+    <TilesContext.Provider value={contextValue}>
       <VirtualGrid
         ref={infiniteLoaderRef}
         columnCount={columnCount}
@@ -91,7 +95,7 @@ function TileRenderer({
 
 TileRenderer.propTypes = {
   elements: PropTypes.any,
-  elementsStates: PropTypes.instanceOf(Map),
+  elementsStates: PropTypes.object,
   onCreateCall: PropTypes.func,
   createLoading: PropTypes.bool,
   newLabel: PropTypes.string,

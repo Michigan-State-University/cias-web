@@ -350,6 +350,14 @@ export default defineMessages({
     id: `${scope}.configureNavigatorSettings`,
     defaultMessage: 'Configure navigator settings',
   },
+  interventionNote: {
+    id: `${scope}.interventionNote`,
+    defaultMessage: 'Note',
+  },
+  interventionNotePlaceholder: {
+    id: `${scope}.interventionNotePlaceholder`,
+    defaultMessage: 'Put additional information about this intervention here',
+  },
   interventionConversationsTranscriptInfo: {
     id: `${scope}.interventionConversationsTranscriptInfo`,
     defaultMessage:

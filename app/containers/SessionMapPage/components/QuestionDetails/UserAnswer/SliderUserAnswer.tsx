@@ -24,11 +24,11 @@ const SliderUserAnswer = ({
 
   const marks = {
     0: {
-      label: <>{startValue}</>,
+      label: startValue,
       style: visualAnalogScaleLabelStyles,
     },
     100: {
-      label: <>{endValue}</>,
+      label: endValue,
       style: visualAnalogScaleLabelStyles,
     },
   };

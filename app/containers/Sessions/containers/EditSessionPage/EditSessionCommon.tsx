@@ -449,7 +449,7 @@ const EditSessionCommon = ({
 
   const active = selectedSlides.length !== 0;
 
-  const mapActions = (action: typeof groupActions[0], index: number) => (
+  const mapActions = (action: (typeof groupActions)[0], index: number) => (
     // @ts-ignore
     <GroupActionButton active={active} {...action} key={index} />
   );

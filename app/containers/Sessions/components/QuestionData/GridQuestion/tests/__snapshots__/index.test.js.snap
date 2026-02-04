@@ -755,6 +755,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       hidden=""
                     >
                       <img
+                        alt="Delete column 1"
                         class="c17"
                         hidden=""
                         src="IMAGE_MOCK"
@@ -813,6 +814,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       hidden=""
                     >
                       <img
+                        alt="Delete column 2"
                         class="c17"
                         hidden=""
                         src="IMAGE_MOCK"
@@ -854,7 +856,9 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   </div>
                 </div>
               </th>
-              <td />
+              <td
+                aria-hidden="true"
+              />
             </tr>
           </thead>
           <tbody
@@ -880,6 +884,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     width="60"
                   >
                     <img
+                      alt="Delete row 1"
                       class="c17"
                       hidden=""
                       src="IMAGE_MOCK"
@@ -986,6 +991,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     width="60"
                   >
                     <img
+                      alt="Delete row 2"
                       class="c17"
                       hidden=""
                       src="IMAGE_MOCK"

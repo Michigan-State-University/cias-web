@@ -1,6 +1,6 @@
 import { UPDATE_VARIABLE } from 'global/reducers/questions/constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const currencyQuestionReducer = (question, payload) => {
   switch (payload.type) {
     case UPDATE_VARIABLE:

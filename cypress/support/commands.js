@@ -98,11 +98,12 @@ const defaultOptions = {
 
 Cypress.Commands.add(
   'populateSessionWithQuestions',
-  (questionTypesToPopulate = questionTypes, options) => {
+  (questionTypesToPopulate, options) => {
+    const actualQuestionTypes = questionTypesToPopulate || questionTypes;
     const mergedOptions = { ...defaultOptions, ...options };
     const { variablePrefix, questionDetails, removeReadQuestionBlock } =
       mergedOptions;
-    forEach(questionTypesToPopulate, (questionType, questionIndex) => {
+    forEach(actualQuestionTypes, (questionType, questionIndex) => {
       cy.getBySel('add-screen-button').click({ force: true });
       cy.getBySel('question-type-chooser').within(() => {
         cy.contains(questionType).click({ force: true });

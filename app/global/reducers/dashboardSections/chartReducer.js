@@ -8,7 +8,7 @@ import {
 } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
-const chartReducer = (state = null, action) =>
+const chartReducer = (state = null, action = null) =>
   produce(state, () => {
     const { type, payload } = action;
 

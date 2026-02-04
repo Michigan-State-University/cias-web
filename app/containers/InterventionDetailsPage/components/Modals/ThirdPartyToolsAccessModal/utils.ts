@@ -74,7 +74,7 @@ export const schema = (formatMessage: IntlShape['formatMessage']) =>
   Yup.object().shape({
     hfhsAccess: Yup.boolean(),
     locationIds: Yup.array().when('hfhsAccess', {
-      is: (hfhsAccess) => hfhsAccess,
+      is: (hfhsAccess: boolean) => hfhsAccess,
       then: Yup.array().min(
         1,
         formatMessage(messages.selectClinicLocationsError),

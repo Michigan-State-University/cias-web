@@ -282,7 +282,7 @@ const QuestionListGroup = ({
     </Draggable>
   );
 
-  if (questions.length === 0) return <></>;
+  if (questions.length === 0) return null;
   return isDraggableGroup ? renderGroupWithDnd() : renderGroup();
 };
 

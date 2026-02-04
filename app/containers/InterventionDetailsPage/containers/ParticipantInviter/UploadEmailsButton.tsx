@@ -18,15 +18,13 @@ export const UploadEmailsButton: FC<Props> = ({ onClick, disabled }) => {
   const { formatMessage } = useIntl();
 
   return (
-    <>
-      <TextButton
-        onClick={onClick}
-        buttonProps={CSV_BUTTON_PROPS}
-        disabled={disabled}
-      >
-        <Icon src={CsvIcon} />
-        {formatMessage(messages.uploadEmailsButtonTitle)}
-      </TextButton>
-    </>
+    <TextButton
+      onClick={onClick}
+      buttonProps={CSV_BUTTON_PROPS}
+      disabled={disabled}
+    >
+      <Icon src={CsvIcon} />
+      {formatMessage(messages.uploadEmailsButtonTitle)}
+    </TextButton>
   );
 };

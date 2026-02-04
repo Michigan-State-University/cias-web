@@ -69,7 +69,7 @@ export const initialState = {
   },
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const dashboardSectionsReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     const { type, payload } = action;

@@ -15,7 +15,7 @@ const text = (props: TextProps) => ({
   fontStyle: props.fontStyle || '',
   color: props.color
     ? `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`
-    : props.defaultColor ?? `${themeColors.text}`,
+    : (props.defaultColor ?? `${themeColors.text}`),
   whiteSpace: props.whiteSpace || '',
   textOverflow: props.textOverflow || '',
   cursor: props.clickable ? 'pointer;' : '',

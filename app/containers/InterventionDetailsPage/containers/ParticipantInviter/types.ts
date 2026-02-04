@@ -10,6 +10,7 @@ export enum InviteParticipantModalView {
   INVITE_PREDEFINED_PARTICIPANT = 'INVITE_PREDEFINED_PARTICIPANT',
   MANAGE_PREDEFINED_PARTICIPANT = 'MANAGE_PREDEFINED_PARTICIPANT',
   UPLOAD_EMAILS = 'UPLOAD_EMAILS',
+  UPLOAD_PREDEFINED_PARTICIPANTS = 'UPLOAD_PREDEFINED_PARTICIPANTS',
 }
 
 export type InviteParticipantModalViewState =
@@ -27,6 +28,7 @@ export type InviteParticipantModalViewState =
 export enum ParticipantInvitationType {
   EMAIL = 'EMAIL',
   PREDEFINED = 'PREDEFINED',
+  PREDEFINED_CSV_UPLOAD = 'PREDEFINED_CSV_UPLOAD',
 }
 
 export type CopyLinkFormValues = {
@@ -110,3 +112,36 @@ export enum PredefinedParticipantFormMode {
   CREATE = 'CREATE',
   UPDATE = 'UPDATE',
 }
+
+export type PredefinedParticipantCsvRow = {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  externalId?: string;
+  phoneCountryCode?: string;
+  phoneNumber?: string;
+  emailNotification?: string;
+  smsNotification?: string;
+  healthClinicId?: string;
+  healthClinicName?: string;
+};
+
+export type UploadedPredefinedParticipantsCsvData = {
+  data: PredefinedParticipantCsvRow;
+}[];
+
+export type ParsedPredefinedParticipantCsvRow = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  externalId: string;
+  iso: Nullable<SelectOption<CountryCode>>;
+  number: string;
+  emailNotification: boolean;
+  smsNotification: boolean;
+  healthClinicOption: SelectOption<string> | null;
+};
+
+export type InvitePredefinedParticipantsFormValues = {
+  participants: ParsedPredefinedParticipantCsvRow[];
+};

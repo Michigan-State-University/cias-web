@@ -45,7 +45,7 @@ const QuestionSettings = ({
   const isVisible = settingsVisibility && questionsLength;
 
   return (
-    <Container isVisible={isVisible}>
+    <Container isVisible={isVisible} data-cy="question-settings-panel">
       <SettingsBar isVisible={isVisible} height="100%">
         <Box width={elements.screenSettingsWidth} height="100%" padded>
           <Row align="center" justify="between" mb={40}>

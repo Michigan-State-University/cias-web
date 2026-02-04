@@ -11,7 +11,7 @@ export const initialState: ChatWidgetState = {
 
 export const chatWidgetReducerKey = 'chatWidget';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 const ChatWidgetReducer: Reducer<ChatWidgetState, ChatWidgetAction> = (
   state = initialState,
   { payload, type }: ChatWidgetAction,

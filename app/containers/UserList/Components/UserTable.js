@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useState } from 'react';
+import React, { Fragment, memo, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
@@ -34,7 +34,7 @@ const UserTable = ({
   const openModal = (user) => setPickedUser(user);
   const closeModal = () => setPickedUser({});
 
-  const openRemoveUserModal = (user) => setUserToRemove(user);
+  const openRemoveUserModal = useCallback((user) => setUserToRemove(user), []);
   const closeRemoveUserModal = () => setUserToRemove({});
 
   const handleDeactivate = () => {

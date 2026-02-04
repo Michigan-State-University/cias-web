@@ -20,7 +20,7 @@ export const initialState = {
   success: false,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const registerPageReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {

@@ -3,6 +3,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -85,20 +86,31 @@ const DashboardSections = ({
     }
   };
 
+  const contextValue = useMemo(
+    () => ({
+      dashboardSections,
+      loaders,
+      errors,
+      selectedChart,
+      fromDashboardView,
+      isAnySectionDragging,
+      setIsAnySectionDragging,
+    }),
+    [
+      dashboardSections,
+      loaders,
+      errors,
+      selectedChart,
+      fromDashboardView,
+      isAnySectionDragging,
+      setIsAnySectionDragging,
+    ],
+  );
+
   if (fetchDashboardSectionsLoader) return <Loader type="inline" />;
 
   return (
-    <DashboardSectionsContext.Provider
-      value={{
-        dashboardSections,
-        loaders,
-        errors,
-        selectedChart,
-        fromDashboardView,
-        isAnySectionDragging,
-        setIsAnySectionDragging,
-      }}
-    >
+    <DashboardSectionsContext.Provider value={contextValue}>
       <FullWidthContainer>
         <Row>
           <Col mb={40}>

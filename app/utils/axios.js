@@ -42,6 +42,7 @@ const isGuestRequest = (locationUrl, method, requestUrl) =>
 axios.interceptors.request.use(
   (config) => {
     config.baseURL = process.env.API_URL;
+
     const { method, url } = config;
     let headers;
     if (isGuestRequest(window.location.pathname, method, url)) {
@@ -49,6 +50,12 @@ axios.interceptors.request.use(
     } else {
       headers = LocalStorageService.getHeaders();
     }
+
+    if (process.env.ADDITIONAL_ORIGIN_SECURE_TOKEN) {
+      headers['Additional-Origin-Secure-Token'] =
+        process.env.ADDITIONAL_ORIGIN_SECURE_TOKEN || '';
+    }
+
     config.headers = objectToCamelKebabCase({
       ...headers,
       ...config.headers,

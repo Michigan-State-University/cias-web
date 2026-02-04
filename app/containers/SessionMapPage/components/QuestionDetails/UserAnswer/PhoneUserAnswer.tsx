@@ -31,10 +31,10 @@ const PhoneUserAnswer = ({
   const answered = typeof value !== 'string';
 
   const formattedPhoneNumber = answered
-    ? parsePhoneNumberFromString(
+    ? (parsePhoneNumberFromString(
         value.number,
         value.iso as CountryCode,
-      )?.formatNational() ?? ''
+      )?.formatNational() ?? '')
     : '';
 
   return (

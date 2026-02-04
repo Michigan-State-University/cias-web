@@ -27,6 +27,7 @@ import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { PredefinedParticipantsTable } from './PredefinedParticipantsTable';
 import { HealthClinicCollapse } from './HealthClinicCollapse';
 import messages from './messages';
+import { UploadPredefinedParticipantsButton } from './UploadPredefinedParticipantsButton';
 
 export type Props = {
   interventionId: string;
@@ -84,27 +85,37 @@ export const PredefinedParticipantsTab: FC<Props> = ({
         invitingNotPossibleMessage={formatMessage(
           messages.creatingPredefinedParticipantsNotPossibleMessage,
         )}
+        onUploadPredefinedParticipants={() =>
+          onInvite(ParticipantInvitationType.PREDEFINED_CSV_UPLOAD)
+        }
       />
     );
   }
 
   return (
     <Column maxHeight="100%">
-      <Row mb={16} align="center">
+      <Row mb={16} align="center" gap={16}>
         <InviteParticipantsButton
           invitationType={ParticipantInvitationType.PREDEFINED}
           onInvite={onInvite}
           disabled={!creatingPredefinedParticipantsPossible}
         />
+        <UploadPredefinedParticipantsButton
+          onClick={() =>
+            onInvite(ParticipantInvitationType.PREDEFINED_CSV_UPLOAD)
+          }
+          disabled={!creatingPredefinedParticipantsPossible}
+        />
       </Row>
       <Box overflow="auto" maxHeight="100%">
-        {!isReportingIntervention && (
+        {predefinedParticipants?.length && !isReportingIntervention && (
           <PredefinedParticipantsTable
             predefinedParticipants={predefinedParticipants}
             onManage={onManage}
           />
         )}
-        {isReportingIntervention &&
+        {predefinedParticipants?.length &&
+          isReportingIntervention &&
           participantsGroupedByHealthClinic.map(
             ([healthClinicId, groupedParticipants]) => (
               <HealthClinicCollapse

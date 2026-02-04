@@ -55,6 +55,7 @@ export interface SimpleIntervention {
   id: string;
   googleLanguageId: number;
   name: string;
+  note: Nullable<string>;
   organizationId: Nullable<string>;
   sessionsSize: number;
   updatedAt: string;

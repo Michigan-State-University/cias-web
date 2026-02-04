@@ -30,7 +30,10 @@ describe('<QuestionSubtitle />', () => {
 
   beforeAll(() => {
     store = createStore(reducer, initialState);
-    store.runSaga = () => {};
+    store.runSaga = () => ({
+      cancel: () => {},
+      toPromise: () => Promise.resolve(),
+    });
     store.injectedSagas = {};
     store.injectedReducers = {};
   });

@@ -8,7 +8,7 @@ export const initialState = {
   locale: DEFAULT_LOCALE,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const appLanguageProviderReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {

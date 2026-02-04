@@ -7,8 +7,7 @@ import { initialState } from './reducer';
 
 export const selectIntervention = (state) => state.intervention || initialState;
 
-export const makeSelectInterventionState = () =>
-  createSelector(selectIntervention, (substate) => substate);
+export const makeSelectInterventionState = () => selectIntervention;
 
 export const makeSelectIntervention = () =>
   createSelector(selectIntervention, (substate) => substate.intervention);
