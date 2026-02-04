@@ -10,10 +10,10 @@ export const getAnswerImageSize = (size, isMobile = false) => {
       case 'small':
         return { maxHeight: '70px', maxWidth: '200px' };
       case 'large':
-        return { maxHeight: '280px', maxWidth: '260px' };
+        return { maxHeight: '215px', maxWidth: '260px' };
       case 'medium':
       default:
-        return { maxHeight: '140px', maxWidth: '230px' };
+        return { maxHeight: '120px', maxWidth: '230px' };
     }
   }
 
