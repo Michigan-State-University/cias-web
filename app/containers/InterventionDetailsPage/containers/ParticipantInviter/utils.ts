@@ -420,6 +420,7 @@ const parseBooleanFromCsv = (value?: string): boolean => {
 export type ParsePredefinedParticipantsCsvResult = {
   participants: ParsedPredefinedParticipantCsvRow[];
   invalidPhoneCount: number;
+  invalidHealthClinicCount: number;
 };
 
 export const parsePredefinedParticipantsCsv = (
@@ -439,18 +440,37 @@ export const parsePredefinedParticipantsCsv = (
     );
 
   let invalidPhoneCount = 0;
+  let invalidHealthClinicCount = 0;
+
+  const clinicNameToIdMap = new Map<string, string>();
+  Object.entries(normalizedHealthClinicsInfos).forEach(([id, info]) => {
+    if (!info.deleted) {
+      clinicNameToIdMap.set(info.healthClinicName.toLowerCase(), id);
+    }
+  });
 
   const participants = dataRows.map((row) => {
     let healthClinicOption: SelectOption<string> | null = null;
+    let resolvedHealthClinicName = '';
+    let resolvedHealthSystemName = '';
 
     if (isReportingIntervention) {
-      const healthClinicId = row.healthClinicId?.trim();
-      if (healthClinicId && normalizedHealthClinicsInfos[healthClinicId]) {
-        const clinic = normalizedHealthClinicsInfos[healthClinicId];
-        healthClinicOption = {
-          value: healthClinicId,
-          label: clinic.healthClinicName,
-        };
+      const healthClinicName = row.healthClinicName?.trim();
+      if (healthClinicName) {
+        const healthClinicId = clinicNameToIdMap.get(
+          healthClinicName.toLowerCase(),
+        );
+        if (healthClinicId) {
+          const clinic = normalizedHealthClinicsInfos[healthClinicId];
+          healthClinicOption = {
+            value: healthClinicId,
+            label: clinic.healthClinicName,
+          };
+          resolvedHealthClinicName = clinic.healthClinicName;
+          resolvedHealthSystemName = clinic.healthSystemName;
+        } else {
+          invalidHealthClinicCount += 1;
+        }
       }
     }
 
@@ -476,19 +496,23 @@ export const parsePredefinedParticipantsCsv = (
       emailNotification: parseBooleanFromCsv(row.emailNotification),
       smsNotification: parseBooleanFromCsv(row.smsNotification),
       healthClinicOption,
+      healthClinicName: resolvedHealthClinicName,
+      healthSystemName: resolvedHealthSystemName,
     };
   });
 
-  return { participants, invalidPhoneCount };
+  return { participants, invalidPhoneCount, invalidHealthClinicCount };
 };
 
 export const generatePredefinedParticipantsExampleCsv = (
   healthClinicOptions: SelectOption<string>[],
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
   isReportingIntervention: boolean,
 ): PredefinedParticipantCsvRow[] => {
   if (isReportingIntervention) {
-    return healthClinicOptions.map(
-      ({ value: healthClinicId, label: healthClinicName }, index) => ({
+    return healthClinicOptions.map(({ value: healthClinicId }, index) => {
+      const clinicInfo = normalizedHealthClinicsInfos[healthClinicId];
+      return {
         firstName: `FirstName${index + 1}`,
         lastName: `LastName${index + 1}`,
         email: `participant${index + 1}@example.com`,
@@ -497,10 +521,10 @@ export const generatePredefinedParticipantsExampleCsv = (
         phoneNumber: `555123456${index}`,
         emailNotification: 'true',
         smsNotification: 'false',
-        healthClinicId,
-        healthClinicName,
-      }),
-    );
+        healthClinicName: clinicInfo?.healthClinicName || '',
+        healthSystemName: clinicInfo?.healthSystemName || '',
+      };
+    });
   }
 
   return [...Array(3)].map((_, index) => ({
@@ -557,5 +581,7 @@ export const prepareBulkCreatePredefinedParticipantsPayload = (
     emailNotification: participant.emailNotification,
     smsNotification: participant.smsNotification,
     healthClinicId: participant.healthClinicOption?.value || undefined,
+    healthClinicName: participant.healthClinicName || undefined,
+    healthSystemName: participant.healthSystemName || undefined,
   })),
 });

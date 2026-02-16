@@ -122,8 +122,8 @@ export type PredefinedParticipantCsvRow = {
   phoneNumber?: string;
   emailNotification?: string;
   smsNotification?: string;
-  healthClinicId?: string;
   healthClinicName?: string;
+  healthSystemName?: string;
 };
 
 export type UploadedPredefinedParticipantsCsvData = {
@@ -140,6 +140,8 @@ export type ParsedPredefinedParticipantCsvRow = {
   emailNotification: boolean;
   smsNotification: boolean;
   healthClinicOption: SelectOption<string> | null;
+  healthClinicName: string;
+  healthSystemName: string;
 };
 
 export type InvitePredefinedParticipantsFormValues = {
