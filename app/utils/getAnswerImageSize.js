@@ -8,12 +8,12 @@ export const getAnswerImageSize = (size, isMobile = false) => {
   if (isMobile) {
     switch (size) {
       case 'small':
-        return { maxHeight: '70px', maxWidth: '200px' };
+        return { maxHeight: '55px', maxWidth: '200px' };
       case 'large':
-        return { maxHeight: '215px', maxWidth: '260px' };
+        return { maxHeight: '180px', maxWidth: '260px' };
       case 'medium':
       default:
-        return { maxHeight: '120px', maxWidth: '230px' };
+        return { maxHeight: '95px', maxWidth: '230px' };
     }
   }
 
