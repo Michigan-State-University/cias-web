@@ -382,6 +382,8 @@ export function AnswerSessionPage({
   const [videoEnd, setVideoEnd] = useState(null);
   const [videoProgress, setVideoProgress] = useState(null);
 
+  const fetchAttemptedRef = useRef(null);
+
   const {
     type,
     settings: {
@@ -461,14 +463,45 @@ export function AnswerSessionPage({
   const { sessionId, interventionId, index } = params;
 
   useEffect(() => {
-    if (
-      isPreview &&
-      interventionId !== fetchedInterventionId &&
-      !fetchInterventionLoading
-    ) {
-      fetchIntervention(interventionId);
+    if (!isPreview) {
+      return;
     }
-  }, [interventionId]);
+
+    if (interventionId === fetchedInterventionId) {
+      fetchAttemptedRef.current = interventionId;
+      return;
+    }
+
+    if (fetchAttemptedRef.current !== interventionId) {
+      fetchAttemptedRef.current = null;
+    }
+
+    if (
+      !fetchInterventionLoading &&
+      fetchAttemptedRef.current !== interventionId
+    ) {
+      fetchAttemptedRef.current = interventionId;
+      fetchIntervention(interventionId);
+      return;
+    }
+
+    // Stuck state: loading=true but we haven't marked this as attempted
+    // (Happens when component unmounts/remounts during locale change)
+    if (
+      fetchInterventionLoading &&
+      fetchAttemptedRef.current !== interventionId
+    ) {
+      fetchAttemptedRef.current = interventionId;
+
+      const refetchTimer = setTimeout(() => {
+        fetchIntervention(interventionId);
+      }, 300);
+
+      return () => {
+        clearTimeout(refetchTimer);
+      };
+    }
+  }, [interventionId, isPreview]);
 
   useEffect(() => {
     if (currentQuestionId) {
