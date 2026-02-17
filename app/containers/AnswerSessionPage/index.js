@@ -467,18 +467,15 @@ export function AnswerSessionPage({
       return;
     }
 
-    // Already fetched this intervention
     if (interventionId === fetchedInterventionId) {
       fetchAttemptedRef.current = interventionId;
       return;
     }
 
-    // Fresh intervention, reset attempt tracking
     if (fetchAttemptedRef.current !== interventionId) {
       fetchAttemptedRef.current = null;
     }
 
-    // Normal case: not loading and haven't attempted yet
     if (
       !fetchInterventionLoading &&
       fetchAttemptedRef.current !== interventionId
