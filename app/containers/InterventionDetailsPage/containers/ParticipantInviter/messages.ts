@@ -333,4 +333,21 @@ export default defineMessages({
     defaultMessage:
       '{count, plural, one {# phone number} other {# phone numbers}} could not be parsed due to invalid country code or phone number format.',
   },
+  healthClinicColumnHeader: {
+    id: `${scope}.healthClinicColumnHeader`,
+    defaultMessage: 'Health Clinic',
+  },
+  healthSystemColumnHeader: {
+    id: `${scope}.healthSystemColumnHeader`,
+    defaultMessage: 'Health System',
+  },
+  csvInvalidHealthClinicIds: {
+    id: `${scope}.csvInvalidHealthClinicIds`,
+    defaultMessage:
+      '{count, plural, one {# health clinic ID was} other {# health clinic IDs were}} not recognized and cleared. Please verify the health clinic assignments.',
+  },
+  noHealthClinicAssigned: {
+    id: `${scope}.noHealthClinicAssigned`,
+    defaultMessage: 'No clinic',
+  },
 });
