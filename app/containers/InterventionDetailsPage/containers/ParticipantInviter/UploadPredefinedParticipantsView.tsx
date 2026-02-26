@@ -77,9 +77,14 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
     () =>
       generatePredefinedParticipantsExampleCsv(
         healthClinicOptions,
+        normalizedHealthClinicsInfos,
         isReportingIntervention,
       ),
-    [healthClinicOptions, isReportingIntervention],
+    [
+      healthClinicOptions,
+      normalizedHealthClinicsInfos,
+      isReportingIntervention,
+    ],
   );
 
   const [participants, setParticipants] = useState<
@@ -88,17 +93,28 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
 
   const handleUpload = (data: UploadedPredefinedParticipantsCsvData) => {
     try {
-      const { participants: parsedParticipants, invalidPhoneCount } =
-        parsePredefinedParticipantsCsv(
-          data,
-          normalizedHealthClinicsInfos,
-          isReportingIntervention,
-        );
+      const {
+        participants: parsedParticipants,
+        invalidPhoneCount,
+        invalidHealthClinicCount,
+      } = parsePredefinedParticipantsCsv(
+        data,
+        normalizedHealthClinicsInfos,
+        isReportingIntervention,
+      );
 
       if (invalidPhoneCount > 0) {
         toast.warning(
           formatMessage(messages.csvInvalidPhoneNumbers, {
             count: invalidPhoneCount,
+          }),
+        );
+      }
+
+      if (invalidHealthClinicCount > 0) {
+        toast.warning(
+          formatMessage(messages.csvInvalidHealthClinicIds, {
+            count: invalidHealthClinicCount,
           }),
         );
       }
@@ -146,7 +162,6 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
         <Column flex={1} gap={16}>
           <InvitePredefinedParticipantsForm
             initialFormValues={{ participants }}
-            isReportingIntervention={isReportingIntervention}
             onSubmit={handleSubmit}
             submitting={submitting}
             onParticipantsChange={setParticipants}

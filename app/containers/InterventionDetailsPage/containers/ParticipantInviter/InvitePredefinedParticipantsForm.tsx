@@ -16,7 +16,6 @@ import { TEXT_BUTTON_PROPS } from './constants';
 
 export type Props = {
   initialFormValues: InvitePredefinedParticipantsFormValues;
-  isReportingIntervention: boolean;
   onSubmit: FormikConfig<InvitePredefinedParticipantsFormValues>['onSubmit'];
   submitting: boolean;
   onParticipantsChange?: (
