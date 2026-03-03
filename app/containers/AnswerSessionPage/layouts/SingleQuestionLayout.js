@@ -73,7 +73,7 @@ const SingleQuestionLayout = ({
                   answerImage={answerImage}
                   payload={payload}
                   index={index}
-                  imageMaxWidth={getAnswerImageSize(answerImageSize)}
+                  imageSize={getAnswerImageSize(answerImageSize, isMobile)}
                 />
               </Radio>
             </HoverableBox>
