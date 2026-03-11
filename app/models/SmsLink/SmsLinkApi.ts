@@ -9,6 +9,7 @@ interface SmsLinkApi {
     url: string;
     variable: string;
     link_type: string;
+    variant_id: Nullable<string>;
   };
 }
 

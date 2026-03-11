@@ -244,12 +244,19 @@ export const setFiltersAction = (filters) =>
 export const setTextMessagesCount = (count) =>
   actionBuilder(SET_TEXT_MESSAGES_COUNT, { count });
 
-export const createSmsLinkRequest = (smsPlanId, linkType, url, variable) =>
+export const createSmsLinkRequest = (
+  smsPlanId,
+  linkType,
+  url,
+  variable,
+  variantId = null,
+) =>
   actionBuilder(CREATE_SMS_LINK_REQUEST, {
     smsPlanId,
     linkType,
     url,
     variable,
+    variantId,
   });
 export const createSmsLinkSuccess = (smsLink) =>
   actionBuilder(CREATE_SMS_LINK_SUCCESS, { smsLink });
