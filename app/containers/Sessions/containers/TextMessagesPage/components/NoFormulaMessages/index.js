@@ -105,6 +105,7 @@ const NoFormulaMessage = ({
             disabled={!editingPossible}
             placement="right"
             onClick={handleAddLink}
+            dropdownWidth="260px"
           >
             <Text fontWeight="bold" color={themeColors.secondary}>
               {formatMessage(settingsMessages.addLinkButton)}
