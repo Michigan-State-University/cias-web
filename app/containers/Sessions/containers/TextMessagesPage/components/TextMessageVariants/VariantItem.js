@@ -44,9 +44,12 @@ import {
   changeSelectedVariantId,
   deleteTextMessageVariantAttachmentRequest,
   uploadTextMessageVariantAttachmentRequest,
+  createSmsLinkRequest,
 } from 'global/reducers/textMessages';
 
 import { ModalType, useModal } from 'components/Modal';
+import SmsLinkModal from 'containers/SmsLinkModal';
+import { SmsLinksList } from '../SmsLinksList';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
@@ -61,7 +64,7 @@ const originalTextIconProps = {
 const VariantItem = ({
   open,
   index,
-  variant: { id, formulaMatch, content, originalText, attachment },
+  variant: { id, formulaMatch, content, originalText, attachment, smsLinks },
   changeFormulaMatchAction,
   changeContentAction,
   removeVariant,
@@ -72,6 +75,7 @@ const VariantItem = ({
   variantState,
   uploadAttachment,
   deleteAttachment,
+  addLink,
 }) => {
   const { sessionId, interventionId, formatMessage, editingPossible } =
     useContext(TextMessagesContext);
@@ -101,6 +105,15 @@ const VariantItem = ({
     handleContentChange(
       `${content}${variableHelper.getFormattedVariableForDynamicInput()}`,
     );
+  };
+
+  const handleAddLink = (linkType, url, variable) => {
+    addLink(textMessageId, linkType, url, variable, id);
+
+    const text = content ?? '';
+    if (variable && !text.includes(`::${variable}::`)) {
+      handleContentChange(`${text}::${variable}::`);
+    }
   };
 
   const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
@@ -192,30 +205,42 @@ const VariantItem = ({
             <Text whiteSpace="pre">
               {formatMessage(messages.sectionCaseContentHeader)}
             </Text>
-            <VariableChooser
-              disabled={disabled}
-              currentInterventionId={interventionId}
-              onClick={handleAddVariable}
-              placement="right"
-              questionTypeWhitelist={[
-                dateQuestion.id,
-                textboxQuestion.id,
-                numberQuestion.id,
-                visualAnalogueScaleQuestion.id,
-                currencyQuestion.id,
-                nameQuestion.id,
-              ]}
-              currentSessionId={sessionId}
-              includeAllVariables
-              includeCurrentSession
-              includeNonDigitVariables
-              isMultiSession
-              sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
-            >
-              <Text fontWeight="bold" color={themeColors.secondary}>
-                {formatMessage(settingsMessages.addVariableButton)}
-              </Text>
-            </VariableChooser>
+            <NoMarginRow gap={20}>
+              <SmsLinkModal
+                disabled={disabled}
+                placement="right"
+                onClick={handleAddLink}
+                dropdownWidth="260px"
+              >
+                <Text fontWeight="bold" color={themeColors.secondary}>
+                  {formatMessage(settingsMessages.addLinkButton)}
+                </Text>
+              </SmsLinkModal>
+              <VariableChooser
+                disabled={disabled}
+                currentInterventionId={interventionId}
+                onClick={handleAddVariable}
+                placement="right"
+                questionTypeWhitelist={[
+                  dateQuestion.id,
+                  textboxQuestion.id,
+                  numberQuestion.id,
+                  visualAnalogueScaleQuestion.id,
+                  currencyQuestion.id,
+                  nameQuestion.id,
+                ]}
+                currentSessionId={sessionId}
+                includeAllVariables
+                includeCurrentSession
+                includeNonDigitVariables
+                isMultiSession
+                sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
+              >
+                <Text fontWeight="bold" color={themeColors.secondary}>
+                  {formatMessage(settingsMessages.addVariableButton)}
+                </Text>
+              </VariableChooser>
+            </NoMarginRow>
           </NoMarginRow>
           <Box bg={colors.linkWater} width="100%" mt={10} mb={20} px={8} py={8}>
             <OriginalTextHover
@@ -239,14 +264,19 @@ const VariantItem = ({
               />
             </OriginalTextHover>
           </Box>
-          <TextMessageAttachment
-            attachment={attachment}
-            loading={uploadAttachmentLoading}
-            onAdd={handleAddAttachment}
-            onDelete={handleDeleteAttachment}
-            editingPossible={editingPossible}
-          />
         </Row>
+        <SmsLinksList
+          smsPlanId={textMessageId}
+          variantId={id}
+          availableSmsLinks={smsLinks ?? []}
+        />
+        <TextMessageAttachment
+          attachment={attachment}
+          loading={uploadAttachmentLoading}
+          onAdd={handleAddAttachment}
+          onDelete={handleDeleteAttachment}
+          editingPossible={editingPossible}
+        />
       </Container>
     </Collapse>
   );
@@ -266,6 +296,7 @@ VariantItem.propTypes = {
   variantState: PropTypes.object,
   uploadAttachment: PropTypes.func,
   deleteAttachment: PropTypes.func,
+  addLink: PropTypes.func,
 };
 VariantItem.defaultProps = {
   open: false,
@@ -278,6 +309,7 @@ const mapDispatchToProps = {
   changeSelectedVariant: changeSelectedVariantId,
   uploadAttachment: uploadTextMessageVariantAttachmentRequest,
   deleteAttachment: deleteTextMessageVariantAttachmentRequest,
+  addLink: createSmsLinkRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);
