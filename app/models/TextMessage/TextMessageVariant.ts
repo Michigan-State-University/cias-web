@@ -1,4 +1,5 @@
 import { AppFile } from 'models/File';
+import { SmsLink } from 'models/SmsLink';
 
 export interface VariantOriginalText {
   content: string;
@@ -10,4 +11,5 @@ export interface TextMessageVariant {
   formulaMatch: string;
   originalText: string;
   attachment: Nullable<AppFile>;
+  smsLinks: SmsLink[];
 }
