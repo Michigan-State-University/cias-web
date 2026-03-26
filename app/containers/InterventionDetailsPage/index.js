@@ -288,6 +288,12 @@ export function InterventionDetailsPage({
     [isAccessRevoked],
   );
 
+  const canCreateRaSession = useMemo(
+    () =>
+      !sessions?.some((session) => session.type === SessionTypes.RA_SESSION),
+    [sessions],
+  );
+
   const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
   const { ExportInterventionModalOption, ExportInterventionModal } =
@@ -690,6 +696,7 @@ export function InterventionDetailsPage({
                   <Row my={18} align="center">
                     <SessionCreateButton
                       canCreateCatSession={canCreateCatSession}
+                      canCreateRaSession={canCreateRaSession}
                       handleSessionCreation={createSessionCall}
                       disabled={!editingPossible}
                     />
