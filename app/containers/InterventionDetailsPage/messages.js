@@ -98,6 +98,11 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this session? It will no longer be possible to recover it later.',
   },
+  raSessionDeleteMessage: {
+    id: `${scope}.raSessionDeleteMessage`,
+    defaultMessage:
+      "Are you sure you want to delete this RA session? This will unblock all predefined participants who haven't had their RA session filled yet. Any unfilled RA session data will be lost.",
+  },
   interventionSettings: {
     id: `${scope}.interventionSettings`,
     defaultMessage: 'Intervention Settings',
