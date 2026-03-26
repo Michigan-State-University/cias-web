@@ -184,7 +184,8 @@ const QuestionTypeChooser = ({
                   questionTypeId={id}
                 />
               ))}
-              {sessionType === SessionTypes.CLASSIC_SESSION &&
+              {(sessionType === SessionTypes.CLASSIC_SESSION ||
+                sessionType === SessionTypes.RA_SESSION) &&
                 AddableGroups.map(({ color, id }) => (
                   <NewItem
                     key={id}

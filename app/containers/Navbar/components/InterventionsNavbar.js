@@ -117,6 +117,8 @@ const InterventionNavbar = ({
   const { interventionId, sessionId } = params;
 
   const isClassicSession = type === SessionTypes.CLASSIC_SESSION;
+  const isClassicLikeSession =
+    type === SessionTypes.CLASSIC_SESSION || type === SessionTypes.RA_SESSION;
 
   useInjectSaga({ key: 'editSession', saga: editSessionSaga });
   const [tabActive, setTabActive] = useState(
@@ -140,7 +142,9 @@ const InterventionNavbar = ({
   }, [pathname]);
 
   const previewDisabled =
-    !questionsLength || !canPreview(interventionStatus) || !isClassicSession;
+    !questionsLength ||
+    !canPreview(interventionStatus) ||
+    !isClassicLikeSession;
 
   const textMessagesCountValue = smsPlansCount ?? textMessagesCount ?? '0';
 
@@ -225,7 +229,7 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        {isClassicSession && (
+        {isClassicLikeSession && (
           <TabItem
             linkMatch={formatMessage(messages.reportTemplates)}
             renderAsLink={
@@ -249,7 +253,7 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {canAccessParticipantsData && isClassicSession && (
+        {canAccessParticipantsData && isClassicLikeSession && (
           <TabItem
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
@@ -297,7 +301,7 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {isClassicSession && (
+        {isClassicLikeSession && (
           <TabItem
             renderAsLink={
               <StyledLink

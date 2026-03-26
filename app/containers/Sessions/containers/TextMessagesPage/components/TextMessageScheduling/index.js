@@ -218,7 +218,10 @@ const TextMessageScheduling = ({
               includeCurrentSession
               includeNonDigitVariables
               isMultiSession
-              sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
+              sessionTypesWhiteList={[
+                SessionTypes.CLASSIC_SESSION,
+                SessionTypes.RA_SESSION,
+              ]}
             >
               <Badge bg={themeColors.primary} color={colors.white}>
                 {variableValue ||

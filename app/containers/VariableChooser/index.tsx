@@ -105,6 +105,7 @@ const VariableChooser = ({
     SessionTypes.CAT_SESSION,
     SessionTypes.CLASSIC_SESSION,
     SessionTypes.SMS_SESSION,
+    SessionTypes.RA_SESSION,
   ],
   setIsOpen: propsSetOpen,
   mode = VariableChooserMode.VARIABLE,

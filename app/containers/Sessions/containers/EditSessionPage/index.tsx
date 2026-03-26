@@ -36,6 +36,7 @@ import {
 import {
   CatSession,
   ClassicSession,
+  ResearchAssistantSession,
   SessionTypes,
   SmsSession,
 } from 'models/Session';
@@ -64,7 +65,7 @@ interface Props extends RouteComponentProps<MatchParams> {
   fetchInterventions: () => void;
   fetchReportTemplates: (sessionId: string) => void;
   interventionStatus: string;
-  session: ClassicSession | SmsSession | CatSession;
+  session: ClassicSession | SmsSession | CatSession | ResearchAssistantSession;
   editingPossible: boolean;
 }
 
@@ -114,7 +115,8 @@ const EditSessionPage = ({
         </title>
       </Helmet>
       {(type === SessionTypes.SMS_SESSION ||
-        type === SessionTypes.CLASSIC_SESSION) && (
+        type === SessionTypes.CLASSIC_SESSION ||
+        type === SessionTypes.RA_SESSION) && (
         <EditSessionCommon
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}

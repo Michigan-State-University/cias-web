@@ -300,7 +300,10 @@ const SectionCaseItem = ({
                 includeCurrentSession
                 includeNonDigitVariables
                 isMultiSession
-                sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
+                sessionTypesWhiteList={[
+                  SessionTypes.CLASSIC_SESSION,
+                  SessionTypes.RA_SESSION,
+                ]}
               >
                 <TextButton
                   whiteSpace="nowrap"
