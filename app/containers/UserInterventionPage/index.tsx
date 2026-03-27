@@ -86,7 +86,9 @@ const UserInterventionPage = () => {
     if (!data) return [];
     const { sessions, userIntervention } = data;
     const nonSmsSessions = sessions.filter(
-      ({ type: sessionType }) => sessionType !== SessionTypes.SMS_SESSION,
+      ({ type: sessionType }) =>
+        sessionType !== SessionTypes.SMS_SESSION &&
+        sessionType !== SessionTypes.RA_SESSION,
     );
     if (userIntervention.intervention.type !== InterventionType.DEFAULT) {
       return nonSmsSessions;

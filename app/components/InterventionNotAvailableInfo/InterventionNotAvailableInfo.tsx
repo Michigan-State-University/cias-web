@@ -29,7 +29,8 @@ export const InterventionNotAvailableInfo = ({ reason }: Props) => {
       case InterventionNotAvailableReason.SESSION_CLOSED: {
         return formatMessage(messages.moduleNotAvailableTitle);
       }
-      case InterventionNotAvailableReason.INTERVENTION_PAUSED: {
+      case InterventionNotAvailableReason.INTERVENTION_PAUSED:
+      case InterventionNotAvailableReason.RA_SESSION_PENDING: {
         return formatMessage(messages.studyNotAvailableTemporarilyTitle);
       }
       default: {

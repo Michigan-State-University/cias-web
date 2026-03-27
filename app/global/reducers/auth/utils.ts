@@ -4,6 +4,11 @@ import { RoutePath } from 'global/constants';
 import objectToCamelCase from 'utils/objectToCamelCase';
 import { parametrizeRoutePath } from 'utils/router';
 
+import {
+  getInterventionNotAvailablePagePathFromReason,
+  InterventionNotAvailableReason,
+} from 'components/InterventionNotAvailableInfo';
+
 import { RedirectDataDTO } from './types';
 
 export const getPredefinedParticipantRedirectPath = (
@@ -19,7 +24,16 @@ export const getPredefinedParticipantRedirectPath = (
     healthClinicId,
     multipleFillSessionAvailable,
     lang,
+    raSessionPending,
   } = objectToCamelCase(redirectDataDTO);
+
+  if (raSessionPending) {
+    return {
+      path: getInterventionNotAvailablePagePathFromReason(
+        InterventionNotAvailableReason.RA_SESSION_PENDING,
+      ),
+    };
+  }
 
   if (sessionId) {
     // redirect to answer session page

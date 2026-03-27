@@ -197,7 +197,9 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     (isReportingIntervention && organizationId !== organization?.id);
 
   const filteredSessionOptions = sessionOptions.filter(
-    (session) => session.type !== SessionTypes.SMS_SESSION,
+    (session) =>
+      session.type !== SessionTypes.SMS_SESSION &&
+      session.type !== SessionTypes.RA_SESSION,
   );
 
   const { view } = currentView;
