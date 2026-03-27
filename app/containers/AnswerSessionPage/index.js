@@ -339,6 +339,7 @@ export function AnswerSessionPage({
     showTextReadingControls,
     transitionalUserSessionId,
     fetchPreviousQuestionLoading,
+    isRaFulfillment,
   },
   isPreview,
   interventionStatus,
@@ -543,7 +544,7 @@ export function AnswerSessionPage({
       nextQuestion(userSessionId, questionId);
     }
 
-    if (userSession.liveChatEnabled && interventionId) {
+    if (userSession.liveChatEnabled && interventionId && !isRaFulfillment) {
       setLiveChatEnabled(interventionId);
     }
   }, [userSession]);

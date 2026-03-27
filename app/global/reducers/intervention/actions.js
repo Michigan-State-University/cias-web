@@ -132,6 +132,9 @@ import {
   UNASSIGN_TAG_REQUEST,
   UNASSIGN_TAG_SUCCESS,
   UNASSIGN_TAG_ERROR,
+  FULFILL_RA_SESSION_REQUEST,
+  FULFILL_RA_SESSION_SUCCESS,
+  FULFILL_RA_SESSION_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -656,3 +659,10 @@ export const unassignTagSuccess = (tagId) =>
   actionBuilder(UNASSIGN_TAG_SUCCESS, { tagId });
 export const unassignTagError = (error) =>
   actionBuilder(UNASSIGN_TAG_ERROR, { error });
+
+export const fulfillRaSessionRequest = (slug) =>
+  actionBuilder(FULFILL_RA_SESSION_REQUEST, { slug });
+export const fulfillRaSessionSuccess = () =>
+  actionBuilder(FULFILL_RA_SESSION_SUCCESS, {});
+export const fulfillRaSessionError = (error) =>
+  actionBuilder(FULFILL_RA_SESSION_ERROR, { error });

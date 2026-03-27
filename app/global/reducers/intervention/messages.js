@@ -206,4 +206,12 @@ export default defineMessages({
     id: `${scope}.bulkCreatePredefinedParticipantsError`,
     defaultMessage: 'Unable to create predefined participants.',
   },
+  raSessionAlreadyCompleted: {
+    id: `${scope}.raSessionAlreadyCompleted`,
+    defaultMessage: 'This RA session has already been completed.',
+  },
+  fulfillRaSessionError: {
+    id: `${scope}.fulfillRaSessionError`,
+    defaultMessage: 'Unable to initiate RA session fulfillment.',
+  },
 });

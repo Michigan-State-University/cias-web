@@ -46,6 +46,7 @@ import {
   VERIFY_PID_REQUEST,
   VERIFY_PID_SUCCESS,
   VERIFY_PID_ERROR,
+  SET_RA_FULFILLMENT,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
@@ -180,3 +181,6 @@ export const verifyPidSuccess = (user) =>
   actionBuilder(VERIFY_PID_SUCCESS, { user });
 export const verifyPidError = (error) =>
   actionBuilder(VERIFY_PID_ERROR, { error });
+
+export const setRaFulfillment = (isRaFulfillment) =>
+  actionBuilder(SET_RA_FULFILLMENT, { isRaFulfillment });

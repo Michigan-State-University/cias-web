@@ -350,4 +350,16 @@ export default defineMessages({
     id: `${scope}.noHealthClinicAssigned`,
     defaultMessage: 'No clinic',
   },
+  raSessionColumnHeader: {
+    id: `${scope}.raSessionColumnHeader`,
+    defaultMessage: 'RA Session',
+  },
+  fillRaSessionButton: {
+    id: `${scope}.fillRaSessionButton`,
+    defaultMessage: 'Fill RA Session',
+  },
+  raSessionCompleted: {
+    id: `${scope}.raSessionCompleted`,
+    defaultMessage: 'Completed',
+  },
 });
