@@ -27,7 +27,11 @@ export const SocketProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (!cableUrl) {
-      cable?.close('logged_out');
+      try {
+        cable?.close('logged_out');
+      } catch {
+        console.warn('WebSocket cable close failed');
+      }
       setCable(null);
       return;
     }
@@ -40,7 +44,7 @@ export const SocketProvider = ({ children }: Props) => {
     const currentUid = getUidFromCableUrl(cable.transport.url);
     const newUid = getUidFromCableUrl(cableUrl);
 
-    if (newUid !== currentUid) {
+    if (!currentUid || newUid !== currentUid) {
       cable.transport.setURL(cableUrl);
     }
   }, [cableUrl]);
