@@ -59,7 +59,7 @@ export const useSocket = <
         newChannel.on(LISTEN_SOCKET_MESSAGE_EVENT_NAME, messageListener);
         setChannel(newChannel);
       } catch {
-        console.warn('WebSocket channel subscription failed');
+        // Intentionally swallowed — WebSocket disconnect errors are non-actionable
       }
     }
   }, [channel, cable, memoizedParams, suspend]);

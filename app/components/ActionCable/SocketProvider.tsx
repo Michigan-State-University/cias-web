@@ -30,7 +30,7 @@ export const SocketProvider = ({ children }: Props) => {
       try {
         cable?.close('logged_out');
       } catch {
-        console.warn('WebSocket cable close failed');
+        // Intentionally swallowed — WebSocket close can throw in broken in-app browsers
       }
       setCable(null);
       return;
