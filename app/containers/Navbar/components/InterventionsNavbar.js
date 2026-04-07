@@ -116,7 +116,6 @@ const InterventionNavbar = ({
 }) => {
   const { interventionId, sessionId } = params;
 
-  const isClassicSession = type === SessionTypes.CLASSIC_SESSION;
   const isClassicLikeSession =
     type === SessionTypes.CLASSIC_SESSION || type === SessionTypes.RA_SESSION;
 
@@ -277,7 +276,7 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {isClassicSession && (
+        {isClassicLikeSession && (
           <TabItem
             linkMatch={formatMessage(messages.smsMessaging)}
             renderAsLink={
