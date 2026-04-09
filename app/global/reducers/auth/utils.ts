@@ -9,6 +9,8 @@ import {
   InterventionNotAvailableReason,
 } from 'components/InterventionNotAvailableInfo';
 
+import { InterventionType } from 'models/Intervention';
+
 import { RedirectDataDTO } from './types';
 
 export const getPredefinedParticipantRedirectPath = (
@@ -25,9 +27,20 @@ export const getPredefinedParticipantRedirectPath = (
     multipleFillSessionAvailable,
     lang,
     raSessionPending,
+    interventionType,
   } = objectToCamelCase(redirectDataDTO);
 
   if (raSessionPending) {
+    if (interventionType === InterventionType.FLEXIBLE) {
+      // FlexibleOrder: redirect to session grid with raSessionPending flag
+      const redirectPath = parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+        userInterventionId,
+      });
+      return {
+        path: `${redirectPath}?raSessionPending=true`,
+      };
+    }
+
     return {
       path: getInterventionNotAvailablePagePathFromReason(
         InterventionNotAvailableReason.RA_SESSION_PENDING,
@@ -83,7 +96,26 @@ export const getShortLinkRedirectPath = (
     healthClinicId,
     multipleFillSessionAvailable,
     lang,
+    raSessionPending,
+    interventionType,
   } = objectToCamelCase(redirectDataDTO);
+
+  if (raSessionPending) {
+    if (interventionType === InterventionType.FLEXIBLE) {
+      const redirectPath = parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+        userInterventionId,
+      });
+      return {
+        path: `${redirectPath}?raSessionPending=true`,
+      };
+    }
+
+    return {
+      path: getInterventionNotAvailablePagePathFromReason(
+        InterventionNotAvailableReason.RA_SESSION_PENDING,
+      ),
+    };
+  }
 
   const queryParams = new URLSearchParams({ lang });
   if (healthClinicId) {

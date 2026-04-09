@@ -11,6 +11,7 @@ export type RedirectData = {
   multipleFillSessionAvailable: boolean;
   lang: string;
   raSessionPending: boolean;
+  interventionType: string;
 };
 
 export type RedirectDataDTO = CamelToSnake<RedirectData>;
