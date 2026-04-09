@@ -362,4 +362,16 @@ export default defineMessages({
     id: `${scope}.raSessionCompleted`,
     defaultMessage: 'Completed',
   },
+  raSessionLabel: {
+    id: `${scope}.raSessionLabel`,
+    defaultMessage: 'Research Assistant Session',
+  },
+  raSessionCompletedInfo: {
+    id: `${scope}.raSessionCompletedInfo`,
+    defaultMessage: 'Completed on {date} by {email}',
+  },
+  raSessionPending: {
+    id: `${scope}.raSessionPending`,
+    defaultMessage: 'Not completed yet',
+  },
 });
