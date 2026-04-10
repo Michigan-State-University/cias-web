@@ -21,8 +21,8 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Maximum time one test can run for */
-  timeout: 30000,
+  /* Maximum time one test can run for — CI uses a remote staging API so needs more time */
+  timeout: process.env.CI ? 90000 : 30000,
   /* Continue running tests even if some fail */
   maxFailures: process.env.CI ? undefined : 0,
   /* Configure workers.
@@ -44,9 +44,9 @@ export default defineConfig({
     /* Video recording */
     video: 'retain-on-failure',
 
-    // Add extra time for API responses
-    actionTimeout: 15000,
-    navigationTimeout: 30000,
+    // Add extra time for API responses — CI uses a remote staging API
+    actionTimeout: process.env.CI ? 30000 : 15000,
+    navigationTimeout: process.env.CI ? 60000 : 30000,
   },
 
   /* Configure projects for major browsers */
