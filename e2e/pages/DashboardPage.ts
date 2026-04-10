@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 
 export class DashboardPage {
   readonly page: Page;
@@ -15,19 +15,40 @@ export class DashboardPage {
 
   async goto() {
     await this.page.goto('/');
+    await this.page.waitForLoadState('domcontentloaded');
 
-    if (this.page.url().includes('/login')) {
-      throw new Error('Authentication failed - redirected to login page. Run auth setup again.');
+    // The app may need a moment to check auth and redirect; wait for either
+    // the dashboard to appear or a login redirect to settle.
+    const dashboard = this.page.locator('[data-cy="create-intervention-button"]');
+    const loginForm = this.page.locator('[data-cy="login-email-input"]');
+
+    const which = await Promise.race([
+      dashboard.waitFor({ state: 'visible', timeout: 60000 }).then(() => 'dashboard' as const),
+      loginForm.waitFor({ state: 'visible', timeout: 60000 }).then(() => 'login' as const),
+    ]);
+
+    if (which === 'login') {
+      throw new Error(
+        'Authentication failed - redirected to login page. Auth tokens may have expired. Run auth setup again.',
+      );
     }
-
-    await this.page.waitForSelector('[data-cy="create-intervention-button"]', {
-      timeout: 30000,
-    });
   }
 
   async createIntervention() {
+    // Wait for the button to be ready, then set up response listener before clicking
+    await this.createInterventionButton.waitFor({ state: 'visible', timeout: 15000 });
+
+    const responsePromise = this.page.waitForResponse(
+      (response) =>
+        response.url().includes('/interventions') &&
+        response.request().method() === 'POST' &&
+        response.status() === 201,
+      { timeout: 60000 },
+    );
+
     await this.createInterventionButton.click();
-    await this.page.waitForURL(/\/interventions\/.*/, { timeout: 30000 });
+    await responsePromise;
+    await this.page.waitForURL(/\/interventions\/.*/, { timeout: 60000 });
   }
 
   async searchInterventions(searchText: string) {
