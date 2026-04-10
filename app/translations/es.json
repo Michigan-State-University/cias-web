@@ -574,7 +574,7 @@
   "app.containers.Answer.layouts.sex": "Sexo",
   "app.containers.Answer.layouts.sexPlaceholder": "Elige tu sexo",
   "app.containers.Answer.layouts.sliderLabel": "Seleccione un valor en un control deslizante:",
-  "app.containers.Answer.layouts.textBoxQuestionRemainingCharacters": "Personajes restantes: {remaining}",
+  "app.containers.Answer.layouts.textBoxQuestionRemainingCharacters": "Caracteres restantes: {remaining}",
   "app.containers.Answer.layouts.textPlaceholder": "Ingrese su respuesta aquí",
   "app.containers.Answer.layouts.wcagExternalLinkWarning": "Al hacer clic en este enlace accederá a un sitio web diferente. Puede hacer clic en la pestaña CIAS en su navegador para regresar a CIAS en cualquier momento.",
   "app.containers.Answer.layouts.zipCode": "Código postal",
