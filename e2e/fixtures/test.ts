@@ -6,23 +6,23 @@ import fs from 'fs';
 export const test = base.extend<{}, { workerStorageState: string }>({
   // Worker-scoped fixture that determines which auth file to use
   workerStorageState: [
-    async ({ browser }, use, workerInfo) => {
+    async ({}, use, workerInfo) => {
       // Get total number of auth files available
       const WORKER_COUNT = parseInt(process.env.E2E_WORKER_COUNT || '5', 10);
-      
+
       // Wrap worker index to available auth files using modulo
       // This handles cases where Playwright assigns worker indices beyond the worker count
       // (e.g., when running multiple browser projects)
       const authFileIndex = workerInfo.workerIndex % WORKER_COUNT;
       const authFile = path.join(__dirname, `../.auth/admin-worker-${authFileIndex}.json`);
-      
+
       // Verify the auth file exists
       if (!fs.existsSync(authFile)) {
         throw new Error(
           `Auth file ${authFile} does not exist. Run 'npm run e2e:setup' to create worker-specific auth files.`
         );
       }
-      
+
       await use(authFile);
     },
     { scope: 'worker' },
@@ -33,69 +33,38 @@ export const test = base.extend<{}, { workerStorageState: string }>({
     const context = await browser.newContext({
       storageState: workerStorageState,
     });
-    
+
     await use(context);
     await context.close();
   },
 
-  // Page fixture with token rotation handling
-  page: async ({ context, workerStorageState }, use, testInfo) => {
+  // Page fixture with token persistence at teardown
+  //
+  // Token rotation during the test is handled by the app's own axios interceptors
+  // (app/utils/axios.js), which update localStorage on every API response.
+  // We only need to persist the final state to the auth file so the next test
+  // starts with valid tokens.
+  page: async ({ context, workerStorageState }, use) => {
     const page = await context.newPage();
-    
-    // Track if we're updating tokens to prevent race conditions
-    let isUpdatingTokens = false;
-    
-    // Intercept responses to update auth tokens when they change
-    page.on('response', async (response) => {
-      const headers = response.headers();
-      const accessToken = headers['access-token'];
-      const client = headers['client'];
-      const uid = headers['uid'];
-      
-      // If new tokens are provided, update both localStorage and the storage state file
-      if (accessToken && client && uid && !isUpdatingTokens) {
-        isUpdatingTokens = true;
-        try {
-          // First, update the browser's localStorage immediately
-          await page.evaluate(({ accessToken, client, uid }) => {
-            const currentHeaders = JSON.parse(localStorage.getItem('headers') || '{}');
-            const updatedHeaders = {
-              ...currentHeaders,
-              'Access-Token': accessToken,
-              'Client': client,
-              'Uid': uid,
-            };
-            localStorage.setItem('headers', JSON.stringify(updatedHeaders));
-          }, { accessToken, client, uid });
-          
-          // Then update the storage state file for persistence
-          const storageState = await context.storageState();
-          const origin = storageState.origins.find(o => o.origin.includes(process.env.E2E_BASE_URL || 'localhost:4200'));
-          if (origin) {
-            const headersItem = origin.localStorage.find(item => item.name === 'headers');
-            if (headersItem) {
-              const currentHeaders = JSON.parse(headersItem.value);
-              headersItem.value = JSON.stringify({
-                ...currentHeaders,
-                'Access-Token': accessToken,
-                'Client': client,
-                'Uid': uid,
-              });
-              
-              // Write the updated state back to the worker's auth file
-              fs.writeFileSync(workerStorageState, JSON.stringify(storageState, null, 2));
-            }
-          }
-        } catch (error) {
-          // Silently fail - token update is best-effort
-         console.warn(`Failed to update tokens for worker ${testInfo.workerIndex}:`, error instanceof Error ? error.message : String(error));
-        } finally {
-          isUpdatingTokens = false;
-        }
-      }
-    });
-    
+
     await use(page);
+
+    // After the test completes, persist the browser's current storage state
+    // to the auth file so subsequent tests start with the latest tokens.
+    // Only persist if the page is still on a valid (non-login) URL to avoid
+    // saving a logged-out state after auth failures.
+    try {
+      const currentUrl = page.url();
+      const isOnLoginPage = currentUrl.includes('/login');
+
+      if (!isOnLoginPage) {
+        const storageState = await context.storageState();
+        fs.writeFileSync(workerStorageState, JSON.stringify(storageState, null, 2));
+      }
+    } catch {
+      // Best-effort — page may already be closed on timeout
+    }
+
     await page.close();
   },
 });

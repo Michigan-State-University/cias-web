@@ -21,6 +21,7 @@ cypress.env.json
 .github/instructions/
 .github/plan/
 .github/prompts/
+.claude/
 
 # Playwright
 /test-results/
