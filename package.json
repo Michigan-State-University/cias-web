@@ -154,7 +154,7 @@
     "react-helmet": "6.1.0",
     "react-icons": "^5.5.0",
     "react-idle-timer": "4.6.4",
-    "react-inlinesvg": "2.2.2",
+    "react-inlinesvg": "4.2.0",
     "react-intl": "^6.8.5",
     "react-lottie": "1.2.3",
     "react-papaparse": "3.8.0",
