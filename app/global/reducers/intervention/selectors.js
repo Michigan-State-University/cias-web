@@ -186,3 +186,11 @@ export const makeSelectRaSessionQuestionGroups = () =>
     selectIntervention,
     (substate) => substate?.raSessionQuestionGroups ?? [],
   );
+
+export const makeSelectBulkCreateStructuredErrors = () =>
+  createSelector(
+    selectIntervention,
+    (substate) =>
+      substate?.errors?.bulkCreatePredefinedParticipants?.response?.data
+        ?.details?.errors ?? null,
+  );

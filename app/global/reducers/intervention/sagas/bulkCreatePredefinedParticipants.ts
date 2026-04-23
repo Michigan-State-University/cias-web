@@ -4,7 +4,6 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
-import { jsonApiToArray } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
@@ -21,33 +20,51 @@ import {
 } from '../constants';
 import messages from '../messages';
 
-function* bulkCreatePredefinedParticipants({
+export function* bulkCreatePredefinedParticipants({
   payload: { interventionId, data, onSuccess },
 }: ReturnType<typeof bulkCreatePredefinedParticipantsRequest>) {
   const requestURL = `v1/interventions/${interventionId}/predefined_participants/bulk_create`;
 
+  // Strip variable_answers before snake-casing — lodash snakeCase() mangles dotted keys like "s1.mood" → "s_1_mood". Re-attached below.
+  const participantsWithoutAnswers = data.participants.map(
+    ({
+      variableAnswers,
+      ...rest
+    }: {
+      variableAnswers?: Record<string, string>;
+      [key: string]: unknown;
+    }) => rest,
+  );
+  const originalVariableAnswers = data.participants.map(
+    (p: { variableAnswers?: Record<string, string> }) =>
+      p.variableAnswers ?? {},
+  );
+
+  const snakeCasedBody = objectToSnakeCase({
+    predefinedUsers: {
+      ...data,
+      participants: participantsWithoutAnswers,
+    },
+  });
+  snakeCasedBody.predefined_users.participants.forEach(
+    (p: Record<string, unknown>, i: number) => {
+      // eslint-disable-next-line no-param-reassign
+      p.variable_answers = originalVariableAnswers[i];
+    },
+  );
+
   try {
-    const { data: responseData } = yield call(
-      axios.post,
-      requestURL,
-      objectToSnakeCase({ predefinedUsers: data }),
-    );
+    yield call(axios.post, requestURL, snakeCasedBody);
 
-    const predefinedParticipants = jsonApiToArray(
-      responseData,
-      'predefinedParticipant',
-    );
-
-    yield put(bulkCreatePredefinedParticipantsSuccess(predefinedParticipants));
+    yield put(bulkCreatePredefinedParticipantsSuccess());
     yield call(
       toast.success,
-      formatMessage(messages.bulkCreatePredefinedParticipantsSuccess),
+      formatMessage(messages.bulkCreatePredefinedParticipantsAccepted),
       {
         toastId: BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS,
       },
     );
 
-    // Refresh the predefined participants list
     yield put(fetchPredefinedParticipantsRequest(interventionId));
 
     if (onSuccess) {
@@ -55,16 +72,30 @@ function* bulkCreatePredefinedParticipants({
     }
   } catch (error) {
     yield put(bulkCreatePredefinedParticipantsError(error));
-    yield call(
-      toast.error,
-      formatApiErrorMessage(
-        error,
-        messages.bulkCreatePredefinedParticipantsError,
-      ),
-      {
-        toastId: BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR,
-      },
-    );
+
+    const structuredErrors = (error as any)?.response?.data?.details?.errors;
+    if (Array.isArray(structuredErrors) && structuredErrors.length > 0) {
+      yield call(
+        toast.error,
+        formatMessage(messages.bulkCreatePredefinedParticipantsErrorList, {
+          count: structuredErrors.length,
+        }),
+        {
+          toastId: BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR,
+        },
+      );
+    } else {
+      yield call(
+        toast.error,
+        formatApiErrorMessage(
+          error,
+          messages.bulkCreatePredefinedParticipantsError,
+        ),
+        {
+          toastId: BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR,
+        },
+      );
+    }
   }
 }
 

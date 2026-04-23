@@ -692,5 +692,6 @@ export const prepareBulkCreatePredefinedParticipantsPayload = (
     healthClinicId: participant.healthClinicOption?.value || undefined,
     healthClinicName: participant.healthClinicName || undefined,
     healthSystemName: participant.healthSystemName || undefined,
+    variableAnswers: participant.raAnswers ?? {},
   })),
 });

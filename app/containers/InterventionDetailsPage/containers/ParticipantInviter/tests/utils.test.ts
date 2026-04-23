@@ -7,6 +7,7 @@ import {
   SUPPORTED_RA_QUESTION_TYPES,
   parsePredefinedParticipantsCsv,
   generatePredefinedParticipantsExampleCsv,
+  prepareBulkCreatePredefinedParticipantsPayload,
 } from '../utils';
 import { RaAnswerColumnMap } from '../types';
 
@@ -396,5 +397,80 @@ describe('generatePredefinedParticipantsExampleCsv — RA column extensions', ()
 
     expect(rows.length).toBe(1);
     expect(rows[0]['s1.a_var']).toBe('42');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 4. prepareBulkCreatePredefinedParticipantsPayload
+// ---------------------------------------------------------------------------
+
+describe('prepareBulkCreatePredefinedParticipantsPayload', () => {
+  const interventionId = 'int-1';
+
+  const makeParticipant = (overrides = {}) => ({
+    firstName: 'Alice',
+    lastName: 'Smith',
+    email: 'alice@example.com',
+    externalId: 'EXT001',
+    iso: '',
+    number: '',
+    emailNotification: true,
+    smsNotification: false,
+    healthClinicOption: undefined,
+    healthClinicName: '',
+    healthSystemName: '',
+    raAnswers: undefined,
+    raAnswerTypeMismatches: undefined,
+    ...overrides,
+  });
+
+  it('emits variableAnswers as empty object when raAnswers is undefined', () => {
+    const values = { participants: [makeParticipant()] };
+    const payload = prepareBulkCreatePredefinedParticipantsPayload(
+      values as any,
+      interventionId,
+    );
+
+    expect(payload.participants[0].variableAnswers).toEqual({});
+  });
+
+  it('forwards raAnswers as variableAnswers when present', () => {
+    const raAnswers = { 's1.var1': '1', 's1.var2': '2026-04-22' };
+    const values = { participants: [makeParticipant({ raAnswers })] };
+    const payload = prepareBulkCreatePredefinedParticipantsPayload(
+      values as any,
+      interventionId,
+    );
+
+    expect(payload.participants[0].variableAnswers).toEqual(raAnswers);
+  });
+
+  it('includes interventionId in the payload root', () => {
+    const values = { participants: [makeParticipant()] };
+    const payload = prepareBulkCreatePredefinedParticipantsPayload(
+      values as any,
+      interventionId,
+    );
+
+    expect(payload.interventionId).toBe(interventionId);
+  });
+
+  it('emits variableAnswers for each participant independently', () => {
+    const raAnswers1 = { 's1.var1': '10' };
+    const raAnswers2 = { 's1.var1': '20' };
+    const values = {
+      participants: [
+        makeParticipant({ raAnswers: raAnswers1 }),
+        makeParticipant({ email: 'bob@example.com', raAnswers: raAnswers2 }),
+      ],
+    };
+
+    const payload = prepareBulkCreatePredefinedParticipantsPayload(
+      values as any,
+      interventionId,
+    );
+
+    expect(payload.participants[0].variableAnswers).toEqual(raAnswers1);
+    expect(payload.participants[1].variableAnswers).toEqual(raAnswers2);
   });
 });

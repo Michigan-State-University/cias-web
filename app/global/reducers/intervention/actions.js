@@ -642,10 +642,8 @@ export const bulkCreatePredefinedParticipantsRequest = (
     data,
     onSuccess,
   });
-export const bulkCreatePredefinedParticipantsSuccess = (participants) =>
-  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS, {
-    participants,
-  });
+export const bulkCreatePredefinedParticipantsSuccess = () =>
+  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS, {});
 export const bulkCreatePredefinedParticipantsError = (error) =>
   actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR, { error });
 
