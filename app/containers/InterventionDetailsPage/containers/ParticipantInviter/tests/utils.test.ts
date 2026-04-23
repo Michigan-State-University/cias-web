@@ -38,7 +38,7 @@ const makeQuestionGroup = (questions: any[] = []) => ({
 const makeSingleQuestion = (overrides = {}) => ({
   id: 'q1',
   type: QuestionTypes.SINGLE,
-  body: { variable: 'var1' },
+  body: { variable: { name: 'var1' } },
   title: 'Single Question',
   ...overrides,
 });
@@ -46,7 +46,7 @@ const makeSingleQuestion = (overrides = {}) => ({
 const makeNumberQuestion = (overrides = {}) => ({
   id: 'q2',
   type: QuestionTypes.NUMBER,
-  body: { variable: 'var2' },
+  body: { variable: { name: 'var2' } },
   title: 'Number Question',
   ...overrides,
 });
@@ -54,7 +54,7 @@ const makeNumberQuestion = (overrides = {}) => ({
 const makeDateQuestion = (overrides = {}) => ({
   id: 'q3',
   type: QuestionTypes.DATE,
-  body: { variable: 'var3' },
+  body: { variable: { name: 'var3' } },
   title: 'Date Question',
   ...overrides,
 });
@@ -62,7 +62,7 @@ const makeDateQuestion = (overrides = {}) => ({
 const makeUnsupportedQuestion = (overrides = {}) => ({
   id: 'q-unsupported',
   type: QuestionTypes.FREE_RESPONSE,
-  body: { variable: 'varUnsupported' },
+  body: { variable: { name: 'varUnsupported' } },
   title: 'Text Question',
   ...overrides,
 });
@@ -150,7 +150,7 @@ describe('prepareRaAnswerColumnMap', () => {
         {
           id: 'q-notitle',
           type: QuestionTypes.NUMBER,
-          body: { variable: 'varX' },
+          body: { variable: { name: 'varX' } },
         },
       ]),
     ];
@@ -165,6 +165,45 @@ describe('prepareRaAnswerColumnMap', () => {
       QuestionTypes.NUMBER,
       QuestionTypes.DATE,
     ]);
+  });
+
+  it('reads the variable name from body.variable.name, not body.variable (regression guard: codebase-wide convention per QuestionBody.ts:26-40)', () => {
+    const raSession = makeRaSession();
+    const groupsWithWrongShape = [
+      makeQuestionGroup([
+        {
+          id: 'q-wrong',
+          type: QuestionTypes.SINGLE,
+          body: { variable: 'strung-as-string' as any },
+          title: 'Wrong shape',
+        },
+      ]),
+    ];
+
+    expect(
+      prepareRaAnswerColumnMap(raSession as any, groupsWithWrongShape),
+    ).toEqual({});
+
+    const groupsWithRightShape = [
+      makeQuestionGroup([
+        {
+          id: 'q-right',
+          type: QuestionTypes.SINGLE,
+          body: { variable: { name: 'mood' } },
+          title: 'Right shape',
+        },
+      ]),
+    ];
+
+    expect(
+      prepareRaAnswerColumnMap(raSession as any, groupsWithRightShape),
+    ).toEqual({
+      's1.mood': {
+        questionId: 'q-right',
+        questionType: QuestionTypes.SINGLE,
+        questionTitle: 'Right shape',
+      },
+    });
   });
 });
 

@@ -443,7 +443,7 @@ export const prepareRaAnswerColumnMap = (
   questionGroups.forEach((group) => {
     (group.questions ?? []).forEach((q) => {
       if (!SUPPORTED_RA_QUESTION_TYPES.includes(q.type)) return;
-      const questionVariable = q.body?.variable;
+      const questionVariable = q.body?.variable?.name;
       if (!questionVariable) return;
       const columnKey = `${raSession.variable}.${questionVariable}`;
       map[columnKey] = {

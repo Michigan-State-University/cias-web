@@ -293,7 +293,8 @@ export default defineMessages({
   },
   uploadPredefinedParticipantsInfo: {
     id: `${scope}.uploadPredefinedParticipantsInfo`,
-    defaultMessage: `Upload a CSV file containing predefined participant information. Download the example file to see the required format.`,
+    defaultMessage:
+      'Upload a CSV file containing predefined participant information. Download the example file to see the required format. The import runs in the background — we will send you an e-mail when this process has been finished.',
   },
   examplePredefinedParticipantsCsvFilename: {
     id: `${scope}.examplePredefinedParticipantsCsvFilename`,
@@ -383,5 +384,19 @@ export default defineMessages({
     id: `${scope}.csvRaAnswerTypeMismatch`,
     defaultMessage:
       '{count, plural, one {# answer value has} other {# answer values have}} the wrong type for its question.',
+  },
+  raAnswersInfoBanner: {
+    id: `${scope}.raAnswersInfoBanner`,
+    defaultMessage:
+      'This CSV includes RA-session answer columns. The columns below are read-only - to change an answer, edit the CSV and re-upload.',
+  },
+  bulkCreateErrorListHeader: {
+    id: `${scope}.bulkCreateErrorListHeader`,
+    defaultMessage:
+      '{count, plural, one {# issue to fix before importing:} other {# issues to fix before importing:}}',
+  },
+  rowNumberColumnHeader: {
+    id: `${scope}.rowNumberColumnHeader`,
+    defaultMessage: '#',
   },
 });

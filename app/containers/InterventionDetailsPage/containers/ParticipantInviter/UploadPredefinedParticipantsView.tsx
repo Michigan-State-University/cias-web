@@ -7,7 +7,9 @@ import {
   makeSelectInterventionLoader,
   makeSelectRaSession,
   makeSelectRaSessionQuestionGroups,
+  makeSelectBulkCreateStructuredErrors,
   bulkCreatePredefinedParticipantsRequest,
+  bulkCreatePredefinedParticipantsError,
   fetchRaSessionQuestionGroupsRequest,
 } from 'global/reducers/intervention';
 
@@ -18,6 +20,7 @@ import CsvFileExport from 'components/CsvFileExport';
 import CsvFileReader from 'components/CsvFileReader';
 import Row from 'components/Row';
 
+import { BulkCreateErrorList } from './BulkCreateErrorList';
 import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
   NormalizedHealthClinicsInfos,
@@ -61,6 +64,8 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
   const submitting = useSelector(
     makeSelectInterventionLoader('bulkCreatePredefinedParticipants'),
   );
+
+  const structuredErrors = useSelector(makeSelectBulkCreateStructuredErrors());
 
   const raSession = useSelector(makeSelectRaSession());
   const raSessionQuestionGroups = useSelector(
@@ -113,9 +118,11 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
     ParsedPredefinedParticipantCsvRow[]
   >([]);
 
-  const [, setHasRaAnswers] = useState(false);
+  const [hasRaAnswers, setHasRaAnswers] = useState(false);
 
   const handleUpload = (data: UploadedPredefinedParticipantsCsvData) => {
+    dispatch(bulkCreatePredefinedParticipantsError(null));
+
     try {
       const {
         participants: parsedParticipants,
@@ -185,7 +192,7 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
       <Alert
         content={formatMessage(messages.uploadPredefinedParticipantsInfo)}
         type={AlertType.INFO}
-        contentProps={{ maxWidth: 510 }}
+        wrap={false}
       />
 
       <Row align="center" gap={24}>
@@ -208,11 +215,24 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
 
       {participants.length > 0 && (
         <Column flex={1} gap={16}>
+          {hasRaAnswers && (
+            <Alert
+              type={AlertType.INFO}
+              content={formatMessage(messages.raAnswersInfoBanner)}
+              wrap={false}
+            />
+          )}
+
+          {structuredErrors && structuredErrors.length > 0 && (
+            <BulkCreateErrorList errors={structuredErrors} />
+          )}
+
           <InvitePredefinedParticipantsForm
             initialFormValues={{ participants }}
             onSubmit={handleSubmit}
             submitting={submitting}
             onParticipantsChange={setParticipants}
+            raAnswerColumns={raAnswerColumns}
           />
         </Column>
       )}
