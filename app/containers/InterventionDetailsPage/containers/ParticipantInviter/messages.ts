@@ -374,4 +374,14 @@ export default defineMessages({
     id: `${scope}.raSessionPending`,
     defaultMessage: 'Not completed yet',
   },
+  csvUnknownRaAnswerColumn: {
+    id: `${scope}.csvUnknownRaAnswerColumn`,
+    defaultMessage:
+      "{count, plural, one {# CSV column} other {# CSV columns}} don't match any RA-session variable and were ignored.",
+  },
+  csvRaAnswerTypeMismatch: {
+    id: `${scope}.csvRaAnswerTypeMismatch`,
+    defaultMessage:
+      '{count, plural, one {# answer value has} other {# answer values have}} the wrong type for its question.',
+  },
 });

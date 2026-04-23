@@ -135,6 +135,9 @@ import {
   FULFILL_RA_SESSION_REQUEST,
   FULFILL_RA_SESSION_SUCCESS,
   FULFILL_RA_SESSION_ERROR,
+  FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST,
+  FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS,
+  FETCH_RA_SESSION_QUESTION_GROUPS_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -666,3 +669,10 @@ export const fulfillRaSessionSuccess = () =>
   actionBuilder(FULFILL_RA_SESSION_SUCCESS, {});
 export const fulfillRaSessionError = (error) =>
   actionBuilder(FULFILL_RA_SESSION_ERROR, { error });
+
+export const fetchRaSessionQuestionGroupsRequest = (sessionId) =>
+  actionBuilder(FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST, { sessionId });
+export const fetchRaSessionQuestionGroupsSuccess = (questionGroups) =>
+  actionBuilder(FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS, { questionGroups });
+export const fetchRaSessionQuestionGroupsError = (error) =>
+  actionBuilder(FETCH_RA_SESSION_QUESTION_GROUPS_ERROR, { error });

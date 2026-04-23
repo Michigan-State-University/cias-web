@@ -939,6 +939,8 @@
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.copyPredefinedParticipanyUrlButtonTitle": "Copy predefined participant invitation URL",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.createPredefinedParticipants": "Create {count} {count, plural, one {participant} other {participants}}",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.creatingPredefinedParticipantsNotPossibleMessage": "Predefined participants can be created in draft and published interventions only",
+  "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.csvRaAnswerTypeMismatch": "{count, plural, one {# answer value has} other {# answer values have}} the wrong type for its question.",
+  "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.csvUnknownRaAnswerColumn": "{count, plural, one {# CSV column} other {# CSV columns}} don't match any RA-session variable and were ignored.",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.csvUploadLabel": "Upload e-mails",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.deactivatePredefinedParticipantButtonTitle": "Deactivate participant",
   "app.containers.InterventionDetailsPage.containers.InviteParticipantsButton.editDetailsButtonTitle": "Edit details",

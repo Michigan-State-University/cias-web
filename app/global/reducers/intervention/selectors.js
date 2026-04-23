@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { canEdit } from 'models/Status/statusPermissions';
 
+import { SessionTypes } from 'models/Session';
 import { makeSelectIsAdmin, makeSelectUserId } from 'global/reducers/auth';
 
 import { initialState } from './reducer';
@@ -172,4 +173,16 @@ export const makeSelectInterventionLanguageCode = () =>
   createSelector(
     selectIntervention,
     ({ intervention }) => intervention?.languageCode,
+  );
+
+export const makeSelectRaSession = () =>
+  createSelector(makeSelectIntervention(), (intervention) => {
+    const sessions = intervention?.sessions ?? [];
+    return sessions.find((s) => s.type === SessionTypes.RA_SESSION) ?? null;
+  });
+
+export const makeSelectRaSessionQuestionGroups = () =>
+  createSelector(
+    selectIntervention,
+    (substate) => substate?.raSessionQuestionGroups ?? [],
   );
