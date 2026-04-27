@@ -7,6 +7,7 @@ import {
   fulfillRaSessionRequest,
   makeSelectInterventionLoader,
   makeSelectPredefinedParticipantById,
+  makeSelectRaSession,
   updatePredefinedParticipantRequest,
   deactivatePredefinedParticipantRequest,
   activatePredefinedParticipantRequest,
@@ -67,6 +68,9 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
   const participant: Nullable<PredefinedParticipant> = useSelector(
     makeSelectPredefinedParticipantById(participantId),
   );
+
+  const raSession = useSelector(makeSelectRaSession());
+  const hasRaSession = Boolean(raSession);
 
   const submitting = useSelector(
     makeSelectInterventionLoader('updatePredefinedParticipant'),
@@ -156,7 +160,7 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
                 <CopyPredefinedParticipantUrlButton url={url} />
               </Row>
             </Column>
-            {participant.raSessionCompleted !== undefined && (
+            {hasRaSession && (
               <Column gap={8} flex={1} align="start">
                 <Text fontWeight="bold" lineHeight={1.2}>
                   {formatMessage(messages.raSessionLabel)}

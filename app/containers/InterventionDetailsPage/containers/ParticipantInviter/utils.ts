@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
 import { Session } from 'models/Session';
+import { SUPPORTED_RA_QUESTION_TYPE_IDS } from 'models/Session/QuestionTypes';
 import { QuestionTypes } from 'models/Question';
 
 import { RoutePath, WEB_HOST } from 'global/constants';
@@ -428,11 +429,8 @@ export type ParsePredefinedParticipantsCsvResult = {
   raAnswerTypeMismatchCount: number;
 };
 
-export const SUPPORTED_RA_QUESTION_TYPES: QuestionTypes[] = [
-  QuestionTypes.SINGLE,
-  QuestionTypes.NUMBER,
-  QuestionTypes.DATE,
-];
+export const SUPPORTED_RA_QUESTION_TYPES: QuestionTypes[] =
+  SUPPORTED_RA_QUESTION_TYPE_IDS as QuestionTypes[];
 
 export const prepareRaAnswerColumnMap = (
   raSession: Session | null,
@@ -595,7 +593,7 @@ const exampleValueForQuestionType = (type: QuestionTypes): string => {
     case QuestionTypes.DATE:
       return '2026-04-22';
     case QuestionTypes.SINGLE:
-      return '0';
+      return '1';
     default:
       return '';
   }

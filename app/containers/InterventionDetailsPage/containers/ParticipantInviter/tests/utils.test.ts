@@ -387,7 +387,7 @@ describe('generatePredefinedParticipantsExampleCsv — RA column extensions', ()
 
     expect(rows[0]['s1.a_var']).toBe('42'); // NUMBER
     expect(rows[0]['s1.m_var']).toBe('2026-04-22'); // DATE
-    expect(rows[0]['s1.z_var']).toBe('0'); // SINGLE
+    expect(rows[0]['s1.z_var']).toBe('1'); // SINGLE
   });
 
   it('uses empty string for unsupported type in raAnswerColumns (default branch)', () => {

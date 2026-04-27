@@ -210,7 +210,7 @@ export default defineMessages({
   bulkCreatePredefinedParticipantsErrorList: {
     id: `${scope}.bulkCreatePredefinedParticipantsErrorList`,
     defaultMessage:
-      '{count, plural, one {The server rejected # row.} other {The server rejected # rows.}} See details above.',
+      '{count, plural, one {# issue to fix before importing.} other {# issues to fix before importing.}} See details above.',
   },
   raSessionAlreadyCompleted: {
     id: `${scope}.raSessionAlreadyCompleted`,

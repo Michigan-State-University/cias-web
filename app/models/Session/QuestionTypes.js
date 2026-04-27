@@ -191,3 +191,13 @@ export const AddableToClassicSessionQuestionTypes = QuestionTypes.filter(
 export const AddableToSmsSessionQuestionTypes = QuestionTypes.filter(({ id }) =>
   addableToSmsSessionQuestionTypes.includes(id),
 );
+
+export const SUPPORTED_RA_QUESTION_TYPE_IDS = [
+  singleQuestion.id,
+  numberQuestion.id,
+  dateQuestion.id,
+];
+
+export const AddableToRaSessionQuestionTypes = QuestionTypes.filter(({ id }) =>
+  SUPPORTED_RA_QUESTION_TYPE_IDS.includes(id),
+);

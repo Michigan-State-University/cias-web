@@ -294,7 +294,7 @@ export default defineMessages({
   uploadPredefinedParticipantsInfo: {
     id: `${scope}.uploadPredefinedParticipantsInfo`,
     defaultMessage:
-      'Upload a CSV file containing predefined participant information. Download the example file to see the required format. The import runs in the background — we will send you an e-mail when this process has been finished.',
+      'Upload a CSV file containing predefined participant information. Download the example file to see the required format. The template includes columns for RA session questions that have variables assigned. The import runs in the background — CIAS will send you an e-mail when this process has been finished.',
   },
   examplePredefinedParticipantsCsvFilename: {
     id: `${scope}.examplePredefinedParticipantsCsvFilename`,
