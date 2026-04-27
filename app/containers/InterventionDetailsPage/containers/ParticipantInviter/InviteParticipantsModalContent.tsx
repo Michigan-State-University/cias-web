@@ -197,7 +197,9 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     (isReportingIntervention && organizationId !== organization?.id);
 
   const filteredSessionOptions = sessionOptions.filter(
-    (session) => session.type !== SessionTypes.SMS_SESSION,
+    (session) =>
+      session.type !== SessionTypes.SMS_SESSION &&
+      session.type !== SessionTypes.RA_SESSION,
   );
 
   const { view } = currentView;
@@ -235,7 +237,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
-              sessionOptions={sessionOptions}
+              sessionOptions={filteredSessionOptions}
               healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
@@ -247,7 +249,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
-              sessionOptions={sessionOptions}
+              sessionOptions={filteredSessionOptions}
               healthClinicOptions={healthClinicOptions}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onBack={handleBack}

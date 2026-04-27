@@ -4,9 +4,11 @@ import groupBy from 'lodash/groupBy';
 import { useIntl } from 'react-intl';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
+import { SessionTypes } from 'models/Session';
 
 import {
   fetchPredefinedParticipantsRequest,
+  makeSelectIntervention,
   makeSelectInterventionError,
   makeSelectInterventionLoader,
   makeSelectPredefinedParticipants,
@@ -58,12 +60,31 @@ export const PredefinedParticipantsTab: FC<Props> = ({
   const predefinedParticipantsError = useSelector(
     makeSelectInterventionError('fetchPredefinedParticipants'),
   );
+  const intervention = useSelector(makeSelectIntervention());
+  const hasRaSession = useMemo(
+    () =>
+      intervention?.sessions?.some(
+        (s: { type: string }) => s.type === SessionTypes.RA_SESSION,
+      ) ?? false,
+    [intervention?.sessions],
+  );
 
   useEffect(() => {
     if (!predefinedParticipants) {
       dispatch(fetchPredefinedParticipantsRequest(interventionId));
     }
   }, [interventionId, predefinedParticipants]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        dispatch(fetchPredefinedParticipantsRequest(interventionId));
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () =>
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [interventionId]);
 
   const participantsGroupedByHealthClinic = useMemo(() => {
     if (!isReportingIntervention) return [];
@@ -112,6 +133,7 @@ export const PredefinedParticipantsTab: FC<Props> = ({
           <PredefinedParticipantsTable
             predefinedParticipants={predefinedParticipants}
             onManage={onManage}
+            hasRaSession={hasRaSession}
           />
         )}
         {predefinedParticipants?.length &&
@@ -125,6 +147,7 @@ export const PredefinedParticipantsTab: FC<Props> = ({
                 <PredefinedParticipantsTable
                   predefinedParticipants={groupedParticipants}
                   onManage={onManage}
+                  hasRaSession={hasRaSession}
                 />
               </HealthClinicCollapse>
             ),

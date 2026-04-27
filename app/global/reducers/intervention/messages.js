@@ -198,12 +198,26 @@ export default defineMessages({
     id: `${scope}.sendPredefinedParticipantEmailInvitationError`,
     defaultMessage: 'Unable to send e-mail invitation.',
   },
-  bulkCreatePredefinedParticipantsSuccess: {
-    id: `${scope}.bulkCreatePredefinedParticipantsSuccess`,
-    defaultMessage: 'Predefined participants have been successfully created.',
+  bulkCreatePredefinedParticipantsAccepted: {
+    id: `${scope}.bulkCreatePredefinedParticipantsAccepted`,
+    defaultMessage:
+      "Import accepted — we'll email you when it's done. Refresh this page to see new participants.",
   },
   bulkCreatePredefinedParticipantsError: {
     id: `${scope}.bulkCreatePredefinedParticipantsError`,
-    defaultMessage: 'Unable to create predefined participants.',
+    defaultMessage: 'Unable to import predefined participants.',
+  },
+  bulkCreatePredefinedParticipantsErrorList: {
+    id: `${scope}.bulkCreatePredefinedParticipantsErrorList`,
+    defaultMessage:
+      '{count, plural, one {# issue to fix before importing.} other {# issues to fix before importing.}} See details above.',
+  },
+  raSessionAlreadyCompleted: {
+    id: `${scope}.raSessionAlreadyCompleted`,
+    defaultMessage: 'This RA session has already been completed.',
+  },
+  fulfillRaSessionError: {
+    id: `${scope}.fulfillRaSessionError`,
+    defaultMessage: 'Unable to initiate RA session fulfillment.',
   },
 });

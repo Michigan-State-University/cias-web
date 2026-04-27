@@ -1,11 +1,16 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import {
   makeSelectInterventionLoader,
+  makeSelectRaSession,
+  makeSelectRaSessionQuestionGroups,
+  makeSelectBulkCreateStructuredErrors,
   bulkCreatePredefinedParticipantsRequest,
+  bulkCreatePredefinedParticipantsError,
+  fetchRaSessionQuestionGroupsRequest,
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
@@ -15,6 +20,7 @@ import CsvFileExport from 'components/CsvFileExport';
 import CsvFileReader from 'components/CsvFileReader';
 import Row from 'components/Row';
 
+import { BulkCreateErrorList } from './BulkCreateErrorList';
 import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
   NormalizedHealthClinicsInfos,
@@ -32,6 +38,7 @@ import {
   generatePredefinedParticipantsExampleCsv,
   prepareBulkCreatePredefinedParticipantsPayload,
   mergePredefinedParticipants,
+  prepareRaAnswerColumnMap,
 } from './utils';
 
 export type Props = {
@@ -58,6 +65,24 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
     makeSelectInterventionLoader('bulkCreatePredefinedParticipants'),
   );
 
+  const structuredErrors = useSelector(makeSelectBulkCreateStructuredErrors());
+
+  const raSession = useSelector(makeSelectRaSession());
+  const raSessionQuestionGroups = useSelector(
+    makeSelectRaSessionQuestionGroups(),
+  );
+
+  useEffect(() => {
+    if (raSession?.id) {
+      dispatch(fetchRaSessionQuestionGroupsRequest(raSession.id));
+    }
+  }, [raSession?.id]);
+
+  const raAnswerColumns = useMemo(
+    () => prepareRaAnswerColumnMap(raSession, raSessionQuestionGroups),
+    [raSession, raSessionQuestionGroups],
+  );
+
   const handleSubmit: InvitePredefinedParticipantsFormProps['onSubmit'] = (
     values,
   ) => {
@@ -79,11 +104,13 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
         healthClinicOptions,
         normalizedHealthClinicsInfos,
         isReportingIntervention,
+        raAnswerColumns,
       ),
     [
       healthClinicOptions,
       normalizedHealthClinicsInfos,
       isReportingIntervention,
+      raAnswerColumns,
     ],
   );
 
@@ -91,16 +118,23 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
     ParsedPredefinedParticipantCsvRow[]
   >([]);
 
+  const [hasRaAnswers, setHasRaAnswers] = useState(false);
+
   const handleUpload = (data: UploadedPredefinedParticipantsCsvData) => {
+    dispatch(bulkCreatePredefinedParticipantsError(null));
+
     try {
       const {
         participants: parsedParticipants,
         invalidPhoneCount,
         invalidHealthClinicCount,
+        unknownRaAnswerColumnCount,
+        raAnswerTypeMismatchCount,
       } = parsePredefinedParticipantsCsv(
         data,
         normalizedHealthClinicsInfos,
         isReportingIntervention,
+        raAnswerColumns,
       );
 
       if (invalidPhoneCount > 0) {
@@ -118,6 +152,27 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
           }),
         );
       }
+
+      if (unknownRaAnswerColumnCount > 0) {
+        toast.warning(
+          formatMessage(messages.csvUnknownRaAnswerColumn, {
+            count: unknownRaAnswerColumnCount,
+          }),
+        );
+      }
+
+      if (raAnswerTypeMismatchCount > 0) {
+        toast.warning(
+          formatMessage(messages.csvRaAnswerTypeMismatch, {
+            count: raAnswerTypeMismatchCount,
+          }),
+        );
+      }
+
+      const detected = parsedParticipants.some(
+        (p) => p.raAnswers && Object.values(p.raAnswers).some((v) => v?.trim()),
+      );
+      setHasRaAnswers(detected);
 
       setParticipants((prevParticipants) =>
         mergePredefinedParticipants(prevParticipants, parsedParticipants),
@@ -137,7 +192,7 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
       <Alert
         content={formatMessage(messages.uploadPredefinedParticipantsInfo)}
         type={AlertType.INFO}
-        contentProps={{ maxWidth: 510 }}
+        wrap={false}
       />
 
       <Row align="center" gap={24}>
@@ -160,11 +215,24 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
 
       {participants.length > 0 && (
         <Column flex={1} gap={16}>
+          {hasRaAnswers && (
+            <Alert
+              type={AlertType.INFO}
+              content={formatMessage(messages.raAnswersInfoBanner)}
+              wrap={false}
+            />
+          )}
+
+          {structuredErrors && structuredErrors.length > 0 && (
+            <BulkCreateErrorList errors={structuredErrors} />
+          )}
+
           <InvitePredefinedParticipantsForm
             initialFormValues={{ participants }}
             onSubmit={handleSubmit}
             submitting={submitting}
             onParticipantsChange={setParticipants}
+            raAnswerColumns={raAnswerColumns}
           />
         </Column>
       )}

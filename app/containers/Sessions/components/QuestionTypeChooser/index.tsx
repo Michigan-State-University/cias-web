@@ -20,6 +20,7 @@ import { makeSelectInterventionHfhsAccess } from 'global/reducers/intervention';
 import useOutsideClick from 'utils/useOutsideClick';
 import {
   AddableToClassicSessionQuestionTypes,
+  AddableToRaSessionQuestionTypes,
   henryFordInitialScreen,
   henryFordQuestion,
   nameQuestion,
@@ -92,10 +93,16 @@ const QuestionTypeChooser = ({
     toggleTypeChooser();
   };
 
-  const questionTypes =
-    sessionType === SessionTypes.SMS_SESSION
-      ? AddableToSmsSessionQuestionTypes
-      : AddableToClassicSessionQuestionTypes;
+  const questionTypes = (() => {
+    switch (sessionType) {
+      case SessionTypes.SMS_SESSION:
+        return AddableToSmsSessionQuestionTypes;
+      case SessionTypes.RA_SESSION:
+        return AddableToRaSessionQuestionTypes;
+      default:
+        return AddableToClassicSessionQuestionTypes;
+    }
+  })();
 
   const isVisible = visible && height;
 
@@ -172,7 +179,10 @@ const QuestionTypeChooser = ({
               height={height}
               ref={containerRef}
               horizontalFogVisible={false}
-              verticalFogVisible={sessionType !== SessionTypes.SMS_SESSION}
+              verticalFogVisible={
+                sessionType !== SessionTypes.SMS_SESSION &&
+                sessionType !== SessionTypes.RA_SESSION
+              }
             >
               {questionTypes.map(({ color, id }) => (
                 <NewItem

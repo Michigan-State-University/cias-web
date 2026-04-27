@@ -293,7 +293,8 @@ export default defineMessages({
   },
   uploadPredefinedParticipantsInfo: {
     id: `${scope}.uploadPredefinedParticipantsInfo`,
-    defaultMessage: `Upload a CSV file containing predefined participant information. Download the example file to see the required format.`,
+    defaultMessage:
+      'Upload a CSV file containing predefined participant information. Download the example file to see the required format. The template includes columns for RA session questions that have variables assigned. The import runs in the background — CIAS will send you an e-mail when this process has been finished.',
   },
   examplePredefinedParticipantsCsvFilename: {
     id: `${scope}.examplePredefinedParticipantsCsvFilename`,
@@ -349,5 +350,53 @@ export default defineMessages({
   noHealthClinicAssigned: {
     id: `${scope}.noHealthClinicAssigned`,
     defaultMessage: 'No clinic',
+  },
+  raSessionColumnHeader: {
+    id: `${scope}.raSessionColumnHeader`,
+    defaultMessage: 'RA Session',
+  },
+  fillRaSessionButton: {
+    id: `${scope}.fillRaSessionButton`,
+    defaultMessage: 'Fill RA Session',
+  },
+  raSessionCompleted: {
+    id: `${scope}.raSessionCompleted`,
+    defaultMessage: 'Completed',
+  },
+  raSessionLabel: {
+    id: `${scope}.raSessionLabel`,
+    defaultMessage: 'Research Assistant Session',
+  },
+  raSessionCompletedInfo: {
+    id: `${scope}.raSessionCompletedInfo`,
+    defaultMessage: 'Completed on {date} by {email}',
+  },
+  raSessionPending: {
+    id: `${scope}.raSessionPending`,
+    defaultMessage: 'Not completed yet',
+  },
+  csvUnknownRaAnswerColumn: {
+    id: `${scope}.csvUnknownRaAnswerColumn`,
+    defaultMessage:
+      "{count, plural, one {# CSV column} other {# CSV columns}} don't match any RA-session variable and were ignored.",
+  },
+  csvRaAnswerTypeMismatch: {
+    id: `${scope}.csvRaAnswerTypeMismatch`,
+    defaultMessage:
+      '{count, plural, one {# answer value has} other {# answer values have}} the wrong type for its question.',
+  },
+  raAnswersInfoBanner: {
+    id: `${scope}.raAnswersInfoBanner`,
+    defaultMessage:
+      'This CSV includes RA-session answer columns. The columns below are read-only - to change an answer, edit the CSV and re-upload.',
+  },
+  bulkCreateErrorListHeader: {
+    id: `${scope}.bulkCreateErrorListHeader`,
+    defaultMessage:
+      '{count, plural, one {# issue to fix before importing:} other {# issues to fix before importing:}}',
+  },
+  rowNumberColumnHeader: {
+    id: `${scope}.rowNumberColumnHeader`,
+    defaultMessage: '#',
   },
 });

@@ -48,4 +48,13 @@ export default defineMessages({
     defaultMessage:
       'The CAT-MH™ session contains predefined screens that you cannot view or edit. The questions are displayed to the participants according to the CAT-MH™ algorithm.',
   },
+  raSession: {
+    id: `${scope}.raSession`,
+    defaultMessage: 'Research Assistant Session',
+  },
+  raSessionDescription: {
+    id: `${scope}.raSessionDescription`,
+    defaultMessage:
+      'This session is filled by a research assistant before the participant begins. Only one RA session is allowed per intervention.',
+  },
 });

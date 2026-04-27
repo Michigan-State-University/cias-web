@@ -10,18 +10,22 @@ import { EllipsisText } from 'components/Text';
 import { TextButton } from 'components/Button';
 import Row from 'components/Row';
 
-import { ParsedPredefinedParticipantCsvRow } from './types';
+import { ParsedPredefinedParticipantCsvRow, RaAnswerColumnMap } from './types';
 import { TEXT_BUTTON_PROPS } from './constants';
 import messages from './messages';
 
 export type Props = {
+  rowNumber: number;
   participant: ParsedPredefinedParticipantCsvRow;
   onRemove: () => void;
+  raAnswerColumns?: RaAnswerColumnMap;
 };
 
 export const PredefinedParticipantRowForm: FC<Props> = ({
+  rowNumber,
   participant,
   onRemove,
+  raAnswerColumns,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -50,16 +54,31 @@ export const PredefinedParticipantRowForm: FC<Props> = ({
       color={colors.aliceBlueSaturated}
       bg={colors.white}
     >
-      <NoMaxWidthTD padding={8} width="30%">
+      <NoMaxWidthTD padding={8}>
+        <EllipsisText
+          text={String(rowNumber)}
+          fontSize={12}
+          fontWeight="bold"
+        />
+      </NoMaxWidthTD>
+      <NoMaxWidthTD padding={8}>
         <EllipsisText text={fullName} fontSize={12} />
       </NoMaxWidthTD>
-      <NoMaxWidthTD padding={8} width="30%">
+      <NoMaxWidthTD padding={8}>
         <EllipsisText text={participant.email || ''} fontSize={12} />
       </NoMaxWidthTD>
-      <NoMaxWidthTD padding={8} width="30%">
+      <NoMaxWidthTD padding={8}>
         <EllipsisText text={phone} fontSize={12} />
       </NoMaxWidthTD>
-      <NoMaxWidthTD padding={8} width="10%">
+      {Object.keys(raAnswerColumns ?? {}).map((columnKey) => (
+        <NoMaxWidthTD key={columnKey} padding={8}>
+          <EllipsisText
+            text={participant.raAnswers?.[columnKey] ?? '—'}
+            fontSize={12}
+          />
+        </NoMaxWidthTD>
+      ))}
+      <NoMaxWidthTD padding={8}>
         <Row justify="end">
           <TextButton
             buttonProps={{ ...TEXT_BUTTON_PROPS, color: themeColors.warning }}

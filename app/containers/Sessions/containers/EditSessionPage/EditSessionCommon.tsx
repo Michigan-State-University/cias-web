@@ -30,6 +30,7 @@ import includes from 'lodash/includes';
 import { reorderScope } from 'models/Session/ReorderScope';
 import {
   ClassicSession,
+  ResearchAssistantSession,
   Session,
   SessionTypes,
   SmsSession,
@@ -127,7 +128,7 @@ import QuestionListGroup from '../QuestionListGroup';
 import defaultQuestionSubtitlesMessages from './defaultQuestionSubtitlesMessages';
 
 type NonReduxProps = {
-  session: ClassicSession | SmsSession;
+  session: ClassicSession | SmsSession | ResearchAssistantSession;
   editingPossible: boolean;
   interventionStatus: string;
   interventionId?: string;

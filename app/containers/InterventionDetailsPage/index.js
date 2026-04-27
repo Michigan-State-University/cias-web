@@ -288,6 +288,12 @@ export function InterventionDetailsPage({
     [isAccessRevoked],
   );
 
+  const canCreateRaSession = useMemo(
+    () =>
+      !sessions?.some((session) => session.type === SessionTypes.RA_SESSION),
+    [sessions],
+  );
+
   const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
   const { ExportInterventionModalOption, ExportInterventionModal } =
@@ -417,7 +423,7 @@ export function InterventionDetailsPage({
     createSession(interventionId, sessions.length, sessionType);
 
   const handleReorder = (previousIndex, nextIndex) => {
-    const newList = reorder(nonSmsSessions, previousIndex, nextIndex);
+    const newList = reorder(reorderableSessions, previousIndex, nextIndex);
     let position = 0;
     const orderedNewList = newList.map((session) => {
       position += 1;
@@ -453,12 +459,24 @@ export function InterventionDetailsPage({
     [sortedSessions],
   );
 
-  const nonSmsSessions = useMemo(
+  const reorderableSessions = useMemo(
     () =>
       sortedSessions &&
       filter(
         sortedSessions,
-        (session) => session.type !== SessionTypes.SMS_SESSION,
+        (session) =>
+          session.type !== SessionTypes.SMS_SESSION &&
+          session.type !== SessionTypes.RA_SESSION,
+      ),
+    [sortedSessions],
+  );
+
+  const raSessions = useMemo(
+    () =>
+      sortedSessions &&
+      filter(
+        sortedSessions,
+        (session) => session.type === SessionTypes.RA_SESSION,
       ),
     [sortedSessions],
   );
@@ -476,8 +494,8 @@ export function InterventionDetailsPage({
               ref={providedDroppable.innerRef}
               {...providedDroppable.droppableProps}
             >
-              {nonSmsSessions &&
-                nonSmsSessions.map((session, index) => (
+              {reorderableSessions &&
+                reorderableSessions.map((session, index) => (
                   <Row key={session.id}>
                     <SessionListItem
                       disabled={!editingPossible}
@@ -486,6 +504,48 @@ export function InterventionDetailsPage({
                       session={session}
                       index={index}
                       isSelected={index === sessionIndex}
+                      handleCopySession={handleCopySession}
+                      handleExternalCopySession={handleExternalCopySession}
+                      handleDeleteSession={(sessionId) =>
+                        setDeleteConfirmationSessionId(sessionId)
+                      }
+                      editSession={editSession}
+                      interventionType={type}
+                      hfhsAccess={hfhsAccess}
+                    />
+                  </Row>
+                ))}
+              {providedDroppable.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </DraggedTest>
+  );
+
+  const renderRaSessions = () => (
+    <DraggedTest>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable
+          isDropDisabled
+          droppableId="ra-session-list"
+          type={reorderScope.sessions}
+        >
+          {(providedDroppable) => (
+            <div
+              ref={providedDroppable.innerRef}
+              {...providedDroppable.droppableProps}
+            >
+              {raSessions &&
+                raSessions.map((session, index) => (
+                  <Row key={session.id}>
+                    <SessionListItem
+                      disabled={!editingPossible}
+                      deletionPossible={editingPossible}
+                      sharedTo={sharedTo}
+                      session={session}
+                      index={index}
+                      isSelected={false}
                       handleCopySession={handleCopySession}
                       handleExternalCopySession={handleExternalCopySession}
                       handleDeleteSession={(sessionId) =>
@@ -580,7 +640,12 @@ export function InterventionDetailsPage({
               visible={!isNullOrUndefined(deleteConfirmationSessionId)}
               onClose={() => setDeleteConfirmationSessionId(null)}
               description={formatMessage(messages.sessionDeleteHeader)}
-              content={formatMessage(messages.sessionDeleteMessage)}
+              content={formatMessage(
+                sessions?.find((s) => s.id === deleteConfirmationSessionId)
+                  ?.type === SessionTypes.RA_SESSION
+                  ? messages.raSessionDeleteMessage
+                  : messages.sessionDeleteMessage,
+              )}
               confirmAction={() =>
                 handleDeleteSession(deleteConfirmationSessionId)
               }
@@ -670,10 +735,20 @@ export function InterventionDetailsPage({
 
             <GRow>
               <GCol xl={6}>
+                {!isEmpty(raSessions) && (
+                  <>
+                    {renderRaSessions()}
+                    {!isEmpty(reorderableSessions) && (
+                      <Row mx={24} mt={24} mb={6}>
+                        <Divider />
+                      </Row>
+                    )}
+                  </>
+                )}
                 {renderClassicSessions()}
                 {!isEmpty(smsSessions) && (
                   <>
-                    {!isEmpty(nonSmsSessions) && (
+                    {!isEmpty(reorderableSessions) && (
                       <Row mx={24} mt={24} mb={6}>
                         <Divider />
                       </Row>
@@ -690,6 +765,7 @@ export function InterventionDetailsPage({
                   <Row my={18} align="center">
                     <SessionCreateButton
                       canCreateCatSession={canCreateCatSession}
+                      canCreateRaSession={canCreateRaSession}
                       handleSessionCreation={createSessionCall}
                       disabled={!editingPossible}
                     />

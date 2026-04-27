@@ -68,6 +68,7 @@ import {
   verifyPidSuccess,
   verifyPidError,
   fetchUserSessionRequest,
+  setRaFulfillment,
 } from './actions';
 import {
   makeSelectAnswers,
@@ -133,6 +134,11 @@ function* submitAnswersAsync({
       throw new Error('Choose answer');
     }
   } catch (error) {
+    const reason = error?.response?.data?.reason;
+    if (reason === 'NOT_RA_FULFILLER') {
+      yield call(toast.error, formatMessage(messages.raSessionTakenOver));
+      return;
+    }
     yield put(
       submitAnswerFailure(
         questionId,
@@ -218,8 +224,36 @@ function* redirectToPreview({
 
 function* fetchUserSession({ payload: { sessionId } }) {
   const {
-    query: { cid: healthClinicId },
+    query: { cid: healthClinicId, userSessionId: raUserSessionId },
   } = yield select(makeSelectLocation());
+
+  if (raUserSessionId) {
+    try {
+      const { data } = yield call(
+        axios.get,
+        `/v1/user_sessions/${raUserSessionId}/ra_show`,
+      );
+      const userSession = jsonApiToObject(data, 'userSession');
+
+      yield put(fetchUserSessionSuccess(userSession));
+      yield put(changeLocale(userSession.languageCode));
+      yield put(setRaFulfillment(true));
+      return;
+    } catch (error) {
+      const reason = error?.response?.data?.reason;
+      if (reason === 'NOT_RA_FULFILLER' || error?.response?.status === 403) {
+        yield call(toast.error, formatMessage(messages.raSessionAccessDenied));
+      } else {
+        yield call(
+          toast.error,
+          formatApiErrorMessage(error, messages.raSessionFetchError),
+        );
+      }
+      yield put(fetchUserSessionError(error));
+      return;
+    }
+  }
+
   const requestUrl = `/v1/user_sessions`;
   const searchParams = new URLSearchParams();
 
