@@ -1026,8 +1026,14 @@ test.describe('Question Creation - Single Answer', () => {
     });
     await page.waitForTimeout(500);
 
+    const branchingSaveResponse = page.waitForResponse(
+      (response) =>
+        response.url().includes('/questions/') &&
+        response.request().method() === 'PATCH',
+      { timeout: 15000 }
+    );
     await visibleFinishScreen.click({ force: true });
-    await page.waitForTimeout(500);
+    await branchingSaveResponse;
 
     await expect(formulaInput).toHaveValue('var_1');
 

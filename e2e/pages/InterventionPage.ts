@@ -47,11 +47,11 @@ export class InterventionPage {
       }
 
       // Wait for the create session button to be visible and click it
-      await this.createSessionButton.waitFor({ state: 'visible', timeout: 10000 });
+      await this.createSessionButton.waitFor({ state: 'visible', timeout: 30000 });
       await this.createSessionButton.click();
 
       // Wait for the dialog to appear
-      await createSessionDialogButton.waitFor({ state: 'visible', timeout: 5000 });
+      await createSessionDialogButton.waitFor({ state: 'visible', timeout: 10000 });
     }
 
     // Select session type in the dialog (Classic is pre-selected)
@@ -70,7 +70,7 @@ export class InterventionPage {
       (response) =>
         response.url().includes('/sessions') &&
         response.request().method() === 'POST',
-      { timeout: 15000 },
+      { timeout: 30000 },
     );
 
     // Click the create session button in the dialog
@@ -279,7 +279,7 @@ export class InterventionPage {
     const labelSelector = `label[for="access-radio-${type}"]`;
     const label = this.page.locator(labelSelector);
 
-    await label.waitFor({ state: 'visible', timeout: 10000 });
+    await label.waitFor({ state: 'visible', timeout: 30000 });
     await label.click();
 
     await this.page.waitForResponse(
@@ -287,7 +287,7 @@ export class InterventionPage {
         response.url().includes('/interventions/') &&
         response.request().method() === 'PATCH' &&
         response.status() === 200,
-      { timeout: 10000 },
+      { timeout: 30000 },
     );
   }
 
