@@ -676,6 +676,7 @@ export function AnswerSessionPage({
       switch (type) {
         case QuestionTypes.PHONE: {
           const { confirmed, timezone } = answerBody[0]?.value ?? {};
+          if (isPreview) return !!timezone;
           return confirmed && timezone;
         }
         case QuestionTypes.NUMBER: {
