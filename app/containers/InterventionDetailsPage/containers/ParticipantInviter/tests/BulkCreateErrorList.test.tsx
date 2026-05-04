@@ -66,6 +66,19 @@ describe('<BulkCreateErrorList />', () => {
     ).toBeInTheDocument();
   });
 
+  it('renders the published-required error for RA answer uploads', () => {
+    const errors: BulkCreateErrorEntry[] = [
+      { code: 'ra_answers_require_published_intervention_error' },
+    ];
+    renderWithIntl(<BulkCreateErrorList errors={errors} />);
+
+    expect(
+      screen.getByText(
+        /RA-session answers can only be imported once the intervention is published\. Publish the intervention or remove the RA answer values from the CSV\./,
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('renders multiple errors', () => {
     const errors: BulkCreateErrorEntry[] = [
       { row: 0, field: 'email', code: 'blank' },

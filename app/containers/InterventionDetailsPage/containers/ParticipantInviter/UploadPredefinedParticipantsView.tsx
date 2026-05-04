@@ -239,7 +239,7 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
 
       {participants.length > 0 && (
         <Column flex={1} gap={16}>
-          {hasRaAnswers && (
+          {hasRaAnswers && raAnswersAllowed && (
             <Alert
               type={AlertType.INFO}
               content={formatMessage(messages.raAnswersInfoBanner)}

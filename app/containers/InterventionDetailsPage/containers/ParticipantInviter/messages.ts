@@ -398,7 +398,7 @@ export default defineMessages({
   raAnswersRequirePublishedInfoBanner: {
     id: `${scope}.raAnswersRequirePublishedInfoBanner`,
     defaultMessage:
-      'RA-session answers can only be imported once the intervention is published. You can still upload participants without RA answers, or publish the intervention first.',
+      'To import RA-session answers, please publish the intervention first. You can still upload participants without RA answers in the meantime.',
   },
   raAnswersRequirePublishedBlockBanner: {
     id: `${scope}.raAnswersRequirePublishedBlockBanner`,
