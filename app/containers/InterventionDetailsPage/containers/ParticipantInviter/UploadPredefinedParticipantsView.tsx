@@ -195,6 +195,12 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
         wrap={false}
       />
 
+      <Alert
+        content={formatMessage(messages.uploadPredefinedParticipantsRaDataInfo)}
+        type={AlertType.INFO}
+        wrap={false}
+      />
+
       <Row align="center" gap={24}>
         <CsvFileExport
           filename={formatMessage(
