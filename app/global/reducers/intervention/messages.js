@@ -212,6 +212,11 @@ export default defineMessages({
     defaultMessage:
       '{count, plural, one {# issue to fix before importing.} other {# issues to fix before importing.}} See details above.',
   },
+  bulkCreatePredefinedParticipantsRaAnswersRequirePublishedError: {
+    id: `${scope}.bulkCreatePredefinedParticipantsRaAnswersRequirePublishedError`,
+    defaultMessage:
+      'RA-session answers can only be imported once the intervention is published.',
+  },
   raSessionAlreadyCompleted: {
     id: `${scope}.raSessionAlreadyCompleted`,
     defaultMessage: 'This RA session has already been completed.',

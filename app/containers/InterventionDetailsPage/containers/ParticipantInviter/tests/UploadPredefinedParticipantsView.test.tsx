@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -7,8 +7,74 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { initialState as interventionInitialState } from 'global/reducers/intervention/reducer';
+import { InterventionStatus } from 'models/Intervention';
+import { SessionTypes } from 'models/Session';
 
 import { UploadPredefinedParticipantsView } from '../UploadPredefinedParticipantsView';
+
+// Mock CsvFileReader so tests can fire onUpload directly. The component is a
+// .js file with a `default` export — the mock matches that shape.
+jest.mock('components/CsvFileReader', () => ({
+  __esModule: true,
+  default: ({
+    onUpload,
+    children,
+  }: {
+    onUpload: (data: unknown) => void;
+    children: React.ReactNode;
+  }) => (
+    <button
+      type="button"
+      data-testid="mock-csv-upload"
+      onClick={() => onUpload([])}
+    >
+      {children}
+    </button>
+  ),
+}));
+
+// Mock the CSV parser so tests can control what `handleUpload` receives without
+// needing real CSV input or a populated raSession in the store.
+const mockParse = jest.fn();
+jest.mock('../utils', () => {
+  const actual = jest.requireActual('../utils');
+  return {
+    ...actual,
+    parsePredefinedParticipantsCsv: (...args: unknown[]) => mockParse(...args),
+  };
+});
+
+const buildParticipant = (
+  raAnswers?: Record<string, string>,
+): Record<string, unknown> => ({
+  firstName: 'First',
+  lastName: 'Last',
+  email: 'user@example.com',
+  externalId: '',
+  iso: null,
+  number: '',
+  emailNotification: false,
+  smsNotification: false,
+  healthClinicOption: null,
+  healthClinicName: '',
+  healthSystemName: '',
+  ...(raAnswers ? { raAnswers } : {}),
+});
+
+const buildParseResult = (participants: Record<string, unknown>[]) => ({
+  participants,
+  invalidPhoneCount: 0,
+  invalidHealthClinicCount: 0,
+  unknownRaAnswerColumnCount: 0,
+  raAnswerTypeMismatchCount: 0,
+});
+
+const interventionWithRaSession = {
+  intervention: {
+    id: 'int-1',
+    sessions: [{ id: 'ra-1', type: SessionTypes.RA_SESSION, variable: 's1' }],
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -26,6 +92,7 @@ const defaultProps = {
   interventionName: 'Test Intervention',
   isReportingIntervention: false,
   interventionId: 'int-1',
+  interventionStatus: InterventionStatus.PUBLISHED,
   healthClinicOptions: [],
   normalizedHealthClinicsInfos: {},
   onBack: jest.fn(),
@@ -134,5 +201,119 @@ describe('<UploadPredefinedParticipantsView />', () => {
   it('matches snapshot in the default (empty) state', () => {
     const { container } = renderComponent();
     expect(container).toMatchSnapshot();
+  });
+
+  describe('RA answer upload gate', () => {
+    beforeEach(() => {
+      mockParse.mockReset();
+    });
+
+    it('shows the preflight notice when intervention is unpublished and has an RA session', () => {
+      renderComponent(
+        { interventionStatus: InterventionStatus.DRAFT },
+        interventionWithRaSession,
+      );
+
+      expect(
+        screen.getByText(
+          /To import RA-session answers, please publish the intervention first\. You can still upload participants without RA answers in the meantime/,
+        ),
+      ).toBeInTheDocument();
+    });
+
+    it('does NOT show the preflight notice when intervention is published', () => {
+      renderComponent(
+        { interventionStatus: InterventionStatus.PUBLISHED },
+        interventionWithRaSession,
+      );
+
+      expect(
+        screen.queryByText(
+          /To import RA-session answers, please publish the intervention first\. You can still upload participants without RA answers in the meantime/,
+        ),
+      ).not.toBeInTheDocument();
+    });
+
+    it('does NOT show the preflight notice when intervention has no RA session', () => {
+      renderComponent({ interventionStatus: InterventionStatus.DRAFT });
+
+      expect(
+        screen.queryByText(
+          /To import RA-session answers, please publish the intervention first\. You can still upload participants without RA answers in the meantime/,
+        ),
+      ).not.toBeInTheDocument();
+    });
+
+    it('blocks upload when DRAFT and CSV contains RA answers', () => {
+      mockParse.mockReturnValueOnce(
+        buildParseResult([buildParticipant({ 's1.var1': 'A' })]),
+      );
+
+      renderComponent(
+        { interventionStatus: InterventionStatus.DRAFT },
+        interventionWithRaSession,
+      );
+      fireEvent.click(screen.getByTestId('mock-csv-upload'));
+
+      expect(
+        screen.getByText(
+          /This CSV includes RA-session answers, but the intervention is not published yet/,
+        ),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(/The columns below are read-only/),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /^Create 1 participant$/ }),
+      ).toBeDisabled();
+    });
+
+    it('allows upload when PUBLISHED and CSV contains RA answers', () => {
+      mockParse.mockReturnValueOnce(
+        buildParseResult([buildParticipant({ 's1.var1': 'A' })]),
+      );
+
+      renderComponent(
+        { interventionStatus: InterventionStatus.PUBLISHED },
+        interventionWithRaSession,
+      );
+      fireEvent.click(screen.getByTestId('mock-csv-upload'));
+
+      expect(
+        screen.queryByText(
+          /This CSV includes RA-session answers, but the intervention is not published yet/,
+        ),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(/The columns below are read-only/),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /^Create 1 participant$/ }),
+      ).not.toBeDisabled();
+    });
+
+    it('does not block when DRAFT and CSV has no RA answer values (whitespace-only filtered)', () => {
+      // hasRaAnswers requires at least one non-whitespace cell. A participant
+      // with no raAnswers (or only whitespace) does not trigger the block banner.
+      mockParse.mockReturnValueOnce(buildParseResult([buildParticipant()]));
+
+      renderComponent(
+        { interventionStatus: InterventionStatus.DRAFT },
+        interventionWithRaSession,
+      );
+      fireEvent.click(screen.getByTestId('mock-csv-upload'));
+
+      expect(
+        screen.queryByText(
+          /This CSV includes RA-session answers, but the intervention is not published yet/,
+        ),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/The columns below are read-only/),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /^Create 1 participant$/ }),
+      ).not.toBeDisabled();
+    });
   });
 });
