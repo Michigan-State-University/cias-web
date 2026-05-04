@@ -25,6 +25,7 @@ export type Props = {
     participants: InvitePredefinedParticipantsFormValues['participants'],
   ) => void;
   raAnswerColumns?: RaAnswerColumnMap;
+  disabled?: boolean;
 };
 
 export const InvitePredefinedParticipantsForm: FC<Props> = ({
@@ -33,6 +34,7 @@ export const InvitePredefinedParticipantsForm: FC<Props> = ({
   submitting,
   onParticipantsChange,
   raAnswerColumns,
+  disabled,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -142,7 +144,7 @@ export const InvitePredefinedParticipantsForm: FC<Props> = ({
               type="submit"
               onClick={handleSubmit}
               loading={submitting}
-              disabled={values.participants.length === 0}
+              disabled={values.participants.length === 0 || disabled}
             >
               {formatMessage(messages.createPredefinedParticipants, {
                 count: values.participants.length,

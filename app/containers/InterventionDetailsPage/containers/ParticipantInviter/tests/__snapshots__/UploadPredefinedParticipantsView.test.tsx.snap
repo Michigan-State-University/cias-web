@@ -96,25 +96,6 @@ exports[`<UploadPredefinedParticipantsView /> matches snapshot in the default (e
   gap: 24px;
 }
 
-.c12 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 .c4 {
   font-family: DM Sans;
   font-size: 13px;
@@ -314,29 +295,12 @@ exports[`<UploadPredefinedParticipantsView /> matches snapshot in the default (e
           </div>
         </button>
       </div>
-      <input
-        accept="text/csv"
-        style="display: none;"
-        type="file"
-      />
-      <div>
-        <div
-          class="c12"
-        >
-          <img
-            alt="upload"
-            class="c10"
-            src="IMAGE_MOCK"
-          />
-          <p
-            class="c11"
-            color="#B727EA"
-            font-weight="bold"
-          >
-            Upload predefined participants
-          </p>
-        </div>
-      </div>
+      <button
+        data-testid="mock-csv-upload"
+        type="button"
+      >
+        Upload predefined participants
+      </button>
     </div>
   </div>
 </div>

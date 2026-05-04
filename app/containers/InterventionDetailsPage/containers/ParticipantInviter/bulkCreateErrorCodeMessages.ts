@@ -37,6 +37,11 @@ const messages = defineMessages({
     id: `${scope}.ra_session_has_no_answerable_questions`,
     defaultMessage: 'The RA session has no answerable questions.',
   },
+  ra_answers_require_published_intervention_error: {
+    id: `${scope}.ra_answers_require_published_intervention_error`,
+    defaultMessage:
+      'RA session answers can only be imported when the intervention is published.',
+  },
   session_variable_mismatch: {
     id: `${scope}.session_variable_mismatch`,
     defaultMessage:

@@ -395,6 +395,11 @@ export default defineMessages({
     defaultMessage:
       'This CSV includes RA-session answer columns. The columns below are read-only - to change an answer, edit the CSV and re-upload.',
   },
+  raAnswersBlockedByStatus: {
+    id: `${scope}.raAnswersBlockedByStatus`,
+    defaultMessage:
+      'RA session answers can only be imported on a published intervention. Publish the intervention first, or remove the answer columns from your CSV.',
+  },
   bulkCreateErrorListHeader: {
     id: `${scope}.bulkCreateErrorListHeader`,
     defaultMessage:

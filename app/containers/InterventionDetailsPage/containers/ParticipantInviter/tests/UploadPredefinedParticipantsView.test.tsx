@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -7,8 +7,66 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { initialState as interventionInitialState } from 'global/reducers/intervention/reducer';
+import { InterventionStatus } from 'models/Intervention';
 
 import { UploadPredefinedParticipantsView } from '../UploadPredefinedParticipantsView';
+
+// Mock CsvFileReader so tests can fire onUpload directly. The component is a
+// .js file with a `default` export — the mock matches that shape.
+jest.mock('components/CsvFileReader', () => ({
+  __esModule: true,
+  default: ({
+    onUpload,
+    children,
+  }: {
+    onUpload: (data: unknown) => void;
+    children: React.ReactNode;
+  }) => (
+    <button
+      type="button"
+      data-testid="mock-csv-upload"
+      onClick={() => onUpload([])}
+    >
+      {children}
+    </button>
+  ),
+}));
+
+// Mock the CSV parser so tests can control what `handleUpload` receives without
+// needing real CSV input or a populated raSession in the store.
+const mockParse = jest.fn();
+jest.mock('../utils', () => {
+  const actual = jest.requireActual('../utils');
+  return {
+    ...actual,
+    parsePredefinedParticipantsCsv: (...args: unknown[]) => mockParse(...args),
+  };
+});
+
+const buildParticipant = (
+  raAnswers?: Record<string, string>,
+): Record<string, unknown> => ({
+  firstName: 'First',
+  lastName: 'Last',
+  email: 'user@example.com',
+  externalId: '',
+  iso: null,
+  number: '',
+  emailNotification: false,
+  smsNotification: false,
+  healthClinicOption: null,
+  healthClinicName: '',
+  healthSystemName: '',
+  ...(raAnswers ? { raAnswers } : {}),
+});
+
+const buildParseResult = (participants: Record<string, unknown>[]) => ({
+  participants,
+  invalidPhoneCount: 0,
+  invalidHealthClinicCount: 0,
+  unknownRaAnswerColumnCount: 0,
+  raAnswerTypeMismatchCount: 0,
+});
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -28,6 +86,7 @@ const defaultProps = {
   interventionId: 'int-1',
   healthClinicOptions: [],
   normalizedHealthClinicsInfos: {},
+  interventionStatus: InterventionStatus.PUBLISHED,
   onBack: jest.fn(),
 };
 
@@ -134,5 +193,74 @@ describe('<UploadPredefinedParticipantsView />', () => {
   it('matches snapshot in the default (empty) state', () => {
     const { container } = renderComponent();
     expect(container).toMatchSnapshot();
+  });
+
+  describe('RA answer upload gate', () => {
+    beforeEach(() => {
+      mockParse.mockReset();
+    });
+
+    it('blocks upload when DRAFT and CSV contains RA answers', () => {
+      mockParse.mockReturnValueOnce(
+        buildParseResult([buildParticipant({ 's1.var1': 'A' })]),
+      );
+
+      renderComponent({ interventionStatus: InterventionStatus.DRAFT });
+      fireEvent.click(screen.getByTestId('mock-csv-upload'));
+
+      expect(
+        screen.getByText(
+          /RA session answers can only be imported on a published intervention/,
+        ),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(/This CSV includes RA-session answer columns/),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /^Create 1 participant$/ }),
+      ).toBeDisabled();
+    });
+
+    it('allows upload when PUBLISHED and CSV contains RA answers', () => {
+      mockParse.mockReturnValueOnce(
+        buildParseResult([buildParticipant({ 's1.var1': 'A' })]),
+      );
+
+      renderComponent({ interventionStatus: InterventionStatus.PUBLISHED });
+      fireEvent.click(screen.getByTestId('mock-csv-upload'));
+
+      expect(
+        screen.queryByText(
+          /RA session answers can only be imported on a published intervention/,
+        ),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(/This CSV includes RA-session answer columns/),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /^Create 1 participant$/ }),
+      ).not.toBeDisabled();
+    });
+
+    it('does not block when DRAFT and CSV has no RA answer values (whitespace-only filtered)', () => {
+      // hasRaAnswers requires at least one non-whitespace cell. A participant
+      // with no raAnswers (or only whitespace) does not trigger the gate.
+      mockParse.mockReturnValueOnce(buildParseResult([buildParticipant()]));
+
+      renderComponent({ interventionStatus: InterventionStatus.DRAFT });
+      fireEvent.click(screen.getByTestId('mock-csv-upload'));
+
+      expect(
+        screen.queryByText(
+          /RA session answers can only be imported on a published intervention/,
+        ),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/This CSV includes RA-session answer columns/),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /^Create 1 participant$/ }),
+      ).not.toBeDisabled();
+    });
   });
 });

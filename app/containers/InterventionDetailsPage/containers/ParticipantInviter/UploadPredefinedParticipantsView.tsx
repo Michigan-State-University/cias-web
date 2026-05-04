@@ -20,6 +20,9 @@ import CsvFileExport from 'components/CsvFileExport';
 import CsvFileReader from 'components/CsvFileReader';
 import Row from 'components/Row';
 
+import { InterventionStatus } from 'models/Intervention';
+import { canBulkUploadRaAnswers } from 'models/Status/statusPermissions';
+
 import { BulkCreateErrorList } from './BulkCreateErrorList';
 import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
@@ -47,6 +50,7 @@ export type Props = {
   interventionId: string;
   healthClinicOptions: SelectOption<string>[];
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
+  interventionStatus: InterventionStatus;
   onBack: () => void;
 };
 
@@ -57,6 +61,7 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
   interventionId,
   healthClinicOptions,
   normalizedHealthClinicsInfos,
+  interventionStatus,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -86,6 +91,8 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
   const handleSubmit: InvitePredefinedParticipantsFormProps['onSubmit'] = (
     values,
   ) => {
+    if (raAnswersBlocked) return;
+
     const payload = prepareBulkCreatePredefinedParticipantsPayload(
       values,
       interventionId,
@@ -119,6 +126,9 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
   >([]);
 
   const [hasRaAnswers, setHasRaAnswers] = useState(false);
+
+  const canUploadRaAnswers = canBulkUploadRaAnswers(interventionStatus);
+  const raAnswersBlocked = hasRaAnswers && !canUploadRaAnswers;
 
   const handleUpload = (data: UploadedPredefinedParticipantsCsvData) => {
     dispatch(bulkCreatePredefinedParticipantsError(null));
@@ -221,7 +231,15 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
 
       {participants.length > 0 && (
         <Column flex={1} gap={16}>
-          {hasRaAnswers && (
+          {raAnswersBlocked && (
+            <Alert
+              type={AlertType.WARNING}
+              content={formatMessage(messages.raAnswersBlockedByStatus)}
+              wrap={false}
+            />
+          )}
+
+          {hasRaAnswers && !raAnswersBlocked && (
             <Alert
               type={AlertType.INFO}
               content={formatMessage(messages.raAnswersInfoBanner)}
@@ -239,6 +257,7 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
             submitting={submitting}
             onParticipantsChange={setParticipants}
             raAnswerColumns={raAnswerColumns}
+            disabled={raAnswersBlocked}
           />
         </Column>
       )}
