@@ -75,15 +75,20 @@ export function* bulkCreatePredefinedParticipants({
 
     const structuredErrors = (error as any)?.response?.data?.details?.errors;
     if (Array.isArray(structuredErrors) && structuredErrors.length > 0) {
-      yield call(
-        toast.error,
-        formatMessage(messages.bulkCreatePredefinedParticipantsErrorList, {
-          count: structuredErrors.length,
-        }),
-        {
-          toastId: BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR,
-        },
-      );
+      const isOnlyRaAnswersGate =
+        structuredErrors.length === 1 &&
+        structuredErrors[0]?.code ===
+          'ra_answers_require_published_intervention_error';
+      const toastMessage = isOnlyRaAnswersGate
+        ? formatMessage(
+            messages.bulkCreatePredefinedParticipantsRaAnswersRequirePublishedError,
+          )
+        : formatMessage(messages.bulkCreatePredefinedParticipantsErrorList, {
+            count: structuredErrors.length,
+          });
+      yield call(toast.error, toastMessage, {
+        toastId: BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR,
+      });
     } else {
       yield call(
         toast.error,

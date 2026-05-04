@@ -7,6 +7,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { initialState as interventionInitialState } from 'global/reducers/intervention/reducer';
+import { InterventionStatus } from 'models/Intervention';
 
 import { UploadPredefinedParticipantsView } from '../UploadPredefinedParticipantsView';
 
@@ -26,6 +27,7 @@ const defaultProps = {
   interventionName: 'Test Intervention',
   isReportingIntervention: false,
   interventionId: 'int-1',
+  interventionStatus: InterventionStatus.PUBLISHED,
   healthClinicOptions: [],
   normalizedHealthClinicsInfos: {},
   onBack: jest.fn(),

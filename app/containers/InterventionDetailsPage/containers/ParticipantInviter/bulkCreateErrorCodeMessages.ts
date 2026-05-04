@@ -75,6 +75,11 @@ const messages = defineMessages({
     defaultMessage:
       'Row {row}: column "{field}" — expected a date (YYYY-MM-DD).',
   },
+  ra_answers_require_published_intervention_error: {
+    id: `${scope}.ra_answers_require_published_intervention_error`,
+    defaultMessage:
+      'RA-session answers can only be imported once the intervention is published. Publish the intervention or remove the RA answer values from the CSV.',
+  },
   unknown: {
     id: `${scope}.unknown`,
     defaultMessage: 'Row {row}: {field} — {code}.',

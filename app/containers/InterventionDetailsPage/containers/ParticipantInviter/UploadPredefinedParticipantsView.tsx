@@ -13,6 +13,9 @@ import {
   fetchRaSessionQuestionGroupsRequest,
 } from 'global/reducers/intervention';
 
+import { InterventionStatus } from 'models/Intervention';
+import { canBulkImportRaAnswers } from 'models/Status/statusPermissions';
+
 import Column from 'components/Column';
 import { SelectOption } from 'components/Select/types';
 import { Alert, AlertType } from 'components/Alert';
@@ -45,6 +48,7 @@ export type Props = {
   interventionName: string;
   isReportingIntervention: boolean;
   interventionId: string;
+  interventionStatus: InterventionStatus;
   healthClinicOptions: SelectOption<string>[];
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onBack: () => void;
@@ -55,6 +59,7 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
   interventionName,
   isReportingIntervention,
   interventionId,
+  interventionStatus,
   healthClinicOptions,
   normalizedHealthClinicsInfos,
 }) => {
@@ -83,9 +88,14 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
     [raSession, raSessionQuestionGroups],
   );
 
+  const raAnswersAllowed = canBulkImportRaAnswers(interventionStatus);
+  const showRaAnswersPublishedNotice = !raAnswersAllowed && !!raSession;
+
   const handleSubmit: InvitePredefinedParticipantsFormProps['onSubmit'] = (
     values,
   ) => {
+    if (hasRaAnswers && !raAnswersAllowed) return;
+
     const payload = prepareBulkCreatePredefinedParticipantsPayload(
       values,
       interventionId,
@@ -201,6 +211,14 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
         wrap={false}
       />
 
+      {showRaAnswersPublishedNotice && (
+        <Alert
+          content={formatMessage(messages.raAnswersRequirePublishedInfoBanner)}
+          type={AlertType.WARNING_LIGHT}
+          wrap={false}
+        />
+      )}
+
       <Row align="center" gap={24}>
         <CsvFileExport
           filename={formatMessage(
@@ -229,6 +247,16 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
             />
           )}
 
+          {hasRaAnswers && !raAnswersAllowed && (
+            <Alert
+              type={AlertType.WARNING}
+              content={formatMessage(
+                messages.raAnswersRequirePublishedBlockBanner,
+              )}
+              wrap={false}
+            />
+          )}
+
           {structuredErrors && structuredErrors.length > 0 && (
             <BulkCreateErrorList errors={structuredErrors} />
           )}
@@ -239,6 +267,7 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
             submitting={submitting}
             onParticipantsChange={setParticipants}
             raAnswerColumns={raAnswerColumns}
+            submitDisabled={hasRaAnswers && !raAnswersAllowed}
           />
         </Column>
       )}

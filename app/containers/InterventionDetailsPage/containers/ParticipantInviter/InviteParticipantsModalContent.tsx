@@ -281,6 +281,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               interventionName={interventionName}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
+              interventionStatus={interventionStatus}
               healthClinicOptions={healthClinicOptions}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onBack={handleBack}
