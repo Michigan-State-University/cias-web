@@ -3,7 +3,18 @@
 exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c0 {
+  "baseElement": .c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c0 {
   width: auto;
   height: auto;
   display: block;
@@ -53,17 +64,6 @@ exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
   max-height: 300px;
   overflow: scroll;
   color: unset;
-}
-
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
 }
 
 .c11 {
@@ -215,7 +215,18 @@ exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
       </div>
     </div>
   </body>,
-  "container": .c0 {
+  "container": .c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c0 {
   width: auto;
   height: auto;
   display: block;
@@ -265,17 +276,6 @@ exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
   max-height: 300px;
   overflow: scroll;
   color: unset;
-}
-
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
 }
 
 .c11 {

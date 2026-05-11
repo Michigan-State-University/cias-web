@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   PredefinedParticipantData,
+  fulfillRaSessionRequest,
   makeSelectInterventionLoader,
   makeSelectPredefinedParticipantById,
+  makeSelectRaSession,
   updatePredefinedParticipantRequest,
   deactivatePredefinedParticipantRequest,
   activatePredefinedParticipantRequest,
@@ -15,10 +17,15 @@ import {
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
 
+import dayjs from 'dayjs';
+
+import { themeColors } from 'theme';
+
 import Column from 'components/Column';
 import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 import Row from 'components/Row';
+import { TextButton } from 'components/Button';
 
 import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
@@ -61,6 +68,9 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
   const participant: Nullable<PredefinedParticipant> = useSelector(
     makeSelectPredefinedParticipantById(participantId),
   );
+
+  const raSession = useSelector(makeSelectRaSession());
+  const hasRaSession = Boolean(raSession);
 
   const submitting = useSelector(
     makeSelectInterventionLoader('updatePredefinedParticipant'),
@@ -140,15 +150,48 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
       />
       {participant && (
         <>
-          <Column gap={8}>
-            <Text fontWeight="bold" lineHeight={1.2}>
-              {formatMessage(messages.predefinedParticipantLinkLabel)}
-            </Text>
-            <Row gap={8} align="center">
-              <Text lineHeight={1.2}>{url}</Text>
-              <CopyPredefinedParticipantUrlButton url={url} />
-            </Row>
-          </Column>
+          <Row gap={24}>
+            <Column gap={8} flex={1}>
+              <Text fontWeight="bold" lineHeight={1.2}>
+                {formatMessage(messages.predefinedParticipantLinkLabel)}
+              </Text>
+              <Row gap={8} align="center">
+                <Text lineHeight={1.2}>{url}</Text>
+                <CopyPredefinedParticipantUrlButton url={url} />
+              </Row>
+            </Column>
+            {hasRaSession && (
+              <Column gap={8} flex={1} align="start">
+                <Text fontWeight="bold" lineHeight={1.2}>
+                  {formatMessage(messages.raSessionLabel)}
+                </Text>
+                {participant.raSessionCompleted ? (
+                  <Text lineHeight={1.2} fontSize={13}>
+                    {formatMessage(messages.raSessionCompletedInfo, {
+                      date: participant.raSessionFinishedAt
+                        ? dayjs(participant.raSessionFinishedAt).format(
+                            'MMMM D, YYYY h:mm A z',
+                          )
+                        : '',
+                      email: participant.raSessionFulfilledByEmail ?? '',
+                    })}
+                  </Text>
+                ) : (
+                  <TextButton
+                    buttonProps={{
+                      color: themeColors.secondary,
+                      fontWeight: 'bold',
+                    }}
+                    onClick={() =>
+                      dispatch(fulfillRaSessionRequest(participant.slug))
+                    }
+                  >
+                    {formatMessage(messages.fillRaSessionButton)}
+                  </TextButton>
+                )}
+              </Column>
+            )}
+          </Row>
           <Column>
             <SentInvitationsInfo participant={participant} />
             {formDisabled && (

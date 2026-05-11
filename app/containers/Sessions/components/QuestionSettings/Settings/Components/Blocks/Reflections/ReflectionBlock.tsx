@@ -298,7 +298,10 @@ const ReflectionBlock = ({
         isMultiIntervention={false}
         isMultiSession
         initialSessionId={reflectedOtherSessionId ?? currentSessionId}
-        sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
+        sessionTypesWhiteList={[
+          SessionTypes.CLASSIC_SESSION,
+          SessionTypes.RA_SESSION,
+        ]}
         currentSessionPreviousQuestions={currentSessionPreviousQuestions}
         dropdownWidth={348}
       >

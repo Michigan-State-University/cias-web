@@ -7,6 +7,7 @@ export enum SessionTypes {
   CLASSIC_SESSION = 'Session::Classic',
   SMS_SESSION = 'Session::Sms',
   CAT_SESSION = 'Session::CatMh',
+  RA_SESSION = 'Session::ResearchAssistant',
 }
 
 interface SessionSettings {
@@ -87,4 +88,8 @@ export interface CatSession extends Session {
   catMhTestTypes: {
     id: string;
   }[];
+}
+
+export interface ResearchAssistantSession extends Session {
+  type: SessionTypes.RA_SESSION;
 }

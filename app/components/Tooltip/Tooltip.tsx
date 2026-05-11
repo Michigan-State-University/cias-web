@@ -42,6 +42,7 @@ export type TooltipProps = {
   tooltipProps?: Partial<CSSProperties>;
   iconProps?: object;
   onHide?: () => void;
+  nonInteractive?: boolean;
 } & Record<string, unknown>;
 
 /**
@@ -62,6 +63,7 @@ const Tooltip = ({
   tooltipProps,
   iconProps,
   onHide,
+  nonInteractive,
   ...restProps
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>();
@@ -149,12 +151,13 @@ const Tooltip = ({
             effect="solid"
             multiline
             getContent={getContent}
-            delayHide={200}
+            delayHide={nonInteractive ? 0 : 200}
             afterHide={onFocusOut}
             overridePosition={place ? undefined : calculateTooltipPosition}
             place={place}
             backgroundColor={backgroundColor}
             tooltipProps={tooltipProps}
+            nonInteractive={nonInteractive}
           />
         </Portal>
       )}

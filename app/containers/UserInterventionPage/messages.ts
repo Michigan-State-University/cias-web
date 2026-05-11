@@ -28,4 +28,8 @@ export default defineMessages({
     id: `${scope}.fillAgain`,
     defaultMessage: 'Fill again',
   },
+  sessionNotAvailableRaPending: {
+    id: `${scope}.sessionNotAvailableRaPending`,
+    defaultMessage: 'Session not available yet',
+  },
 });
