@@ -89,7 +89,6 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
   );
 
   const raAnswersAllowed = canBulkImportRaAnswers(interventionStatus);
-  const showRaAnswersPublishedNotice = !raAnswersAllowed && !!raSession;
 
   const handleSubmit: InvitePredefinedParticipantsFormProps['onSubmit'] = (
     values,
@@ -210,14 +209,6 @@ export const UploadPredefinedParticipantsView: FC<Props> = ({
         type={AlertType.INFO}
         wrap={false}
       />
-
-      {showRaAnswersPublishedNotice && (
-        <Alert
-          content={formatMessage(messages.raAnswersRequirePublishedInfoBanner)}
-          type={AlertType.WARNING_LIGHT}
-          wrap={false}
-        />
-      )}
 
       <Row align="center" gap={24}>
         <CsvFileExport

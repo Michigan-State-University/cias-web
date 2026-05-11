@@ -395,15 +395,10 @@ export default defineMessages({
     defaultMessage:
       'This CSV includes RA-session answer columns. The columns below are read-only - to change an answer, edit the CSV and re-upload.',
   },
-  raAnswersRequirePublishedInfoBanner: {
-    id: `${scope}.raAnswersRequirePublishedInfoBanner`,
-    defaultMessage:
-      'To import RA-session answers, please publish the intervention first. You can still upload participants without RA answers in the meantime.',
-  },
   raAnswersRequirePublishedBlockBanner: {
     id: `${scope}.raAnswersRequirePublishedBlockBanner`,
     defaultMessage:
-      'This CSV includes RA-session answers, but the intervention is not published yet. Publish the intervention or remove the RA answer values from the CSV before importing.',
+      'This CSV includes RA-session answers, but the intervention is not published yet. Please publish the intervention or remove the RA answer values from the CSV before importing.',
   },
   bulkCreateErrorListHeader: {
     id: `${scope}.bulkCreateErrorListHeader`,

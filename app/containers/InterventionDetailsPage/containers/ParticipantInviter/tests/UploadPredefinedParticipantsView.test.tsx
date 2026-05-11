@@ -208,42 +208,6 @@ describe('<UploadPredefinedParticipantsView />', () => {
       mockParse.mockReset();
     });
 
-    it('shows the preflight notice when intervention is unpublished and has an RA session', () => {
-      renderComponent(
-        { interventionStatus: InterventionStatus.DRAFT },
-        interventionWithRaSession,
-      );
-
-      expect(
-        screen.getByText(
-          /To import RA-session answers, please publish the intervention first\. You can still upload participants without RA answers in the meantime/,
-        ),
-      ).toBeInTheDocument();
-    });
-
-    it('does NOT show the preflight notice when intervention is published', () => {
-      renderComponent(
-        { interventionStatus: InterventionStatus.PUBLISHED },
-        interventionWithRaSession,
-      );
-
-      expect(
-        screen.queryByText(
-          /To import RA-session answers, please publish the intervention first\. You can still upload participants without RA answers in the meantime/,
-        ),
-      ).not.toBeInTheDocument();
-    });
-
-    it('does NOT show the preflight notice when intervention has no RA session', () => {
-      renderComponent({ interventionStatus: InterventionStatus.DRAFT });
-
-      expect(
-        screen.queryByText(
-          /To import RA-session answers, please publish the intervention first\. You can still upload participants without RA answers in the meantime/,
-        ),
-      ).not.toBeInTheDocument();
-    });
-
     it('blocks upload when DRAFT and CSV contains RA answers', () => {
       mockParse.mockReturnValueOnce(
         buildParseResult([buildParticipant({ 's1.var1': 'A' })]),
