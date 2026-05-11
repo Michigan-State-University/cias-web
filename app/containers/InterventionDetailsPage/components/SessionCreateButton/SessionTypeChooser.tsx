@@ -16,12 +16,14 @@ type Props = {
   onCreateSession: (sessionType: SessionTypes) => void;
   canCreateCatSession: boolean;
   canCreateSmsSession: boolean;
+  canCreateRaSession: boolean;
 };
 
 const SessionTypeChooser = ({
   onCreateSession,
   canCreateCatSession,
   canCreateSmsSession,
+  canCreateRaSession,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
   const [selectedSessionType, setSelectedSessionType] = useState(
@@ -34,6 +36,7 @@ const SessionTypeChooser = ({
         formatMessage,
         canCreateCatSession,
         canCreateSmsSession,
+        canCreateRaSession,
       ),
     [formatMessage],
   );

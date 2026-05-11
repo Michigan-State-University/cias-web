@@ -6,6 +6,9 @@ import isNil from 'lodash/isNil';
 import dayjs from 'dayjs';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
+import { Session } from 'models/Session';
+import { SUPPORTED_RA_QUESTION_TYPE_IDS } from 'models/Session/QuestionTypes';
+import { QuestionTypes } from 'models/Question';
 
 import { RoutePath, WEB_HOST } from 'global/constants';
 import validatorsMessages from 'global/i18n/validatorsMessages';
@@ -42,6 +45,7 @@ import {
   UploadedPredefinedParticipantsCsvData,
   ParsedPredefinedParticipantCsvRow,
   InvitePredefinedParticipantsFormValues,
+  RaAnswerColumnMap,
 } from './types';
 import messages from './messages';
 
@@ -421,12 +425,55 @@ export type ParsePredefinedParticipantsCsvResult = {
   participants: ParsedPredefinedParticipantCsvRow[];
   invalidPhoneCount: number;
   invalidHealthClinicCount: number;
+  unknownRaAnswerColumnCount: number;
+  raAnswerTypeMismatchCount: number;
+};
+
+export const SUPPORTED_RA_QUESTION_TYPES: QuestionTypes[] =
+  SUPPORTED_RA_QUESTION_TYPE_IDS as QuestionTypes[];
+
+export const prepareRaAnswerColumnMap = (
+  raSession: Session | null,
+  questionGroups: Array<{ questions?: Array<any> }> | null,
+): RaAnswerColumnMap => {
+  if (!raSession || !questionGroups?.length) return {};
+  const map: RaAnswerColumnMap = {};
+  questionGroups.forEach((group) => {
+    (group.questions ?? []).forEach((q) => {
+      if (!SUPPORTED_RA_QUESTION_TYPES.includes(q.type)) return;
+      const questionVariable = q.body?.variable?.name;
+      if (!questionVariable) return;
+      const columnKey = `${raSession.variable}.${questionVariable}`;
+      map[columnKey] = {
+        questionId: q.id,
+        questionType: q.type,
+        questionTitle: q.title ?? questionVariable,
+      };
+    });
+  });
+  return map;
+};
+
+const isValueValidForType = (value: string, type: QuestionTypes): boolean => {
+  const trimmed = value.trim();
+  if (!trimmed) return true;
+  switch (type) {
+    case QuestionTypes.NUMBER:
+      return !Number.isNaN(Number(trimmed));
+    case QuestionTypes.DATE:
+      return dayjs(trimmed, 'YYYY-MM-DD', true).isValid();
+    case QuestionTypes.SINGLE:
+      return true;
+    default:
+      return false;
+  }
 };
 
 export const parsePredefinedParticipantsCsv = (
   data: UploadedPredefinedParticipantsCsvData,
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
   isReportingIntervention: boolean,
+  raAnswerColumns: RaAnswerColumnMap = {},
 ): ParsePredefinedParticipantsCsvResult => {
   const dataRows = data
     .map((result) => result.data)
@@ -441,6 +488,15 @@ export const parsePredefinedParticipantsCsv = (
 
   let invalidPhoneCount = 0;
   let invalidHealthClinicCount = 0;
+  let unknownRaAnswerColumnCount = 0;
+  let raAnswerTypeMismatchCount = 0;
+
+  const allRowKeys = new Set<string>();
+  dataRows.forEach((row) => Object.keys(row).forEach((k) => allRowKeys.add(k)));
+  const knownRaKeys = new Set(Object.keys(raAnswerColumns));
+  unknownRaAnswerColumnCount = Array.from(allRowKeys).filter(
+    (k) => k.includes('.') && !knownRaKeys.has(k),
+  ).length;
 
   const clinicNameToIdMap = new Map<string, string>();
   Object.entries(normalizedHealthClinicsInfos).forEach(([id, info]) => {
@@ -486,6 +542,22 @@ export const parsePredefinedParticipantsCsv = (
       invalidPhoneCount += 1;
     }
 
+    const raAnswers: Record<string, string> = {};
+    const raAnswerTypeMismatches: string[] = [];
+    Object.keys(raAnswerColumns).forEach((columnKey) => {
+      const raw = row[columnKey];
+      if (raw === undefined || raw === null) return;
+      const trimmed = String(raw).trim();
+      if (!trimmed) return;
+      raAnswers[columnKey] = trimmed;
+      if (
+        !isValueValidForType(trimmed, raAnswerColumns[columnKey].questionType)
+      ) {
+        raAnswerTypeMismatches.push(columnKey);
+        raAnswerTypeMismatchCount += 1;
+      }
+    });
+
     return {
       firstName: row.firstName?.trim() || '',
       lastName: row.lastName?.trim() || '',
@@ -498,17 +570,50 @@ export const parsePredefinedParticipantsCsv = (
       healthClinicOption,
       healthClinicName: resolvedHealthClinicName,
       healthSystemName: resolvedHealthSystemName,
+      raAnswers: Object.keys(raAnswers).length ? raAnswers : undefined,
+      raAnswerTypeMismatches: raAnswerTypeMismatches.length
+        ? raAnswerTypeMismatches
+        : undefined,
     };
   });
 
-  return { participants, invalidPhoneCount, invalidHealthClinicCount };
+  return {
+    participants,
+    invalidPhoneCount,
+    invalidHealthClinicCount,
+    unknownRaAnswerColumnCount,
+    raAnswerTypeMismatchCount,
+  };
+};
+
+const exampleValueForQuestionType = (type: QuestionTypes): string => {
+  switch (type) {
+    case QuestionTypes.NUMBER:
+      return '42';
+    case QuestionTypes.DATE:
+      return '2026-04-22';
+    case QuestionTypes.SINGLE:
+      return '1';
+    default:
+      return '';
+  }
 };
 
 export const generatePredefinedParticipantsExampleCsv = (
   healthClinicOptions: SelectOption<string>[],
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
   isReportingIntervention: boolean,
+  raAnswerColumns: RaAnswerColumnMap = {},
 ): PredefinedParticipantCsvRow[] => {
+  const raColumnsSample = Object.fromEntries(
+    Object.keys(raAnswerColumns)
+      .sort()
+      .map((key) => [
+        key,
+        exampleValueForQuestionType(raAnswerColumns[key].questionType),
+      ]),
+  );
+
   if (isReportingIntervention) {
     return healthClinicOptions.map(({ value: healthClinicId }, index) => {
       const clinicInfo = normalizedHealthClinicsInfos[healthClinicId];
@@ -523,6 +628,7 @@ export const generatePredefinedParticipantsExampleCsv = (
         smsNotification: 'false',
         healthClinicName: clinicInfo?.healthClinicName || '',
         healthSystemName: clinicInfo?.healthSystemName || '',
+        ...raColumnsSample,
       };
     });
   }
@@ -536,6 +642,7 @@ export const generatePredefinedParticipantsExampleCsv = (
     phoneNumber: `555123456${index}`,
     emailNotification: 'true',
     smsNotification: 'false',
+    ...raColumnsSample,
   }));
 };
 
@@ -583,5 +690,6 @@ export const prepareBulkCreatePredefinedParticipantsPayload = (
     healthClinicId: participant.healthClinicOption?.value || undefined,
     healthClinicName: participant.healthClinicName || undefined,
     healthSystemName: participant.healthSystemName || undefined,
+    variableAnswers: participant.raAnswers ?? {},
   })),
 });

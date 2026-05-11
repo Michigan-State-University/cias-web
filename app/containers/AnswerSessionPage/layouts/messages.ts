@@ -189,4 +189,8 @@ export default defineMessages({
     defaultMessage:
       'Participant will be asked to provide their medical record number <bold>if the above data is incorrect.</bold>',
   },
+  closeTab: {
+    id: `${scope}.closeTab`,
+    defaultMessage: 'Close Tab',
+  },
 });

@@ -3,7 +3,25 @@
 exports[`<CopyChooser /> should match the snapshot 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c0 {
+  "baseElement": .c17 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: not-allowed !important;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -61,24 +79,6 @@ exports[`<CopyChooser /> should match the snapshot 1`] = `
   height: 60px;
   max-height: 300px;
   background-color: rgba(248,251,255,1);
-}
-
-.c17 {
-  width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: not-allowed !important;
-  border: none;
-  outline: none;
-  background-color: #107969;
-  color: #FFFFFF;
-  border: 1px solid transparent;
-  cursor: default;
-  background-color: #9AA1B6;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-right: 25px;
-  margin-left: 25px;
 }
 
 .c10 {
@@ -434,7 +434,25 @@ exports[`<CopyChooser /> should match the snapshot 1`] = `
       </div>
     </div>
   </body>,
-  "container": .c0 {
+  "container": .c17 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: not-allowed !important;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -492,24 +510,6 @@ exports[`<CopyChooser /> should match the snapshot 1`] = `
   height: 60px;
   max-height: 300px;
   background-color: rgba(248,251,255,1);
-}
-
-.c17 {
-  width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: not-allowed !important;
-  border: none;
-  outline: none;
-  background-color: #107969;
-  color: #FFFFFF;
-  border: 1px solid transparent;
-  cursor: default;
-  background-color: #9AA1B6;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-right: 25px;
-  margin-left: 25px;
 }
 
 .c10 {

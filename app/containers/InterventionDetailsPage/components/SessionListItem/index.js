@@ -42,6 +42,7 @@ import duplicateInternally from 'assets/svg/duplicate-internally.svg';
 import copy from 'assets/svg/copy.svg';
 import bin from 'assets/svg/bin-no-bg.svg';
 import mobileIcon from 'assets/svg/phone_message.svg';
+import raIcon from 'assets/svg/user.svg';
 import { colors, themeColors } from 'theme';
 
 import { InterventionType } from 'models/Intervention';
@@ -110,15 +111,21 @@ function SessionListItem({
     }
   };
 
+  const isRaSession = type === SessionTypes.RA_SESSION;
+
   const options = [
-    {
-      id: 'duplicate',
-      label: formatMessage(messages.duplicateHere),
-      icon: copy,
-      action: () => handleCopySession(id),
-      color: colors.bluewood,
-      disabled,
-    },
+    ...(!isRaSession
+      ? [
+          {
+            id: 'duplicate',
+            label: formatMessage(messages.duplicateHere),
+            icon: copy,
+            action: () => handleCopySession(id),
+            color: colors.bluewood,
+            disabled,
+          },
+        ]
+      : []),
     {
       id: 'copy',
       label: formatMessage(messages.copy),
@@ -246,6 +253,9 @@ function SessionListItem({
                       {type === SessionTypes.SMS_SESSION && (
                         <Icon src={mobileIcon} alt="sms" />
                       )}
+                      {type === SessionTypes.RA_SESSION && (
+                        <Icon src={raIcon} alt="ra" />
+                      )}
                     </Row>
                     <Row marginBlockStart={5} gap={8}>
                       <BadgeInput
@@ -344,7 +354,7 @@ function SessionListItem({
                     />
                   </Row>
                 )}
-                {isSessionBranchingPossible && (
+                {isSessionBranchingPossible && !isRaSession && (
                   <SessionBranching
                     disabled={disabled}
                     formulas={formulas}
