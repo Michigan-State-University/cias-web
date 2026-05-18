@@ -57,7 +57,9 @@ ENV API_URL=${API_URL} \
 
 # Install dependencies first for layer-cache friendliness.
 # patch-package runs in postinstall and needs patches/ available — copy it before npm ci.
-COPY package.json package-lock.json ./
+# .npmrc carries `legacy-peer-deps=true` — required because npm 10+ is strict about peer deps
+# and this codebase has known peer-dep conflicts the team works around via legacy mode.
+COPY package.json package-lock.json .npmrc ./
 COPY patches/ ./patches/
 COPY internals/scripts/npmcheckversion.js ./internals/scripts/npmcheckversion.js
 RUN npm ci --prefer-offline --no-audit --progress=false
@@ -96,7 +98,8 @@ WORKDIR /web
 
 # Production-only deps (no dev deps in runtime). patches/ is needed because
 # postinstall runs patch-package again — keep it consistent with builder.
-COPY --chown=app:app package.json package-lock.json ./
+# .npmrc carries `legacy-peer-deps=true`, same as builder stage.
+COPY --chown=app:app package.json package-lock.json .npmrc ./
 COPY --chown=app:app patches/ ./patches/
 COPY --chown=app:app internals/scripts/npmcheckversion.js ./internals/scripts/npmcheckversion.js
 RUN npm ci --omit=dev --prefer-offline --no-audit --progress=false \

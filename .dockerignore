@@ -47,9 +47,10 @@ COPYING.txt
 .stylelintrc
 .travis.yml
 appveyor.yml
-.npmrc
 .nvmrc
 Procfile
+# NB: .npmrc is INCLUDED on purpose — it sets legacy-peer-deps=true, required by npm ci.
+# Excluding it broke the build (peer-dep conflicts when running on strict npm 10+).
 
 # Cypress + analysis artifacts
 cypress.env.json*
