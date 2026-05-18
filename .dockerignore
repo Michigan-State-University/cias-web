@@ -1,2 +1,75 @@
-node_modules
-npm-debug.log
+# VCS / editors
+.git
+.github
+.gitignore
+.gitattributes
+.editorconfig
+.idea
+.vscode
+**/.DS_Store
+
+# Local secrets / env — NEVER bake into the image (build args carry env per build)
+.env
+.env.*
+*.local.yml
+
+# Build / test artifacts (we generate fresh build/ in the builder stage)
+build/
+node_modules/
+coverage/
+e2e/
+cypress/
+playwright-report/
+test-results/
+.tmp-webpack/
+.auth/
+**/*.log
+.eslintcache
+
+# Docker / CI files (not needed inside the image)
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+
+# Tooling / repo metadata
+.claude
+docs
+README.md
+CHANGELOG.md
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+COPYING.txt
+.all-contributorsrc
+.husky
+.lintstagedrc*
+.prettier*
+.prettierignore
+.stylelintrc
+.travis.yml
+appveyor.yml
+.npmrc
+.nvmrc
+Procfile
+
+# Cypress + analysis artifacts
+cypress.env.json*
+cypress.json
+disconnected-error-investigation.md
+
+# Other platforms' deployment manifests (not ECS)
+container/
+
+# Dokku maintenance-mode page (Dokku-only — ECS handles maintenance via ALB / CloudFront)
+maintenance/
+
+# Email template source (MJML sub-project) — output goes elsewhere, not served by cias-web
+mjml/
+
+# Report templates (sent to cias-api for report generation, not served by web)
+report-template/
+
+# Dokku/Heroku-style startup script — wrong pattern for pre-built ECS image
+startup.sh
+
+# Orphan download artifact
+github.zip
