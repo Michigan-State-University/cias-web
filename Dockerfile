@@ -89,25 +89,24 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
         tini \
     && rm -rf /var/lib/apt/lists/*
 
-RUN groupadd --system --gid 1000 app \
-    && useradd  --system --uid 1000 --gid app --create-home --home-dir /home/app app \
-    && mkdir -p /web \
-    && chown -R app:app /web
+# node:22-slim already ships a non-root `node` user at UID/GID 1000 with /home/node.
+# Use it directly rather than creating another user (would conflict on GID 1000).
+RUN mkdir -p /web && chown -R node:node /web
 
 WORKDIR /web
 
 # Production-only deps (no dev deps in runtime). patches/ is needed because
 # postinstall runs patch-package again — keep it consistent with builder.
 # .npmrc carries `legacy-peer-deps=true`, same as builder stage.
-COPY --chown=app:app package.json package-lock.json .npmrc ./
-COPY --chown=app:app patches/ ./patches/
-COPY --chown=app:app internals/scripts/npmcheckversion.js ./internals/scripts/npmcheckversion.js
+COPY --chown=node:node package.json package-lock.json .npmrc ./
+COPY --chown=node:node patches/ ./patches/
+COPY --chown=node:node internals/scripts/npmcheckversion.js ./internals/scripts/npmcheckversion.js
 RUN npm ci --omit=dev --prefer-offline --no-audit --progress=false \
     && npm cache clean --force
 
 # Built SPA assets + Express server source
-COPY --from=builder --chown=app:app /web/build ./build
-COPY --chown=app:app server/ ./server/
+COPY --from=builder --chown=node:node /web/build ./build
+COPY --chown=node:node server/ ./server/
 
 # Bake the release tag into the image for traceability.
 # SOURCE_VERSION was declared in the builder stage (needed by webpack/utils.js); re-declare
@@ -116,7 +115,7 @@ ARG SOURCE_VERSION=unspecified
 ENV SOURCE_VERSION=${SOURCE_VERSION}
 RUN echo "${SOURCE_VERSION}" > /release-version
 
-USER app
+USER node
 
 EXPOSE 4200
 
