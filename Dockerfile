@@ -39,6 +39,10 @@ ARG ADDITIONAL_ORIGIN_SECURE_TOKEN
 ARG SOURCE_VERSION=unspecified
 
 # Expose ARGs as ENV so webpack-dotenv's systemvars:true picks them up.
+# NOTE: NODE_ENV is intentionally NOT set here. Setting NODE_ENV=production at the image level
+# causes `npm ci` to silently skip devDependencies (npm 7+ behavior), which means patch-package
+# isn't installed → postinstall fails → build dies. The npm script for `build` sets NODE_ENV
+# via cross-env when invoking webpack, so production-mode bundling still happens correctly.
 ENV API_URL=${API_URL} \
     WEBSOCKET_URL=${WEBSOCKET_URL} \
     WEB_URL=${WEB_URL} \
@@ -52,8 +56,7 @@ ENV API_URL=${API_URL} \
     DISABLED_SMS_CAMPAIGN=${DISABLED_SMS_CAMPAIGN} \
     ALLOWED_USERS_FOR_SMS_CAMPAIGNS=${ALLOWED_USERS_FOR_SMS_CAMPAIGNS} \
     ADDITIONAL_ORIGIN_SECURE_TOKEN=${ADDITIONAL_ORIGIN_SECURE_TOKEN} \
-    SOURCE_VERSION=${SOURCE_VERSION} \
-    NODE_ENV=production
+    SOURCE_VERSION=${SOURCE_VERSION}
 
 # Install dependencies first for layer-cache friendliness.
 # patch-package runs in postinstall and needs patches/ available — copy it before npm ci.
@@ -68,7 +71,12 @@ RUN npm ci --prefer-offline --no-audit --progress=false
 COPY . .
 
 # `npm run build` runs: webpack prod build → postbuild removes *.js.map source maps
+# (NODE_ENV=production is set inside this command via cross-env in the npm script)
 RUN npm run build
+
+# Strip devDependencies after build so the resulting node_modules is production-only,
+# but with patch-package's patches already applied to the surviving prod deps.
+RUN npm prune --omit=dev
 
 # ---------- runtime ----------
 FROM node:${NODE_VERSION}-slim AS runtime
@@ -95,16 +103,13 @@ RUN mkdir -p /web && chown -R node:node /web
 
 WORKDIR /web
 
-# Production-only deps (no dev deps in runtime). patches/ is needed because
-# postinstall runs patch-package again — keep it consistent with builder.
-# .npmrc carries `legacy-peer-deps=true`, same as builder stage.
-COPY --chown=node:node package.json package-lock.json .npmrc ./
-COPY --chown=node:node patches/ ./patches/
-COPY --chown=node:node internals/scripts/npmcheckversion.js ./internals/scripts/npmcheckversion.js
-RUN npm ci --omit=dev --prefer-offline --no-audit --progress=false \
-    && npm cache clean --force
-
-# Built SPA assets + Express server source
+# Copy the production-pruned, patches-applied node_modules straight from the builder.
+# We skip a separate `npm ci --omit=dev` here on purpose: re-running install in runtime
+# would re-execute the `postinstall` hook (patch-package), which is a devDependency and
+# isn't present in --omit=dev — install would fail. The builder already produced exactly
+# the node_modules we want, so we copy it whole.
+COPY --from=builder --chown=node:node /web/node_modules ./node_modules
+COPY --from=builder --chown=node:node /web/package.json /web/package-lock.json ./
 COPY --from=builder --chown=node:node /web/build ./build
 COPY --chown=node:node server/ ./server/
 
