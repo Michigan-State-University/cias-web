@@ -71,12 +71,16 @@ jobs:
 
       - name: Verify build-args were baked into the JS bundle
         # Strong evidence the webpack DefinePlugin substitution worked.
+        # webpack output config: path=build/, filename=[name].[contenthash].js — files land
+        # directly in build/, not under build/static/js/.
         run: |
           docker run --rm cias-web:build-check sh -c '
-            if grep -rho "api-build-check.example.com" build/static/js/*.js 2>/dev/null | head -1 | grep -q "api-build-check"; then
+            if grep -rho "api-build-check.example.com" build/ 2>/dev/null | head -1 | grep -q "api-build-check"; then
               echo "✓ API_URL was baked into the JS bundle"
             else
-              echo "✗ API_URL was NOT found in the JS bundle — webpack Dotenv plugin did not pick it up"
+              echo "✗ API_URL was NOT found in the JS bundle"
+              echo "Contents of build/:"
+              ls build/ | head -20
               exit 1
             fi
           '
