@@ -8,8 +8,7 @@
 #
 # Why per-env builds: webpack's Dotenv plugin (with systemvars: true) substitutes env vars
 # directly into the JS bundle via DefinePlugin. A bundle built for staging URLs cannot be
-# repointed to production without rebuilding. Same constraint as the cias-api migration plan
-# §0.3 — chose Option A (separate builds per environment).
+# repointed to production without rebuilding.
 
 ARG NODE_VERSION=22
 
