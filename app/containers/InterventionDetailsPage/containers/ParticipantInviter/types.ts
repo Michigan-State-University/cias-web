@@ -119,6 +119,7 @@ export type PredefinedParticipantCsvRow = {
   lastName?: string;
   email?: string;
   externalId?: string;
+  // Numeric calling code, e.g. "1" or "44" (the leading "+" is optional). A 2-letter ISO code is also accepted.
   phoneCountryCode?: string;
   phoneNumber?: string;
   emailNotification?: string;
