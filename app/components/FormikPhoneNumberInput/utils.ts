@@ -126,8 +126,9 @@ export const parsePhoneFromCsv = (
       return getInitialValues(null, null);
     }
 
-    if (trimmedCode.startsWith('+')) {
-      const fullNumber = `${trimmedCode}${trimmedNumber}`;
+    const callingCode = trimmedCode.replace(/^\+/, '');
+    if (/^\d+$/.test(callingCode)) {
+      const fullNumber = `+${callingCode}${trimmedNumber}`;
       const parsed = parsePhoneNumber(fullNumber);
 
       if (parsed) {
