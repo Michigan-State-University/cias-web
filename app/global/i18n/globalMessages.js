@@ -7,6 +7,10 @@ export default defineMessages({
     id: `${scope}.variableNamePlaceholder`,
     defaultMessage: 'Variable name...',
   },
+  required: {
+    id: `${scope}.required`,
+    defaultMessage: 'Required',
+  },
   variableScorePlaceholder: {
     id: `${scope}.variableScorePlaceholder`,
     defaultMessage: 'Score',
