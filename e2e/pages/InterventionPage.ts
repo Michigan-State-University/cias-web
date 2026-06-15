@@ -88,6 +88,60 @@ export class InterventionPage {
     }
   }
 
+  // Opens the "create session" type-chooser modal (no-op if already open).
+  async openCreateSessionModal() {
+    const submitButton = this.page.locator('[data-cy="create-session-submit-button"]');
+    if (await submitButton.isVisible().catch(() => false)) return;
+
+    const modalPortal = this.page.locator('#modal-portal [role="dialog"]');
+    if (await modalPortal.isVisible().catch(() => false)) {
+      await this.page.keyboard.press('Escape');
+      await this.page.waitForTimeout(500);
+    }
+
+    await this.createSessionButton.waitFor({ state: 'visible', timeout: 30000 });
+    await this.createSessionButton.click();
+    await submitButton.waitFor({ state: 'visible', timeout: 10000 });
+  }
+
+  async createRaSession() {
+    await this.openCreateSessionModal();
+
+    await this.page
+      .locator('[data-cy="session-type-option-Session::ResearchAssistant"]')
+      .click();
+
+    const responsePromise = this.page.waitForResponse(
+      (response) =>
+        response.url().includes('/sessions') &&
+        response.request().method() === 'POST',
+      { timeout: 30000 },
+    );
+
+    await this.page.locator('[data-cy="create-session-submit-button"]').click();
+
+    const response = await responsePromise;
+    expect(response.status()).toBe(201);
+
+    await this.page.waitForTimeout(1000);
+  }
+
+  // Whether the Research Assistant option is offered in the create-session modal
+  // (only one RA session is allowed per intervention). Leaves the modal closed.
+  async isRaSessionTypeAvailable(): Promise<boolean> {
+    await this.openCreateSessionModal();
+
+    const raOption = this.page.locator(
+      '[data-cy="session-type-option-Session::ResearchAssistant"]',
+    );
+    const available = await raOption.isVisible().catch(() => false);
+
+    await this.page.keyboard.press('Escape');
+    await this.page.waitForTimeout(300);
+
+    return available;
+  }
+
   async enterSession(index: number = 0) {
     const enterSessionButton = this.page.locator(
       `[data-cy="enter-session-${index}"]`,
@@ -201,6 +255,31 @@ export class InterventionPage {
 
     await responsePromise;
     await this.page.locator('[role="dialog"]').waitFor({ state: 'hidden', timeout: 10000 });
+  }
+
+  // Opens the internal-copy picker for a session, selects the target intervention
+  // and clicks "Paste session in this intervention" — without asserting the result.
+  // Used to exercise the RA-conflict guard (which blocks the paste client-side).
+  async startInternalSessionCopy(sessionIndex: number, targetInterventionName: string) {
+    const dropdownTriggers = this.page.locator('[data-cy^="dropdown-trigger-session-list-item-options"]');
+    await dropdownTriggers.nth(sessionIndex).click();
+
+    const copyOption = this.page.locator('[data-cy="dropdown-option-copy"]');
+    await copyOption.waitFor({ state: 'visible', timeout: 5000 });
+    await copyOption.click();
+
+    const dialog = this.page.locator('[role="dialog"]');
+    await dialog.waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.waitForTimeout(2000);
+
+    const targetRow = dialog.getByText(targetInterventionName, { exact: false });
+    await targetRow.waitFor({ state: 'visible', timeout: 10000 });
+    await targetRow.click();
+    await this.page.waitForTimeout(1000);
+
+    const pasteButton = this.page.locator('button:has-text("Paste session in this intervention")');
+    await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
+    await pasteButton.click();
   }
 
   async addNote(noteText: string) {
