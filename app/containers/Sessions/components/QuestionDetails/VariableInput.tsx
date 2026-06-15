@@ -10,10 +10,14 @@ import { canEdit } from 'models/Status/statusPermissions';
 import { QuestionBodyVariable } from 'models/Question';
 import { InterventionStatus } from 'models/Intervention';
 
-import { variableNameValidator } from 'utils/validators';
+import {
+  requiredVariableNameValidator,
+  variableNameValidator,
+} from 'utils/validators';
 
 import { BadgeInput } from 'components/Input/BadgeInput';
 import Row from 'components/Row';
+import Text, { HiddenText } from 'components/Text';
 
 export type VariableInputProps = {
   isNarratorTab?: boolean;
@@ -21,6 +25,7 @@ export type VariableInputProps = {
   interventionStatus: InterventionStatus;
   questionId: string;
   disabled?: boolean;
+  required?: boolean;
 };
 
 const VariableInput = ({
@@ -29,6 +34,7 @@ const VariableInput = ({
   interventionStatus,
   questionId,
   disabled,
+  required,
 }: VariableInputProps) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -50,13 +56,23 @@ const VariableInput = ({
         py={12}
         textAlign="center"
         keyboard="tel"
-        validator={variableNameValidator}
+        validator={
+          required ? requiredVariableNameValidator : variableNameValidator
+        }
         placeholder={formatMessage(globalMessages.variableNamePlaceholder)}
         value={variable.name}
         color={colors.jungleGreen}
         onBlur={updateVariable}
         autoComplete="off"
       />
+      {required && (
+        <>
+          <Text aria-hidden color={colors.flamingo} ml={4} fontWeight="bold">
+            *
+          </Text>
+          <HiddenText>{formatMessage(globalMessages.required)}</HiddenText>
+        </>
+      )}
     </Row>
   );
 };

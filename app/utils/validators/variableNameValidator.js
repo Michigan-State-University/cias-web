@@ -10,6 +10,12 @@ export const variableNameValidator = (target) => {
   return variableNameRegex.test(target);
 };
 
+export const requiredVariableNameValidator = (target) => {
+  if (target === '') return false;
+
+  return variableNameRegex.test(target);
+};
+
 export const variableNameInTextboxValidator = (target) => {
   if (target === '') return true;
 
