@@ -7,12 +7,16 @@ import {
   gridQuestion,
   multiQuestion,
   tlfbQuestion,
+  SUPPORTED_RA_QUESTION_TYPE_IDS,
 } from 'models/Session/QuestionTypes';
 import {
   QUESTIONS_WITHOUT_VARIABLE,
   getEditVariables,
   getTlfbVariables,
 } from 'models/Session/utils';
+import { SessionTypes } from 'models/Session';
+
+import { makeSelectSession } from 'global/reducers/session/selectors';
 
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
@@ -142,10 +146,19 @@ const isAnswerOptionWithVariableUpdate = (cachedQuestion, currentQuestion) => {
   });
 };
 
-const validateVariable = (payload, question, variables) => {
+export const validateVariable = (question, variables, isRaSession) => {
   if (QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
     return;
   }
+
+  if (
+    isRaSession &&
+    SUPPORTED_RA_QUESTION_TYPE_IDS.includes(question.type) &&
+    !question.body?.variable?.name?.trim()
+  ) {
+    throw new Error(formatMessage(messages.raVariableRequired));
+  }
+
   const duplicateError = new Error(formatMessage(messages.duplicateVariable));
 
   const checkAgainstExisting = (name) => {
@@ -192,8 +205,11 @@ function* editQuestion({ payload }) {
     (currentVariable) => currentVariable && currentVariable.trim(),
   );
 
+  const session = yield select(makeSelectSession());
+  const isRaSession = session?.type === SessionTypes.RA_SESSION;
+
   try {
-    validateVariable(payload, question, variables);
+    validateVariable(question, variables, isRaSession);
   } catch (error) {
     yield call(toast.error, error.message, {
       toastId: EDIT_QUESTION_ERROR,

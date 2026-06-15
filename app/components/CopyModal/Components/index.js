@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, IntlShape } from 'react-intl';
+import { toast } from 'react-toastify';
 
 import Column from 'components/Column';
 import Button from 'components/Button';
@@ -58,6 +59,7 @@ const CopyChooser = ({
   disableCurrentQuestionGroupCopy,
   disableCurrentSessionCopy,
   disableCurrentInterventionCopy,
+  blockInterventionsWithRaSession,
   changeView,
   pasteText,
   savedIds,
@@ -112,8 +114,22 @@ const CopyChooser = ({
 
   const handleCopyCurrent = () => {
     if (!selectedItem?.id) return;
-    if (currentView === VIEWS.INTERVENTION)
+    if (currentView === VIEWS.INTERVENTION) {
+      const targetIntervention = interventions?.find(
+        (intervention) => intervention.id === selectedItem.id,
+      );
+      if (
+        blockInterventionsWithRaSession &&
+        targetIntervention?.hasResearchAssistantSession
+      ) {
+        toast.error(formatMessage(messages.raSessionCopyConflict), {
+          toastId: 'ra-session-copy-conflict',
+        });
+        return;
+      }
       onClick({ type: VIEWS.INTERVENTION, id: selectedItem.id });
+      return;
+    }
     if (currentView === VIEWS.SESSION)
       onClick({ type: VIEWS.SESSION, id: selectedItem.id });
     if (currentView === VIEWS.QUESTION_GROUP)
@@ -255,6 +271,7 @@ CopyChooser.propTypes = {
   disableCurrentQuestionGroupCopy: PropTypes.bool,
   disableCurrentSessionCopy: PropTypes.bool,
   disableCurrentInterventionCopy: PropTypes.bool,
+  blockInterventionsWithRaSession: PropTypes.bool,
   changeView: PropTypes.func,
   savedIds: PropTypes.object,
   pasteText: PropTypes.string,
@@ -271,6 +288,7 @@ CopyChooser.defaultProps = {
   disableCurrentQuestionGroupCopy: false,
   disableCurrentSessionCopy: false,
   disableCurrentInterventionCopy: false,
+  blockInterventionsWithRaSession: false,
 };
 
 const mapStateToProps = createStructuredSelector({
