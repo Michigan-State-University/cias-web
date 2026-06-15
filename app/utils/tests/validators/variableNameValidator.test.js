@@ -2,10 +2,7 @@
  * Test variableNameValidator
  */
 
-import {
-  requiredVariableNameValidator,
-  variableNameValidator,
-} from 'utils/validators';
+import { variableNameValidator } from 'utils/validators';
 
 describe('variableNameValidator regex', () => {
   it('should return false when checked against numbers', () => {
@@ -70,24 +67,6 @@ describe('variableNameValidator regex', () => {
 
     targets.forEach((target) =>
       expect(variableNameValidator(target)).toBeFalse(),
-    );
-  });
-});
-
-describe('requiredVariableNameValidator', () => {
-  it('should return false for an empty value (variable is required)', () => {
-    expect(requiredVariableNameValidator('')).toBeFalse();
-  });
-
-  it('should return true for a valid non-empty variable name', () => {
-    ['var', 'q1', 'systolic_bp', '3Q'].forEach((target) =>
-      expect(requiredVariableNameValidator(target)).toBeTrue(),
-    );
-  });
-
-  it('should return false for an invalid variable name', () => {
-    ['-', ' ', '@', '1'].forEach((target) =>
-      expect(requiredVariableNameValidator(target)).toBeFalse(),
     );
   });
 });

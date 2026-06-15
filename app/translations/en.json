@@ -121,6 +121,7 @@
   "app.components.ChatMessageList.participant": "Participant",
   "app.components.CollaboratingIndicator.title": "Intervention with collaborators indicator",
   "app.components.ConfirmationBox.selectPlace": "Select a place to paste",
+  "app.containers.TargetQuestionChooser.raSessionCopyConflict": "This intervention already has a Research Assistant session. Only one is allowed per intervention — choose a different intervention.",
   "app.components.ConversationInfoBox.archived": "Archived",
   "app.components.ConversationInfoBox.me": "Me: {messageContent}",
   "app.components.ConversationInfoBox.you": "You: {messageContent}",

@@ -223,6 +223,7 @@ function SessionListItem({
                 disableQuestionGroupCopy
                 disableSessionCopy
                 disableCurrentInterventionCopy
+                blockInterventionsWithRaSession={isRaSession}
                 pasteText={formatMessage(messages.pasteSession)}
                 defaultView={VIEWS.INTERVENTION}
               />

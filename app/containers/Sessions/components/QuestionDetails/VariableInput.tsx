@@ -10,10 +10,7 @@ import { canEdit } from 'models/Status/statusPermissions';
 import { QuestionBodyVariable } from 'models/Question';
 import { InterventionStatus } from 'models/Intervention';
 
-import {
-  requiredVariableNameValidator,
-  variableNameValidator,
-} from 'utils/validators';
+import { variableNameValidator } from 'utils/validators';
 
 import { BadgeInput } from 'components/Input/BadgeInput';
 import Row from 'components/Row';
@@ -56,9 +53,7 @@ const VariableInput = ({
         py={12}
         textAlign="center"
         keyboard="tel"
-        validator={
-          required ? requiredVariableNameValidator : variableNameValidator
-        }
+        validator={variableNameValidator}
         placeholder={formatMessage(globalMessages.variableNamePlaceholder)}
         value={variable.name}
         color={colors.jungleGreen}

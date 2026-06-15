@@ -115,6 +115,7 @@
   "app.components.ChatMessageList.participant": "Partícipe",
   "app.components.CollaboratingIndicator.title": "",
   "app.components.ConfirmationBox.selectPlace": "",
+  "app.containers.TargetQuestionChooser.raSessionCopyConflict": "",
   "app.components.ConversationInfoBox.archived": "",
   "app.components.ConversationInfoBox.me": "",
   "app.components.ConversationInfoBox.you": "",
