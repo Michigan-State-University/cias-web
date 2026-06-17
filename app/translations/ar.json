@@ -519,6 +519,7 @@
   "app.components.SmsSendTimeSettings.timeRangeByResearcher": "",
   "app.components.SmsSendTimeSettings.to": "",
   "app.components.TextMessageTypeChooser.alertForThirdPartyLabel": "",
+  "app.components.TextMessageTypeChooser.informationForParticipantDisabledTooltip": "",
   "app.components.TextMessageTypeChooser.informationForParticipantLabel": "",
   "app.components.TextMessageTypeChooser.typeOfTheSMS": "",
   "app.components.TextMessageTypeChooser.typeOfTheSMSTooltip": "",
