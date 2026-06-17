@@ -364,6 +364,11 @@ export default defineMessages({
     id: `${scope}.fillRaSessionButton`,
     defaultMessage: 'Fill RA Session',
   },
+  fillRaSessionDisabledInfo: {
+    id: `${scope}.fillRaSessionDisabledInfo`,
+    defaultMessage:
+      'The RA session can only be filled once the intervention is published.',
+  },
   raSessionCompleted: {
     id: `${scope}.raSessionCompleted`,
     defaultMessage: 'Completed',

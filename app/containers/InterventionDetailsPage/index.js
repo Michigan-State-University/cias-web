@@ -433,7 +433,7 @@ export function InterventionDetailsPage({
       };
     });
     reorderSessions({
-      reorderedList: concat(orderedNewList, smsSessions),
+      reorderedList: concat(orderedNewList, smsSessions, raSessions),
       interventionId,
     });
   };
@@ -639,7 +639,12 @@ export function InterventionDetailsPage({
             <ConfirmationModal
               visible={!isNullOrUndefined(deleteConfirmationSessionId)}
               onClose={() => setDeleteConfirmationSessionId(null)}
-              description={formatMessage(messages.sessionDeleteHeader)}
+              description={formatMessage(
+                sessions?.find((s) => s.id === deleteConfirmationSessionId)
+                  ?.type === SessionTypes.RA_SESSION
+                  ? messages.raSessionDeleteHeader
+                  : messages.sessionDeleteHeader,
+              )}
               content={formatMessage(
                 sessions?.find((s) => s.id === deleteConfirmationSessionId)
                   ?.type === SessionTypes.RA_SESSION
