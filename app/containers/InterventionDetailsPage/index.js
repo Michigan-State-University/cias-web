@@ -433,7 +433,7 @@ export function InterventionDetailsPage({
       };
     });
     reorderSessions({
-      reorderedList: concat(orderedNewList, smsSessions),
+      reorderedList: concat(orderedNewList, smsSessions, raSessions),
       interventionId,
     });
   };
