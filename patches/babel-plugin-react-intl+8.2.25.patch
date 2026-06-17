@@ -1,0 +1,19 @@
+diff --git a/node_modules/babel-plugin-react-intl/index.js b/node_modules/babel-plugin-react-intl/index.js
+index f9c1f86..3710e9d 100755
+--- a/node_modules/babel-plugin-react-intl/index.js
++++ b/node_modules/babel-plugin-react-intl/index.js
+@@ -190,10 +190,10 @@ function assertObjectExpression(path, callee) {
+ }
+ exports.default = helper_plugin_utils_1.declare(function (api, options) {
+     api.assertVersion(7);
+-    schema_utils_1.validate(OPTIONS_SCHEMA, options, {
+-        name: 'babel-plugin-react-intl',
+-        baseDataPath: 'options',
+-    });
++    // patch: skip schema-utils option validation. The nested schema-utils@3
++    // resolves an incompatible ajv (v8) in this tree and throws "Unknown
++    // keyword formatMinimum". We pass no plugin options, so validation is a
++    // no-op anyway. See patches/babel-plugin-react-intl+8.2.25.patch.
+     var pragma = options.pragma;
+     /**
+      * Store this in the node itself so that multiple passes work. Specifically
