@@ -11,22 +11,24 @@ import { createSessionSuccess, createSessionError } from '../actions';
 
 export function* createSession({ payload: { id, lastPosition, type } }) {
   const requestURL = `v1/interventions/${id}/sessions`;
-  const sessionNamePrefix =
-    type === SessionTypes.CAT_SESSION ? CAT_SESSION_NAME_PREFIX : '';
-  const sessionName =
-    type === SessionTypes.SMS_SESSION
-      ? 'New SMS Campaign'
-      : `${sessionNamePrefix}New Session`;
+  const isRaSession = type === SessionTypes.RA_SESSION;
+
+  const session = { type };
+
+  if (!isRaSession) {
+    const sessionNamePrefix =
+      type === SessionTypes.CAT_SESSION ? CAT_SESSION_NAME_PREFIX : '';
+    session.name =
+      type === SessionTypes.SMS_SESSION
+        ? 'New SMS Campaign'
+        : `${sessionNamePrefix}New Session`;
+    session.position = lastPosition + 1;
+  }
+
   try {
     const {
       data: { data },
-    } = yield call(axios.post, requestURL, {
-      session: {
-        type,
-        name: sessionName,
-        position: lastPosition + 1,
-      },
-    });
+    } = yield call(axios.post, requestURL, { session });
 
     yield put(createSessionSuccess(defaultMapper(objectToCamelCase(data))));
   } catch (error) {

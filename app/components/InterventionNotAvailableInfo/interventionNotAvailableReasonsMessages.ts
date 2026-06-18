@@ -23,4 +23,9 @@ export default defineMessages<InterventionNotAvailableReason>({
     id: `${scope}.SESSION_CLOSED`,
     defaultMessage: 'This module has been closed',
   },
+  [InterventionNotAvailableReason.RA_SESSION_PENDING]: {
+    id: `${scope}.RA_SESSION_PENDING`,
+    defaultMessage:
+      'Your session is not available yet. Please check back later or contact the research team.',
+  },
 });

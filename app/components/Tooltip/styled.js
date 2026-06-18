@@ -33,5 +33,14 @@ export const StyledTooltip = styled(ReactTooltip).attrs({
     pointer-events: auto !important;
   }
 
+  ${({ nonInteractive }) =>
+    nonInteractive &&
+    `
+    pointer-events: none !important;
+    &:hover {
+      pointer-events: none !important;
+    }
+  `}
+
   ${({ tooltipProps }) => tooltipProps}
 `;

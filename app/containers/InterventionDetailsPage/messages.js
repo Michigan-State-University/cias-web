@@ -98,6 +98,15 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this session? It will no longer be possible to recover it later.',
   },
+  raSessionDeleteHeader: {
+    id: `${scope}.raSessionDeleteHeader`,
+    defaultMessage: 'Delete Research Assistant Session',
+  },
+  raSessionDeleteMessage: {
+    id: `${scope}.raSessionDeleteMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Research Assistant Session? It will no longer be possible to recover it later.',
+  },
   interventionSettings: {
     id: `${scope}.interventionSettings`,
     defaultMessage: 'Intervention Settings',

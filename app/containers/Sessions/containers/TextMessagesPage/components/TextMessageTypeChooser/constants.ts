@@ -4,3 +4,6 @@ export const INFORMATION_FOR_PARTICIPANT_LABEL_ID =
   'id-information-for-participant-label';
 
 export const ALERT_FOR_THIRD_PARTY_LABEL_ID = 'id-alert-for-third-party-label';
+
+export const INFORMATION_FOR_PARTICIPANT_DISABLED_TOOLTIP_ID =
+  'id-information-for-participant-disabled-tooltip';

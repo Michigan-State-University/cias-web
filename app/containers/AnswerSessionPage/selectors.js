@@ -103,6 +103,12 @@ const makeSelectQuestionLanguageCode = () =>
     (substate) => substate.currentQuestion?.question_language,
   );
 
+const makeSelectIsRaFulfillment = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.isRaFulfillment,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -120,4 +126,5 @@ export {
   makeSelectUserSessionLanguageCode,
   makeSelectQuestionLanguageCode,
   makeSelectVideoStats,
+  makeSelectIsRaFulfillment,
 };

@@ -27,6 +27,7 @@ export interface UserIntervention {
   userSessions: { data: UserSession[] };
   containMultipleFillSession: boolean;
   healthClinicId: Nullable<string>;
+  raSessionPending: boolean;
 }
 
 export type UserInterventionDTO = CamelToSnakeOmitId<UserIntervention>;

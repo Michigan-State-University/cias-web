@@ -37,6 +37,8 @@ import sendPredefinedParticipantSmsInvitationSaga from './sendPredefinedParticip
 import sendPredefinedParticipantEmailInvitationSaga from './sendPredefinedParticipantEmailInvitation';
 import bulkCreatePredefinedParticipantsSaga from './bulkCreatePredefinedParticipants';
 import unassignTagSaga from './unassignTag';
+import fulfillRaSessionSaga from './fulfillRaSession';
+import fetchRaSessionQuestionGroupsSaga from './fetchRaSessionQuestionGroups';
 
 export * from './onCollaboratorRemovedReceive';
 export * from './refreshInterventionData';
@@ -121,6 +123,8 @@ export default function* allInterventionSagas() {
     sendPredefinedParticipantEmailInvitationSaga(),
     bulkCreatePredefinedParticipantsSaga(),
     unassignTagSaga(),
+    fulfillRaSessionSaga(),
+    fetchRaSessionQuestionGroupsSaga(),
   ]);
 }
 

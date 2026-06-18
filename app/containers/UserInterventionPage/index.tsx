@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
+import { useParams, useLocation } from 'react-router';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 import groupBy from 'lodash/groupBy';
@@ -59,6 +59,12 @@ interface Params {
 
 const UserInterventionPage = () => {
   const { userInterventionId } = useParams<Params>();
+  const location = useLocation();
+
+  const raSessionPendingFromQuery = useMemo(() => {
+    const searchParams = new URLSearchParams(location.search);
+    return searchParams.get('raSessionPending') === 'true';
+  }, [location.search]);
 
   const globalDispatch = useDispatch();
 
@@ -86,7 +92,9 @@ const UserInterventionPage = () => {
     if (!data) return [];
     const { sessions, userIntervention } = data;
     const nonSmsSessions = sessions.filter(
-      ({ type: sessionType }) => sessionType !== SessionTypes.SMS_SESSION,
+      ({ type: sessionType }) =>
+        sessionType !== SessionTypes.SMS_SESSION &&
+        sessionType !== SessionTypes.RA_SESSION,
     );
     if (userIntervention.intervention.type !== InterventionType.DEFAULT) {
       return nonSmsSessions;
@@ -138,7 +146,12 @@ const UserInterventionPage = () => {
     },
     healthClinicId,
     containMultipleFillSession,
+    raSessionPending: raSessionPendingFromApi,
   } = userIntervention;
+
+  const raSessionPending =
+    raSessionPendingFromQuery ||
+    (raSessionPendingFromApi && type === InterventionType.FLEXIBLE);
 
   if (status === InterventionStatus.PAUSED) {
     const redirectPath = getInterventionNotAvailablePagePathFromReason(
@@ -181,6 +194,7 @@ const UserInterventionPage = () => {
               interventionId={id}
               userSession={groupedUserSessions[session.id]?.[0]}
               healthClinicId={healthClinicId}
+              raSessionPending={raSessionPending}
             />
           </Col>
         ))}

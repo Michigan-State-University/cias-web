@@ -10,6 +10,7 @@ import viewTitlesMessages from './viewTitlesMessages';
 import {
   INVITE_PARTICIPANTS_MODAL_HEIGHT,
   INVITE_PARTICIPANTS_MODAL_WIDTH,
+  INVITE_PARTICIPANTS_MODAL_WIDTH_WIDE,
 } from './constants';
 import {
   InviteParticipantModalView,
@@ -53,12 +54,25 @@ export const InviteParticipantsModal: FC<Props> = ({
     }
   }, [visible]);
 
+  const isUploadPdpView =
+    currentView.view ===
+    InviteParticipantModalView.UPLOAD_PREDEFINED_PARTICIPANTS;
+
   return (
     <Modal
       visible={visible}
       onClose={onClose}
       title={formatMessage(viewTitlesMessages[currentView.view])}
-      width={INVITE_PARTICIPANTS_MODAL_WIDTH}
+      width={
+        isUploadPdpView
+          ? INVITE_PARTICIPANTS_MODAL_WIDTH_WIDE
+          : INVITE_PARTICIPANTS_MODAL_WIDTH
+      }
+      maxWidth={
+        isUploadPdpView
+          ? INVITE_PARTICIPANTS_MODAL_WIDTH_WIDE
+          : INVITE_PARTICIPANTS_MODAL_WIDTH
+      }
       height={INVITE_PARTICIPANTS_MODAL_HEIGHT}
       pt={24}
       px={24}

@@ -44,6 +44,7 @@ import {
   VERIFY_PID_REQUEST,
   VERIFY_PID_SUCCESS,
   VERIFY_PID_ERROR,
+  SET_RA_FULFILLMENT,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -85,6 +86,7 @@ export const initialState = {
   hfhsPatientDetail: null,
   verifyPidLoading: false,
   verifyPidError: null,
+  isRaFulfillment: false,
 };
 
 /* eslint-disable default-case, no-param-reassign, default-param-last */
@@ -162,6 +164,7 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case FETCH_USER_SESSION_REQUEST: {
         draft.userSessionLoading = true;
         draft.fetchUserSessionError = null;
+        draft.isRaFulfillment = false;
         break;
       }
 
@@ -300,6 +303,11 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case SET_HFHS_PATIENT_DETAIL: {
         draft.hfhsPatientDetail = payload.hfhsPatientDetail;
+        break;
+      }
+
+      case SET_RA_FULFILLMENT: {
+        draft.isRaFulfillment = payload.isRaFulfillment;
         break;
       }
 

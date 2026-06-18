@@ -11,6 +11,7 @@ export const prepareSessionTypes = (
   formatMessage: any,
   canCreateCatSession: boolean,
   canCreateSmsSession: boolean,
+  canCreateRaSession: boolean,
 ): SessionTypesCard[] => {
   const sessionTypesCards: SessionTypesCard[] = [
     {
@@ -31,6 +32,13 @@ export const prepareSessionTypes = (
       title: formatMessage(messages.catSession),
       type: SessionTypes.CAT_SESSION,
       description: formatMessage(messages.catSessionDescription),
+    });
+  }
+  if (canCreateRaSession) {
+    sessionTypesCards.push({
+      title: formatMessage(messages.raSession),
+      type: SessionTypes.RA_SESSION,
+      description: formatMessage(messages.raSessionDescription),
     });
   }
   return sessionTypesCards;

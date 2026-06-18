@@ -12,11 +12,13 @@ import { PredefinedParticipantsTableRow } from './PredefinedParticipantsTableRow
 export type Props = {
   predefinedParticipants: PredefinedParticipant[];
   onManage: (participantId: string) => void;
+  hasRaSession?: boolean;
 };
 
 export const PredefinedParticipantsTable: FC<Props> = ({
   predefinedParticipants,
   onManage,
+  hasRaSession = false,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -39,6 +41,13 @@ export const PredefinedParticipantsTable: FC<Props> = ({
               {formatMessage(messages.invitationColumnHeader)}
             </Text>
           </TH>
+          {hasRaSession && (
+            <TH padding={8}>
+              <Text textAlign="left" fontWeight="bold">
+                {formatMessage(messages.raSessionColumnHeader)}
+              </Text>
+            </TH>
+          )}
           <TH width={110}></TH>
         </TR>
       </THead>
@@ -48,6 +57,7 @@ export const PredefinedParticipantsTable: FC<Props> = ({
             key={predefinedParticipant.id}
             predefinedParticipant={predefinedParticipant}
             onManage={onManage}
+            hasRaSession={hasRaSession}
           />
         ))}
       </TBody>

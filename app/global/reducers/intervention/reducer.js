@@ -147,6 +147,9 @@ import {
   UNASSIGN_TAG_REQUEST,
   UNASSIGN_TAG_SUCCESS,
   UNASSIGN_TAG_ERROR,
+  FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST,
+  FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS,
+  FETCH_RA_SESSION_QUESTION_GROUPS_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -154,6 +157,7 @@ export const initialState = {
   intervention: null,
   invitations: null,
   predefinedParticipants: null,
+  raSessionQuestionGroups: [],
   invitationsStates: {},
   collaborators: [],
   currentUserCollaboratorData: null,
@@ -193,6 +197,7 @@ export const initialState = {
     sendPredefinedParticipantEmailInvitation: false,
     bulkCreatePredefinedParticipants: false,
     updateAllSessionsScheduleLoading: false,
+    fetchRaSessionQuestionGroups: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -210,6 +215,7 @@ export const initialState = {
     fetchPredefinedParticipants: null,
     bulkCreatePredefinedParticipants: null,
     updateAllSessionsScheduleError: null,
+    fetchRaSessionQuestionGroups: null,
   },
 };
 
@@ -954,6 +960,24 @@ export const interventionReducer = (state = initialState, action) =>
       case UNASSIGN_TAG_ERROR: {
         draft.loaders.unassignTag = false;
         draft.errors.unassignTag = action.payload.error;
+        break;
+      }
+
+      case FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST: {
+        draft.loaders.fetchRaSessionQuestionGroups = true;
+        draft.errors.fetchRaSessionQuestionGroups = null;
+        break;
+      }
+      case FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS: {
+        draft.loaders.fetchRaSessionQuestionGroups = false;
+        draft.raSessionQuestionGroups = action.payload.questionGroups;
+        break;
+      }
+      case FETCH_RA_SESSION_QUESTION_GROUPS_ERROR: {
+        const { error } = action.payload;
+        draft.loaders.fetchRaSessionQuestionGroups = false;
+        draft.errors.fetchRaSessionQuestionGroups = error;
+        draft.raSessionQuestionGroups = [];
         break;
       }
     }

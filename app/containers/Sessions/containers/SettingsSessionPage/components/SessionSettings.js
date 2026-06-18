@@ -402,15 +402,16 @@ const SessionSettings = ({
                 />
               </InputContainer>
 
-              {type !== SessionTypes.SMS_SESSION && (
-                <Option
-                  disabled={!editingPossible}
-                  label={formatMessage(messages.multipleFill)}
-                  tooltipText={formatMessage(messages.multipleFillTooltip)}
-                  value={multipleFill}
-                  action={(val) => editSession({ multipleFill: val })}
-                />
-              )}
+              {type !== SessionTypes.SMS_SESSION &&
+                type !== SessionTypes.RA_SESSION && (
+                  <Option
+                    disabled={!editingPossible}
+                    label={formatMessage(messages.multipleFill)}
+                    tooltipText={formatMessage(messages.multipleFillTooltip)}
+                    value={multipleFill}
+                    action={(val) => editSession({ multipleFill: val })}
+                  />
+                )}
               <SessionSettingsForm
                 disabled={!editingPossible}
                 autofinishEnabled={autofinishEnabled}

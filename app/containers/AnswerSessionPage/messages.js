@@ -312,4 +312,17 @@ export default defineMessages({
     id: `${scope}.submitAnswerError`,
     defaultMessage: "Couldn't submit the answer",
   },
+  raSessionAccessDenied: {
+    id: `${scope}.raSessionAccessDenied`,
+    defaultMessage: 'You do not have permission to fill this RA session.',
+  },
+  raSessionFetchError: {
+    id: `${scope}.raSessionFetchError`,
+    defaultMessage: 'Unable to load the RA session.',
+  },
+  raSessionTakenOver: {
+    id: `${scope}.raSessionTakenOver`,
+    defaultMessage:
+      'Another researcher has taken over this session. Your answers can no longer be submitted.',
+  },
 });
