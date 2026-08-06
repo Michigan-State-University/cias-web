@@ -114,6 +114,7 @@ import { makeSelectNavbarHeight } from 'global/reducers/globalState';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
+import { SCREEN_DELETE_COLLAPSE_DURATION_MS } from '../../components/QuestionListItem/constants';
 
 import messages from './messages';
 import { EditSessionPageContext, useLockEditSessionPageScroll } from './utils';
@@ -220,6 +221,9 @@ const EditSessionCommon = ({
   const { formatMessage } = useIntl();
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState<string[]>([]);
+  const [deletingSlides, setDeletingSlides] = useState<string[]>([]);
+  const deleteTimeoutRef =
+    useRef<Nullable<ReturnType<typeof setTimeout>>>(null);
   const [showList, setShowList] = useState(false);
   const [duplicateModalVisible, setDuplicateModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
@@ -343,12 +347,24 @@ const EditSessionCommon = ({
       inactiveIcon: bin,
       activeIcon: binActive,
       action: () => {
-        deleteQuestions(selectedSlides, sessionId, groupIds);
+        const slidesToDelete = selectedSlides;
+        setDeletingSlides(slidesToDelete);
         setSelectedSlides([]);
+        deleteTimeoutRef.current = setTimeout(() => {
+          deleteQuestions(slidesToDelete, sessionId, groupIds);
+          setDeletingSlides([]);
+        }, SCREEN_DELETE_COLLAPSE_DURATION_MS);
       },
       disabled: !editingPossible,
     },
   ];
+
+  useEffect(
+    () => () => {
+      if (deleteTimeoutRef.current) clearTimeout(deleteTimeoutRef.current);
+    },
+    [],
+  );
 
   useLockEditSessionPageScroll();
 
@@ -603,6 +619,7 @@ const EditSessionCommon = ({
                           key={questionGroup.id}
                           selectedQuestion={selectedQuestion}
                           selectedSlides={selectedSlides}
+                          deletingSlides={deletingSlides}
                           toggleGroup={toggleGroup}
                           isDuringQuestionReorder={isDuringQuestionReorder}
                           interventionStatus={interventionStatus}
@@ -632,6 +649,7 @@ const EditSessionCommon = ({
                   key={finishGroup.id}
                   selectedQuestion={selectedQuestion}
                   selectedSlides={selectedSlides}
+                  deletingSlides={deletingSlides}
                   toggleGroup={toggleGroup}
                   isDuringQuestionReorder={isDuringQuestionReorder}
                   interventionStatus={interventionStatus}
