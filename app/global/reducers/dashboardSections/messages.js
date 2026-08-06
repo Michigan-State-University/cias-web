@@ -44,4 +44,8 @@ export default defineMessages({
     id: `${scope}.filterChartDataError`,
     defaultMessage: `There was an error fetching charts data`,
   },
+  editChartError: {
+    id: `${scope}.editChartError`,
+    defaultMessage: `Failed to save the chart — your last change was reverted.`,
+  },
 });

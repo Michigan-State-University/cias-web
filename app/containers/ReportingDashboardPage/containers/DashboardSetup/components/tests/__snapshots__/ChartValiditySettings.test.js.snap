@@ -1,0 +1,418 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChartValiditySettings /> Should render and match the snapshot 1`] = `
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 18px;
+  color: unset;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  color: unset;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  color: unset;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color: unset;
+}
+
+.c12 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 90px;
+  cursor: pointer;
+  color: unset;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-right: 10px;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c1 {
+  margin-top: 36px;
+}
+
+.c9 {
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c14 {
+  margin-top: 24px;
+}
+
+.c10 {
+  margin: 0 !important;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c13 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c0 {
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.c15 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 120px;
+  height: 50px;
+  max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
+  color: #2F3850;
+  text-align: center;
+}
+
+.c15:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c15:disabled {
+  color: #ABBBD1;
+}
+
+.c16 {
+  border: none;
+  background-color: #E9F1FB;
+  outline: none;
+  max-width: none;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.c16:focus {
+  border: none;
+}
+
+<div>
+  <div
+    class="c0"
+    style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
+  >
+    <div
+      class="c1"
+      mt="36"
+      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+    >
+      <div
+        align="start"
+        class="c2"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
+      >
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+          >
+            <p
+              class="c5"
+            >
+              <b>
+                Participant validity
+              </b>
+            </p>
+            <div
+              class="c6"
+              display="flex"
+            >
+              <div
+                class="c7"
+                data-for="chart-validity-settings-tooltip"
+                data-tip=""
+              >
+                <img
+                  alt="?"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="c8"
+        >
+          <div
+            class="c4"
+          >
+            <p
+              class="c5"
+            >
+              Minimum answered items (variables) required
+            </p>
+            <div
+              class="c6"
+              display="flex"
+            >
+              <div
+                class="c7"
+                data-for="chart-validity-min-answered-tooltip"
+                data-tip=""
+              >
+                <img
+                  alt="?"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="c9 c10"
+          style="margin-left: 0px; margin-right: 0px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+        >
+          <div
+            align="start"
+            class="c11"
+            mr="10"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
+          >
+            <div
+              class="c12"
+              cursor="pointer"
+              data-cy="chart-validity-min-answered-select"
+              data-testid="min-answered-variables-select"
+              width="90px"
+            >
+              <div
+                class="css-b62m3t-container"
+              >
+                <span
+                  class="css-1f43avz-a11yText-A11yText"
+                  id="react-select-3-live-region"
+                />
+                <span
+                  aria-atomic="false"
+                  aria-live="polite"
+                  aria-relevant="additions text"
+                  class="css-1f43avz-a11yText-A11yText"
+                  role="log"
+                />
+                <div
+                  class="css-p9csh6-control"
+                >
+                  <div
+                    class="css-hlgwow"
+                  >
+                    <div
+                      class="css-1dimb5e-singleValue"
+                    >
+                      9
+                    </div>
+                    <div
+                      class="css-19bb58m"
+                      data-value=""
+                    >
+                      <input
+                        aria-activedescendant=""
+                        aria-autocomplete="list"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        class=""
+                        id="react-select-3-input"
+                        role="combobox"
+                        spellcheck="false"
+                        style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="css-1wy0on6"
+                  >
+                    <div
+                      aria-hidden="true"
+                      class="css-1xc3v61-indicatorContainer"
+                    >
+                      <img
+                        alt="arrow"
+                        class="c13"
+                        src="IMAGE_MOCK"
+                        transform=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            align="start"
+            class="c2"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
+          >
+            <p
+              class="c5"
+            >
+              out of 9
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c14"
+      mt="24"
+      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+    >
+      <div
+        align="start"
+        class="c2"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
+      >
+        <div
+          class="c8"
+        >
+          <div
+            class="c4"
+          >
+            <p
+              class="c5"
+            >
+              Positive Despite Missing Data — threshold
+            </p>
+            <div
+              class="c6"
+              display="flex"
+            >
+              <div
+                class="c7"
+                data-for="chart-validity-threshold-tooltip"
+                data-tip=""
+              >
+                <img
+                  alt="?"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <input
+          aria-label="Positive Despite Missing Data — threshold"
+          class="c15 c16"
+          data-cy="chart-validity-threshold-input"
+          data-testid="positive-despite-missing-threshold-input"
+          dir="auto"
+          height="50px"
+          placeholder="Off"
+          type="text"
+          value="15"
+          width="120px"
+        />
+      </div>
+    </div>
+    <span
+      style="display: table; clear: both;"
+    />
+  </div>
+</div>
+`;

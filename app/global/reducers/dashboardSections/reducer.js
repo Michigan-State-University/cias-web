@@ -238,6 +238,15 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.editChartLoader = false;
         draft.errors.editChartError = null;
 
+        // the visible tree is what every selector reads — without this, chart
+        // attributes computed by the API (`formulaVariableCount`) never reach
+        // the editor and stay stale for the rest of the session
+        updateItemById(
+          draft.dashboardSections,
+          payload.chart.dashboardSectionId,
+          (item) => dashboardSectionReducer(item, action),
+        );
+
         updateItemById(
           draft.cache.dashboardSections,
           payload.chart.dashboardSectionId,

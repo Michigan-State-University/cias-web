@@ -145,6 +145,16 @@ const ChartSettings = ({
     [chart.formula.defaultPattern, onEditFormula],
   );
 
+  const onEditMinAnsweredVariables = useCallback(
+    onEditFormula('minAnsweredVariables'),
+    [chart.formula.minAnsweredVariables, onEditFormula],
+  );
+
+  const onEditPositiveDespiteMissingThreshold = useCallback(
+    onEditFormula('positiveDespiteMissingThreshold'),
+    [chart.formula.positiveDespiteMissingThreshold, onEditFormula],
+  );
+
   const onDeleteFormulaPattern = useCallback(
     (index) => () =>
       onEditFormula('patterns')(
@@ -204,6 +214,10 @@ const ChartSettings = ({
           onEditStatus={onEditStatus}
           onEditDateRange={onEditDateRange}
           onCopyChart={onCopyChart}
+          onEditMinAnsweredVariables={onEditMinAnsweredVariables}
+          onEditPositiveDespiteMissingThreshold={
+            onEditPositiveDespiteMissingThreshold
+          }
         />,
       );
     case ChartTypeDto.NUMERIC_BAR_CHART:
@@ -222,6 +236,10 @@ const ChartSettings = ({
           onEditStatus={onEditStatus}
           onEditTrendLine={onEditTrendLine}
           onCopyChart={onCopyChart}
+          onEditMinAnsweredVariables={onEditMinAnsweredVariables}
+          onEditPositiveDespiteMissingThreshold={
+            onEditPositiveDespiteMissingThreshold
+          }
         />,
       );
     default:

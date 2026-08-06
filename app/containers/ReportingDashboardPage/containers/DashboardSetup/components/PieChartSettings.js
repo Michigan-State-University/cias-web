@@ -8,10 +8,13 @@ import { DateRangeChooser } from 'components/DateRangeChooser';
 
 import ChartSettingsGeneralSection from './ChartSettingsGeneralSection';
 import ChartSettingsTopSection from './ChartSettingsTopSection';
+import ChartFormulaSection from './ChartFormulaSection';
 import PieChartFormulaOtherPattern from './PieChartFormulaOtherPattern';
 import PieChartFormulaPattern from './PieChartFormulaPattern';
+import ChartValiditySettings from './ChartValiditySettings';
 
 import { FullWidthContainer } from '../../../styled';
+import { FormulaGroupPanel } from '../styled';
 import messages from '../messages';
 import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
 import { colors } from '../../../../../theme';
@@ -31,6 +34,8 @@ const PieChartSettings = ({
   onEditStatus,
   onEditDateRange,
   onCopyChart,
+  onEditMinAnsweredVariables,
+  onEditPositiveDespiteMissingThreshold,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -38,8 +43,15 @@ const PieChartSettings = ({
     statusPermissions: { canBeEdited },
   } = useContext(ChartSettingsContext);
 
-  const { chartType, formula, id, status, dateRangeStart, dateRangeEnd } =
-    chart;
+  const {
+    chartType,
+    formula,
+    id,
+    status,
+    dateRangeStart,
+    dateRangeEnd,
+    formulaVariableCount,
+  } = chart;
 
   const {
     loaders: { deleteChartLoader },
@@ -80,39 +92,57 @@ const PieChartSettings = ({
       <ChartSettingsGeneralSection
         chart={chart}
         onEditDescription={onEditDescription}
-        onEditFormulaPayload={onEditFormulaPayload}
         onEditName={onEditName}
       />
 
-      <Row mt={36}>
-        <Col>
-          {formula.patterns.map((pattern, index) => (
-            <PieChartFormulaPattern
-              key={`Pattern-${index}-Chart-${id}`}
-              pattern={pattern}
-              onEdit={onEditFormulaPattern(index)}
-              onDelete={onDeleteFormulaPattern(index)}
-            />
-          ))}
-          <PieChartFormulaOtherPattern
-            key={`OtherPattern-Chart-${id}`}
-            pattern={formula.defaultPattern}
-            onEdit={onEditFormulaDefaultPattern}
-          />
-        </Col>
-      </Row>
+      <FormulaGroupPanel>
+        <ChartFormulaSection
+          chart={chart}
+          onEditFormulaPayload={onEditFormulaPayload}
+        />
 
-      <Row mt={36}>
-        <Col>
-          <DashedButton
-            onClick={onAddFormulaPattern}
-            loading={addPatternLoader}
-            disabled={!canBeEdited}
-          >
-            {formatMessage(messages.addNewCase)}
-          </DashedButton>
-        </Col>
-      </Row>
+        <Row mt={36}>
+          <Col>
+            {formula.patterns.map((pattern, index) => (
+              <PieChartFormulaPattern
+                key={`Pattern-${index}-Chart-${id}`}
+                pattern={pattern}
+                onEdit={onEditFormulaPattern(index)}
+                onDelete={onDeleteFormulaPattern(index)}
+              />
+            ))}
+            <PieChartFormulaOtherPattern
+              key={`OtherPattern-Chart-${id}`}
+              pattern={formula.defaultPattern}
+              onEdit={onEditFormulaDefaultPattern}
+            />
+          </Col>
+        </Row>
+
+        <Row mt={36}>
+          <Col>
+            <DashedButton
+              onClick={onAddFormulaPattern}
+              loading={addPatternLoader}
+              disabled={!canBeEdited}
+            >
+              {formatMessage(messages.addNewCase)}
+            </DashedButton>
+          </Col>
+        </Row>
+
+        <ChartValiditySettings
+          formulaVariableCount={formulaVariableCount}
+          minAnsweredVariables={formula.minAnsweredVariables}
+          positiveDespiteMissingThreshold={
+            formula.positiveDespiteMissingThreshold
+          }
+          onEditMinAnsweredVariables={onEditMinAnsweredVariables}
+          onEditPositiveDespiteMissingThreshold={
+            onEditPositiveDespiteMissingThreshold
+          }
+        />
+      </FormulaGroupPanel>
     </FullWidthContainer>
   );
 };
@@ -132,6 +162,8 @@ PieChartSettings.propTypes = {
   onEditStatus: PropTypes.func,
   onEditDateRange: PropTypes.func,
   onCopyChart: PropTypes.func,
+  onEditMinAnsweredVariables: PropTypes.func,
+  onEditPositiveDespiteMissingThreshold: PropTypes.func,
 };
 
 export default memo(PieChartSettings);

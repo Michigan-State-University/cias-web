@@ -119,7 +119,7 @@ const SectionComponent = ({
       </FullWidthContainer>
 
       {!fromDashboardView && isAnySectionDragging && (
-        <SidePanel isOpen={Boolean(selectedChart)} style={{ width: 500 }}>
+        <SidePanel isOpen={Boolean(selectedChart)} style={{ width: 525 }}>
           <ChartSettings onClose={closeSettings} chart={selectedChart} />
         </SidePanel>
       )}

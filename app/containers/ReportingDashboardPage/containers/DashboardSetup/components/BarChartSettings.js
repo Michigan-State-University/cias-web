@@ -17,8 +17,11 @@ import FlexRow from 'components/Row';
 import ChartSettingsGeneralSection from './ChartSettingsGeneralSection';
 import ChartSettingsTopSection from './ChartSettingsTopSection';
 import BarChartFormulaPattern from './BarChartFormulaPattern';
+import ChartFormulaSection from './ChartFormulaSection';
+import ChartValiditySettings from './ChartValiditySettings';
 
 import { FullWidthContainer } from '../../../styled';
+import { FormulaGroupPanel } from '../styled';
 import messages from '../messages';
 import chartIntervalTypesMessages from '../chartIntervalTypesMessages';
 import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
@@ -36,6 +39,8 @@ const BarChartSettings = ({
   onEditStatus,
   onEditTrendLine,
   onCopyChart,
+  onEditMinAnsweredVariables,
+  onEditPositiveDespiteMissingThreshold,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -43,7 +48,15 @@ const BarChartSettings = ({
     statusPermissions: { canBeEdited },
   } = useContext(ChartSettingsContext);
 
-  const { chartType, formula, id, status, trendLine, intervalType } = chart;
+  const {
+    chartType,
+    formula,
+    id,
+    status,
+    trendLine,
+    intervalType,
+    formulaVariableCount,
+  } = chart;
 
   const {
     loaders: { deleteChartLoader },
@@ -165,21 +178,39 @@ const BarChartSettings = ({
       <ChartSettingsGeneralSection
         chart={chart}
         onEditDescription={onEditDescription}
-        onEditFormulaPayload={onEditFormulaPayload}
         onEditName={onEditName}
       />
 
-      <Row mt={36}>
-        <Col>
-          {formula.patterns.map((pattern, index) => (
-            <BarChartFormulaPattern
-              key={`Pattern-${index}-Chart-${id}`}
-              pattern={pattern}
-              onEdit={onEditFormulaPattern(index)}
-            />
-          ))}
-        </Col>
-      </Row>
+      <FormulaGroupPanel>
+        <ChartFormulaSection
+          chart={chart}
+          onEditFormulaPayload={onEditFormulaPayload}
+        />
+
+        <Row mt={36}>
+          <Col>
+            {formula.patterns.map((pattern, index) => (
+              <BarChartFormulaPattern
+                key={`Pattern-${index}-Chart-${id}`}
+                pattern={pattern}
+                onEdit={onEditFormulaPattern(index)}
+              />
+            ))}
+          </Col>
+        </Row>
+
+        <ChartValiditySettings
+          formulaVariableCount={formulaVariableCount}
+          minAnsweredVariables={formula.minAnsweredVariables}
+          positiveDespiteMissingThreshold={
+            formula.positiveDespiteMissingThreshold
+          }
+          onEditMinAnsweredVariables={onEditMinAnsweredVariables}
+          onEditPositiveDespiteMissingThreshold={
+            onEditPositiveDespiteMissingThreshold
+          }
+        />
+      </FormulaGroupPanel>
     </FullWidthContainer>
   );
 };
@@ -197,6 +228,8 @@ BarChartSettings.propTypes = {
   onEditStatus: PropTypes.func,
   onEditTrendLine: PropTypes.func,
   onCopyChart: PropTypes.func,
+  onEditMinAnsweredVariables: PropTypes.func,
+  onEditPositiveDespiteMissingThreshold: PropTypes.func,
 };
 
 export default memo(BarChartSettings);

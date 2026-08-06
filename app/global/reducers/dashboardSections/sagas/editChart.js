@@ -1,13 +1,20 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import objectToCamelCase from 'utils/objectToCamelCase';
 import { makeSelectOrganization } from 'global/reducers/organizations';
-import { ChartStatus, EDIT_CHART_REQUEST } from '../constants';
+import {
+  ChartStatus,
+  EDIT_CHART_ERROR,
+  EDIT_CHART_REQUEST,
+} from '../constants';
 import { editChartError, editChartSuccess, setChartsData } from '../actions';
+import messages from '../messages';
 
 export function* editChart({ payload: { chart } }) {
   const requestURL = `v1/charts/${chart.id}`;
@@ -35,6 +42,15 @@ export function* editChart({ payload: { chart } }) {
       yield put(setChartsData(parsedData));
     }
   } catch (error) {
+    // EDIT_CHART_ERROR silently restores the cached sections tree — without a
+    // toast the edit just disappears from the editor with no explanation
+    yield call(
+      toast.error,
+      formatApiErrorMessage(error, messages.editChartError),
+      {
+        toastId: EDIT_CHART_ERROR,
+      },
+    );
     yield put(editChartError(error));
   }
 }

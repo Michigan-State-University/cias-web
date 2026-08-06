@@ -38,6 +38,11 @@ export function* addChart({
               label: 'NotMatched',
               color: colors.mauve,
             },
+            // keep in sync with the backend chart formula default
+            // (`app/models/concerns/default_values/dictionary.yml`) — this
+            // hardcoded formula never reads it
+            minAnsweredVariables: 0,
+            positiveDespiteMissingThreshold: null,
           },
           intervalType: ChartIntervalType.MONTHLY,
         },

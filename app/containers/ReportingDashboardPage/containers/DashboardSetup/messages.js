@@ -184,4 +184,44 @@ export default defineMessages({
     id: `${scope}.endDateLabel`,
     defaultMessage: 'Date to (optional)',
   },
+  chartValiditySettingsLabel: {
+    id: `${scope}.chartValiditySettingsLabel`,
+    defaultMessage: '<b>Participant validity</b>',
+  },
+  chartValiditySingleInstrumentHint: {
+    id: `${scope}.chartValiditySingleInstrumentHint`,
+    defaultMessage:
+      'These settings count across the whole formula, so it should cover a single instrument — with several instruments the minimum spans all of their variables together.',
+  },
+  chartValidityMinAnsweredLabel: {
+    id: `${scope}.chartValidityMinAnsweredLabel`,
+    defaultMessage: 'Minimum answered items (variables) required',
+  },
+  chartValidityMinAnsweredOutOf: {
+    id: `${scope}.chartValidityMinAnsweredOutOf`,
+    defaultMessage: 'out of {variableCount}',
+  },
+  chartValidityMinAnsweredHint: {
+    id: `${scope}.chartValidityMinAnsweredHint`,
+    defaultMessage:
+      '0 turns the check off. Any higher value excludes participants who answered fewer formula variables.',
+  },
+  chartValidityStaleMinAnsweredNotice: {
+    id: `${scope}.chartValidityStaleMinAnsweredNotice`,
+    defaultMessage:
+      'The minimum is set to {minAnswered}, but the formula now has only {variableCount} {variableCount, plural, one {variable} other {variables}}. No participant can meet it — lower the minimum.',
+  },
+  chartValidityThresholdLabel: {
+    id: `${scope}.chartValidityThresholdLabel`,
+    defaultMessage: 'Positive Despite Missing Data — threshold',
+  },
+  chartValidityThresholdPlaceholder: {
+    id: `${scope}.chartValidityThresholdPlaceholder`,
+    defaultMessage: 'Off',
+  },
+  chartValidityThresholdHint: {
+    id: `${scope}.chartValidityThresholdHint`,
+    defaultMessage:
+      'Leave empty to turn the rescue off. A participant below the minimum still counts if their score (missing answers count as 0) reaches this value. Set it at or above the cut-off — lower values can rescue participants into the default case. Numeric formulas only; a true/false formula (e.g. built with OR) is never rescued.',
+  },
 });
