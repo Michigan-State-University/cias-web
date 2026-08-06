@@ -1,5 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 
+import { waitForApiResponse } from '../utils/waitForApiResponse';
+
 export class SessionPage {
   readonly page: Page;
   readonly backToInterventionButton: Locator;
@@ -36,13 +38,12 @@ export class SessionPage {
     
     await this.page.keyboard.press('Tab');
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/sessions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
   }
 
   async getSessionName(): Promise<string> {
@@ -97,12 +98,11 @@ export class SessionPage {
    * Wait for a question to be created via API
    */
   async waitForQuestionCreated() {
-    return this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    return waitForApiResponse(this.page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
   }
 }
