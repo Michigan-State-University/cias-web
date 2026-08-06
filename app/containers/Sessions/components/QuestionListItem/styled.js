@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import { colors, themeColors } from 'theme';
 import Circle from 'components/Circle';
 import { fontSizes } from 'theme/fonts';
@@ -41,4 +42,9 @@ const ClampedTitle = styled(H3)`
   display: -webkit-box;
 `;
 
-export { NumberCircle, ToggleableBox, ClampedTitle };
+const CollapsibleRow = styled(motion.div)`
+  width: 100%;
+  overflow: hidden;
+`;
+
+export { NumberCircle, ToggleableBox, ClampedTitle, CollapsibleRow };
