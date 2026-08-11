@@ -31,3 +31,5 @@ cypress.env.json
 /playwright/.auth/
 /e2e/.auth/
 /.auth/
+
+docs/knowledge-pills

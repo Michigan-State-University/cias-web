@@ -1,0 +1,110 @@
+name: Build check
+
+# Run on every push to a feature branch and on PRs.
+# Goal: verify the Dockerfile builds successfully for linux/amd64.
+# Does not push anywhere, does not require AWS credentials.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches-ignore: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build image (no push)
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: false
+          load: true
+          platforms: linux/amd64
+          provenance: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          # Build-args MUST be set or webpack bakes empty strings into the bundle.
+          # Production CI will pull real values from SSM; these are placeholders for
+          # build-time validation only.
+          build-args: |
+            SOURCE_VERSION=build-check-${{ github.sha }}
+            NODE_VERSION=22
+            API_URL=https://api-build-check.example.com
+            WEBSOCKET_URL=wss://api-build-check.example.com/cable
+            WEB_URL=https://build-check.example.com
+            APP_STAGE=build-check
+            LOGROCKET_ENV=
+            SENTRY_DSN=
+            SENTRY_ENV=build-check
+            SENTRY_AUTH_TOKEN=
+            INTERVENTION_EXPORT_FEATURE_ENABLED=0
+            HFHS_INTEGRATION_FEATURE_ENABLED=0
+            DISABLED_SMS_CAMPAIGN=
+            ALLOWED_USERS_FOR_SMS_CAMPAIGNS=
+            ADDITIONAL_ORIGIN_SECURE_TOKEN=
+          tags: cias-web:build-check
+
+      - name: Inspect image
+        run: |
+          {
+            echo "## Image build successful"
+            echo ""
+            echo '```'
+            docker image inspect cias-web:build-check \
+              --format 'Size: {{.Size}} bytes / Arch: {{.Architecture}}/{{.Os}} / Created: {{.Created}}'
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Verify build-args were baked into the JS bundle
+        # Strong evidence the webpack DefinePlugin substitution worked.
+        # webpack output config: path=build/, filename=[name].[contenthash].js — files land
+        # directly in build/, not under build/static/js/.
+        run: |
+          docker run --rm cias-web:build-check sh -c '
+            if grep -rho "api-build-check.example.com" build/ 2>/dev/null | head -1 | grep -q "api-build-check"; then
+              echo "✓ API_URL was baked into the JS bundle"
+            else
+              echo "✗ API_URL was NOT found in the JS bundle"
+              echo "Contents of build/:"
+              ls build/ | head -20
+              exit 1
+            fi
+          '
+
+      - name: Smoke test — Express server boots and serves index.html
+        run: |
+          docker run -d --name cias-web-test -p 4200:4200 cias-web:build-check
+          # Give the Express server a moment to start
+          for i in 1 2 3 4 5 6; do
+            sleep 2
+            if curl -fsS http://localhost:4200/ -o /tmp/index.html; then
+              echo "Server responded on attempt $i"
+              break
+            fi
+          done
+          # Verify it served HTML, not an error page
+          grep -q '<html' /tmp/index.html || (echo "Did not serve HTML"; cat /tmp/index.html; exit 1)
+          echo "✓ Express server served the SPA"
+          docker logs cias-web-test
+          docker stop cias-web-test
+          docker rm cias-web-test
+
+      - name: Verify /release-version is baked in
+        run: |
+          VERSION=$(docker run --rm cias-web:build-check cat /release-version)
+          echo "Release version in image: $VERSION"
+          [ "$VERSION" = "build-check-${{ github.sha }}" ] || (echo "Mismatch"; exit 1)
