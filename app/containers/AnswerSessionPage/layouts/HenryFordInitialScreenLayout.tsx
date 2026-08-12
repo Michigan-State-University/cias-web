@@ -30,7 +30,7 @@ import { ApiMessageError } from 'models/Api';
 import { QuestionTypes } from 'models/Question';
 
 import { nameValidationSchema } from 'utils/validators';
-import { getUTCDateString } from 'utils/dateUtils';
+import dayjs from 'dayjs';
 
 import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 
@@ -193,7 +193,7 @@ const HenryFordInitialScreenLayout = ({
     onSubmitPatientData({
       ...restValues,
       sex: sexOption?.value,
-      dob: dobDate ? getUTCDateString(dobDate) : '',
+      dob: dobDate ? dayjs(dobDate).format('YYYY-MM-DD') : '',
       phoneNumber:
         iso && number
           ? formatPhoneNumberForHfhs({ iso: iso.value, number })
