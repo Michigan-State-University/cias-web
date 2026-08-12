@@ -75,7 +75,7 @@
   },
   "pre-commit": "lint:staged",
   "dependencies": {
-    "@anycable/web": "0.3.2",
+    "@anycable/web": "1.1.0",
     "@babel/polyfill": "7.12.1",
     "@dnd-kit/core": "5.0.3",
     "@dnd-kit/sortable": "10.0.0",
