@@ -4,9 +4,9 @@ import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
 import { colors, themeColors } from 'theme';
-import { floatValidator } from 'utils/validators';
 
 import Box from 'components/Box';
+import Checkbox from 'components/Checkbox';
 import { Col, NoMarginRow, Row } from 'components/ReactGridSystem';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import Select from 'components/Select';
@@ -15,7 +15,6 @@ import Comment from 'components/Text/Comment';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
-import { Input } from '../styled';
 import { ChartSettingsContext } from '../constants';
 
 const populateMinAnsweredOption = (value) => ({ value, label: `${value}` });
@@ -23,9 +22,9 @@ const populateMinAnsweredOption = (value) => ({ value, label: `${value}` });
 const ChartValiditySettings = ({
   formulaVariableCount,
   minAnsweredVariables,
-  positiveDespiteMissingThreshold,
+  positiveDespiteMissingData,
   onEditMinAnsweredVariables,
-  onEditPositiveDespiteMissingThreshold,
+  onEditPositiveDespiteMissingData,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -36,7 +35,7 @@ const ChartValiditySettings = ({
   // charts created before this feature carry a formula without either key
   const variableCount = formulaVariableCount ?? 0;
   const minAnswered = minAnsweredVariables ?? 0;
-  const threshold = positiveDespiteMissingThreshold ?? null;
+  const rescueEnabled = positiveDespiteMissingData ?? false;
 
   // an empty or unparseable formula payload leaves nothing to count against
   const isDisabled = !canBeEdited || variableCount === 0;
@@ -59,8 +58,8 @@ const ChartValiditySettings = ({
   const handleEditMinAnsweredVariables = (option) =>
     onEditMinAnsweredVariables(option.value);
 
-  const handleEditPositiveDespiteMissingThreshold = (value) =>
-    onEditPositiveDespiteMissingThreshold(value === '' ? null : Number(value));
+  const handleEditPositiveDespiteMissingData = (checked) =>
+    onEditPositiveDespiteMissingData(checked);
 
   return (
     <FullWidthContainer>
@@ -136,34 +135,28 @@ const ChartValiditySettings = ({
 
       <Row mt={24}>
         <Col>
-          <Box mb={5}>
+          <NoMarginRow align="center">
             <HelpIconTooltip
-              id="chart-validity-threshold-tooltip"
+              id="chart-validity-rescue-tooltip"
               tooltipContent={formatMessage(
                 messages.chartValidityThresholdHint,
               )}
               iconProps={{ fill: colors.manatee }}
             >
-              <Text>{formatMessage(messages.chartValidityThresholdLabel)}</Text>
+              <Checkbox
+                id="chart-validity-positive-despite-missing-data-checkbox"
+                data-cy="chart-validity-rescue-checkbox"
+                data-testid="positive-despite-missing-data-checkbox"
+                disabled={isDisabled}
+                checked={rescueEnabled}
+                onChange={handleEditPositiveDespiteMissingData}
+              >
+                <Text>
+                  {formatMessage(messages.chartValidityThresholdLabel)}
+                </Text>
+              </Checkbox>
             </HelpIconTooltip>
-          </Box>
-
-          <Input
-            type="singleline"
-            data-cy="chart-validity-threshold-input"
-            data-testid="positive-despite-missing-threshold-input"
-            disabled={isDisabled}
-            width="120px"
-            height="50px"
-            textAlign="center"
-            placeholder={formatMessage(
-              messages.chartValidityThresholdPlaceholder,
-            )}
-            value={threshold === null ? '' : `${threshold}`}
-            validator={floatValidator}
-            onBlur={handleEditPositiveDespiteMissingThreshold}
-            aria-label={formatMessage(messages.chartValidityThresholdLabel)}
-          />
+          </NoMarginRow>
         </Col>
       </Row>
     </FullWidthContainer>
@@ -173,9 +166,9 @@ const ChartValiditySettings = ({
 ChartValiditySettings.propTypes = {
   formulaVariableCount: PropTypes.number,
   minAnsweredVariables: PropTypes.number,
-  positiveDespiteMissingThreshold: PropTypes.number,
+  positiveDespiteMissingData: PropTypes.bool,
   onEditMinAnsweredVariables: PropTypes.func,
-  onEditPositiveDespiteMissingThreshold: PropTypes.func,
+  onEditPositiveDespiteMissingData: PropTypes.func,
 };
 
 export default memo(ChartValiditySettings);

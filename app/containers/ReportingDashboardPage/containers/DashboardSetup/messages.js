@@ -96,7 +96,7 @@ export default defineMessages({
   },
   chartSettingsAddVariable: {
     id: `${scope}.chartSettingsAddVariable`,
-    defaultMessage: 'Add variable',
+    defaultMessage: '+ Add variable',
   },
   chartSettingsIntervalType: {
     id: `${scope}.chartSettingsIntervalType`,
@@ -191,7 +191,7 @@ export default defineMessages({
   chartValiditySingleInstrumentHint: {
     id: `${scope}.chartValiditySingleInstrumentHint`,
     defaultMessage:
-      'These settings count across the whole formula, so it should cover a single instrument — with several instruments the minimum spans all of their variables together.',
+      'Controls which participants this chart counts. A participant who answers too few of the formula variables is shown as their own Invalid / Insufficient Data category rather than dropped from the chart.',
   },
   chartValidityMinAnsweredLabel: {
     id: `${scope}.chartValidityMinAnsweredLabel`,
@@ -204,7 +204,7 @@ export default defineMessages({
   chartValidityMinAnsweredHint: {
     id: `${scope}.chartValidityMinAnsweredHint`,
     defaultMessage:
-      '0 turns the check off. Any higher value excludes participants who answered fewer formula variables.',
+      '0 turns the check off. The count covers every variable in the formula - a Single question is one variable, a Multiple question one per option.',
   },
   chartValidityStaleMinAnsweredNotice: {
     id: `${scope}.chartValidityStaleMinAnsweredNotice`,
@@ -213,15 +213,11 @@ export default defineMessages({
   },
   chartValidityThresholdLabel: {
     id: `${scope}.chartValidityThresholdLabel`,
-    defaultMessage: 'Positive Despite Missing Data — threshold',
-  },
-  chartValidityThresholdPlaceholder: {
-    id: `${scope}.chartValidityThresholdPlaceholder`,
-    defaultMessage: 'Off',
+    defaultMessage: 'Positive Despite Missing Data',
   },
   chartValidityThresholdHint: {
     id: `${scope}.chartValidityThresholdHint`,
     defaultMessage:
-      'Leave empty to turn the rescue off. A participant below the minimum still counts if their score (missing answers count as 0) reaches this value. Set it at or above the cut-off — lower values can rescue participants into the default case. Numeric formulas only; a true/false formula (e.g. built with OR) is never rescued.',
+      "When checked, a participant below the minimum still counts if their score (missing answers count as 0) already matches one of the chart's cases - they can never land in the default category. Leave unchecked and they are classified as Invalid / Insufficient Data.",
   },
 });

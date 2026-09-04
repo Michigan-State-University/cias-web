@@ -20,7 +20,7 @@ describe('editChart saga', () => {
       payload: 'S1.a+S1.b',
       patterns: [],
       minAnsweredVariables: 2,
-      positiveDespiteMissingThreshold: 15,
+      positiveDespiteMissingData: true,
     },
   };
 
@@ -36,7 +36,7 @@ describe('editChart saga', () => {
             payload: 'S1.a+S1.b',
             patterns: [],
             min_answered_variables: 2,
-            positive_despite_missing_threshold: 15,
+            positive_despite_missing_data: true,
           },
         },
       },
@@ -55,7 +55,7 @@ describe('editChart saga', () => {
             payload: 'S1.a+S1.b',
             patterns: [],
             minAnsweredVariables: 2,
-            positiveDespiteMissingThreshold: 15,
+            positiveDespiteMissingData: true,
           },
         }),
       )

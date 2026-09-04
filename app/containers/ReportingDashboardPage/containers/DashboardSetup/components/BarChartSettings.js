@@ -40,7 +40,7 @@ const BarChartSettings = ({
   onEditTrendLine,
   onCopyChart,
   onEditMinAnsweredVariables,
-  onEditPositiveDespiteMissingThreshold,
+  onEditPositiveDespiteMissingData,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -202,13 +202,9 @@ const BarChartSettings = ({
         <ChartValiditySettings
           formulaVariableCount={formulaVariableCount}
           minAnsweredVariables={formula.minAnsweredVariables}
-          positiveDespiteMissingThreshold={
-            formula.positiveDespiteMissingThreshold
-          }
+          positiveDespiteMissingData={formula.positiveDespiteMissingData}
           onEditMinAnsweredVariables={onEditMinAnsweredVariables}
-          onEditPositiveDespiteMissingThreshold={
-            onEditPositiveDespiteMissingThreshold
-          }
+          onEditPositiveDespiteMissingData={onEditPositiveDespiteMissingData}
         />
       </FormulaGroupPanel>
     </FullWidthContainer>
@@ -229,7 +225,7 @@ BarChartSettings.propTypes = {
   onEditTrendLine: PropTypes.func,
   onCopyChart: PropTypes.func,
   onEditMinAnsweredVariables: PropTypes.func,
-  onEditPositiveDespiteMissingThreshold: PropTypes.func,
+  onEditPositiveDespiteMissingData: PropTypes.func,
 };
 
 export default memo(BarChartSettings);

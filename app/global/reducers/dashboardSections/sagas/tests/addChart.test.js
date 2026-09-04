@@ -41,7 +41,7 @@ describe('addChart saga', () => {
 
     expect(requestBody.chart.formula).toMatchObject({
       min_answered_variables: 0,
-      positive_despite_missing_threshold: null,
+      positive_despite_missing_data: false,
     });
   });
 

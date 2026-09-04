@@ -35,7 +35,7 @@ const PieChartSettings = ({
   onEditDateRange,
   onCopyChart,
   onEditMinAnsweredVariables,
-  onEditPositiveDespiteMissingThreshold,
+  onEditPositiveDespiteMissingData,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -134,13 +134,9 @@ const PieChartSettings = ({
         <ChartValiditySettings
           formulaVariableCount={formulaVariableCount}
           minAnsweredVariables={formula.minAnsweredVariables}
-          positiveDespiteMissingThreshold={
-            formula.positiveDespiteMissingThreshold
-          }
+          positiveDespiteMissingData={formula.positiveDespiteMissingData}
           onEditMinAnsweredVariables={onEditMinAnsweredVariables}
-          onEditPositiveDespiteMissingThreshold={
-            onEditPositiveDespiteMissingThreshold
-          }
+          onEditPositiveDespiteMissingData={onEditPositiveDespiteMissingData}
         />
       </FormulaGroupPanel>
     </FullWidthContainer>
@@ -163,7 +159,7 @@ PieChartSettings.propTypes = {
   onEditDateRange: PropTypes.func,
   onCopyChart: PropTypes.func,
   onEditMinAnsweredVariables: PropTypes.func,
-  onEditPositiveDespiteMissingThreshold: PropTypes.func,
+  onEditPositiveDespiteMissingData: PropTypes.func,
 };
 
 export default memo(PieChartSettings);

@@ -12,7 +12,7 @@ describe('dashboardSections reducer', () => {
       payload: 'S1.a+S1.b+S1.c',
       patterns: [],
       minAnsweredVariables: 0,
-      positiveDespiteMissingThreshold: null,
+      positiveDespiteMissingData: false,
     },
     formulaVariableCount: 3,
     // client-only, never part of an API response
@@ -38,7 +38,7 @@ describe('dashboardSections reducer', () => {
       payload: 'S1.a+S1.b',
       patterns: [],
       minAnsweredVariables: 3,
-      positiveDespiteMissingThreshold: 15,
+      positiveDespiteMissingData: true,
     },
     formulaVariableCount: 2,
   };
@@ -55,13 +55,13 @@ describe('dashboardSections reducer', () => {
     it('applies the response chart to the visible dashboardSections tree', () => {
       expect(visibleChart.formulaVariableCount).toBe(2);
       expect(visibleChart.formula.minAnsweredVariables).toBe(3);
-      expect(visibleChart.formula.positiveDespiteMissingThreshold).toBe(15);
+      expect(visibleChart.formula.positiveDespiteMissingData).toBe(true);
     });
 
     it('still applies the response chart to the cache', () => {
       expect(cachedChart.formulaVariableCount).toBe(2);
       expect(cachedChart.formula.minAnsweredVariables).toBe(3);
-      expect(cachedChart.formula.positiveDespiteMissingThreshold).toBe(15);
+      expect(cachedChart.formula.positiveDespiteMissingData).toBe(true);
     });
 
     it('keeps client-only keys through the merge', () => {

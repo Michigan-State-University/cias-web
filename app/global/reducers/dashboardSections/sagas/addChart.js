@@ -42,7 +42,7 @@ export function* addChart({
             // (`app/models/concerns/default_values/dictionary.yml`) — this
             // hardcoded formula never reads it
             minAnsweredVariables: 0,
-            positiveDespiteMissingThreshold: null,
+            positiveDespiteMissingData: false,
           },
           intervalType: ChartIntervalType.MONTHLY,
         },

@@ -26,9 +26,9 @@ describe('<ChartValiditySettings />', () => {
   const defaultProps = {
     formulaVariableCount: 9,
     minAnsweredVariables: 9,
-    positiveDespiteMissingThreshold: 15,
+    positiveDespiteMissingData: false,
     onEditMinAnsweredVariables: jest.fn(),
-    onEditPositiveDespiteMissingThreshold: jest.fn(),
+    onEditPositiveDespiteMissingData: jest.fn(),
   };
 
   // mirrors the app-level provider — the labels use <b>, which only formats
@@ -126,32 +126,40 @@ describe('<ChartValiditySettings />', () => {
     expect(queryByText(/but the formula now has only/)).not.toBeInTheDocument();
   });
 
-  it('Should treat an emptied threshold as off', async () => {
-    const { getByTestId } = renderComponent();
+  it('Should pass checking the rescue checkbox up as true', async () => {
+    const { getByTestId } = renderComponent({
+      positiveDespiteMissingData: false,
+    });
 
-    const input = getByTestId('positive-despite-missing-threshold-input');
-    fireEvent.change(input, { target: { value: '' } });
-    fireEvent.blur(input);
+    fireEvent.click(getByTestId('positive-despite-missing-data-checkbox'));
 
     await waitFor(() =>
       expect(
-        defaultProps.onEditPositiveDespiteMissingThreshold,
-      ).toHaveBeenCalledWith(null),
+        defaultProps.onEditPositiveDespiteMissingData,
+      ).toHaveBeenCalledWith(true),
     );
   });
 
-  it('Should pass a filled threshold up as a number', async () => {
-    const { getByTestId } = renderComponent();
+  it('Should pass unchecking the rescue checkbox up as false', async () => {
+    const { getByTestId } = renderComponent({
+      positiveDespiteMissingData: true,
+    });
 
-    const input = getByTestId('positive-despite-missing-threshold-input');
-    fireEvent.change(input, { target: { value: '12.5' } });
-    fireEvent.blur(input);
+    fireEvent.click(getByTestId('positive-despite-missing-data-checkbox'));
 
     await waitFor(() =>
       expect(
-        defaultProps.onEditPositiveDespiteMissingThreshold,
-      ).toHaveBeenCalledWith(12.5),
+        defaultProps.onEditPositiveDespiteMissingData,
+      ).toHaveBeenCalledWith(false),
     );
+  });
+
+  it('Should render the checkbox checked when the rescue is on', () => {
+    const { getByTestId } = renderComponent({
+      positiveDespiteMissingData: true,
+    });
+
+    expect(getByTestId('positive-despite-missing-data-checkbox')).toBeChecked();
   });
 
   it('Should disable both inputs outside draft', () => {
@@ -161,7 +169,7 @@ describe('<ChartValiditySettings />', () => {
       getByTestId('min-answered-variables-select').querySelector('input'),
     ).toBeDisabled();
     expect(
-      getByTestId('positive-despite-missing-threshold-input'),
+      getByTestId('positive-despite-missing-data-checkbox'),
     ).toBeDisabled();
   });
 
@@ -175,7 +183,7 @@ describe('<ChartValiditySettings />', () => {
       getByTestId('min-answered-variables-select').querySelector('input'),
     ).toBeDisabled();
     expect(
-      getByTestId('positive-despite-missing-threshold-input'),
+      getByTestId('positive-despite-missing-data-checkbox'),
     ).toBeDisabled();
   });
 
@@ -183,27 +191,27 @@ describe('<ChartValiditySettings />', () => {
     const { getByTestId } = renderComponent({
       formulaVariableCount: null,
       minAnsweredVariables: null,
-      positiveDespiteMissingThreshold: null,
+      positiveDespiteMissingData: false,
     });
 
     expect(
       getByTestId('min-answered-variables-select').querySelector('input'),
     ).toBeDisabled();
     expect(
-      getByTestId('positive-despite-missing-threshold-input'),
+      getByTestId('positive-despite-missing-data-checkbox'),
     ).toBeDisabled();
   });
 
-  it('Should default a formula without the keys to 0 / empty', () => {
+  it('Should default a formula without the keys to 0 / unchecked', () => {
     const { getByTestId, getAllByText } = renderComponent({
       formulaVariableCount: 4,
       minAnsweredVariables: undefined,
-      positiveDespiteMissingThreshold: undefined,
+      positiveDespiteMissingData: undefined,
     });
 
     expect(getAllByText('0').length).toBeGreaterThan(0);
-    expect(getByTestId('positive-despite-missing-threshold-input')).toHaveValue(
-      '',
-    );
+    expect(
+      getByTestId('positive-despite-missing-data-checkbox'),
+    ).not.toBeChecked();
   });
 });

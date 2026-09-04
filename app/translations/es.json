@@ -163,7 +163,6 @@
   "app.components.DashboardSetup.chartValidityStaleMinAnsweredNotice": "",
   "app.components.DashboardSetup.chartValidityThresholdHint": "",
   "app.components.DashboardSetup.chartValidityThresholdLabel": "",
-  "app.components.DashboardSetup.chartValidityThresholdPlaceholder": "",
   "app.components.DashboardSetup.dashboardSectionsError": "",
   "app.components.DashboardSetup.dashboardSectionsHeader": "",
   "app.components.DashboardSetup.deleteChartModalHeader": "",
