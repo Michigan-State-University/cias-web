@@ -22,6 +22,7 @@ export const CHART_HEIGHT = elements.chartTileHeight - 150;
 
 export const X_AXIS_KEY = 'label';
 export const STACK_Y_AXIS_KEY = 'notMatchedValue';
+export const INVALID_Y_AXIS_KEY = 'invalidValue';
 export const Y_AXIS_KEY = 'value';
 export const POPULATION_KEY = 'population';
 

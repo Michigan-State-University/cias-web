@@ -220,4 +220,24 @@ export default defineMessages({
     defaultMessage:
       "When checked, a participant below the minimum still counts if their score (missing answers count as 0) already matches one of the chart's cases - they can never land in the default category. Leave unchecked and they are classified as Invalid / Insufficient Data.",
   },
+  barChartTooltipPopulation: {
+    id: `${scope}.barChartTooltipPopulation`,
+    defaultMessage: 'Population: {value}',
+  },
+  barChartTooltipMatched: {
+    id: `${scope}.barChartTooltipMatched`,
+    defaultMessage: 'Matched: {value}',
+  },
+  barChartTooltipNotMatched: {
+    id: `${scope}.barChartTooltipNotMatched`,
+    defaultMessage: 'Not matched: {value}',
+  },
+  barChartTooltipInvalid: {
+    id: `${scope}.barChartTooltipInvalid`,
+    defaultMessage: 'Invalid / Insufficient Data: {value}',
+  },
+  barChartTooltipInvalidWithShare: {
+    id: `${scope}.barChartTooltipInvalidWithShare`,
+    defaultMessage: 'Invalid / Insufficient Data: {value} ({share}%)',
+  },
 });
