@@ -1,0 +1,40 @@
+# .semgrepignore -- exclude patterns for Semgrep SAST analysis
+# Gitignore-style patterns, one per line. Lines starting with # are comments.
+# Required: htd-cq runs semgrep with --no-git-ignore, so .gitignore is NOT honored.
+
+# Common
+.git/
+htd-cq-output/
+.htd-cq-coverage/
+
+# JavaScript / TypeScript
+node_modules/
+.next/
+.nuxt/
+dist/
+build/
+coverage/
+*.min.js
+*.min.css
+.tmp-webpack/
+package-lock.json
+patches/
+public/
+app/assets/
+
+# Local env and auth fixtures (committed *.example templates stay scanned)
+.env
+.env.*
+cypress.env.json
+e2e/.auth/
+playwright/.auth/
+
+# Editor and agent config
+.claude/
+.vscode/
+.idea/
+.history/
+
+# Stray archive committed at the repository root
+github.zip
+

@@ -1,0 +1,11 @@
+{
+  "coverageImage": "node:22",
+  "installCommand": "npm ci --ignore-scripts",
+  "coverageCommand": "npx cross-env NODE_ENV=test jest --coverage --ci --maxWorkers=2",
+  "sonarProperties": {
+    "sonar.javascript.lcov.reportPaths": "coverage/lcov.info"
+  },
+  "trivyExtends": {
+    "skipDirs": ["node_modules", "build", "coverage", ".tmp-webpack", "htd-cq-output"]
+  }
+}
