@@ -16,7 +16,11 @@ import ChartValiditySettings from './ChartValiditySettings';
 import { FullWidthContainer } from '../../../styled';
 import { FormulaGroupPanel } from '../styled';
 import messages from '../messages';
-import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
+import {
+  ChartSettingsContext,
+  DashboardSectionsContext,
+  isMinAnsweredStale,
+} from '../constants';
 import { colors } from '../../../../../theme';
 
 const PieChartSettings = ({
@@ -71,6 +75,7 @@ const PieChartSettings = ({
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
         hasFormula={formula.payload !== ''}
+        isMinAnsweredStale={isMinAnsweredStale(formula, formulaVariableCount)}
         onCopyChart={onCopyChart}
       />
 

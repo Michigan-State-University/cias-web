@@ -24,7 +24,11 @@ import { FullWidthContainer } from '../../../styled';
 import { FormulaGroupPanel } from '../styled';
 import messages from '../messages';
 import chartIntervalTypesMessages from '../chartIntervalTypesMessages';
-import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
+import {
+  ChartSettingsContext,
+  DashboardSectionsContext,
+  isMinAnsweredStale,
+} from '../constants';
 
 const BarChartSettings = ({
   chart,
@@ -82,6 +86,7 @@ const BarChartSettings = ({
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
         hasFormula={formula.payload !== ''}
+        isMinAnsweredStale={isMinAnsweredStale(formula, formulaVariableCount)}
         onCopyChart={onCopyChart}
       />
 

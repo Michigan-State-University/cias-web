@@ -64,6 +64,11 @@ export default defineMessages({
     id: `${scope}.chartSettingsPublishButton`,
     defaultMessage: 'Publish chart',
   },
+  chartSettingsStaleMinAnsweredBlocked: {
+    id: `${scope}.chartSettingsStaleMinAnsweredBlocked`,
+    defaultMessage:
+      'Data collection cannot start while the minimum answered items is higher than the number of variables the formula references. Lower the minimum first — once collection starts, the chart can no longer be edited.',
+  },
   chartSettingsNotEditableInfo: {
     id: `${scope}.chartSettingsNotEditableInfo`,
     defaultMessage: `Data are being collected. <span style='color: #D2371D;'>From this moment you can not introduce any changes to the chart</span>.`,

@@ -40,8 +40,6 @@ const ChartValiditySettings = ({
   // an empty or unparseable formula payload leaves nothing to count against
   const isDisabled = !canBeEdited || variableCount === 0;
 
-  // the payload was edited down below the stored minimum — never rewrite it
-  // silently, the researcher has to resolve it
   const isMinAnsweredStale = minAnswered > variableCount;
 
   const minAnsweredOptions = useMemo(

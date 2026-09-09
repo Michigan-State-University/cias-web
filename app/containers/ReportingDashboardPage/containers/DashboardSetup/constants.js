@@ -16,6 +16,13 @@ export const ChartSettingsContext = createContext({
   statusPermissions: StatusPermissions(''),
 });
 
+// A minimum higher than the number of variables the formula references can never be met, so
+// every participant would be classified Invalid / Insufficient Data. It happens when the payload
+// is edited down and the stored minimum is left behind - never rewritten silently, because the
+// minimum is the researcher's clinical threshold to choose.
+export const isMinAnsweredStale = (formula, formulaVariableCount) =>
+  (formula?.minAnsweredVariables ?? 0) > (formulaVariableCount ?? 0);
+
 export const CHART_NAME_MAX_WIDTH = elements.chartTileWidth / 2 - 50;
 export const CHART_WIDTH = elements.chartTileWidth - 50;
 export const CHART_HEIGHT = elements.chartTileHeight - 150;

@@ -35,6 +35,7 @@ const ChartSettingsTopSection = ({
   onChangeStatus,
   onDelete,
   hasFormula,
+  isMinAnsweredStale,
   onCopyChart,
 }) => {
   const { formatMessage } = useIntl();
@@ -89,10 +90,13 @@ const ChartSettingsTopSection = ({
     }
   }, [chartStatus]);
 
+  // Starting collection is irreversible in the UI: it back-fills every finished session and
+  // locks editing, so an unmeetable minimum would write a chart full of Invalid rows that the
+  // researcher can no longer correct.
   const changeStatusButtonDisabled = useMemo(() => {
-    if (chartStatus === ChartStatus.DRAFT && !hasFormula) return true;
-    return false;
-  }, [chartStatus, hasFormula]);
+    if (chartStatus !== ChartStatus.DRAFT) return false;
+    return !hasFormula || isMinAnsweredStale;
+  }, [chartStatus, hasFormula, isMinAnsweredStale]);
 
   const renderButtonOrStatusBadge = useCallback(() => {
     switch (chartStatus) {
@@ -119,7 +123,12 @@ const ChartSettingsTopSection = ({
           </Badge>
         );
     }
-  }, [chartStatus, handleStatusChange, isChangingStatus]);
+  }, [
+    chartStatus,
+    handleStatusChange,
+    isChangingStatus,
+    changeStatusButtonDisabled,
+  ]);
 
   return (
     <FullWidthContainer>
@@ -157,6 +166,18 @@ const ChartSettingsTopSection = ({
         </Col>
       </Row>
 
+      {isMinAnsweredStale && chartStatus === ChartStatus.DRAFT && (
+        <Row mt={36}>
+          <Col>
+            <InfoBox>
+              <Text color={themeColors.warning} fontWeight="bold">
+                {formatMessage(messages.chartSettingsStaleMinAnsweredBlocked)}
+              </Text>
+            </InfoBox>
+          </Col>
+        </Row>
+      )}
+
       {!statusPermissions.canBeEdited && (
         <Row mt={36}>
           <Col>
@@ -193,6 +214,7 @@ ChartSettingsTopSection.propTypes = {
   onDelete: PropTypes.func,
   onCopyChart: PropTypes.func,
   hasFormula: PropTypes.bool,
+  isMinAnsweredStale: PropTypes.bool,
 };
 
 export default memo(ChartSettingsTopSection);
