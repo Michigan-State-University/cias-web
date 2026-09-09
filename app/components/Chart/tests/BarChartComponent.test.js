@@ -111,9 +111,7 @@ describe('<BarChartComponent />', () => {
 
     const [matched, notMatched, invalid] = seriesFills(container);
     expect(matched).toBe('#107969');
-    // the derived segment follows `fill`...
     expect(notMatched).not.toBe(DERIVED_NOT_MATCHED_FILL);
-    // ...the reserved one does not
     expect(invalid).toBe(INVALID_FILL);
   });
 
@@ -126,10 +124,9 @@ describe('<BarChartComponent />', () => {
 
     const [matched, notMatched, invalid] = seriesOrigins(container);
 
-    // one column - same x for every segment
     expect(notMatched.x).toBe(matched.x);
     expect(invalid.x).toBe(matched.x);
-    // ...and each segment sits above the previous one (SVG y grows downwards)
+    // each segment sits above the previous one - SVG y grows downwards
     expect(notMatched.y).toBeLessThan(matched.y);
     expect(invalid.y).toBeLessThan(notMatched.y);
   });
@@ -142,8 +139,6 @@ describe('<BarChartComponent />', () => {
       secondStackFill: INVALID_FILL,
     });
 
-    // the series is declared but draws nothing, so a chart with no invalid rows looks
-    // exactly as it did before the third segment existed
     expect(seriesFills(container)).toEqual([
       MATCHED_FILL,
       DERIVED_NOT_MATCHED_FILL,

@@ -41,10 +41,9 @@ const PERCENTAGE_DATA = [
   { label: 'Jan', value: 40, population: 50, invalidValue: 10 },
 ];
 
-// The y-domain the preview DECLARED before this phase. It did not clip against it: recharts only
-// ever raises an explicit domain (`allowDataOverflow` is false and unset repo-wide - see the note
-// in `BarChart.js`), so the bars were always drawn in full. The value of declaring the real
-// ceiling is that the axis no longer depends on that undocumented fallback.
+// The y-domain the preview used to declare. It never clipped: recharts only ever RAISES an
+// explicit domain (`allowDataOverflow` is unset repo-wide), so the bars were always drawn in
+// full. Declaring the real ceiling stops the axis depending on that undocumented fallback.
 const OLD_PREVIEW_CEILING = 400;
 
 const Harness = (props) => {
@@ -142,10 +141,9 @@ describe('<BarChart />', () => {
   });
 
   // The sibling test above sets `invalidValue: 0` PRESENT, which satisfies the `?? 0` guards in
-  // `stackTotal` without ever exercising them - remove all three and it stays green. This datum
-  // omits the key entirely, which is the shape the API serves during the web-before-api deploy
-  // window that phase 3's A6 gate explicitly sanctions. Without the guards the domain becomes
-  // [0, undefined] and this fails.
+  // `stackTotal` without exercising them - remove all three and it stays green. This datum omits
+  // the key entirely, the shape the API serves in a web-before-api deploy window. Without the
+  // guards the domain becomes [0, undefined] and this fails.
   it('Should keep the numeric y-domain numeric when the datum omits the invalid key', () => {
     renderComponent({
       ...numericProps,
@@ -241,10 +239,9 @@ describe('<BarChart />', () => {
     expect(getByText('Population: 50')).toBeInTheDocument();
   });
 
-  // Both interval types. `generateBarChartPreviewData` has a separate QUARTERLY branch that got
-  // the identical edit, and `tree()` hardcodes MONTHLY, so monthly-only coverage left half of work
-  // item 6 unrendered (review round 1, finding F2 - taken here rather than deferred, since it is a
-  // wrapper around the block the F1 fix already opened).
+  // Both interval types: `generateBarChartPreviewData` has a separate QUARTERLY branch carrying
+  // the identical edit, and `tree()` hardcodes MONTHLY, so monthly-only coverage renders half of
+  // it untested.
   [ChartIntervalType.MONTHLY, ChartIntervalType.QUARTERLY].forEach(
     (intervalType) => {
       describe(`draft preview (${intervalType})`, () => {
@@ -281,8 +278,8 @@ describe('<BarChart />', () => {
           const { data, yAxis } = chartProps();
           const tallestStack = Math.max(...data.map(stackTotal));
 
-          // the old ceiling sat below the preview's own tallest stack; recharts raised the axis to the
-          // data anyway, so this asserts the ceiling is now declared correctly, not that a clip stopped
+          // the old ceiling sat below the preview's own tallest stack, and recharts raised the axis
+          // to the data anyway - so this pins that the ceiling is declared right, not that it clips
           expect(tallestStack).toBeGreaterThan(OLD_PREVIEW_CEILING);
           expect(yAxis.domain).toEqual([0, MAX_NUMERIC_VALUE]);
           expect(MAX_NUMERIC_VALUE).toBeGreaterThanOrEqual(tallestStack);

@@ -88,9 +88,6 @@ const BarChartComponent = ({
             {children}
           </Bar>
         )}
-        {/* Unlike `stackDataKey`, this segment takes an explicit colour instead of one derived
-            from `fill` - it stands for a fixed, reserved category rather than a shade of the
-            matched series. */}
         {secondStackDataKey && (
           <Bar
             dataKey={secondStackDataKey}
@@ -136,10 +133,6 @@ BarChartComponent.propTypes = {
   tooltip: PropTypes.object,
   stackDataKey: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   secondStackDataKey: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  // Required only when a second stacked key is actually requested. recharts renders a `<Bar>`
-  // with no `fill` as black, and the reserved Invalid grey must never be derived from another
-  // series, so there is deliberately no fallback colour - a loud black segment beats a
-  // plausible-looking wrong one.
   secondStackFill: (props, propName, componentName) => {
     if (props.secondStackDataKey && typeof props[propName] !== 'string') {
       return new Error(
