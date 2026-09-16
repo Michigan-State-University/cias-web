@@ -12,7 +12,9 @@ export const BaseStyledInput = ({
   calculateWidthFromText,
   ...props
 }) => {
-  const sufixLenght = props?.sufix?.length * averageLetterWidth + 2;
+  const sufixLength = props?.sufix?.length;
+  const sufixLenght =
+    (sufixLength !== undefined ? sufixLength : 0) * averageLetterWidth + 2;
   return (
     <Input
       {...props}

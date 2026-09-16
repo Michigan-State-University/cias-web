@@ -4,3 +4,4 @@ export * from './TextMessageType';
 export * from './TextMessageVariant';
 export * from './TextMessageScheduleOption';
 export * from './TextMessageScheduleFrequency';
+export * from './SmsSendTimeType';

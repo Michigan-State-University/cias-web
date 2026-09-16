@@ -48,7 +48,7 @@ describe('<SessionListItem />', () => {
   };
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore(browserHistory, {});
     ReactDOM.createPortal = jest.fn((element) => element);
     modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal-portal');

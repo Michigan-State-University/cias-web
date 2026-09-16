@@ -46,6 +46,7 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
   >
     <div
       class="c1"
+      data-cy="dropdown-trigger-test-dropdown"
       id="test-dropdown"
     >
       <img
@@ -104,6 +105,7 @@ exports[`<Dropdown /> should render on top and  match the snapshot 1`] = `
   >
     <div
       class="c1"
+      data-cy="dropdown-trigger-test-dropdown"
       id="test-dropdown"
     >
       <img

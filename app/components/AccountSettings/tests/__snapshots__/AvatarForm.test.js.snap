@@ -178,11 +178,11 @@ exports[`<AvatarForm /> Should render and match the snapshot 1`] = `
         <div
           class="c6 c7"
           height="fit-content"
+          role="presentation"
         >
           <input
-            accept="image/jpg, image/png, image/jpeg"
-            autocomplete="off"
-            style="display: none;"
+            accept=""
+            style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
             tabindex="-1"
             type="file"
           />

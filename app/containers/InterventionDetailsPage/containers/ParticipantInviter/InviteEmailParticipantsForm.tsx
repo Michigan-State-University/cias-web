@@ -119,56 +119,52 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
                   {({ push, remove }) => (
                     <Column>
                       {values.clinics.map((clinic, index) => (
-                        <>
-                          <HealthClinicCollapse
-                            healthClinicInfo={
-                              clinic.healthClinicOption
-                                ? normalizedHealthClinicsInfos[
-                                    clinic.healthClinicOption?.value
-                                  ]
-                                : null
-                            }
-                            openedInitially
-                          >
-                            <Column gap={16} pb={16}>
-                              <FormikSelect
-                                formikKey={`clinics.${index}.healthClinicOption`}
-                                label={formatMessage(
-                                  messages.clinicSelectLabel,
-                                )}
-                                inputProps={{
-                                  placeholder: formatMessage(
-                                    messages.clinicSelectPlaceholder,
-                                  ),
-                                  isClearable: true,
-                                }}
-                                options={healthClinicOptions}
-                                required
-                              />
-                              <FormikEmailsInput
-                                formikKey={`clinics.${index}.emails`}
-                                label={formatMessage(messages.emailsInputLabel)}
-                                placeholder={formatMessage(
-                                  messages.emailsInputPlaceholder,
-                                )}
-                                transparent
-                                required
-                              />
-                              {index !== 0 && (
-                                <Row>
-                                  <TextButton
-                                    onClick={() => remove(index)}
-                                    buttonProps={TEXT_BUTTON_PROPS}
-                                  >
-                                    {formatMessage(
-                                      messages.removeClinicButtonTitle,
-                                    )}
-                                  </TextButton>
-                                </Row>
+                        <HealthClinicCollapse
+                          healthClinicInfo={
+                            clinic.healthClinicOption
+                              ? normalizedHealthClinicsInfos[
+                                  clinic.healthClinicOption?.value
+                                ]
+                              : null
+                          }
+                          openedInitially
+                        >
+                          <Column gap={16} pb={16}>
+                            <FormikSelect
+                              formikKey={`clinics.${index}.healthClinicOption`}
+                              label={formatMessage(messages.clinicSelectLabel)}
+                              inputProps={{
+                                placeholder: formatMessage(
+                                  messages.clinicSelectPlaceholder,
+                                ),
+                                isClearable: true,
+                              }}
+                              options={healthClinicOptions}
+                              required
+                            />
+                            <FormikEmailsInput
+                              formikKey={`clinics.${index}.emails`}
+                              label={formatMessage(messages.emailsInputLabel)}
+                              placeholder={formatMessage(
+                                messages.emailsInputPlaceholder,
                               )}
-                            </Column>
-                          </HealthClinicCollapse>
-                        </>
+                              transparent
+                              required
+                            />
+                            {index !== 0 && (
+                              <Row>
+                                <TextButton
+                                  onClick={() => remove(index)}
+                                  buttonProps={TEXT_BUTTON_PROPS}
+                                >
+                                  {formatMessage(
+                                    messages.removeClinicButtonTitle,
+                                  )}
+                                </TextButton>
+                              </Row>
+                            )}
+                          </Column>
+                        </HealthClinicCollapse>
                       ))}
                       <Row mt={16}>
                         <TextButton

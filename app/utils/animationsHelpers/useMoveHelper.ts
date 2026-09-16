@@ -62,7 +62,7 @@ const useMoveHelper: TUseMoveHelper = (
       await Promise.all(
         characterToMoveAnimationsMap[character].map(
           async (animation: MoveAnimation) => {
-            const data = await importAnimation(character, animation);
+            const data = await importAnimation(animation, character);
             moveAnimations.push({
               name: animation,
               animationData: data,
@@ -98,7 +98,9 @@ const useMoveHelper: TUseMoveHelper = (
       currentData: moveAnim,
     });
     setAnimationPos(scaledPosition);
-    await new Promise((r) => setTimeout(r, animationDuration + 100));
+    await new Promise((r) => {
+      setTimeout(r, animationDuration + 100);
+    });
   };
 
   return { animationPos, moveAnimation, fetchMoveAnimations };

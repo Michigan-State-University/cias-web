@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, IntlShape } from 'react-intl';
 import { compose } from 'redux';
@@ -34,6 +34,7 @@ const CopyModal = ({
   disableCurrentQuestionGroupCopy,
   disableCurrentSessionCopy,
   disableCurrentInterventionCopy,
+  blockInterventionsWithRaSession,
   pasteText,
   defaultView,
   interventionStatusFilter,
@@ -43,8 +44,13 @@ const CopyModal = ({
     onClose();
   };
 
+  const contextValue = useMemo(
+    () => ({ interventionStatusFilter }),
+    [interventionStatusFilter],
+  );
+
   return (
-    <CopyModalContext.Provider value={{ interventionStatusFilter }}>
+    <CopyModalContext.Provider value={contextValue}>
       <Modal
         visible={visible}
         onClose={onClose}
@@ -62,6 +68,7 @@ const CopyModal = ({
           disableCurrentQuestionGroupCopy={disableCurrentQuestionGroupCopy}
           disableCurrentSessionCopy={disableCurrentSessionCopy}
           disableCurrentInterventionCopy={disableCurrentInterventionCopy}
+          blockInterventionsWithRaSession={blockInterventionsWithRaSession}
           pasteText={pasteText}
         />
       </Modal>
@@ -80,6 +87,7 @@ CopyModal.propTypes = {
   disableCurrentQuestionGroupCopy: PropTypes.bool,
   disableCurrentSessionCopy: PropTypes.bool,
   disableCurrentInterventionCopy: PropTypes.bool,
+  blockInterventionsWithRaSession: PropTypes.bool,
   pasteText: PropTypes.string,
   defaultView: PropTypes.string,
   interventionStatusFilter: PropTypes.arrayOf(PropTypes.string),
@@ -93,6 +101,7 @@ CopyModal.defaultProps = {
   disableCurrentQuestionGroupCopy: false,
   disableCurrentSessionCopy: false,
   disableCurrentInterventionCopy: false,
+  blockInterventionsWithRaSession: false,
   defaultView: VIEWS.QUESTION_GROUP,
   interventionStatusFilter: [InterventionStatus.DRAFT],
 };

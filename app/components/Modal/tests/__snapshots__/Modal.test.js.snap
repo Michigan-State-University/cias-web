@@ -206,7 +206,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
           <div
             align="start"
             class="c5"
-            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%; right: auto; left: auto;"
           >
             <div
               class="c6"
@@ -222,7 +222,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
           <div
             align="end"
             class="c8"
-            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%; right: auto; left: auto;"
           >
             <button
               aria-label="Close window"
@@ -245,7 +245,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
           <div
             align="start"
             class="c5"
-            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
           >
             <div
               class="c10"

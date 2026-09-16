@@ -16,6 +16,15 @@ import {
   DELETE_QUESTION_IMAGE_REQUEST,
   DELETE_QUESTION_IMAGE_SUCCESS,
   DELETE_QUESTION_IMAGE_ERROR,
+  ADD_ANSWER_IMAGE_REQUEST,
+  ADD_ANSWER_IMAGE_SUCCESS,
+  ADD_ANSWER_IMAGE_ERROR,
+  DELETE_ANSWER_IMAGE_REQUEST,
+  DELETE_ANSWER_IMAGE_SUCCESS,
+  DELETE_ANSWER_IMAGE_ERROR,
+  UPDATE_ANSWER_IMAGE_REQUEST,
+  UPDATE_ANSWER_IMAGE_SUCCESS,
+  UPDATE_ANSWER_IMAGE_ERROR,
   COPY_QUESTION_REQUEST,
   COPY_QUESTION_SUCCESS,
   COPY_QUESTION_ERROR,
@@ -93,6 +102,31 @@ export const updateQuestionImageSuccess = (questionId) =>
   actionBuilder(UPDATE_QUESTION_IMAGE_SUCCESS, { questionId });
 export const updateQuestionImageError = (payload) =>
   actionBuilder(UPDATE_QUESTION_IMAGE_ERROR, payload);
+
+export const addAnswerImageRequest = (payload) =>
+  actionBuilder(ADD_ANSWER_IMAGE_REQUEST, payload);
+export const addAnswerImageSuccess = (question) =>
+  actionBuilder(ADD_ANSWER_IMAGE_SUCCESS, { question });
+export const addAnswerImageError = (payload) =>
+  actionBuilder(ADD_ANSWER_IMAGE_ERROR, payload);
+
+export const deleteAnswerImageRequest = (payload) =>
+  actionBuilder(DELETE_ANSWER_IMAGE_REQUEST, payload);
+export const deleteAnswerImageSuccess = (question) =>
+  actionBuilder(DELETE_ANSWER_IMAGE_SUCCESS, { question });
+export const deleteAnswerImageError = (payload) =>
+  actionBuilder(DELETE_ANSWER_IMAGE_ERROR, payload);
+
+export const updateAnswerImageRequest = (questionId, answerId, description) =>
+  actionBuilder(UPDATE_ANSWER_IMAGE_REQUEST, {
+    questionId,
+    answerId,
+    description,
+  });
+export const updateAnswerImageSuccess = (questionId) =>
+  actionBuilder(UPDATE_ANSWER_IMAGE_SUCCESS, { questionId });
+export const updateAnswerImageError = (payload) =>
+  actionBuilder(UPDATE_ANSWER_IMAGE_ERROR, payload);
 
 export const copyQuestionRequest = (payload) =>
   actionBuilder(COPY_QUESTION_REQUEST, payload);

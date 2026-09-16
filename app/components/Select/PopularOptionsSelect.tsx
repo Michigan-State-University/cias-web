@@ -46,11 +46,14 @@ const PopularOptionsSelect = <OptionType extends SelectOption<string>>({
   const groupedOptions = useMemo(
     () =>
       selectProps.options?.reduce((groups, option) => {
-        const groupIndex = +!popularOptionsValues.includes(option.value);
-        groups[groupIndex].options.push({
-          ...(option as OptionType),
-          highlighted: !groupIndex,
-        });
+        // Type guard: check if it's an option (has value) not a group (has options)
+        if ('value' in option) {
+          const groupIndex = +!popularOptionsValues.includes(option.value);
+          groups[groupIndex].options.push({
+            ...(option as OptionType),
+            highlighted: !groupIndex,
+          });
+        }
         return groups;
       }, emptyGroups) ?? emptyGroups,
     [selectProps.options, popularOptionsValues],

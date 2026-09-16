@@ -78,9 +78,7 @@ const PaginationHandler = ({
       )}
 
       {!isLastPage && (
-        <>
-          <H1 cursor="pointer" onClick={changePage(nextPage)}>{`>`}</H1>
-        </>
+        <H1 cursor="pointer" onClick={changePage(nextPage)}>{`>`}</H1>
       )}
     </Row>
   );

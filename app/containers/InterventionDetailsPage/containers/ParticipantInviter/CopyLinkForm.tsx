@@ -76,10 +76,34 @@ const CopyLinkForm: FC<Props> = ({
       validationSchema={validationSchema}
       onSubmit={() => {}}
     >
-      {({ values, isValid, dirty, handleSubmit }) => (
+      {({ values, isValid, handleSubmit }) => (
         <Form>
           <Column>
             <Divider />
+            {isModularIntervention && (
+              <CopyToClipboard
+                // @ts-ignore
+                textToCopy={createInviteUrl(
+                  isModularIntervention,
+                  isReportingIntervention,
+                  interventionId,
+                  null,
+                  values.healthClinicOption?.value,
+                  interventionLanguageCode,
+                )}
+                icon={share}
+                iconAlt={formatMessage(messages.copyLinkIconAlt)}
+                disabled={false}
+                buttonDisabled={
+                  isReportingIntervention && !values.healthClinicOption
+                }
+                onClick={handleSubmit}
+                mt={21}
+                mb={13}
+              >
+                {formatMessage(messages.copyInterventionLinkButtonTitle)}
+              </CopyToClipboard>
+            )}
             {(!isModularIntervention || isReportingIntervention) && (
               <Row mt={16} gap={16}>
                 {!isModularIntervention && (
@@ -108,10 +132,36 @@ const CopyLinkForm: FC<Props> = ({
                 )}
               </Row>
             )}
+            {isModularIntervention && (
+              <Row mt={16} gap={16}>
+                <FormikSelect
+                  formikKey="sessionOption"
+                  label={formatMessage(messages.sessionSelectLabel)}
+                  inputProps={{
+                    placeholder: formatMessage(
+                      messages.sessionSelectPlaceholder,
+                    ),
+                  }}
+                  options={sessionOptions}
+                />
+                {isReportingIntervention && (
+                  <FormikSelect
+                    formikKey="healthClinicOption"
+                    label={formatMessage(messages.clinicSelectLabel)}
+                    inputProps={{
+                      placeholder: formatMessage(
+                        messages.clinicSelectPlaceholder,
+                      ),
+                    }}
+                    options={healthClinicOptions}
+                  />
+                )}
+              </Row>
+            )}
             <CopyToClipboard
               // @ts-ignore
               textToCopy={createInviteUrl(
-                isModularIntervention,
+                false, // Always use session URL for this button
                 isReportingIntervention,
                 interventionId,
                 values.sessionOption?.value,
@@ -122,18 +172,24 @@ const CopyLinkForm: FC<Props> = ({
               )}
               icon={share}
               iconAlt={formatMessage(messages.copyLinkIconAlt)}
-              disabled={!isValid}
+              disabled={!isValid || !values.sessionOption}
               buttonDisabled={
                 !isValid ||
-                ((!isModularIntervention || isReportingIntervention) && !dirty)
+                !values.sessionOption ||
+                (isReportingIntervention && !values.healthClinicOption)
               }
               onClick={handleSubmit}
               mt={21}
               mb={13}
             >
-              {formatMessage(messages.copyLinkButtonTitle, {
-                isModularIntervention,
-              })}
+              {formatMessage(
+                isModularIntervention
+                  ? messages.copySessionLinkButtonTitle
+                  : messages.copyLinkButtonTitle,
+                {
+                  isModularIntervention: false,
+                },
+              )}
             </CopyToClipboard>
             <SetProperSessionLanguageCode />
           </Column>

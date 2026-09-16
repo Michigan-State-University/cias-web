@@ -57,7 +57,11 @@ export default defineMessages({
   },
   goToDashboard: {
     id: `${scope}.goToDashboard`,
-    defaultMessage: 'Go to dashboard',
+    defaultMessage: 'My Dashboard',
+  },
+  fillAgain: {
+    id: `${scope}.fillAgain`,
+    defaultMessage: 'Fill again',
   },
   goToSessionMap: {
     id: `${scope}.goToSessionMap`,
@@ -218,5 +222,9 @@ export default defineMessages({
   rescan: {
     id: `${scope}.rescan`,
     defaultMessage: 'Rescan QR Code',
+  },
+  closeTab: {
+    id: `${scope}.closeTab`,
+    defaultMessage: 'Close Tab',
   },
 });

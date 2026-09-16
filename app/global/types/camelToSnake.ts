@@ -32,8 +32,8 @@ type SnakeUnderscore<
 > = First extends UpperAlphabetic | '' | '_'
   ? ''
   : Second extends UpperAlphabetic
-  ? '_'
-  : '';
+    ? '_'
+    : '';
 
 type ToSnakeCase<
   S extends string,
@@ -44,8 +44,8 @@ type ToSnakeCase<
       Second
     >}${Lowercase<Second>}${ToSnakeCase<Rest, First>}`
   : S extends `${infer First}`
-  ? `${SnakeUnderscore<Previous, First>}${Lowercase<First>}`
-  : '';
+    ? `${SnakeUnderscore<Previous, First>}${Lowercase<First>}`
+    : '';
 
 type SnakeCase<S extends string> = ToSnakeCase<S, ''>;
 
@@ -56,10 +56,10 @@ type SnakeCase<S extends string> = ToSnakeCase<S, ''>;
 export type CamelToSnake<T> = T extends readonly any[]
   ? { [K in keyof T]: CamelToSnake<T[K]> }
   : T extends object
-  ? {
-      [K in keyof T as SnakeCase<Extract<K, string>>]: CamelToSnake<T[K]>;
-    }
-  : T;
+    ? {
+        [K in keyof T as SnakeCase<Extract<K, string>>]: CamelToSnake<T[K]>;
+      }
+    : T;
 
 /**
  * IMPORTANT: Supports keys with a max length of 37 characters.

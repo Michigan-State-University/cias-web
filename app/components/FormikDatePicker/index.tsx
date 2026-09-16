@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { useField, useFormikContext } from 'formik';
 import isNil from 'lodash/isNil';
 import { useIntl } from 'react-intl';
-import { ReactDatePickerProps } from 'react-datepicker';
+import { DatePickerProps } from 'react-datepicker';
 
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
@@ -17,7 +17,7 @@ export type Props = PropsWithChildren<{
   label: string;
   placeholder?: string;
   disabled?: boolean;
-  datePickerProps?: Partial<ReactDatePickerProps>;
+  datePickerProps?: Partial<DatePickerProps>;
   inputProps?: DateInputProps;
   submitOnChange?: boolean;
   selectTime?: boolean;
@@ -45,6 +45,15 @@ const FormikDatePicker = ({
 
   const hasError = touched && !isNil(error);
 
+  // Filter out incompatible props for react-datepicker v7
+  const {
+    showMonthYearDropdown,
+    showMonthDropdown,
+    showYearDropdown,
+    selectsRange,
+    ...filteredDatePickerProps
+  } = datePickerProps || {};
+
   useDidUpdateEffect(() => {
     if (submitOnChange) {
       submitForm();
@@ -60,8 +69,9 @@ const FormikDatePicker = ({
       {...columnStyleProps}
     >
       <LocalizedDatePicker
-        {...field}
-        onChange={(value) => setValue(value)}
+        name={field.name}
+        onBlur={field.onBlur}
+        onChange={(value: Date | null) => setValue(value)}
         disabled={disabled}
         selected={field.value}
         placeholderText={
@@ -71,13 +81,11 @@ const FormikDatePicker = ({
         customInput={
           <DateInput disabled={disabled} hasError={hasError} {...inputProps} />
         }
-        showMonthDropdown
-        showYearDropdown
         calendarClassName="schedule-date-picker"
         timeCaption={formatMessage(messages.timeCaption)}
         showTimeSelect={selectTime}
         strictParsing
-        {...datePickerProps}
+        {...(filteredDatePickerProps as any)}
       />
     </FormikControlLayout>
   );

@@ -468,97 +468,95 @@ const HenryFordInitialScreenLayout = ({
         {/* @ts-ignore - Tabs component expects children with label prop */}
         <div label={formatMessage(messages.scanQRCodeTab)}>
           {showPatientDataDisplay && hfhsPatientDetailAnonymized ? (
-            <>
-              <Box>
-                <Container fluid style={{ padding: 0 }}>
-                  <Row gutterWidth={24} style={{ rowGap: '24px' }}>
-                    <Col xs={12}>
-                      <Text fontSize="18px" fontWeight="bold" mb={16}>
-                        {formatMessage(messages.confirmPatientData)}
-                      </Text>
-                    </Col>
+            <Box>
+              <Container fluid style={{ padding: 0 }}>
+                <Row gutterWidth={24} style={{ rowGap: '24px' }}>
+                  <Col xs={12}>
+                    <Text fontSize="18px" fontWeight="bold" mb={16}>
+                      {formatMessage(messages.confirmPatientData)}
+                    </Text>
+                  </Col>
 
-                    <Col {...columnClassMap}>
-                      <Text fontSize="14px" color={colors.grey} mb={8}>
-                        {formatMessage(messages.firstName)}
-                      </Text>
-                      <Text fontSize="16px" fontWeight="medium">
-                        {hfhsPatientDetailAnonymized.firstName}
-                      </Text>
-                    </Col>
+                  <Col {...columnClassMap}>
+                    <Text fontSize="14px" color={colors.grey} mb={8}>
+                      {formatMessage(messages.firstName)}
+                    </Text>
+                    <Text fontSize="16px" fontWeight="medium">
+                      {hfhsPatientDetailAnonymized.firstName}
+                    </Text>
+                  </Col>
 
-                    <Col {...columnClassMap}>
-                      <Text fontSize="14px" color={colors.grey} mb={8}>
-                        {formatMessage(messages.lastName)}
-                      </Text>
-                      <Text fontSize="16px" fontWeight="medium">
-                        {hfhsPatientDetailAnonymized.lastName}
-                      </Text>
-                    </Col>
+                  <Col {...columnClassMap}>
+                    <Text fontSize="14px" color={colors.grey} mb={8}>
+                      {formatMessage(messages.lastName)}
+                    </Text>
+                    <Text fontSize="16px" fontWeight="medium">
+                      {hfhsPatientDetailAnonymized.lastName}
+                    </Text>
+                  </Col>
 
-                    <Col {...columnClassMap}>
-                      <Text fontSize="14px" color={colors.grey} mb={8}>
-                        {formatMessage(messages.phoneNumber)}
-                      </Text>
-                      <Text fontSize="16px" fontWeight="medium">
-                        {hfhsPatientDetailAnonymized.phoneNumber}
-                      </Text>
-                    </Col>
+                  <Col {...columnClassMap}>
+                    <Text fontSize="14px" color={colors.grey} mb={8}>
+                      {formatMessage(messages.phoneNumber)}
+                    </Text>
+                    <Text fontSize="16px" fontWeight="medium">
+                      {hfhsPatientDetailAnonymized.phoneNumber}
+                    </Text>
+                  </Col>
 
-                    <Col {...columnClassMap}>
-                      <Text fontSize="14px" color={colors.grey} mb={8}>
-                        {formatMessage(messages.dateOfBirth)}
-                      </Text>
-                      <Text fontSize="16px" fontWeight="medium">
-                        {formatDOB(hfhsPatientDetailAnonymized.dob || '')}
-                      </Text>
-                    </Col>
-                  </Row>
-                </Container>
+                  <Col {...columnClassMap}>
+                    <Text fontSize="14px" color={colors.grey} mb={8}>
+                      {formatMessage(messages.dateOfBirth)}
+                    </Text>
+                    <Text fontSize="16px" fontWeight="medium">
+                      {formatDOB(hfhsPatientDetailAnonymized.dob || '')}
+                    </Text>
+                  </Col>
+                </Row>
+              </Container>
 
-                <Container fluid style={{ padding: '32px 0 0 0' }}>
-                  <Row gutterWidth={24} style={{ rowGap: '16px' }}>
-                    <Col xs={12} sm={forceMobile ? 12 : 6}>
-                      <Button
-                        onClick={() => {
-                          if (
-                            onSubmitPatientData &&
-                            hfhsPatientDetailAnonymized
-                          ) {
-                            onSubmitPatientData({
-                              id: hfhsPatientDetailAnonymized.id,
-                            });
-                          }
-                        }}
-                        loading={qrVerifying}
-                        disabled={
-                          !hfhsPatientDetailAnonymized ||
-                          continueButtonDisabled ||
-                          isVerifying
+              <Container fluid style={{ padding: '32px 0 0 0' }}>
+                <Row gutterWidth={24} style={{ rowGap: '16px' }}>
+                  <Col xs={12} sm={forceMobile ? 12 : 6}>
+                    <Button
+                      onClick={() => {
+                        if (
+                          onSubmitPatientData &&
+                          hfhsPatientDetailAnonymized
+                        ) {
+                          onSubmitPatientData({
+                            id: hfhsPatientDetailAnonymized.id,
+                          });
                         }
-                        width="100%"
-                      >
-                        {formatMessage(messages.continue)}
-                      </Button>
-                    </Col>
-                    <Col xs={12} sm={forceMobile ? 12 : 6}>
-                      <Button
-                        variant="secondary"
-                        onClick={() => {
-                          if (onTogglePatientDataDisplay) {
-                            onTogglePatientDataDisplay();
-                          }
-                        }}
-                        disabled={isVerifying}
-                        width="100%"
-                      >
-                        {formatMessage(messages.rescan)}
-                      </Button>
-                    </Col>
-                  </Row>
-                </Container>
-              </Box>
-            </>
+                      }}
+                      loading={qrVerifying}
+                      disabled={
+                        !hfhsPatientDetailAnonymized ||
+                        continueButtonDisabled ||
+                        isVerifying
+                      }
+                      width="100%"
+                    >
+                      {formatMessage(messages.continue)}
+                    </Button>
+                  </Col>
+                  <Col xs={12} sm={forceMobile ? 12 : 6}>
+                    <Button
+                      variant="secondary"
+                      onClick={() => {
+                        if (onTogglePatientDataDisplay) {
+                          onTogglePatientDataDisplay();
+                        }
+                      }}
+                      disabled={isVerifying}
+                      width="100%"
+                    >
+                      {formatMessage(messages.rescan)}
+                    </Button>
+                  </Col>
+                </Row>
+              </Container>
+            </Box>
           ) : (
             <>
               <Text mb={16}>{formatMessage(messages.scanInstructions)}</Text>

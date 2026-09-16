@@ -126,6 +126,23 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
+.c16 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  color: unset;
+}
+
+.c17 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
 .c12 {
   position: relative;
   display: inline-block;
@@ -514,7 +531,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c15"
+    class="c0"
   >
     <div
       class="c1 c2"
@@ -560,6 +577,85 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
           </div>
         </div>
       </label>
+    </div>
+  </div>
+  <div
+    class="c15"
+  >
+    <h3
+      class="c11"
+    >
+      Answer Image Size
+    </h3>
+    <div
+      class="c16"
+      cursor="pointer"
+    >
+      <div
+        class="css-b62m3t-container"
+      >
+        <span
+          class="css-1f43avz-a11yText-A11yText"
+          id="react-select-3-live-region"
+        />
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          class="css-1f43avz-a11yText-A11yText"
+          role="log"
+        />
+        <div
+          class="css-1eyhby5-control"
+        >
+          <div
+            class="css-hlgwow"
+          >
+            <div
+              class="css-1dimb5e-singleValue"
+            >
+              Medium
+            </div>
+            <div
+              class="css-19bb58m"
+              data-value=""
+            >
+              <input
+                aria-activedescendant=""
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-haspopup="true"
+                autocapitalize="none"
+                autocomplete="off"
+                autocorrect="off"
+                class=""
+                id="react-select-3-input"
+                role="combobox"
+                spellcheck="false"
+                style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                tabindex="0"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            class="css-1wy0on6"
+          >
+            <div
+              aria-hidden="true"
+              class="css-1xc3v61-indicatorContainer"
+            >
+              <img
+                alt="arrow"
+                class="c17"
+                src="IMAGE_MOCK"
+                transform=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

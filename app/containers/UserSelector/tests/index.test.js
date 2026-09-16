@@ -25,7 +25,10 @@ describe('<UserSelector />', () => {
   };
   beforeAll(() => {
     store = createTestStore(initialState);
-    store.runSaga = () => {};
+    store.runSaga = () => ({
+      cancel: () => {},
+      toPromise: () => Promise.resolve(),
+    });
     store.injectedReducers = {
       userList: UserListReducer,
       auth: authReducer,

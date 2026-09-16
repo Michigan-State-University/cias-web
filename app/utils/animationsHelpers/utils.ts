@@ -7,8 +7,8 @@ import { CharacterType } from 'models/Character';
 import { ScaleFactor2D } from 'global/types/math';
 
 export const importAnimation = async (
-  character: CharacterType = CharacterType.PEEDY,
   animationName: string,
+  character: CharacterType = CharacterType.PEEDY,
 ) => import(`assets/animations/${character}/${animationName}.json`);
 
 export const getScaleFactor = (

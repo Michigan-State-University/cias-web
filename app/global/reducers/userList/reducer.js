@@ -51,7 +51,7 @@ export const initialState = {
   usersLoading: true,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const userListReducer = (state = initialState, { type, payload }) =>
   produce(state, (draft) => {
     switch (type) {

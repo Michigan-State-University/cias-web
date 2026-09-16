@@ -49,6 +49,30 @@ import {
 const MINIMAL_COLUMNS_LENGTH = 2;
 const MINIMAL_ROWS_LENGTH = 1;
 
+// Extract overlay internal wrapper to avoid creating component during render
+const ColumnOverlayWrapper = ({ children }) => (
+  <thead>
+    <tr>
+      <TH>{children}</TH>
+    </tr>
+  </thead>
+);
+
+ColumnOverlayWrapper.propTypes = {
+  children: PropTypes.node,
+};
+
+// Extract overlay internal wrapper for rows to avoid creating component during render
+const RowOverlayWrapper = ({ children }) => (
+  <tbody>
+    <StripedTR>{children}</StripedTR>
+  </tbody>
+);
+
+RowOverlayWrapper.propTypes = {
+  children: PropTypes.node,
+};
+
 const GridQuestion = ({
   selectedQuestion,
   addRow,
@@ -160,13 +184,7 @@ const GridQuestion = ({
                   overlayProps={{
                     overlayWrapperTag: 'table',
                     renderOverlayInPortal: true,
-                    overlayInternalWrapper: (children) => (
-                      <thead>
-                        <tr>
-                          <TH>{children}</TH>
-                        </tr>
-                      </thead>
-                    ),
+                    overlayInternalWrapper: ColumnOverlayWrapper,
                   }}
                 >
                   {({ item: column, index: columnIndex, dragHandleProps }) => (
@@ -188,6 +206,9 @@ const GridQuestion = ({
                             clickable
                             onClick={() => deleteColumn(columnIndex)}
                             src={bin}
+                            alt={formatMessage(messages.deleteColumn, {
+                              index: columnIndex + 1,
+                            })}
                             hidden={
                               columns.length <= MINIMAL_COLUMNS_LENGTH ||
                               hoveredColumn !== columnIndex
@@ -274,7 +295,7 @@ const GridQuestion = ({
                     </div>
                   )}
                 </DndSortable>
-                <td ref={containerRightRef} />
+                <td ref={containerRightRef} aria-hidden="true" />
               </StripedTR>
             </THead>
             <TBody>
@@ -290,11 +311,7 @@ const GridQuestion = ({
                 overlayProps={{
                   overlayWrapperTag: 'table',
                   renderOverlayInPortal: true,
-                  overlayInternalWrapper: (children) => (
-                    <tbody>
-                      <StripedTR>{children}</StripedTR>
-                    </tbody>
-                  ),
+                  overlayInternalWrapper: RowOverlayWrapper,
                 }}
               >
                 {({ item: row, index: rowIndex, dragHandleProps }) => (
@@ -312,6 +329,9 @@ const GridQuestion = ({
                             clickable
                             onClick={() => deleteRow(rowIndex)}
                             src={bin}
+                            alt={formatMessage(messages.deleteRow, {
+                              index: rowIndex + 1,
+                            })}
                             hidden={
                               rows.length <= MINIMAL_ROWS_LENGTH ||
                               hoveredRow !== rowIndex

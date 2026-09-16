@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
@@ -55,58 +55,66 @@ const TranslateLanguageSettings = ({
     [sourceLanguageOptions, sourceLanguage],
   );
 
-  const handleSourceLanguageChange = (
-    newSourceLanguage: Nullable<LanguageSelectOption>,
-  ) => {
-    onSourceLanguageChange(newSourceLanguage);
-    if (
-      newSourceLanguage?.googleLanguageId ===
-      destinationLanguage?.googleLanguageId
-    ) {
-      onDestinationLanguageChange(null);
-    }
-  };
+  const handleSourceLanguageChange = useCallback(
+    (newSourceLanguage: unknown) => {
+      const selectedLanguage =
+        newSourceLanguage as Nullable<LanguageSelectOption>;
+      onSourceLanguageChange(selectedLanguage);
+      if (
+        selectedLanguage?.googleLanguageId ===
+        destinationLanguage?.googleLanguageId
+      ) {
+        onDestinationLanguageChange(null);
+      }
+    },
+    [onSourceLanguageChange, destinationLanguage, onDestinationLanguageChange],
+  );
+
+  const handleDestinationLanguageChange = useCallback(
+    (newValue: unknown) => {
+      onDestinationLanguageChange(newValue as Nullable<LanguageSelectOption>);
+    },
+    [onDestinationLanguageChange],
+  );
 
   return (
-    <>
-      <Row align="end">
-        <Column>
-          <Text id={SOURCE_LANGUAGE_LABEL_ID}>
-            <FormattedMessage {...messages.sourceLanguage} />
-          </Text>
-          <PopularOptionsSelect
-            mt={5}
-            selectProps={{
-              options: sourceLanguageOptions,
-              value: sourceLanguage,
-              onChange: handleSourceLanguageChange,
-              placeholder: formatMessage(messages.searchLanguage),
-              'aria-labelledby': SOURCE_LANGUAGE_LABEL_ID,
-            }}
-            popularOptionsValues={['en', 'es', 'zh', 'fr']}
-          />
-        </Column>
-        <Column mx={15} height={45} width="auto" justify="center">
-          <H2 color={themeColors.primary}>-</H2>
-        </Column>
-        <Column>
-          <Text id={DESTINATION_LANGUAGE_LABEL_ID}>
-            <FormattedMessage {...messages.destinationLanguage} />
-          </Text>
-          <PopularOptionsSelect
-            mt={5}
-            selectProps={{
-              options: destinationLanguageOptions,
-              value: destinationLanguage,
-              onChange: onDestinationLanguageChange,
-              placeholder: formatMessage(messages.searchLanguage),
-              'aria-labelledby': DESTINATION_LANGUAGE_LABEL_ID,
-            }}
-            popularOptionsValues={['en', 'es', 'zh', 'fr']}
-          />
-        </Column>
-      </Row>
-    </>
+    <Row align="end">
+      <Column>
+        <Text id={SOURCE_LANGUAGE_LABEL_ID}>
+          <FormattedMessage {...messages.sourceLanguage} />
+        </Text>
+        <PopularOptionsSelect
+          mt={5}
+          selectProps={{
+            options: sourceLanguageOptions,
+            value: sourceLanguage,
+            onChange: handleSourceLanguageChange,
+            placeholder: formatMessage(messages.searchLanguage),
+            'aria-labelledby': SOURCE_LANGUAGE_LABEL_ID,
+          }}
+          popularOptionsValues={['en', 'es', 'zh', 'fr']}
+        />
+      </Column>
+      <Column mx={15} height={45} width="auto" justify="center">
+        <H2 color={themeColors.primary}>-</H2>
+      </Column>
+      <Column>
+        <Text id={DESTINATION_LANGUAGE_LABEL_ID}>
+          <FormattedMessage {...messages.destinationLanguage} />
+        </Text>
+        <PopularOptionsSelect
+          mt={5}
+          selectProps={{
+            options: destinationLanguageOptions,
+            value: destinationLanguage,
+            onChange: handleDestinationLanguageChange,
+            placeholder: formatMessage(messages.searchLanguage),
+            'aria-labelledby': DESTINATION_LANGUAGE_LABEL_ID,
+          }}
+          popularOptionsValues={['en', 'es', 'zh', 'fr']}
+        />
+      </Column>
+    </Row>
   );
 };
 

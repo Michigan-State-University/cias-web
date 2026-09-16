@@ -120,7 +120,7 @@ const useScrollInfo = () => {
 
   const throttledUpdate = throttle(update, throttleTime);
 
-  const setRef = useCallback(node => {
+  const setRef = useCallback((node) => {
     if (node) {
       // When the ref is first set (after mounting)
       node.addEventListener('scroll', throttledUpdate);

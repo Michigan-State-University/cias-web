@@ -34,29 +34,6 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   color: unset;
 }
 
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-block-start: 10px;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -83,6 +60,29 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   justify-content: space-between;
   justify-items: space-between;
   margin-block-end: 24px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-block-start: 10px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
 }
 
 .c6 {
@@ -213,7 +213,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
               />
               <div
                 class="rc-slider-track"
-                style="background-color: rgb(183, 39, 234); left: 0%; width: 0%;"
+                style="background-color: rgb(183, 39, 234); left: 0%; right: auto; width: 0%;"
               />
               <div
                 class="rc-slider-step"

@@ -8,4 +8,8 @@ export default defineMessages({
     defaultMessage:
       'An error has occured during uploading a file {file}: {err}',
   },
+  fileTooLarge: {
+    id: `${scope}.fileTooLarge`,
+    defaultMessage: 'The file is too large. Maximum file size is {maxSize}MB.',
+  },
 });

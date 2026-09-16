@@ -79,6 +79,12 @@ export interface GenericQuestion<
   originalText: QuestionOriginalText;
   imageUrl: Nullable<string>;
   imageAlt: Nullable<string>;
+  answerImages: Array<{
+    id: string;
+    url: string;
+    alt: Nullable<string>;
+    answerId: string;
+  }>;
   firstQuestion: boolean;
 }
 
@@ -164,7 +170,10 @@ export type FinishQuestion = GenericQuestion<
   QuestionTypes.FINISH,
   FinishQuestionBody,
   FinishQuestionSettings
->;
+> & {
+  nextSessionId?: Nullable<string>;
+  sessionMultipleFill?: Nullable<boolean>;
+};
 export type FinishQuestionDTO = CamelToSnake<FinishQuestion>;
 
 export type PhoneQuestion = GenericQuestion<

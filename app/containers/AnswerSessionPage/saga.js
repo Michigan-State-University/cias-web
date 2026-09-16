@@ -42,6 +42,7 @@ import {
   FETCH_PREVIOUS_QUESTION_REQUEST,
   VERIFY_PATIENT_DATA_REQUEST,
   VERIFY_QR_CODE_REQUEST,
+  VERIFY_PID_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -68,6 +69,10 @@ import {
   setHfhsPatientDetailAnonymized,
   verifyQRCodeSuccess,
   verifyQRCodeError,
+  verifyPidSuccess,
+  verifyPidError,
+  fetchUserSessionRequest,
+  setRaFulfillment,
 } from './actions';
 import {
   makeSelectAnswers,
@@ -133,6 +138,11 @@ function* submitAnswersAsync({
       throw new Error('Choose answer');
     }
   } catch (error) {
+    const reason = error?.response?.data?.reason;
+    if (reason === 'NOT_RA_FULFILLER') {
+      yield call(toast.error, formatMessage(messages.raSessionTakenOver));
+      return;
+    }
     yield put(
       submitAnswerFailure(
         questionId,
@@ -218,8 +228,36 @@ function* redirectToPreview({
 
 function* fetchUserSession({ payload: { sessionId } }) {
   const {
-    query: { cid: healthClinicId },
+    query: { cid: healthClinicId, userSessionId: raUserSessionId },
   } = yield select(makeSelectLocation());
+
+  if (raUserSessionId) {
+    try {
+      const { data } = yield call(
+        axios.get,
+        `/v1/user_sessions/${raUserSessionId}/ra_show`,
+      );
+      const userSession = jsonApiToObject(data, 'userSession');
+
+      yield put(fetchUserSessionSuccess(userSession));
+      yield put(changeLocale(userSession.languageCode));
+      yield put(setRaFulfillment(true));
+      return;
+    } catch (error) {
+      const reason = error?.response?.data?.reason;
+      if (reason === 'NOT_RA_FULFILLER' || error?.response?.status === 403) {
+        yield call(toast.error, formatMessage(messages.raSessionAccessDenied));
+      } else {
+        yield call(
+          toast.error,
+          formatApiErrorMessage(error, messages.raSessionFetchError),
+        );
+      }
+      yield put(fetchUserSessionError(error));
+      return;
+    }
+  }
+
   const requestUrl = `/v1/user_sessions`;
   const searchParams = new URLSearchParams();
 
@@ -427,7 +465,47 @@ function* verifyQRCode({ payload: { decodedString } }) {
   }
 }
 
-// Individual exports for testing
+function* verifyPid({ payload: { pid } }) {
+  const requestUrl = `/v1/predefined_participants/verify`;
+  const requestBody = objectToSnakeCase({ slug: pid });
+
+  const currentUserRoles = LocalStorageService.getHeaders();
+  const clearHeaders =
+    !currentUserRoles || Object.keys(currentUserRoles).length === 0;
+
+  if (clearHeaders) {
+    LocalStorageService.clearHeaders();
+  }
+
+  try {
+    const { data } = yield call(axios.post, requestUrl, requestBody);
+    const { user } = data;
+
+    const mappedUser = jsonApiToObject({ data: user }, 'user');
+    yield call(LocalStorageService.setState, { user: mappedUser });
+    yield put(verifyPidSuccess(mappedUser));
+
+    const location = yield select(makeSelectLocation());
+    const { pathname } = location;
+
+    const sessionIdMatch = pathname.match(/sessions\/([^/]+)\/fill/);
+    if (sessionIdMatch) {
+      const sessionId = sessionIdMatch[1];
+
+      const isAuthenticated = LocalStorageService.isAuthenticated();
+      if (isAuthenticated) {
+        yield put(fetchUserSessionRequest(sessionId));
+      }
+    }
+  } catch (error) {
+    yield put(verifyPidError(error));
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+    }
+  }
+}
+
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
   yield takeLatest(RESET_SESSION, resetSession);
@@ -442,6 +520,7 @@ export default function* AnswerSessionPageSaga() {
   yield takeEvery(FETCH_PREVIOUS_QUESTION_REQUEST, fetchPreviousQuestion);
   yield takeLatest(VERIFY_PATIENT_DATA_REQUEST, verifyPatientData);
   yield takeLatest(VERIFY_QR_CODE_REQUEST, verifyQRCode);
+  yield takeLatest(VERIFY_PID_REQUEST, verifyPid);
 }
 
 export function* redirectToPreviewSaga() {

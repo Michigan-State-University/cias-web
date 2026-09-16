@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IntlShape } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 
 import LocalStorageService from 'utils/localStorageService';
 import { getIsPreview } from 'utils/previewMode';
@@ -19,7 +20,7 @@ import GhostLink from 'components/GhostLink';
 
 import { StyledLink } from './styled';
 import messages from './messages';
-import { makeSelectUserSession } from '../selectors';
+import { makeSelectUserSession, makeSelectIsRaFulfillment } from '../selectors';
 import { getNextSessionUrl, getSessionMapUserPreviewUrl } from '../utils';
 import {
   fetchOrCreateUserSessionRequest,
@@ -35,7 +36,9 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   const isGuestUser = !LocalStorageService.getState();
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const userSession = useSelector(makeSelectUserSession());
+  const isRaFulfillment = useSelector(makeSelectIsRaFulfillment());
 
   const fixedElementsDirection = useSelector(
     makeSelectInterventionFixedElementsDirection(),
@@ -46,9 +49,17 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     interventionType,
     sharedTo,
     userInterventionId,
+    logoUrl,
+    imageAlt,
   } = userSession;
-  // @ts-ignore
-  const { next_session_id: nextSessionId } = question;
+  const {
+    next_session_id: nextSessionId,
+    settings,
+    session_multiple_fill: sessionMultipleFill,
+  } = question;
+  const showDashboardButton = settings?.show_dashboard_button ?? false;
+
+  const canFillAgain = sessionMultipleFill ?? false;
 
   const isModuleIntervention =
     interventionType === InterventionType.FIXED ||
@@ -81,6 +92,22 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     dispatch(resetAuthReducer());
   };
 
+  const completeSession = () => {
+    LocalStorageService.clearHeaders();
+    dispatch(resetAuthReducer());
+    history.push(RoutePath.SESSION_COMPLETED, {
+      logoUrl,
+      imageAlt,
+    });
+  };
+
+  const fillAgain = () => {
+    const { sessionId } = userSession;
+
+    dispatch(resetAnswerSessionPageReducer());
+    dispatch(fetchOrCreateUserSessionRequest(sessionId));
+  };
+
   const clearUserSession = () => {
     dispatch(resetAnswerSessionPageReducer());
   };
@@ -96,6 +123,16 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
       // predefined users after filling a session in sequential intervention
     }
   }, []);
+
+  if (isRaFulfillment) {
+    return (
+      <Row mt={50} justify="center" width="100%" dir={fixedElementsDirection}>
+        <Button onClick={() => window.close()} px={20} width="auto">
+          {formatMessage(messages.closeTab)}
+        </Button>
+      </Row>
+    );
+  }
 
   const showModulesButtons = isModuleIntervention && !isPreview;
 
@@ -160,21 +197,33 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
           </Button>
         </StyledLink>
       )}
-      <StyledLink to={getGoToDashboardButtonLink()}>
-        <Button
-          onClick={isPreview ? closeCurrentTab : undefined}
-          px={20}
-          width="100%"
-        >
-          {formatMessage(
-            messages[
-              isPreview && sharedTo === InterventionSharedTo.ANYONE
-                ? 'completeSession'
-                : 'goToDashboard'
-            ],
-          )}
+      {showDashboardButton && (
+        <StyledLink to={getGoToDashboardButtonLink()}>
+          <Button
+            onClick={isPreview ? closeCurrentTab : undefined}
+            px={20}
+            width="100%"
+          >
+            {formatMessage(
+              messages[
+                isPreview && sharedTo === InterventionSharedTo.ANYONE
+                  ? 'completeSession'
+                  : 'goToDashboard'
+              ],
+            )}
+          </Button>
+        </StyledLink>
+      )}
+      {!showDashboardButton && canFillAgain && (
+        <Button onClick={fillAgain} px={20} width="auto">
+          {formatMessage(messages.fillAgain)}
         </Button>
-      </StyledLink>
+      )}
+      {!showDashboardButton && !canFillAgain && (
+        <Button onClick={completeSession} px={20} width="auto">
+          {formatMessage(messages.completeSession)}
+        </Button>
+      )}
     </Row>
   );
 };

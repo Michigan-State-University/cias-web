@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -77,6 +77,8 @@ function TeamsList({
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
 
+  const contextValue = useMemo(() => ({ isAdmin }), [isAdmin]);
+
   const getContent = () => {
     if (teamsLoading && teams.length === 0) return <Loader />;
     if (teamsFetchError) return <ErrorAlert errorText={teamsFetchError} />;
@@ -95,7 +97,7 @@ function TeamsList({
             </Col>
           </Row>
         </Container>
-        <TeamListContext.Provider value={{ isAdmin }}>
+        <TeamListContext.Provider value={contextValue}>
           <TeamsTable
             formatMessage={formatMessage}
             teams={teams}

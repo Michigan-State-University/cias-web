@@ -45,6 +45,10 @@ import {
   VERIFY_QR_CODE_REQUEST,
   VERIFY_QR_CODE_SUCCESS,
   VERIFY_QR_CODE_ERROR,
+  VERIFY_PID_REQUEST,
+  VERIFY_PID_SUCCESS,
+  VERIFY_PID_ERROR,
+  SET_RA_FULFILLMENT,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -87,9 +91,12 @@ export const initialState = {
   hfhsPatientDetailAnonymized: null,
   verifyQRCodeLoading: false,
   verifyQRCodeError: null,
+  verifyPidLoading: false,
+  verifyPidError: null,
+  isRaFulfillment: false,
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
   produce(state, (draft) => {
     switch (type) {
@@ -164,6 +171,7 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case FETCH_USER_SESSION_REQUEST: {
         draft.userSessionLoading = true;
         draft.fetchUserSessionError = null;
+        draft.isRaFulfillment = false;
         break;
       }
 
@@ -323,6 +331,27 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case VERIFY_QR_CODE_ERROR: {
         draft.verifyQRCodeLoading = false;
         draft.verifyQRCodeError = payload.error;
+        break;
+      }
+
+      case SET_RA_FULFILLMENT: {
+        draft.isRaFulfillment = payload.isRaFulfillment;
+        break;
+      }
+
+      case VERIFY_PID_REQUEST: {
+        draft.verifyPidLoading = true;
+        draft.verifyPidError = null;
+        break;
+      }
+      case VERIFY_PID_SUCCESS: {
+        draft.verifyPidLoading = false;
+        draft.verifyPidError = null;
+        break;
+      }
+      case VERIFY_PID_ERROR: {
+        draft.verifyPidLoading = false;
+        draft.verifyPidError = payload.error;
         break;
       }
     }

@@ -8,6 +8,7 @@ export const mapQuestionToStateObject = (question) => ({
     ...question.attributes.body,
     data: question.attributes.body.data || [],
   },
+  answer_images: question.attributes.answer_images || [],
 });
 
 export const defaultMapper = (object) => ({

@@ -14,10 +14,17 @@ export function* termsAccept({ payload: { fields, onSuccess } }) {
   const requestUrl = 'v1/users/confirm_terms';
   try {
     const password = yield select(makeSelectCachePassword());
-    yield call(axios.patch, requestUrl, {
-      ...objectKeysToSnakeCase(fields),
-      password,
-    });
+    yield call(
+      axios.patch,
+      requestUrl,
+      {
+        ...objectKeysToSnakeCase(fields),
+        password,
+      },
+      {
+        withCredentials: true,
+      },
+    );
     yield call(onSuccess);
     yield call(toast.success, formatMessage(messages.termsAcceptSuccess), {
       toastId: TERMS_ACCEPT_SUCCESS,

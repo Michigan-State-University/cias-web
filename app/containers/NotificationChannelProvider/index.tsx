@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useMemo } from 'react';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useSelector } from 'react-redux';
 
@@ -32,14 +32,17 @@ export const NotificationChannelProvider = ({
     });
   };
 
+  const contextValue = useMemo(
+    () => ({
+      readConversationNotifications,
+      readNotification,
+      setNavigatorAvailability,
+    }),
+    [readNotification, setNavigatorAvailability, notifications],
+  );
+
   return (
-    <NotificationChannelContext.Provider
-      value={{
-        readConversationNotifications,
-        readNotification,
-        setNavigatorAvailability,
-      }}
-    >
+    <NotificationChannelContext.Provider value={contextValue}>
       {children}
     </NotificationChannelContext.Provider>
   );

@@ -7,12 +7,16 @@ import {
   gridQuestion,
   multiQuestion,
   tlfbQuestion,
+  SUPPORTED_RA_QUESTION_TYPE_IDS,
 } from 'models/Session/QuestionTypes';
 import {
   QUESTIONS_WITHOUT_VARIABLE,
   getEditVariables,
   getTlfbVariables,
 } from 'models/Session/utils';
+import { SessionTypes } from 'models/Session';
+
+import { makeSelectSession } from 'global/reducers/session/selectors';
 
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
@@ -39,10 +43,122 @@ import {
   makeSelectSelectedQuestion,
 } from '../selectors';
 
-const validateVariable = (payload, question, variables) => {
+const getVariableNamesSet = (question) => {
+  if (!question?.body || !question?.type) return new Set();
+
+  const names = [];
+
+  if (question.type === multiQuestion.id) {
+    question.body.data?.forEach((item) => {
+      if (item?.variable?.name) {
+        names.push(item.variable.name);
+      }
+    });
+  } else if (question.type === gridQuestion.id) {
+    question.body.data?.[0]?.payload?.rows?.forEach((row) => {
+      if (row?.variable?.name) {
+        names.push(row.variable.name);
+      }
+    });
+  } else if (!QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
+    if (question.body.variable?.name) {
+      names.push(question.body.variable.name);
+    }
+  }
+
+  return new Set(names);
+};
+
+const isVariableNameUpdate = (diff, cachedQuestion, currentQuestion) => {
+  if (!diff.body) return false;
+
+  const oldVariables = getVariableNamesSet(cachedQuestion);
+  const newVariables = getVariableNamesSet(currentQuestion);
+
+  if (oldVariables.size === 0) return false;
+
+  const oldVarsArray = [...oldVariables];
+  const newVarsArray = [...newVariables];
+
+  if (newVariables.size > oldVariables.size) {
+    return oldVarsArray.some((oldVar) => !newVariables.has(oldVar));
+  }
+
+  if (oldVariables.size !== newVariables.size) {
+    return true;
+  }
+
+  return newVarsArray.some((varName) => !oldVariables.has(varName));
+};
+
+const normalizePayload = (payload) => {
+  if (!payload || typeof payload !== 'string') return '';
+  return payload.replace(/<p>|<\/p>/g, '').trim();
+};
+
+const getAnswerOptionsMap = (question) => {
+  const optionsMap = new Map();
+  if (!question?.body || !question?.type) return optionsMap;
+
+  let optionsList = [];
+  if (question.type === multiQuestion.id) {
+    optionsList = question.body.data || [];
+  } else if (question.type === gridQuestion.id) {
+    optionsList = get(question, ['body', 'data', '0', 'payload', 'rows'], []);
+  }
+
+  optionsList.forEach((option) => {
+    const varName = get(option, ['variable', 'name']);
+    const rawPayload = get(option, 'payload');
+    if (varName) {
+      optionsMap.set(varName, normalizePayload(rawPayload));
+    }
+  });
+  return optionsMap;
+};
+
+const isAnswerOptionWithVariableUpdate = (cachedQuestion, currentQuestion) => {
+  const { type } = currentQuestion;
+
+  if (type !== multiQuestion.id && type !== gridQuestion.id) {
+    return false;
+  }
+
+  const oldOptionsMap = getAnswerOptionsMap(cachedQuestion);
+  const newOptionsMap = getAnswerOptionsMap(currentQuestion);
+
+  if (oldOptionsMap.size === 0) {
+    return false;
+  }
+
+  const oldOptionsArray = Array.from(oldOptionsMap.entries());
+
+  return oldOptionsArray.some(([varName, oldNormalizedPayload]) => {
+    if (newOptionsMap.has(varName)) {
+      const newNormalizedPayload = newOptionsMap.get(varName);
+
+      return (
+        oldNormalizedPayload !== newNormalizedPayload &&
+        oldNormalizedPayload.length > 0
+      );
+    }
+    return false;
+  });
+};
+
+export const validateVariable = (question, variables, isRaSession) => {
   if (QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
     return;
   }
+
+  if (
+    isRaSession &&
+    SUPPORTED_RA_QUESTION_TYPE_IDS.includes(question.type) &&
+    !question.body?.variable?.name?.trim()
+  ) {
+    throw new Error(formatMessage(messages.raVariableRequired));
+  }
+
   const duplicateError = new Error(formatMessage(messages.duplicateVariable));
 
   const checkAgainstExisting = (name) => {
@@ -89,8 +205,11 @@ function* editQuestion({ payload }) {
     (currentVariable) => currentVariable && currentVariable.trim(),
   );
 
+  const session = yield select(makeSelectSession());
+  const isRaSession = session?.type === SessionTypes.RA_SESSION;
+
   try {
-    validateVariable(payload, question, variables);
+    validateVariable(question, variables, isRaSession);
   } catch (error) {
     yield call(toast.error, error.message, {
       toastId: EDIT_QUESTION_ERROR,
@@ -102,6 +221,13 @@ function* editQuestion({ payload }) {
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
+  const isVariableUpdate = isVariableNameUpdate(diff, cachedQuestion, question);
+
+  const isAnswerOptionUpdate = isAnswerOptionWithVariableUpdate(
+    cachedQuestion,
+    question,
+  );
+
   const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
     const response = yield axios.patch(requestURL, {
@@ -110,11 +236,50 @@ function* editQuestion({ payload }) {
 
     const responseQuestion = mapQuestionToStateObject(response.data.data);
 
-    return yield put(editQuestionSuccess(responseQuestion));
+    yield put(editQuestionSuccess(responseQuestion));
+
+    if (isVariableUpdate) {
+      yield call(toast.success, formatMessage(messages.variableUpdateQueued), {
+        toastId: 'variable-update-queued',
+        autoClose: 5000,
+      });
+    }
+    if (isAnswerOptionUpdate) {
+      yield call(
+        toast.success,
+        formatMessage(messages.answerOptionUpdateQueued),
+        {
+          toastId: 'answer-option-update-queued',
+          autoClose: 5000,
+        },
+      );
+    }
   } catch (error) {
-    yield call(toast.error, error.response?.data?.message, {
-      toastId: EDIT_QUESTION_ERROR,
-    });
+    if (error.response?.status === 422 && isVariableUpdate) {
+      yield call(
+        toast.warning,
+        error.response?.data?.message ||
+          formatMessage(messages.variableUpdateInProgress),
+        {
+          toastId: 'variable-update-in-progress',
+          autoClose: 5000,
+        },
+      );
+    } else if (error.response?.status === 422 && isAnswerOptionUpdate) {
+      yield call(
+        toast.warning,
+        error.response?.data?.message ||
+          formatMessage(messages.answerOptionUpdateInProgress),
+        {
+          toastId: 'answer-option-update-in-progress',
+          autoClose: 5000,
+        },
+      );
+    } else {
+      yield call(toast.error, error.response?.data?.message, {
+        toastId: EDIT_QUESTION_ERROR,
+      });
+    }
     return yield put(editQuestionError({ error, questionId: question.id }));
   }
 }

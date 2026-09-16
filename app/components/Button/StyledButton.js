@@ -18,7 +18,7 @@ const invertedStyles = (color, textColor) => css`
 `;
 
 const basicStyles = (outlined, color, textColor) => css`
-  background-color: ${outlined ? colors.white : themeColors[color] ?? color};
+  background-color: ${outlined ? colors.white : (themeColors[color] ?? color)};
   color: ${textColor ?? colors.white};
   border: 1px solid transparent;
 `;
@@ -26,7 +26,7 @@ const basicStyles = (outlined, color, textColor) => css`
 const lightStyles = (outlined, color, textColor) => css`
   background-color: ${outlined
     ? colors.white
-    : Color(themeColors.primary).alpha(0.1).hexa() ?? color};
+    : (Color(themeColors.primary).alpha(0.1).hexa() ?? color)};
   color: ${textColor ?? themeColors.primary};
   border: 1px solid transparent;
 `;
@@ -72,7 +72,10 @@ export const StyledButton = styled.button`
   ${({ inverted, light, outlined, color, textColor }) =>
     getStyles(inverted, light, outlined, color, textColor)}
   ${(props) => props.disabled && getDisabledStyles(props.inverted)};
-  transition: background-color 300ms ease, color 300ms ease, border 300ms ease;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border 300ms ease;
 
   &:hover {
     ${(props) => getHoverStyles(props)};

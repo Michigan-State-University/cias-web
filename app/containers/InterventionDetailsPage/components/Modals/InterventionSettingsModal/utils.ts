@@ -66,7 +66,7 @@ export const createInterventionSettingsFormValidationSchema = () => {
         Yup.object({
           selected: Yup.boolean(),
           name: Yup.string().when('selected', {
-            is: (selected) => selected,
+            is: (selected: boolean) => selected,
             then: unreservedURLCharactersSchema.concat(
               requiredValidationSchema,
             ),

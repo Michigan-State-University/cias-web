@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Loader /> Should render and match the snapshot 1`] = `
-Object {
+{
   "asFragment": [Function],
   "baseElement": .c1 {
   display: -webkit-box;

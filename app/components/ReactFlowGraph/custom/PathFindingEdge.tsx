@@ -24,15 +24,13 @@ const PathFindingEdge = ({
   const markerEnd = getMarkerEnd(arrowHeadType, markerEndId);
 
   return (
-    <>
-      <path
-        id={id}
-        style={style}
-        className="react-flow__edge-path"
-        d={edgePath}
-        markerEnd={markerEnd}
-      />
-    </>
+    <path
+      id={id}
+      style={style}
+      className="react-flow__edge-path"
+      d={edgePath}
+      markerEnd={markerEnd}
+    />
   );
 };
 

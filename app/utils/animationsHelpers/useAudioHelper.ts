@@ -5,7 +5,6 @@ import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
 import * as Sentry from '@sentry/browser';
 import type { LottieRef } from 'react-lottie';
-import { Severity } from '@sentry/react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -115,22 +114,22 @@ const useAudioHelper: TUseAudioHelper = (
             [ESpeechPhase.START]:
               ESpeechPhase.START in speechAnimation
                 ? await importAnimation(
-                    character,
                     speechAnimation[ESpeechPhase.START]!,
+                    character,
                   )
                 : undefined,
             [ESpeechPhase.SPEECH]:
               ESpeechPhase.SPEECH in speechAnimation
                 ? await importAnimation(
-                    character,
                     speechAnimation[ESpeechPhase.SPEECH]!,
+                    character,
                   )
                 : undefined,
             [ESpeechPhase.END]:
               ESpeechPhase.END in speechAnimation
                 ? await importAnimation(
-                    character,
                     speechAnimation[ESpeechPhase.END]!,
+                    character,
                   )
                 : undefined,
           };
@@ -299,10 +298,7 @@ const useAudioHelper: TUseAudioHelper = (
         reflection_index: currentData?.currentReflectionIndex,
       },
     });
-    Sentry.captureMessage(
-      `Issue with audio with text: ${text}`,
-      Severity.Error,
-    );
+    Sentry.captureMessage(`Issue with audio with text: ${text}`, 'error');
   };
 
   const handleSpeech = (fetchedAudios: string[]): void => {
@@ -335,11 +331,11 @@ const useAudioHelper: TUseAudioHelper = (
   const shouldOmitSentence = (fetchedAudios: string[]): boolean =>
     Boolean(
       fetchedAudios.length &&
-        currentData &&
-        currentData.text &&
-        ['.', '?', '!', ','].includes(
-          currentData.text[currentData.currentAudioIndex],
-        ),
+      currentData &&
+      currentData.text &&
+      ['.', '?', '!', ','].includes(
+        currentData.text[currentData.currentAudioIndex],
+      ),
     );
 
   const nextBlock = (): void => {
@@ -375,10 +371,10 @@ const useAudioHelper: TUseAudioHelper = (
         currentData.currentAnimation === ESpeechPhase.END &&
         currentData.isEndReversed
       ) {
-        animationCurrent?.anim.goToAndStop(
-          animationCurrent?.anim.totalFrames - 1,
-          true,
-        );
+        const totalFrames = animationCurrent?.anim.totalFrames;
+        if (totalFrames !== undefined) {
+          animationCurrent?.anim.goToAndStop(totalFrames - 1, true);
+        }
         animationCurrent?.anim.setDirection(-1);
       }
 

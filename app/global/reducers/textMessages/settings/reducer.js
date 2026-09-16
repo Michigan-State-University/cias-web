@@ -15,6 +15,8 @@ import {
   CHANGE_TYPE,
   CHANGE_INCLUDED_DATA,
   CHANGE_SCHEDULING_VARIABLE,
+  CHANGE_SMS_SEND_TIME_TYPE,
+  CHANGE_SMS_SEND_TIME_DETAILS,
 } from './constants';
 
 /**
@@ -42,6 +44,7 @@ const textMessageSettingsReducer = (textMessage, payload) =>
       case CHANGE_FORMULA_USED:
       case CHANGE_NO_FORMULA_TEXT:
       case CHANGE_TYPE:
+      case CHANGE_SMS_SEND_TIME_TYPE:
         draft[payload.data.field] = payload.data.value;
         break;
 
@@ -52,6 +55,10 @@ const textMessageSettingsReducer = (textMessage, payload) =>
 
       case CHANGE_INCLUDED_DATA:
         assign(draft, payload.data.value);
+        break;
+
+      case CHANGE_SMS_SEND_TIME_DETAILS:
+        draft.smsSendTimeDetails = payload.data.value;
         break;
 
       default:

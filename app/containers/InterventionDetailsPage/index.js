@@ -18,6 +18,8 @@ import { filter, isEmpty, concat } from 'lodash';
 
 import { colors, themeColors } from 'theme';
 
+import { TbTagPlus } from 'react-icons/tb';
+
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import GearIcon from 'assets/svg/gear-wo-background.svg';
@@ -57,6 +59,7 @@ import {
   makeSelectCanCurrentUserAccessParticipantsData,
   fetchInterventionSaga,
   makeSelectIsCurrentUserEditor,
+  unassignTagRequest,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -105,6 +108,8 @@ import {
   InterventionSettingsModal,
   useThirdPartyToolsAccessModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
+  AssignTagModal,
+  ASSIGN_TAG_MODAL_WIDTH,
 } from './components/Modals';
 import messages from './messages';
 import { InterventionDetailsPageContext } from './utils';
@@ -135,6 +140,7 @@ export function InterventionDetailsPage({
   editingPossible,
   isCurrentUserInterventionOwner,
   canAccessParticipantsData,
+  unassignTag,
 }) {
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
@@ -165,6 +171,7 @@ export function InterventionDetailsPage({
     sensitiveDataState,
     clearSensitiveDataScheduledAt,
     exportedData,
+    tags,
   } = intervention || {};
 
   const showSessionCreateButton = canEdit(status);
@@ -183,12 +190,16 @@ export function InterventionDetailsPage({
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
 
+  const [assignTagModalVisible, setAssignTagModalVisible] = useState(false);
+
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
   const closeAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(false);
   const openAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(true);
+  const closeAssignTagModal = () => setAssignTagModalVisible(false);
+  const openAssignTagModal = () => setAssignTagModalVisible(true);
   const handleCopyIntervention = () => copyIntervention({ interventionId: id });
   const handleDeleteSession = (sessionId) => {
     deleteSession(sessionId, id);
@@ -246,8 +257,10 @@ export function InterventionDetailsPage({
         ...csv,
         url: `${process.env.API_URL}/v1/interventions/${interventionId}/csv_attachment`,
       },
-      onExport: (onSuccess) => sendCsv(id, onSuccess),
+      onExport: (onSuccess, startDate, endDate, timezone) =>
+        sendCsv(id, onSuccess, startDate, endDate, timezone),
       exportLoaderSelector: makeSelectInterventionLoader('sendCsvLoading'),
+      showDateTimeFilters: true,
     });
 
   const onShareExternally = () => {
@@ -273,6 +286,12 @@ export function InterventionDetailsPage({
   const canCreateCatSession = useMemo(
     () => !isAccessRevoked,
     [isAccessRevoked],
+  );
+
+  const canCreateRaSession = useMemo(
+    () =>
+      !sessions?.some((session) => session.type === SessionTypes.RA_SESSION),
+    [sessions],
   );
 
   const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
@@ -330,6 +349,13 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
+    {
+      id: 'assignTag',
+      label: formatMessage(messages.assignTag),
+      icon: TbTagPlus,
+      action: openAssignTagModal,
+      color: colors.bluewood,
+    },
     ...(isAdmin || hfhsAccess
       ? [
           {
@@ -389,11 +415,15 @@ export function InterventionDetailsPage({
       id: interventionId,
     });
 
+  const handleRemoveTag = (tagId) => {
+    unassignTag(interventionId, tagId);
+  };
+
   const createSessionCall = (sessionType) =>
     createSession(interventionId, sessions.length, sessionType);
 
   const handleReorder = (previousIndex, nextIndex) => {
-    const newList = reorder(nonSmsSessions, previousIndex, nextIndex);
+    const newList = reorder(reorderableSessions, previousIndex, nextIndex);
     let position = 0;
     const orderedNewList = newList.map((session) => {
       position += 1;
@@ -403,7 +433,7 @@ export function InterventionDetailsPage({
       };
     });
     reorderSessions({
-      reorderedList: concat(orderedNewList, smsSessions),
+      reorderedList: concat(orderedNewList, smsSessions, raSessions),
       interventionId,
     });
   };
@@ -429,12 +459,24 @@ export function InterventionDetailsPage({
     [sortedSessions],
   );
 
-  const nonSmsSessions = useMemo(
+  const reorderableSessions = useMemo(
     () =>
       sortedSessions &&
       filter(
         sortedSessions,
-        (session) => session.type !== SessionTypes.SMS_SESSION,
+        (session) =>
+          session.type !== SessionTypes.SMS_SESSION &&
+          session.type !== SessionTypes.RA_SESSION,
+      ),
+    [sortedSessions],
+  );
+
+  const raSessions = useMemo(
+    () =>
+      sortedSessions &&
+      filter(
+        sortedSessions,
+        (session) => session.type === SessionTypes.RA_SESSION,
       ),
     [sortedSessions],
   );
@@ -452,8 +494,8 @@ export function InterventionDetailsPage({
               ref={providedDroppable.innerRef}
               {...providedDroppable.droppableProps}
             >
-              {nonSmsSessions &&
-                nonSmsSessions.map((session, index) => (
+              {reorderableSessions &&
+                reorderableSessions.map((session, index) => (
                   <Row key={session.id}>
                     <SessionListItem
                       disabled={!editingPossible}
@@ -462,6 +504,48 @@ export function InterventionDetailsPage({
                       session={session}
                       index={index}
                       isSelected={index === sessionIndex}
+                      handleCopySession={handleCopySession}
+                      handleExternalCopySession={handleExternalCopySession}
+                      handleDeleteSession={(sessionId) =>
+                        setDeleteConfirmationSessionId(sessionId)
+                      }
+                      editSession={editSession}
+                      interventionType={type}
+                      hfhsAccess={hfhsAccess}
+                    />
+                  </Row>
+                ))}
+              {providedDroppable.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </DraggedTest>
+  );
+
+  const renderRaSessions = () => (
+    <DraggedTest>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable
+          isDropDisabled
+          droppableId="ra-session-list"
+          type={reorderScope.sessions}
+        >
+          {(providedDroppable) => (
+            <div
+              ref={providedDroppable.innerRef}
+              {...providedDroppable.droppableProps}
+            >
+              {raSessions &&
+                raSessions.map((session, index) => (
+                  <Row key={session.id}>
+                    <SessionListItem
+                      disabled={!editingPossible}
+                      deletionPossible={editingPossible}
+                      sharedTo={sharedTo}
+                      session={session}
+                      index={index}
+                      isSelected={false}
                       handleCopySession={handleCopySession}
                       handleExternalCopySession={handleExternalCopySession}
                       handleDeleteSession={(sessionId) =>
@@ -529,17 +613,20 @@ export function InterventionDetailsPage({
     </DraggedTest>
   );
 
+  const contextValue = useMemo(
+    () => ({
+      canEdit: editingPossible,
+    }),
+    [editingPossible],
+  );
+
   if (fetchInterventionLoading) return <Loader />;
 
   if (fetchInterventionError)
     return <ErrorAlert errorText={fetchInterventionError} fullPage />;
 
   return (
-    <InterventionDetailsPageContext.Provider
-      value={{
-        canEdit: editingPossible,
-      }}
-    >
+    <InterventionDetailsPageContext.Provider value={contextValue}>
       <Column height="100%">
         <CollaborationPanel />
         <Row overflowY="auto">
@@ -552,8 +639,18 @@ export function InterventionDetailsPage({
             <ConfirmationModal
               visible={!isNullOrUndefined(deleteConfirmationSessionId)}
               onClose={() => setDeleteConfirmationSessionId(null)}
-              description={formatMessage(messages.sessionDeleteHeader)}
-              content={formatMessage(messages.sessionDeleteMessage)}
+              description={formatMessage(
+                sessions?.find((s) => s.id === deleteConfirmationSessionId)
+                  ?.type === SessionTypes.RA_SESSION
+                  ? messages.raSessionDeleteHeader
+                  : messages.sessionDeleteHeader,
+              )}
+              content={formatMessage(
+                sessions?.find((s) => s.id === deleteConfirmationSessionId)
+                  ?.type === SessionTypes.RA_SESSION
+                  ? messages.raSessionDeleteMessage
+                  : messages.sessionDeleteMessage,
+              )}
               confirmAction={() =>
                 handleDeleteSession(deleteConfirmationSessionId)
               }
@@ -599,6 +696,19 @@ export function InterventionDetailsPage({
               />
             </Modal>
 
+            <Modal
+              title={formatMessage(messages.assignTag)}
+              onClose={closeAssignTagModal}
+              visible={assignTagModalVisible}
+              width={ASSIGN_TAG_MODAL_WIDTH}
+            >
+              <AssignTagModal
+                interventionId={interventionId}
+                onClose={closeAssignTagModal}
+                onSuccess={() => fetchIntervention(interventionId)}
+              />
+            </Modal>
+
             <CollaboratorsModal />
             <ClearInterventionDataModal />
 
@@ -624,14 +734,26 @@ export function InterventionDetailsPage({
               sessions={sortedSessions ?? []}
               openExportCsvModal={openExportCsvModal}
               canAccessParticipantsData={canAccessParticipantsData}
+              tags={tags}
+              onRemoveTag={handleRemoveTag}
             />
 
             <GRow>
               <GCol xl={6}>
+                {!isEmpty(raSessions) && (
+                  <>
+                    {renderRaSessions()}
+                    {!isEmpty(reorderableSessions) && (
+                      <Row mx={24} mt={24} mb={6}>
+                        <Divider />
+                      </Row>
+                    )}
+                  </>
+                )}
                 {renderClassicSessions()}
                 {!isEmpty(smsSessions) && (
                   <>
-                    {!isEmpty(nonSmsSessions) && (
+                    {!isEmpty(reorderableSessions) && (
                       <Row mx={24} mt={24} mb={6}>
                         <Divider />
                       </Row>
@@ -648,6 +770,7 @@ export function InterventionDetailsPage({
                   <Row my={18} align="center">
                     <SessionCreateButton
                       canCreateCatSession={canCreateCatSession}
+                      canCreateRaSession={canCreateRaSession}
                       handleSessionCreation={createSessionCall}
                       disabled={!editingPossible}
                     />
@@ -695,6 +818,7 @@ InterventionDetailsPage.propTypes = {
   editingPossible: PropTypes.bool,
   isCurrentUserInterventionOwner: PropTypes.bool,
   canAccessParticipantsData: PropTypes.bool,
+  unassignTag: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -726,6 +850,7 @@ const mapDispatchToProps = {
   deleteSession: deleteSessionRequest,
   externalCopySession: externalCopySessionRequest,
   editSession: editSessionRequest,
+  unassignTag: unassignTagRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

@@ -35,6 +35,7 @@ import { UploadEmailsView } from './UploadEmailsView';
 import messages from './messages';
 import { CreatePredefinedParticipantView } from './CreatePredefinedParticipantView';
 import { ManagePredefinedParticipantView } from './ManagePredefinedParticipantView';
+import { UploadPredefinedParticipantsView } from './UploadPredefinedParticipantsView';
 
 export type Props = {
   interventionId: string;
@@ -81,20 +82,20 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   }, [organizationId]);
 
-  const sessionOptions: (SelectOption<string> & { type: string })[] =
-    useMemo(() => {
-      if (isModularIntervention) return [];
-      return sessions.map(({ id, name, type }) => ({
+  const sessionOptions: (SelectOption<string> & { type: string })[] = useMemo(
+    () =>
+      sessions.map(({ id, name, type }) => ({
         value: id,
         label: name,
         type,
-      }));
-    }, [isModularIntervention, sessions]);
+      })),
+    [sessions],
+  );
 
-  const normalizedSessions: NormalizedSessions = useMemo(() => {
-    if (isModularIntervention) return {};
-    return normalizeArrayToObject(sessions, 'id');
-  }, [isModularIntervention, sessions]);
+  const normalizedSessions: NormalizedSessions = useMemo(
+    () => normalizeArrayToObject(sessions, 'id'),
+    [sessions],
+  );
 
   const healthClinicOptions: SelectOption<string>[] = useMemo(() => {
     const options: SelectOption<string>[] = [];
@@ -155,6 +156,12 @@ export const InviteParticipantsModalContent: FC<Props> = ({
       setCurrentView({
         view: InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT,
       });
+    } else if (
+      invitationType === ParticipantInvitationType.PREDEFINED_CSV_UPLOAD
+    ) {
+      setCurrentView({
+        view: InviteParticipantModalView.UPLOAD_PREDEFINED_PARTICIPANTS,
+      });
     }
   };
 
@@ -190,7 +197,9 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     (isReportingIntervention && organizationId !== organization?.id);
 
   const filteredSessionOptions = sessionOptions.filter(
-    (session) => session.type !== SessionTypes.SMS_SESSION,
+    (session) =>
+      session.type !== SessionTypes.SMS_SESSION &&
+      session.type !== SessionTypes.RA_SESSION,
   );
 
   const { view } = currentView;
@@ -228,7 +237,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
-              sessionOptions={sessionOptions}
+              sessionOptions={filteredSessionOptions}
               healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
@@ -240,7 +249,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
-              sessionOptions={sessionOptions}
+              sessionOptions={filteredSessionOptions}
               healthClinicOptions={healthClinicOptions}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onBack={handleBack}
@@ -264,6 +273,18 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
               invitingPossible={invitingPossible}
+            />
+          )}
+          {view ===
+            InviteParticipantModalView.UPLOAD_PREDEFINED_PARTICIPANTS && (
+            <UploadPredefinedParticipantsView
+              interventionName={interventionName}
+              isReportingIntervention={isReportingIntervention}
+              interventionId={interventionId}
+              interventionStatus={interventionStatus}
+              healthClinicOptions={healthClinicOptions}
+              normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+              onBack={handleBack}
             />
           )}
         </>

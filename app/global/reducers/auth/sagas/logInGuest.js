@@ -10,7 +10,9 @@ export function* logInGuest({ payload: { sessionId } }) {
   const body = {
     session_id: sessionId,
   };
-  const { data } = yield call(axios.post, requestUrl, body);
+  const { data } = yield call(axios.post, requestUrl, body, {
+    withCredentials: true,
+  });
   yield call(LocalStorageService.setGuestHeaders, data);
 }
 

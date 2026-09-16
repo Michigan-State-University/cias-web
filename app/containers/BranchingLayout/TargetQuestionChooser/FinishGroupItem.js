@@ -17,6 +17,7 @@ const FinishGroupItem = ({
     mb={5}
     onClick={() => onClick({ type, id })}
     selected={target && target.id === id}
+    data-cy={`select-finish-screen-${id}`}
   >
     <Box maxWidth={230}>
       <EllipsisText text={htmlToPlainText(subtitle)} color={colors.white} />

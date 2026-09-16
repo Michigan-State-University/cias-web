@@ -42,6 +42,7 @@ const QuestionSubtitle = ({
       hoverColor={colors.linkWater}
       clickable={false}
       dir={dynamicElementsDirection}
+      data-cy="question-subtitle-input"
     >
       <OriginalTextHover
         id={`question-${id}-subtitle`}

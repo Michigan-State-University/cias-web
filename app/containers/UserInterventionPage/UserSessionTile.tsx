@@ -37,6 +37,7 @@ interface Props {
   userSession?: Nullable<UserSession>;
   healthClinicId: Nullable<string>;
   containMultipleFillSession: boolean;
+  raSessionPending?: boolean;
 }
 
 const UserSessionTile = ({
@@ -57,6 +58,7 @@ const UserSessionTile = ({
   userSession,
   healthClinicId,
   containMultipleFillSession,
+  raSessionPending = false,
 }: Props) => {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -81,14 +83,17 @@ const UserSessionTile = ({
     !userSession.scheduledAt ||
     dayjs().isBefore(dayjs(userSession.scheduledAt));
 
+  const isBlockedByRa = raSessionPending;
+
   const isNotAvailable =
-    interventionType !== InterventionType.FLEXIBLE &&
-    isScheduledForFuture &&
-    !isFirstSession &&
-    !userSession?.finishedAt &&
-    !userSession?.lastAnswerAt && // keeping lastAnswerAt check for existing user sessions
-    !userSession?.started &&
-    !isSessionClosed;
+    isBlockedByRa ||
+    (interventionType !== InterventionType.FLEXIBLE &&
+      isScheduledForFuture &&
+      !isFirstSession &&
+      !userSession?.finishedAt &&
+      !userSession?.lastAnswerAt && // keeping lastAnswerAt check for existing user sessions
+      !userSession?.started &&
+      !isSessionClosed);
 
   const userSessionStatus = useMemo(() => {
     if (isNotAvailable) return UserSessionStatus.NOT_AVAILABLE;
@@ -130,6 +135,12 @@ const UserSessionTile = ({
     ].includes(userSessionStatus);
 
   const renderBottomText = () => {
+    if (isBlockedByRa) {
+      return (
+        <Text>{formatMessage(messages.sessionNotAvailableRaPending)}</Text>
+      );
+    }
+
     if (userSessionStatus !== UserSessionStatus.NOT_AVAILABLE) {
       return (
         <Text

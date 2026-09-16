@@ -23,7 +23,7 @@ describe('<RegisterPage />', () => {
   let mainAppContainer;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore(browserHistory, {});
 
     ReactDOM.createPortal = jest.fn((element) => element);
     modalContainer = document.createElement('div');

@@ -6,7 +6,7 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 
-import { makeSelectCurrentSessionId } from 'global/reducers/session';
+import { makeSelectCurrentSessionId } from 'global/reducers/session/selectors';
 
 import messages from './messages';
 import {

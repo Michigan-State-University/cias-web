@@ -37,7 +37,7 @@ const Component = <T extends boolean | string>({
           />
         );
 
-      return <></>;
+      return null;
     }
     case 'boolean': {
       return (
@@ -53,7 +53,7 @@ const Component = <T extends boolean | string>({
       );
     }
     default:
-      return <></>;
+      return null;
   }
 };
 

@@ -243,10 +243,10 @@ const SessionMapPage = (): JSX.Element => {
 
   const loading = Boolean(
     sessionLoading ||
-      questionGroupsLoading ||
-      reportTemplatesLoading ||
-      interventionLoading ||
-      answersLoading,
+    questionGroupsLoading ||
+    reportTemplatesLoading ||
+    interventionLoading ||
+    answersLoading,
   );
 
   return (

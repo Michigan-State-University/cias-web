@@ -17,7 +17,7 @@ import {
 import { chartReducer } from './chartReducer';
 
 /* eslint-disable default-case, no-param-reassign */
-const dashboardSectionReducer = (state = null, action) =>
+const dashboardSectionReducer = (state = null, action = null) =>
   produce(state, (draft) => {
     const { type, payload } = action;
 

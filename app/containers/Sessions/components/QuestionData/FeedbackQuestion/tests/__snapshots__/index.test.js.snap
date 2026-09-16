@@ -231,7 +231,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
             />
             <div
               class="rc-slider-track"
-              style="background-color: rgb(183, 39, 234); left: 0%; width: 0%;"
+              style="background-color: rgb(183, 39, 234); left: 0%; right: auto; width: 0%;"
             />
             <div
               class="rc-slider-step"
@@ -255,7 +255,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
               dragging="false"
               index="0"
               role="slider"
-              style="border-color: #b727ea; box-shadow: none; border-width: 3px; left: 0%; transform: translateX(-50%);"
+              style="border-color: rgb(183, 39, 234); box-shadow: none; border-width: 3px; left: 0%; right: auto; transform: translateX(-50%);"
             >
               <div
                 class="c5"
@@ -278,7 +278,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
             >
               <span
                 class="rc-slider-mark-text rc-slider-mark-text-active"
-                style="transform: translateX(-50%); left: 0%; font-size: 15px;"
+                style="transform: translateX(-50%); left: 0%; font-size: 15px; width: fit-content;"
               >
                 <div
                   class="c8"
@@ -298,7 +298,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
               </span>
               <span
                 class="rc-slider-mark-text"
-                style="transform: translateX(-50%); left: 100%; font-size: 15px;"
+                style="transform: translateX(-50%); left: 100%; font-size: 15px; width: fit-content;"
               >
                 <div
                   class="c10"

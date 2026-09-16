@@ -147,7 +147,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
             />
             <div
               class="rc-slider-track"
-              style="background-color: rgb(183, 39, 234); left: 0%; width: 10%;"
+              style="background-color: rgb(183, 39, 234); left: 0%; right: auto; width: 10%;"
             />
             <div
               class="rc-slider-step"
@@ -179,7 +179,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
               dragging="false"
               index="0"
               role="slider"
-              style="border-color: #b727ea; box-shadow: none; border-width: 3px; left: 10%; transform: translateX(-50%);"
+              style="border-color: rgb(183, 39, 234); box-shadow: none; border-width: 3px; left: 10%; right: auto; transform: translateX(-50%);"
             >
               <div
                 class="c5"
@@ -201,25 +201,25 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
             >
               <span
                 class="rc-slider-mark-text rc-slider-mark-text-active"
-                style="transform: translateX(-50%); left: 0%; font-size: 15px;"
+                style="transform: translateX(-50%); left: 0%; font-size: 15px; width: fit-content;"
               >
                 0
               </span>
               <span
                 class="rc-slider-mark-text rc-slider-mark-text-active"
-                style="transform: translateX(-50%); left: 5%; font-size: 15px; font-weight: 700; color: rgb(47, 56, 80);"
+                style="transform: translateX(-50%); left: 5%; font-size: 15px; width: fit-content; font-weight: 700; color: rgb(47, 56, 80);"
               >
                 10
               </span>
               <span
                 class="rc-slider-mark-text"
-                style="transform: translateX(-50%); left: 55.00000000000001%; font-size: 15px; font-weight: 700; color: rgb(47, 56, 80);"
+                style="transform: translateX(-50%); left: 55.00000000000001%; font-size: 15px; width: fit-content; font-weight: 700; color: rgb(47, 56, 80);"
               >
                 90
               </span>
               <span
                 class="rc-slider-mark-text"
-                style="transform: translateX(-50%); left: 100%; font-size: 15px;"
+                style="transform: translateX(-50%); left: 100%; font-size: 15px; width: fit-content;"
               >
                 100
               </span>

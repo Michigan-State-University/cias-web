@@ -60,6 +60,15 @@ import {
   StyledCircle,
 } from './styled';
 
+// eslint-disable-next-line no-unused-vars
+const TabItem = ({ renderAsLink, linkMatch, children }) => children || null;
+
+TabItem.propTypes = {
+  renderAsLink: PropTypes.node,
+  linkMatch: PropTypes.string,
+  children: PropTypes.node,
+};
+
 const getActiveTab = (path, formatMessage) => {
   if (path.includes('/edit')) return formatMessage(messages.content);
   if (path.includes('/settings')) return formatMessage(messages.settings);
@@ -107,7 +116,8 @@ const InterventionNavbar = ({
 }) => {
   const { interventionId, sessionId } = params;
 
-  const isClassicSession = type === SessionTypes.CLASSIC_SESSION;
+  const isClassicLikeSession =
+    type === SessionTypes.CLASSIC_SESSION || type === SessionTypes.RA_SESSION;
 
   useInjectSaga({ key: 'editSession', saga: editSessionSaga });
   const [tabActive, setTabActive] = useState(
@@ -131,7 +141,9 @@ const InterventionNavbar = ({
   }, [pathname]);
 
   const previewDisabled =
-    !questionsLength || !canPreview(interventionStatus) || !isClassicSession;
+    !questionsLength ||
+    !canPreview(interventionStatus) ||
+    !isClassicLikeSession;
 
   const textMessagesCountValue = smsPlansCount ?? textMessagesCount ?? '0';
 
@@ -181,6 +193,7 @@ const InterventionNavbar = ({
           onFocus={selectInputText}
           maxWidth={280}
           autoComplete="off"
+          data-cy="session-name-input"
         />
       </Row>
       <Tabs
@@ -191,7 +204,7 @@ const InterventionNavbar = ({
         controlled
         minWidth={310}
       >
-        <div
+        <TabItem
           renderAsLink={
             <StyledLink
               to={parametrizeRoutePath(RoutePath.EDIT_SESSION, {
@@ -203,7 +216,7 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        <div
+        <TabItem
           renderAsLink={
             <StyledLink
               to={parametrizeRoutePath(RoutePath.SESSION_SETTINGS, {
@@ -215,8 +228,8 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        {isClassicSession && (
-          <div
+        {isClassicLikeSession && (
+          <TabItem
             linkMatch={formatMessage(messages.reportTemplates)}
             renderAsLink={
               <StyledLink
@@ -239,8 +252,8 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {canAccessParticipantsData && isClassicSession && (
-          <div
+        {canAccessParticipantsData && isClassicLikeSession && (
+          <TabItem
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
               <StyledLink
@@ -263,8 +276,8 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {isClassicSession && (
-          <div
+        {isClassicLikeSession && (
+          <TabItem
             linkMatch={formatMessage(messages.smsMessaging)}
             renderAsLink={
               <StyledLink
@@ -287,8 +300,8 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {isClassicSession && (
-          <div
+        {isClassicLikeSession && (
+          <TabItem
             renderAsLink={
               <StyledLink
                 to={parametrizeRoutePath(RoutePath.SESSION_MAP, {

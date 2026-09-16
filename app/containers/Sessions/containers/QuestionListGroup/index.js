@@ -49,6 +49,7 @@ const QuestionListGroup = ({
   sessionType,
   selectSlide,
   selectedSlides,
+  deletingSlides = [],
   selectedQuestion,
   questions,
   editingPossible,
@@ -105,6 +106,7 @@ const QuestionListGroup = ({
             groupIds={groupIds}
             selectSlide={selectSlide}
             checked={selectedSlides.includes(question.id)}
+            isBeingDeleted={deletingSlides.includes(question.id)}
             manage={manage}
             index={index}
             selectedQuestionIndex={selectedQuestion}
@@ -282,7 +284,7 @@ const QuestionListGroup = ({
     </Draggable>
   );
 
-  if (questions.length === 0) return <></>;
+  if (questions.length === 0) return null;
   return isDraggableGroup ? renderGroupWithDnd() : renderGroup();
 };
 
@@ -300,6 +302,7 @@ QuestionListGroup.propTypes = {
   selectSlide: PropTypes.func,
   formatMessage: PropTypes.func,
   selectedSlides: PropTypes.array,
+  deletingSlides: PropTypes.array,
   selectedQuestion: PropTypes.string,
   questions: PropTypes.array,
   interventionStatus: PropTypes.string,

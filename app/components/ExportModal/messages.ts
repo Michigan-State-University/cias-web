@@ -32,4 +32,24 @@ export default defineMessages({
     id: `${scope}.spinnerIconAlt`,
     defaultMessage: 'Spinner',
   },
+  startDateLabel: {
+    id: `${scope}.startDateLabel`,
+    defaultMessage: 'Start Date & Time',
+  },
+  endDateLabel: {
+    id: `${scope}.endDateLabel`,
+    defaultMessage: 'End Date & Time',
+  },
+  timezoneLabel: {
+    id: `${scope}.timezoneLabel`,
+    defaultMessage: 'Timezone',
+  },
+  startDatePlaceholder: {
+    id: `${scope}.startDatePlaceholder`,
+    defaultMessage: 'Select start date and time',
+  },
+  endDatePlaceholder: {
+    id: `${scope}.endDatePlaceholder`,
+    defaultMessage: 'Select end date and time',
+  },
 });

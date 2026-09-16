@@ -172,6 +172,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c3"
+          data-cy="single-question-answer-0"
         >
           <div
             class="c4"
@@ -194,9 +195,13 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
                 class="c1 c10"
               >
                 <div
-                  class="c11"
+                  class="c0"
                 >
-                  test
+                  <div
+                    class="c11"
+                  >
+                    test
+                  </div>
                 </div>
               </div>
             </label>
@@ -208,6 +213,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c3"
+          data-cy="single-question-answer-1"
         >
           <div
             class="c4"
@@ -230,9 +236,13 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
                 class="c1 c10"
               >
                 <div
-                  class="c11"
+                  class="c0"
                 >
-                  test
+                  <div
+                    class="c11"
+                  >
+                    test
+                  </div>
                 </div>
               </div>
             </label>

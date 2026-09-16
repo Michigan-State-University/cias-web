@@ -18,7 +18,7 @@ export const initialState = {
   error: null,
 };
 
-export const fileDownloadReducer = (state = initialState, { payload, type }) =>
+export const fileDownloadReducer = ({ payload, type }, state = initialState) =>
   produce(state, (draft) => {
     switch (type) {
       case DOWNLOAD_FILE_REQUEST:

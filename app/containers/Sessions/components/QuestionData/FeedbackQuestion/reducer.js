@@ -8,7 +8,7 @@ import {
   UPDATE_FORMULA_CASE,
 } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const feedbackQuestionReducer = (question, payload) => {
   const questionData = question.body.data;
   switch (payload.type) {

@@ -1,14 +1,14 @@
 import { createSelector } from 'reselect';
 import { canEdit } from 'models/Status/statusPermissions';
 
+import { SessionTypes } from 'models/Session';
 import { makeSelectIsAdmin, makeSelectUserId } from 'global/reducers/auth';
 
 import { initialState } from './reducer';
 
 export const selectIntervention = (state) => state.intervention || initialState;
 
-export const makeSelectInterventionState = () =>
-  createSelector(selectIntervention, (substate) => substate);
+export const makeSelectInterventionState = () => selectIntervention;
 
 export const makeSelectIntervention = () =>
   createSelector(selectIntervention, (substate) => substate.intervention);
@@ -173,4 +173,24 @@ export const makeSelectInterventionLanguageCode = () =>
   createSelector(
     selectIntervention,
     ({ intervention }) => intervention?.languageCode,
+  );
+
+export const makeSelectRaSession = () =>
+  createSelector(makeSelectIntervention(), (intervention) => {
+    const sessions = intervention?.sessions ?? [];
+    return sessions.find((s) => s.type === SessionTypes.RA_SESSION) ?? null;
+  });
+
+export const makeSelectRaSessionQuestionGroups = () =>
+  createSelector(
+    selectIntervention,
+    (substate) => substate?.raSessionQuestionGroups ?? [],
+  );
+
+export const makeSelectBulkCreateStructuredErrors = () =>
+  createSelector(
+    selectIntervention,
+    (substate) =>
+      substate?.errors?.bulkCreatePredefinedParticipants?.response?.data
+        ?.details?.errors ?? null,
   );

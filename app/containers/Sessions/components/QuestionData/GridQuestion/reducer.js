@@ -11,7 +11,7 @@ import {
   REORDER_COLUMNS,
 } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const gridQuestionReducer = (question, payload) => {
   switch (payload.type) {
     case ADD_ROW:

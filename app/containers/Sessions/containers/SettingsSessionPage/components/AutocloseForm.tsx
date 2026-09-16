@@ -42,7 +42,7 @@ export const AutocloseForm: React.FC<Props> = ({
 
   const validationSchema = Yup.object({
     autocloseAtDate: Yup.date().when('autocloseEnabled', {
-      is: (value) => !!value,
+      is: (value: boolean) => !!value,
       then: requiredDateValidationSchema,
       otherwise: Yup.date().nullable(),
     }),

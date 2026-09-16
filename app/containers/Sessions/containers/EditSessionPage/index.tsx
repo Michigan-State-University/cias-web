@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { injectSaga, injectReducer } from 'redux-injectors';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -36,6 +36,7 @@ import {
 import {
   CatSession,
   ClassicSession,
+  ResearchAssistantSession,
   SessionTypes,
   SmsSession,
 } from 'models/Session';
@@ -64,7 +65,7 @@ interface Props extends RouteComponentProps<MatchParams> {
   fetchInterventions: () => void;
   fetchReportTemplates: (sessionId: string) => void;
   interventionStatus: string;
-  session: ClassicSession | SmsSession | CatSession;
+  session: ClassicSession | SmsSession | CatSession | ResearchAssistantSession;
   editingPossible: boolean;
 }
 
@@ -95,23 +96,27 @@ const EditSessionPage = ({
     setStoreInitialized(true);
   }, []);
 
+  const contextValue = useMemo(
+    () => ({
+      sessionId: params.sessionId,
+      interventionId: params.interventionId,
+    }),
+    [params.sessionId, params.interventionId],
+  );
+
   // @ts-ignore
   if (!storeInitialized || getSessionLoader) return <Loader size={100} />;
 
   return (
-    <EditSessionPageContext.Provider
-      value={{
-        sessionId: params.sessionId,
-        interventionId: params.interventionId,
-      }}
-    >
+    <EditSessionPageContext.Provider value={contextValue}>
       <Helmet>
         <title>
           {formatMessage(messages.pageTitle, { name: sessionName })}
         </title>
       </Helmet>
       {(type === SessionTypes.SMS_SESSION ||
-        type === SessionTypes.CLASSIC_SESSION) && (
+        type === SessionTypes.CLASSIC_SESSION ||
+        type === SessionTypes.RA_SESSION) && (
         <EditSessionCommon
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}

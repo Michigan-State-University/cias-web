@@ -1,0 +1,146 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [dev, master]
+  pull_request:
+    branches: [dev, master]
+  # workflow_dispatch only appears in the Actions tab once this file is on the
+  # default branch.
+  workflow_dispatch:
+
+concurrency:
+  # head_ref is set on pull_request events, ref on push events. Grouping on
+  # head_ref || ref puts the push run and the PR run for one branch into the
+  # same group, so they do not compete for the runner -- which matters because
+  # contention makes SonarQube slower to boot.
+  group: code-quality-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+# Read-only. The scan posts no comment and needs nothing else.
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    # Pull requests from forks are not given secrets, so the SSH and install
+    # steps below would fail by design. Skipping is not failing -- outside
+    # contributions to this public repository stay green.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository || github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    # Two bounds, and both are needed. htd-cq's own --timeout (below) defaults
+    # to 10m and kills the SonarQube scanner mid-run; coverage generation alone
+    # -- npm ci plus the full Jest suite in a container, before SonarQube even
+    # starts -- takes ~8m, so the default cannot fit this repository. The job
+    # bound sits above it as the outer backstop.
+    timeout-minutes: 40
+    env:
+      TECH: javascript
+      TIER: high
+      # Report-only. Flip to "true" once the existing findings are triaged.
+      ENFORCE_GATE: "false"
+      # This repository is public and Actions logs are world-readable. Scanner
+      # stdout names vulnerable packages, secret locations and SAST hits, so
+      # every step writes its output to a file outside the workspace and the
+      # log gets nothing but the gate verdict. The report goes to S3.
+      SCAN_LOG: /tmp/htd-cq-scan.log
+
+    steps:
+      # Actions are pinned to commit SHAs. Tags are mutable and can be
+      # repointed by the action owner; the trivy-action and kics-github-action
+      # compromises both worked that way. Semgrep flags tag refs as findings.
+      # Resolve a new SHA with:
+      #   gh api repos/<owner>/<repo>/commits/<tag> --jq .sha
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # Full history is required by SonarQube's SCM/new-code analysis.
+          fetch-depth: 0
+
+      # No toolchain or coverage step: .htd-cq.json makes htd-cq run
+      # `npm ci --ignore-scripts` and Jest inside a node:22 container and feed
+      # coverage/lcov.info to SonarQube itself.
+
+      - name: Setup SSH for code-quality-configs
+        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.HTD_CQ_CONFIGS_DEPLOY_KEY }}
+
+      - name: Install htd-cq
+        env:
+          GH_TOKEN: ${{ secrets.HTD_CQ_TOKEN }}
+        run: |
+          gh release download \
+            --repo HTD-Health/code-quality \
+            --pattern "*linux_amd64*" \
+            --dir /tmp
+          tar xzf /tmp/htd-cq_*_linux_amd64.tar.gz -C /usr/local/bin
+
+      - name: Run htd-cq scan
+        id: scan
+        env:
+          # CI runners share CPU and RAM with the four parallel scanner
+          # containers. The default 3-minute SonarQube startup window is too
+          # tight under that load and the scan dies with exit 2 before the
+          # scanner runs at all. Do not remove this.
+          SONAR_STARTUP_TIMEOUT: 6m
+        run: |
+          set +e
+          # --timeout is NOT optional: the 10m default kills the scanner while
+          # SonarQube is still indexing. A full local run measured 12m19s.
+          htd-cq scan --tech "$TECH" --tier "$TIER" --timeout 30m > "$SCAN_LOG" 2>&1
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+
+      - name: Publish report to S3
+        if: always() && steps.scan.outputs.exit_code != '' && steps.scan.outputs.exit_code != '2'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.HTD_CQ_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.HTD_CQ_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ vars.HTD_CQ_AWS_REGION }}
+          HTD_CQ_S3_BUCKET: ${{ vars.HTD_CQ_S3_BUCKET }}
+        run: |
+          # S3 is the only sink for this scan. `htd-cq publish` exits 0 when the
+          # bucket is unset, which would leave the report nowhere and say
+          # nothing, so the bucket is checked here instead.
+          if [ -z "$HTD_CQ_S3_BUCKET" ]; then
+            echo "::error::HTD_CQ_S3_BUCKET is not set -- the report has nowhere to go"
+            exit 1
+          fi
+          htd-cq publish >> "$SCAN_LOG" 2>&1
+
+      # No artifact upload. Scan reports name vulnerable dependencies and
+      # candidate secret locations, and artifacts on a public repository are
+      # downloadable by anyone from the run summary. S3 is the only sink.
+
+      - name: Report scan outcome
+        if: always()
+        env:
+          EXIT: ${{ steps.scan.outputs.exit_code }}
+        run: |
+          case "$EXIT" in
+            0)
+              echo "Quality gate PASSED"
+              ;;
+            1)
+              if [ "$ENFORCE_GATE" = "true" ]; then
+                echo "::error::Quality gate FAILED -- see the report in S3"
+                exit 1
+              fi
+              echo "::warning::Quality gate FAILED (report-only, not blocking) -- see the report in S3"
+              ;;
+            2|"")
+              # An infrastructure error means the scan did not happen. This
+              # fails the job even in report-only mode -- it is not a gate
+              # result and must not be silently swallowed. The tail is the one
+              # place scan output reaches the public log; at exit 2 it is
+              # container startup noise, not findings.
+              echo "::error::Scan infrastructure error -- the scan did not run"
+              tail -n 50 "$SCAN_LOG" 2>/dev/null || true
+              exit 1
+              ;;
+            *)
+              echo "::error::Unknown htd-cq exit code: $EXIT"
+              exit 1
+              ;;
+          esac

@@ -83,37 +83,35 @@ class AppRoute extends Route {
         Boolean(sidebarProps) && canDisplayLeftSidebar(user?.roles);
 
       return (
-        <>
-          <PageContainer fluid>
-            <Row nogutter>
-              <Navbar
-                navbarProps={navbarProps}
-                match={computedMatch}
-                location={location}
-              />
-            </Row>
-            <RowBelowNavbar nogutter>
-              {isSidebarVisible && (
-                <Col width="content">
-                  <Sidebar
-                    sidebarProps={sidebarProps}
-                    match={computedMatch}
-                    location={location}
-                  />
-                </Col>
-              )}
-              <Col>
-                <MainAppContainer
-                  id="main-app-container"
-                  $isSidebarVisible={isSidebarVisible}
-                  $navbarHeight={navbarHeight}
-                >
-                  {render()}
-                </MainAppContainer>
+        <PageContainer fluid>
+          <Row nogutter>
+            <Navbar
+              navbarProps={navbarProps}
+              match={computedMatch}
+              location={location}
+            />
+          </Row>
+          <RowBelowNavbar nogutter>
+            {isSidebarVisible && (
+              <Col width="content">
+                <Sidebar
+                  sidebarProps={sidebarProps}
+                  match={computedMatch}
+                  location={location}
+                />
               </Col>
-            </RowBelowNavbar>
-          </PageContainer>
-        </>
+            )}
+            <Col>
+              <MainAppContainer
+                id="main-app-container"
+                $isSidebarVisible={isSidebarVisible}
+                $navbarHeight={navbarHeight}
+              >
+                {render()}
+              </MainAppContainer>
+            </Col>
+          </RowBelowNavbar>
+        </PageContainer>
       );
     }
 

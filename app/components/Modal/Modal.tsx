@@ -68,7 +68,7 @@ const Modal = ({
   stretchContent,
   contentContainerProps,
   ...stylesProps
-}: Props): JSX.Element => {
+}: Props): JSX.Element | null => {
   const { formatMessage } = useIntl();
 
   const handleClose = () => {
@@ -114,7 +114,7 @@ const Modal = ({
     return {};
   }, [stretchContent]);
 
-  if (!visible) return <></>;
+  if (!visible) return null;
 
   return (
     <Portal id={portalId || MODAL_PORTAL_ID}>

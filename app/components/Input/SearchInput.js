@@ -18,6 +18,7 @@ const SearchInput = ({
   debounceTime,
   value,
   onChange,
+  'data-cy': dataCy,
   ...inputProps
 }) => {
   const { formatMessage } = useIntl();
@@ -35,7 +36,7 @@ const SearchInput = ({
   ]);
 
   return (
-    <SearchInputStyled>
+    <SearchInputStyled data-cy={dataCy}>
       <Input
         {...inputProps}
         width="100%"
@@ -65,6 +66,7 @@ SearchInput.propTypes = {
   debounceTime: PropTypes.number,
   value: PropTypes.string,
   onChange: PropTypes.func,
+  'data-cy': PropTypes.string,
 };
 
 SearchInput.defaultProps = {

@@ -47,6 +47,10 @@ export default defineMessages({
     id: `${scope}.required`,
     defaultMessage: 'Required',
   },
+  none_of_above: {
+    id: `${scope}.none_of_above`,
+    defaultMessage: 'Add "None of the above" option',
+  },
   start_autofinish_timer: {
     id: `${scope}.start_autofinish_timer`,
     defaultMessage: 'Fire report if get this far',
@@ -197,5 +201,30 @@ export default defineMessages({
   copyFormula: {
     id: `${scope}.copyFormula`,
     defaultMessage: 'Copy formula',
+  },
+  show_dashboard_button: {
+    id: `${scope}.show_dashboard_button`,
+    defaultMessage: 'My Dashboard Button',
+  },
+  show_dashboard_button_tooltip_text: {
+    id: `${scope}.show_dashboard_button_tooltip_text`,
+    defaultMessage:
+      'Toggle on if you have registered participants and want them to access participant reports, uploaded resources or re-fill the session.',
+  },
+  answer_image_size: {
+    id: `${scope}.answer_image_size`,
+    defaultMessage: 'Answer Image Size',
+  },
+  answer_image_size_small: {
+    id: `${scope}.answer_image_size_small`,
+    defaultMessage: 'Small',
+  },
+  answer_image_size_medium: {
+    id: `${scope}.answer_image_size_medium`,
+    defaultMessage: 'Medium',
+  },
+  answer_image_size_large: {
+    id: `${scope}.answer_image_size_large`,
+    defaultMessage: 'Large',
   },
 });

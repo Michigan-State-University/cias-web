@@ -20,7 +20,7 @@ describe('<BranchingLayout />', () => {
   let props;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore(browserHistory, {});
     props = { formula: { patterns: [] } };
   });
 

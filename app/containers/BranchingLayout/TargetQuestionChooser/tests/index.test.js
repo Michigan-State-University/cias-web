@@ -182,7 +182,10 @@ describe('<TargetQuestionChooser />', () => {
       },
     });
 
-    store.runSaga = () => {};
+    store.runSaga = () => ({
+      cancel: () => {},
+      toPromise: () => Promise.resolve(),
+    });
     store.injectedReducers = {
       session: sessionReducer,
       questions: questionsReducer,
@@ -232,7 +235,10 @@ describe('<TargetQuestionChooser />', () => {
         selectedQuestion: question.id,
       },
     });
-    store.runSaga = () => {};
+    store.runSaga = () => ({
+      cancel: () => {},
+      toPromise: () => Promise.resolve(),
+    });
     store.injectedReducers = {
       session: sessionReducer,
       questions: questionsReducer,
@@ -301,7 +307,10 @@ describe('<TargetQuestionChooser />', () => {
       },
     });
 
-    store.runSaga = () => {};
+    store.runSaga = () => ({
+      cancel: () => {},
+      toPromise: () => Promise.resolve(),
+    });
     store.injectedReducers = {
       session: sessionReducer,
       questions: questionsReducer,

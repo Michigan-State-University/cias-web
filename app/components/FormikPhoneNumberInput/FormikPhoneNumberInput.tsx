@@ -2,11 +2,10 @@ import React, { useRef, useMemo, FC, FocusEventHandler } from 'react';
 import union from 'lodash/union';
 import { useField, useFormikContext } from 'formik';
 import { getCountryCallingCode } from 'libphonenumber-js';
-import { FlagIcon } from 'react-flag-kit';
+import { FlagIcon, FlagIconCode } from 'react-flag-kit';
 import { MessageDescriptor, useIntl } from 'react-intl';
-import { NamedProps } from 'react-select';
+import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 import { CountryCode } from 'libphonenumber-js/types';
-import { FlagIconCode } from 'react-flag-kit/typings/FlagIcon';
 
 import FormikNumberInput from 'components/FormikNumberInput';
 import FormikSelect from 'components/FormikSelect';
@@ -58,15 +57,17 @@ export const FormikPhoneNumberInput: FC<Props> = ({
     </Row>
   );
 
-  const formatOptionLabel: NamedProps<
-    SelectOption<CountryCode>
-  >['formatOptionLabel'] = ({ value }: SelectOption<CountryCode>) =>
+  const formatOptionLabel = ({ value }: SelectOption<CountryCode>) =>
     getCodeLabel(value);
+
+  type SelectOptionWithFilterData = SelectOption<CountryCode> & {
+    filterData: string;
+  };
 
   const prefixOptions = useMemo(
     () =>
       (isoOptions ?? union(POPULAR_COUNTRY_CODES, getCountriesCodes())).map(
-        (country) => ({
+        (country): SelectOptionWithFilterData => ({
           value: country,
           label: country,
           filterData: `${country} +${getCountryCallingCode(country)}`,
@@ -75,9 +76,9 @@ export const FormikPhoneNumberInput: FC<Props> = ({
     [isoOptions],
   );
 
-  const filterOption: NamedProps<SelectOption<CountryCode>>['filterOption'] = (
-    { data: { filterData } },
-    value,
+  const filterOption = (
+    { data: { filterData } }: FilterOptionOption<SelectOptionWithFilterData>,
+    value: string,
   ) => {
     if (!value) return true;
     return filterData.toUpperCase().includes(value.toUpperCase());

@@ -83,6 +83,7 @@ export class TextMessagesBuilder {
     this.sessionId = textMessage.sessionId;
     this.schedule = textMessage.schedule;
     this.schedulePayload = textMessage.schedulePayload;
+    this.scheduleVariable = textMessage.scheduleVariable;
     this.frequency = textMessage.frequency;
     this.endAt = textMessage.endAt;
     this.formula = textMessage.formula;
@@ -94,6 +95,8 @@ export class TextMessagesBuilder {
     this.includeLastName = textMessage.includeLastName;
     this.includePhoneNumber = textMessage.includePhoneNumber;
     this.includeEmail = textMessage.includeEmail;
+    this.smsSendTimeType = textMessage.smsSendTimeType;
+    this.smsSendTimeDetails = textMessage.smsSendTimeDetails;
 
     return this;
   };
@@ -107,6 +110,7 @@ export class TextMessagesBuilder {
     sessionId: this.sessionId,
     schedule: this.schedule,
     schedulePayload: this.schedulePayload,
+    scheduleVariable: this.scheduleVariable,
     frequency: this.frequency,
     endAt: this.endAt,
     formula: this.formula,
@@ -118,19 +122,22 @@ export class TextMessagesBuilder {
     includeLastName: this.includeLastName,
     includePhoneNumber: this.includePhoneNumber,
     includeEmail: this.includeEmail,
+    smsSendTimeType: this.smsSendTimeType,
+    smsSendTimeDetails: this.smsSendTimeDetails,
   });
 
   /**
    * @param  {string} name
    * @param  {string} sessionId
+   * @param  {TextMessageType} type
    * @returns  {TextMessage}
    */
-  buildNewTextMessage = (name, sessionId) => ({
+  buildNewTextMessage = (name, sessionId, type = TextMessageType.NORMAL) => ({
     id: null,
     name,
     sessionId,
     schedule: TextMessageScheduleOption.AFTER_FILL,
     frequency: TextMessageScheduleFrequency.ONCE,
-    type: TextMessageType.NORMAL,
+    type,
   });
 }

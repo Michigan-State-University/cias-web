@@ -5,14 +5,14 @@ import { Intervention } from 'models/Intervention';
 import { matchResearchersInterventionPaths } from 'utils/router';
 
 import { RoutePath } from 'global/constants';
-import { getSessionRequest } from 'global/reducers/session';
+import { getSessionRequest } from 'global/reducers/session/actions';
 import {
   fetchReportTemplatesRequest,
   fetchSingleReportTemplateRequest,
-  makeSelectSelectedReportId,
-} from 'global/reducers/reportTemplates';
-import { fetchTextMessagesRequest } from 'global/reducers/textMessages';
-import { getQuestionGroupsRequest } from 'global/reducers/questionGroups';
+} from 'global/reducers/reportTemplates/actions';
+import { makeSelectSelectedReportId } from 'global/reducers/reportTemplates/selectors';
+import { fetchTextMessagesRequest } from 'global/reducers/textMessages/actions';
+import { getQuestionGroupsRequest } from 'global/reducers/questionGroups/actions';
 
 import { REFRESH_INTERVENTION_DATA } from '../constants';
 import { fetchInterventionRequest, refreshInterventionData } from '../actions';

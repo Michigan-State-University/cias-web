@@ -118,6 +118,12 @@ const makeSelectVerifyQRCodeState = () =>
     }),
   );
 
+const makeSelectIsRaFulfillment = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.isRaFulfillment,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -137,4 +143,5 @@ export {
   makeSelectQuestionLanguageCode,
   makeSelectVideoStats,
   makeSelectVerifyQRCodeState,
+  makeSelectIsRaFulfillment,
 };

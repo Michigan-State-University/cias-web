@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'react-grid-system';
 import { compose } from 'redux';
@@ -33,6 +33,7 @@ import {
   getSessionRequest,
   getSessionSaga,
   sessionReducer,
+  makeSelectSession,
 } from 'global/reducers/session';
 
 import Row from 'components/Row';
@@ -60,8 +61,11 @@ const TextMessagingPage = ({
   filters,
   setFilters,
   editingPossible,
+  session,
 }) => {
   const { formatMessage } = useIntl();
+
+  const sessionType = session?.type;
 
   useEffect(() => {
     fetchTextMessages(sessionId);
@@ -75,22 +79,39 @@ const TextMessagingPage = ({
     fetchSession({ sessionId, interventionId });
   }, [interventionId, sessionId]);
 
+  const contextValue = useMemo(
+    () => ({
+      formatMessage,
+      textMessages,
+      loaders,
+      errors,
+      selectedMessageId,
+      changeSelectedId,
+      sessionId,
+      sessionType,
+      selectedMessage,
+      selectedMessageState,
+      editingPossible,
+      interventionId,
+    }),
+    [
+      formatMessage,
+      textMessages,
+      loaders,
+      errors,
+      selectedMessageId,
+      changeSelectedId,
+      sessionId,
+      sessionType,
+      selectedMessage,
+      selectedMessageState,
+      editingPossible,
+      interventionId,
+    ],
+  );
+
   return (
-    <TextMessagesContext.Provider
-      value={{
-        formatMessage,
-        textMessages,
-        loaders,
-        errors,
-        selectedMessageId,
-        changeSelectedId,
-        sessionId,
-        selectedMessage,
-        selectedMessageState,
-        editingPossible,
-        interventionId,
-      }}
-    >
+    <TextMessagesContext.Provider value={contextValue}>
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -130,6 +151,7 @@ TextMessagingPage.propTypes = {
   fetchSession: PropTypes.func,
   setFilters: PropTypes.func,
   filters: PropTypes.arrayOf(PropTypes.object),
+  session: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -141,6 +163,7 @@ const mapStateToProps = createStructuredSelector({
   loaders: makeSelectLoaders(),
   errors: makeSelectErrors(),
   editingPossible: makeSelectEditingPossible(),
+  session: makeSelectSession(),
 });
 
 const mapDispatchToProps = {

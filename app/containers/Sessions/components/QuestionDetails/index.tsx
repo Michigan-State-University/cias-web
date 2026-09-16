@@ -67,6 +67,7 @@ const QuestionDetails = (props: QuestionDetailsProps) => (
     overflow="scroll"
     padding={30}
     bg={colors.zirkon}
+    data-cy="question-details"
   >
     <RenderQuestionDetails {...props} />
   </Box>
@@ -246,6 +247,7 @@ const RenderQuestionDetails = ({
                             interventionStatus={status}
                             isNarratorTab={isNarratorTab}
                             variable={body.variable}
+                            required={sessionType === SessionTypes.RA_SESSION}
                           />
                         </HelpIconTooltip>
                       </Row>

@@ -140,4 +140,13 @@ export default defineMessages({
     id: `${scope}.goBackToLoginPage`,
     defaultMessage: 'Go back to login page',
   },
+  rememberBrowserLabel: {
+    id: `${scope}.rememberBrowserLabel`,
+    defaultMessage: 'Remember this browser for 30 days',
+  },
+  rememberBrowserHelpText: {
+    id: `${scope}.rememberBrowserHelpText`,
+    defaultMessage:
+      "You won't need to enter a verification code on this browser for 30 days",
+  },
 });

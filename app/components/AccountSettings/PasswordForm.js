@@ -13,7 +13,7 @@ import { passwordRegex } from 'global/constants/regex';
 
 import messages from './messages';
 
-const passwordLength = 8;
+const passwordLength = 12;
 
 const validationSchema = (formatMessage) =>
   Yup.object().shape({
@@ -24,7 +24,7 @@ const validationSchema = (formatMessage) =>
       .required(formatMessage(messages.newPasswordRequired))
       .min(
         passwordLength,
-        formatMessage(messages.passwordLength, { length: 8 }),
+        formatMessage(messages.passwordLength, { length: 12 }),
       )
       .test(
         'password',

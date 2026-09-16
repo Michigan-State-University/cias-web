@@ -145,11 +145,14 @@ export const verificationCodeNeeded = () =>
 export const termsNotAccepted = (fields, password) =>
   actionBuilder(TERMS_NOT_ACCEPTED, { fields, password });
 
-export const verificationCodeRequest = (verificationCode) =>
-  actionBuilder(VERIFICATION_CODE_REQUEST, { verificationCode });
+export const verificationCodeRequest = (verificationCode, rememberBrowser) =>
+  actionBuilder(VERIFICATION_CODE_REQUEST, {
+    verificationCode,
+    rememberBrowser,
+  });
 
-export const verificationCodeSuccess = () =>
-  actionBuilder(VERIFICATION_CODE_SUCCESS);
+export const verificationCodeSuccess = (verificationCode) =>
+  actionBuilder(VERIFICATION_CODE_SUCCESS, { verificationCode });
 
 export const verificationCodeError = (error) =>
   actionBuilder(VERIFICATION_CODE_ERROR, { error });

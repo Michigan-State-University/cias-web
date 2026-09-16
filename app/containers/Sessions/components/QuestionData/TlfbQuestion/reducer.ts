@@ -18,7 +18,7 @@ import {
   REMOVE_SUBSTANCE_GROUP,
 } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, @typescript-eslint/default-param-last */
 const tlfbQuestionsReducer = (
   question: TlfbQuestionDTO,
   payload: { data: { value: string }; type: string },

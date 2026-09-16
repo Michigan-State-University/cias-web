@@ -9,3 +9,8 @@ export {
   ThirdPartyToolsAccessModal,
   useThirdPartyToolsAccessModal,
 } from './ThirdPartyToolsAccessModal';
+
+export {
+  default as AssignTagModal,
+  ASSIGN_TAG_MODAL_WIDTH,
+} from './AssignTagModal';

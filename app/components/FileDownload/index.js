@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -40,9 +40,14 @@ const FileDownload = ({
     downloadFile(url, fileName);
   };
 
+  const isDownloadingValue = useMemo(
+    () => ({ isDownloading }),
+    [isDownloading],
+  );
+
   return (
     <Box onClick={handleClick} role="button" {...styleProps}>
-      <FileDownloadContext.Provider value={{ isDownloading }}>
+      <FileDownloadContext.Provider value={isDownloadingValue}>
         <FileDownloadContext.Consumer>
           {isFunction(children) ? children : () => children}
         </FileDownloadContext.Consumer>

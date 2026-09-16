@@ -33,6 +33,14 @@ export default defineMessages({
     defaultMessage:
       'Copy URL link to this {isModularIntervention, select, true {intervention} false {session} other {}}',
   },
+  copyInterventionLinkButtonTitle: {
+    id: `${scope}.copyInterventionLinkButtonTitle`,
+    defaultMessage: 'Copy URL link to this intervention',
+  },
+  copySessionLinkButtonTitle: {
+    id: `${scope}.copySessionLinkButtonTitle`,
+    defaultMessage: 'Copy URL link to this session',
+  },
   noParticipantsInfo: {
     id: `${scope}.noParticipantsInfo`,
     defaultMessage: `There are no {invitationType, select, EMAIL {e-mail} PREDEFINED {predefined} other {}} participants yet`,
@@ -113,6 +121,10 @@ export default defineMessages({
     id: `${scope}.uploadEmailsButtonTitle`,
     defaultMessage: `Upload e-mails`,
   },
+  uploadPredefinedParticipantsButtonTitle: {
+    id: `${scope}.uploadPredefinedParticipantsButtonTitle`,
+    defaultMessage: `Upload predefined participants`,
+  },
   uploadEmailsInfo: {
     id: `${scope}.uploadEmailsInfo`,
     defaultMessage: `Upload CSV file with e-mail to upload multiple e-mails at once. To prepare correct format, use the file template.`,
@@ -128,6 +140,10 @@ export default defineMessages({
   csvUploadLabel: {
     id: `${scope}.csvUploadLabel`,
     defaultMessage: 'Upload e-mails',
+  },
+  predefinedParticipantsUploadLabel: {
+    id: `${scope}.predefinedParticipantsUploadLabel`,
+    defaultMessage: 'Upload predefined participants',
   },
   addClinicButtonTitle: {
     id: `${scope}.addClinicButtonTitle`,
@@ -176,6 +192,10 @@ export default defineMessages({
   emailInputPlaceholder: {
     id: `${scope}.emailInputPlaceholder`,
     defaultMessage: `Enter participant e-mail`,
+  },
+  phoneInputLabel: {
+    id: `${scope}.phoneInputLabel`,
+    defaultMessage: `Phone`,
   },
   externalIdInputLabel: {
     id: `${scope}.externalIdInputLabel`,
@@ -270,5 +290,128 @@ export default defineMessages({
   predefinedParticipantResendEmailInvitationButtonTitle: {
     id: `${scope}.predefinedParticipantResendEmailInvitationButtonTitle`,
     defaultMessage: `Resend e-mail invitation`,
+  },
+  uploadPredefinedParticipantsInfo: {
+    id: `${scope}.uploadPredefinedParticipantsInfo`,
+    defaultMessage:
+      'Upload a CSV file containing predefined participant information. Download the example file to see the required format. The template includes columns for RA session questions that have variables assigned. The import runs in the background — CIAS will send you an e-mail when this process has been finished.',
+  },
+  uploadPredefinedParticipantsRaDataInfo: {
+    id: `${scope}.uploadPredefinedParticipantsRaDataInfo`,
+    defaultMessage:
+      'All variables must have data before the RA session can close, allowing the participant to proceed with Session 1. If some data might be unknown or missing, please include an "unknown" or "not available" response option for that variable.',
+  },
+  examplePredefinedParticipantsCsvFilename: {
+    id: `${scope}.examplePredefinedParticipantsCsvFilename`,
+    defaultMessage: `{name}-predefined-participants-example`,
+  },
+  reviewPredefinedParticipants: {
+    id: `${scope}.reviewPredefinedParticipants`,
+    defaultMessage: `Review {count} predefined {count, plural, one {participant} other {participants}}`,
+  },
+  createPredefinedParticipants: {
+    id: `${scope}.createPredefinedParticipants`,
+    defaultMessage: `Create {count} {count, plural, one {participant} other {participants}}`,
+  },
+  participantNumber: {
+    id: `${scope}.participantNumber`,
+    defaultMessage: `Participant #{number}`,
+  },
+  bulkUploadPredefinedParticipants: {
+    id: `${scope}.bulkUploadPredefinedParticipants`,
+    defaultMessage: `Bulk Upload via CSV`,
+  },
+  removeParticipantRow: {
+    id: `${scope}.removeParticipantRow`,
+    defaultMessage: 'Remove',
+  },
+  removeAllParticipants: {
+    id: `${scope}.removeAllParticipants`,
+    defaultMessage: 'Remove all participants',
+  },
+  csvParsingError: {
+    id: `${scope}.csvParsingError`,
+    defaultMessage:
+      'An error occurred while parsing the CSV file. Please check the file format and try again.',
+  },
+  csvInvalidPhoneNumbers: {
+    id: `${scope}.csvInvalidPhoneNumbers`,
+    defaultMessage:
+      '{count, plural, one {# phone number} other {# phone numbers}} could not be parsed due to invalid country code or phone number format.',
+  },
+  healthClinicColumnHeader: {
+    id: `${scope}.healthClinicColumnHeader`,
+    defaultMessage: 'Health Clinic',
+  },
+  healthSystemColumnHeader: {
+    id: `${scope}.healthSystemColumnHeader`,
+    defaultMessage: 'Health System',
+  },
+  csvInvalidHealthClinicIds: {
+    id: `${scope}.csvInvalidHealthClinicIds`,
+    defaultMessage:
+      '{count, plural, one {# health clinic ID was} other {# health clinic IDs were}} not recognized and cleared. Please verify the health clinic assignments.',
+  },
+  noHealthClinicAssigned: {
+    id: `${scope}.noHealthClinicAssigned`,
+    defaultMessage: 'No clinic',
+  },
+  raSessionColumnHeader: {
+    id: `${scope}.raSessionColumnHeader`,
+    defaultMessage: 'RA Session',
+  },
+  fillRaSessionButton: {
+    id: `${scope}.fillRaSessionButton`,
+    defaultMessage: 'Fill RA Session',
+  },
+  fillRaSessionDisabledInfo: {
+    id: `${scope}.fillRaSessionDisabledInfo`,
+    defaultMessage:
+      'The RA session can only be filled once the intervention is published.',
+  },
+  raSessionCompleted: {
+    id: `${scope}.raSessionCompleted`,
+    defaultMessage: 'Completed',
+  },
+  raSessionLabel: {
+    id: `${scope}.raSessionLabel`,
+    defaultMessage: 'Research Assistant Session',
+  },
+  raSessionCompletedInfo: {
+    id: `${scope}.raSessionCompletedInfo`,
+    defaultMessage: 'Completed on {date} by {email}',
+  },
+  raSessionPending: {
+    id: `${scope}.raSessionPending`,
+    defaultMessage: 'Not completed yet',
+  },
+  csvUnknownRaAnswerColumn: {
+    id: `${scope}.csvUnknownRaAnswerColumn`,
+    defaultMessage:
+      "{count, plural, one {# CSV column} other {# CSV columns}} don't match any RA-session variable and were ignored.",
+  },
+  csvRaAnswerTypeMismatch: {
+    id: `${scope}.csvRaAnswerTypeMismatch`,
+    defaultMessage:
+      '{count, plural, one {# answer value has} other {# answer values have}} the wrong type for its question.',
+  },
+  raAnswersInfoBanner: {
+    id: `${scope}.raAnswersInfoBanner`,
+    defaultMessage:
+      'This CSV includes RA-session answer columns. The columns below are read-only - to change an answer, edit the CSV and re-upload.',
+  },
+  raAnswersRequirePublishedBlockBanner: {
+    id: `${scope}.raAnswersRequirePublishedBlockBanner`,
+    defaultMessage:
+      'This CSV includes RA-session answers, but the intervention is not published yet. Please publish the intervention or remove the RA answer values from the CSV before importing.',
+  },
+  bulkCreateErrorListHeader: {
+    id: `${scope}.bulkCreateErrorListHeader`,
+    defaultMessage:
+      '{count, plural, one {# issue to fix before importing:} other {# issues to fix before importing:}}',
+  },
+  rowNumberColumnHeader: {
+    id: `${scope}.rowNumberColumnHeader`,
+    defaultMessage: '#',
   },
 });

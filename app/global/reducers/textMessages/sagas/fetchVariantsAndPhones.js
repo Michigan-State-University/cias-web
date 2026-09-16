@@ -22,10 +22,22 @@ export function* fetchVariantsAndPhones() {
     const currentTextMessageId = yield select(makeSelectSelectedMessageId());
     const requestUrl = `v1/sms_plans/${currentTextMessageId}`;
     const { data } = yield call(axios.get, requestUrl);
-    const { variants, phones, smsLinks } = mapJsonApiToObject(data, 'smsPlan', {
+    const mapped = mapJsonApiToObject(data, 'smsPlan', {
       isSingleObject: true,
     });
-    yield put(fetchVariantsAndPhonesSuccess(variants, phones, smsLinks));
+
+    const variants = mapped.variants ?? [];
+    const phones = mapped.phones ?? [];
+    const smsLinks = mapped.noFormulaSmsLinks ?? [];
+
+    const hydratedVariants = variants.map((v) => ({
+      ...v,
+      smsLinks: v.smsLinks ?? [],
+    }));
+
+    yield put(
+      fetchVariantsAndPhonesSuccess(hydratedVariants, phones, smsLinks),
+    );
   } catch (error) {
     yield call(
       toast.error,

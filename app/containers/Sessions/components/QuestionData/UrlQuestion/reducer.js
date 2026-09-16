@@ -2,7 +2,7 @@ import { UPDATE_VARIABLE } from 'global/reducers/questions/constants';
 
 import { UPDATE_URL } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const urlQuestionReducer = (question, payload) => {
   switch (payload.type) {
     case UPDATE_URL:

@@ -62,7 +62,7 @@ export const AutofinishForm: React.FC<Props> = ({
 
   const validationSchema = Yup.object({
     autofinishDelay: Yup.string().when('autofinishEnabled', {
-      is: (value) => !!value,
+      is: (value: boolean) => !!value,
       then: naturalNumberValidationSchema.concat(requiredValidationSchema),
     }),
   });

@@ -25,8 +25,14 @@ export const orderSettings = (settings) =>
     ...(!isNullOrUndefined(settings.required) && {
       required: settings.required,
     }),
+    ...(!isNullOrUndefined(settings.none_of_above) && {
+      none_of_above: settings.none_of_above,
+    }),
     ...(!isNullOrUndefined(settings.start_autofinish_timer) && {
       start_autofinish_timer: settings.start_autofinish_timer,
+    }),
+    ...(!isNullOrUndefined(settings.show_dashboard_button) && {
+      show_dashboard_button: settings.show_dashboard_button,
     }),
     ...(!isNullOrUndefined(settings.show_number) && {
       show_number: settings.show_number,
@@ -39,6 +45,9 @@ export const orderSettings = (settings) =>
     }),
     ...('max_length' in settings && {
       max_length: settings.max_length,
+    }),
+    ...('answer_image_size' in settings && {
+      answer_image_size: settings.answer_image_size ?? 'medium',
     }),
   };
 

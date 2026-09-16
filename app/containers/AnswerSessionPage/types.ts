@@ -11,9 +11,8 @@ export type AnswerSessionPageFeedbackScreenSettings = {
 
 export type SharedProps<
   T extends QuestionDTO = QuestionDTO,
-  V extends
-    | null
-    | GenericAnswer['decryptedBody']['data'] = GenericAnswer['decryptedBody']['data'],
+  V extends null | GenericAnswer['decryptedBody']['data'] =
+    GenericAnswer['decryptedBody']['data'],
 > = {
   selectAnswer: (answer: V) => void;
   answerBody: V;

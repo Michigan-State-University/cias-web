@@ -5,6 +5,8 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import {
   CHANGE_SCHEDULING_FREQUENCY,
   CHANGE_INCLUDED_DATA,
+  CHANGE_SMS_SEND_TIME_TYPE,
+  CHANGE_SMS_SEND_TIME_DETAILS,
 } from 'global/reducers/textMessages/settings/constants';
 
 import { UPDATE_TEXT_MESSAGE_SETTINGS_REQUEST } from '../constants';
@@ -27,6 +29,10 @@ export function* updateTextMessage({ payload: { value: actionValue } }) {
       body = { sms_plan: { end_at: value.endAt, frequency: value.frequency } };
     } else if (type === CHANGE_INCLUDED_DATA) {
       body = objectToSnakeCase(value);
+    } else if (type === CHANGE_SMS_SEND_TIME_TYPE) {
+      body = { sms_plan: { sms_send_time_type: value } };
+    } else if (type === CHANGE_SMS_SEND_TIME_DETAILS) {
+      body = { sms_plan: { sms_send_time_details: value } };
     } else
       body = objectToSnakeCase({
         sms_plan: {

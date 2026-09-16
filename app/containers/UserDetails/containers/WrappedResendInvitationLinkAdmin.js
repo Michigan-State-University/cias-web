@@ -24,7 +24,7 @@ export const WrappedResendInvitationLinkAdmin = () => {
 
   const activated = useMemo(() => user?.fullName?.trim(), [user?.fullName]);
 
-  if (!user || activated) return <></>;
+  if (!user || activated) return null;
 
   return <ResendInvitationLink loading={loading} onResend={resendInvitation} />;
 };

@@ -21,6 +21,7 @@ import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
 import presentationProjectorSelected from 'assets/svg/presentation-projector-selected.svg';
 import { colors, borders, fontSizes, themeColors } from 'theme';
+import { SessionTypes } from 'models/Session';
 import { makeSelectSession } from 'global/reducers/session';
 import {
   makeSelectInterventionLoader,
@@ -91,13 +92,19 @@ const TargetQuestionChooser = (props) => {
 
   const { sessions: sessionList } = intervention || {};
 
-  const filteredSessionList = useMemo(
-    () =>
-      sessionList
-        ? sessionList.filter((session) => session.position > sessionIndex + 1)
-        : [],
-    [sessionList, sessionIndex],
-  );
+  const sourceSessionType = props.session?.type;
+
+  const filteredSessionList = useMemo(() => {
+    if (!sessionList) return [];
+
+    const sourceIsRa = sourceSessionType === SessionTypes.RA_SESSION;
+
+    return sessionList.filter((session) => {
+      if (sourceIsRa && session.id !== sessionId) return false;
+      if (!sourceIsRa && session.type === SessionTypes.RA_SESSION) return false;
+      return session.position > sessionIndex + 1;
+    });
+  }, [sessionList, sessionIndex, sourceSessionType, sessionId]);
 
   const [isSessionView, _setIsSessionView] = useState(false);
   const setIsSessionView = (value, event) => {

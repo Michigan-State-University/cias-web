@@ -14,7 +14,7 @@ describe('<QuestionTypeChooser />', () => {
   let store;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore(browserHistory, {});
   });
 
   it('Expect to not log errors in console', () => {

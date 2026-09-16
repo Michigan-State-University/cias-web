@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import { WarningIcon } from 'components/Icons';
-import Text from 'components/Text';
+import Text from 'components/Text/Text';
 
 import Tooltip from './Tooltip';
 import { TooltipType } from './constants';

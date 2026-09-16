@@ -4,9 +4,11 @@ import groupBy from 'lodash/groupBy';
 import { useIntl } from 'react-intl';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
+import { SessionTypes } from 'models/Session';
 
 import {
   fetchPredefinedParticipantsRequest,
+  makeSelectIntervention,
   makeSelectInterventionError,
   makeSelectInterventionLoader,
   makeSelectPredefinedParticipants,
@@ -27,6 +29,7 @@ import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { PredefinedParticipantsTable } from './PredefinedParticipantsTable';
 import { HealthClinicCollapse } from './HealthClinicCollapse';
 import messages from './messages';
+import { UploadPredefinedParticipantsButton } from './UploadPredefinedParticipantsButton';
 
 export type Props = {
   interventionId: string;
@@ -57,12 +60,31 @@ export const PredefinedParticipantsTab: FC<Props> = ({
   const predefinedParticipantsError = useSelector(
     makeSelectInterventionError('fetchPredefinedParticipants'),
   );
+  const intervention = useSelector(makeSelectIntervention());
+  const hasRaSession = useMemo(
+    () =>
+      intervention?.sessions?.some(
+        (s: { type: string }) => s.type === SessionTypes.RA_SESSION,
+      ) ?? false,
+    [intervention?.sessions],
+  );
 
   useEffect(() => {
     if (!predefinedParticipants) {
       dispatch(fetchPredefinedParticipantsRequest(interventionId));
     }
   }, [interventionId, predefinedParticipants]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        dispatch(fetchPredefinedParticipantsRequest(interventionId));
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () =>
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [interventionId]);
 
   const participantsGroupedByHealthClinic = useMemo(() => {
     if (!isReportingIntervention) return [];
@@ -84,27 +106,38 @@ export const PredefinedParticipantsTab: FC<Props> = ({
         invitingNotPossibleMessage={formatMessage(
           messages.creatingPredefinedParticipantsNotPossibleMessage,
         )}
+        onUploadPredefinedParticipants={() =>
+          onInvite(ParticipantInvitationType.PREDEFINED_CSV_UPLOAD)
+        }
       />
     );
   }
 
   return (
     <Column maxHeight="100%">
-      <Row mb={16} align="center">
+      <Row mb={16} align="center" gap={16}>
         <InviteParticipantsButton
           invitationType={ParticipantInvitationType.PREDEFINED}
           onInvite={onInvite}
           disabled={!creatingPredefinedParticipantsPossible}
         />
+        <UploadPredefinedParticipantsButton
+          onClick={() =>
+            onInvite(ParticipantInvitationType.PREDEFINED_CSV_UPLOAD)
+          }
+          disabled={!creatingPredefinedParticipantsPossible}
+        />
       </Row>
       <Box overflow="auto" maxHeight="100%">
-        {!isReportingIntervention && (
+        {predefinedParticipants?.length && !isReportingIntervention && (
           <PredefinedParticipantsTable
             predefinedParticipants={predefinedParticipants}
             onManage={onManage}
+            hasRaSession={hasRaSession}
           />
         )}
-        {isReportingIntervention &&
+        {predefinedParticipants?.length &&
+          isReportingIntervention &&
           participantsGroupedByHealthClinic.map(
             ([healthClinicId, groupedParticipants]) => (
               <HealthClinicCollapse
@@ -114,6 +147,7 @@ export const PredefinedParticipantsTab: FC<Props> = ({
                 <PredefinedParticipantsTable
                   predefinedParticipants={groupedParticipants}
                   onManage={onManage}
+                  hasRaSession={hasRaSession}
                 />
               </HealthClinicCollapse>
             ),

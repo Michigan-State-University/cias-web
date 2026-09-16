@@ -157,35 +157,38 @@ const WrappedAccordion = ({
           onReorder={handleReorder}
           onDelete={openDeleteModal}
         >
-          {map(narrator.blocks, (block, blockIndex) => (
-            <div
-              data-cy={`narrator-block-${blockIndex}`}
-              key={`${id}-narrator-block-${blockIndex}`}
-              color={getBlockColor(block.type, { animation, voice })}
-              // @ts-ignore
-              deleteActive={block.type !== NarratorBlockTypes.FEEDBACK}
-              label={`${blockIndex + 1}. ${formatMessage(
+          {map(narrator.blocks, (block, blockIndex) => {
+            const accordionItemProps = {
+              'data-cy': `narrator-block-${blockIndex}`,
+              key: `${id}-narrator-block-${blockIndex}`,
+              color: getBlockColor(block.type, { animation, voice }),
+              deleteActive: block.type !== NarratorBlockTypes.FEEDBACK,
+              label: `${blockIndex + 1}. ${formatMessage(
                 blockTypesMessages[block.type],
-              )}`}
-            >
-              {!isTlfbGroup && (
-                <ClearAnimationButton
-                  blockIndex={blockIndex}
-                  disabled={disabled}
-                />
-              )}
-              {renderBlock(
-                block,
-                blockIndex,
-                id,
-                formatMessage,
-                disabled,
-                !animation,
-                isTlfbGroup,
-                character,
-              )}
-            </div>
-          ))}
+              )}`,
+            };
+
+            return (
+              <div {...accordionItemProps}>
+                {!isTlfbGroup && (
+                  <ClearAnimationButton
+                    blockIndex={blockIndex}
+                    disabled={disabled}
+                  />
+                )}
+                {renderBlock(
+                  block,
+                  blockIndex,
+                  id,
+                  formatMessage,
+                  disabled,
+                  !animation,
+                  isTlfbGroup,
+                  character,
+                )}
+              </div>
+            );
+          })}
         </Accordion>
       )}
     </>

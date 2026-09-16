@@ -16,6 +16,7 @@ import Text from 'components/Text';
 import messages from './messages';
 import {
   ALERT_FOR_THIRD_PARTY_LABEL_ID,
+  INFORMATION_FOR_PARTICIPANT_DISABLED_TOOLTIP_ID,
   INFORMATION_FOR_PARTICIPANT_LABEL_ID,
   SMS_TYPE_TOOLTIP_ID,
 } from './constants';
@@ -24,12 +25,14 @@ export type Props = {
   type: TextMessageType;
   onTypeChange: (newType: TextMessageType) => void;
   disabled: boolean;
+  normalTypeDisabled?: boolean;
 };
 
 const TextMessageTypeChooserComponent = ({
   type,
   onTypeChange,
   disabled,
+  normalTypeDisabled = false,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
@@ -63,16 +66,36 @@ const TextMessageTypeChooserComponent = ({
       </Row>
       <Row mb={16}>
         <Col>
-          <Radio
-            id={INFORMATION_FOR_PARTICIPANT_LABEL_ID}
-            onChange={onInformationForParticipantChange}
-            checked={type === TextMessageType.NORMAL}
-            disabled={disabled}
-          >
-            <Text>
-              {formatMessage(messages.informationForParticipantLabel)}
-            </Text>
-          </Radio>
+          <Row align="center" gap={8}>
+            <Radio
+              id={INFORMATION_FOR_PARTICIPANT_LABEL_ID}
+              onChange={onInformationForParticipantChange}
+              checked={type === TextMessageType.NORMAL}
+              disabled={disabled || normalTypeDisabled}
+            >
+              <Text>
+                {formatMessage(messages.informationForParticipantLabel)}
+              </Text>
+            </Radio>
+            {normalTypeDisabled && (
+              // @ts-ignore
+              <Tooltip
+                id={INFORMATION_FOR_PARTICIPANT_DISABLED_TOOLTIP_ID}
+                content={formatMessage(
+                  messages.informationForParticipantDisabledTooltip,
+                )}
+              >
+                <Circle
+                  bg={colors.grey}
+                  color={colors.white}
+                  size="18px"
+                  fontWeight="bold"
+                  fontSize={13}
+                  child="?"
+                />
+              </Tooltip>
+            )}
+          </Row>
         </Col>
 
         <Col>

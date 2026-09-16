@@ -507,8 +507,8 @@ const createCollapseNode = (
   position: { x: 0, y: 0 },
   selectable: false,
   data: {
-    firstCollapsedScreenNo: firstCollapsedNode.data?.questionIndex! + 1,
-    lastCollapsedScreenNo: lastCollapsedNode.data?.questionIndex! + 1,
+    firstCollapsedScreenNo: (firstCollapsedNode.data?.questionIndex ?? 0) + 1,
+    lastCollapsedScreenNo: (lastCollapsedNode.data?.questionIndex ?? 0) + 1,
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useIdleTimer } from 'react-idle-timer';
 import axios from 'axios';
@@ -113,7 +113,7 @@ const IdleTimer = ({ logOut, user }) => {
     pause();
   };
 
-  return <></>;
+  return null;
 };
 
 IdleTimer.propTypes = {

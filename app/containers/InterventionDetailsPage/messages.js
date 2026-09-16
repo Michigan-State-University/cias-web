@@ -98,6 +98,15 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this session? It will no longer be possible to recover it later.',
   },
+  raSessionDeleteHeader: {
+    id: `${scope}.raSessionDeleteHeader`,
+    defaultMessage: 'Delete Research Assistant Session',
+  },
+  raSessionDeleteMessage: {
+    id: `${scope}.raSessionDeleteMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Research Assistant Session? It will no longer be possible to recover it later.',
+  },
   interventionSettings: {
     id: `${scope}.interventionSettings`,
     defaultMessage: 'Intervention Settings',
@@ -114,6 +123,10 @@ export default defineMessages({
     id: `${scope}.assignOrganization`,
     defaultMessage: 'Assign Organization',
   },
+  assignTag: {
+    id: `${scope}.assignTag`,
+    defaultMessage: 'Assign tag',
+  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: 'Intervention: {name}',
@@ -124,7 +137,7 @@ export default defineMessages({
   },
   catMhCounter: {
     id: `${scope}.catMhCounter`,
-    defaultMessage: `<bold>CAT-MH™ License</bold>: {catMhLicenseType, select, limited {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)} unlimited {Unlimited (<counter>{used}</counter> <space></space> tests used)}}`,
+    defaultMessage: `<bold>CAT-MH™ License:</bold> {catMhLicenseType, select, limited {Limited (<counter>{used}/{initial}</counter> tests used)} unlimited {Unlimited (<counter>{used}</counter> tests used)} other {}}`,
   },
   catMhCountInfo: {
     id: `${scope}.catMhCountInfo`,

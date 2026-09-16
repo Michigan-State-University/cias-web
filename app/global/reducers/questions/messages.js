@@ -11,6 +11,11 @@ export default defineMessages({
     id: `${scope}.reservedVariable`,
     defaultMessage: 'This variable name is reserved!',
   },
+  raVariableRequired: {
+    id: `${scope}.raVariableRequired`,
+    defaultMessage:
+      'Please set a variable name for this question before saving changes — it is required for Research Assistant session questions.',
+  },
   copyError: {
     id: `${scope}.copyError`,
     defaultMessage: 'Cannot copy the screen!',
@@ -38,5 +43,25 @@ export default defineMessages({
   copySuccess: {
     id: `${scope}.copySuccess`,
     defaultMessage: 'Copied screen successfully!',
+  },
+  variableUpdateQueued: {
+    id: `${scope}.variableUpdateQueued`,
+    defaultMessage:
+      'Variable references are being updated. Please refresh the page in a moment to see the results.',
+  },
+  variableUpdateInProgress: {
+    id: `${scope}.variableUpdateInProgress`,
+    defaultMessage:
+      'Cannot update question variable while references update is in progress. Please try again in a few moments.',
+  },
+  answerOptionUpdateQueued: {
+    id: `${scope}.answerOptionUpdateQueued`,
+    defaultMessage:
+      'Answer option references are being updated. Please refresh the page in a moment to see the results.',
+  },
+  answerOptionUpdateInProgress: {
+    id: `${scope}.answerOptionUpdateInProgress`,
+    defaultMessage:
+      'Cannot update question answer option while references update is in progress. Please try again in a few moments.',
   },
 });

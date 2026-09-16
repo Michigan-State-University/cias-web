@@ -98,7 +98,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const organizationReducer = (state = initialState, action) =>
+const organizationReducer = (state = initialState, action = null) =>
   produce(state, (draft) => {
     const { type, payload } = action;
 

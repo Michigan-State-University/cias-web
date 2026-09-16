@@ -141,6 +141,15 @@ import {
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS,
   SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_REQUEST,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS,
+  BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR,
+  UNASSIGN_TAG_REQUEST,
+  UNASSIGN_TAG_SUCCESS,
+  UNASSIGN_TAG_ERROR,
+  FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST,
+  FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS,
+  FETCH_RA_SESSION_QUESTION_GROUPS_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -148,6 +157,7 @@ export const initialState = {
   intervention: null,
   invitations: null,
   predefinedParticipants: null,
+  raSessionQuestionGroups: [],
   invitationsStates: {},
   collaborators: [],
   currentUserCollaboratorData: null,
@@ -185,7 +195,9 @@ export const initialState = {
     activatePredefinedParticipant: false,
     sendPredefinedParticipantSmsInvitation: false,
     sendPredefinedParticipantEmailInvitation: false,
+    bulkCreatePredefinedParticipants: false,
     updateAllSessionsScheduleLoading: false,
+    fetchRaSessionQuestionGroups: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -201,11 +213,13 @@ export const initialState = {
     changeInterventionNarrator: null,
     editShortLinks: null,
     fetchPredefinedParticipants: null,
+    bulkCreatePredefinedParticipants: null,
     updateAllSessionsScheduleError: null,
+    fetchRaSessionQuestionGroups: null,
   },
 };
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 export const interventionReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     const updateInvitationListItemStateById = (invitationId, changes) => {
@@ -910,6 +924,60 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR: {
         draft.loaders.sendPredefinedParticipantEmailInvitation = false;
+        break;
+      }
+
+      case BULK_CREATE_PREDEFINED_PARTICIPANTS_REQUEST: {
+        draft.loaders.bulkCreatePredefinedParticipants = true;
+        draft.errors.bulkCreatePredefinedParticipants = null;
+        break;
+      }
+      case BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS: {
+        draft.loaders.bulkCreatePredefinedParticipants = false;
+        break;
+      }
+      case BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR: {
+        const { error } = action.payload;
+        draft.loaders.bulkCreatePredefinedParticipants = false;
+        draft.errors.bulkCreatePredefinedParticipants = error;
+        break;
+      }
+
+      case UNASSIGN_TAG_REQUEST: {
+        draft.loaders.unassignTag = true;
+        draft.errors.unassignTag = null;
+        break;
+      }
+      case UNASSIGN_TAG_SUCCESS: {
+        draft.loaders.unassignTag = false;
+        if (draft.intervention && draft.intervention.tags) {
+          draft.intervention.tags = draft.intervention.tags.filter(
+            (tag) => tag.id !== action.payload.tagId,
+          );
+        }
+        break;
+      }
+      case UNASSIGN_TAG_ERROR: {
+        draft.loaders.unassignTag = false;
+        draft.errors.unassignTag = action.payload.error;
+        break;
+      }
+
+      case FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST: {
+        draft.loaders.fetchRaSessionQuestionGroups = true;
+        draft.errors.fetchRaSessionQuestionGroups = null;
+        break;
+      }
+      case FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS: {
+        draft.loaders.fetchRaSessionQuestionGroups = false;
+        draft.raSessionQuestionGroups = action.payload.questionGroups;
+        break;
+      }
+      case FETCH_RA_SESSION_QUESTION_GROUPS_ERROR: {
+        const { error } = action.payload;
+        draft.loaders.fetchRaSessionQuestionGroups = false;
+        draft.errors.fetchRaSessionQuestionGroups = error;
+        draft.raSessionQuestionGroups = [];
         break;
       }
     }

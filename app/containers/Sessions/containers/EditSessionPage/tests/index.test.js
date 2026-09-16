@@ -12,7 +12,7 @@ describe('<EditSessionPage />', () => {
   let store;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore(browserHistory, {});
   });
 
   it.skip('Should render and match the snapshot', () => {

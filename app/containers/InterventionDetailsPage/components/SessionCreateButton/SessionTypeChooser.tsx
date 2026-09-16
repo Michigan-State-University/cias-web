@@ -16,12 +16,14 @@ type Props = {
   onCreateSession: (sessionType: SessionTypes) => void;
   canCreateCatSession: boolean;
   canCreateSmsSession: boolean;
+  canCreateRaSession: boolean;
 };
 
 const SessionTypeChooser = ({
   onCreateSession,
   canCreateCatSession,
   canCreateSmsSession,
+  canCreateRaSession,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
   const [selectedSessionType, setSelectedSessionType] = useState(
@@ -34,6 +36,7 @@ const SessionTypeChooser = ({
         formatMessage,
         canCreateCatSession,
         canCreateSmsSession,
+        canCreateRaSession,
       ),
     [formatMessage],
   );
@@ -55,6 +58,7 @@ const SessionTypeChooser = ({
             border={`1px solid ${colors.linkWater}`}
             background={isChecked ? colors.zirkon : colors.white}
             borderRadius={5}
+            data-cy={`session-type-option-${type}`}
           >
             <Radio
               id={`session-type-chooser-${type}`}
@@ -84,6 +88,7 @@ const SessionTypeChooser = ({
           width={150}
           mt={20}
           onClick={() => onCreateSession(selectedSessionType)}
+          data-cy="create-session-submit-button"
         >
           {formatMessage(messages.create)}
         </Button>

@@ -5,13 +5,12 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { HttpStatusCodes } from 'utils/constants';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { UserStorageController } from '../UserStorageController';
 import { verificationCodeError, verificationCodeSuccess } from '../actions';
 import { VERIFICATION_CODE_REQUEST } from '../constants';
 import { makeSelectLoginFormData } from '../selectors';
 import messages from '../messages';
 
-function* verifyCode({ payload: { verificationCode } }) {
+function* verifyCode({ payload: { verificationCode, rememberBrowser } }) {
   const requestURL = `/v1/users/confirm_logging_code`;
 
   const { email } = yield select(makeSelectLoginFormData());
@@ -22,17 +21,17 @@ function* verifyCode({ payload: { verificationCode } }) {
       data: { verification_code },
     } = yield axios.patch(
       requestURL,
-      objectToSnakeCase({ verificationCode, email }),
+      objectToSnakeCase({ verificationCode, email, rememberBrowser }),
       {
         headers: { Uid: email },
+        withCredentials: true,
       },
     );
 
-    const userStorageController = new UserStorageController(email);
-    userStorageController.setVerificationCode(verification_code);
-
     yield delay(300);
-    yield put(verificationCodeSuccess());
+    // eslint-disable-next-line camelcase
+    const codeForState = rememberBrowser ? null : verification_code;
+    yield put(verificationCodeSuccess(codeForState));
   } catch (error) {
     yield delay(300);
 

@@ -21,16 +21,23 @@ import messages from '../NoFormulaMessages/messages';
 
 interface Props {
   smsPlanId: string;
+  variantId?: string | null;
   availableSmsLinks: any[];
 }
 
-export const SmsLinksList = ({ smsPlanId, availableSmsLinks }: Props) => {
+export const SmsLinksList = ({
+  smsPlanId,
+  variantId,
+  availableSmsLinks,
+}: Props) => {
   const { formatMessage } = useIntl();
 
-  const apiUrl = useMemo(
-    () => `v1/sms_links?sms_link[sms_plan_id]=${smsPlanId}`,
-    [smsPlanId],
-  );
+  const apiUrl = useMemo(() => {
+    if (variantId) {
+      return `v1/sms_links?sms_link[variant_id]=${variantId}`;
+    }
+    return `v1/sms_links?sms_link[sms_plan_id]=${smsPlanId}`;
+  }, [smsPlanId, variantId]);
 
   const state = useGet<SmsLinksApiResponse, SmsLinksApiResponse>(
     apiUrl,

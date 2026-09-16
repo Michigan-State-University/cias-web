@@ -51,12 +51,16 @@ export const useSocket = <
 
   const subscribe = useCallback(async () => {
     if (!channel && cable && !suspend) {
-      const newChannel = (await cable.subscribeTo(
-        channelName,
-        memoizedParams,
-      )) as TChannel;
-      newChannel.on(LISTEN_SOCKET_MESSAGE_EVENT_NAME, messageListener);
-      setChannel(newChannel);
+      try {
+        const newChannel = (await cable.subscribeTo(
+          channelName,
+          memoizedParams,
+        )) as TChannel;
+        newChannel.on(LISTEN_SOCKET_MESSAGE_EVENT_NAME, messageListener);
+        setChannel(newChannel);
+      } catch {
+        // Intentionally swallowed — WebSocket disconnect errors are non-actionable
+      }
     }
   }, [channel, cable, memoizedParams, suspend]);
 

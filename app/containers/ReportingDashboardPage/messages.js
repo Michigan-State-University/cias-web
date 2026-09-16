@@ -100,7 +100,7 @@ export default defineMessages({
   },
   addEntityButton: {
     id: `${scope}.addEntityButton`,
-    defaultMessage: `+ Add {type, select, ORGANIZATION {Organization} HEALTH_SYSTEM {Health System} CLINIC {Clinic}}`,
+    defaultMessage: `+ Add {type, select, ORGANIZATION {Organization} HEALTH_SYSTEM {Health System} CLINIC {Clinic} other {Entity}}`,
   },
   healthSystemHeader: {
     id: `${scope}.healthSystemHeader`,

@@ -49,8 +49,7 @@ export interface IndexedVariableAnswerData<
   index?: number;
 }
 
-export interface ThirdPartyReportAnswerData
-  extends IndexedVariableAnswerData<string> {
+export interface ThirdPartyReportAnswerData extends IndexedVariableAnswerData<string> {
   reportTemplateIds: string[];
   numericValue: string[];
 }
@@ -61,8 +60,7 @@ export interface GridAnswerData extends VariableAnswerData<string> {
   };
 }
 
-export interface HenryFordQuestionAnswerData
-  extends IndexedVariableAnswerData<string> {
+export interface HenryFordQuestionAnswerData extends IndexedVariableAnswerData<string> {
   hfhValue: string;
 }
 

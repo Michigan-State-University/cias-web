@@ -17,6 +17,14 @@ module.exports = function addDevMiddlewares(app, webpackConfig) {
     webpackConfig.output.publicPath,
   );
 
+  app.use((req, res, next) => {
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
+
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    next();
+  });
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
 

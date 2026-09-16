@@ -1,6 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CopyModal /> Should render and match the snapshot 1`] = `
+.c28 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: not-allowed !important;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
 .c11 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -61,22 +79,14 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   background-color: rgba(248,251,255,1);
 }
 
-.c28 {
-  width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: not-allowed !important;
-  border: none;
-  outline: none;
-  background-color: #107969;
-  color: #FFFFFF;
-  border: 1px solid transparent;
-  cursor: default;
-  background-color: #9AA1B6;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+.c7 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
   margin-right: 25px;
   margin-left: 25px;
+  color: #2F3850;
 }
 
 .c0 {
@@ -320,16 +330,6 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c7 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 25px;
-  line-height: 130%;
-  margin-right: 25px;
-  margin-left: 25px;
-  color: #2F3850;
-}
-
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -510,7 +510,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
           <div
             align="start"
             class="c5"
-            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%; right: auto; left: auto;"
           >
             <div
               class="c6"
@@ -526,7 +526,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
           <div
             align="end"
             class="c8"
-            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%; right: auto; left: auto;"
           >
             <button
               aria-label="Close window"
@@ -549,7 +549,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
           <div
             align="start"
             class="c5"
-            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; right: auto; left: auto;"
           >
             <div
               class="c10"

@@ -33,7 +33,7 @@ export const initialState = {
 
 export const generatedReportsReducerKey = 'generatedReports';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 
 const selectFilter = (currentState, filter) => {
   if (!filter) return currentState;

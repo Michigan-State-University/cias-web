@@ -13,6 +13,11 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Next Screen',
   },
+  raSessionCopyConflict: {
+    id: `${scope}.raSessionCopyConflict`,
+    defaultMessage:
+      'This intervention already has a Research Assistant session. Only one is allowed per intervention — choose a different intervention.',
+  },
   sessionListHeader: {
     id: `${scope}.sessionListHeader`,
     defaultMessage: 'Sessions in',

@@ -25,7 +25,7 @@ const StatusFilter = ({ formatMessage, onChange, active }) => {
   const handleChange = (values) => onChange(values.map(({ value }) => value));
 
   return (
-    <Col>
+    <Col data-cy="intervention-status-filter">
       <Select
         selectProps={{
           isMulti: true,
@@ -34,6 +34,7 @@ const StatusFilter = ({ formatMessage, onChange, active }) => {
           value: selectValue,
           onChange: handleChange,
           placeholder: formatMessage(messages.statusFilterPlaceholder),
+          inputId: 'status-filter-input',
         }}
       />
     </Col>

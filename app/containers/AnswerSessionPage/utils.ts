@@ -19,7 +19,9 @@ export const getSessionMapUserPreviewUrl = (userSessionId: string): string => {
   return `${sessionUrl}/map?userSessionId=${userSessionId}`;
 };
 
-export const getNextSessionUrl = (sessionId: string): string => {
+export const getNextSessionUrl = (sessionId: Nullable<string>): string => {
+  if (!sessionId) return '';
+
   const {
     location: { pathname },
   } = window;
@@ -96,13 +98,10 @@ export const formatPhoneNumberForHfhs = ({
 }: Pick<PhoneAttributes, 'number' | 'iso'>) => {
   const parsedPhone = parsePhoneNumberFromString(number, iso);
   if (!parsedPhone) return '';
-  return parsedPhone
-    .formatInternational()
-    .replace(new RegExp(' ', 'g'), '-')
-    .slice(1);
+  return parsedPhone.formatInternational().replace(/ /g, '-').slice(1);
 };
 
 export const parsePhoneNumberFromHfhs = (number: string) => {
-  const phone = `+${number.replace(new RegExp('-', 'g'), ' ')}`;
+  const phone = `+${number.replace(/-/g, ' ')}`;
   return parsePhoneNumberFromString(phone);
 };

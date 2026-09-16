@@ -173,9 +173,13 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <div
-              class="c10"
+              class="c0"
             >
-              test
+              <div
+                class="c10"
+              >
+                test
+              </div>
             </div>
           </label>
         </div>
@@ -204,9 +208,13 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <div
-              class="c10"
+              class="c0"
             >
-              test
+              <div
+                class="c10"
+              >
+                test
+              </div>
             </div>
           </label>
         </div>

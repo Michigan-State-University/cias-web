@@ -175,81 +175,79 @@ const NoNavigatorsForm = ({
     disabled;
 
   return (
-    <>
-      <Box>
-        <H2 fontSize={16} lineHeight="24px" mb={24}>
-          {formatMessage(messages.textInformation)}
-        </H2>
-        <Box mb={24}>
-          {/* @ts-ignore */}
-          <FormikHookInput
-            formikKey="noNavigatorAvailableMessage"
-            formikState={formik}
-            placeholder={formatMessage(messages.messagePlaceholder)}
-            label={formatMessage(messages.messageLabel)}
-            inputProps={{ width: '100%', disabled }}
-          />
-        </Box>
+    <Box>
+      <H2 fontSize={16} lineHeight="24px" mb={24}>
+        {formatMessage(messages.textInformation)}
+      </H2>
+      <Box mb={24}>
         {/* @ts-ignore */}
         <FormikHookInput
-          formikKey="contactMessage"
+          formikKey="noNavigatorAvailableMessage"
           formikState={formik}
-          placeholder={formatMessage(messages.contactMessagePlaceholder)}
-          label={formatMessage(messages.contactMessageLabel)}
+          placeholder={formatMessage(messages.messagePlaceholder)}
+          label={formatMessage(messages.messageLabel)}
           inputProps={{ width: '100%', disabled }}
         />
-        <Box my={24}>
-          <PhoneNumberForm
-            // @ts-ignore
-            formatMessage={formatMessage}
-            phone={phone ?? defaultPhone}
-            changePhoneNumber={onPhoneNumberFormChange(setNewPhone)}
-            confirmationDisabled
-            prefixLabelMessage={messages.contactPrefix}
-            phoneLabel={messages.contactPhoneNumber}
-            required={false}
-            allowPartial
-            ref={phoneNumberFormCallbackRef}
-            disabled={disabled}
-          />
-        </Box>
-        <Box my={24}>
-          <PhoneNumberForm
-            // @ts-ignore
-            formatMessage={formatMessage}
-            phone={messagePhone ?? defaultPhone}
-            changePhoneNumber={onPhoneNumberFormChange(setMessageNewPhone)}
-            confirmationDisabled
-            prefixLabelMessage={messages.messagePrefix}
-            phoneLabel={messages.messagePhoneNumber}
-            required={false}
-            allowPartial
-            ref={messagePhoneNumberFormCallbackRef}
-            disabled={disabled}
-          />
-        </Box>
-        {/* @ts-ignore */}
-        <FormikHookInput
-          formikKey="contactEmail"
-          formikState={formik}
-          placeholder={formatMessage(messages.emailPlaceholder)}
-          label={formatMessage(messages.emailLabel)}
-          inputProps={{ width: '100%', disabled }}
-        />
-        {/* @ts-ignore */}
-        <Button
-          type="submit"
-          disabled={isSaveDisabled}
-          loading={isUpdating}
-          px={24}
-          width="auto"
-          mt={24}
-          onClick={onSaveChanges}
-        >
-          {formatMessage(messages.saveChanges)}
-        </Button>
       </Box>
-    </>
+      {/* @ts-ignore */}
+      <FormikHookInput
+        formikKey="contactMessage"
+        formikState={formik}
+        placeholder={formatMessage(messages.contactMessagePlaceholder)}
+        label={formatMessage(messages.contactMessageLabel)}
+        inputProps={{ width: '100%', disabled }}
+      />
+      <Box my={24}>
+        <PhoneNumberForm
+          // @ts-ignore
+          formatMessage={formatMessage}
+          phone={phone ?? defaultPhone}
+          changePhoneNumber={onPhoneNumberFormChange(setNewPhone)}
+          confirmationDisabled
+          prefixLabelMessage={messages.contactPrefix}
+          phoneLabel={messages.contactPhoneNumber}
+          required={false}
+          allowPartial
+          ref={phoneNumberFormCallbackRef}
+          disabled={disabled}
+        />
+      </Box>
+      <Box my={24}>
+        <PhoneNumberForm
+          // @ts-ignore
+          formatMessage={formatMessage}
+          phone={messagePhone ?? defaultPhone}
+          changePhoneNumber={onPhoneNumberFormChange(setMessageNewPhone)}
+          confirmationDisabled
+          prefixLabelMessage={messages.messagePrefix}
+          phoneLabel={messages.messagePhoneNumber}
+          required={false}
+          allowPartial
+          ref={messagePhoneNumberFormCallbackRef}
+          disabled={disabled}
+        />
+      </Box>
+      {/* @ts-ignore */}
+      <FormikHookInput
+        formikKey="contactEmail"
+        formikState={formik}
+        placeholder={formatMessage(messages.emailPlaceholder)}
+        label={formatMessage(messages.emailLabel)}
+        inputProps={{ width: '100%', disabled }}
+      />
+      {/* @ts-ignore */}
+      <Button
+        type="submit"
+        disabled={isSaveDisabled}
+        loading={isUpdating}
+        px={24}
+        width="auto"
+        mt={24}
+        onClick={onSaveChanges}
+      >
+        {formatMessage(messages.saveChanges)}
+      </Button>
+    </Box>
   );
 };
 

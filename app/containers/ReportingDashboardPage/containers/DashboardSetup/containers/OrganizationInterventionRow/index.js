@@ -101,7 +101,7 @@ const OrganizationInterventionRow = ({
 
 OrganizationInterventionRow.propTypes = {
   organizationId: PropTypes.string,
-  refetchInterventions: PropTypes.bool,
+  refetchInterventions: PropTypes.func,
   fetchInterventions: PropTypes.func,
   createIntervention: PropTypes.func,
   createInterventionLoading: PropTypes.bool,

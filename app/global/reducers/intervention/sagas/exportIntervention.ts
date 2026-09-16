@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -15,10 +18,43 @@ import {
   EXPORT_INTERVENTION_ERROR,
 } from '../constants';
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 function* exportIntervention({
-  payload: { interventionId, onSuccess },
+  payload: {
+    interventionId,
+    onSuccess,
+    startDate,
+    endDate,
+    timezone: selectedTimezone,
+  },
 }: ReturnType<typeof exportInterventionRequest>) {
-  const url = `v1/interventions/${interventionId}/export`;
+  let url = `v1/interventions/${interventionId}/export`;
+
+  const params = new URLSearchParams();
+  if (startDate) {
+    const formattedStartDate = selectedTimezone
+      ? dayjs(startDate)
+          .tz(selectedTimezone, true)
+          .format('YYYY-MM-DDTHH:mm:ss')
+      : dayjs(startDate).format('YYYY-MM-DDTHH:mm:ss');
+    params.append('start_datetime', formattedStartDate);
+  }
+  if (endDate) {
+    const formattedEndDate = selectedTimezone
+      ? dayjs(endDate).tz(selectedTimezone, true).format('YYYY-MM-DDTHH:mm:ss')
+      : dayjs(endDate).format('YYYY-MM-DDTHH:mm:ss');
+    params.append('end_datetime', formattedEndDate);
+  }
+  if (selectedTimezone) {
+    params.append('timezone', selectedTimezone);
+  }
+
+  const queryString = params.toString();
+  if (queryString) {
+    url = `${url}?${queryString}`;
+  }
 
   try {
     yield call(axios.post, url);

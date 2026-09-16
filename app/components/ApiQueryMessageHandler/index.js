@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
@@ -39,7 +39,7 @@ const ApiQueryMessageHandler = () => {
     }
   }, [success, error]);
 
-  return <></>;
+  return null;
 };
 
 ApiQueryMessageHandler.propTypes = {};

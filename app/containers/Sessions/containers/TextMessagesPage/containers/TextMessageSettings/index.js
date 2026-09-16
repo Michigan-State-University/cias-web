@@ -15,12 +15,19 @@ import {
   changeTileName,
   cloneTextMessageRequest,
   changeType,
+  changeSmsSendTimeType,
+  changeSmsSendTimeDetails,
 } from 'global/reducers/textMessages';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import copy from 'assets/svg/copy.svg';
 
-import { TextMessageType } from 'models/TextMessage';
+import {
+  TextMessageType,
+  SmsSendTimeType,
+  TextMessageScheduleOption,
+} from 'models/TextMessage';
+import { SessionTypes } from 'models/Session';
 
 import { colors } from 'theme';
 
@@ -40,6 +47,7 @@ import NoFormulaMessage from '../../components/NoFormulaMessages';
 import { TextMessageTypeChooser } from '../../components/TextMessageTypeChooser';
 import { ParticipantPersonalData } from '../../components/ParticipantPersonalData';
 import { AlertPhones } from '../../components/AlertPhones';
+import { SmsSendTimeSettings } from '../../components/SmsSendTimeSettings';
 
 const TextMessageSettings = ({
   changeSchedulingTypeAction,
@@ -51,6 +59,8 @@ const TextMessageSettings = ({
   changeTileNameAction,
   cloneTextMessage,
   changeTypeAction,
+  changeSmsSendTimeTypeAction,
+  changeSmsSendTimeDetailsAction,
   sessionId,
 }) => {
   const {
@@ -70,9 +80,15 @@ const TextMessageSettings = ({
       noFormulaAttachment,
       originalText,
       type,
+      smsSendTimeType,
+      smsSendTimeDetails,
     },
     selectedMessageState: { uploadAttachmentLoading, uploadAttachmentError },
+    interventionId,
+    sessionType,
   } = useContext(TextMessagesContext);
+
+  const isRaSession = sessionType === SessionTypes.RA_SESSION;
 
   useEffect(() => {
     fetchVariantsAndPhones();
@@ -136,24 +152,44 @@ const TextMessageSettings = ({
         type={type}
         onTypeChange={changeTypeAction}
         disabled={!editingPossible}
+        normalTypeDisabled={isRaSession}
       />
 
       {type === TextMessageType.NORMAL && (
-        <TextMessageScheduling
-          id={id}
-          selectedOption={schedule}
-          frequency={frequency}
-          endAt={endAt}
-          formatMessage={formatMessage}
-          value={schedulePayload}
-          variableValue={scheduleVariable}
-          onChangeOption={changeSchedulingTypeAction}
-          onChangeValue={changeSchedulingValueAction}
-          onChangeVariable={changeSchedulingVariableAction}
-          onChangeFrequency={changeSchedulingFrequencyAction}
-          disabled={!editingPossible}
-          sessionId={sessionId}
-        />
+        <>
+          <TextMessageScheduling
+            id={id}
+            selectedOption={schedule}
+            frequency={frequency}
+            endAt={endAt}
+            formatMessage={formatMessage}
+            value={schedulePayload}
+            variableValue={scheduleVariable}
+            onChangeOption={changeSchedulingTypeAction}
+            onChangeValue={changeSchedulingValueAction}
+            onChangeVariable={changeSchedulingVariableAction}
+            onChangeFrequency={changeSchedulingFrequencyAction}
+            disabled={!editingPossible}
+            sessionId={sessionId}
+            interventionId={interventionId}
+          />
+
+          {schedule !== TextMessageScheduleOption.AFTER_FILL && (
+            <>
+              <SectionDivider />
+
+              <SmsSendTimeSettings
+                smsSendTimeType={
+                  smsSendTimeType || SmsSendTimeType.PREFERRED_BY_PARTICIPANT
+                }
+                smsSendTimeDetails={smsSendTimeDetails}
+                onSmsSendTimeTypeChange={changeSmsSendTimeTypeAction}
+                onSmsSendTimeDetailsChange={changeSmsSendTimeDetailsAction}
+                disabled={!editingPossible}
+              />
+            </>
+          )}
+        </>
       )}
 
       <SectionDivider />
@@ -195,6 +231,8 @@ TextMessageSettings.propTypes = {
   changeTileNameAction: PropTypes.func,
   cloneTextMessage: PropTypes.func,
   changeTypeAction: PropTypes.func,
+  changeSmsSendTimeTypeAction: PropTypes.func,
+  changeSmsSendTimeDetailsAction: PropTypes.func,
   sessionId: PropTypes.string,
 };
 
@@ -208,6 +246,8 @@ const mapDispatchToProps = {
   removeTextMessage: removeTextMessageRequest,
   cloneTextMessage: cloneTextMessageRequest,
   changeTypeAction: changeType,
+  changeSmsSendTimeTypeAction: changeSmsSendTimeType,
+  changeSmsSendTimeDetailsAction: changeSmsSendTimeDetails,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

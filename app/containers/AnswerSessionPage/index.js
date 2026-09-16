@@ -123,6 +123,7 @@ import {
   fetchUserSessionRequest,
   fetchPreviousQuestionRequest,
   selectVideoStats,
+  verifyPidRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
@@ -338,6 +339,7 @@ export function AnswerSessionPage({
     showTextReadingControls,
     transitionalUserSessionId,
     fetchPreviousQuestionLoading,
+    isRaFulfillment,
   },
   isPreview,
   interventionStatus,
@@ -355,6 +357,7 @@ export function AnswerSessionPage({
   fixedElementsDirection,
   dynamicElementsDirection,
   changeLocale,
+  verifyPid,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -379,6 +382,8 @@ export function AnswerSessionPage({
   const [videoStart, setVideoStart] = useState(null);
   const [videoEnd, setVideoEnd] = useState(null);
   const [videoProgress, setVideoProgress] = useState(null);
+
+  const fetchAttemptedRef = useRef(null);
 
   const {
     type,
@@ -446,6 +451,8 @@ export function AnswerSessionPage({
   const location = useLocation();
 
   const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
+  const pid = useQuery('pid');
+
   useEffect(() => {
     if (questionLanguage) {
       changeLocale(questionLanguage);
@@ -457,14 +464,45 @@ export function AnswerSessionPage({
   const { sessionId, interventionId, index } = params;
 
   useEffect(() => {
-    if (
-      isPreview &&
-      interventionId !== fetchedInterventionId &&
-      !fetchInterventionLoading
-    ) {
-      fetchIntervention(interventionId);
+    if (!isPreview) {
+      return;
     }
-  }, [interventionId]);
+
+    if (interventionId === fetchedInterventionId) {
+      fetchAttemptedRef.current = interventionId;
+      return;
+    }
+
+    if (fetchAttemptedRef.current !== interventionId) {
+      fetchAttemptedRef.current = null;
+    }
+
+    if (
+      !fetchInterventionLoading &&
+      fetchAttemptedRef.current !== interventionId
+    ) {
+      fetchAttemptedRef.current = interventionId;
+      fetchIntervention(interventionId);
+      return;
+    }
+
+    // Stuck state: loading=true but we haven't marked this as attempted
+    // (Happens when component unmounts/remounts during locale change)
+    if (
+      fetchInterventionLoading &&
+      fetchAttemptedRef.current !== interventionId
+    ) {
+      fetchAttemptedRef.current = interventionId;
+
+      const refetchTimer = setTimeout(() => {
+        fetchIntervention(interventionId);
+      }, 300);
+
+      return () => {
+        clearTimeout(refetchTimer);
+      };
+    }
+  }, [interventionId, isPreview]);
 
   useEffect(() => {
     if (currentQuestionId) {
@@ -478,6 +516,12 @@ export function AnswerSessionPage({
   const previewPossible =
     !(isPreview && !canPreview(interventionStatus)) &&
     (!isUserSessionFinished || (isGuestUser && isUserSessionFinished));
+
+  useEffect(() => {
+    if (pid && !isPreview) {
+      verifyPid(pid);
+    }
+  }, [pid, isPreview, verifyPid]);
 
   useEffect(() => {
     if (isAuthenticated && !userSession) {
@@ -500,7 +544,7 @@ export function AnswerSessionPage({
       nextQuestion(userSessionId, questionId);
     }
 
-    if (userSession.liveChatEnabled && interventionId) {
+    if (userSession.liveChatEnabled && interventionId && !isRaFulfillment) {
       setLiveChatEnabled(interventionId);
     }
   }, [userSession]);
@@ -633,6 +677,7 @@ export function AnswerSessionPage({
       switch (type) {
         case QuestionTypes.PHONE: {
           const { confirmed, timezone } = answerBody[0]?.value ?? {};
+          if (isPreview) return !!timezone;
           return confirmed && timezone;
         }
         case QuestionTypes.NUMBER: {
@@ -993,6 +1038,7 @@ export function AnswerSessionPage({
                         onClick={startInterventionAsync}
                         title={buttonText()}
                         isDesktop={isDesktop}
+                        data-cy="start-preview-button"
                       />
                       {showGoToDashboardButton && (
                         <GoToDashboardButton
@@ -1013,99 +1059,93 @@ export function AnswerSessionPage({
                   </Column>
                 )}
                 {interventionStarted && !nextQuestionError && (
-                  <>
+                  <Box
+                    id={ANSWER_SESSION_CONTAINER_ID}
+                    position="relative"
+                    height="100%"
+                    maxHeight="100vh"
+                    width="100%"
+                    borderRadius="0px"
+                    display="flex"
+                    direction="column"
+                  >
                     <Box
-                      id={ANSWER_SESSION_CONTAINER_ID}
-                      position="relative"
-                      height="100%"
-                      maxHeight="100vh"
                       width="100%"
-                      borderRadius="0px"
+                      overflow={isMobilePreview ? 'auto' : undefined}
+                      filled
                       display="flex"
                       direction="column"
                     >
-                      <Box
+                      <Row
+                        padding={!isDesktop || isMobile ? 30 : 0}
+                        pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
+                        pt={
+                          isMobile && extraSpaceForNarrator && !logoUrl
+                            ? 0
+                            : undefined
+                        }
                         width="100%"
-                        overflow={isMobilePreview ? 'auto' : undefined}
-                        filled
-                        display="flex"
-                        direction="column"
                       >
-                        <Row
-                          padding={!isDesktop || isMobile ? 30 : 0}
-                          pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
-                          pt={
-                            isMobile && extraSpaceForNarrator && !logoUrl
-                              ? 0
-                              : undefined
+                        {!isDesktop && (
+                          <Row>
+                            <Img
+                              maxHeight={elements.interventionLogoSize.height}
+                              maxWidth={elements.interventionLogoSize.width}
+                              src={logoUrl}
+                              aria-label={imageAlt}
+                            />
+                          </Row>
+                        )}
+                        {renderQuestionTranscript(true)}
+                      </Row>
+
+                      {transitionalUserSessionId && (
+                        <BranchingScreen
+                          resetTransitionalUserSessionId={
+                            resetTransitionalUserSessionId
                           }
-                          width="100%"
-                        >
-                          {!isDesktop && (
-                            <Row>
-                              <Img
-                                maxHeight={elements.interventionLogoSize.height}
-                                maxWidth={elements.interventionLogoSize.width}
-                                src={logoUrl}
-                                aria-label={imageAlt}
-                              />
-                            </Row>
-                          )}
-                          {renderQuestionTranscript(true)}
-                        </Row>
-
-                        {transitionalUserSessionId && (
-                          <BranchingScreen
-                            resetTransitionalUserSessionId={
-                              resetTransitionalUserSessionId
-                            }
-                          />
-                        )}
-
-                        {!nextQuestionLoading &&
-                          currentQuestion &&
-                          !transitionalUserSessionId && (
-                            <ScreenWrapper isFullSize={isFullSize}>
-                              {isNarratorPositionFixed && renderQuestion()}
-                              {!isNarratorPositionFixed && (
-                                <AnimationRefHelper
-                                  currentQuestion={currentQuestion}
-                                  currentQuestionId={currentQuestionId}
-                                  previewMode={previewMode}
-                                  changeIsAnimationOngoing={
-                                    changeIsAnimationOngoing
-                                  }
-                                  setFeedbackSettings={setFeedbackSettings}
-                                  feedbackScreenSettings={
-                                    feedbackScreenSettings
-                                  }
-                                  audioInstance={audioInstance}
-                                  dynamicElementsDirection={
-                                    dynamicElementsDirection
-                                  }
-                                >
-                                  {renderQuestion()}
-                                </AnimationRefHelper>
-                              )}
-                            </ScreenWrapper>
-                          )}
-
-                        {answersError && (
-                          <ErrorAlert errorText={answersError} />
-                        )}
-                      </Box>
-                      {isMobilePreview && (
-                        <AnswerSessionPageFooter
-                          settings={{
-                            showTextTranscript,
-                            showTextReadingControls,
-                          }}
-                          isMobilePreview
-                          isPreview={isPreview}
                         />
                       )}
+
+                      {!nextQuestionLoading &&
+                        currentQuestion &&
+                        !transitionalUserSessionId && (
+                          <ScreenWrapper isFullSize={isFullSize}>
+                            {isNarratorPositionFixed && renderQuestion()}
+                            {!isNarratorPositionFixed && (
+                              <AnimationRefHelper
+                                currentQuestion={currentQuestion}
+                                currentQuestionId={currentQuestionId}
+                                previewMode={previewMode}
+                                changeIsAnimationOngoing={
+                                  changeIsAnimationOngoing
+                                }
+                                setFeedbackSettings={setFeedbackSettings}
+                                feedbackScreenSettings={feedbackScreenSettings}
+                                audioInstance={audioInstance}
+                                dynamicElementsDirection={
+                                  dynamicElementsDirection
+                                }
+                              >
+                                {renderQuestion()}
+                              </AnimationRefHelper>
+                            )}
+                          </ScreenWrapper>
+                        )}
+
+                      {answersError && <ErrorAlert errorText={answersError} />}
                     </Box>
-                  </>
+                    {isMobilePreview && (
+                      <AnswerSessionPageFooter
+                        settings={{
+                          showTextTranscript,
+                          showTextReadingControls,
+                        }}
+                        isMobilePreview
+                        isPreview={isPreview}
+                      />
+                    )}
+                  </Box>
                 )}
               </AnswerOuterContainer>
             </Box>
@@ -1153,6 +1193,7 @@ AnswerSessionPage.propTypes = {
   fixedElementsDirection: PropTypes.string,
   dynamicElementsDirection: PropTypes.string,
   changeLocale: PropTypes.func,
+  verifyPid: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -1184,6 +1225,7 @@ const mapDispatchToProps = {
   saveQuickExitEvent: saveQuickExitEventRequest,
   fetchPreviousQuestion: fetchPreviousQuestionRequest,
   changeLocale: changeLocaleAction,
+  verifyPid: verifyPidRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

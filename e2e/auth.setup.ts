@@ -1,0 +1,155 @@
+import { test as setup, expect } from '@playwright/test';
+import path from 'path';
+import fs from 'fs';
+
+/**
+ * Authentication setup for e2e tests with multi-user support.
+ * 
+ * Environment variables:
+ * - E2E_ADMIN_EMAIL_PATTERN: Email pattern with {index} placeholder (default: 'e2e_admin_{index}@example.com')
+ * - E2E_ADMIN_PASSWORD: Password for all e2e admin accounts
+ * - E2E_VERIFICATION_CODE: 2FA code (if enabled)
+ * - E2E_WORKER_COUNT: Size of the admin account pool (default: 5)
+ * - E2E_ACCOUNT_OFFSET: First account in the pool this run should use (default: 0)
+ * - E2E_ACCOUNTS_NEEDED: How many accounts to authenticate (default: the whole pool).
+ *   A sharded CI run sets OFFSET/NEEDED so each shard signs in as exactly the one
+ *   account its workers will use, instead of the whole pool.
+ * - E2E_AUTH_SETUP_DELAY_MS: Delay in milliseconds between auth attempts to avoid rate limiting (default: 2000)
+ */
+setup('authenticate admin users for all workers', async ({ browser }) => {
+  const ACCOUNT_COUNT = parseInt(process.env.E2E_WORKER_COUNT || '5', 10);
+  const ACCOUNT_OFFSET = parseInt(process.env.E2E_ACCOUNT_OFFSET || '0', 10);
+  const ACCOUNTS_NEEDED = parseInt(
+    process.env.E2E_ACCOUNTS_NEEDED || String(ACCOUNT_COUNT),
+    10,
+  );
+  // Set timeout based on the number of accounts to authenticate and the delay
+  // Formula: (ACCOUNTS_NEEDED * (60s per auth + delay)) with some buffer
+  const AUTH_DELAY_MS = parseInt(process.env.E2E_AUTH_SETUP_DELAY_MS || '2000', 10);
+  const timeoutMs = ACCOUNTS_NEEDED * (60000 + AUTH_DELAY_MS) + 30000; // 30s buffer
+
+  setup.setTimeout(timeoutMs);
+  console.log(`\nSetup timeout set to ${timeoutMs / 1000}s for ${ACCOUNTS_NEEDED} accounts`);
+
+  const emailPattern = process.env.E2E_ADMIN_EMAIL_PATTERN || 'e2e_admin_{index}@example.com';
+  const password = process.env.E2E_ADMIN_PASSWORD;
+  const verificationCode = process.env.E2E_VERIFICATION_CODE;
+
+  if (!password || !verificationCode) {
+    throw new Error(
+      'E2E_ADMIN_PASSWORD and E2E_VERIFICATION_CODE environment variables must be set',
+    );
+  }
+
+  // Create auth directory if it doesn't exist
+  const authDir = path.join(__dirname, '.auth');
+  if (!fs.existsSync(authDir)) {
+    fs.mkdirSync(authDir, { recursive: true });
+  }
+  
+  console.log(
+    `\nAuthenticating ${ACCOUNTS_NEEDED} admin user(s) starting at account ${ACCOUNT_OFFSET}...`,
+  );
+  if (AUTH_DELAY_MS > 0) {
+    console.log(`Delay between auth attempts: ${AUTH_DELAY_MS}ms`);
+  }
+  console.log(`Email pattern: ${emailPattern}`);
+  console.log(`Password provided: ${!!password}`);
+  console.log(`Verification code provided: ${!!verificationCode}`);
+  console.log(`Base URL: ${process.env.E2E_BASE_URL || 'http://localhost:4200'}`);
+  console.log(`API URL: ${process.env.API_URL}`);
+  console.log('');
+
+  // Authenticate each admin account separately
+  for (let n = 0; n < ACCOUNTS_NEEDED; n++) {
+    const accountIndex = (ACCOUNT_OFFSET + n) % ACCOUNT_COUNT;
+    const adminEmail = emailPattern.replace('{index}', accountIndex.toString());
+    console.log(`\nAuthenticating ${adminEmail}...`);
+
+    // Create a new context and page for each authentication
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    try {
+      console.log(`🌐 Navigating to login page...`);
+      // Navigate to login page
+      await page.goto('/');
+
+      console.log(`📝 Filling login form for ${adminEmail}...`);
+      // Fill in login form
+      await page.locator('[data-cy="login-email-input"]').fill(adminEmail);
+      await page.locator('[data-cy="login-password-input"]').fill(password);
+
+      console.log(`🔐 Clicking login button...`);
+      // Click login button
+      await page.locator('[data-cy="login-submit-button"]').click();
+
+      // Check for error messages on the login page
+      const errorMessage = page.locator('[role="alert"], .error-message, [class*="error"]');
+      
+      // Check if 2FA verification is needed
+      const verificationInput = page.locator('[data-cy="verification-code-input"]');
+      
+      console.log(`⏳ Waiting for login response...`);
+      // Wait for either verification code input or dashboard navigation
+      const result = await Promise.race([
+        verificationInput.waitFor({ state: 'visible', timeout: 20000 }).then(() => '2fa'),
+        page.waitForURL(/\/$|\/\?/, { timeout: 20000 }).then(() => 'dashboard'),
+        errorMessage.first().waitFor({ state: 'visible', timeout: 20000 }).then(() => 'error'),
+      ]).catch(() => 'timeout');
+
+      if (result === 'error') {
+        const errorText = await errorMessage.first().textContent();
+        console.warn(`⚠ Login error for ${adminEmail}: ${errorText}`);
+        throw new Error(`Authentication failed for ${adminEmail}: ${errorText}`);
+      }
+
+      if (result === 'timeout') {
+        console.error(`❌ Timeout waiting for login response for ${adminEmail}`);
+        console.error(`Current URL: ${page.url()}`);
+        const pageContent = await page.textContent('body');
+        console.error(`Page contains login form: ${pageContent?.includes('login')}`);
+        
+        throw new Error(`Timeout waiting for login response for ${adminEmail}`);
+      }
+
+      if (result === '2fa') {
+        console.log(`🔢 2FA required, entering verification code...`);
+        await verificationInput.fill(verificationCode);
+        await page.locator('[data-cy="verification-submit-button"]').click();
+      }
+
+      console.log(`✅ Verifying dashboard access...`);
+      // Verify we're on the dashboard (root URL, not login)
+      await expect(page).not.toHaveURL(/\/login/, { timeout: 30000 });
+
+      // Save the authenticated state for this worker
+      const workerAuthFile = path.join(authDir, `admin-worker-${accountIndex}.json`);
+      await context.storageState({ path: workerAuthFile });
+      console.log(`✅ Created auth file: admin-worker-${accountIndex}.json`);
+    } catch (error) {
+      // Log error with screenshot for debugging
+      console.error(`✗ Failed to authenticate ${adminEmail}:`);
+      console.error(error instanceof Error ? error.message : String(error));
+      
+      // Take screenshot for debugging
+      const screenshotPath = path.join(authDir, `error-${adminEmail.replace('@', '-at-')}.png`);
+      await page.screenshot({ path: screenshotPath }).catch(() => {});
+      console.error(`Screenshot saved to: ${screenshotPath}`);
+      
+      throw error;
+    } finally {
+      await page.close();
+      await context.close();
+    }
+
+    // Add delay between auth attempts to avoid rate limiting (skip for last iteration)
+    if (AUTH_DELAY_MS > 0 && n < ACCOUNTS_NEEDED - 1) {
+      console.log(`Waiting ${AUTH_DELAY_MS}ms before next authentication...`);
+      await new Promise(resolve => setTimeout(resolve, AUTH_DELAY_MS));
+    }
+  }
+
+  console.log(`\n✓ Successfully authenticated ${ACCOUNTS_NEEDED} admin user(s)`);
+  console.log('✓ Each worker will use a separate admin account to avoid rate limiting');
+});

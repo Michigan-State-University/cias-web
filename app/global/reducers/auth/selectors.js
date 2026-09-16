@@ -46,6 +46,12 @@ export const makeSelectTermsExtraFields = () =>
 export const makeSelectVerificationSuccess = () =>
   createSelector(selectAuth, (authState) => authState.verificationCodeSuccess);
 
+export const makeSelectTemporaryVerificationCode = () =>
+  createSelector(
+    selectAuth,
+    (authState) => authState.temporaryVerificationCode,
+  );
+
 export const makeSelectUserId = () =>
   createSelector(selectAuth, (authState) => authState.user?.id);
 

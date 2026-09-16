@@ -42,6 +42,7 @@ const TextMessageScheduling = ({
   onChangeFrequency,
   disabled,
   sessionId,
+  interventionId,
 }) => {
   const [frequencySettings, setFrequencySettings] = useState({
     frequency,
@@ -212,11 +213,15 @@ const TextMessageScheduling = ({
               placement="left"
               questionTypeWhitelist={[dateQuestion.id]}
               currentSessionId={sessionId}
+              currentInterventionId={interventionId}
               includeAllVariables
               includeCurrentSession
               includeNonDigitVariables
               isMultiSession
-              sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
+              sessionTypesWhiteList={[
+                SessionTypes.CLASSIC_SESSION,
+                SessionTypes.RA_SESSION,
+              ]}
             >
               <Badge bg={themeColors.primary} color={colors.white}>
                 {variableValue ||
@@ -304,6 +309,7 @@ TextMessageScheduling.propTypes = {
   onChangeVariable: PropTypes.func,
   disabled: PropTypes.bool,
   sessionId: PropTypes.string,
+  interventionId: PropTypes.string,
 };
 
 export default TextMessageScheduling;

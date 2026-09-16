@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useRef } from 'react';
+import React, { memo, useContext, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
@@ -63,6 +63,8 @@ const InterventionView = ({ onClick }: Props) => {
     fetchInterventions(0, batchSize);
   }, []);
 
+  const contextValue = useMemo(() => ({ onClick }), [onClick]);
+
   if (interventionsLoading && !interventions?.length) {
     return <Spinner color={themeColors.secondary} />;
   }
@@ -80,7 +82,7 @@ const InterventionView = ({ onClick }: Props) => {
   return (
     <ViewWrapper>
       {interventions && (
-        <InterventionViewContext.Provider value={{ onClick }}>
+        <InterventionViewContext.Provider value={contextValue}>
           {/* @ts-ignore */}
           <VirtualGrid
             ref={infiniteLoaderRef}

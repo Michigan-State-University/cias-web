@@ -25,6 +25,7 @@ const PreviewButton = ({ previewDisabled, text, handleClick }) => (
       mx={5}
       display="flex"
       align="center"
+      data-cy="open-preview-button"
     >
       <Icon
         src={eye}

@@ -23,8 +23,10 @@ function* fetchReportTemplates({ payload: { sessionId } }) {
 
     const selectedReport = yield select(makeSelectSelectedReport());
 
-    if (!selectedReport || selectedReport?.sessionId !== sessionId)
-      yield put(selectReportTemplate(mappedData[mappedData?.length - 1]?.id));
+    if (!selectedReport || selectedReport?.sessionId !== sessionId) {
+      const lastIndex = (mappedData?.length ?? 1) - 1;
+      yield put(selectReportTemplate(mappedData[lastIndex]?.id));
+    }
   } catch (error) {
     yield put(fetchReportTemplatesFailure(error));
   }

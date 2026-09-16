@@ -25,7 +25,7 @@ describe('<SessionSchedule />', () => {
   let store;
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = configureStore(browserHistory, {});
   });
 
   const exactDateProps = {

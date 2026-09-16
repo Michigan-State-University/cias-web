@@ -1,4 +1,4 @@
-import React, { useRef, memo } from 'react';
+import React, { useRef, memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -39,6 +39,25 @@ const ChooserComponent = ({
   const { formatMessage } = useIntl();
   const infiniteLoaderRef = useRef();
 
+  const contextValue = useMemo(
+    () => ({
+      selectedItem,
+      changeViewAction,
+      selectAction,
+      disableCopy,
+      listIcon,
+      disabledItemsIds,
+    }),
+    [
+      selectedItem,
+      changeViewAction,
+      selectAction,
+      disableCopy,
+      listIcon,
+      disabledItemsIds,
+    ],
+  );
+
   return (
     <Column data-testid={`${elementId}-select-target-session`} height="100%">
       <Column px={25} mb={15}>
@@ -73,16 +92,7 @@ const ChooserComponent = ({
         >
           <Box filled>
             {!!items?.length && (
-              <InfiniteScrollContext.Provider
-                value={{
-                  selectedItem,
-                  changeViewAction,
-                  selectAction,
-                  disableCopy,
-                  listIcon,
-                  disabledItemsIds,
-                }}
-              >
+              <InfiniteScrollContext.Provider value={contextValue}>
                 <VirtualGrid
                   ref={infiniteLoaderRef}
                   columnCount={1}

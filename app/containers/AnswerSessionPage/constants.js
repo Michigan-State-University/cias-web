@@ -110,6 +110,11 @@ export const VERIFY_QR_CODE_SUCCESS =
   'app/AnswerSessionPage/VERIFY_QR_CODE_SUCCESS';
 export const VERIFY_QR_CODE_ERROR =
   'app/AnswerSessionPage/VERIFY_QR_CODE_ERROR';
+export const VERIFY_PID_REQUEST = 'app/AnswerSessionPage/VERIFY_PID_REQUEST';
+export const VERIFY_PID_SUCCESS = 'app/AnswerSessionPage/VERIFY_PID_SUCCESS';
+export const VERIFY_PID_ERROR = 'app/AnswerSessionPage/VERIFY_PID_ERROR';
+
+export const SET_RA_FULFILLMENT = 'app/AnswerSessionPage/SET_RA_FULFILLMENT';
 
 export const QUESTION_TITLE_ID = 'question-title';
 

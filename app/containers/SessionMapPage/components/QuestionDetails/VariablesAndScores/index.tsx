@@ -17,7 +17,7 @@ type Props = {
 const VariablesAndScores = ({ question }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
-  const renderChipsByQuestionType = (): JSX.Element[] | JSX.Element => {
+  const renderChipsByQuestionType = (): JSX.Element[] | JSX.Element | null => {
     switch (question.type) {
       case QuestionTypes.FREE_RESPONSE:
       case QuestionTypes.DATE:
@@ -99,7 +99,7 @@ const VariablesAndScores = ({ question }: Props): JSX.Element => {
           </Column>
         );
       default:
-        return <></>;
+        return null;
     }
   };
 

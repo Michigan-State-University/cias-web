@@ -47,6 +47,10 @@ import {
   VERIFY_QR_CODE_REQUEST,
   VERIFY_QR_CODE_SUCCESS,
   VERIFY_QR_CODE_ERROR,
+  VERIFY_PID_REQUEST,
+  VERIFY_PID_SUCCESS,
+  VERIFY_PID_ERROR,
+  SET_RA_FULFILLMENT,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
@@ -186,3 +190,12 @@ export const verifyQRCodeSuccess = () =>
   actionBuilder(VERIFY_QR_CODE_SUCCESS, {});
 export const verifyQRCodeError = (error) =>
   actionBuilder(VERIFY_QR_CODE_ERROR, { error });
+export const verifyPidRequest = (pid) =>
+  actionBuilder(VERIFY_PID_REQUEST, { pid });
+export const verifyPidSuccess = (user) =>
+  actionBuilder(VERIFY_PID_SUCCESS, { user });
+export const verifyPidError = (error) =>
+  actionBuilder(VERIFY_PID_ERROR, { error });
+
+export const setRaFulfillment = (isRaFulfillment) =>
+  actionBuilder(SET_RA_FULFILLMENT, { isRaFulfillment });

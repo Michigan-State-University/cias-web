@@ -31,6 +31,10 @@ const QuestionListItem = ({
 
   const maxRowContentWidth = width - 70;
 
+  const subtitleText = htmlToPlainText(subtitle);
+  const truncatedSubtitle = subtitleText.slice(0, 30).replace(/\s+/g, '-');
+  const dataCy = `choose-question-${position}-${truncatedSubtitle}`;
+
   return (
     <Row
       data-testid={`${selectedQuestion.id}-select-target-question-el`}
@@ -40,7 +44,7 @@ const QuestionListItem = ({
       onClick={() => canSelectQuestion(position) && onClick({ type, id })}
       clickable={canSelectQuestion(position)}
       width="100%"
-      data-cy={`choose-question-${htmlToPlainText(subtitle)}`}
+      data-cy={dataCy}
       ref={onRefChange}
     >
       <Img src={target.id === id ? webpageSelected : webpage} mr={10} />

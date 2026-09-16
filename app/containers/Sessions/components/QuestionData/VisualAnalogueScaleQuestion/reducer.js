@@ -2,7 +2,7 @@ import { UPDATE_VARIABLE } from 'global/reducers/questions/constants';
 
 import { UPDATE_DATA } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
+/* eslint-disable default-case, no-param-reassign, default-param-last */
 const visualAnalogueScaleQuestionReducer = (question, payload) => {
   switch (payload.type) {
     case UPDATE_DATA:
