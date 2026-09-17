@@ -2,6 +2,8 @@ import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
+import { isChartRegenerationInProgress } from 'global/reducers/dashboardSections';
+
 import { Col, Row } from 'components/ReactGridSystem';
 import DashedButton from 'components/Button/DashedButton';
 import { DateRangeChooser } from 'components/DateRangeChooser';
@@ -38,6 +40,7 @@ const PieChartSettings = ({
   onEditStatus,
   onEditDateRange,
   onCopyChart,
+  onRegenerateChart,
   onEditMinAnsweredVariables,
   onEditPositiveDespiteMissingData,
 }) => {
@@ -58,7 +61,7 @@ const PieChartSettings = ({
   } = chart;
 
   const {
-    loaders: { deleteChartLoader },
+    loaders: { deleteChartLoader, regenerateChartLoader },
   } = useContext(DashboardSectionsContext);
 
   const handleEditDateRange = (start, end) => {
@@ -77,6 +80,9 @@ const PieChartSettings = ({
         hasFormula={formula.payload !== ''}
         isMinAnsweredStale={isMinAnsweredStale(formula, formulaVariableCount)}
         onCopyChart={onCopyChart}
+        onRegenerateChart={onRegenerateChart}
+        isRegenerating={isChartRegenerationInProgress(chart)}
+        isEnqueuingRegeneration={regenerateChartLoader}
       />
 
       <Row mt={36}>
@@ -163,6 +169,7 @@ PieChartSettings.propTypes = {
   onEditStatus: PropTypes.func,
   onEditDateRange: PropTypes.func,
   onCopyChart: PropTypes.func,
+  onRegenerateChart: PropTypes.func,
   onEditMinAnsweredVariables: PropTypes.func,
   onEditPositiveDespiteMissingData: PropTypes.func,
 };

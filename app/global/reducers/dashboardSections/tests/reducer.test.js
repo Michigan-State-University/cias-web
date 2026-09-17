@@ -1,7 +1,13 @@
 import cloneDeep from 'lodash/cloneDeep';
 
 import { dashboardSectionsReducer, initialState } from '../reducer';
-import { editChartSuccess } from '../actions';
+import {
+  editChartSuccess,
+  fetchChartSuccess,
+  regenerateChartPollFinished,
+  regenerateChartSuccess,
+} from '../actions';
+import { isChartRegenerationInProgress } from '../constants';
 
 describe('dashboardSections reducer', () => {
   const chart = {
@@ -75,6 +81,80 @@ describe('dashboardSections reducer', () => {
     it('clears the loader and the error', () => {
       expect(nextState.loaders.editChartLoader).toBe(false);
       expect(nextState.errors.editChartError).toBeNull();
+    });
+  });
+
+  describe('FETCH_CHART_SUCCESS', () => {
+    const polled = { id: 'chart-1', dashboardSectionId: 'section-1' };
+
+    const running = dashboardSectionsReducer(
+      stateWithSections,
+      fetchChartSuccess({ ...polled, regenerating: true }),
+    );
+
+    it('applies the polled chart to the visible tree and the cache', () => {
+      expect(running.dashboardSections[0].charts[0].regenerating).toBe(true);
+      expect(running.cache.dashboardSections[0].charts[0].regenerating).toBe(
+        true,
+      );
+    });
+
+    it('flips regenerating back to false - the path that re-enables the button', () => {
+      const next = dashboardSectionsReducer(
+        running,
+        fetchChartSuccess({ ...polled, regenerating: false }),
+      );
+      expect(next.dashboardSections[0].charts[0].regenerating).toBe(false);
+    });
+
+    it('keeps client-only keys through the merge', () => {
+      expect(running.dashboardSections[0].charts[0].chartData).toEqual({
+        labels: [],
+      });
+    });
+
+    it('leaves other sections untouched', () => {
+      expect(running.dashboardSections[1]).toEqual(sections[1]);
+    });
+  });
+
+  describe('regeneration pending flag', () => {
+    const enqueued = dashboardSectionsReducer(
+      stateWithSections,
+      regenerateChartSuccess('chart-1'),
+    );
+
+    it('is set on the 202, while the server still reports regenerating: false', () => {
+      expect(
+        isChartRegenerationInProgress(enqueued.dashboardSections[0].charts[0]),
+      ).toBe(true);
+      expect(
+        enqueued.cache.dashboardSections[0].charts[0].regenerationPending,
+      ).toBe(true);
+    });
+
+    it('survives a poll response that reports regenerating: false', () => {
+      const polled = dashboardSectionsReducer(
+        enqueued,
+        fetchChartSuccess({
+          id: 'chart-1',
+          dashboardSectionId: 'section-1',
+          regenerating: false,
+        }),
+      );
+      expect(
+        isChartRegenerationInProgress(polled.dashboardSections[0].charts[0]),
+      ).toBe(true);
+    });
+
+    it('clears when the poll concludes', () => {
+      const done = dashboardSectionsReducer(
+        enqueued,
+        regenerateChartPollFinished('chart-1'),
+      );
+      expect(
+        isChartRegenerationInProgress(done.dashboardSections[0].charts[0]),
+      ).toBe(false);
     });
   });
 });

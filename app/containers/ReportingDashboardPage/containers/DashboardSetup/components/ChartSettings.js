@@ -16,6 +16,7 @@ import {
   editChartRequest,
   StatusPermissions,
   copyChartRequest,
+  regenerateChartRequest,
 } from 'global/reducers/dashboardSections';
 
 import ActionIcon from 'components/ActionIcon';
@@ -37,6 +38,7 @@ const ChartSettings = ({
   editChart,
   onClose,
   copyChart,
+  regenerateChart,
 }) => {
   const [isAddingPattern, setIsAddingPattern] = useState(false);
   const [isChangingStatus, setIsChangingStatus] = useState(false);
@@ -196,6 +198,10 @@ const ChartSettings = ({
     copyChart(chart.id);
   }, [chart.id]);
 
+  const onRegenerateChart = useCallback(() => {
+    regenerateChart(chart.id);
+  }, [chart.id]);
+
   switch (chart.chartType) {
     case ChartTypeDto.PIE_CHART:
       return wrapper(
@@ -214,6 +220,7 @@ const ChartSettings = ({
           onEditStatus={onEditStatus}
           onEditDateRange={onEditDateRange}
           onCopyChart={onCopyChart}
+          onRegenerateChart={onRegenerateChart}
           onEditMinAnsweredVariables={onEditMinAnsweredVariables}
           onEditPositiveDespiteMissingData={onEditPositiveDespiteMissingData}
         />,
@@ -234,6 +241,7 @@ const ChartSettings = ({
           onEditStatus={onEditStatus}
           onEditTrendLine={onEditTrendLine}
           onCopyChart={onCopyChart}
+          onRegenerateChart={onRegenerateChart}
           onEditMinAnsweredVariables={onEditMinAnsweredVariables}
           onEditPositiveDespiteMissingData={onEditPositiveDespiteMissingData}
         />,
@@ -249,12 +257,14 @@ ChartSettings.propTypes = {
   editChart: PropTypes.func,
   onClose: PropTypes.func,
   copyChart: PropTypes.func,
+  regenerateChart: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   deleteChart: deleteChartRequest,
   editChart: editChartRequest,
   copyChart: copyChartRequest,
+  regenerateChart: regenerateChartRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

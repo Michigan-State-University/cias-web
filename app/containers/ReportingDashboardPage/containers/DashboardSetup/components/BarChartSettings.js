@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { ChartTypeDto } from 'global/reducers/dashboardSections';
+import {
+  ChartTypeDto,
+  isChartRegenerationInProgress,
+} from 'global/reducers/dashboardSections';
 
 import { ChartIntervalType } from 'models/Chart';
 
@@ -43,6 +46,7 @@ const BarChartSettings = ({
   onEditStatus,
   onEditTrendLine,
   onCopyChart,
+  onRegenerateChart,
   onEditMinAnsweredVariables,
   onEditPositiveDespiteMissingData,
 }) => {
@@ -63,7 +67,7 @@ const BarChartSettings = ({
   } = chart;
 
   const {
-    loaders: { deleteChartLoader },
+    loaders: { deleteChartLoader, regenerateChartLoader },
   } = useContext(DashboardSectionsContext);
 
   const handleChangeTypeToNumeric = () =>
@@ -88,6 +92,9 @@ const BarChartSettings = ({
         hasFormula={formula.payload !== ''}
         isMinAnsweredStale={isMinAnsweredStale(formula, formulaVariableCount)}
         onCopyChart={onCopyChart}
+        onRegenerateChart={onRegenerateChart}
+        isRegenerating={isChartRegenerationInProgress(chart)}
+        isEnqueuingRegeneration={regenerateChartLoader}
       />
 
       <Row mt={36}>
@@ -229,6 +236,7 @@ BarChartSettings.propTypes = {
   onEditStatus: PropTypes.func,
   onEditTrendLine: PropTypes.func,
   onCopyChart: PropTypes.func,
+  onRegenerateChart: PropTypes.func,
   onEditMinAnsweredVariables: PropTypes.func,
   onEditPositiveDespiteMissingData: PropTypes.func,
 };

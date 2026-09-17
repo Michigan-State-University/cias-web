@@ -48,6 +48,18 @@ export const COPY_CHART_REQUEST = 'app/dashboardSections/COPY_CHART_REQUEST';
 export const COPY_CHART_SUCCESS = 'app/dashboardSections/COPY_CHART_SUCCESS';
 export const COPY_CHART_ERROR = 'app/dashboardSections/COPY_CHART_ERROR';
 
+export const REGENERATE_CHART_REQUEST =
+  'app/dashboardSections/REGENERATE_CHART_REQUEST';
+export const REGENERATE_CHART_SUCCESS =
+  'app/dashboardSections/REGENERATE_CHART_SUCCESS';
+export const REGENERATE_CHART_ERROR =
+  'app/dashboardSections/REGENERATE_CHART_ERROR';
+export const REGENERATE_CHART_POLL_FINISHED =
+  'app/dashboardSections/REGENERATE_CHART_POLL_FINISHED';
+
+export const FETCH_CHART_SUCCESS = 'app/dashboardSections/FETCH_CHART_SUCCESS';
+export const FETCH_CHART_ERROR = 'app/dashboardSections/FETCH_CHART_ERROR';
+
 export const SELECT_CHART_ACTION = 'app/dashboardSections/SELECT_CHART_ACTION';
 export const SET_CHARTS_DATA = 'app/dashboardSections/SET_CHARTS_DATA';
 export const SET_CHARTS_FILTERS = 'app/dashboardSections/SET_CHARTS_FILTERS';
@@ -92,6 +104,28 @@ export const ChartStatusToColorMap = {
   [ChartStatus.DATA_COLLECTION]: colors.bluewood,
   [ChartStatus.PUBLISHED]: colors.pistachio,
 };
+
+// Read it only through the helpers below, so swapping the serializer attribute stays a one-line change.
+export const CHART_REGENERATING_ATTRIBUTE = 'regenerating';
+
+export const isChartRegenerating = (chart) =>
+  Boolean(chart?.[CHART_REGENERATING_ATTRIBUTE]);
+
+// The server flag alone is not enough: the endpoint returns 202 as soon as the job is ENQUEUED and
+// `regenerating_since` is written by the worker, so the chart reports `regenerating: false` for the
+// whole queue wait. `regenerationPending` is a client-only key covering that window.
+export const isChartRegenerationInProgress = (chart) =>
+  isChartRegenerating(chart) || Boolean(chart?.regenerationPending);
+
+export const REGENERATE_CHART_POLL_INTERVAL = 10000;
+export const REGENERATE_CHART_POLL_SLOW_INTERVAL = 30000;
+export const REGENERATE_CHART_POLL_FAST_ATTEMPTS = 6;
+// ~10 min. Deliberately short of the backend's 30-min job timeout: the injected saga runs in DAEMON
+// mode and is never cancelled on unmount, so this bound is also how long the leak can run.
+export const REGENERATE_CHART_POLL_MAX_ATTEMPTS = 24;
+// `regenerating: false` is ambiguous between "not picked up yet" and "finished".
+export const REGENERATE_CHART_START_GRACE_ATTEMPTS = 6;
+export const REGENERATE_CHART_POLL_MAX_CONSECUTIVE_FAILURES = 3;
 
 export const ALLOWED_CHART_EDIT = [ChartStatus.DRAFT];
 

@@ -167,6 +167,19 @@ export default defineMessages({
     id: `${scope}.noChartsData`,
     defaultMessage: 'No charts data',
   },
+  chartSettingsRegenerate: {
+    id: `${scope}.chartSettingsRegenerate`,
+    defaultMessage: 'Regenerate data',
+  },
+  regenerateChartModalHeader: {
+    id: `${scope}.regenerateChartModalHeader`,
+    defaultMessage: 'Regenerate this chart?',
+  },
+  regenerateChartModalMessage: {
+    id: `${scope}.regenerateChartModalMessage`,
+    defaultMessage:
+      "This will rebuild the chart's figures from participants' existing answers. The rebuild happens in place, so the chart's previous data is overwritten and cannot be recovered. We'll email you when it's finished.",
+  },
   deleteChartModalHeader: {
     id: `${scope}.deleteChartModalHeader`,
     defaultMessage: 'Delete Chart',
@@ -244,5 +257,10 @@ export default defineMessages({
   barChartTooltipInvalidWithShare: {
     id: `${scope}.barChartTooltipInvalidWithShare`,
     defaultMessage: 'Invalid / Insufficient Data: {value} ({share}%)',
+  },
+  chartSettingsRegenerateDraftHint: {
+    id: `${scope}.chartSettingsRegenerateDraftHint`,
+    defaultMessage:
+      'A draft chart has no collected data to regenerate. Start data collection first.',
   },
 });

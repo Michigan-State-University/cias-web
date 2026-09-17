@@ -2,6 +2,7 @@ import React, { memo, useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
+import { TbRefresh } from 'react-icons/tb';
 
 import { colors, themeColors } from 'theme';
 
@@ -37,6 +38,9 @@ const ChartSettingsTopSection = ({
   hasFormula,
   isMinAnsweredStale,
   onCopyChart,
+  onRegenerateChart,
+  isRegenerating,
+  isEnqueuingRegeneration,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -48,6 +52,15 @@ const ChartSettingsTopSection = ({
       description: formatMessage(messages.deleteChartModalHeader),
       content: formatMessage(messages.deleteChartModalMessage),
       confirmAction: onDelete,
+    },
+  });
+
+  const { openModal: openRegenerateModal, Modal: RegenerateModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.regenerateChartModalHeader),
+      content: formatMessage(messages.regenerateChartModalMessage),
+      confirmAction: onRegenerateChart,
     },
   });
 
@@ -98,6 +111,9 @@ const ChartSettingsTopSection = ({
     return !hasFormula || isMinAnsweredStale;
   }, [chartStatus, hasFormula, isMinAnsweredStale]);
 
+  const isRegenerateDisabled =
+    isRegenerating || chartStatus === ChartStatus.DRAFT;
+
   const renderButtonOrStatusBadge = useCallback(() => {
     switch (chartStatus) {
       case ChartStatus.DRAFT:
@@ -133,6 +149,7 @@ const ChartSettingsTopSection = ({
   return (
     <FullWidthContainer>
       <DeleteModal />
+      <RegenerateModal />
 
       <Row justify="between" align="center">
         <Col xs="content">
@@ -154,6 +171,43 @@ const ChartSettingsTopSection = ({
       </Row>
 
       <Row mr="0!important" mt={36} justify="end">
+        <Col xs="content" mr={24}>
+          <TextButton
+            id="regenerate-chart-button"
+            loading={isEnqueuingRegeneration}
+            disabled={isRegenerateDisabled}
+            onClick={openRegenerateModal}
+            buttonProps={{
+              title:
+                chartStatus === ChartStatus.DRAFT
+                  ? formatMessage(messages.chartSettingsRegenerateDraftHint)
+                  : undefined,
+            }}
+          >
+            <Row justify="end">
+              <TbRefresh
+                size={18}
+                color={
+                  isRegenerateDisabled
+                    ? themeColors.comment
+                    : themeColors.secondary
+                }
+                style={{ marginRight: 8 }}
+              />
+              <Text
+                fontWeight="bold"
+                color={
+                  isRegenerateDisabled
+                    ? themeColors.comment
+                    : themeColors.secondary
+                }
+              >
+                {formatMessage(messages.chartSettingsRegenerate)}
+              </Text>
+            </Row>
+          </TextButton>
+        </Col>
+
         <Col xs="content">
           <TextButton onClick={onCopyChart}>
             <Row justify="end">
@@ -213,6 +267,9 @@ ChartSettingsTopSection.propTypes = {
   onChangeStatus: PropTypes.func,
   onDelete: PropTypes.func,
   onCopyChart: PropTypes.func,
+  onRegenerateChart: PropTypes.func,
+  isRegenerating: PropTypes.bool,
+  isEnqueuingRegeneration: PropTypes.bool,
   hasFormula: PropTypes.bool,
   isMinAnsweredStale: PropTypes.bool,
 };
