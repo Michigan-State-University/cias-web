@@ -2,6 +2,7 @@ import React, { memo, useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
+import { TbRefresh } from 'react-icons/tb';
 
 import { colors, themeColors } from 'theme';
 
@@ -35,7 +36,11 @@ const ChartSettingsTopSection = ({
   onChangeStatus,
   onDelete,
   hasFormula,
+  isMinAnsweredStale,
   onCopyChart,
+  onRegenerateChart,
+  isRegenerating,
+  isEnqueuingRegeneration,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -47,6 +52,15 @@ const ChartSettingsTopSection = ({
       description: formatMessage(messages.deleteChartModalHeader),
       content: formatMessage(messages.deleteChartModalMessage),
       confirmAction: onDelete,
+    },
+  });
+
+  const { openModal: openRegenerateModal, Modal: RegenerateModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.regenerateChartModalHeader),
+      content: formatMessage(messages.regenerateChartModalMessage),
+      confirmAction: onRegenerateChart,
     },
   });
 
@@ -89,10 +103,16 @@ const ChartSettingsTopSection = ({
     }
   }, [chartStatus]);
 
+  // Starting collection is irreversible in the UI: it back-fills every finished session and
+  // locks editing, so an unmeetable minimum would write a chart full of Invalid rows that the
+  // researcher can no longer correct.
   const changeStatusButtonDisabled = useMemo(() => {
-    if (chartStatus === ChartStatus.DRAFT && !hasFormula) return true;
-    return false;
-  }, [chartStatus, hasFormula]);
+    if (chartStatus !== ChartStatus.DRAFT) return false;
+    return !hasFormula || isMinAnsweredStale;
+  }, [chartStatus, hasFormula, isMinAnsweredStale]);
+
+  const isRegenerateDisabled =
+    isRegenerating || chartStatus === ChartStatus.DRAFT;
 
   const renderButtonOrStatusBadge = useCallback(() => {
     switch (chartStatus) {
@@ -119,11 +139,17 @@ const ChartSettingsTopSection = ({
           </Badge>
         );
     }
-  }, [chartStatus, handleStatusChange, isChangingStatus]);
+  }, [
+    chartStatus,
+    handleStatusChange,
+    isChangingStatus,
+    changeStatusButtonDisabled,
+  ]);
 
   return (
     <FullWidthContainer>
       <DeleteModal />
+      <RegenerateModal />
 
       <Row justify="between" align="center">
         <Col xs="content">
@@ -145,6 +171,43 @@ const ChartSettingsTopSection = ({
       </Row>
 
       <Row mr="0!important" mt={36} justify="end">
+        <Col xs="content" mr={24}>
+          <TextButton
+            id="regenerate-chart-button"
+            loading={isEnqueuingRegeneration}
+            disabled={isRegenerateDisabled}
+            onClick={openRegenerateModal}
+            buttonProps={{
+              title:
+                chartStatus === ChartStatus.DRAFT
+                  ? formatMessage(messages.chartSettingsRegenerateDraftHint)
+                  : undefined,
+            }}
+          >
+            <Row justify="end">
+              <TbRefresh
+                size={18}
+                color={
+                  isRegenerateDisabled
+                    ? themeColors.comment
+                    : themeColors.secondary
+                }
+                style={{ marginRight: 8 }}
+              />
+              <Text
+                fontWeight="bold"
+                color={
+                  isRegenerateDisabled
+                    ? themeColors.comment
+                    : themeColors.secondary
+                }
+              >
+                {formatMessage(messages.chartSettingsRegenerate)}
+              </Text>
+            </Row>
+          </TextButton>
+        </Col>
+
         <Col xs="content">
           <TextButton onClick={onCopyChart}>
             <Row justify="end">
@@ -156,6 +219,18 @@ const ChartSettingsTopSection = ({
           </TextButton>
         </Col>
       </Row>
+
+      {isMinAnsweredStale && chartStatus === ChartStatus.DRAFT && (
+        <Row mt={36}>
+          <Col>
+            <InfoBox>
+              <Text color={themeColors.warning} fontWeight="bold">
+                {formatMessage(messages.chartSettingsStaleMinAnsweredBlocked)}
+              </Text>
+            </InfoBox>
+          </Col>
+        </Row>
+      )}
 
       {!statusPermissions.canBeEdited && (
         <Row mt={36}>
@@ -192,7 +267,11 @@ ChartSettingsTopSection.propTypes = {
   onChangeStatus: PropTypes.func,
   onDelete: PropTypes.func,
   onCopyChart: PropTypes.func,
+  onRegenerateChart: PropTypes.func,
+  isRegenerating: PropTypes.bool,
+  isEnqueuingRegeneration: PropTypes.bool,
   hasFormula: PropTypes.bool,
+  isMinAnsweredStale: PropTypes.bool,
 };
 
 export default memo(ChartSettingsTopSection);

@@ -42,6 +42,15 @@ export const Input = styled(StyledInput)`
   padding-right: ${paddings.small};
 `;
 
+export const FormulaGroupPanel = styled.div`
+  width: 100%;
+  margin-top: 36px;
+  padding: 16px 12px;
+  border-radius: 8px;
+  border: 1px solid ${colors.selago};
+  background-color: ${colors.zirkon};
+`;
+
 export const BarChartTooltip = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
   padding: 10px;
