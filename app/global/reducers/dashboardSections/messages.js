@@ -46,7 +46,7 @@ export default defineMessages({
   },
   regenerateChartSuccess: {
     id: `${scope}.regenerateChartSuccess`,
-    defaultMessage: `Chart regeneration has started. You'll get an email when it finishes.`,
+    defaultMessage: `Chart regeneration has started. You'll get an email when it finishes - refresh the page then to see the updated chart.`,
   },
   regenerateChartError: {
     id: `${scope}.regenerateChartError`,

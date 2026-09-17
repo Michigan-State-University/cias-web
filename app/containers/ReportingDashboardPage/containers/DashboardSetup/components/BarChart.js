@@ -25,8 +25,7 @@ import {
 import { BarChartTooltip } from '../styled';
 import messages from '../messages';
 
-// Two decimal places, matching the backend's `.round(2)` on the matched percentage. The rounding
-// factor is DERIVED from the place count so the name, the comment and the value cannot drift apart.
+// Two decimal places, matching the backend's `.round(2)` on the matched percentage.
 const SHARE_DECIMAL_PLACES = 2;
 const SHARE_ROUNDING_FACTOR = 10 ** SHARE_DECIMAL_PLACES;
 
@@ -63,12 +62,9 @@ const BarChart = ({
 
   const maxNumericValue = useMemo(() => {
     if (realChartData && chartType === ChartTypeDto.NUMERIC_BAR_CHART) {
-      // Declares the ceiling we mean: the whole stack, matched + not matched + invalid.
-      // NOT a clip fix - recharts never clips to an explicit domain unless `allowDataOverflow`
-      // is set, and nothing in this repo sets it, so an explicit bound can only RAISE the axis
-      // and a non-numeric one is discarded in favour of the data domain. For published charts
-      // this is a no-op that buys an explicit, correct ceiling instead of an undocumented
-      // recharts fallback; the visible effect is ~14px of headroom on quarterly previews.
+      // The ceiling is the whole stack - matched + not matched + invalid. Not a clip fix:
+      // recharts only ever RAISES the axis from an explicit bound, so this is a no-op on
+      // published charts and ~14px of headroom on quarterly previews.
       const maxPopulationData = maxBy(realChartData, stackTotal);
       if (!maxPopulationData) return undefined;
 

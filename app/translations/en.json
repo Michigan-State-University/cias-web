@@ -2117,7 +2117,7 @@
   "app.global.reducers.dashboardSections.filterError": "Couldn't fetch chart data",
   "app.global.reducers.dashboardSections.regenerateChartError": "Couldn't start regenerating this chart.",
   "app.global.reducers.dashboardSections.regenerateChartStillRunning": "This chart is taking longer than usual to regenerate. It is still running - reload the page later to see the result.",
-  "app.global.reducers.dashboardSections.regenerateChartSuccess": "Chart regeneration has started. You'll get an email when it finishes.",
+  "app.global.reducers.dashboardSections.regenerateChartSuccess": "Chart regeneration has started. You'll get an email when it finishes - refresh the page then to see the updated chart.",
   "app.global.reducers.dashboardSections.reorderError": "Couldn't reorder dashboard sections",
   "app.global.reducers.organizations.deleteClinicError": "Failed to delete Clinic!",
   "app.global.reducers.organizations.deleteClinicSuccess": "Clinic deleted successfully!",

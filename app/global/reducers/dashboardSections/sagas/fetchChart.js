@@ -5,7 +5,6 @@ import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import { fetchChartError, fetchChartSuccess } from '../actions';
 
-// Called directly via `call` by the regenerate poll - deliberately has no watcher.
 export function* fetchChart({ payload: { chartId } }) {
   const requestURL = `v1/charts/${chartId}`;
 

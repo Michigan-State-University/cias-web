@@ -48,8 +48,7 @@ export function* regenerateChart({ payload: { chartId } }) {
   });
   yield put(regenerateChartSuccess(chartId));
 
-  // Nothing pushes the lock's release, so poll. A `false` only ends the poll once the flag has been
-  // seen `true` or the queue grace window has passed - see the constants for why it is ambiguous.
+  // Nothing pushes the lock's release, so poll - see the constants for why a `false` is ambiguous.
   let chart = yield call(fetchChart, { payload: { chartId } });
   let attempts = 0;
   let failures = 0;

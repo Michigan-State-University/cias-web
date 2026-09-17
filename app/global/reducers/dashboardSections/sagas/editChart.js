@@ -42,8 +42,6 @@ export function* editChart({ payload: { chart } }) {
       yield put(setChartsData(parsedData));
     }
   } catch (error) {
-    // EDIT_CHART_ERROR silently restores the cached sections tree — without a
-    // toast the edit just disappears from the editor with no explanation
     yield call(
       toast.error,
       formatApiErrorMessage(error, messages.editChartError),

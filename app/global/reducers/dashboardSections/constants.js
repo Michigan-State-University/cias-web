@@ -105,7 +105,6 @@ export const ChartStatusToColorMap = {
   [ChartStatus.PUBLISHED]: colors.pistachio,
 };
 
-// Read it only through the helpers below, so swapping the serializer attribute stays a one-line change.
 export const CHART_REGENERATING_ATTRIBUTE = 'regenerating';
 
 export const isChartRegenerating = (chart) =>
