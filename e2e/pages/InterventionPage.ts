@@ -1,5 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 
+import { waitForApiResponse } from '../utils/waitForApiResponse';
+
 // Access setting types
 export enum InterventionAccessType {
   ANYONE = 'anyone',
@@ -66,12 +68,11 @@ export class InterventionPage {
     }
 
     // Intercept the API call before clicking create
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST',
-      { timeout: 30000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      timeout: 30000,
+    });
 
     // Click the create session button in the dialog
     await createSessionDialogButton.click();
@@ -111,12 +112,11 @@ export class InterventionPage {
       .locator('[data-cy="session-type-option-Session::ResearchAssistant"]')
       .click();
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST',
-      { timeout: 30000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      timeout: 30000,
+    });
 
     await this.page.locator('[data-cy="create-session-submit-button"]').click();
 
@@ -177,11 +177,10 @@ export class InterventionPage {
     const deleteOption = this.page.locator('[data-cy="dropdown-option-delete"]');
     await deleteOption.waitFor({ state: 'visible', timeout: 5000 });
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.request().method() === 'DELETE',
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions/',
+      method: 'DELETE',
+    });
 
     await deleteOption.click();
 
@@ -203,13 +202,11 @@ export class InterventionPage {
     const duplicateOption = this.page.locator('[data-cy="dropdown-option-duplicate"]');
     await duplicateOption.waitFor({ state: 'visible', timeout: 5000 });
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.url().includes('/clone') &&
-        response.request().method() === 'POST',
-      { timeout: 15000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: ['/sessions/', '/clone'],
+      method: 'POST',
+      timeout: 15000,
+    });
 
     await duplicateOption.click();
 
@@ -242,14 +239,12 @@ export class InterventionPage {
     await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
     
     // Wait for the API response that duplicates the session internally
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.url().includes('/duplicate') &&
-        response.request().method() === 'POST' &&
-        response.status() === 200,
-      { timeout: 15000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: ['/sessions/', '/duplicate'],
+      method: 'POST',
+      status: 200,
+      timeout: 15000,
+    });
     
     await pasteButton.click();
 
@@ -293,13 +288,12 @@ export class InterventionPage {
     // Click outside to trigger the save (blur triggers save in ApprovableInput)
     await this.page.locator('h2:has-text("Note")').click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
   }
 
   async getNoteText(): Promise<string> {
@@ -323,13 +317,12 @@ export class InterventionPage {
       return;
     }
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await label.click();
 
@@ -361,13 +354,12 @@ export class InterventionPage {
     await label.waitFor({ state: 'visible', timeout: 30000 });
     await label.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 30000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 30000,
+    });
   }
 
   async addInvitedParticipant(email: string) {
@@ -376,11 +368,11 @@ export class InterventionPage {
     await emailInput.fill(email);
     await emailInput.press('Enter');
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') && response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      status: 200,
+      timeout: 10000,
+    });
   }
 
   async isSessionScheduleVisible(sessionIndex: number): Promise<boolean> {
@@ -431,13 +423,12 @@ export class InterventionPage {
   async setEstimateTime(sessionIndex: number, minutes: string) {
     const input = this.getEstimateTimeInput(sessionIndex);
     
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.request().method() === 'PUT' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions/',
+      method: 'PUT',
+      status: 200,
+      timeout: 10000,
+    });
     
     await input.fill(minutes);
     await input.blur();
@@ -470,13 +461,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -493,13 +483,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -516,13 +505,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
 
     await this.page.waitForTimeout(500);
@@ -540,13 +528,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -564,13 +551,12 @@ export class InterventionPage {
     await confirmButton.click();
 
     // Wait for API response
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -589,12 +575,11 @@ export class InterventionPage {
     // Trigger blur by pressing Tab or clicking outside - this should trigger the save
     await this.nameInput.press('Tab');
     
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
   }
 }

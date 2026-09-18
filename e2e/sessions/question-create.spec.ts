@@ -1,5 +1,6 @@
 import { test, expect } from '../fixtures/test';
 import { DashboardPage, InterventionPage, SessionPage } from '../pages';
+import { waitForApiResponse } from '../utils/waitForApiResponse';
 
 test.describe('Question Creation - Single Answer', () => {
   
@@ -14,13 +15,12 @@ test.describe('Question Creation - Single Answer', () => {
     const interventionId = await dashboardPage.getInterventionIdFromUrl();
     expect(interventionId).toBeTruthy();
 
-    const createSessionResponse = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSessionResponse = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
 
@@ -46,13 +46,12 @@ test.describe('Question Creation - Single Answer', () => {
     const singleAnswerOption = page.locator('[data-cy="question-type-single"]');
     await expect(singleAnswerOption).toBeVisible();
 
-    const createQuestionPromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createQuestionPromise = waitForApiResponse(page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await singleAnswerOption.click();
 
@@ -101,13 +100,12 @@ test.describe('Question Creation - Single Answer', () => {
     await dashboardPage.createIntervention();
 
     const interventionId = await dashboardPage.getInterventionIdFromUrl();
-    const createSessionResponse = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSessionResponse = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
     
@@ -119,13 +117,12 @@ test.describe('Question Creation - Single Answer', () => {
 
     await page.locator('[data-cy="add-screen-button"]').click();
 
-    const createQuestionPromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createQuestionPromise = waitForApiResponse(page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await page.locator('[data-cy="question-type-single"]').click();
     await createQuestionPromise;
@@ -164,13 +161,12 @@ test.describe('Question Creation - Single Answer', () => {
     const interventionId = await dashboardPage.getInterventionIdFromUrl();
     expect(interventionId).toBeTruthy();
 
-    const createSessionResponse = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSessionResponse = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
     
@@ -194,13 +190,12 @@ test.describe('Question Creation - Single Answer', () => {
     await expect(nameQuestionOption).toBeVisible();
     await expect(nameQuestionOption).not.toBeDisabled();
 
-    const createQuestionPromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createQuestionPromise = waitForApiResponse(page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await nameQuestionOption.click();
 
@@ -279,13 +274,12 @@ test.describe('Question Creation - Single Answer', () => {
     const interventionId = await dashboardPage.getInterventionIdFromUrl();
     expect(interventionId).toBeTruthy();
 
-    const createSessionResponse = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSessionResponse = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
     
@@ -309,13 +303,12 @@ test.describe('Question Creation - Single Answer', () => {
     await expect(phoneQuestionOption).toBeVisible();
     await expect(phoneQuestionOption).not.toBeDisabled();
 
-    const createQuestionPromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createQuestionPromise = waitForApiResponse(page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await phoneQuestionOption.click();
 
@@ -388,13 +381,12 @@ test.describe('Question Creation - Single Answer', () => {
     const interventionId = await dashboardPage.getInterventionIdFromUrl();
     expect(interventionId).toBeTruthy();
 
-    const createSessionResponse = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSessionResponse = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
     
@@ -419,13 +411,12 @@ test.describe('Question Creation - Single Answer', () => {
 
     await expect(tlfbGroupOption.getByText('Creates group')).toBeVisible();
 
-    const createQuestionGroupPromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createQuestionGroupPromise = waitForApiResponse(page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await tlfbGroupOption.click();
 
@@ -489,13 +480,12 @@ test.describe('Question Creation - Single Answer', () => {
     const interventionId = await dashboardPage.getInterventionIdFromUrl();
     expect(interventionId).toBeTruthy();
 
-    const createSessionResponse = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSessionResponse = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
     
@@ -518,13 +508,12 @@ test.describe('Question Creation - Single Answer', () => {
     const singleAnswerOption = page.locator('[data-cy="question-type-single"]');
     await expect(singleAnswerOption).toBeVisible();
 
-    const createQuestionPromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createQuestionPromise = waitForApiResponse(page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await singleAnswerOption.click();
 
@@ -565,16 +554,11 @@ test.describe('Question Creation - Single Answer', () => {
     await expect(page.getByText('Do you want to delete this screen?')).toBeVisible();
     await expect(page.getByText('This operation is irreversible!')).toBeVisible();
 
-    const deleteQuestionPromise = page.waitForResponse(
-      (response) => {
-        const url = response.url();
-        const method = response.request().method();
-        console.log(`API call: ${method} ${url}`);
-        return url.includes('/delete_questions') &&
-          method === 'DELETE';
-      },
-      { timeout: 15000 }
-    );
+    const deleteQuestionPromise = waitForApiResponse(page, {
+      urlIncludes: '/delete_questions',
+      method: 'DELETE',
+      timeout: 15000,
+    });
 
     const confirmButtonByText = page.getByText('Confirm', { exact: false });
     const deleteButtonByText = page.getByText('Delete', { exact: false });
@@ -621,13 +605,12 @@ test.describe('Question Creation - Single Answer', () => {
     const interventionId = await dashboardPage.getInterventionIdFromUrl();
     expect(interventionId).toBeTruthy();
 
-    const createSessionResponse = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSessionResponse = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
     
@@ -650,13 +633,12 @@ test.describe('Question Creation - Single Answer', () => {
     const singleAnswerOption = page.locator('[data-cy="question-type-single"]');
     await expect(singleAnswerOption).toBeVisible();
 
-    const createQuestionPromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createQuestionPromise = waitForApiResponse(page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await singleAnswerOption.click();
 
@@ -680,17 +662,12 @@ test.describe('Question Creation - Single Answer', () => {
     const duplicateHereOption = page.getByText('Duplicate here').last();
     await expect(duplicateHereOption).toBeVisible();
 
-    const copyQuestionPromise = page.waitForResponse(
-      (response) => {
-        const url = response.url();
-        const method = response.request().method();
-        console.log(`API call: ${method} ${url}`);
-        return url.includes('/clone') &&
-          method === 'POST' &&
-          response.status() === 201;
-      },
-      { timeout: 15000 }
-    );
+    const copyQuestionPromise = waitForApiResponse(page, {
+      urlIncludes: '/clone',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await duplicateHereOption.click();
 
@@ -724,13 +701,12 @@ test.describe('Question Creation - Single Answer', () => {
     const interventionId = await dashboardPage.getInterventionIdFromUrl();
     expect(interventionId).toBeTruthy();
 
-    const createSession1Response = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSession1Response = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
     
@@ -738,13 +714,12 @@ test.describe('Question Creation - Single Answer', () => {
     const session1Data = await session1Response.json();
     const session1Id = session1Data.data.id;
 
-    const createSession2Response = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSession2Response = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
     
@@ -778,13 +753,12 @@ test.describe('Question Creation - Single Answer', () => {
     const singleAnswerOption = page.locator('[data-cy="question-type-single"]');
     await expect(singleAnswerOption).toBeVisible();
     
-    const createQuestionPromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createQuestionPromise = waitForApiResponse(page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await singleAnswerOption.click();
     await createQuestionPromise;
@@ -830,13 +804,12 @@ test.describe('Question Creation - Single Answer', () => {
     const interventionId = await dashboardPage.getInterventionIdFromUrl();
     expect(interventionId).toBeTruthy();
 
-    const createSessionResponse = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const createSessionResponse = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
     
@@ -1026,12 +999,11 @@ test.describe('Question Creation - Single Answer', () => {
     });
     await page.waitForTimeout(500);
 
-    const branchingSaveResponse = page.waitForResponse(
-      (response) =>
-        response.url().includes('/questions/') &&
-        response.request().method() === 'PATCH',
-      { timeout: 15000 }
-    );
+    const branchingSaveResponse = waitForApiResponse(page, {
+      urlIncludes: '/questions/',
+      method: 'PATCH',
+      timeout: 15000,
+    });
     await visibleFinishScreen.click({ force: true });
     await branchingSaveResponse;
 

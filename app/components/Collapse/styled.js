@@ -3,6 +3,7 @@ import { colors, themeColors } from 'theme';
 import Color from 'color';
 
 import { style, layout, padding, text } from '../BaseComponentStyles';
+import { COLLAPSE_HEIGHT_TRANSITION_DURATION_MS } from './constants';
 
 export const StyledCollapseContainer = styled.div`
   width: 100%;
@@ -38,7 +39,8 @@ export const Content = styled.div`
 export const StyledCollapseContent = styled.div`
   .ReactCollapse--collapse {
     ${({ disableAnimation }) =>
-      !disableAnimation && `transition: height 480ms ease;`}
+      !disableAnimation &&
+      `transition: height ${COLLAPSE_HEIGHT_TRANSITION_DURATION_MS}ms ease;`}
   }
   ${style};
   ${layout};

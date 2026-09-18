@@ -9,18 +9,27 @@ import fs from 'fs';
  * - E2E_ADMIN_EMAIL_PATTERN: Email pattern with {index} placeholder (default: 'e2e_admin_{index}@example.com')
  * - E2E_ADMIN_PASSWORD: Password for all e2e admin accounts
  * - E2E_VERIFICATION_CODE: 2FA code (if enabled)
- * - E2E_WORKER_COUNT: Number of worker accounts to create auth files for (default: 5)
+ * - E2E_WORKER_COUNT: Size of the admin account pool (default: 5)
+ * - E2E_ACCOUNT_OFFSET: First account in the pool this run should use (default: 0)
+ * - E2E_ACCOUNTS_NEEDED: How many accounts to authenticate (default: the whole pool).
+ *   A sharded CI run sets OFFSET/NEEDED so each shard signs in as exactly the one
+ *   account its workers will use, instead of the whole pool.
  * - E2E_AUTH_SETUP_DELAY_MS: Delay in milliseconds between auth attempts to avoid rate limiting (default: 2000)
  */
 setup('authenticate admin users for all workers', async ({ browser }) => {
-  // Set timeout based on worker count and delay
-  // Formula: (WORKER_COUNT * (60s per auth + delay)) with some buffer
-  const WORKER_COUNT = parseInt(process.env.E2E_WORKER_COUNT || '5', 10);
+  const ACCOUNT_COUNT = parseInt(process.env.E2E_WORKER_COUNT || '5', 10);
+  const ACCOUNT_OFFSET = parseInt(process.env.E2E_ACCOUNT_OFFSET || '0', 10);
+  const ACCOUNTS_NEEDED = parseInt(
+    process.env.E2E_ACCOUNTS_NEEDED || String(ACCOUNT_COUNT),
+    10,
+  );
+  // Set timeout based on the number of accounts to authenticate and the delay
+  // Formula: (ACCOUNTS_NEEDED * (60s per auth + delay)) with some buffer
   const AUTH_DELAY_MS = parseInt(process.env.E2E_AUTH_SETUP_DELAY_MS || '2000', 10);
-  const timeoutMs = WORKER_COUNT * (60000 + AUTH_DELAY_MS) + 30000; // 30s buffer
-  
+  const timeoutMs = ACCOUNTS_NEEDED * (60000 + AUTH_DELAY_MS) + 30000; // 30s buffer
+
   setup.setTimeout(timeoutMs);
-  console.log(`\nSetup timeout set to ${timeoutMs / 1000}s for ${WORKER_COUNT} workers`);
+  console.log(`\nSetup timeout set to ${timeoutMs / 1000}s for ${ACCOUNTS_NEEDED} accounts`);
 
   const emailPattern = process.env.E2E_ADMIN_EMAIL_PATTERN || 'e2e_admin_{index}@example.com';
   const password = process.env.E2E_ADMIN_PASSWORD;
@@ -38,7 +47,9 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
     fs.mkdirSync(authDir, { recursive: true });
   }
   
-  console.log(`\nAuthenticating ${WORKER_COUNT} admin users...`);
+  console.log(
+    `\nAuthenticating ${ACCOUNTS_NEEDED} admin user(s) starting at account ${ACCOUNT_OFFSET}...`,
+  );
   if (AUTH_DELAY_MS > 0) {
     console.log(`Delay between auth attempts: ${AUTH_DELAY_MS}ms`);
   }
@@ -50,8 +61,9 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
   console.log('');
 
   // Authenticate each admin account separately
-  for (let workerIndex = 0; workerIndex < WORKER_COUNT; workerIndex++) {
-    const adminEmail = emailPattern.replace('{index}', workerIndex.toString());
+  for (let n = 0; n < ACCOUNTS_NEEDED; n++) {
+    const accountIndex = (ACCOUNT_OFFSET + n) % ACCOUNT_COUNT;
+    const adminEmail = emailPattern.replace('{index}', accountIndex.toString());
     console.log(`\nAuthenticating ${adminEmail}...`);
 
     // Create a new context and page for each authentication
@@ -112,9 +124,9 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
       await expect(page).not.toHaveURL(/\/login/, { timeout: 30000 });
 
       // Save the authenticated state for this worker
-      const workerAuthFile = path.join(authDir, `admin-worker-${workerIndex}.json`);
+      const workerAuthFile = path.join(authDir, `admin-worker-${accountIndex}.json`);
       await context.storageState({ path: workerAuthFile });
-      console.log(`✅ Created auth file: admin-worker-${workerIndex}.json`);
+      console.log(`✅ Created auth file: admin-worker-${accountIndex}.json`);
     } catch (error) {
       // Log error with screenshot for debugging
       console.error(`✗ Failed to authenticate ${adminEmail}:`);
@@ -132,12 +144,12 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
     }
 
     // Add delay between auth attempts to avoid rate limiting (skip for last iteration)
-    if (AUTH_DELAY_MS > 0 && workerIndex < WORKER_COUNT - 1) {
+    if (AUTH_DELAY_MS > 0 && n < ACCOUNTS_NEEDED - 1) {
       console.log(`Waiting ${AUTH_DELAY_MS}ms before next authentication...`);
       await new Promise(resolve => setTimeout(resolve, AUTH_DELAY_MS));
     }
   }
 
-  console.log(`\n✓ Successfully authenticated ${WORKER_COUNT} admin users`);
+  console.log(`\n✓ Successfully authenticated ${ACCOUNTS_NEEDED} admin user(s)`);
   console.log('✓ Each worker will use a separate admin account to avoid rate limiting');
 });

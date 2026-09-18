@@ -23,6 +23,13 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   /* Maximum time one test can run for — CI uses a remote staging API so needs more time */
   timeout: process.env.CI ? 90000 : 30000,
+  /* Assertions were the one timeout left on Playwright's 5s default while action
+   * and navigation were raised for CI. That is not enough for elements that only
+   * render once data comes back from the remote staging API — e.g. the add-screen
+   * button, which waits on the session load. */
+  expect: {
+    timeout: process.env.CI ? 15000 : 5000,
+  },
   /* Continue running tests even if some fail */
   maxFailures: process.env.CI ? undefined : 0,
   /* Configure workers.
