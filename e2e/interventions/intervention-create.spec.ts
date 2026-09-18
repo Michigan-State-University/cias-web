@@ -83,14 +83,8 @@ test.describe('Create Intervention by Admin', () => {
     // Duplicate the session
     await interventionPage.duplicateSession(0);
 
-    // The clone operation doesn't immediately update the UI, need to reload
-    await page.reload();
-
-    // Wait for second session to appear in the DOM
-    await page.waitForSelector('[data-cy="enter-session-1"]', { timeout: 15000 });
-
-    // Verify we now have 2 sessions
-    sessionCount = await interventionPage.getSessionCount();
-    expect(sessionCount).toBe(2);
+    // The clone runs as a background job on the API side and the page only fetches
+    // its sessions on mount, so reload until the copy is there
+    await interventionPage.waitForSessionCount(2);
   });
 });

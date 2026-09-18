@@ -54,8 +54,7 @@ test.describe('Session Type Selection Modal', () => {
 
     await interventionPage.deleteSession(0);
 
-    await page.waitForTimeout(1000);
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.waitForSessionCount(1);
   });
 
   test('should duplicate a session', async ({ page }) => {
@@ -71,11 +70,8 @@ test.describe('Session Type Selection Modal', () => {
 
     await interventionPage.duplicateSession(0);
 
-    await page.reload();
-
-    await page.waitForSelector('[data-cy="enter-session-1"]', { timeout: 15000 });
-
-    expect(await interventionPage.getSessionCount()).toBe(2);
+    // `/clone` only enqueues a background job — reload until it has run.
+    await interventionPage.waitForSessionCount(2);
 
     await expect(page.locator('[data-cy^="enter-session-"]').nth(0)).toBeVisible();
     await expect(page.locator('[data-cy^="enter-session-"]').nth(1)).toBeVisible();
@@ -105,17 +101,16 @@ test.describe('Session Type Selection Modal', () => {
     expect(await interventionPage.getSessionCount()).toBe(0);
 
     await page.goto(`/interventions/${sourceInterventionId}`);
-    await page.waitForTimeout(1000);
 
     await interventionPage.createSession('classic');
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.waitForSessionCount(1);
 
     await interventionPage.duplicateSessionInternally(0, targetName);
 
     await page.goto(`/interventions/${targetInterventionId}`);
-    await page.waitForTimeout(1000);
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    // `/duplicate` only enqueues a background job — reload until it has run.
+    await interventionPage.waitForSessionCount(1);
 
     await expect(page.locator('[data-cy="enter-session-0"]')).toBeVisible();
   });

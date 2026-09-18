@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 import { waitForApiResponse } from '../utils/waitForApiResponse';
 
@@ -52,26 +52,57 @@ export class DashboardPage {
     await this.page.waitForURL(/\/interventions\/.*/, { timeout: 60000 });
   }
 
+  // The dashboard debounces the search by 300ms and then refetches the list, so
+  // the only reliable signal that what is on screen is the FILTERED list is the
+  // response to that request — a fixed sleep races it and leaves the previous
+  // list in the DOM.
+  private static searchQueryFragment(searchText: string): string {
+    const query = new URLSearchParams({ name: searchText.trim() }).toString();
+    // An empty search is a prefix of every other one, so anchor it on the next
+    // query param — otherwise it also matches a still-pending filtered request.
+    return searchText.trim() ? query : `${query}&`;
+  }
+
+  private waitForSearchResponse(searchText: string) {
+    return waitForApiResponse(this.page, {
+      urlIncludes: ['/interventions', DashboardPage.searchQueryFragment(searchText)],
+      method: 'GET',
+      status: 200,
+      timeout: 30000,
+    });
+  }
+
   async searchInterventions(searchText: string) {
+    const responsePromise = this.waitForSearchResponse(searchText);
+
     await this.searchInput.locator('input').fill(searchText);
-    await this.page.waitForTimeout(500);
+
+    await responsePromise;
   }
 
   async clearSearch() {
+    const responsePromise = this.waitForSearchResponse('');
+
     await this.searchInput.locator('input').fill('');
-    await this.page.waitForTimeout(500);
+
+    await responsePromise;
   }
 
   getInterventionTile(interventionId: string): Locator {
     return this.page.locator(`[data-cy="intervention-tile-${interventionId}"]`);
   }
 
+  // A tile is `intervention-tile-<id>`, but the name inside it is
+  // `intervention-tile-name` — a plain prefix match counts every tile twice.
+  private static readonly INTERVENTION_TILE_SELECTOR =
+    '[data-cy^="intervention-tile-"]:not([data-cy="intervention-tile-name"])';
+
   getVisibleInterventionTiles(): Locator {
-    return this.page.locator('[data-cy^="intervention-tile-"]');
+    return this.page.locator(DashboardPage.INTERVENTION_TILE_SELECTOR);
   }
 
   getFirstInterventionTile(): Locator {
-    return this.page.locator('[data-cy^="intervention-tile-"]').first();
+    return this.page.locator(DashboardPage.INTERVENTION_TILE_SELECTOR).first();
   }
 
   async starIntervention(interventionId: string) {
@@ -103,10 +134,43 @@ export class DashboardPage {
 
   async duplicateIntervention(interventionId: string) {
     await this.openInterventionDropdown(interventionId);
+
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: ['/interventions/', '/clone'],
+      method: 'POST',
+      timeout: 30000,
+    });
+
     await this.page
       .locator('[data-cy="dropdown-option-duplicateHere"]')
       .click();
-    await this.page.waitForTimeout(1000);
+
+    await responsePromise;
+  }
+
+  // Cloning an intervention only enqueues a background job on the API side, and
+  // the dashboard does not refetch on its own — reload and search again until the
+  // copy shows up.
+  async waitForSearchResultCount(
+    searchText: string,
+    expected: number,
+    timeout: number = 30000,
+  ) {
+    const tiles = this.getVisibleInterventionTiles();
+    const deadline = Date.now() + timeout;
+
+    while (Date.now() < deadline) {
+      try {
+        await expect(tiles).toHaveCount(expected, { timeout: 5000 });
+        return;
+      } catch {
+        await this.page.reload();
+        await this.waitForInterventionsToLoad();
+        await this.searchInterventions(searchText);
+      }
+    }
+
+    await expect(tiles).toHaveCount(expected, { timeout: 5000 });
   }
 
   async getVisibleInterventionCount(): Promise<number> {
@@ -128,12 +192,14 @@ export class DashboardPage {
     await this.page.waitForURL(/\/interventions\/.*/, { timeout: 30000 });
   }
 
-  async waitForInterventionsToLoad() {
+  async waitForInterventionsToLoad(timeout: number = 30000) {
     // Wait for at least one intervention tile or the "no results" message
     await this.page
-      .locator('[data-cy^="intervention-tile-"], h3:has-text("No results")')
+      .locator(
+        `${DashboardPage.INTERVENTION_TILE_SELECTOR}, h3:has-text("No results")`,
+      )
       .first()
-      .waitFor({ timeout: 10000 });
+      .waitFor({ timeout });
   }
 
   async getInterventionIdFromUrl(): Promise<string> {

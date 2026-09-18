@@ -3,6 +3,7 @@ import { PhoneType } from './PhoneType';
 
 // Used when verifying patient on the HF initial screen
 export type HfhsPatientData = {
+  id?: string;
   firstName?: string;
   lastName?: string;
   dob?: string;
@@ -16,4 +17,13 @@ export type HfhsPatientData = {
 // Returned from BE
 export type HfhsPatientDetail = Omit<HfhsPatientData, 'mrn'> & {
   patientId: string;
+};
+
+export type HfhsPatientDetailAnonymized = {
+  id: string;
+  firstName?: string;
+  lastName?: string;
+  dob?: string;
+  phoneNumber?: string;
+  mrn?: string;
 };

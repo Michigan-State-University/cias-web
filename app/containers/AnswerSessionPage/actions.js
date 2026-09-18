@@ -42,7 +42,11 @@ import {
   VERIFY_PATIENT_DATA_SUCCESS,
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
+  SET_HFHS_PATIENT_DETAIL_ANONYMIZED,
   SELECT_VIDEO_STATS,
+  VERIFY_QR_CODE_REQUEST,
+  VERIFY_QR_CODE_SUCCESS,
+  VERIFY_QR_CODE_ERROR,
   VERIFY_PID_REQUEST,
   VERIFY_PID_SUCCESS,
   VERIFY_PID_ERROR,
@@ -175,6 +179,17 @@ export const verifyPatientDataError = (error) =>
 export const setHfhsPatientDetail = (hfhsPatientDetail) =>
   actionBuilder(SET_HFHS_PATIENT_DETAIL, { hfhsPatientDetail });
 
+export const setHfhsPatientDetailAnonymized = (hfhsPatientDetailAnonymized) =>
+  actionBuilder(SET_HFHS_PATIENT_DETAIL_ANONYMIZED, {
+    hfhsPatientDetailAnonymized,
+  });
+
+export const verifyQRCodeRequest = (decodedString) =>
+  actionBuilder(VERIFY_QR_CODE_REQUEST, { decodedString });
+export const verifyQRCodeSuccess = () =>
+  actionBuilder(VERIFY_QR_CODE_SUCCESS, {});
+export const verifyQRCodeError = (error) =>
+  actionBuilder(VERIFY_QR_CODE_ERROR, { error });
 export const verifyPidRequest = (pid) =>
   actionBuilder(VERIFY_PID_REQUEST, { pid });
 export const verifyPidSuccess = (user) =>

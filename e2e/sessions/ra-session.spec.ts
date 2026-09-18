@@ -38,7 +38,8 @@ test.describe('Research Assistant Sessions', () => {
     const dashboardPage = new DashboardPage(page);
     const interventionPage = new InterventionPage(page);
 
-    // Keep the name short — the picker truncates long intervention names with an ellipsis.
+    // The picker truncates the rendered name; the helper matches on the full name
+    // react-truncate keeps in `data-tip`, so the length here does not matter.
     const targetName = `ra-t-${Date.now().toString().slice(-6)}`;
 
     // Target intervention already has an RA session.
@@ -65,8 +66,7 @@ test.describe('Research Assistant Sessions', () => {
 
     // The target still has exactly one session — nothing was copied.
     await page.goto(`/interventions/${targetInterventionId}`);
-    await page.waitForTimeout(1000);
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.waitForSessionCount(1);
   });
 
   test('duplicates a Research Assistant session into an intervention without one', async ({
@@ -75,7 +75,8 @@ test.describe('Research Assistant Sessions', () => {
     const dashboardPage = new DashboardPage(page);
     const interventionPage = new InterventionPage(page);
 
-    // Keep the name short — the picker truncates long intervention names with an ellipsis.
+    // The picker truncates the rendered name; the helper matches on the full name
+    // react-truncate keeps in `data-tip`, so the length here does not matter.
     const targetName = `ra-c-${Date.now().toString().slice(-6)}`;
 
     // Target intervention without an RA session.
@@ -93,10 +94,10 @@ test.describe('Research Assistant Sessions', () => {
     await interventionPage.duplicateSessionInternally(0, targetName);
 
     await page.goto(`/interventions/${targetInterventionId}`);
-    await page.waitForTimeout(1000);
 
-    // The RA session was copied in...
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    // The RA session was copied in — by a background job on the API side, so this
+    // reloads until the worker has run it...
+    await interventionPage.waitForSessionCount(1);
     // ...and the target now counts as having an RA session.
     expect(await interventionPage.isRaSessionTypeAvailable()).toBe(false);
   });
