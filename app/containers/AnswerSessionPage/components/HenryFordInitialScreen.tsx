@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { HenryFordInitialScreenDTO } from 'models/Question';
-import { HfhsPatientData, HfhsPatientDetail } from 'models/HfhsPatient';
+import {
+  HfhsPatientData,
+  HfhsPatientDetail,
+  HfhsPatientDetailAnonymized,
+} from 'models/HfhsPatient';
 
 import { RootState } from 'global/reducers';
 
@@ -35,7 +39,7 @@ const HenryFordInitialScreen = ({
   );
   const hfhsPatientDetailAnonymized = useSelector<
     RootState,
-    Nullable<HfhsPatientDetail>
+    Nullable<HfhsPatientDetailAnonymized>
   >(makeSelectHfhsPatientDetailAnonymized());
   const { loading, error } = useSelector(makeSelectVerifyPatientDataState());
   const { loading: qrVerifying, error: qrVerifyingError } = useSelector(

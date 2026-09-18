@@ -30,9 +30,9 @@ export default defineMessages({
     defaultMessage:
       'Camera is already in use by another application. Please close other applications using the camera and try again.',
   },
-  qrScanError: {
-    id: `${scope}.qrScanError`,
+  scanTakingTooLong: {
+    id: `${scope}.scanTakingTooLong`,
     defaultMessage:
-      'Failed to scan QR code. Please try again or enter data manually.',
+      'Still no luck? Make sure the code is well lit and fills the frame, or switch to the "Enter Manually" tab.',
   },
 });

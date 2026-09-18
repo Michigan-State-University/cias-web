@@ -18,3 +18,12 @@ export type HfhsPatientData = {
 export type HfhsPatientDetail = Omit<HfhsPatientData, 'mrn'> & {
   patientId: string;
 };
+
+export type HfhsPatientDetailAnonymized = {
+  id: string;
+  firstName?: string;
+  lastName?: string;
+  dob?: string;
+  phoneNumber?: string;
+  mrn?: string;
+};

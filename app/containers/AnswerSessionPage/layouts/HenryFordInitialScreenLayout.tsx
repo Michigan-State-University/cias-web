@@ -23,6 +23,7 @@ import sexMessages from 'global/i18n/sexMessages';
 import {
   HfhsPatientData,
   HfhsPatientDetail,
+  HfhsPatientDetailAnonymized,
   PhoneType,
   Sex,
 } from 'models/HfhsPatient';
@@ -31,7 +32,6 @@ import { QuestionTypes } from 'models/Question';
 
 import { nameValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
-import { formatDOB } from 'utils/hfhsDataFormatters';
 
 import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 
@@ -49,7 +49,7 @@ import {
   phoneNumberSchema,
 } from 'components/FormikPhoneNumberInput';
 import Tabs from 'components/Tabs';
-import AztecQRScanner from 'components/AztecQRScanner';
+import AztecQRScanner from 'components/AztecQRScanner/Loadable';
 
 import { makeSelectVerifyPatientDataState } from '../selectors';
 import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
@@ -124,7 +124,7 @@ export type Props = {
   verifying?: boolean;
   verifyingError?: Nullable<ApiMessageError>;
   hfhsPatientDetail?: Nullable<HfhsPatientDetail>;
-  hfhsPatientDetailAnonymized?: Nullable<HfhsPatientDetail>;
+  hfhsPatientDetailAnonymized?: Nullable<HfhsPatientDetailAnonymized>;
   previewMedicalNumberInput?: boolean;
   continueButtonDisabled?: boolean;
   qrVerifying?: boolean;
@@ -155,7 +155,6 @@ const HenryFordInitialScreenLayout = ({
     makeSelectInterventionFixedElementsDirection(),
   );
 
-  // const activeTab = useSelector(makeSelectHfhInitialScreenTab());
   const [activeTab, setActiveTab] = useState(
     formatMessage(messages.enterManuallyTab),
   );
@@ -506,10 +505,19 @@ const HenryFordInitialScreenLayout = ({
 
                   <Col {...columnClassMap}>
                     <Text fontSize="14px" color={colors.grey} mb={8}>
-                      {formatMessage(messages.dateOfBirth)}
+                      {formatMessage(messages.yearOfBirth)}
                     </Text>
                     <Text fontSize="16px" fontWeight="medium">
-                      {formatDOB(hfhsPatientDetailAnonymized.dob || '')}
+                      {hfhsPatientDetailAnonymized.dob}
+                    </Text>
+                  </Col>
+
+                  <Col {...columnClassMap}>
+                    <Text fontSize="14px" color={colors.grey} mb={8}>
+                      {formatMessage(messages.medicalRecordNumber)}
+                    </Text>
+                    <Text fontSize="16px" fontWeight="medium">
+                      {hfhsPatientDetailAnonymized.mrn}
                     </Text>
                   </Col>
                 </Row>
@@ -542,7 +550,7 @@ const HenryFordInitialScreenLayout = ({
                   </Col>
                   <Col xs={12} sm={forceMobile ? 12 : 6}>
                     <Button
-                      variant="secondary"
+                      inverted
                       onClick={() => {
                         if (onTogglePatientDataDisplay) {
                           onTogglePatientDataDisplay();

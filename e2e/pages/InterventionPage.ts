@@ -159,6 +159,27 @@ export class InterventionPage {
     return sessions.count();
   }
 
+  // Both ways of duplicating a session (`/clone` and `/duplicate`) only enqueue a
+  // background job on the API side, and the intervention page fetches its sessions
+  // once, on mount — so the copy appears neither when the request returns nor on
+  // its own. Reload until the worker has caught up.
+  async waitForSessionCount(expected: number, timeout: number = 30000) {
+    const sessions = this.page.locator('[data-cy^="enter-session-"]');
+    const deadline = Date.now() + timeout;
+
+    while (Date.now() < deadline) {
+      try {
+        await expect(sessions).toHaveCount(expected, { timeout: 5000 });
+        return;
+      } catch {
+        await this.page.reload();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+
+    await expect(sessions).toHaveCount(expected, { timeout: 5000 });
+  }
+
   async deleteSession(sessionIndex: number) {
     // We need to find the session ID from the dropdown trigger
     // The sessions have data-cy="enter-session-{index}" and the dropdown is in the same container
@@ -213,67 +234,77 @@ export class InterventionPage {
     await responsePromise;
   }
 
-  async duplicateSessionInternally(sessionIndex: number, targetInterventionName: string) {
+  // The picker renders every intervention name through EllipsisText, which is
+  // react-truncate: the name is cut in the DOM itself ("target-17896357909…"),
+  // so matching on the rendered text only works for names short enough to survive.
+  // react-truncate keeps the full name on `data-tip`, which is what we match on.
+  private copyPickerRow(targetInterventionName: string): Locator {
+    return this.page
+      .locator('[role="dialog"]')
+      .locator(`[data-tip="${targetInterventionName}"]`);
+  }
+
+  // Opens the internal-copy picker for a session and waits until the modal has
+  // actually loaded its intervention list — the list is fetched by the modal
+  // itself, so the rows are not in the DOM when the dialog first appears.
+  private async openInternalCopyPicker(sessionIndex: number) {
     const dropdownTriggers = this.page.locator('[data-cy^="dropdown-trigger-session-list-item-options"]');
     await dropdownTriggers.nth(sessionIndex).click();
 
-    const duplicateInternallyOption = this.page.locator('[data-cy="dropdown-option-copy"]');
-    await duplicateInternallyOption.waitFor({ state: 'visible', timeout: 5000 });
-    await duplicateInternallyOption.click();
+    const copyOption = this.page.locator('[data-cy="dropdown-option-copy"]');
+    await copyOption.waitFor({ state: 'visible', timeout: 5000 });
 
-    await this.page.locator('[role="dialog"]').waitFor({ state: 'visible', timeout: 5000 });
+    const interventionsLoaded = waitForApiResponse(this.page, {
+      urlIncludes: ['/interventions', 'start_index='],
+      method: 'GET',
+      status: 200,
+      timeout: 30000,
+    });
 
-    await this.page.waitForTimeout(2000);
+    await copyOption.click();
 
-    const targetInterventionRow = this.page
-      .locator('[role="dialog"]')
-      .getByText(targetInterventionName, { exact: false });
-    
-    await targetInterventionRow.waitFor({ state: 'visible', timeout: 10000 });
+    await expect(this.page.locator('[role="dialog"]')).toBeVisible();
+
+    await interventionsLoaded;
+  }
+
+  private async selectCopyPickerTarget(targetInterventionName: string) {
+    const targetInterventionRow = this.copyPickerRow(targetInterventionName);
+
+    await expect(targetInterventionRow).toBeVisible();
     await targetInterventionRow.click();
+  }
 
-    await this.page.waitForTimeout(2000);
+  async duplicateSessionInternally(sessionIndex: number, targetInterventionName: string) {
+    await this.openInternalCopyPicker(sessionIndex);
+    await this.selectCopyPickerTarget(targetInterventionName);
 
     const pasteButton = this.page.locator('button:has-text("Paste session in this intervention")');
+    await expect(pasteButton).toBeVisible();
 
-    await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
-    
     // Wait for the API response that duplicates the session internally
     const responsePromise = waitForApiResponse(this.page, {
       urlIncludes: ['/sessions/', '/duplicate'],
       method: 'POST',
       status: 200,
-      timeout: 15000,
+      timeout: 30000,
     });
-    
+
     await pasteButton.click();
 
     await responsePromise;
-    await this.page.locator('[role="dialog"]').waitFor({ state: 'hidden', timeout: 10000 });
+    await expect(this.page.locator('[role="dialog"]')).toBeHidden();
   }
 
   // Opens the internal-copy picker for a session, selects the target intervention
   // and clicks "Paste session in this intervention" — without asserting the result.
   // Used to exercise the RA-conflict guard (which blocks the paste client-side).
   async startInternalSessionCopy(sessionIndex: number, targetInterventionName: string) {
-    const dropdownTriggers = this.page.locator('[data-cy^="dropdown-trigger-session-list-item-options"]');
-    await dropdownTriggers.nth(sessionIndex).click();
-
-    const copyOption = this.page.locator('[data-cy="dropdown-option-copy"]');
-    await copyOption.waitFor({ state: 'visible', timeout: 5000 });
-    await copyOption.click();
-
-    const dialog = this.page.locator('[role="dialog"]');
-    await dialog.waitFor({ state: 'visible', timeout: 5000 });
-    await this.page.waitForTimeout(2000);
-
-    const targetRow = dialog.getByText(targetInterventionName, { exact: false });
-    await targetRow.waitFor({ state: 'visible', timeout: 10000 });
-    await targetRow.click();
-    await this.page.waitForTimeout(1000);
+    await this.openInternalCopyPicker(sessionIndex);
+    await this.selectCopyPickerTarget(targetInterventionName);
 
     const pasteButton = this.page.locator('button:has-text("Paste session in this intervention")');
-    await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
+    await expect(pasteButton).toBeVisible();
     await pasteButton.click();
   }
 
@@ -571,15 +602,19 @@ export class InterventionPage {
     await this.nameInput.waitFor({ state: 'visible', timeout: 10000 });
     
     await this.nameInput.fill(newName);
-    
-    // Trigger blur by pressing Tab or clicking outside - this should trigger the save
-    await this.nameInput.press('Tab');
-    
-    await waitForApiResponse(this.page, {
+
+    // Registered before the blur: a fast API can answer before `waitForResponse`
+    // is listening, and the wait would then sit there until it times out.
+    const responsePromise = waitForApiResponse(this.page, {
       urlIncludes: '/interventions/',
       method: 'PATCH',
       status: 200,
-      timeout: 10000,
+      timeout: 30000,
     });
+
+    // Trigger blur by pressing Tab or clicking outside - this should trigger the save
+    await this.nameInput.press('Tab');
+
+    await responsePromise;
   }
 }

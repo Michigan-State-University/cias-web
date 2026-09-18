@@ -223,6 +223,14 @@ export default defineMessages({
     id: `${scope}.rescan`,
     defaultMessage: 'Rescan QR Code',
   },
+  yearOfBirth: {
+    id: `${scope}.yearOfBirth`,
+    defaultMessage: 'Year of Birth',
+  },
+  medicalRecordNumber: {
+    id: `${scope}.medicalRecordNumber`,
+    defaultMessage: 'Medical Record Number',
+  },
   closeTab: {
     id: `${scope}.closeTab`,
     defaultMessage: 'Close Tab',
