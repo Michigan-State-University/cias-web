@@ -437,12 +437,12 @@ export default defineMessages({
   copyTestLinkSuccess: {
     id: `${scope}.copyTestLinkSuccess`,
     defaultMessage:
-      'Test link copied. It works until {expiresAt} — open it now in a private/incognito window.',
+      'Test link copied. It works until {expiresAt}. Open it in a private/incognito window.',
   },
   copyTestLinkSuccessUnknownExpiry: {
     id: `${scope}.copyTestLinkSuccessUnknownExpiry`,
     defaultMessage:
-      'Test link copied. It works for a few minutes — open it now in a private/incognito window.',
+      'Test link copied. It works for a few minutes. Open it in a private/incognito window.',
   },
   copyTestLinkClipboardError: {
     id: `${scope}.copyTestLinkClipboardError`,
@@ -452,6 +452,6 @@ export default defineMessages({
   copyTestLinkHint: {
     id: `${scope}.copyTestLinkHint`,
     defaultMessage:
-      'A test link marks the participant it creates as test data; their fill is deleted automatically about 24 hours later, together with its contribution to the relevant charts. Open it promptly in a private or incognito window and complete the fill in that tab — the marker applies only to a newly created anonymous participant, so a browser that is already signed in, or already holds one, records a real fill that is never deleted.',
+      'A test link marks the participant it creates as test data; their fill is deleted automatically about 24 hours later, together with its contribution to the relevant charts. Open it in a private or incognito window and complete the fill in that tab.',
   },
 });

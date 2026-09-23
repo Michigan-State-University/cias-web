@@ -3,6 +3,11 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.TestLinkTokenGate';
 
 export default defineMessages({
+  testLinkNotice: {
+    id: `${scope}.testLinkNotice`,
+    defaultMessage:
+      'This is a test run. The data recorded here is marked as test data and will be deleted automatically 24 hours from now.',
+  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: 'Test link not usable',

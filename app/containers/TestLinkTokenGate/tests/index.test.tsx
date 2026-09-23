@@ -43,8 +43,13 @@ const reloadOfTestLinkPage = (interventionId = INTERVENTION_ID) => {
 const renderGate = (
   status: TestLinkTokenStatus = TestLinkTokenStatus.PENDING,
   interventionId: Nullable<string> = INTERVENTION_ID,
+  showNotice = false,
+  answerSessionPage: Record<string, unknown> = {},
 ) => {
-  const store = createTestStore({ testLinkToken: { status } });
+  const store = createTestStore({
+    testLinkToken: { status },
+    AnswerSessionPage: answerSessionPage,
+  });
   // The identity reducer in `createTestStore` is the point: keep injection from swapping in the
   // real root reducer, so the status under test survives the request action the gate dispatches.
   store.replaceReducer = () => {};
@@ -53,7 +58,10 @@ const renderGate = (
   const view = render(
     <Provider store={store}>
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <TestLinkTokenGate interventionId={interventionId ?? undefined}>
+        <TestLinkTokenGate
+          interventionId={interventionId ?? undefined}
+          showNotice={showNotice}
+        >
           <div data-testid={CHILD_ID}>fill</div>
         </TestLinkTokenGate>
       </IntlProvider>
@@ -212,5 +220,139 @@ describe('<TestLinkTokenGate />', () => {
     );
 
     expect(order).toEqual(['gate-asked', 'child-mount']);
+  });
+  // Regression: "Complete session" resets the auth reducer, which reinitialises injected reducers
+  // and rewinds `testLinkToken.status` from VALID back to PENDING. The gate does not remount, so its
+  // `asked` flag survives and the token-keyed effect never re-asks — it used to sit on a spinner
+  // forever. The verdict is latched locally so a rewind cannot strand it.
+  it('keeps letting the page through after the slice is reset under it', () => {
+    landOnTestLink();
+
+    const store = createTestStore({
+      testLinkToken: { status: TestLinkTokenStatus.VALID },
+    });
+    store.replaceReducer = () => {};
+
+    const view = () => (
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <TestLinkTokenGate interventionId={INTERVENTION_ID}>
+            <div data-testid={CHILD_ID}>fill</div>
+          </TestLinkTokenGate>
+        </IntlProvider>
+      </Provider>
+    );
+
+    const { getByTestId, queryByTestId, rerender } = render(view());
+    expect(getByTestId(CHILD_ID)).toBeInTheDocument();
+
+    // The auth reset rewinds the slice.
+    store.getState = () =>
+      ({ testLinkToken: { status: TestLinkTokenStatus.PENDING } }) as never;
+    rerender(view());
+
+    expect(queryByTestId(CHILD_ID)).toBeInTheDocument();
+  });
+
+  describe('the test-link notice', () => {
+    const notice = (container: HTMLElement) =>
+      container.querySelector('[data-cy="test-link-notice"]');
+
+    // Regression: the notice used to be added by returning a fragment in one branch and bare
+    // `children` in the other. That changes the element structure, so React unmounted and remounted
+    // the page underneath the moment the notice stood down — which in the app meant clicking Start
+    // threw you back to the start screen and re-ran the effect that creates the session.
+    it('does not remount the page when the notice stands down', () => {
+      landOnTestLink();
+
+      let mounts = 0;
+      const CountingChild = () => {
+        useEffect(() => {
+          mounts += 1;
+        }, []);
+        return <div data-testid={CHILD_ID}>fill</div>;
+      };
+
+      const store = createTestStore({
+        testLinkToken: { status: TestLinkTokenStatus.VALID },
+        AnswerSessionPage: { testRunFill: false },
+      });
+      store.replaceReducer = () => {};
+
+      const view = () => (
+        <Provider store={store}>
+          <IntlProvider locale={DEFAULT_LOCALE}>
+            <TestLinkTokenGate interventionId={INTERVENTION_ID} showNotice>
+              <CountingChild />
+            </TestLinkTokenGate>
+          </IntlProvider>
+        </Provider>
+      );
+
+      const { container, rerender } = render(view());
+      expect(notice(container)).toBeInTheDocument();
+      expect(mounts).toBe(1);
+
+      // The server has now ruled, so the notice stands down.
+      store.getState = () =>
+        ({
+          testLinkToken: { status: TestLinkTokenStatus.VALID },
+          AnswerSessionPage: { testRunFill: true },
+        }) as never;
+      rerender(view());
+
+      expect(mounts).toBe(1);
+    });
+
+    it('renders above the page when the caller asks for it', () => {
+      landOnTestLink();
+      const { container, getByTestId } = renderGate(
+        TestLinkTokenStatus.VALID,
+        INTERVENTION_ID,
+        true,
+      );
+
+      expect(getByTestId(CHILD_ID)).toBeInTheDocument();
+      expect(notice(container)).toBeInTheDocument();
+    });
+
+    it('stays hidden unless the caller asks', () => {
+      landOnTestLink();
+      const { container, getByTestId } = renderGate(TestLinkTokenStatus.VALID);
+
+      expect(getByTestId(CHILD_ID)).toBeInTheDocument();
+      expect(notice(container)).not.toBeInTheDocument();
+    });
+
+    // Both landing routes ask for the notice, so it has to stand down the moment the server has
+    // ruled on an actual fill — otherwise it sits above `TestRunBanner` saying a second thing.
+    it.each([
+      ['the fill was marked', { testRunFill: true }],
+      ['the marker was refused', { testRunMarkerFailed: true }],
+    ])(
+      'stands down once the server has ruled: %s',
+      (_label, answerSessionPage) => {
+        landOnTestLink();
+        const { container } = renderGate(
+          TestLinkTokenStatus.VALID,
+          INTERVENTION_ID,
+          true,
+          answerSessionPage,
+        );
+
+        expect(notice(container)).not.toBeInTheDocument();
+      },
+    );
+
+    it('stays hidden when the link was refused', () => {
+      landOnTestLink();
+      const { container } = renderGate(
+        TestLinkTokenStatus.EXPIRED,
+        INTERVENTION_ID,
+        true,
+      );
+
+      expect(notice(container)).not.toBeInTheDocument();
+    });
   });
 });

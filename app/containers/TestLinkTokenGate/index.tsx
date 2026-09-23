@@ -18,6 +18,14 @@ import {
 
 import { getTestLinkToken, testLinkTokenAppliesTo } from 'utils/testLinkToken';
 
+// Safe from either route: `selectAnswerSessionPageDomain` falls back to `initialState` when the
+// slice is not injected, so this reads `false` on the invite page rather than throwing.
+import {
+  makeSelectTestRunFill,
+  makeSelectTestRunMarkerFailed,
+} from 'containers/AnswerSessionPage/selectors';
+
+import { Alert, AlertType } from 'components/Alert';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import H1 from 'components/H1';
@@ -29,6 +37,9 @@ import messages from './messages';
 type Props = {
   children: ReactElement;
   interventionId?: string;
+  // Set by both landing routes. The notice covers the window before a fill exists; once the server
+  // has reported on one, `AnswerSessionPage`'s `TestRunBanner` is the authority and this hides.
+  showNotice?: boolean;
 };
 
 const blockedCopy = (status: TestLinkTokenStatus) => {
@@ -57,6 +68,7 @@ const blockedCopy = (status: TestLinkTokenStatus) => {
 const TestLinkTokenGate = ({
   children,
   interventionId,
+  showNotice = false,
 }: Props): ReactElement => {
   useInjectReducer({
     key: testLinkTokenReducerKey,
@@ -72,13 +84,18 @@ const TestLinkTokenGate = ({
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
   const status = useSelector(makeSelectTestLinkTokenStatus());
+  const fillMarked = useSelector(makeSelectTestRunFill());
+  const markerFailed = useSelector(makeSelectTestRunMarkerFailed());
+  const serverHasRuled = fillMarked || markerFailed;
   const [asked, setAsked] = useState(false);
+  const [verdict, setVerdict] = useState<Nullable<TestLinkTokenStatus>>(null);
 
   const token = testLinkTokenAppliesTo(interventionId ?? null)
     ? getTestLinkToken()
     : null;
 
   useEffect(() => {
+    setVerdict(null);
     if (!token) return;
     dispatch(verifyTestLinkTokenRequest(token));
     // `useInjectReducer` does not eject, so a verdict from an earlier gated mount is still in the
@@ -87,9 +104,22 @@ const TestLinkTokenGate = ({
     setAsked(true);
   }, [token]);
 
-  if (!token) return children;
+  // Declared after the token effect on purpose: both run on mount in declaration order, and the
+  // token effect clears the verdict. The slice is not a reliable place to keep it — a global auth
+  // reset ("Complete session" for a guest) reinitialises injected reducers and rewinds `status` to
+  // PENDING. The gate does not remount, so `asked` survives and the token-keyed effect never
+  // re-asks; without this latch the gate sits on a spinner forever.
+  useEffect(() => {
+    if (status !== TestLinkTokenStatus.PENDING) setVerdict(status);
+  }, [status]);
 
-  if (!asked || status === TestLinkTokenStatus.PENDING) {
+  const effectiveStatus = verdict ?? status;
+
+  if (!token) {
+    return children;
+  }
+
+  if (!asked || effectiveStatus === TestLinkTokenStatus.PENDING) {
     return (
       <Box
         width="100%"
@@ -103,9 +133,32 @@ const TestLinkTokenGate = ({
     );
   }
 
-  if (status === TestLinkTokenStatus.VALID) return children;
+  if (effectiveStatus === TestLinkTokenStatus.VALID) {
+    // The fragment is rendered unconditionally so `children` keeps its position in the tree.
+    // Returning `children` bare in one branch and wrapped in another changes the element structure,
+    // which makes React unmount and remount the page underneath — losing its state and re-running
+    // its mount effects, including the one that creates the session.
+    //
+    // The notice itself stands down once the server has ruled on a real fill: from that point
+    // `AnswerSessionPage`'s `TestRunBanner` reports the verdict with authority, and a second banner
+    // about the link would only duplicate or contradict it.
+    return (
+      <>
+        {showNotice && !serverHasRuled && (
+          <Box width="100%" px={24} pt={16} data-cy="test-link-notice">
+            <Alert
+              content={formatMessage(messages.testLinkNotice)}
+              type={AlertType.WARNING_LIGHT}
+              centered
+            />
+          </Box>
+        )}
+        {children}
+      </>
+    );
+  }
 
-  const { header, text } = blockedCopy(status);
+  const { header, text } = blockedCopy(effectiveStatus);
 
   return (
     <>

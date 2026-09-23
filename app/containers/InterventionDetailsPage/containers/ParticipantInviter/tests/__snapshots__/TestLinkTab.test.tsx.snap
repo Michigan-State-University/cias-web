@@ -292,7 +292,7 @@ exports[`<TestLinkTab /> should match the snapshot 1`] = `
         color="#6B707C"
         font-size="12"
       >
-        A test link marks the participant it creates as test data; their fill is deleted automatically about 24 hours later, together with its contribution to the relevant charts. Open it promptly in a private or incognito window and complete the fill in that tab — the marker applies only to a newly created anonymous participant, so a browser that is already signed in, or already holds one, records a real fill that is never deleted.
+        A test link marks the participant it creates as test data; their fill is deleted automatically about 24 hours later, together with its contribution to the relevant charts. Open it in a private or incognito window and complete the fill in that tab.
       </p>
     </div>
   </form>

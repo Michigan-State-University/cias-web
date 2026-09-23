@@ -124,7 +124,10 @@ AnswerSessionPageComponent.propTypes = {
 // component type on every render, which remounts the page underneath it. The intervention id comes
 // from the route because a reload strips the token from the URL but not from `sessionStorage`.
 const GatedAnswerSessionPage = (props) => (
-  <TestLinkTokenGate interventionId={props.match?.params?.interventionId}>
+  <TestLinkTokenGate
+    interventionId={props.match?.params?.interventionId}
+    showNotice
+  >
     <AnswerSessionPage {...props} />
   </TestLinkTokenGate>
 );
@@ -134,7 +137,10 @@ GatedAnswerSessionPage.propTypes = {
 };
 
 const GatedUserInterventionInvitePage = (props) => (
-  <TestLinkTokenGate interventionId={props.match?.params?.interventionId}>
+  <TestLinkTokenGate
+    interventionId={props.match?.params?.interventionId}
+    showNotice
+  >
     <UserInterventionInvitePage {...props} />
   </TestLinkTokenGate>
 );

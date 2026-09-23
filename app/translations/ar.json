@@ -2241,6 +2241,7 @@
   "app.utils.useInterventionChannel.stopEditModeError": "",
   "app.containers.AnswerSessionPage.testRunBanner": "",
   "app.containers.AnswerSessionPage.testRunMarkerFailedBanner": "",
+  "app.containers.TestLinkTokenGate.testLinkNotice": "",
   "app.containers.TestLinkTokenGate.pageTitle": "",
   "app.containers.TestLinkTokenGate.expiredHeader": "",
   "app.containers.TestLinkTokenGate.expiredText": "",
