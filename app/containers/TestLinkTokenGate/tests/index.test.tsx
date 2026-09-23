@@ -254,6 +254,89 @@ describe('<TestLinkTokenGate />', () => {
     expect(queryByTestId(CHILD_ID)).toBeInTheDocument();
   });
 
+  describe('when the server refuses the marker', () => {
+    const refused = { testRunMarkerFailed: true };
+
+    it('blocks the fill instead of warning about it', () => {
+      landOnTestLink();
+      const { queryByTestId } = renderGate(
+        TestLinkTokenStatus.VALID,
+        INTERVENTION_ID,
+        true,
+        refused,
+      );
+
+      expect(queryByTestId(CHILD_ID)).not.toBeInTheDocument();
+    });
+
+    it('says the link is no longer valid', () => {
+      landOnTestLink();
+      renderGate(TestLinkTokenStatus.VALID, INTERVENTION_ID, true, refused);
+
+      expect(
+        screen.getByText('This test link is no longer valid'),
+      ).toBeInTheDocument();
+    });
+
+    it('lets a marked fill through', () => {
+      landOnTestLink();
+      const { getByTestId } = renderGate(
+        TestLinkTokenStatus.VALID,
+        INTERVENTION_ID,
+        true,
+        { testRunFill: true },
+      );
+
+      expect(getByTestId(CHILD_ID)).toBeInTheDocument();
+    });
+
+    // A genuine participant never carries a token, so the block can never reach them.
+    it('never blocks a fill that presented no token', () => {
+      const { getByTestId } = renderGate(
+        TestLinkTokenStatus.PENDING,
+        INTERVENTION_ID,
+        false,
+        refused,
+      );
+
+      expect(getByTestId(CHILD_ID)).toBeInTheDocument();
+    });
+
+    // Same failure mode as the stranded spinner: `RESET_REDUCER` clears the refusal, and without a
+    // latch the gate would let the page back in and remount it, creating a second session.
+    it('keeps blocking after the slice is reset under it', () => {
+      landOnTestLink();
+
+      const store = createTestStore({
+        testLinkToken: { status: TestLinkTokenStatus.VALID },
+        AnswerSessionPage: refused,
+      });
+      store.replaceReducer = () => {};
+
+      const view = () => (
+        <Provider store={store}>
+          <IntlProvider locale={DEFAULT_LOCALE}>
+            <TestLinkTokenGate interventionId={INTERVENTION_ID}>
+              <div data-testid={CHILD_ID}>fill</div>
+            </TestLinkTokenGate>
+          </IntlProvider>
+        </Provider>
+      );
+
+      const { queryByTestId, rerender } = render(view());
+      expect(queryByTestId(CHILD_ID)).not.toBeInTheDocument();
+
+      store.getState = () =>
+        ({
+          testLinkToken: { status: TestLinkTokenStatus.VALID },
+          AnswerSessionPage: { testRunMarkerFailed: false },
+        }) as never;
+      rerender(view());
+
+      expect(queryByTestId(CHILD_ID)).not.toBeInTheDocument();
+    });
+  });
+
   describe('the test-link notice', () => {
     const notice = (container: HTMLElement) =>
       container.querySelector('[data-cy="test-link-notice"]');

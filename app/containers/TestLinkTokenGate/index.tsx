@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useIntl } from 'react-intl';
+import { MessageDescriptor, useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
@@ -89,6 +89,7 @@ const TestLinkTokenGate = ({
   const serverHasRuled = fillMarked || markerFailed;
   const [asked, setAsked] = useState(false);
   const [verdict, setVerdict] = useState<Nullable<TestLinkTokenStatus>>(null);
+  const [markerRefused, setMarkerRefused] = useState(false);
 
   const token = testLinkTokenAppliesTo(interventionId ?? null)
     ? getTestLinkToken()
@@ -96,6 +97,7 @@ const TestLinkTokenGate = ({
 
   useEffect(() => {
     setVerdict(null);
+    setMarkerRefused(false);
     if (!token) return;
     dispatch(verifyTestLinkTokenRequest(token));
     // `useInjectReducer` does not eject, so a verdict from an earlier gated mount is still in the
@@ -112,6 +114,12 @@ const TestLinkTokenGate = ({
   useEffect(() => {
     if (status !== TestLinkTokenStatus.PENDING) setVerdict(status);
   }, [status]);
+
+  // Latched for the same reason as the verdict: `RESET_REDUCER` would otherwise clear the refusal
+  // and let the page back in, remounting it and creating a second session.
+  useEffect(() => {
+    if (markerFailed) setMarkerRefused(true);
+  }, [markerFailed]);
 
   const effectiveStatus = verdict ?? status;
 
@@ -131,6 +139,35 @@ const TestLinkTokenGate = ({
         <Spinner size={100} color={themeColors.secondary} />
       </Box>
     );
+  }
+
+  const renderBlocked = ({
+    header,
+    text,
+  }: {
+    header: MessageDescriptor;
+    text: MessageDescriptor;
+  }) => (
+    <>
+      <Helmet>
+        <title>{formatMessage(messages.pageTitle)}</title>
+      </Helmet>
+      <Column height="100%" justify="center" align="center" padding={24}>
+        <H1 textAlign="center">{formatMessage(header)}</H1>
+        <H2 mt={10} fontWeight="regular" textAlign="center">
+          {formatMessage(text)}
+        </H2>
+      </Column>
+    </>
+  );
+
+  // The server refused the marker, so this fill would be permanent participant data. Blocking here
+  // stops the finish, which is what writes chart statistics, reports, SMS and the HFHS message.
+  if (markerRefused) {
+    return renderBlocked({
+      header: messages.markerFailedHeader,
+      text: messages.markerFailedText,
+    });
   }
 
   if (effectiveStatus === TestLinkTokenStatus.VALID) {
@@ -158,21 +195,7 @@ const TestLinkTokenGate = ({
     );
   }
 
-  const { header, text } = blockedCopy(effectiveStatus);
-
-  return (
-    <>
-      <Helmet>
-        <title>{formatMessage(messages.pageTitle)}</title>
-      </Helmet>
-      <Column height="100%" justify="center" align="center" padding={24}>
-        <H1 textAlign="center">{formatMessage(header)}</H1>
-        <H2 mt={10} fontWeight="regular" textAlign="center">
-          {formatMessage(text)}
-        </H2>
-      </Column>
-    </>
-  );
+  return renderBlocked(blockedCopy(effectiveStatus));
 };
 
 export default TestLinkTokenGate;

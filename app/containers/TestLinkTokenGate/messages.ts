@@ -8,6 +8,15 @@ export default defineMessages({
     defaultMessage:
       'This is a test run. The data recorded here is marked as test data and will be deleted automatically 24 hours from now.',
   },
+  markerFailedHeader: {
+    id: `${scope}.markerFailedHeader`,
+    defaultMessage: 'This test link is no longer valid',
+  },
+  markerFailedText: {
+    id: `${scope}.markerFailedText`,
+    defaultMessage:
+      'It most likely expired before the session started, so this fill would be recorded as a real participant and could not be deleted afterwards. Copy a fresh test link from the intervention and open it straight away.',
+  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: 'Test link not usable',

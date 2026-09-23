@@ -918,7 +918,7 @@ export function AnswerSessionPage({
       maxHeight="100vh"
       background={isMobilePreview ? undefined : themeColors.sessionBackground}
     >
-      <TestRunBanner isPreview={isPreview} />
+      <TestRunBanner />
       {quickExitEnabled && (
         <QuickExit
           isMobilePreview={isMobilePreview}
