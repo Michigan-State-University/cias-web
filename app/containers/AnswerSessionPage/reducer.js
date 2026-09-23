@@ -8,6 +8,7 @@ import { I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 
 import {
   RESET_REDUCER,
+  SET_TEST_RUN_FILL,
   SUBMIT_ANSWER_ERROR,
   SUBMIT_ANSWER_REQUEST,
   SUBMIT_ANSWER_SUCCESS,
@@ -53,6 +54,8 @@ const getEmptyFeedbackScreenSettings = () => ({
 });
 
 export const initialState = {
+  testRunFill: false,
+  testRunMarkerFailed: false,
   questionLoading: false,
   questionError: '',
   sessionQuestions: [],
@@ -95,6 +98,13 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
     switch (type) {
       case RESET_REDUCER: {
         Object.assign(draft, initialState);
+        break;
+      }
+
+      case SET_TEST_RUN_FILL: {
+        const { testRun, testLinkTokenSent } = payload;
+        draft.testRunFill = testRun;
+        draft.testRunMarkerFailed = Boolean(testLinkTokenSent) && !testRun;
         break;
       }
 

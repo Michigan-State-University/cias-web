@@ -14,6 +14,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { getIsPreview } from 'utils/previewMode';
+import { hasTestLinkToken, withTestLinkToken } from 'utils/testLinkToken';
 import { parametrizeRoutePath } from 'utils/router';
 import objectToCamelCase from 'utils/objectToCamelCase';
 import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
@@ -57,6 +58,7 @@ import {
   fetchUserSessionSuccess,
   fetchUserSessionError,
   fetchOrCreateUserSessionSuccess,
+  setTestRunFill,
   fetchOrCreateUserSessionError,
   resetReducer,
   fetchPreviousQuestionSuccess,
@@ -266,6 +268,8 @@ function* fetchUserSession({ payload: { sessionId } }) {
     const { data } = yield axios.get(`${requestUrl}?${searchParams}`);
     const userSession = jsonApiToObject(data, 'userSession');
 
+    // This GET carries no token, so it can only report an existing marker, never a failed link.
+    yield put(setTestRunFill(Boolean(data?.meta?.test_run), false));
     yield put(fetchUserSessionSuccess(userSession));
     yield put(changeLocale(userSession.languageCode));
   } catch (error) {
@@ -278,21 +282,27 @@ function* fetchUserSession({ payload: { sessionId } }) {
   }
 }
 
-function* createUserSession({ payload: { sessionId } }) {
+export function* createUserSession({ payload: { sessionId } }) {
   const {
     query: { cid: healthClinicId },
   } = yield select(makeSelectLocation());
   const requestUrl = `/v1/user_sessions`;
+  // Read before the request, never after: a log out or Quick Exit can clear the token mid-flight.
+  const testLinkTokenSent = hasTestLinkToken();
 
   try {
-    const { data } = yield axios.post(
+    const { data } = yield call(
+      axios.post,
       requestUrl,
-      objectToSnakeCase({
-        userSession: { sessionId, healthClinicId },
-      }),
+      withTestLinkToken(
+        objectToSnakeCase({
+          userSession: { sessionId, healthClinicId },
+        }),
+      ),
     );
     const userSession = jsonApiToObject(data, 'userSession');
 
+    yield put(setTestRunFill(Boolean(data?.meta?.test_run), testLinkTokenSent));
     yield put(createUserSessionSuccess(userSession));
     yield put(changeLocale(userSession.languageCode));
     yield put(resetPhoneNumberPreview());
@@ -306,21 +316,26 @@ function* createUserSession({ payload: { sessionId } }) {
   }
 }
 
-function* fetchOrCreateUserSession({ payload: { sessionId } }) {
+export function* fetchOrCreateUserSession({ payload: { sessionId } }) {
   const {
     query: { cid: healthClinicId },
   } = yield select(makeSelectLocation());
   const requestUrl = `/v1/fetch_or_create_user_sessions`;
+  const testLinkTokenSent = hasTestLinkToken();
 
   try {
-    const { data } = yield axios.post(
+    const { data } = yield call(
+      axios.post,
       requestUrl,
-      objectToSnakeCase({
-        userSession: { sessionId, healthClinicId },
-      }),
+      withTestLinkToken(
+        objectToSnakeCase({
+          userSession: { sessionId, healthClinicId },
+        }),
+      ),
     );
     const userSession = jsonApiToObject(data, 'userSession');
 
+    yield put(setTestRunFill(Boolean(data?.meta?.test_run), testLinkTokenSent));
     yield put(fetchOrCreateUserSessionSuccess(userSession));
     yield put(resetPhoneNumberPreview());
     yield put(startSession());

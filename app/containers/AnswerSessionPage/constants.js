@@ -139,3 +139,5 @@ export const NO_CONTINUE_BUTTON_QUESTIONS = [
   QuestionTypes.FINISH,
   QuestionTypes.HENRY_FORD_INITIAL,
 ];
+
+export const SET_TEST_RUN_FILL = 'app/AnswerSessionPage/SET_TEST_RUN_FILL';

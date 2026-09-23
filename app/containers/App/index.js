@@ -69,6 +69,7 @@ import ParticipantReportsPage from 'containers/ParticipantReportsPage/Loadable';
 import SessionMapPage from 'containers/SessionMapPage/Loadable';
 import ParticipantInterventionsPage from 'containers/ParticipantInterventionsPage/Loadable';
 import UserInterventionInvitePage from 'containers/UserInterventionInvitePage/Loadable';
+import TestLinkTokenGate from 'containers/TestLinkTokenGate';
 import SuperadminConsolePage from 'containers/SuperadminConsolePage/Loadable';
 import InboxPage from 'containers/InboxPage/Loadable';
 import ArchivePage from 'containers/ArchivePage/Loadable';
@@ -116,6 +117,29 @@ const AnswerSessionPageComponent = ({ match }) => (
 );
 
 AnswerSessionPageComponent.propTypes = {
+  match: PropTypes.object,
+};
+
+// Defined out here for the same reason as the preview component above — an inline wrapper is a new
+// component type on every render, which remounts the page underneath it. The intervention id comes
+// from the route because a reload strips the token from the URL but not from `sessionStorage`.
+const GatedAnswerSessionPage = (props) => (
+  <TestLinkTokenGate interventionId={props.match?.params?.interventionId}>
+    <AnswerSessionPage {...props} />
+  </TestLinkTokenGate>
+);
+
+GatedAnswerSessionPage.propTypes = {
+  match: PropTypes.object,
+};
+
+const GatedUserInterventionInvitePage = (props) => (
+  <TestLinkTokenGate interventionId={props.match?.params?.interventionId}>
+    <UserInterventionInvitePage {...props} />
+  </TestLinkTokenGate>
+);
+
+GatedUserInterventionInvitePage.propTypes = {
   match: PropTypes.object,
 };
 
@@ -388,7 +412,7 @@ export function App({ user, fetchSelfDetails }) {
         <AppRoute
           exact
           path={RoutePath.ANSWER_SESSION}
-          component={AnswerSessionPage}
+          component={GatedAnswerSessionPage}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
@@ -455,7 +479,7 @@ export function App({ user, fetchSelfDetails }) {
         <AppRoute
           exact
           path={RoutePath.INTERVENTION_INVITE}
-          component={UserInterventionInvitePage}
+          component={GatedUserInterventionInvitePage}
         />
         <AppRoute
           exact

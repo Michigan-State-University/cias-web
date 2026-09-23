@@ -325,4 +325,14 @@ export default defineMessages({
     defaultMessage:
       'Another researcher has taken over this session. Your answers can no longer be submitted.',
   },
+  testRunBanner: {
+    id: `${scope}.testRunBanner`,
+    defaultMessage:
+      'This is a test run. The data recorded here is marked as test data and will be deleted automatically 24 hours from now.',
+  },
+  testRunMarkerFailedBanner: {
+    id: `${scope}.testRunMarkerFailedBanner`,
+    defaultMessage:
+      'This test link is no longer valid, most likely because it has expired. This session is NOT marked as a test run: it will be recorded as a real participant and cannot be deleted afterwards. Close this session and copy a fresh test link.',
+  },
 });

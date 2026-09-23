@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 
 import { SelectOption } from 'components/Select/types';
@@ -13,6 +13,8 @@ import {
 import messages from './messages';
 import { EmailParticipantsTab } from './EmailParticipantsTab';
 import { PredefinedParticipantsTab } from './PredefinedParticipantsTab';
+import { TestLinkTab } from './TestLinkTab';
+import { useCanMintTestLink } from './CopyTestLinkButton';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -54,6 +56,28 @@ export const ParticipantListView: FC<Props> = ({
   setActiveTab,
 }) => {
   const { formatMessage } = useIntl();
+
+  const canMintTestLink = useCanMintTestLink();
+  const showTestLinkTab = copyingInvitationLinkPossible && canMintTestLink;
+
+  const emailParticipantsTabLabel = formatMessage(
+    messages.emailParticipantsTab,
+  );
+  const testParticipantsTabLabel = formatMessage(messages.testParticipantsTab);
+
+  // `Tabs` hides the *button* of a hidden tab but still renders its content whenever the label
+  // matches, so losing the editor lock while the test tab is open would strand the panel with no way
+  // back. Fall back to the first tab instead.
+  useEffect(() => {
+    if (!showTestLinkTab && activeTab === testParticipantsTabLabel) {
+      setActiveTab(emailParticipantsTabLabel);
+    }
+  }, [
+    showTestLinkTab,
+    activeTab,
+    testParticipantsTabLabel,
+    emailParticipantsTabLabel,
+  ]);
 
   return (
     <>
@@ -104,9 +128,20 @@ export const ParticipantListView: FC<Props> = ({
             onManage={onManage}
           />
         </div>
+        {/* @ts-ignore */}
+        <div label={testParticipantsTabLabel} hidden={!showTestLinkTab}>
+          <TestLinkTab
+            isModularIntervention={isModularIntervention}
+            isReportingIntervention={isReportingIntervention}
+            interventionId={interventionId}
+            interventionLanguageCode={interventionLanguageCode}
+            sessionOptions={sessionOptions}
+            healthClinicOptions={healthClinicOptions}
+          />
+        </div>
       </Tabs>
       {copyingInvitationLinkPossible &&
-        activeTab === formatMessage(messages.emailParticipantsTab) && (
+        activeTab === emailParticipantsTabLabel && (
           <CopyLinkForm
             isModularIntervention={isModularIntervention}
             isReportingIntervention={isReportingIntervention}
