@@ -16,6 +16,7 @@ import {
   editChartRequest,
   StatusPermissions,
   copyChartRequest,
+  regenerateChartRequest,
 } from 'global/reducers/dashboardSections';
 
 import ActionIcon from 'components/ActionIcon';
@@ -37,6 +38,7 @@ const ChartSettings = ({
   editChart,
   onClose,
   copyChart,
+  regenerateChart,
 }) => {
   const [isAddingPattern, setIsAddingPattern] = useState(false);
   const [isChangingStatus, setIsChangingStatus] = useState(false);
@@ -145,6 +147,16 @@ const ChartSettings = ({
     [chart.formula.defaultPattern, onEditFormula],
   );
 
+  const onEditMinAnsweredVariables = useCallback(
+    onEditFormula('minAnsweredVariables'),
+    [chart.formula.minAnsweredVariables, onEditFormula],
+  );
+
+  const onEditPositiveDespiteMissingData = useCallback(
+    onEditFormula('positiveDespiteMissingData'),
+    [chart.formula.positiveDespiteMissingData, onEditFormula],
+  );
+
   const onDeleteFormulaPattern = useCallback(
     (index) => () =>
       onEditFormula('patterns')(
@@ -186,6 +198,10 @@ const ChartSettings = ({
     copyChart(chart.id);
   }, [chart.id]);
 
+  const onRegenerateChart = useCallback(() => {
+    regenerateChart(chart.id);
+  }, [chart.id]);
+
   switch (chart.chartType) {
     case ChartTypeDto.PIE_CHART:
       return wrapper(
@@ -204,6 +220,9 @@ const ChartSettings = ({
           onEditStatus={onEditStatus}
           onEditDateRange={onEditDateRange}
           onCopyChart={onCopyChart}
+          onRegenerateChart={onRegenerateChart}
+          onEditMinAnsweredVariables={onEditMinAnsweredVariables}
+          onEditPositiveDespiteMissingData={onEditPositiveDespiteMissingData}
         />,
       );
     case ChartTypeDto.NUMERIC_BAR_CHART:
@@ -222,6 +241,9 @@ const ChartSettings = ({
           onEditStatus={onEditStatus}
           onEditTrendLine={onEditTrendLine}
           onCopyChart={onCopyChart}
+          onRegenerateChart={onRegenerateChart}
+          onEditMinAnsweredVariables={onEditMinAnsweredVariables}
+          onEditPositiveDespiteMissingData={onEditPositiveDespiteMissingData}
         />,
       );
     default:
@@ -235,12 +257,14 @@ ChartSettings.propTypes = {
   editChart: PropTypes.func,
   onClose: PropTypes.func,
   copyChart: PropTypes.func,
+  regenerateChart: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   deleteChart: deleteChartRequest,
   editChart: editChartRequest,
   copyChart: copyChartRequest,
+  regenerateChart: regenerateChartRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

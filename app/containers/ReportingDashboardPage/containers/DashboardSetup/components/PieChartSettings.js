@@ -2,18 +2,27 @@ import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
+import { isChartRegenerationInProgress } from 'global/reducers/dashboardSections';
+
 import { Col, Row } from 'components/ReactGridSystem';
 import DashedButton from 'components/Button/DashedButton';
 import { DateRangeChooser } from 'components/DateRangeChooser';
 
 import ChartSettingsGeneralSection from './ChartSettingsGeneralSection';
 import ChartSettingsTopSection from './ChartSettingsTopSection';
+import ChartFormulaSection from './ChartFormulaSection';
 import PieChartFormulaOtherPattern from './PieChartFormulaOtherPattern';
 import PieChartFormulaPattern from './PieChartFormulaPattern';
+import ChartValiditySettings from './ChartValiditySettings';
 
 import { FullWidthContainer } from '../../../styled';
+import { FormulaGroupPanel } from '../styled';
 import messages from '../messages';
-import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
+import {
+  ChartSettingsContext,
+  DashboardSectionsContext,
+  isMinAnsweredStale,
+} from '../constants';
 import { colors } from '../../../../../theme';
 
 const PieChartSettings = ({
@@ -31,6 +40,9 @@ const PieChartSettings = ({
   onEditStatus,
   onEditDateRange,
   onCopyChart,
+  onRegenerateChart,
+  onEditMinAnsweredVariables,
+  onEditPositiveDespiteMissingData,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -38,11 +50,18 @@ const PieChartSettings = ({
     statusPermissions: { canBeEdited },
   } = useContext(ChartSettingsContext);
 
-  const { chartType, formula, id, status, dateRangeStart, dateRangeEnd } =
-    chart;
+  const {
+    chartType,
+    formula,
+    id,
+    status,
+    dateRangeStart,
+    dateRangeEnd,
+    formulaVariableCount,
+  } = chart;
 
   const {
-    loaders: { deleteChartLoader },
+    loaders: { deleteChartLoader, regenerateChartLoader },
   } = useContext(DashboardSectionsContext);
 
   const handleEditDateRange = (start, end) => {
@@ -59,7 +78,11 @@ const PieChartSettings = ({
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
         hasFormula={formula.payload !== ''}
+        isMinAnsweredStale={isMinAnsweredStale(formula, formulaVariableCount)}
         onCopyChart={onCopyChart}
+        onRegenerateChart={onRegenerateChart}
+        isRegenerating={isChartRegenerationInProgress(chart)}
+        isEnqueuingRegeneration={regenerateChartLoader}
       />
 
       <Row mt={36}>
@@ -80,39 +103,53 @@ const PieChartSettings = ({
       <ChartSettingsGeneralSection
         chart={chart}
         onEditDescription={onEditDescription}
-        onEditFormulaPayload={onEditFormulaPayload}
         onEditName={onEditName}
       />
 
-      <Row mt={36}>
-        <Col>
-          {formula.patterns.map((pattern, index) => (
-            <PieChartFormulaPattern
-              key={`Pattern-${index}-Chart-${id}`}
-              pattern={pattern}
-              onEdit={onEditFormulaPattern(index)}
-              onDelete={onDeleteFormulaPattern(index)}
-            />
-          ))}
-          <PieChartFormulaOtherPattern
-            key={`OtherPattern-Chart-${id}`}
-            pattern={formula.defaultPattern}
-            onEdit={onEditFormulaDefaultPattern}
-          />
-        </Col>
-      </Row>
+      <FormulaGroupPanel>
+        <ChartFormulaSection
+          chart={chart}
+          onEditFormulaPayload={onEditFormulaPayload}
+        />
 
-      <Row mt={36}>
-        <Col>
-          <DashedButton
-            onClick={onAddFormulaPattern}
-            loading={addPatternLoader}
-            disabled={!canBeEdited}
-          >
-            {formatMessage(messages.addNewCase)}
-          </DashedButton>
-        </Col>
-      </Row>
+        <Row mt={36}>
+          <Col>
+            {formula.patterns.map((pattern, index) => (
+              <PieChartFormulaPattern
+                key={`Pattern-${index}-Chart-${id}`}
+                pattern={pattern}
+                onEdit={onEditFormulaPattern(index)}
+                onDelete={onDeleteFormulaPattern(index)}
+              />
+            ))}
+            <PieChartFormulaOtherPattern
+              key={`OtherPattern-Chart-${id}`}
+              pattern={formula.defaultPattern}
+              onEdit={onEditFormulaDefaultPattern}
+            />
+          </Col>
+        </Row>
+
+        <Row mt={36}>
+          <Col>
+            <DashedButton
+              onClick={onAddFormulaPattern}
+              loading={addPatternLoader}
+              disabled={!canBeEdited}
+            >
+              {formatMessage(messages.addNewCase)}
+            </DashedButton>
+          </Col>
+        </Row>
+
+        <ChartValiditySettings
+          formulaVariableCount={formulaVariableCount}
+          minAnsweredVariables={formula.minAnsweredVariables}
+          positiveDespiteMissingData={formula.positiveDespiteMissingData}
+          onEditMinAnsweredVariables={onEditMinAnsweredVariables}
+          onEditPositiveDespiteMissingData={onEditPositiveDespiteMissingData}
+        />
+      </FormulaGroupPanel>
     </FullWidthContainer>
   );
 };
@@ -132,6 +169,9 @@ PieChartSettings.propTypes = {
   onEditStatus: PropTypes.func,
   onEditDateRange: PropTypes.func,
   onCopyChart: PropTypes.func,
+  onRegenerateChart: PropTypes.func,
+  onEditMinAnsweredVariables: PropTypes.func,
+  onEditPositiveDespiteMissingData: PropTypes.func,
 };
 
 export default memo(PieChartSettings);

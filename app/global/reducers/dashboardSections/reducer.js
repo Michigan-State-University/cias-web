@@ -30,6 +30,11 @@ import {
   FETCH_SECTIONS_REQUEST,
   FETCH_SECTIONS_SUCCESS,
   COPY_CHART_SUCCESS,
+  REGENERATE_CHART_REQUEST,
+  REGENERATE_CHART_SUCCESS,
+  REGENERATE_CHART_ERROR,
+  REGENERATE_CHART_POLL_FINISHED,
+  FETCH_CHART_SUCCESS,
   SELECT_CHART_ACTION,
   SET_CHARTS_DATA,
   SET_CHARTS_FILTERS,
@@ -56,6 +61,7 @@ export const initialState = {
     addChartLoader: false,
     editChartLoader: false,
     deleteChartLoader: false,
+    regenerateChartLoader: false,
   },
   errors: {
     fetchDashboardSectionError: null,
@@ -66,8 +72,22 @@ export const initialState = {
     addChartError: null,
     editChartError: null,
     deleteChartError: null,
+    regenerateChartError: null,
   },
 };
+
+// Swept across all sections because the regenerate actions carry a chart id and no section id.
+const setChartRegenerationPending = (draft, chartId, pending) =>
+  [draft.dashboardSections, draft.cache.dashboardSections].forEach((sections) =>
+    (sections ?? []).forEach(({ charts }) => {
+      if (!charts) return;
+
+      updateItemById(charts, chartId, (chart) => ({
+        ...chart,
+        regenerationPending: pending,
+      }));
+    }),
+  );
 
 /* eslint-disable default-case, no-param-reassign, default-param-last */
 const dashboardSectionsReducer = (state = initialState, action) =>
@@ -238,6 +258,15 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.editChartLoader = false;
         draft.errors.editChartError = null;
 
+        // the visible tree is what every selector reads — without this, chart
+        // attributes computed by the API (`formulaVariableCount`) never reach
+        // the editor and stay stale for the rest of the session
+        updateItemById(
+          draft.dashboardSections,
+          payload.chart.dashboardSectionId,
+          (item) => dashboardSectionReducer(item, action),
+        );
+
         updateItemById(
           draft.cache.dashboardSections,
           payload.chart.dashboardSectionId,
@@ -288,6 +317,49 @@ const dashboardSectionsReducer = (state = initialState, action) =>
       case DELETE_CHART_ERROR: {
         draft.loaders.deleteChartLoader = false;
         draft.errors.deleteChartError = payload.error;
+
+        break;
+      }
+
+      case REGENERATE_CHART_REQUEST: {
+        draft.loaders.regenerateChartLoader = true;
+        draft.errors.regenerateChartError = null;
+
+        break;
+      }
+
+      case REGENERATE_CHART_SUCCESS: {
+        draft.loaders.regenerateChartLoader = false;
+        setChartRegenerationPending(draft, payload.chartId, true);
+
+        break;
+      }
+
+      case REGENERATE_CHART_POLL_FINISHED: {
+        setChartRegenerationPending(draft, payload.chartId, false);
+
+        break;
+      }
+
+      case REGENERATE_CHART_ERROR: {
+        draft.loaders.regenerateChartLoader = false;
+        draft.errors.regenerateChartError = payload.error;
+
+        break;
+      }
+
+      case FETCH_CHART_SUCCESS: {
+        updateItemById(
+          draft.dashboardSections,
+          payload.chart.dashboardSectionId,
+          (item) => dashboardSectionReducer(item, action),
+        );
+
+        updateItemById(
+          draft.cache.dashboardSections,
+          payload.chart.dashboardSectionId,
+          (item) => dashboardSectionReducer(item, action),
+        );
 
         break;
       }
