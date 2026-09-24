@@ -2,6 +2,12 @@ name: E2E Tests
 
 on: push
 
+# A newer push to the same branch stops the older run. Left running, its shards
+# keep driving the shared staging accounts underneath the newer run's shards.
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   API_URL: https://cias-api-staging.herokuapp.com
   WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
@@ -13,6 +19,9 @@ env:
 jobs:
   build:
     name: Build app for E2E
+    # Runs triggered by Dependabot get no repository secrets, so the admin
+    # sign-in can only fail. Skipping here skips the shards that depend on it.
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -23,7 +32,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -47,6 +56,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 20
+
+    # Every run of this workflow shares the same five staging admin accounts, and
+    # the API rotates an account's token on each request, so two runs on one
+    # account log each other out. Only one job per account at a time: a run from
+    # another branch waits for the account instead of colliding with it.
+    # (GitHub keeps one pending job per group; a third run queuing for the same
+    # account replaces the one already waiting.)
+    concurrency:
+      group: e2e-staging-account-${{ matrix.account }}
+      cancel-in-progress: false
 
     strategy:
       # one shard failing must not cancel the others, or a single flake hides
@@ -75,7 +94,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -139,7 +158,7 @@ jobs:
 
   merge-reports:
     name: Merge E2E reports
-    if: always()
+    if: always() && github.actor != 'dependabot[bot]'
     needs: e2e-tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -151,7 +170,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
