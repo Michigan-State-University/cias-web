@@ -57,7 +57,7 @@ export default defineMessages({
   },
   start_autofinish_timer_tooltip_text: {
     id: `${scope}.start_autofinish_timer_tooltip_text`,
-    defaultMessage: `Selecting this option means that if the participant gets at least as far as this screen and answers it, CIAS will send any summary reports or text messages after the patient finishes the session, even if they don't get to the very last screen. CIAS will also consider the session to be completed after the participant closes this session, as long as they got at least this far. This means that the participant won't be able to come back later to finish any screens that come after this one.<br/><br/>This option is available if autofinish is enabled in session General Settings only.`,
+    defaultMessage: `Selecting this option means that if the participant gets at least as far as this screen and answers it, CIAS will generate any summary reports even if they don't get to the very last screen. The reports are generated when the participant reaches the finish screen, and also when they stop responding and the session times out from inactivity. CIAS will consider the session to be completed once that happens, so the participant won't be able to come back later to finish any screens that come after this one.<br/><br/>If autofinish is enabled in session General Settings, the autofinish delay decides how long CIAS waits, and any scheduled text messages are sent as well. With autofinish off, only the reports are generated - no text messages are sent and the next session is not unlocked.`,
   },
   min_length: {
     id: `${scope}.min_length`,
