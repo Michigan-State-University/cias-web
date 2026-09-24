@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { canEdit } from 'models/Status/statusPermissions';
 
+import { SessionTypes } from 'models/Session';
 import { makeSelectIsAdmin, makeSelectUserId } from 'global/reducers/auth';
 
 import { initialState } from './reducer';
@@ -41,6 +42,12 @@ export const makeSelectInterventionLoader = (name) =>
 
 export const makeSelectInterventionError = (name) =>
   createSelector(selectIntervention, ({ errors }) => errors[name]);
+
+export const makeSelectGenerateTestLinkLoader = (url) =>
+  createSelector(
+    selectIntervention,
+    ({ loaders }) => !!loaders.generateTestLink?.[url],
+  );
 
 export const makeSelectCurrentSessionIndex = () =>
   createSelector(
@@ -172,4 +179,24 @@ export const makeSelectInterventionLanguageCode = () =>
   createSelector(
     selectIntervention,
     ({ intervention }) => intervention?.languageCode,
+  );
+
+export const makeSelectRaSession = () =>
+  createSelector(makeSelectIntervention(), (intervention) => {
+    const sessions = intervention?.sessions ?? [];
+    return sessions.find((s) => s.type === SessionTypes.RA_SESSION) ?? null;
+  });
+
+export const makeSelectRaSessionQuestionGroups = () =>
+  createSelector(
+    selectIntervention,
+    (substate) => substate?.raSessionQuestionGroups ?? [],
+  );
+
+export const makeSelectBulkCreateStructuredErrors = () =>
+  createSelector(
+    selectIntervention,
+    (substate) =>
+      substate?.errors?.bulkCreatePredefinedParticipants?.response?.data
+        ?.details?.errors ?? null,
   );

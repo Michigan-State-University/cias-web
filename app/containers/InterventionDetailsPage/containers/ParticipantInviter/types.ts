@@ -1,6 +1,7 @@
 import { Session } from 'models/Session';
 import { HealthClinic } from 'models/Organization';
 import { CountryCode } from 'libphonenumber-js/types';
+import { QuestionTypes } from 'models/Question';
 
 import { SelectOption } from 'components/Select/types';
 
@@ -118,13 +119,14 @@ export type PredefinedParticipantCsvRow = {
   lastName?: string;
   email?: string;
   externalId?: string;
+  // Numeric calling code, e.g. "1" or "44" (the leading "+" is optional). A 2-letter ISO code is also accepted.
   phoneCountryCode?: string;
   phoneNumber?: string;
   emailNotification?: string;
   smsNotification?: string;
   healthClinicName?: string;
   healthSystemName?: string;
-};
+} & Record<string, string | undefined>; // accepts dotted RA answer keys
 
 export type UploadedPredefinedParticipantsCsvData = {
   data: PredefinedParticipantCsvRow;
@@ -142,8 +144,29 @@ export type ParsedPredefinedParticipantCsvRow = {
   healthClinicOption: SelectOption<string> | null;
   healthClinicName: string;
   healthSystemName: string;
+  raAnswers?: Record<string, string>;
+  raAnswerTypeMismatches?: string[];
 };
 
 export type InvitePredefinedParticipantsFormValues = {
   participants: ParsedPredefinedParticipantCsvRow[];
+};
+
+export type RaAnswerColumnMeta = {
+  questionId: string;
+  questionType: QuestionTypes;
+  questionTitle: string;
+};
+
+export type RaAnswerColumnMap = Record<string, RaAnswerColumnMeta>;
+
+export type BulkCreateErrorEntry = {
+  row?: number;
+  field?: string;
+  code: string;
+  [contextKey: string]: unknown;
+};
+
+export type BulkCreateErrorDetails = {
+  errors: BulkCreateErrorEntry[];
 };

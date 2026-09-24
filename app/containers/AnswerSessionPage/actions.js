@@ -19,6 +19,7 @@ import {
   REDIRECT_TO_PREVIEW,
   CREATE_USER_SESSION_REQUEST,
   CREATE_USER_SESSION_SUCCESS,
+  SET_TEST_RUN_FILL,
   CREATE_USER_SESSION_FAILURE,
   NEXT_QUESTION_REQUEST,
   NEXT_QUESTION_SUCCESS,
@@ -46,6 +47,7 @@ import {
   VERIFY_PID_REQUEST,
   VERIFY_PID_SUCCESS,
   VERIFY_PID_ERROR,
+  SET_RA_FULFILLMENT,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
@@ -180,3 +182,9 @@ export const verifyPidSuccess = (user) =>
   actionBuilder(VERIFY_PID_SUCCESS, { user });
 export const verifyPidError = (error) =>
   actionBuilder(VERIFY_PID_ERROR, { error });
+
+export const setRaFulfillment = (isRaFulfillment) =>
+  actionBuilder(SET_RA_FULFILLMENT, { isRaFulfillment });
+
+export const setTestRunFill = (testRun, testLinkTokenSent = false) =>
+  actionBuilder(SET_TEST_RUN_FILL, { testRun, testLinkTokenSent });

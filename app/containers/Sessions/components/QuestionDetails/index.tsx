@@ -247,6 +247,7 @@ const RenderQuestionDetails = ({
                             interventionStatus={status}
                             isNarratorTab={isNarratorTab}
                             variable={body.variable}
+                            required={sessionType === SessionTypes.RA_SESSION}
                           />
                         </HelpIconTooltip>
                       </Row>

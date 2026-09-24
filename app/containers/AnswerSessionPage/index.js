@@ -100,6 +100,7 @@ import CharacterAnim from './components/CharacterAnim';
 import CommonLayout from './layouts/CommonLayout';
 
 import makeSelectAnswerSessionPage from './selectors';
+import TestRunBanner from './components/TestRunBanner';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -339,6 +340,7 @@ export function AnswerSessionPage({
     showTextReadingControls,
     transitionalUserSessionId,
     fetchPreviousQuestionLoading,
+    isRaFulfillment,
   },
   isPreview,
   interventionStatus,
@@ -543,7 +545,7 @@ export function AnswerSessionPage({
       nextQuestion(userSessionId, questionId);
     }
 
-    if (userSession.liveChatEnabled && interventionId) {
+    if (userSession.liveChatEnabled && interventionId && !isRaFulfillment) {
       setLiveChatEnabled(interventionId);
     }
   }, [userSession]);
@@ -676,6 +678,7 @@ export function AnswerSessionPage({
       switch (type) {
         case QuestionTypes.PHONE: {
           const { confirmed, timezone } = answerBody[0]?.value ?? {};
+          if (isPreview) return !!timezone;
           return confirmed && timezone;
         }
         case QuestionTypes.NUMBER: {
@@ -915,6 +918,7 @@ export function AnswerSessionPage({
       maxHeight="100vh"
       background={isMobilePreview ? undefined : themeColors.sessionBackground}
     >
+      <TestRunBanner />
       {quickExitEnabled && (
         <QuickExit
           isMobilePreview={isMobilePreview}

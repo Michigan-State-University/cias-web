@@ -147,6 +147,12 @@ import {
   UNASSIGN_TAG_REQUEST,
   UNASSIGN_TAG_SUCCESS,
   UNASSIGN_TAG_ERROR,
+  FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST,
+  FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS,
+  FETCH_RA_SESSION_QUESTION_GROUPS_ERROR,
+  GENERATE_TEST_LINK_REQUEST,
+  GENERATE_TEST_LINK_SUCCESS,
+  GENERATE_TEST_LINK_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -154,6 +160,7 @@ export const initialState = {
   intervention: null,
   invitations: null,
   predefinedParticipants: null,
+  raSessionQuestionGroups: [],
   invitationsStates: {},
   collaborators: [],
   currentUserCollaboratorData: null,
@@ -193,6 +200,10 @@ export const initialState = {
     sendPredefinedParticipantEmailInvitation: false,
     bulkCreatePredefinedParticipants: false,
     updateAllSessionsScheduleLoading: false,
+    fetchRaSessionQuestionGroups: false,
+    // Keyed by invite url, not the plain boolean its neighbours use — the two copy controls mint
+    // independently and must spin independently.
+    generateTestLink: {},
   },
   errors: {
     fetchInterventionError: null,
@@ -210,6 +221,7 @@ export const initialState = {
     fetchPredefinedParticipants: null,
     bulkCreatePredefinedParticipants: null,
     updateAllSessionsScheduleError: null,
+    fetchRaSessionQuestionGroups: null,
   },
 };
 
@@ -956,6 +968,34 @@ export const interventionReducer = (state = initialState, action) =>
         draft.errors.unassignTag = action.payload.error;
         break;
       }
+
+      case FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST: {
+        draft.loaders.fetchRaSessionQuestionGroups = true;
+        draft.errors.fetchRaSessionQuestionGroups = null;
+        break;
+      }
+      case FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS: {
+        draft.loaders.fetchRaSessionQuestionGroups = false;
+        draft.raSessionQuestionGroups = action.payload.questionGroups;
+        break;
+      }
+      case FETCH_RA_SESSION_QUESTION_GROUPS_ERROR: {
+        const { error } = action.payload;
+        draft.loaders.fetchRaSessionQuestionGroups = false;
+        draft.errors.fetchRaSessionQuestionGroups = error;
+        draft.raSessionQuestionGroups = [];
+        break;
+      }
+
+      case GENERATE_TEST_LINK_REQUEST:
+        draft.loaders.generateTestLink[action.payload.url] = true;
+        break;
+      case GENERATE_TEST_LINK_SUCCESS:
+        delete draft.loaders.generateTestLink[action.payload.url];
+        break;
+      case GENERATE_TEST_LINK_ERROR:
+        delete draft.loaders.generateTestLink[action.payload.url];
+        break;
     }
   });
 

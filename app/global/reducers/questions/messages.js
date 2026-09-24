@@ -11,6 +11,11 @@ export default defineMessages({
     id: `${scope}.reservedVariable`,
     defaultMessage: 'This variable name is reserved!',
   },
+  raVariableRequired: {
+    id: `${scope}.raVariableRequired`,
+    defaultMessage:
+      'Please set a variable name for this question before saving changes — it is required for Research Assistant session questions.',
+  },
   copyError: {
     id: `${scope}.copyError`,
     defaultMessage: 'Cannot copy the screen!',

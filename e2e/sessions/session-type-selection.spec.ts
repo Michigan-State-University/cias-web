@@ -1,5 +1,6 @@
 import { test, expect } from '../fixtures/test';
 import { DashboardPage, InterventionPage } from '../pages';
+import { waitForApiResponse } from '../utils/waitForApiResponse';
 
 test.describe('Session Type Selection Modal', () => {
   
@@ -25,13 +26,12 @@ test.describe('Session Type Selection Modal', () => {
 
     await smsOption.click();
     
-    const responsePromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const responsePromise = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await page.locator('[data-cy="create-session-submit-button"]').click();
     await responsePromise;

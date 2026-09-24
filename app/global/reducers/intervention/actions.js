@@ -132,6 +132,15 @@ import {
   UNASSIGN_TAG_REQUEST,
   UNASSIGN_TAG_SUCCESS,
   UNASSIGN_TAG_ERROR,
+  FULFILL_RA_SESSION_REQUEST,
+  FULFILL_RA_SESSION_SUCCESS,
+  FULFILL_RA_SESSION_ERROR,
+  FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST,
+  FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS,
+  FETCH_RA_SESSION_QUESTION_GROUPS_ERROR,
+  GENERATE_TEST_LINK_REQUEST,
+  GENERATE_TEST_LINK_SUCCESS,
+  GENERATE_TEST_LINK_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -636,10 +645,8 @@ export const bulkCreatePredefinedParticipantsRequest = (
     data,
     onSuccess,
   });
-export const bulkCreatePredefinedParticipantsSuccess = (participants) =>
-  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS, {
-    participants,
-  });
+export const bulkCreatePredefinedParticipantsSuccess = () =>
+  actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_SUCCESS, {});
 export const bulkCreatePredefinedParticipantsError = (error) =>
   actionBuilder(BULK_CREATE_PREDEFINED_PARTICIPANTS_ERROR, { error });
 
@@ -656,3 +663,34 @@ export const unassignTagSuccess = (tagId) =>
   actionBuilder(UNASSIGN_TAG_SUCCESS, { tagId });
 export const unassignTagError = (error) =>
   actionBuilder(UNASSIGN_TAG_ERROR, { error });
+
+export const fulfillRaSessionRequest = (slug) =>
+  actionBuilder(FULFILL_RA_SESSION_REQUEST, { slug });
+export const fulfillRaSessionSuccess = () =>
+  actionBuilder(FULFILL_RA_SESSION_SUCCESS, {});
+export const fulfillRaSessionError = (error) =>
+  actionBuilder(FULFILL_RA_SESSION_ERROR, { error });
+
+export const fetchRaSessionQuestionGroupsRequest = (sessionId) =>
+  actionBuilder(FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST, { sessionId });
+export const fetchRaSessionQuestionGroupsSuccess = (questionGroups) =>
+  actionBuilder(FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS, { questionGroups });
+export const fetchRaSessionQuestionGroupsError = (error) =>
+  actionBuilder(FETCH_RA_SESSION_QUESTION_GROUPS_ERROR, { error });
+
+export const generateTestLinkRequest = (
+  interventionId,
+  url,
+  onSuccess,
+  onError,
+) =>
+  actionBuilder(GENERATE_TEST_LINK_REQUEST, {
+    interventionId,
+    url,
+    onSuccess,
+    onError,
+  });
+export const generateTestLinkSuccess = (url) =>
+  actionBuilder(GENERATE_TEST_LINK_SUCCESS, { url });
+export const generateTestLinkError = (url, error) =>
+  actionBuilder(GENERATE_TEST_LINK_ERROR, { url, error });

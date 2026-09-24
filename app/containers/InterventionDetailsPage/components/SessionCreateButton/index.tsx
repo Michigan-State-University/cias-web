@@ -28,6 +28,7 @@ import SessionTypeChooser from './SessionTypeChooser';
 type Props = {
   handleSessionCreation: (sessionType: string) => void;
   canCreateCatSession: boolean;
+  canCreateRaSession: boolean;
   disabled: boolean;
   user: User;
 };
@@ -35,6 +36,7 @@ type Props = {
 const SessionCreateButton = ({
   handleSessionCreation,
   canCreateCatSession,
+  canCreateRaSession,
   disabled,
   user,
 }: Props): JSX.Element => {
@@ -54,7 +56,7 @@ const SessionCreateButton = ({
   };
 
   const clickWrapper = () => {
-    if (!canCreateCatSession && !canCreateSmsSession()) {
+    if (!canCreateCatSession && !canCreateSmsSession() && !canCreateRaSession) {
       handleSessionCreation(SessionTypes.CLASSIC_SESSION);
     } else {
       setModalVisible(true);
@@ -79,6 +81,7 @@ const SessionCreateButton = ({
           onCreateSession={handleSessionWithTypeCreation}
           canCreateCatSession={canCreateCatSession}
           canCreateSmsSession={canCreateSmsSession()}
+          canCreateRaSession={canCreateRaSession}
         />
       </Modal>
       <NewInterventionContainer

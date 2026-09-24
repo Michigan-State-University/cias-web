@@ -105,6 +105,7 @@ const NoFormulaMessage = ({
             disabled={!editingPossible}
             placement="right"
             onClick={handleAddLink}
+            dropdownWidth="260px"
           >
             <Text fontWeight="bold" color={themeColors.secondary}>
               {formatMessage(settingsMessages.addLinkButton)}
@@ -128,7 +129,10 @@ const NoFormulaMessage = ({
             includeCurrentSession
             includeNonDigitVariables
             isMultiSession
-            sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
+            sessionTypesWhiteList={[
+              SessionTypes.CLASSIC_SESSION,
+              SessionTypes.RA_SESSION,
+            ]}
           >
             <Text fontWeight="bold" color={themeColors.secondary}>
               {formatMessage(settingsMessages.addVariableButton)}

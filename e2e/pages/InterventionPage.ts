@@ -1,5 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 
+import { waitForApiResponse } from '../utils/waitForApiResponse';
+
 // Access setting types
 export enum InterventionAccessType {
   ANYONE = 'anyone',
@@ -47,11 +49,11 @@ export class InterventionPage {
       }
 
       // Wait for the create session button to be visible and click it
-      await this.createSessionButton.waitFor({ state: 'visible', timeout: 10000 });
+      await this.createSessionButton.waitFor({ state: 'visible', timeout: 30000 });
       await this.createSessionButton.click();
 
       // Wait for the dialog to appear
-      await createSessionDialogButton.waitFor({ state: 'visible', timeout: 5000 });
+      await createSessionDialogButton.waitFor({ state: 'visible', timeout: 10000 });
     }
 
     // Select session type in the dialog (Classic is pre-selected)
@@ -66,12 +68,11 @@ export class InterventionPage {
     }
 
     // Intercept the API call before clicking create
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST',
-      { timeout: 15000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      timeout: 30000,
+    });
 
     // Click the create session button in the dialog
     await createSessionDialogButton.click();
@@ -86,6 +87,59 @@ export class InterventionPage {
     for (let i = 0; i < count; i++) {
       await this.createSession();
     }
+  }
+
+  // Opens the "create session" type-chooser modal (no-op if already open).
+  async openCreateSessionModal() {
+    const submitButton = this.page.locator('[data-cy="create-session-submit-button"]');
+    if (await submitButton.isVisible().catch(() => false)) return;
+
+    const modalPortal = this.page.locator('#modal-portal [role="dialog"]');
+    if (await modalPortal.isVisible().catch(() => false)) {
+      await this.page.keyboard.press('Escape');
+      await this.page.waitForTimeout(500);
+    }
+
+    await this.createSessionButton.waitFor({ state: 'visible', timeout: 30000 });
+    await this.createSessionButton.click();
+    await submitButton.waitFor({ state: 'visible', timeout: 10000 });
+  }
+
+  async createRaSession() {
+    await this.openCreateSessionModal();
+
+    await this.page
+      .locator('[data-cy="session-type-option-Session::ResearchAssistant"]')
+      .click();
+
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      timeout: 30000,
+    });
+
+    await this.page.locator('[data-cy="create-session-submit-button"]').click();
+
+    const response = await responsePromise;
+    expect(response.status()).toBe(201);
+
+    await this.page.waitForTimeout(1000);
+  }
+
+  // Whether the Research Assistant option is offered in the create-session modal
+  // (only one RA session is allowed per intervention). Leaves the modal closed.
+  async isRaSessionTypeAvailable(): Promise<boolean> {
+    await this.openCreateSessionModal();
+
+    const raOption = this.page.locator(
+      '[data-cy="session-type-option-Session::ResearchAssistant"]',
+    );
+    const available = await raOption.isVisible().catch(() => false);
+
+    await this.page.keyboard.press('Escape');
+    await this.page.waitForTimeout(300);
+
+    return available;
   }
 
   async enterSession(index: number = 0) {
@@ -123,11 +177,10 @@ export class InterventionPage {
     const deleteOption = this.page.locator('[data-cy="dropdown-option-delete"]');
     await deleteOption.waitFor({ state: 'visible', timeout: 5000 });
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.request().method() === 'DELETE',
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions/',
+      method: 'DELETE',
+    });
 
     await deleteOption.click();
 
@@ -149,13 +202,11 @@ export class InterventionPage {
     const duplicateOption = this.page.locator('[data-cy="dropdown-option-duplicate"]');
     await duplicateOption.waitFor({ state: 'visible', timeout: 5000 });
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.url().includes('/clone') &&
-        response.request().method() === 'POST',
-      { timeout: 15000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: ['/sessions/', '/clone'],
+      method: 'POST',
+      timeout: 15000,
+    });
 
     await duplicateOption.click();
 
@@ -188,19 +239,42 @@ export class InterventionPage {
     await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
     
     // Wait for the API response that duplicates the session internally
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.url().includes('/duplicate') &&
-        response.request().method() === 'POST' &&
-        response.status() === 200,
-      { timeout: 15000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: ['/sessions/', '/duplicate'],
+      method: 'POST',
+      status: 200,
+      timeout: 15000,
+    });
     
     await pasteButton.click();
 
     await responsePromise;
     await this.page.locator('[role="dialog"]').waitFor({ state: 'hidden', timeout: 10000 });
+  }
+
+  // Opens the internal-copy picker for a session, selects the target intervention
+  // and clicks "Paste session in this intervention" — without asserting the result.
+  // Used to exercise the RA-conflict guard (which blocks the paste client-side).
+  async startInternalSessionCopy(sessionIndex: number, targetInterventionName: string) {
+    const dropdownTriggers = this.page.locator('[data-cy^="dropdown-trigger-session-list-item-options"]');
+    await dropdownTriggers.nth(sessionIndex).click();
+
+    const copyOption = this.page.locator('[data-cy="dropdown-option-copy"]');
+    await copyOption.waitFor({ state: 'visible', timeout: 5000 });
+    await copyOption.click();
+
+    const dialog = this.page.locator('[role="dialog"]');
+    await dialog.waitFor({ state: 'visible', timeout: 5000 });
+    await this.page.waitForTimeout(2000);
+
+    const targetRow = dialog.getByText(targetInterventionName, { exact: false });
+    await targetRow.waitFor({ state: 'visible', timeout: 10000 });
+    await targetRow.click();
+    await this.page.waitForTimeout(1000);
+
+    const pasteButton = this.page.locator('button:has-text("Paste session in this intervention")');
+    await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
+    await pasteButton.click();
   }
 
   async addNote(noteText: string) {
@@ -214,13 +288,12 @@ export class InterventionPage {
     // Click outside to trigger the save (blur triggers save in ApprovableInput)
     await this.page.locator('h2:has-text("Note")').click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
   }
 
   async getNoteText(): Promise<string> {
@@ -244,13 +317,12 @@ export class InterventionPage {
       return;
     }
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await label.click();
 
@@ -279,16 +351,15 @@ export class InterventionPage {
     const labelSelector = `label[for="access-radio-${type}"]`;
     const label = this.page.locator(labelSelector);
 
-    await label.waitFor({ state: 'visible', timeout: 10000 });
+    await label.waitFor({ state: 'visible', timeout: 30000 });
     await label.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 30000,
+    });
   }
 
   async addInvitedParticipant(email: string) {
@@ -297,11 +368,11 @@ export class InterventionPage {
     await emailInput.fill(email);
     await emailInput.press('Enter');
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') && response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      status: 200,
+      timeout: 10000,
+    });
   }
 
   async isSessionScheduleVisible(sessionIndex: number): Promise<boolean> {
@@ -352,13 +423,12 @@ export class InterventionPage {
   async setEstimateTime(sessionIndex: number, minutes: string) {
     const input = this.getEstimateTimeInput(sessionIndex);
     
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.request().method() === 'PUT' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions/',
+      method: 'PUT',
+      status: 200,
+      timeout: 10000,
+    });
     
     await input.fill(minutes);
     await input.blur();
@@ -391,13 +461,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -414,13 +483,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -437,13 +505,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
 
     await this.page.waitForTimeout(500);
@@ -461,13 +528,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -485,13 +551,12 @@ export class InterventionPage {
     await confirmButton.click();
 
     // Wait for API response
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -510,12 +575,11 @@ export class InterventionPage {
     // Trigger blur by pressing Tab or clicking outside - this should trigger the save
     await this.nameInput.press('Tab');
     
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
   }
 }

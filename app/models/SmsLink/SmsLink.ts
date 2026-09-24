@@ -8,4 +8,5 @@ export interface SmsLinkAttributes {
 
 export interface SmsLink extends SmsLinkAttributes {
   id: string;
+  variantId: Nullable<string>; // null for no-formula links
 }

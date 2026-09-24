@@ -204,7 +204,10 @@ export const textMessagesReducer = (state = initialState, action) =>
         draft.loaders.createVariantLoading = false;
 
         updateItemById(draft.textMessages, state.selectedMessageId, (item) => {
-          item.variants.push(variant);
+          item.variants.push({
+            ...variant,
+            smsLinks: variant.smsLinks ?? [],
+          });
 
           return item;
         });
@@ -332,11 +335,21 @@ export const textMessagesReducer = (state = initialState, action) =>
       }
 
       case CREATE_SMS_LINK_SUCCESS: {
-        const { smsPlanId } = payload.smsLink;
+        const { smsPlanId, variantId } = payload.smsLink;
 
         draft.loaders.updateTextMessagesLoading = false;
         updateItemById(draft.textMessages, smsPlanId, (textMessageDraft) => {
-          textMessageDraft.smsLinks.push(payload.smsLink);
+          if (variantId) {
+            const variant = textMessageDraft.variants.find(
+              (v) => v.id === variantId,
+            );
+            if (variant) {
+              if (!variant.smsLinks) variant.smsLinks = [];
+              variant.smsLinks.push(payload.smsLink);
+            }
+          } else {
+            textMessageDraft.smsLinks.push(payload.smsLink);
+          }
           return textMessageDraft;
         });
 

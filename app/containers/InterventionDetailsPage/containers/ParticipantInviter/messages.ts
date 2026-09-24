@@ -61,6 +61,10 @@ export default defineMessages({
     id: `${scope}.predefinedParticipantsTab`,
     defaultMessage: `Predefined participants`,
   },
+  testParticipantsTab: {
+    id: `${scope}.testParticipantsTab`,
+    defaultMessage: `Test participants`,
+  },
   inviteEmailParticipantSubmitButtonTitle: {
     id: `${scope}.inviteEmailParticipantSubmitButtonTitle`,
     defaultMessage: `Send invitations`,
@@ -293,7 +297,13 @@ export default defineMessages({
   },
   uploadPredefinedParticipantsInfo: {
     id: `${scope}.uploadPredefinedParticipantsInfo`,
-    defaultMessage: `Upload a CSV file containing predefined participant information. Download the example file to see the required format.`,
+    defaultMessage:
+      'Upload a CSV file containing predefined participant information. Download the example file to see the required format. The template includes columns for RA session questions that have variables assigned. The import runs in the background — CIAS will send you an e-mail when this process has been finished.',
+  },
+  uploadPredefinedParticipantsRaDataInfo: {
+    id: `${scope}.uploadPredefinedParticipantsRaDataInfo`,
+    defaultMessage:
+      'All variables must have data before the RA session can close, allowing the participant to proceed with Session 1. If some data might be unknown or missing, please include an "unknown" or "not available" response option for that variable.',
   },
   examplePredefinedParticipantsCsvFilename: {
     id: `${scope}.examplePredefinedParticipantsCsvFilename`,
@@ -349,5 +359,99 @@ export default defineMessages({
   noHealthClinicAssigned: {
     id: `${scope}.noHealthClinicAssigned`,
     defaultMessage: 'No clinic',
+  },
+  raSessionColumnHeader: {
+    id: `${scope}.raSessionColumnHeader`,
+    defaultMessage: 'RA Session',
+  },
+  fillRaSessionButton: {
+    id: `${scope}.fillRaSessionButton`,
+    defaultMessage: 'Fill RA Session',
+  },
+  fillRaSessionDisabledInfo: {
+    id: `${scope}.fillRaSessionDisabledInfo`,
+    defaultMessage:
+      'The RA session can only be filled once the intervention is published.',
+  },
+  raSessionCompleted: {
+    id: `${scope}.raSessionCompleted`,
+    defaultMessage: 'Completed',
+  },
+  raSessionLabel: {
+    id: `${scope}.raSessionLabel`,
+    defaultMessage: 'Research Assistant Session',
+  },
+  raSessionCompletedInfo: {
+    id: `${scope}.raSessionCompletedInfo`,
+    defaultMessage: 'Completed on {date} by {email}',
+  },
+  raSessionPending: {
+    id: `${scope}.raSessionPending`,
+    defaultMessage: 'Not completed yet',
+  },
+  csvUnknownRaAnswerColumn: {
+    id: `${scope}.csvUnknownRaAnswerColumn`,
+    defaultMessage:
+      "{count, plural, one {# CSV column} other {# CSV columns}} don't match any RA-session variable and were ignored.",
+  },
+  csvRaAnswerTypeMismatch: {
+    id: `${scope}.csvRaAnswerTypeMismatch`,
+    defaultMessage:
+      '{count, plural, one {# answer value has} other {# answer values have}} the wrong type for its question.',
+  },
+  raAnswersInfoBanner: {
+    id: `${scope}.raAnswersInfoBanner`,
+    defaultMessage:
+      'This CSV includes RA-session answer columns. The columns below are read-only - to change an answer, edit the CSV and re-upload.',
+  },
+  raAnswersRequirePublishedBlockBanner: {
+    id: `${scope}.raAnswersRequirePublishedBlockBanner`,
+    defaultMessage:
+      'This CSV includes RA-session answers, but the intervention is not published yet. Please publish the intervention or remove the RA answer values from the CSV before importing.',
+  },
+  bulkCreateErrorListHeader: {
+    id: `${scope}.bulkCreateErrorListHeader`,
+    defaultMessage:
+      '{count, plural, one {# issue to fix before importing:} other {# issues to fix before importing:}}',
+  },
+  rowNumberColumnHeader: {
+    id: `${scope}.rowNumberColumnHeader`,
+    defaultMessage: '#',
+  },
+  copyInterventionTestLinkButtonTitle: {
+    id: `${scope}.copyInterventionTestLinkButtonTitle`,
+    defaultMessage: 'Copy test link to this intervention',
+  },
+  copySessionTestLinkButtonTitle: {
+    id: `${scope}.copySessionTestLinkButtonTitle`,
+    defaultMessage: 'Copy test link to this session',
+  },
+  copyTestLinkIconAlt: {
+    id: `${scope}.copyTestLinkIconAlt`,
+    defaultMessage: 'Copy test link icon',
+  },
+  copyTestLinkCopied: {
+    id: `${scope}.copyTestLinkCopied`,
+    defaultMessage: 'Copied!',
+  },
+  copyTestLinkSuccess: {
+    id: `${scope}.copyTestLinkSuccess`,
+    defaultMessage:
+      'Test link copied. It works until {expiresAt}. Open it in a private/incognito window.',
+  },
+  copyTestLinkSuccessUnknownExpiry: {
+    id: `${scope}.copyTestLinkSuccessUnknownExpiry`,
+    defaultMessage:
+      'Test link copied. It works for a few minutes. Open it in a private/incognito window.',
+  },
+  copyTestLinkClipboardError: {
+    id: `${scope}.copyTestLinkClipboardError`,
+    defaultMessage:
+      'The test link could not be copied to your clipboard. Please try again.',
+  },
+  copyTestLinkHint: {
+    id: `${scope}.copyTestLinkHint`,
+    defaultMessage:
+      'A test link marks the participant it creates as test data; their fill is deleted automatically about 24 hours later, together with its contribution to the relevant charts. Open it in a private or incognito window and complete the fill in that tab.',
   },
 });

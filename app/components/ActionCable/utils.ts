@@ -19,5 +19,7 @@ export const tokenRefresher: TokenRefresher = async (transport) => {
   }
 };
 
-export const getUidFromCableUrl = (cableUrl: string) =>
-  new URL(cableUrl).searchParams.get('uid');
+export const getUidFromCableUrl = (cableUrl: string): Nullable<string> => {
+  if (!cableUrl) return null;
+  return new URL(cableUrl).searchParams.get('uid');
+};

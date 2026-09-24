@@ -63,13 +63,18 @@ if (!isNullOrUndefined(process.env.SENTRY_DSN))
   });
 
 const sanitizeUrl = (url: string) => {
-  const newUrl = new URL(url);
-  const { searchParams } = newUrl;
-  Array.from(searchParams.keys()).forEach((searchParamsKey) =>
-    searchParams.set(searchParamsKey, '*'),
-  );
-  newUrl.search = searchParams.toString();
-  return newUrl.toString();
+  if (!url) return url;
+  try {
+    const newUrl = new URL(url);
+    const { searchParams } = newUrl;
+    Array.from(searchParams.keys()).forEach((searchParamsKey) =>
+      searchParams.set(searchParamsKey, '*'),
+    );
+    newUrl.search = searchParams.toString();
+    return newUrl.toString();
+  } catch {
+    return url;
+  }
 };
 
 if (process.env.LOGROCKET_ENV) {
@@ -91,6 +96,7 @@ if (process.env.LOGROCKET_ENV) {
     'avatar_url',
     'id',
     'uid',
+    'test_link_token',
   ];
 
   const { requestSanitizer, responseSanitizer } =

@@ -75,6 +75,32 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
+.c12 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-right: 24px;
+  color: #2F3850;
+}
+
+.c17 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c42 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 10px;
+  color: #2F3850;
+}
+
 .c5 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -461,32 +487,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 15px;
   line-height: 150%;
-  color: #2F3850;
-}
-
-.c12 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 18px;
-  line-height: 130%;
-  margin-right: 24px;
-  color: #2F3850;
-}
-
-.c17 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 18px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
-.c42 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 18px;
-  line-height: 130%;
-  margin-bottom: 10px;
   color: #2F3850;
 }
 

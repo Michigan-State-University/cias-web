@@ -27,6 +27,9 @@ import {
   bulkCreatePredefinedParticipantsSaga,
 } from 'global/reducers/intervention/sagas';
 import unassignTagSaga from 'global/reducers/intervention/sagas/unassignTag';
+import fulfillRaSessionSaga from 'global/reducers/intervention/sagas/fulfillRaSession';
+import fetchRaSessionQuestionGroupsSaga from 'global/reducers/intervention/sagas/fetchRaSessionQuestionGroups';
+import generateTestLinkSaga from 'global/reducers/intervention/sagas/generateTestLink';
 
 export default function* interventionDetailsPageSagas() {
   yield all([
@@ -52,6 +55,9 @@ export default function* interventionDetailsPageSagas() {
     sendPredefinedParticipantEmailInvitationSaga(),
     bulkCreatePredefinedParticipantsSaga(),
     unassignTagSaga(),
+    fulfillRaSessionSaga(),
+    fetchRaSessionQuestionGroupsSaga(),
+    generateTestLinkSaga(),
   ]);
 }
 

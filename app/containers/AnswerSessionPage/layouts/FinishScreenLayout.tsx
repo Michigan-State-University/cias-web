@@ -20,7 +20,7 @@ import GhostLink from 'components/GhostLink';
 
 import { StyledLink } from './styled';
 import messages from './messages';
-import { makeSelectUserSession } from '../selectors';
+import { makeSelectUserSession, makeSelectIsRaFulfillment } from '../selectors';
 import { getNextSessionUrl, getSessionMapUserPreviewUrl } from '../utils';
 import {
   fetchOrCreateUserSessionRequest,
@@ -38,6 +38,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userSession = useSelector(makeSelectUserSession());
+  const isRaFulfillment = useSelector(makeSelectIsRaFulfillment());
 
   const fixedElementsDirection = useSelector(
     makeSelectInterventionFixedElementsDirection(),
@@ -122,6 +123,16 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
       // predefined users after filling a session in sequential intervention
     }
   }, []);
+
+  if (isRaFulfillment) {
+    return (
+      <Row mt={50} justify="center" width="100%" dir={fixedElementsDirection}>
+        <Button onClick={() => window.close()} px={20} width="auto">
+          {formatMessage(messages.closeTab)}
+        </Button>
+      </Row>
+    );
+  }
 
   const showModulesButtons = isModuleIntervention && !isPreview;
 

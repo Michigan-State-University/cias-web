@@ -1,6 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ForbiddenPage /> should render and match the snapshot 1`] = `
+.c3 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer !important;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 50px;
+  width: 180px;
+}
+
 .c0 {
   font-family: DM Sans;
   font-size: 13px;
@@ -31,23 +48,6 @@ exports[`<ForbiddenPage /> should render and match the snapshot 1`] = `
   font-size: 18px;
   color: #2F3850;
   text-align: center;
-}
-
-.c3 {
-  width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: pointer !important;
-  border: none;
-  outline: none;
-  font-weight: bold;
-  background-color: #107969;
-  color: #FFFFFF;
-  border: 1px solid transparent;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-top: 50px;
-  width: 180px;
 }
 
 <div
