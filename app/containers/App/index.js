@@ -120,9 +120,6 @@ AnswerSessionPageComponent.propTypes = {
   match: PropTypes.object,
 };
 
-// Defined out here for the same reason as the preview component above — an inline wrapper is a new
-// component type on every render, which remounts the page underneath it. The intervention id comes
-// from the route because a reload strips the token from the URL but not from `sessionStorage`.
 const GatedAnswerSessionPage = (props) => (
   <TestLinkTokenGate
     interventionId={props.match?.params?.interventionId}

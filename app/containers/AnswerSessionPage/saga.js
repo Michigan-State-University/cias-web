@@ -268,7 +268,6 @@ function* fetchUserSession({ payload: { sessionId } }) {
     const { data } = yield axios.get(`${requestUrl}?${searchParams}`);
     const userSession = jsonApiToObject(data, 'userSession');
 
-    // This GET carries no token, so it can only report an existing marker, never a failed link.
     yield put(setTestRunFill(Boolean(data?.meta?.test_run), false));
     yield put(fetchUserSessionSuccess(userSession));
     yield put(changeLocale(userSession.languageCode));

@@ -17,8 +17,6 @@ const VERIFIED_STATUSES: string[] = [
   TestLinkTokenStatus.INVALID,
 ];
 
-// The endpoint is unauthenticated and does not spend the token, so asking is free and repeatable.
-// It answers with a flat JSON verdict, not a JSON:API document — there is nothing to normalise.
 export function* verifyTestLinkToken({
   payload: { token },
 }: ReturnType<typeof verifyTestLinkTokenRequest>) {

@@ -18,8 +18,6 @@ import {
 
 import { getTestLinkToken, testLinkTokenAppliesTo } from 'utils/testLinkToken';
 
-// Safe from either route: `selectAnswerSessionPageDomain` falls back to `initialState` when the
-// slice is not injected, so this reads `false` on the invite page rather than throwing.
 import {
   makeSelectTestRunFill,
   makeSelectTestRunMarkerFailed,
@@ -37,8 +35,6 @@ import messages from './messages';
 type Props = {
   children: ReactElement;
   interventionId?: string;
-  // Set by both landing routes. The notice covers the window before a fill exists; once the server
-  // has reported on one, `AnswerSessionPage`'s `TestRunBanner` is the authority and this hides.
   showNotice?: boolean;
 };
 
@@ -56,15 +52,6 @@ const blockedCopy = (status: TestLinkTokenStatus) => {
   }
 };
 
-/**
- * Only an explicit `VALID` lets the page through (CIAS-4187) — a pending check and an unreachable
- * backend both block. The backend marker fails open and an unmarked fill is permanent participant
- * data with no purge path, so "we do not know" must not be answered as "it is fine".
- *
- * Must wrap the landing routes in `containers/App` and never sit inside `AnswerSessionPage`: the
- * guarantee is that the page underneath does not mount at all, so none of its effects run and
- * neither `createUserSession` nor `acceptInterventionInvite` is ever dispatched.
- */
 const TestLinkTokenGate = ({
   children,
   interventionId,
@@ -100,23 +87,13 @@ const TestLinkTokenGate = ({
     setMarkerRefused(false);
     if (!token) return;
     dispatch(verifyTestLinkTokenRequest(token));
-    // `useInjectReducer` does not eject, so a verdict from an earlier gated mount is still in the
-    // slice on this one. Children's effects run before the parent's, so without this the page
-    // underneath mounts — and on the invite route creates a `UserIntervention` — on the stale answer.
     setAsked(true);
   }, [token]);
 
-  // Declared after the token effect on purpose: both run on mount in declaration order, and the
-  // token effect clears the verdict. The slice is not a reliable place to keep it — a global auth
-  // reset ("Complete session" for a guest) reinitialises injected reducers and rewinds `status` to
-  // PENDING. The gate does not remount, so `asked` survives and the token-keyed effect never
-  // re-asks; without this latch the gate sits on a spinner forever.
   useEffect(() => {
     if (status !== TestLinkTokenStatus.PENDING) setVerdict(status);
   }, [status]);
 
-  // Latched for the same reason as the verdict: `RESET_REDUCER` would otherwise clear the refusal
-  // and let the page back in, remounting it and creating a second session.
   useEffect(() => {
     if (markerFailed) setMarkerRefused(true);
   }, [markerFailed]);
@@ -161,8 +138,6 @@ const TestLinkTokenGate = ({
     </>
   );
 
-  // The server refused the marker, so this fill would be permanent participant data. Blocking here
-  // stops the finish, which is what writes chart statistics, reports, SMS and the HFHS message.
   if (markerRefused) {
     return renderBlocked({
       header: messages.markerFailedHeader,
@@ -171,14 +146,6 @@ const TestLinkTokenGate = ({
   }
 
   if (effectiveStatus === TestLinkTokenStatus.VALID) {
-    // The fragment is rendered unconditionally so `children` keeps its position in the tree.
-    // Returning `children` bare in one branch and wrapped in another changes the element structure,
-    // which makes React unmount and remount the page underneath — losing its state and re-running
-    // its mount effects, including the one that creates the session.
-    //
-    // The notice itself stands down once the server has ruled on a real fill: from that point
-    // `AnswerSessionPage`'s `TestRunBanner` reports the verdict with authority, and a second banner
-    // about the link would only duplicate or contradict it.
     return (
       <>
         {showNotice && !serverHasRuled && (

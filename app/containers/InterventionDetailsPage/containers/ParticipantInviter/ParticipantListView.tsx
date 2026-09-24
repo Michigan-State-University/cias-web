@@ -65,9 +65,6 @@ export const ParticipantListView: FC<Props> = ({
   );
   const testParticipantsTabLabel = formatMessage(messages.testParticipantsTab);
 
-  // `Tabs` hides the *button* of a hidden tab but still renders its content whenever the label
-  // matches, so losing the editor lock while the test tab is open would strand the panel with no way
-  // back. Fall back to the first tab instead.
   useEffect(() => {
     if (!showTestLinkTab && activeTab === testParticipantsTabLabel) {
       setActiveTab(emailParticipantsTabLabel);

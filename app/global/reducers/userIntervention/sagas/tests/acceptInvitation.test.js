@@ -74,7 +74,6 @@ describe('acceptInvitation saga — test-link token forwarding', () => {
     expect(body).not.toHaveProperty('test_link_token');
   });
 
-  // See the matching note in AnswerSessionPage's saga spec.
   it('keeps the token after success, so a later accept in the same tab is still marked', async () => {
     land('/interventions/i-1/invite?test_link_token=abc');
 

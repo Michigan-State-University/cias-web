@@ -50,8 +50,6 @@ export const TestLinkTab: FC<Props> = ({
         <CopyTestLinkButton
           interventionId={interventionId}
           url={url}
-          // The button's own `disabled` gates the mint, so it takes the *stronger* rule here —
-          // unlike `CopyToClipboard`, where `disabled` is cosmetic.
           disabled={buttonDisabled}
           label={formatMessage(messages.copySessionTestLinkButtonTitle)}
         />

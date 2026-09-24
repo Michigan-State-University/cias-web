@@ -12,8 +12,6 @@ import { TestLinkTokenAction, TestLinkTokenState } from './types';
 
 export const testLinkTokenReducerKey = 'testLinkToken';
 
-// `PENDING`, not `VALID`: the gate reads this before anything has been asked, and only an explicit
-// `VALID` lets a fill start.
 export const initialState: TestLinkTokenState = {
   status: TestLinkTokenStatus.PENDING,
 };

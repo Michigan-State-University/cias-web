@@ -278,7 +278,6 @@ describe('<CopyTestLinkButton />', () => {
     expect(store.dispatch).not.toHaveBeenCalled();
   });
 
-  // `TextButton` replaces the whole button with a spinner while loading.
   it('shows its own spinner only while its own url is minting', () => {
     const { unmount } = renderButton(buildStore({ generating: true }));
     expect(screen.queryByRole('button')).not.toBeInTheDocument();

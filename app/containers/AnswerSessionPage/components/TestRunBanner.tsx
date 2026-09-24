@@ -8,7 +8,6 @@ import { Alert, AlertType } from 'components/Alert';
 import { makeSelectTestRunFill } from '../selectors';
 import messages from '../messages';
 
-// Driven by what the server reported on the fill response, never by whether the client sent a token.
 const TestRunBanner = () => {
   const { formatMessage } = useIntl();
   const isTestRun = useSelector(makeSelectTestRunFill());

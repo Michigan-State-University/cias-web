@@ -46,8 +46,6 @@ const createDeferred = <T,>(): Deferred<T> => {
     resolve = res;
     reject = rej;
   });
-  // On engines without `ClipboardItem` nothing observes this promise, so a failed mint rejecting it
-  // would surface as an unhandled rejection and be reported to Sentry. Does not change the value.
   promise.catch(() => {});
   return { promise, resolve, reject };
 };
@@ -70,8 +68,6 @@ const beginClipboardWrite = (
     return null;
   }
 
-  // Hoisted out of the `ClipboardItem` call so it still gets a handler when `clipboard.write`
-  // throws synchronously below — in that path the derived promise exists but nothing observes it.
   const blob = text.then(
     (value) => new Blob([value], { type: CLIPBOARD_TEXT_TYPE }),
   );
@@ -82,7 +78,6 @@ const beginClipboardWrite = (
       new ClipboardItemConstructor({ [CLIPBOARD_TEXT_TYPE]: blob }),
     ]);
 
-    // Same reasoning as `blob` above; the success path still awaits the original promise.
     write.catch(() => {});
 
     return write;
@@ -143,8 +138,6 @@ export const CopyTestLinkButton: FC<Props> = ({
     [formatDate],
   );
 
-  // The backend fails open and an unmarked fill looks identical to a marked one, so this reminder
-  // always fires — an unreadable or absent `expires_at` degrades the wording, never the warning.
   const announceCopied = useCallback(
     (expiresAt: Nullable<string>) => {
       setCopied(true);

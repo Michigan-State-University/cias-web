@@ -68,7 +68,6 @@ describe('AnswerSessionPage saga — test-link token forwarding', () => {
         user_session: { session_id: 's-1', health_clinic_id: undefined },
         test_link_token: 'abc',
       });
-      // The token must NOT be nested inside the resource key — the backend reads it top level.
       expect(body.user_session.test_link_token).toBeUndefined();
     });
 
@@ -81,8 +80,6 @@ describe('AnswerSessionPage saga — test-link token forwarding', () => {
       expect(body).not.toHaveProperty('test_link_token');
     });
 
-    // The token used to be dropped after the first successful create, which left a researcher's
-    // "Start session again" fill unmarked and therefore permanent. Do not reinstate that.
     it('keeps the token after success, so a later create in the same tab is still marked', async () => {
       land('/interventions/i-1/sessions/s-1/fill?test_link_token=abc');
 

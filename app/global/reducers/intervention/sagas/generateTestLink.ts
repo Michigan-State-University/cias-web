@@ -22,15 +22,7 @@ type GenerateTestLinkAction = {
   };
 };
 
-/**
- * The mint endpoint does **not** answer in JSON:API — it returns a bare
- * `{ data: { id, type, attributes: { token, expires_at } } }` envelope, so the response is read off
- * `data.data.attributes` and not through `jsonApiToObject`.
- *
- * **Exactly one of `onSuccess` / `onError` must run on every path** — the caller hands over a
- * promise that only these callbacks settle, and a return without calling back leaves its clipboard
- * write pending forever.
- */
+// Exactly one of `onSuccess` / `onError` must run on every path, or the caller's clipboard write stays pending forever.
 export function* generateTestLink({
   payload: { interventionId, url, onSuccess, onError },
 }: GenerateTestLinkAction) {
@@ -61,8 +53,6 @@ export function* generateTestLink({
   yield call(onSuccess, appendTestLinkToken(url, token), expiresAt);
 }
 
-// `takeEvery`, not `takeLatest`: the two copy controls mint independently, and cancelling an
-// in-flight mint would strand its loader and leave the caller's clipboard write unsettled.
 export default function* generateTestLinkSaga() {
   yield takeEvery(GENERATE_TEST_LINK_REQUEST, generateTestLink);
 }
