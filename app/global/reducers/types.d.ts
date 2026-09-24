@@ -4,6 +4,7 @@ import { AnswersAction } from './answers/types';
 import { LiveChatAction } from './liveChat/types';
 import { NavigatorSetupAction } from './navigatorSetup/types';
 import { NotificationsAction } from './notifications/types';
+import { TestLinkTokenAction } from './testLinkToken/types';
 import { TlfbAction } from './tlfb/types';
 
 export type WithReducer = Parameters<typeof useInjectReducer>[0];
@@ -15,4 +16,5 @@ export type RootAction =
   | LiveChatAction
   | NavigatorSetupAction
   | NotificationsAction
+  | TestLinkTokenAction
   | TlfbAction;

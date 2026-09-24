@@ -16,7 +16,7 @@ test.describe('Session Creation', () => {
       await page.waitForTimeout(500);
     }
 
-    expect(await interventionPage.getSessionCount()).toBe(3);
+    await interventionPage.expectSessionCount(3);
 
     await expect(page.locator('[data-cy^="enter-session-"]').nth(0)).toBeVisible();
     await expect(page.locator('[data-cy^="enter-session-"]').nth(1)).toBeVisible();
@@ -33,7 +33,7 @@ test.describe('Session Creation', () => {
     await interventionPage.createSession('classic');
     await interventionPage.createSession('sms');
 
-    expect(await interventionPage.getSessionCount()).toBe(2);
+    await interventionPage.expectSessionCount(2);
     await expect(page.locator('[data-cy^="enter-session-"]').nth(0)).toBeVisible();
     await expect(page.locator('[data-cy^="enter-session-"]').nth(1)).toBeVisible();
   });
