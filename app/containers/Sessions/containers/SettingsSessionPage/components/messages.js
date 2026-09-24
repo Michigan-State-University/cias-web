@@ -58,7 +58,7 @@ export default defineMessages({
   },
   autofinishTooltipTwo: {
     id: `${scope}.autofinishTooltipTwo`,
-    defaultMessage: `<bold>Note: Autofinish needs to be turned on for the “Send reports/SMS after this screen” toggle to become available on a screen level. That toggle allows you to tell CIAS to begin the autofinish countdown only after a certain screen is reached.</bold>`,
+    defaultMessage: `<bold>Note: The “Send reports/SMS after this screen” toggle on a screen level tells CIAS to begin the autofinish countdown only after a certain screen is reached. That toggle works whether or not autofinish is on - with autofinish off, a participant who gets that far still has their reports generated once the session times out from inactivity.</bold>`,
   },
   autofinishEnabledLabel: {
     id: `${scope}.autofinishEnabledLabel`,
