@@ -1,0 +1,338 @@
+name: E2E AI pipeline
+
+# Drafts E2E scenarios and specs via e2e/ai/pipeline.ts (see e2e/ai/README.md).
+# Secrets: ANTHROPIC_API_KEY (or CLAUDE_CODE_OAUTH_TOKEN for development),
+#   E2E_AI_APP_PRIVATE_KEY, E2E_ADMIN_PASSWORD, E2E_VERIFICATION_CODE, ADDITIONAL_ORIGIN_SECURE_TOKEN.
+# Vars: E2E_AI_APP_ID, E2E_ADMIN_EMAIL_PATTERN, E2E_AI_AUTO=on (enables the merge trigger).
+# App permissions: contents, pull requests, issues read/write here; contents, pull requests read on cias-api.
+
+on:
+  pull_request:
+    types: [closed, synchronize]
+    branches: [dev]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: Merged PR to draft E2E scenarios for (backfill or retry)
+        required: true
+  schedule:
+    - cron: '17 6 * * *'
+  # TEMPORARY: runs the pipeline from this branch until it's on the default
+  # branch. Remove with e2e/ai/lib/latest.ts.
+  push:
+    branches: [chore/e2e-ai-pipeline]
+
+permissions:
+  contents: read
+
+env:
+  API_URL: https://cias-api-staging.herokuapp.com
+  WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
+  WEB_URL: http://localhost:4200
+  CLAUDE_CODE_VERSION: 2.1.282
+
+jobs:
+  route:
+    name: Route the event
+    if: >-
+      (github.event_name != 'issue_comment'
+        || (github.event.issue.pull_request && startsWith(github.event.comment.body, '/e2e ')))
+      && (github.event_name != 'pull_request'
+        || (github.event.action == 'closed' && github.event.pull_request.merged)
+        || (github.event.action == 'synchronize'
+          && startsWith(github.event.pull_request.head.ref, 'e2e-ai/')
+          && github.event.sender.type != 'Bot'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      action: ${{ steps.route.outputs.action }}
+      pr: ${{ steps.route.outputs.pr }}
+      commenter: ${{ steps.route.outputs.commenter }}
+      notes: ${{ steps.route.outputs.notes }}
+
+    steps:
+      # Always the default branch's pipeline, never a PR's code with secrets;
+      # only the temporary push trigger runs the pushed commit.
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'push' && github.sha || github.event.repository.default_branch }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Route
+        id: route
+        run: npm run -s e2e:ai -- route --event-name "$GITHUB_EVENT_NAME" --event-path "$GITHUB_EVENT_PATH"
+        env:
+          E2E_AI_AUTO: ${{ vars.E2E_AI_AUTO }}
+          GH_TOKEN: ${{ github.token }}
+
+  generate:
+    name: Draft scenarios
+    needs: route
+    if: needs.route.outputs.action == 'generate' || needs.route.outputs.action == 'regenerate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    concurrency:
+      group: e2e-ai-pr-${{ needs.route.outputs.pr }}
+      cancel-in-progress: false
+    # Only used by the GITHUB_TOKEN fallback below.
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      # An API key, or CLAUDE_CODE_OAUTH_TOKEN for development.
+      - name: Check Claude credentials
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ] && [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
+            echo "::error title=E2E pipeline::Set the ANTHROPIC_API_KEY or CLAUDE_CODE_OAUTH_TOKEN secret (Settings → Secrets and variables → Actions)"
+            exit 1
+          fi
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+      # The App token makes the pipeline's pushes trigger CI. Without an App the
+      # job falls back to GITHUB_TOKEN, whose pushes don't trigger workflows.
+      - name: Create an App token
+        id: app-token
+        if: vars.E2E_AI_APP_ID != ''
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.E2E_AI_APP_ID }}
+          private-key: ${{ secrets.E2E_AI_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: cias-web,cias-api
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'push' && github.sha || github.event.repository.default_branch }}
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token || github.token }}
+
+      - name: Checkout cias-api
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/cias-api
+          ref: dev
+          path: .paired/cias-api
+          token: ${{ steps.app-token.outputs.token || github.token }}
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Claude Code
+        run: npm install -g "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
+
+      - name: Commit as the App
+        run: |
+          if [ -z "$APP_SLUG" ]; then
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            exit 0
+          fi
+          user_id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)
+          git config --global user.name "${APP_SLUG}[bot]"
+          git config --global user.email "${user_id}+${APP_SLUG}[bot]@users.noreply.github.com"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+
+      - name: Draft scenarios
+        run: |
+          if [ "$ACTION" = regenerate ]; then
+            npm run e2e:ai -- regenerate --pr "$PR" --by "$COMMENTER" --notes "$NOTES"
+          else
+            npm run e2e:ai -- generate --pr "$PR" --publish
+          fi
+        env:
+          ACTION: ${{ needs.route.outputs.action }}
+          PR: ${{ needs.route.outputs.pr }}
+          COMMENTER: ${{ needs.route.outputs.commenter }}
+          NOTES: ${{ needs.route.outputs.notes }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+      - name: Keep the run record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-ai-generate-${{ needs.route.outputs.pr }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/e2e-ai/*/run.json
+            ${{ runner.temp }}/e2e-ai/*/pr-body.md
+            ${{ runner.temp }}/e2e-ai/*/input/
+            ${{ runner.temp }}/e2e-ai/*/stages/*.prompt.md
+          if-no-files-found: ignore
+          retention-days: 30
+
+  specs:
+    name: Generate specs
+    needs: route
+    if: needs.route.outputs.action == 'approve'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    # One run at a time on the pipeline's own staging account.
+    concurrency:
+      group: e2e-ai-staging-account
+      cancel-in-progress: false
+
+    steps:
+      - name: Create an App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.E2E_AI_APP_ID }}
+          private-key: ${{ secrets.E2E_AI_APP_PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('./package-lock.json').packages['node_modules/@playwright/test'].version")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Playwright WebKit
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps webkit
+
+      - name: Install Playwright system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps webkit
+
+      - name: Install Claude Code
+        run: npm install -g "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
+
+      - name: Commit as the App
+        run: |
+          user_id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)
+          git config --global user.name "${APP_SLUG}[bot]"
+          git config --global user.email "${user_id}+${APP_SLUG}[bot]@users.noreply.github.com"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+
+      # The dev server reads only .env. No stage can read this file.
+      - name: App environment
+        run: |
+          {
+            echo "API_URL=${API_URL}"
+            echo "WEBSOCKET_URL=${WEBSOCKET_URL}"
+            echo "WEB_URL=${WEB_URL}"
+            echo "ADDITIONAL_ORIGIN_SECURE_TOKEN=${ADDITIONAL_ORIGIN_SECURE_TOKEN}"
+          } > .env
+        env:
+          ADDITIONAL_ORIGIN_SECURE_TOKEN: ${{ secrets.ADDITIONAL_ORIGIN_SECURE_TOKEN }}
+
+      - name: Generate specs
+        run: npm run e2e:ai -- approve --pr "$PR" --by "$COMMENTER"
+        env:
+          PR: ${{ needs.route.outputs.pr }}
+          COMMENTER: ${{ needs.route.outputs.commenter }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # No E2E_WORKER_COUNT/E2E_ACCOUNT_OFFSET: E2E_AI=1 picks the account.
+          E2E_ADMIN_EMAIL_PATTERN: ${{ vars.E2E_ADMIN_EMAIL_PATTERN }}
+          E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
+          E2E_VERIFICATION_CODE: ${{ secrets.E2E_VERIFICATION_CODE }}
+
+      - name: Keep the run record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-ai-specs-${{ needs.route.outputs.pr }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/e2e-ai/*/run.json
+            ${{ runner.temp }}/e2e-ai/*/ready-body.md
+            ${{ runner.temp }}/e2e-ai/*/live-*.json
+            ${{ runner.temp }}/e2e-ai/*/app-server.log
+            ${{ runner.temp }}/e2e-ai/*/stages/*.prompt.md
+          if-no-files-found: ignore
+          retention-days: 30
+
+  housekeeping:
+    name: Housekeeping
+    needs: route
+    if: contains(fromJSON('["decline", "check-scenarios", "sweep"]'), needs.route.outputs.action)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Create an App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.E2E_AI_APP_ID }}
+          private-key: ${{ secrets.E2E_AI_APP_PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run
+        run: |
+          case "$ACTION" in
+            decline) npm run e2e:ai -- decline --pr "$PR" --by "$COMMENTER" ;;
+            check-scenarios) npm run e2e:ai -- check-scenarios --pr "$PR" ;;
+            sweep) npm run e2e:ai -- sweep ;;
+          esac
+        env:
+          ACTION: ${{ needs.route.outputs.action }}
+          PR: ${{ needs.route.outputs.pr }}
+          COMMENTER: ${{ needs.route.outputs.commenter }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}

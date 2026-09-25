@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tests", "notes"],
+  "properties": {
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scenario_id", "file", "title", "fixme"],
+        "properties": {
+          "scenario_id": { "type": "string" },
+          "file": { "type": "string" },
+          "title": { "type": "string" },
+          "fixme": { "type": "boolean" }
+        }
+      }
+    },
+    "notes": { "type": "string" }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["e2e_worthy", "reason"],
+  "properties": {
+    "e2e_worthy": { "type": "boolean" },
+    "reason": { "type": "string" }
+  }
+}
