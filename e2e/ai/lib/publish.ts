@@ -7,6 +7,10 @@ import { run } from './shell';
 
 export type Command = { command: string; args: string[]; cwd?: string };
 
+// A worktree shares the repo's hooks, but the pre-commit hook resolves ./node_modules from the
+// worktree root, which has none. The commits hold generated scenarios only, so skip the hooks.
+const COMMIT = ['commit', '--no-verify'];
+
 export const pipelineBranch = (
   config: PipelineConfig,
   manifest: RunManifest,
@@ -35,7 +39,7 @@ export const publishPlan = (
     { command: 'git', args: ['add', scenariosDir], cwd: checkout },
     {
       command: 'git',
-      args: ['commit', '-m', `test(e2e): draft E2E scenarios for ${change}`],
+      args: [...COMMIT, '-m', `test(e2e): draft E2E scenarios for ${change}`],
       cwd: checkout,
     },
     {
@@ -84,7 +88,7 @@ export const redraftPlan = (
   {
     command: 'git',
     args: [
-      'commit',
+      ...COMMIT,
       '-m',
       `test(e2e): redraft E2E scenarios (#${draft.number})`,
     ],

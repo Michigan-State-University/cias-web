@@ -36,7 +36,7 @@ describe('publishPlan', () => {
       [
         'git switch -c',
         'git add e2e/scenarios/pr-412',
-        'git commit -m',
+        'git commit --no-verify',
         'git push --set-upstream',
         'gh pr create',
       ],
@@ -88,7 +88,7 @@ describe('redraftPlan', () => {
       plan.map(({ command, args }) => `${command} ${args.join(' ')}`),
       [
         'git add e2e/scenarios/pr-412',
-        'git commit -m test(e2e): redraft E2E scenarios (#431)',
+        'git commit --no-verify -m test(e2e): redraft E2E scenarios (#431)',
         'git push origin HEAD:refs/heads/e2e-ai/pr-412',
         `gh pr edit 431 -R ${config.repo} --body-file /work/body.md`,
       ],
