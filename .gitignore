@@ -37,3 +37,6 @@ htd-cq-output/
 
 # htd-cq scan artifacts
 .htd-cq-coverage/
+
+# E2E AI pipeline: read-only paired-repo checkout (CI)
+.paired/
