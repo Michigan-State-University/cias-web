@@ -10,6 +10,8 @@ import { answersReducerKey } from './answers/reducer';
 import { AnswersState } from './answers/types';
 import { tlfbReducerKey } from './tlfb/reducer';
 import { TlfbState } from './tlfb/types';
+import { testLinkTokenReducerKey } from './testLinkToken/reducer';
+import { TestLinkTokenState } from './testLinkToken/types';
 
 export type RootState = {
   [liveChatReducerKey]: LiveChatState;
@@ -18,4 +20,5 @@ export type RootState = {
   [notificationsReducerKey]: NotificationsState;
   [answersReducerKey]: AnswersState;
   [tlfbReducerKey]: TlfbState;
+  [testLinkTokenReducerKey]: TestLinkTokenState;
 };

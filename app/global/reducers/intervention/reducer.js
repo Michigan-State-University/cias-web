@@ -150,6 +150,9 @@ import {
   FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST,
   FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS,
   FETCH_RA_SESSION_QUESTION_GROUPS_ERROR,
+  GENERATE_TEST_LINK_REQUEST,
+  GENERATE_TEST_LINK_SUCCESS,
+  GENERATE_TEST_LINK_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -198,6 +201,9 @@ export const initialState = {
     bulkCreatePredefinedParticipants: false,
     updateAllSessionsScheduleLoading: false,
     fetchRaSessionQuestionGroups: false,
+    // Keyed by invite url, not the plain boolean its neighbours use — the two copy controls mint
+    // independently and must spin independently.
+    generateTestLink: {},
   },
   errors: {
     fetchInterventionError: null,
@@ -980,6 +986,16 @@ export const interventionReducer = (state = initialState, action) =>
         draft.raSessionQuestionGroups = [];
         break;
       }
+
+      case GENERATE_TEST_LINK_REQUEST:
+        draft.loaders.generateTestLink[action.payload.url] = true;
+        break;
+      case GENERATE_TEST_LINK_SUCCESS:
+        delete draft.loaders.generateTestLink[action.payload.url];
+        break;
+      case GENERATE_TEST_LINK_ERROR:
+        delete draft.loaders.generateTestLink[action.payload.url];
+        break;
     }
   });
 

@@ -61,6 +61,10 @@ export default defineMessages({
     id: `${scope}.predefinedParticipantsTab`,
     defaultMessage: `Predefined participants`,
   },
+  testParticipantsTab: {
+    id: `${scope}.testParticipantsTab`,
+    defaultMessage: `Test participants`,
+  },
   inviteEmailParticipantSubmitButtonTitle: {
     id: `${scope}.inviteEmailParticipantSubmitButtonTitle`,
     defaultMessage: `Send invitations`,
@@ -413,5 +417,41 @@ export default defineMessages({
   rowNumberColumnHeader: {
     id: `${scope}.rowNumberColumnHeader`,
     defaultMessage: '#',
+  },
+  copyInterventionTestLinkButtonTitle: {
+    id: `${scope}.copyInterventionTestLinkButtonTitle`,
+    defaultMessage: 'Copy test link to this intervention',
+  },
+  copySessionTestLinkButtonTitle: {
+    id: `${scope}.copySessionTestLinkButtonTitle`,
+    defaultMessage: 'Copy test link to this session',
+  },
+  copyTestLinkIconAlt: {
+    id: `${scope}.copyTestLinkIconAlt`,
+    defaultMessage: 'Copy test link icon',
+  },
+  copyTestLinkCopied: {
+    id: `${scope}.copyTestLinkCopied`,
+    defaultMessage: 'Copied!',
+  },
+  copyTestLinkSuccess: {
+    id: `${scope}.copyTestLinkSuccess`,
+    defaultMessage:
+      'Test link copied. It works until {expiresAt}. Open it in a private/incognito window.',
+  },
+  copyTestLinkSuccessUnknownExpiry: {
+    id: `${scope}.copyTestLinkSuccessUnknownExpiry`,
+    defaultMessage:
+      'Test link copied. It works for a few minutes. Open it in a private/incognito window.',
+  },
+  copyTestLinkClipboardError: {
+    id: `${scope}.copyTestLinkClipboardError`,
+    defaultMessage:
+      'The test link could not be copied to your clipboard. Please try again.',
+  },
+  copyTestLinkHint: {
+    id: `${scope}.copyTestLinkHint`,
+    defaultMessage:
+      'A test link marks the participant it creates as test data; their fill is deleted automatically about 24 hours later, together with its contribution to the relevant charts. Open it in a private or incognito window and complete the fill in that tab.',
   },
 });

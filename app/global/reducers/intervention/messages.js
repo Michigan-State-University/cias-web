@@ -225,4 +225,8 @@ export default defineMessages({
     id: `${scope}.fulfillRaSessionError`,
     defaultMessage: 'Unable to initiate RA session fulfillment.',
   },
+  generateTestLinkError: {
+    id: `${scope}.generateTestLinkError`,
+    defaultMessage: 'Unable to generate a test link. Please try again.',
+  },
 });

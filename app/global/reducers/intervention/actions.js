@@ -138,6 +138,9 @@ import {
   FETCH_RA_SESSION_QUESTION_GROUPS_REQUEST,
   FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS,
   FETCH_RA_SESSION_QUESTION_GROUPS_ERROR,
+  GENERATE_TEST_LINK_REQUEST,
+  GENERATE_TEST_LINK_SUCCESS,
+  GENERATE_TEST_LINK_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -674,3 +677,20 @@ export const fetchRaSessionQuestionGroupsSuccess = (questionGroups) =>
   actionBuilder(FETCH_RA_SESSION_QUESTION_GROUPS_SUCCESS, { questionGroups });
 export const fetchRaSessionQuestionGroupsError = (error) =>
   actionBuilder(FETCH_RA_SESSION_QUESTION_GROUPS_ERROR, { error });
+
+export const generateTestLinkRequest = (
+  interventionId,
+  url,
+  onSuccess,
+  onError,
+) =>
+  actionBuilder(GENERATE_TEST_LINK_REQUEST, {
+    interventionId,
+    url,
+    onSuccess,
+    onError,
+  });
+export const generateTestLinkSuccess = (url) =>
+  actionBuilder(GENERATE_TEST_LINK_SUCCESS, { url });
+export const generateTestLinkError = (url, error) =>
+  actionBuilder(GENERATE_TEST_LINK_ERROR, { url, error });

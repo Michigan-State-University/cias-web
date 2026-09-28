@@ -129,11 +129,13 @@ export class DashboardPage {
   }
 
   async waitForInterventionsToLoad() {
-    // Wait for at least one intervention tile or the "no results" message
+    // Wait for at least one intervention tile or the "no results" message. No
+    // explicit timeout: the config's actionTimeout is raised on CI for the
+    // remote staging API, and a hardcoded 10s here overrode it.
     await this.page
       .locator('[data-cy^="intervention-tile-"], h3:has-text("No results")')
       .first()
-      .waitFor({ timeout: 10000 });
+      .waitFor();
   }
 
   async getInterventionIdFromUrl(): Promise<string> {

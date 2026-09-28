@@ -55,7 +55,11 @@ export const waitForApiResponse = (
   page: Page,
   match: ApiResponseMatch,
 ): Promise<Response> => {
-  const { urlIncludes, method, status, timeout = DEFAULT_TIMEOUT_MS } = match;
+  const { urlIncludes, method, status, timeout: requested = DEFAULT_TIMEOUT_MS } = match;
+  // On CI the app talks to the remote staging API, which regularly takes longer
+  // than the short timeouts many call sites pass (a 15s wait expiring was the
+  // most common API failure). Treat the default as a floor there.
+  const timeout = process.env.CI ? Math.max(requested, DEFAULT_TIMEOUT_MS) : requested;
   const fragments = Array.isArray(urlIncludes) ? urlIncludes : [urlIncludes];
   const unexpected: Response[] = [];
 
