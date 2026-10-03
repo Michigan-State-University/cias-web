@@ -121,16 +121,11 @@ module.exports = {
     'mjml',
     'internals/**/*',
     '*.setup.js',
-    'cypress/support/*.ts',
     'app/utils/libraries/*',
     '.vscode/.history/**/*',
     'e2e/**/*',
     'playwright.config.ts',
   ],
-  globals: {
-    cy: 'readonly',
-    Cypress: 'readonly',
-  },
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],

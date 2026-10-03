@@ -27,10 +27,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '22'
           cache: 'npm'
@@ -45,7 +45,7 @@ jobs:
           NODE_ENV: production
 
       - name: Upload build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: e2e-build
           path: build/
@@ -89,10 +89,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '22'
           cache: 'npm'
@@ -105,7 +105,7 @@ jobs:
         run: echo "version=$(node -p "require('./package-lock.json').packages['node_modules/@playwright/test'].version")" >> $GITHUB_OUTPUT
 
       - name: Cache Playwright browsers
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
@@ -120,7 +120,7 @@ jobs:
         run: npx playwright install-deps webkit chromium firefox
 
       - name: Download build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: e2e-build
           path: build/
@@ -141,7 +141,7 @@ jobs:
           ADDITIONAL_ORIGIN_SECURE_TOKEN: ${{ secrets.ADDITIONAL_ORIGIN_SECURE_TOKEN }}
 
       - name: Upload blob report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: blob-report-${{ matrix.shard }}
@@ -149,7 +149,7 @@ jobs:
           retention-days: 7
 
       - name: Upload traces and screenshots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: test-results-${{ matrix.shard }}
@@ -165,10 +165,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '22'
           cache: 'npm'
@@ -177,7 +177,7 @@ jobs:
         run: npm ci
 
       - name: Download blob reports
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: all-blob-reports
           pattern: blob-report-*
@@ -187,7 +187,7 @@ jobs:
         run: npx playwright merge-reports --reporter html ./all-blob-reports
 
       - name: Upload HTML report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: playwright-report
           path: playwright-report/
