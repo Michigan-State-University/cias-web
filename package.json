@@ -93,7 +93,7 @@
     "byte-size": "8.1.1",
     "chalk": "2.4.2",
     "classnames": "2.2.6",
-    "color": "4.2.3",
+    "color": "5.0.3",
     "compression": "1.7.4",
     "connected-react-router": "6.9.1",
     "cross-env": "5.2.0",
