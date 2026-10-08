@@ -72,6 +72,26 @@ jobs:
       - name: Lint CSS and JS
         run: npm run lint
 
+  npm_audit:
+    name: Dependency security audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.x'
+
+      # npm audit reads package-lock.json directly, so no install is needed.
+      # Unlike bundler-audit, it has no ignore list, so an advisory with no
+      # patched release would keep this job red for good. Hence:
+      # --omit=dev: build/test tooling is excluded (braces has no fixed release)
+      # --audit-level=high: quill's moderate XSS has no fixed 1.x release
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
   test:
     runs-on: ubuntu-latest
     name: Test (batch ${{ matrix.chunk }})
