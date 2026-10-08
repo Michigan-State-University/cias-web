@@ -38,6 +38,8 @@ export type E2eConfig = {
   readOnly: string[];
   // Locators prefer it, and codegen may add it to app components.
   selectorAttribute: string;
+  // The CI workflow that runs the suite; dispatched after a push the App didn't make.
+  testsWorkflow: string;
 };
 
 export type PipelineConfig = {
@@ -63,7 +65,7 @@ export type PipelineConfig = {
   skip: SkipConfig;
   maxBudgetUsdPerCommand: number;
   // Not a developer's dev server: it must serve the code under test.
-  server: { port: number; startTimeoutMinutes: number };
+  server: { port: number; startTimeoutMinutes: number; command: string[] };
   staleDraftDays: number;
   stages: {
     triage: StageConfig & { enabled: boolean };

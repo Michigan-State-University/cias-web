@@ -26,7 +26,8 @@ npm run e2e:ai -- generate --pr 406        # scenarios for a merged PR  → e2e/
 npm run e2e:ai -- codegen --run pr-406     # specs, verified live  → an uncommitted worktree (path printed)
 ```
 
-- **Before merging:** `generate --branch feature/x` works on a local branch instead.
+- **Before merging:** `generate --branch feature/x` works on a local branch instead; codegen then serves and tests
+  that branch, since its change isn't on the base branch yet.
 - **Without the staging account:** add `--no-live` to codegen for static checks only.
 - **To see what would run, free:** add `--dry-run` to either command. It builds the inputs and prints each stage's
   `claude` command.
@@ -159,10 +160,13 @@ Every run's `run.json` (committed next to the scenarios) and the PR body show th
   couple of manual runs look right.
 - **A GitHub App** with contents, pull requests and issues read/write on this repo, and contents and pull requests
   read on the paired repo (the generate job checks its `dev` out to `.paired/cias-api`, read-only). Pushes are made
-  as the App, so other workflows run on them; `GITHUB_TOKEN` pushes don't trigger workflows.
+  as the App, so other workflows run on them.
+- **Without the App**, both jobs fall back to `GITHUB_TOKEN`. Its pushes trigger no workflows, so after pushing specs
+  the pipeline dispatches `e2e.testsWorkflow` on the draft's branch itself. That run shows in Actions, not as a check
+  on the PR.
 - **Label:** `e2e-declined`.
-- **`e2e-tests.yml`:** add `paths-ignore: ['e2e/scenarios/**']` to its `push` trigger. Otherwise every scenario
-  commit and edit runs the full suite against staging.
+- **`e2e-tests.yml`** (`e2e.testsWorkflow`): its `push` trigger ignores `e2e/scenarios/**`, so scenario commits and
+  edits don't run the full suite against staging, and it accepts `workflow_dispatch` for the fallback above.
 - **Knowledge in CI:** commit the pills to `docs/knowledge-pills/`. Without them the planner works from the diff and
   code only.
 
@@ -207,9 +211,9 @@ Common flags:
 2. **`pipeline.config.json`:** `repo`, `baseBranch`, `branchPrefix`, and the **`e2e` block**:
    - `dir`, `pagesDir`;
    - `browserProject`, `authProject`, `seedProject`;
-   - `readOnly`, `selectorAttribute`.
+   - `readOnly`, `selectorAttribute`, `testsWorkflow`.
 
-   Also set `scenariosDir`, `knowledgeDirs`, `pairedRepo`, `ticketPattern`, the `skip` patterns, `server.port`, and
+   Also set `scenariosDir`, `knowledgeDirs`, `pairedRepo`, `ticketPattern`, the `skip` patterns, `server.port` and `server.command`, and
    the models and budgets.
 3. **Rewrite `CONVENTIONS.md`** for the project. Keep the section names **"App behaviour to design around"** and
    **"What can be automated"**: the prompts refer to them. The prompts themselves are project-neutral.
@@ -248,24 +252,11 @@ The workflow is checked with [`actionlint`](https://github.com/rhysd/actionlint)
 | Push rejected on approve | The scenarios changed after approval. Comment `/e2e approve` again |
 | Nothing happened on merge | `E2E_AI_AUTO` isn't `on`, or the skip rules matched: Dependabot, promotion branches, no app-code change, `skip-e2e-gen` label |
 
-## Trying it on GitHub before it's on `dev` (temporary)
-
-GitHub runs dispatch, comment and merge triggers only from the default branch. Until the pipeline is on `dev`, a
-temporary `push` trigger stands in: **a push to `chore/e2e-ai-pipeline` drafts scenarios for the latest PR merged
-into `dev` that the rules don't skip, or for the PR named in the pushed commit's message (`e2e-ai: #416`)**. It opens
-the real draft PR `e2e-ai/pr-<N>`.
-
-- Needs only the `CLAUDE_CODE_OAUTH_TOKEN` secret (your seat's token from `claude setup-token`) or `ANTHROPIC_API_KEY`. Without the App it uses `GITHUB_TOKEN`, so CI doesn't run on the
-  draft's commits.
-- `/e2e` comments don't work in this mode, because they need the workflow on `dev`. To approve, run
-  `npm run e2e:ai -- approve --pr <draft>` locally.
-- CI has no knowledge pills (they're not in the repo), so the scenarios are grounded in code only.
-- To redraft, close the draft PR and delete its branch; until then, pushes for that PR stand down.
-- **Remove before merging:** the `push` trigger in `e2e-ai.yml` and `lib/latest.ts` (plus its test and the
-  `push` branch in `pipeline.ts`'s route command).
-
 ## Known gaps
 
 - **`--record` / `--replay` of codegen** saves the stage's summary but not the files it wrote, so codegen can't be
   replayed offline yet.
 - **Calibration on past PRs,** to score accuracy and edit size, hasn't been run yet.
+- **Verification runs only the new specs.** Codegen may also edit shared page objects; any other spec that uses an
+  edited method isn't re-run locally. The full suite on the draft PR (`e2e.testsWorkflow`) is what catches a
+  regression there, before anyone merges.

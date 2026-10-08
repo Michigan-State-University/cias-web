@@ -110,6 +110,7 @@ const writeInputs = (
 ) => {
   fs.mkdirSync(inputDir, { recursive: true });
   const { source } = gathered;
+  const pairedName = config.pairedRepo?.split('/').pop() ?? 'paired repo';
   const diff = keepFiles(
     gathered.patch,
     (file) => behaviourFiles([file], config.skip).length > 0,
@@ -131,8 +132,8 @@ const writeInputs = (
       : `Branch: ${source.headRef} (into ${source.baseRef})`,
     `Author: ${source.author ?? 'unknown'} · Ticket: ${source.ticket ?? 'none'} · Commit: ${source.sha}`,
     gathered.paired
-      ? `Paired cias-api PRs: ${gathered.paired.change.prs.map((p) => `#${p.number} (${p.state}) ${p.title}`).join('; ')}`
-      : 'Paired cias-api PRs: none found',
+      ? `Paired ${pairedName} PRs: ${gathered.paired.change.prs.map((p) => `#${p.number} (${p.state}) ${p.title}`).join('; ')}`
+      : `Paired ${pairedName} PRs: none found`,
     ...(pairedDiff && pairedDiff.omitted.length > 0
       ? [
           `paired-api.patch holds their behaviour files only; ${pairedDiff.omitted.length} spec/tooling file(s) are left out.`,
@@ -514,6 +515,8 @@ export const generate = (
       path.join(outputDir, 'review.json'),
       `${JSON.stringify(review, null, 2)}\n`,
     );
+    // The checkout is removed when the run ends; this copy lets the run record keep the scenarios if publishing fails.
+    fs.cpSync(outputDir, path.join(runDir, 'output'), { recursive: true });
     save();
     const prBodyFile = path.join(runDir, 'pr-body.md');
     fs.writeFileSync(prBodyFile, renderPrBody(manifest, parsed.scenarios));

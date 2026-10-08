@@ -1,6 +1,12 @@
 name: E2E Tests
 
-on: push
+on:
+  push:
+    # The E2E AI pipeline's scenario commits change no app or test code.
+    paths-ignore:
+      - 'e2e/scenarios/**'
+  # The E2E AI pipeline dispatches the suite after pushing specs without its App.
+  workflow_dispatch:
 
 # A newer push to the same branch stops the older run. Left running, its shards
 # keep driving the shared staging accounts underneath the newer run's shards.

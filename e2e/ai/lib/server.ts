@@ -20,13 +20,14 @@ const sleep = (ms: number) =>
   });
 
 export const startAppServer = async (options: {
+  command: string[];
   cwd: string;
   port: number;
   env: NodeJS.ProcessEnv;
   timeoutMinutes: number;
   logFile: string;
 }): Promise<AppServer> => {
-  const { cwd, port, env, timeoutMinutes, logFile } = options;
+  const { command, cwd, port, env, timeoutMinutes, logFile } = options;
   if (await portInUse(port)) {
     throw new Error(
       `port ${port} is in use. Stop the server on it — the pipeline serves the code under test itself — or change server.port in pipeline.config.json.`,
@@ -35,7 +36,8 @@ export const startAppServer = async (options: {
 
   // The dev server even in CI: only it rebuilds when codegen adds data-cy attributes.
   const log = fs.openSync(logFile, 'a');
-  const child = spawn('npm', ['run', 'start'], {
+  const [executable, ...args] = command;
+  const child = spawn(executable, args, {
     cwd,
     env: { ...env, PORT: String(port) },
     detached: true,

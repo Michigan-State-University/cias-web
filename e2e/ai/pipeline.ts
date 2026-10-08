@@ -8,7 +8,6 @@ import { REPO_ROOT, loadConfig, workRoot } from './lib/config';
 import { formatChecks, runChecks } from './lib/doctor';
 import { generate } from './lib/generate';
 import { checkScenarios, decline, sweep } from './lib/housekeeping';
-import { latestMergedDecision } from './lib/latest';
 import { regenerate } from './lib/regenerate';
 import { renderReport, reportRows } from './lib/report';
 import { githubOutputs, routeEvent } from './lib/router';
@@ -185,15 +184,11 @@ const routeCommand = (argv: string[]) => {
     fs.readFileSync(values['event-path'] ?? '', 'utf8'),
   );
   const eventName = values['event-name'] ?? '';
-  // TEMPORARY: the push trigger in e2e-ai.yml (see lib/latest.ts).
-  const decision =
-    eventName === 'push'
-      ? latestMergedDecision(config, payload.head_commit?.message ?? '')
-      : routeEvent(eventName, payload, {
-          baseBranch: config.baseBranch,
-          branchPrefix: config.branchPrefix,
-          autoEnabled: process.env.E2E_AI_AUTO === 'on',
-        });
+  const decision = routeEvent(eventName, payload, {
+    baseBranch: config.baseBranch,
+    branchPrefix: config.branchPrefix,
+    autoEnabled: process.env.E2E_AI_AUTO === 'on',
+  });
   console.log(JSON.stringify(decision));
 
   // Comment text is untrusted: later jobs read it only via env vars.

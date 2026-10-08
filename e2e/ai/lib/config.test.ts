@@ -39,3 +39,10 @@ describe('change sizing', () => {
     );
   });
 });
+
+describe('project-specific settings', () => {
+  it('names the CI suite and the app server command instead of hard-coding them', () => {
+    assert.match(config.e2e.testsWorkflow, /\.ya?ml$/);
+    assert.ok(config.server.command.length > 0, 'a command to serve the app');
+  });
+});

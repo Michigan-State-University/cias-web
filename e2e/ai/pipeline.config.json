@@ -9,7 +9,8 @@
     "authProject": "setup",
     "seedProject": "ai",
     "readOnly": ["e2e/fixtures", "e2e/auth.setup.ts", "e2e/.auth"],
-    "selectorAttribute": "data-cy"
+    "selectorAttribute": "data-cy",
+    "testsWorkflow": "e2e-tests.yml"
   },
   "scenariosDir": "e2e/scenarios",
   "knowledgeDirs": ["docs/knowledge-pills", "../.claude/knowledge-pills"],
@@ -41,7 +42,8 @@
   "maxBudgetUsdPerCommand": 20,
   "server": {
     "port": 4200,
-    "startTimeoutMinutes": 6
+    "startTimeoutMinutes": 6,
+    "command": ["npm", "run", "start"]
   },
   "staleDraftDays": 14,
   "smallChange": {

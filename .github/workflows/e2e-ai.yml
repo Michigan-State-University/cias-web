@@ -4,7 +4,8 @@ name: E2E AI pipeline
 # Secrets: ANTHROPIC_API_KEY (or CLAUDE_CODE_OAUTH_TOKEN for development),
 #   E2E_AI_APP_PRIVATE_KEY, E2E_ADMIN_PASSWORD, E2E_VERIFICATION_CODE, ADDITIONAL_ORIGIN_SECURE_TOKEN.
 # Vars: E2E_AI_APP_ID, E2E_ADMIN_EMAIL_PATTERN, E2E_AI_AUTO=on (enables the merge trigger).
-# App permissions: contents, pull requests, issues read/write here; contents, pull requests read on cias-api.
+# App permissions: contents, pull requests, issues read/write here; contents, pull requests read on PAIRED_REPO.
+# Without the App (no E2E_AI_APP_ID), jobs fall back to GITHUB_TOKEN; see e2e/ai/README.md → Setup.
 
 on:
   pull_request:
@@ -19,10 +20,6 @@ on:
         required: true
   schedule:
     - cron: '17 6 * * *'
-  # TEMPORARY: runs the pipeline from this branch until it's on the default
-  # branch. Remove with e2e/ai/lib/latest.ts.
-  push:
-    branches: [chore/e2e-ai-pipeline]
 
 permissions:
   contents: read
@@ -32,6 +29,8 @@ env:
   WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
   WEB_URL: http://localhost:4200
   CLAUDE_CODE_VERSION: 2.1.282
+  # Its dev branch is checked out read-only for grounding; must match pairedRepoDirs in pipeline.config.json.
+  PAIRED_REPO: cias-api
 
 jobs:
   route:
@@ -56,12 +55,11 @@ jobs:
       notes: ${{ steps.route.outputs.notes }}
 
     steps:
-      # Always the default branch's pipeline, never a PR's code with secrets;
-      # only the temporary push trigger runs the pushed commit.
+      # Always the default branch's pipeline, never a PR's code with secrets.
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'push' && github.sha || github.event.repository.default_branch }}
+          ref: ${{ github.event.repository.default_branch }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -116,21 +114,21 @@ jobs:
           app-id: ${{ vars.E2E_AI_APP_ID }}
           private-key: ${{ secrets.E2E_AI_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          repositories: cias-web,cias-api
+          repositories: ${{ github.event.repository.name }},${{ env.PAIRED_REPO }}
 
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'push' && github.sha || github.event.repository.default_branch }}
+          ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
           token: ${{ steps.app-token.outputs.token || github.token }}
 
-      - name: Checkout cias-api
+      - name: Checkout the paired repo
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository_owner }}/cias-api
+          repository: ${{ github.repository_owner }}/${{ env.PAIRED_REPO }}
           ref: dev
-          path: .paired/cias-api
+          path: .paired/${{ env.PAIRED_REPO }}
           token: ${{ steps.app-token.outputs.token || github.token }}
           persist-credentials: false
 
@@ -184,6 +182,7 @@ jobs:
           path: |
             ${{ runner.temp }}/e2e-ai/*/run.json
             ${{ runner.temp }}/e2e-ai/*/pr-body.md
+            ${{ runner.temp }}/e2e-ai/*/output/
             ${{ runner.temp }}/e2e-ai/*/input/
             ${{ runner.temp }}/e2e-ai/*/stages/*.prompt.md
           if-no-files-found: ignore
@@ -199,10 +198,19 @@ jobs:
     concurrency:
       group: e2e-ai-staging-account
       cancel-in-progress: false
+    # Only used by the GITHUB_TOKEN fallback below; actions: write dispatches the suite.
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: write
 
     steps:
+      # Without an App the job falls back to GITHUB_TOKEN, and the pipeline then
+      # dispatches the E2E suite itself, since GITHUB_TOKEN pushes trigger nothing.
       - name: Create an App token
         id: app-token
+        if: vars.E2E_AI_APP_ID != ''
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.E2E_AI_APP_ID }}
@@ -213,7 +221,7 @@ jobs:
         with:
           ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ steps.app-token.outputs.token || github.token }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -248,11 +256,16 @@ jobs:
 
       - name: Commit as the App
         run: |
+          if [ -z "$APP_SLUG" ]; then
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            exit 0
+          fi
           user_id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)
           git config --global user.name "${APP_SLUG}[bot]"
           git config --global user.email "${user_id}+${APP_SLUG}[bot]@users.noreply.github.com"
         env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
           APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
 
       # The dev server reads only .env. No stage can read this file.
@@ -272,7 +285,8 @@ jobs:
         env:
           PR: ${{ needs.route.outputs.pr }}
           COMMENTER: ${{ needs.route.outputs.commenter }}
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
+          E2E_AI_DISPATCH_TESTS: ${{ vars.E2E_AI_APP_ID == '' && '1' || '' }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # No E2E_WORKER_COUNT/E2E_ACCOUNT_OFFSET: E2E_AI=1 picks the account.
@@ -300,10 +314,16 @@ jobs:
     if: contains(fromJSON('["decline", "check-scenarios", "sweep"]'), needs.route.outputs.action)
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # Only used by the GITHUB_TOKEN fallback below.
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
 
     steps:
       - name: Create an App token
         id: app-token
+        if: vars.E2E_AI_APP_ID != ''
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.E2E_AI_APP_ID }}
@@ -313,7 +333,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.repository.default_branch }}
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ steps.app-token.outputs.token || github.token }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -335,4 +355,4 @@ jobs:
           ACTION: ${{ needs.route.outputs.action }}
           PR: ${{ needs.route.outputs.pr }}
           COMMENTER: ${{ needs.route.outputs.commenter }}
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}

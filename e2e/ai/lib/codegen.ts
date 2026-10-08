@@ -159,6 +159,25 @@ const resolvePr = (
   return { manifest, sha: draft.headRefOid, approver, pr: draft };
 };
 
+// A merged PR's change is already on the base branch; a branch run's isn't, so its specs must run against the
+// branch itself: its tip if it still exists, else the commit the scenarios were drafted from.
+export const localCodeUnderTest = (
+  manifest: Pick<RunManifest, 'source'>,
+  options: Pick<CodegenOptions, 'baseRef'>,
+  config: Pick<PipelineConfig, 'baseBranch'>,
+  repo = REPO_ROOT,
+): string => {
+  if (options.baseRef) return git(['rev-parse', options.baseRef], repo);
+  const { source } = manifest;
+  if (source.kind !== 'branch')
+    return git(['rev-parse', `origin/${config.baseBranch}`], repo);
+  try {
+    return git(['rev-parse', '--verify', `${source.headRef}^{commit}`], repo);
+  } catch {
+    return source.sha;
+  }
+};
+
 const resolveLocal = (
   runId: string,
   options: CodegenOptions,
@@ -182,10 +201,9 @@ const resolveLocal = (
   } catch {
     // No git identity: keep "local".
   }
-  const base = options.baseRef ?? `origin/${config.baseBranch}`;
   return {
     manifest,
-    sha: git(['rev-parse', base], REPO_ROOT),
+    sha: localCodeUnderTest(manifest, options, config),
     approver,
     scenariosSource: source,
   };
@@ -361,6 +379,7 @@ export const codegen = async (
     if (live) {
       currentStage = 'server';
       server = await startAppServer({
+        command: config.server.command,
         cwd: checkout,
         port,
         env: browserEnv,
@@ -572,9 +591,11 @@ export const codegen = async (
       );
       const toCommit = changedFiles(checkout, commitExclude);
       git(['add', '--', ...toCommit], checkout);
+      // The specs already passed the lint gate; the repo's pre-commit hook would re-lint them with the app's rules.
       git(
         [
           'commit',
+          '--no-verify',
           '-m',
           `test(e2e): generate specs for the approved scenarios (#${target.pr.number})`,
         ],
@@ -585,6 +606,18 @@ export const codegen = async (
         ['push', 'origin', `HEAD:refs/heads/${target.pr.headRefName}`],
         checkout,
       );
+      // A GITHUB_TOKEN push starts no workflow, but a dispatch does: without the App, run the suite explicitly.
+      if (process.env.E2E_AI_DISPATCH_TESTS === '1') {
+        gh([
+          'workflow',
+          'run',
+          e2e.testsWorkflow,
+          '-R',
+          config.repo,
+          '--ref',
+          target.pr.headRefName,
+        ]);
+      }
       const pr = String(target.pr.number);
       gh(['pr', 'edit', pr, '-R', config.repo, '--body-file', bodyFile]);
       gh(['pr', 'ready', pr, '-R', config.repo]);
@@ -617,7 +650,8 @@ export const codegen = async (
     throw error;
   } finally {
     server?.stop();
-    // A local run's results live in the checkout; a published one is pushed.
-    if (options.publish && !options.keepWork) removeCheckout(checkout);
+    // A local run's results live in the checkout; a published one is pushed. A dry run keeps its checkout to inspect.
+    if (options.publish && !options.keepWork && options.mode.kind !== 'dry-run')
+      removeCheckout(checkout);
   }
 };
