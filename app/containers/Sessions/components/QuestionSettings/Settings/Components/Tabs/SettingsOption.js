@@ -17,14 +17,7 @@ import { Input } from '../styled';
 import messages from '../messages';
 import { getSettingOptionTooltipText } from './utils';
 
-const SettingsOption = ({
-  setting,
-  index,
-  onUpdate,
-  disabled,
-  isLast,
-  session,
-}) => {
+const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
   const { formatMessage } = useIntl();
 
   const isNullableNumericSettings =
@@ -44,15 +37,6 @@ const SettingsOption = ({
   );
 
   const tooltipText = getSettingOptionTooltipText(formatMessage, index);
-
-  const optionDisabled = () => {
-    switch (index) {
-      case 'start_autofinish_timer':
-        return !session?.autofinishEnabled;
-      default:
-        return false;
-    }
-  };
 
   const numericInput = useCallback(
     () => (
@@ -108,7 +92,7 @@ const SettingsOption = ({
         <Column>
           <FullWidthSwitch
             id={index}
-            disabled={disabled || optionDisabled()}
+            disabled={disabled}
             checked={setting}
             onToggle={handleUpdate}
           >
@@ -131,7 +115,7 @@ const SettingsOption = ({
         return (
           <FullWidthSwitch
             id={index}
-            disabled={disabled || optionDisabled()}
+            disabled={disabled}
             checked={setting}
             onToggle={handleUpdate}
           >
@@ -173,7 +157,6 @@ SettingsOption.propTypes = {
   index: PropTypes.string,
   disabled: PropTypes.bool,
   isLast: PropTypes.bool,
-  session: PropTypes.object,
 };
 
 export default memo(SettingsOption);

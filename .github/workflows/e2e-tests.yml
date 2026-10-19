@@ -2,8 +2,6 @@ name: E2E Tests
 
 on: push
 
-# A newer push to the same branch stops the older run. Left running, its shards
-# keep driving the shared staging accounts underneath the newer run's shards.
 concurrency:
   group: e2e-${{ github.ref }}
   cancel-in-progress: true
@@ -12,15 +10,13 @@ env:
   API_URL: https://cias-api-staging.herokuapp.com
   WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
   WEB_URL: http://localhost:4200
-  # One shard per admin account in the pool. The API rotates the access token on
-  # every request, so two shards must never drive the same account.
+  # One shard per admin account: the API rotates tokens per request, so shards can't share one.
   SHARD_COUNT: 5
 
 jobs:
   build:
     name: Build app for E2E
-    # Runs triggered by Dependabot get no repository secrets, so the admin
-    # sign-in can only fail. Skipping here skips the shards that depend on it.
+    # Dependabot runs get no secrets, so sign-in would fail
     if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -38,7 +34,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Built once and shared with every shard — the shards only serve it
       - name: Build application
         run: npm run build
         env:
@@ -57,24 +52,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
-    # Every run of this workflow shares the same five staging admin accounts, and
-    # the API rotates an account's token on each request, so two runs on one
-    # account log each other out. Only one job per account at a time: a run from
-    # another branch waits for the account instead of colliding with it.
-    # (GitHub keeps one pending job per group; a third run queuing for the same
-    # account replaces the one already waiting.)
+    # One job per staging account across all runs, or they log each other out
     concurrency:
       group: e2e-staging-account-${{ matrix.account }}
       cancel-in-progress: false
 
     strategy:
-      # one shard failing must not cancel the others, or a single flake hides
-      # every other result
-      fail-fast: false
+      # All shards must pass; tests only fail after their CI retries, so flakes don't trigger this
+      fail-fast: true
       matrix:
-        # `account` is spelled out rather than derived from `shard`: GitHub
-        # expressions have no arithmetic, so `${{ matrix.shard - 1 }}` is a
-        # workflow syntax error
+        # `account` is spelled out: GitHub expressions can't do `matrix.shard - 1`
         include:
           - shard: 1
             account: 0
@@ -125,8 +112,6 @@ jobs:
           name: e2e-build
           path: build/
 
-      # Each shard signs in as exactly one admin account — its own — so the
-      # shards cannot rotate each other's tokens out from under them.
       - name: Run Playwright tests
         run: npx playwright test --project=webkit --shard=${{ matrix.shard }}/${{ env.SHARD_COUNT }} --workers=1 --reporter=blob,list
         env:
