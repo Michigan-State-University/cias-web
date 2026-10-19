@@ -2,6 +2,8 @@ import { GroupType } from 'models/QuestionGroup';
 import { QuestionTypes } from 'models/Question';
 import { SessionTypes } from 'models/Session';
 
+import { parsePhoneFromCsv } from 'components/FormikPhoneNumberInput';
+
 import {
   prepareRaAnswerColumnMap,
   SUPPORTED_RA_QUESTION_TYPES,
@@ -436,6 +438,50 @@ describe('generatePredefinedParticipantsExampleCsv — RA column extensions', ()
 
     expect(rows.length).toBe(1);
     expect(rows[0]['s1.a_var']).toBe('42');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 3b. parsePhoneFromCsv — country code formats
+// ---------------------------------------------------------------------------
+
+describe('parsePhoneFromCsv — country code formats', () => {
+  // Canonical libphonenumber-js example number (guaranteed parseable).
+  const US_NUMBER = '2133734253';
+
+  it('parses a bare numeric calling code ("1") — the documented format', () => {
+    const result = parsePhoneFromCsv('1', US_NUMBER);
+    expect(result.iso.value).toBe('US');
+    expect(result.number).toBeTruthy();
+  });
+
+  it('treats a leading "+" as optional ("+1" === "1")', () => {
+    const withPlus = parsePhoneFromCsv('+1', US_NUMBER);
+    const withoutPlus = parsePhoneFromCsv('1', US_NUMBER);
+    expect(withPlus).toEqual(withoutPlus);
+    expect(withPlus.iso.value).toBe('US');
+  });
+
+  it('resolves an unambiguous non-US calling code from the number ("48" -> PL)', () => {
+    const result = parsePhoneFromCsv('48', '512345678');
+    expect(result.iso.value).toBe('PL');
+    expect(result.number).toBeTruthy();
+  });
+
+  it('still accepts a 2-letter ISO code (backwards compatibility)', () => {
+    const result = parsePhoneFromCsv('US', US_NUMBER);
+    expect(result.iso.value).toBe('US');
+    expect(result.number).toBeTruthy();
+  });
+
+  it('drops the phone when the country code is neither a calling code nor an ISO code', () => {
+    const result = parsePhoneFromCsv('notACode', US_NUMBER);
+    expect(result.number).toBe('');
+  });
+
+  it('drops the phone when the country code is missing', () => {
+    const result = parsePhoneFromCsv('', US_NUMBER);
+    expect(result.number).toBe('');
   });
 });
 

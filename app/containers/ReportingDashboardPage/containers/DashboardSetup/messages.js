@@ -64,6 +64,11 @@ export default defineMessages({
     id: `${scope}.chartSettingsPublishButton`,
     defaultMessage: 'Publish chart',
   },
+  chartSettingsStaleMinAnsweredBlocked: {
+    id: `${scope}.chartSettingsStaleMinAnsweredBlocked`,
+    defaultMessage:
+      'Data collection cannot start while the minimum answered items is higher than the number of variables the formula references. Lower the minimum first — once collection starts, the chart can no longer be edited.',
+  },
   chartSettingsNotEditableInfo: {
     id: `${scope}.chartSettingsNotEditableInfo`,
     defaultMessage: `Data are being collected. <span style='color: #D2371D;'>From this moment you can not introduce any changes to the chart</span>.`,
@@ -96,7 +101,7 @@ export default defineMessages({
   },
   chartSettingsAddVariable: {
     id: `${scope}.chartSettingsAddVariable`,
-    defaultMessage: 'Add variable',
+    defaultMessage: '+ Add variable',
   },
   chartSettingsIntervalType: {
     id: `${scope}.chartSettingsIntervalType`,
@@ -162,6 +167,19 @@ export default defineMessages({
     id: `${scope}.noChartsData`,
     defaultMessage: 'No charts data',
   },
+  chartSettingsRegenerate: {
+    id: `${scope}.chartSettingsRegenerate`,
+    defaultMessage: 'Regenerate data',
+  },
+  regenerateChartModalHeader: {
+    id: `${scope}.regenerateChartModalHeader`,
+    defaultMessage: 'Regenerate this chart?',
+  },
+  regenerateChartModalMessage: {
+    id: `${scope}.regenerateChartModalMessage`,
+    defaultMessage:
+      "This will rebuild the chart's figures from participants' existing answers. The rebuild happens in place, so the chart's previous data is overwritten and cannot be recovered. We'll email you when it's finished.",
+  },
   deleteChartModalHeader: {
     id: `${scope}.deleteChartModalHeader`,
     defaultMessage: 'Delete Chart',
@@ -183,5 +201,66 @@ export default defineMessages({
   endDateLabel: {
     id: `${scope}.endDateLabel`,
     defaultMessage: 'Date to (optional)',
+  },
+  chartValiditySettingsLabel: {
+    id: `${scope}.chartValiditySettingsLabel`,
+    defaultMessage: '<b>Participant validity</b>',
+  },
+  chartValiditySingleInstrumentHint: {
+    id: `${scope}.chartValiditySingleInstrumentHint`,
+    defaultMessage:
+      'Controls which participants this chart counts. A participant who answers too few of the formula variables is shown as their own Invalid / Insufficient Data category rather than dropped from the chart.',
+  },
+  chartValidityMinAnsweredLabel: {
+    id: `${scope}.chartValidityMinAnsweredLabel`,
+    defaultMessage: 'Minimum answered items (variables) required',
+  },
+  chartValidityMinAnsweredOutOf: {
+    id: `${scope}.chartValidityMinAnsweredOutOf`,
+    defaultMessage: 'out of {variableCount}',
+  },
+  chartValidityMinAnsweredHint: {
+    id: `${scope}.chartValidityMinAnsweredHint`,
+    defaultMessage:
+      '0 turns the check off. The count covers every variable in the formula - a Single question is one variable, a Multiple question one per option.',
+  },
+  chartValidityStaleMinAnsweredNotice: {
+    id: `${scope}.chartValidityStaleMinAnsweredNotice`,
+    defaultMessage:
+      'The minimum is set to {minAnswered}, but the formula now has only {variableCount} {variableCount, plural, one {variable} other {variables}}. No participant can meet it — lower the minimum.',
+  },
+  chartValidityThresholdLabel: {
+    id: `${scope}.chartValidityThresholdLabel`,
+    defaultMessage: 'Positive Despite Missing Data',
+  },
+  chartValidityThresholdHint: {
+    id: `${scope}.chartValidityThresholdHint`,
+    defaultMessage:
+      "When checked, a participant below the minimum still counts if their score (missing answers count as 0) already matches one of the chart's cases - they can never land in the default category. Leave unchecked and they are classified as Invalid / Insufficient Data.",
+  },
+  barChartTooltipPopulation: {
+    id: `${scope}.barChartTooltipPopulation`,
+    defaultMessage: 'Population: {value}',
+  },
+  barChartTooltipMatched: {
+    id: `${scope}.barChartTooltipMatched`,
+    defaultMessage: 'Matched: {value}',
+  },
+  barChartTooltipNotMatched: {
+    id: `${scope}.barChartTooltipNotMatched`,
+    defaultMessage: 'Not matched: {value}',
+  },
+  barChartTooltipInvalid: {
+    id: `${scope}.barChartTooltipInvalid`,
+    defaultMessage: 'Invalid / Insufficient Data: {value}',
+  },
+  barChartTooltipInvalidWithShare: {
+    id: `${scope}.barChartTooltipInvalidWithShare`,
+    defaultMessage: 'Invalid / Insufficient Data: {value} ({share}%)',
+  },
+  chartSettingsRegenerateDraftHint: {
+    id: `${scope}.chartSettingsRegenerateDraftHint`,
+    defaultMessage:
+      'A draft chart has no collected data to regenerate. Start data collection first.',
   },
 });

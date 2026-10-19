@@ -16,6 +16,11 @@ export default defineMessages({
     id: `${scope}.informationForParticipantLabel`,
     defaultMessage: 'Information for participant',
   },
+  informationForParticipantDisabledTooltip: {
+    id: `${scope}.informationForParticipantDisabledTooltip`,
+    defaultMessage:
+      "Not available for Research Assistant sessions — participant phone numbers can't be collected here, so participant SMS can't be delivered. Use “Alert for third party” instead.",
+  },
   alertForThirdPartyLabel: {
     id: `${scope}.alertForThirdPartyLabel`,
     defaultMessage: 'Alert for third party',

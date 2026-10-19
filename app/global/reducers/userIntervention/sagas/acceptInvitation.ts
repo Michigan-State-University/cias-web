@@ -8,6 +8,7 @@ import { RoutePath } from 'global/constants';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { parametrizeRoutePath } from 'utils/router';
 import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
+import { withTestLinkToken } from 'utils/testLinkToken';
 
 import { getInterventionNotAvailablePagePathFromApiError } from 'components/InterventionNotAvailableInfo';
 
@@ -27,10 +28,14 @@ export function* acceptInvitation({
           attributes: { blocked },
         },
       },
-    } = yield call(axios.post, url, {
-      intervention_id: interventionId,
-      health_clinic_id: clinicId,
-    });
+    } = yield call(
+      axios.post,
+      url,
+      withTestLinkToken({
+        intervention_id: interventionId,
+        health_clinic_id: clinicId,
+      }),
+    );
     if (blocked) {
       yield put(push(`/`));
       yield call(

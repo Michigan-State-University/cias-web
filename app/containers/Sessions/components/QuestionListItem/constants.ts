@@ -16,3 +16,5 @@ export const NON_DUPLICABLE_SCREENS = [
 
 // screens whose variable is not editable
 export const VARIABLE_NON_EDITABLE_SCREENS = [QuestionTypes.NAME];
+
+export const SCREEN_DELETE_COLLAPSE_DURATION_MS = 250;

@@ -1,15 +1,19 @@
 import React, { FC, memo } from 'react';
 import { useIntl } from 'react-intl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
+import { canFillRaSession } from 'models/Status/statusPermissions';
 
 import { formatPhone } from 'utils/phone';
 
 import { colors, themeColors } from 'theme';
 
-import { fulfillRaSessionRequest } from 'global/reducers/intervention';
+import {
+  fulfillRaSessionRequest,
+  makeSelectInterventionStatus,
+} from 'global/reducers/intervention';
 
 import { NoMaxWidthTD, StripedTR } from 'components/Table';
 import { EllipsisText } from 'components/Text';
@@ -36,6 +40,9 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
+
+  const interventionStatus = useSelector(makeSelectInterventionStatus());
+  const fillingRaSessionPossible = canFillRaSession(interventionStatus);
 
   const {
     id,
@@ -102,12 +109,23 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
               </Badge>
             </Tooltip>
           ) : (
-            <TextButton
-              buttonProps={{ color: themeColors.secondary, fontWeight: 'bold' }}
-              onClick={() => dispatch(fulfillRaSessionRequest(slug))}
+            <Tooltip
+              id={`ra-fill-disabled-${id}`}
+              visible={!fillingRaSessionPossible}
+              text={formatMessage(messages.fillRaSessionDisabledInfo)}
+              nonInteractive
             >
-              {formatMessage(messages.fillRaSessionButton)}
-            </TextButton>
+              <TextButton
+                buttonProps={{
+                  color: themeColors.secondary,
+                  fontWeight: 'bold',
+                }}
+                onClick={() => dispatch(fulfillRaSessionRequest(slug))}
+                disabled={!fillingRaSessionPossible}
+              >
+                {formatMessage(messages.fillRaSessionButton)}
+              </TextButton>
+            </Tooltip>
           )}
         </NoMaxWidthTD>
       )}

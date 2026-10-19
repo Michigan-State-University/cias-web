@@ -129,14 +129,15 @@ export class TextMessagesBuilder {
   /**
    * @param  {string} name
    * @param  {string} sessionId
+   * @param  {TextMessageType} type
    * @returns  {TextMessage}
    */
-  buildNewTextMessage = (name, sessionId) => ({
+  buildNewTextMessage = (name, sessionId, type = TextMessageType.NORMAL) => ({
     id: null,
     name,
     sessionId,
     schedule: TextMessageScheduleOption.AFTER_FILL,
     frequency: TextMessageScheduleFrequency.ONCE,
-    type: TextMessageType.NORMAL,
+    type,
   });
 }

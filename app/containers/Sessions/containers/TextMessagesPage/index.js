@@ -33,6 +33,7 @@ import {
   getSessionRequest,
   getSessionSaga,
   sessionReducer,
+  makeSelectSession,
 } from 'global/reducers/session';
 
 import Row from 'components/Row';
@@ -60,8 +61,11 @@ const TextMessagingPage = ({
   filters,
   setFilters,
   editingPossible,
+  session,
 }) => {
   const { formatMessage } = useIntl();
+
+  const sessionType = session?.type;
 
   useEffect(() => {
     fetchTextMessages(sessionId);
@@ -84,6 +88,7 @@ const TextMessagingPage = ({
       selectedMessageId,
       changeSelectedId,
       sessionId,
+      sessionType,
       selectedMessage,
       selectedMessageState,
       editingPossible,
@@ -97,6 +102,7 @@ const TextMessagingPage = ({
       selectedMessageId,
       changeSelectedId,
       sessionId,
+      sessionType,
       selectedMessage,
       selectedMessageState,
       editingPossible,
@@ -145,6 +151,7 @@ TextMessagingPage.propTypes = {
   fetchSession: PropTypes.func,
   setFilters: PropTypes.func,
   filters: PropTypes.arrayOf(PropTypes.object),
+  session: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -156,6 +163,7 @@ const mapStateToProps = createStructuredSelector({
   loaders: makeSelectLoaders(),
   errors: makeSelectErrors(),
   editingPossible: makeSelectEditingPossible(),
+  session: makeSelectSession(),
 });
 
 const mapDispatchToProps = {

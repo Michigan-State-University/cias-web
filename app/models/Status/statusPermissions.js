@@ -20,6 +20,8 @@ const ALLOWED_CREATING_PREDEFINED_PARTICIPANTS = [
 
 const ALLOWED_BULK_IMPORTING_RA_ANSWERS = [InterventionStatus.PUBLISHED];
 
+const ALLOWED_FILLING_RA_SESSION = [InterventionStatus.PUBLISHED];
+
 const ALLOWED_CHANGING_ACCESS_SETTINGS = [InterventionStatus.DRAFT];
 
 const ALLOWED_ADDING_PARTICIPANTS_TO_INTERVENTION = [
@@ -62,6 +64,9 @@ export const canCreatePredefinedParticipants = (interventionStatus) =>
 
 export const canBulkImportRaAnswers = (interventionStatus) =>
   ALLOWED_BULK_IMPORTING_RA_ANSWERS.includes(interventionStatus);
+
+export const canFillRaSession = (interventionStatus) =>
+  ALLOWED_FILLING_RA_SESSION.includes(interventionStatus);
 
 export const canChangeAccessSettings = (interventionStatus) =>
   ALLOWED_CHANGING_ACCESS_SETTINGS.includes(interventionStatus);

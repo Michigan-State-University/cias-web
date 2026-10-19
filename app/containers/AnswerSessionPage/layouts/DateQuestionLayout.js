@@ -6,8 +6,21 @@ import Box from 'components/Box';
 import Row from 'components/Row';
 import { themeColors } from 'theme';
 
+// The DB contains two date formats:
+//   * "Mon May 11 2026" — historical (Date#toDateString), the format we write
+//   * "2026-05-11"      — written between 2026-04-10 and CIAS-4177 fix deploy
+const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
+
+const parseLocalDate = (raw) => {
+  if (!raw) return null;
+  const iso = raw.match(ISO_DATE);
+  if (iso) return new Date(+iso[1], +iso[2] - 1, +iso[3]);
+  const legacy = new Date(raw);
+  return Number.isNaN(legacy.getTime()) ? null : legacy;
+};
+
 const DateQuestionLayout = ({ onChange, answerBody, disabled }) => {
-  const value = answerBody && answerBody.value ? answerBody.value : '';
+  const value = parseLocalDate(answerBody?.value);
 
   return (
     <Box width="100%" padding={15}>
@@ -17,7 +30,7 @@ const DateQuestionLayout = ({ onChange, answerBody, disabled }) => {
           width={200}
           height={50}
           type="date"
-          value={Date.parse(value)}
+          value={value}
           onCheck={onChange}
           fontSize={15}
           styles={{

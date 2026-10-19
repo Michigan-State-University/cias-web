@@ -34,6 +34,7 @@ const CopyModal = ({
   disableCurrentQuestionGroupCopy,
   disableCurrentSessionCopy,
   disableCurrentInterventionCopy,
+  blockInterventionsWithRaSession,
   pasteText,
   defaultView,
   interventionStatusFilter,
@@ -67,6 +68,7 @@ const CopyModal = ({
           disableCurrentQuestionGroupCopy={disableCurrentQuestionGroupCopy}
           disableCurrentSessionCopy={disableCurrentSessionCopy}
           disableCurrentInterventionCopy={disableCurrentInterventionCopy}
+          blockInterventionsWithRaSession={blockInterventionsWithRaSession}
           pasteText={pasteText}
         />
       </Modal>
@@ -85,6 +87,7 @@ CopyModal.propTypes = {
   disableCurrentQuestionGroupCopy: PropTypes.bool,
   disableCurrentSessionCopy: PropTypes.bool,
   disableCurrentInterventionCopy: PropTypes.bool,
+  blockInterventionsWithRaSession: PropTypes.bool,
   pasteText: PropTypes.string,
   defaultView: PropTypes.string,
   interventionStatusFilter: PropTypes.arrayOf(PropTypes.string),
@@ -98,6 +101,7 @@ CopyModal.defaultProps = {
   disableCurrentQuestionGroupCopy: false,
   disableCurrentSessionCopy: false,
   disableCurrentInterventionCopy: false,
+  blockInterventionsWithRaSession: false,
   defaultView: VIEWS.QUESTION_GROUP,
   interventionStatusFilter: [InterventionStatus.DRAFT],
 };

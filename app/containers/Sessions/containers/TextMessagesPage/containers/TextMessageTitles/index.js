@@ -14,6 +14,7 @@ import Box from 'components/Box';
 
 import addSign from 'assets/svg/addSign.svg';
 import { TextMessagesBuilder, TextMessageType } from 'models/TextMessage';
+import { SessionTypes } from 'models/Session';
 import { createTextMessageRequest } from 'global/reducers/textMessages';
 import { colors } from 'theme';
 
@@ -41,14 +42,22 @@ const SmsTiles = ({ createTextMessage }) => {
     changeSelectedId,
     selectedMessageId,
     sessionId,
+    sessionType,
     editingPossible,
   } = useContext(TextMessagesContext);
 
   const handleCreateTextMessages = () => {
     if (!editingPossible) return;
+    // RA sessions can't collect a confirmed participant phone, so participant
+    // (Normal) SMS plans are never deliverable — default new plans to Alert.
+    const defaultType =
+      sessionType === SessionTypes.RA_SESSION
+        ? TextMessageType.ALERT
+        : TextMessageType.NORMAL;
     const newTextMessage = new TextMessagesBuilder().buildNewTextMessage(
       formatMessage(messages.defaultName),
       sessionId,
+      defaultType,
     );
     createTextMessage(newTextMessage);
   };

@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import { registerDependencies } from 'mjml-validator'
 import { BodyComponent } from 'mjml-core'
 

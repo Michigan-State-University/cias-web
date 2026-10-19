@@ -1,5 +1,7 @@
 import { Page, Locator } from '@playwright/test';
 
+import { waitForApiResponse } from '../utils/waitForApiResponse';
+
 export class DashboardPage {
   readonly page: Page;
   readonly createInterventionButton: Locator;
@@ -38,13 +40,12 @@ export class DashboardPage {
     // Wait for the button to be ready, then set up response listener before clicking
     await this.createInterventionButton.waitFor({ state: 'visible', timeout: 15000 });
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 60000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/interventions',
+      method: 'POST',
+      status: 201,
+      timeout: 60000,
+    });
 
     await this.createInterventionButton.click();
     await responsePromise;
@@ -128,11 +129,13 @@ export class DashboardPage {
   }
 
   async waitForInterventionsToLoad() {
-    // Wait for at least one intervention tile or the "no results" message
+    // Wait for at least one intervention tile or the "no results" message. No
+    // explicit timeout: the config's actionTimeout is raised on CI for the
+    // remote staging API, and a hardcoded 10s here overrode it.
     await this.page
       .locator('[data-cy^="intervention-tile-"], h3:has-text("No results")')
       .first()
-      .waitFor({ timeout: 10000 });
+      .waitFor();
   }
 
   async getInterventionIdFromUrl(): Promise<string> {

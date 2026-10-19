@@ -2,28 +2,86 @@ name: E2E Tests
 
 on: push
 
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
-  E2E_ADMIN_EMAIL_PATTERN: ${{ vars.E2E_ADMIN_EMAIL_PATTERN }}
-  E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
-  E2E_VERIFICATION_CODE: ${{ secrets.E2E_VERIFICATION_CODE }}
-  E2E_WORKER_COUNT: ${{ vars.E2E_WORKER_COUNT }}
-  E2E_AUTH_SETUP_DELAY_MS: ${{ vars.E2E_AUTH_SETUP_DELAY_MS }}
   API_URL: https://cias-api-staging.herokuapp.com
+  WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
+  WEB_URL: http://localhost:4200
+  # One shard per admin account: the API rotates tokens per request, so shards can't share one.
+  SHARD_COUNT: 5
 
 jobs:
-  e2e-tests:
-    name: Playwright E2E Tests
+  build:
+    name: Build app for E2E
+    # Dependabot runs get no secrets, so sign-in would fail
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '18'
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Upload build
+        uses: actions/upload-artifact@v6
+        with:
+          name: e2e-build
+          path: build/
+          retention-days: 1
+
+  e2e-tests:
+    name: Playwright E2E Tests (shard ${{ matrix.shard }})
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    # One job per staging account across all runs, or they log each other out
+    concurrency:
+      group: e2e-staging-account-${{ matrix.account }}
+      cancel-in-progress: false
+
+    strategy:
+      # All shards must pass; tests only fail after their CI retries, so flakes don't trigger this
+      fail-fast: true
+      matrix:
+        # `account` is spelled out: GitHub expressions can't do `matrix.shard - 1`
+        include:
+          - shard: 1
+            account: 0
+          - shard: 2
+            account: 1
+          - shard: 3
+            account: 2
+          - shard: 4
+            account: 3
+          - shard: 5
+            account: 4
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -34,7 +92,7 @@ jobs:
         run: echo "version=$(node -p "require('./package-lock.json').packages['node_modules/@playwright/test'].version")" >> $GITHUB_OUTPUT
 
       - name: Cache Playwright browsers
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
@@ -48,24 +106,18 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps webkit chromium firefox
 
-      # Build the frontend from current branch code
-      # The built app will connect to staging API (set via API_URL)
-      - name: Build application
-        run: npm run build
-        env:
-          API_URL: https://cias-api-staging.herokuapp.com
-          WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
-          NODE_ENV: production
-          WEB_URL: http://localhost:4200
+      - name: Download build
+        uses: actions/download-artifact@v7
+        with:
+          name: e2e-build
+          path: build/
 
-      # Run tests against locally-served frontend (current branch) + staging API
       - name: Run Playwright tests
-        run: npx playwright test --project=webkit --workers=1
+        run: npx playwright test --project=webkit --shard=${{ matrix.shard }}/${{ env.SHARD_COUNT }} --workers=1 --reporter=blob,list
         env:
-          API_URL: https://cias-api-staging.herokuapp.com
-          WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
           E2E_BASE_URL: http://localhost:4200
-          WEB_URL: http://localhost:4200
+          E2E_ACCOUNT_OFFSET: ${{ matrix.account }}
+          E2E_ACCOUNTS_NEEDED: 1
           E2E_ADMIN_EMAIL_PATTERN: ${{ vars.E2E_ADMIN_EMAIL_PATTERN }}
           E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
           E2E_VERIFICATION_CODE: ${{ secrets.E2E_VERIFICATION_CODE }}
@@ -73,20 +125,55 @@ jobs:
           E2E_AUTH_SETUP_DELAY_MS: ${{ vars.E2E_AUTH_SETUP_DELAY_MS }}
           ADDITIONAL_ORIGIN_SECURE_TOKEN: ${{ secrets.ADDITIONAL_ORIGIN_SECURE_TOKEN }}
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
+      - name: Upload blob report
+        uses: actions/upload-artifact@v6
         if: always()
         with:
-          name: playwright-report
-          path: |
-            playwright-report/
-            test-results/
+          name: blob-report-${{ matrix.shard }}
+          path: blob-report/
           retention-days: 7
 
-      - name: Upload test videos on failure
-        uses: actions/upload-artifact@v4
+      - name: Upload traces and screenshots
+        uses: actions/upload-artifact@v6
         if: failure()
         with:
-          name: test-videos
-          path: test-results/**/*.webm
+          name: test-results-${{ matrix.shard }}
+          path: test-results/
+          retention-days: 7
+
+  merge-reports:
+    name: Merge E2E reports
+    if: always() && github.actor != 'dependabot[bot]'
+    needs: e2e-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download blob reports
+        uses: actions/download-artifact@v7
+        with:
+          path: all-blob-reports
+          pattern: blob-report-*
+          merge-multiple: true
+
+      - name: Merge into a single HTML report
+        run: npx playwright merge-reports --reporter html ./all-blob-reports
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v6
+        with:
+          name: playwright-report
+          path: playwright-report/
           retention-days: 7

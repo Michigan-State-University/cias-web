@@ -18,7 +18,7 @@ const DateQuestion = ({ question, answerBody, selectAnswer, disabled }) => {
     selectAnswer([
       {
         var: name,
-        value: date.toISOString().split('T')[0],
+        value: date.toDateString(),
       },
     ]);
   };

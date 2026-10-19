@@ -58,6 +58,7 @@ export interface SimpleIntervention {
   note: Nullable<string>;
   organizationId: Nullable<string>;
   sessionsSize: number;
+  hasResearchAssistantSession: boolean;
   updatedAt: string;
   userId: string;
   status: InterventionStatus;

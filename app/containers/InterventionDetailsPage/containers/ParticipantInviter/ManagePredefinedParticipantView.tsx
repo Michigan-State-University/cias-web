@@ -6,6 +6,7 @@ import {
   PredefinedParticipantData,
   fulfillRaSessionRequest,
   makeSelectInterventionLoader,
+  makeSelectInterventionStatus,
   makeSelectPredefinedParticipantById,
   makeSelectRaSession,
   updatePredefinedParticipantRequest,
@@ -16,6 +17,7 @@ import {
 } from 'global/reducers/intervention';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
+import { canFillRaSession } from 'models/Status/statusPermissions';
 
 import dayjs from 'dayjs';
 
@@ -26,6 +28,7 @@ import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 import Row from 'components/Row';
 import { TextButton } from 'components/Button';
+import Tooltip from 'components/Tooltip';
 
 import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
@@ -71,6 +74,9 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
 
   const raSession = useSelector(makeSelectRaSession());
   const hasRaSession = Boolean(raSession);
+
+  const interventionStatus = useSelector(makeSelectInterventionStatus());
+  const fillingRaSessionPossible = canFillRaSession(interventionStatus);
 
   const submitting = useSelector(
     makeSelectInterventionLoader('updatePredefinedParticipant'),
@@ -177,17 +183,25 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
                     })}
                   </Text>
                 ) : (
-                  <TextButton
-                    buttonProps={{
-                      color: themeColors.secondary,
-                      fontWeight: 'bold',
-                    }}
-                    onClick={() =>
-                      dispatch(fulfillRaSessionRequest(participant.slug))
-                    }
+                  <Tooltip
+                    id={`ra-fill-disabled-${participant.id}`}
+                    visible={!fillingRaSessionPossible}
+                    text={formatMessage(messages.fillRaSessionDisabledInfo)}
+                    nonInteractive
                   >
-                    {formatMessage(messages.fillRaSessionButton)}
-                  </TextButton>
+                    <TextButton
+                      buttonProps={{
+                        color: themeColors.secondary,
+                        fontWeight: 'bold',
+                      }}
+                      onClick={() =>
+                        dispatch(fulfillRaSessionRequest(participant.slug))
+                      }
+                      disabled={!fillingRaSessionPossible}
+                    >
+                      {formatMessage(messages.fillRaSessionButton)}
+                    </TextButton>
+                  </Tooltip>
                 )}
               </Column>
             )}

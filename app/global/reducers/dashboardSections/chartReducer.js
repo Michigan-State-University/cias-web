@@ -3,6 +3,7 @@ import produce from 'immer';
 import {
   EDIT_CHART_REQUEST,
   EDIT_CHART_SUCCESS,
+  FETCH_CHART_SUCCESS,
   SET_CHARTS_DATA,
   SET_CHARTS_FILTERS,
 } from './constants';
@@ -14,7 +15,8 @@ const chartReducer = (state = null, action = null) =>
 
     switch (type) {
       case EDIT_CHART_REQUEST:
-      case EDIT_CHART_SUCCESS: {
+      case EDIT_CHART_SUCCESS:
+      case FETCH_CHART_SUCCESS: {
         return { ...state, ...payload.chart };
       }
       case SET_CHARTS_DATA: {

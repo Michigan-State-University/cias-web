@@ -1,0 +1,40 @@
+# .trufflehogignore -- exclude patterns for TruffleHog secret detection
+# Each line is a regex matched against file paths. Do NOT anchor with ^ --
+# TruffleHog matches against the absolute path, so an anchored pattern never
+# fires. Lines starting with # are comments. Empty lines are ignored.
+#
+# Committed *.example templates are deliberately NOT listed -- they must stay
+# scanned so a real credential pasted into one is caught. Nothing under app/
+# other than the binary animation blobs is excluded: source-file hits are
+# triage, not noise.
+
+# Local, untracked env and auth fixtures
+\.env$
+cypress\.env\.json$
+e2e/\.auth/
+playwright/\.auth/
+
+# Editor and agent config
+\.claude/
+\.vscode/
+\.idea/
+\.history/
+
+# Vendored, generated and build output
+node_modules/
+/build/
+/coverage/
+\.tmp-webpack/
+package-lock\.json$
+patches/
+public/
+
+# Lottie animation exports -- base64 image blobs that trip entropy detectors
+app/assets/animations/
+
+# Scan output
+htd-cq-output/
+\.htd-cq-coverage/
+
+# Stray archive committed at the repository root
+github\.zip$

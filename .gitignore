@@ -32,4 +32,8 @@ cypress.env.json
 /e2e/.auth/
 /.auth/
 
-docs/knowledge-pills
+# htd-cq scan artifacts
+htd-cq-output/
+
+# htd-cq scan artifacts
+.htd-cq-coverage/

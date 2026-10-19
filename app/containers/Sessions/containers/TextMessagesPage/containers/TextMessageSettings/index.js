@@ -27,6 +27,7 @@ import {
   SmsSendTimeType,
   TextMessageScheduleOption,
 } from 'models/TextMessage';
+import { SessionTypes } from 'models/Session';
 
 import { colors } from 'theme';
 
@@ -84,7 +85,10 @@ const TextMessageSettings = ({
     },
     selectedMessageState: { uploadAttachmentLoading, uploadAttachmentError },
     interventionId,
+    sessionType,
   } = useContext(TextMessagesContext);
+
+  const isRaSession = sessionType === SessionTypes.RA_SESSION;
 
   useEffect(() => {
     fetchVariantsAndPhones();
@@ -148,6 +152,7 @@ const TextMessageSettings = ({
         type={type}
         onTypeChange={changeTypeAction}
         disabled={!editingPossible}
+        normalTypeDisabled={isRaSession}
       />
 
       {type === TextMessageType.NORMAL && (

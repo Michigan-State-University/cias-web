@@ -42,6 +42,7 @@ import StyledCircle from 'components/Circle/StyledCircle';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import { ConfirmationModal } from 'components/Modal';
+import { COLLAPSE_HEIGHT_TRANSITION_DURATION_MS } from 'components/Collapse/constants';
 
 import scrollByRef from 'utils/scrollByRef';
 import settingsTabLabels from 'utils/settingsTabsLabels';
@@ -55,12 +56,13 @@ import {
   HIDE_NARRATOR_TAB_QUESTIONS,
   HIDE_SETTINGS_TAB_QUESTIONS,
 } from '../QuestionSettings/constants';
-import { ClampedTitle, ToggleableBox } from './styled';
+import { ClampedTitle, CollapsibleRow, ToggleableBox } from './styled';
 import messages from './messages';
 import getIndex from './utils';
 import {
   NON_DUPLICABLE_SCREENS,
   NON_MANAGEABLE_SCREENS,
+  SCREEN_DELETE_COLLAPSE_DURATION_MS,
   VARIABLE_NON_EDITABLE_SCREENS,
 } from './constants';
 
@@ -88,10 +90,12 @@ const QuestionListItem = ({
   allQuestions,
   sessionId,
   lastCreatedQuestionId,
+  isBeingDeleted,
 }) => {
   const questionRef = useRef(null);
   const [copyOpen, setCopyOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [isCollapsing, setIsCollapsing] = useState(false);
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
 
@@ -112,6 +116,8 @@ const QuestionListItem = ({
     [type],
   );
 
+  const isDisappearing = isCollapsing || isBeingDeleted;
+
   useEffect(() => {
     if (selectedQuestionIndex === id) beforeRender();
   }, [selectedQuestionIndex]);
@@ -121,8 +127,14 @@ const QuestionListItem = ({
       lastCreatedQuestionId === id &&
       selectedQuestionIndex === id &&
       questionRef.current
-    )
-      scrollByRef(questionRef, true);
+    ) {
+      const timeoutHandle = setTimeout(
+        () =>
+          scrollByRef(questionRef, { behavior: 'smooth', block: 'nearest' }),
+        COLLAPSE_HEIGHT_TRANSITION_DURATION_MS,
+      );
+      return () => clearTimeout(timeoutHandle);
+    }
   }, [lastCreatedQuestionId, selectedQuestionIndex]);
 
   const handleSelectClick = () => {
@@ -139,11 +151,19 @@ const QuestionListItem = ({
     }
   };
 
-  const handleDelete = () => {
-    const newIndex = getIndex(selectedQuestionIndex, questions.length);
-    handleSelectClick(newIndex);
-    removeQuestion({ questionId: id, groupId, groupIds, sessionId });
-  };
+  const handleDelete = () => setIsCollapsing(true);
+
+  useEffect(() => {
+    if (!isCollapsing) return undefined;
+
+    const timeoutHandle = setTimeout(() => {
+      const newIndex = getIndex(selectedQuestionIndex, questions.length);
+      handleSelectClick(newIndex);
+      removeQuestion({ questionId: id, groupId, groupIds, sessionId });
+    }, SCREEN_DELETE_COLLAPSE_DURATION_MS);
+
+    return () => clearTimeout(timeoutHandle);
+  }, [isCollapsing]);
 
   const closeCopyModal = () => setCopyOpen(false);
 
@@ -248,73 +268,86 @@ const QuestionListItem = ({
         icon="error"
         confirmationButtonColor="primary"
       />
-      <ToggleableBox
-        padding={15}
-        mb={15}
-        width="100%"
-        onClick={onChangeItem}
-        isSelected={isSelected}
-        bg={colors.zirkon}
-        border={`1px solid ${
-          checked ? colors.electricPurple : colors.smokeWhite
-        }`}
-        data-cy={`question-list-item-${id}`}
+      <CollapsibleRow
+        initial={false}
+        animate={{
+          height: isDisappearing ? 0 : 'auto',
+          opacity: isDisappearing ? 0 : 1,
+        }}
+        transition={{
+          duration: SCREEN_DELETE_COLLAPSE_DURATION_MS / 1000,
+          ease: 'easeInOut',
+        }}
+        style={isDisappearing ? { pointerEvents: 'none' } : undefined}
       >
-        <Row justify="between" ref={questionRef}>
-          {manage && isManageableScreen && (
-            <Column xs={1}>
-              <Checkbox
-                id={`question-to-select-${id}`}
-                onChange={(_, event) => {
-                  selectSlide(id);
-                  event.stopPropagation();
-                  event.preventDefault();
-                }}
-                checked={checked}
-              />
-            </Column>
-          )}
-          <Column xs={10}>
-            <Row dir="auto">
-              <ClampedTitle mb={6}>{htmlToPlainText(subtitle)}</ClampedTitle>
-            </Row>
-            <Row>
-              <Box display="flex" align="center">
-                <StyledCircle
-                  background={
-                    QuestionTypes.find(({ id: typeId }) => typeId === type)
-                      .color
-                  }
-                  size="10px"
-                  mr="5px"
+        <ToggleableBox
+          padding={15}
+          mb={15}
+          width="100%"
+          onClick={onChangeItem}
+          isSelected={isSelected}
+          bg={colors.zirkon}
+          border={`1px solid ${
+            checked ? colors.electricPurple : colors.smokeWhite
+          }`}
+          data-cy={`question-list-item-${id}`}
+        >
+          <Row justify="between" ref={questionRef}>
+            {manage && isManageableScreen && (
+              <Column xs={1}>
+                <Checkbox
+                  id={`question-to-select-${id}`}
+                  onChange={(_, event) => {
+                    selectSlide(id);
+                    event.stopPropagation();
+                    event.preventDefault();
+                  }}
+                  checked={checked}
                 />
-                <Comment fontWeight="bold">
-                  {formatMessage(questionTypesMessages[type])}
-                </Comment>
-              </Box>
-            </Row>
-            {body && hasObjectProperty(body, 'variable') && (
-              <Row mt={10}>
-                <VariableInput
-                  questionId={id}
-                  variable={body.variable}
-                  interventionStatus={interventionStatus}
-                  disabled={!isVariableEditable}
-                />
-              </Row>
+              </Column>
             )}
-          </Column>
-          {!manage && isManageableScreen && (
-            <Column xs={1}>
-              <Dropdown
-                id={`question-list-item-options-${id}`}
-                options={options}
-                dropdownWidth={180}
-              />
+            <Column xs={10}>
+              <Row dir="auto">
+                <ClampedTitle mb={6}>{htmlToPlainText(subtitle)}</ClampedTitle>
+              </Row>
+              <Row>
+                <Box display="flex" align="center">
+                  <StyledCircle
+                    background={
+                      QuestionTypes.find(({ id: typeId }) => typeId === type)
+                        .color
+                    }
+                    size="10px"
+                    mr="5px"
+                  />
+                  <Comment fontWeight="bold">
+                    {formatMessage(questionTypesMessages[type])}
+                  </Comment>
+                </Box>
+              </Row>
+              {body && hasObjectProperty(body, 'variable') && (
+                <Row mt={10}>
+                  <VariableInput
+                    questionId={id}
+                    variable={body.variable}
+                    interventionStatus={interventionStatus}
+                    disabled={!isVariableEditable}
+                  />
+                </Row>
+              )}
             </Column>
-          )}
-        </Row>
-      </ToggleableBox>
+            {!manage && isManageableScreen && (
+              <Column xs={1}>
+                <Dropdown
+                  id={`question-list-item-options-${id}`}
+                  options={options}
+                  dropdownWidth={180}
+                />
+              </Column>
+            )}
+          </Row>
+        </ToggleableBox>
+      </CollapsibleRow>
     </>
   );
 
@@ -367,6 +400,7 @@ QuestionListItem.propTypes = {
   groupIds: PropTypes.array,
   allQuestions: PropTypes.array,
   lastCreatedQuestionId: PropTypes.string,
+  isBeingDeleted: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

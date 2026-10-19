@@ -100,6 +100,7 @@ import CharacterAnim from './components/CharacterAnim';
 import CommonLayout from './layouts/CommonLayout';
 
 import makeSelectAnswerSessionPage from './selectors';
+import TestRunBanner from './components/TestRunBanner';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -917,6 +918,7 @@ export function AnswerSessionPage({
       maxHeight="100vh"
       background={isMobilePreview ? undefined : themeColors.sessionBackground}
     >
+      <TestRunBanner />
       {quickExitEnabled && (
         <QuickExit
           isMobilePreview={isMobilePreview}

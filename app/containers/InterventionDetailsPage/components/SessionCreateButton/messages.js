@@ -55,6 +55,6 @@ export default defineMessages({
   raSessionDescription: {
     id: `${scope}.raSessionDescription`,
     defaultMessage:
-      'This session is filled by a research assistant before the participant begins. Only one RA session is allowed per intervention.',
+      "A research assistant completes this session on behalf of the participant before they start the intervention. Each intervention can have only one. It's used exclusively with Predefined Participants and is never shown to other participant types.",
   },
 });
