@@ -2,8 +2,34 @@ import { test as base, expect } from '@playwright/test';
 import path from 'path';
 import fs from 'fs';
 
+import { waitForApiHealthy } from '../utils/waitForApiHealthy';
+
+const API_RECOVERY_TIMEOUT_MS = 120000;
+
+let apiGaveUp = false;
+
 // Extend the base test with worker-specific authentication and token management
-export const test = base.extend<{}, { workerStorageState: string }>({
+export const test = base.extend<{ apiHealthy: void }, { workerStorageState: string }>({
+  apiHealthy: [
+    async ({}, use, testInfo) => {
+      if (apiGaveUp) {
+        throw new Error('Staging API unavailable: it did not recover for an earlier test');
+      }
+
+      // The wait counts toward the test timeout
+      testInfo.setTimeout(testInfo.timeout + API_RECOVERY_TIMEOUT_MS);
+      try {
+        await waitForApiHealthy(API_RECOVERY_TIMEOUT_MS);
+      } catch (error) {
+        apiGaveUp = true;
+        throw error;
+      }
+
+      await use();
+    },
+    { auto: true },
+  ],
+
   // Worker-scoped fixture that determines which auth file to use
   workerStorageState: [
     async ({}, use, workerInfo) => {

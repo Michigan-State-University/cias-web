@@ -63,7 +63,6 @@ jobs:
     strategy:
       # All shards must pass; tests only fail after their CI retries, so flakes don't trigger this
       fail-fast: true
-      max-parallel: 3
       matrix:
         # `account` is spelled out: GitHub expressions can't do `matrix.shard - 1`
         include:
