@@ -51,6 +51,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Tag must match @playwright/test in package-lock.json (checked below)
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
 
     # One job per staging account across all runs, or they log each other out
     concurrency:
@@ -78,6 +81,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      # The image ships Node 24; the project requires 22
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -87,24 +91,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Get Playwright version
-        id: playwright-version
-        run: echo "version=$(node -p "require('./package-lock.json').packages['node_modules/@playwright/test'].version")" >> $GITHUB_OUTPUT
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v5
-        id: playwright-cache
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-browsers-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
-
-      - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps webkit chromium firefox
-
-      - name: Install Playwright system dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps webkit chromium firefox
+      - name: Check the container image matches @playwright/test
+        run: |
+          missing=$(npx playwright install --dry-run webkit chromium \
+            | sed -n 's/^ *Install location: *//p' | sort -u \
+            | while read -r dir; do [ -d "$dir" ] || printf '%s ' "$dir"; done)
+          if [ -n "$missing" ]; then
+            echo "::error::Browsers missing from the container image: $missing. Bump the image tag in .github/workflows/e2e-tests.yml to match @playwright/test $(node -p "require('./package-lock.json').packages['node_modules/@playwright/test'].version")."
+            exit 1
+          fi
 
       - name: Download build
         uses: actions/download-artifact@v7
