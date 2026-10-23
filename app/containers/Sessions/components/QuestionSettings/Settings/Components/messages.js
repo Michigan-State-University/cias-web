@@ -209,7 +209,7 @@ export default defineMessages({
   show_dashboard_button_tooltip_text: {
     id: `${scope}.show_dashboard_button_tooltip_text`,
     defaultMessage:
-      'Toggle on if you have registered participants and want them to access participant reports, uploaded resources or re-fill the session.',
+      'Toggle on if you have registered participants and want them to access participant reports, uploaded resources or re-fill the session. In module interventions, when on, participants see "Back to modules view" and "Go to next module"; when off, they see a single "Complete Session" button and are told they can close the browser.',
   },
   answer_image_size: {
     id: `${scope}.answer_image_size`,
