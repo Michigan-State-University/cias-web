@@ -136,6 +136,15 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
 
   const showModulesButtons = isModuleIntervention && !isPreview;
 
+  if (showModulesButtons && !showDashboardButton)
+    return (
+      <Row mt={50} justify="center" width="100%" dir={fixedElementsDirection}>
+        <Button onClick={completeSession} px={20} width="auto">
+          {formatMessage(messages.completeSession)}
+        </Button>
+      </Row>
+    );
+
   if (showModulesButtons)
     return (
       <Row
