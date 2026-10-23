@@ -88,7 +88,7 @@ export default defineMessages({
   },
   addAttachmentError: {
     id: `${scope}.addAttachmentError`,
-    defaultMessage: 'An error has occured while uploading the files',
+    defaultMessage: 'An error has occurred while uploading the files',
   },
   deleteAttachmentSuccess: {
     id: `${scope}.deleteAttachmentSuccess`,
@@ -110,7 +110,7 @@ export default defineMessages({
   },
   exportInterventionError: {
     id: `${scope}.exportInterventionError`,
-    defaultMessage: 'An error has occured while exporting your intervention',
+    defaultMessage: 'An error has occurred while exporting your intervention',
   },
   exportInterventionSuccess: {
     id: `${scope}.exportInterventionSuccess`,
