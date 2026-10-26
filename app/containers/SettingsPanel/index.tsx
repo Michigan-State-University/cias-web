@@ -321,7 +321,12 @@ const SettingsPanel = ({ intervention }: Props) => {
             {liveChatEnabled && (
               <TextButton
                 onClick={openNavigatorSettingModal}
-                buttonProps={{ display: 'flex', ml: 24, gap: 8 }}
+                buttonProps={{
+                  'data-cy': 'configure-navigator-settings',
+                  display: 'flex',
+                  ml: 24,
+                  gap: 8,
+                }}
               >
                 <Img src={cog} alt="manage" />
                 <Text fontWeight="bold">
