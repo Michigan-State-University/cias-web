@@ -23,6 +23,8 @@ export type Props = {
   messageSentByCurrentUser: boolean;
   interlocutorData: Nullable<InterlocutorNameData & InterlocutorAvatarData>;
   onClick?: () => void;
+  /** Test hook, forwarded to the InfoBox container. */
+  dataCy?: string;
 };
 
 export const ConversationInfoBox = ({
