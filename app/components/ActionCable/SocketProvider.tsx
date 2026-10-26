@@ -28,7 +28,7 @@ export const SocketProvider = ({ children }: Props) => {
   useEffect(() => {
     if (!cableUrl) {
       try {
-        cable?.close('logged_out');
+        cable?.disconnect();
       } catch {
         // Intentionally swallowed — WebSocket close can throw in broken in-app browsers
       }
