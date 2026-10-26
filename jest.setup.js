@@ -84,6 +84,8 @@ class AudioMock {
 }
 Object.defineProperty(global, 'Audio', { value: () => new AudioMock() });
 
+window.HTMLMediaElement.prototype.pause = () => {};
+
 class LocalStorageMock {
   constructor() {
     this.store = {};
