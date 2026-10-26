@@ -105,4 +105,79 @@ export class SessionPage {
       timeout: 15000,
     });
   }
+
+  async addScreen(questionType: 'single' | 'multiple' | 'text' | 'other') {
+    const created = this.waitForQuestionCreated();
+    await this.clickAddNewScreen();
+    await this.selectQuestionType(questionType);
+    await created;
+    await expect(
+      this.page.locator('[data-cy="question-details"]'),
+    ).toBeVisible();
+  }
+
+  get narratorHandle(): Locator {
+    return this.page.locator('#lottie');
+  }
+
+  get narratorCharacter(): Locator {
+    return this.page.locator('.react-draggable', {
+      has: this.page.locator('#lottie'),
+    });
+  }
+
+  async openNarratorTab() {
+    const settingsPanel = this.page.locator('[data-cy="settings-panel"]');
+    await expect(settingsPanel).toBeVisible();
+    await settingsPanel.getByText('Narrator', { exact: true }).click();
+    await expect(
+      this.page.locator('[data-cy="narrator-blocks"]'),
+    ).toBeVisible();
+  }
+
+  narratorBlockHeader(index: number): Locator {
+    return this.page
+      .locator(`[data-cy="narrator-block-${index}"]`)
+      .getByText(new RegExp(`^${index + 1}\\.`))
+      .last();
+  }
+
+  async openNarratorBlock(index: number) {
+    await expect(
+      this.page.locator(`[data-cy="narrator-block-${index}"]`),
+    ).toBeVisible();
+
+    const cursor = await this.narratorCharacter.evaluate(
+      (node) => getComputedStyle(node).cursor,
+    );
+    if (cursor === 'grab') return;
+
+    await this.narratorBlockHeader(index).click();
+
+    await expect(
+      this.narratorCharacter,
+      'The narrator never became draggable (NarratorContainer sets cursor: grab ' +
+        'only when draggable && editingPossible). Reaching the editor via ' +
+        'gotoViaIntervention is known to work; a direct goto may not.',
+    ).toHaveCSS('cursor', 'grab');
+  }
+
+  async gotoViaIntervention(interventionId: string) {
+    await this.page.goto(`/interventions/${interventionId}`);
+
+    const sessionLink = this.page.locator('[data-cy="enter-session-0"]');
+    await expect(sessionLink).toBeVisible();
+    await sessionLink.click();
+
+    await this.page.waitForURL(/\/sessions\/[^/]+\//, { timeout: 30000 });
+    if (!/\/edit$/.test(this.page.url())) {
+      await this.page.getByText('Screen Creation').first().click();
+    }
+    await this.page.waitForURL(/\/edit$/, { timeout: 30000 });
+
+    await this.verifySessionPageLoaded();
+    await expect(
+      this.page.locator('[data-cy="question-details"]'),
+    ).toBeVisible();
+  }
 }
