@@ -60,6 +60,9 @@ disconnected-error-investigation.md
 # Other platforms' deployment manifests (not ECS)
 container/
 
+# ECS deploy tooling, run by CI or by hand; not part of the app image
+deploy/
+
 # Dokku maintenance-mode page (Dokku-only — ECS handles maintenance via ALB / CloudFront)
 maintenance/
 

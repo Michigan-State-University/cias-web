@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1.7
 
 # Single web image used by one ECS task definition (cias-web), built ONCE PER ENVIRONMENT:
-#   - cias-web:v1.2.3-rc1 → staging URLs baked into the JS bundle at build time
-#   - cias-web:v1.2.3     → production URLs baked into the JS bundle at build time
+#   - cias-web:staging-v1.2.3-rc.1 → staging URLs baked into the JS bundle at build time
+#   - cias-web:production-v1.2.3   → production URLs baked into the JS bundle at build time
+# deploy/deploy-web.sh builds, pushes and deploys it (run by .github/workflows/deploy-web.yml).
 #
 # Local dev does NOT use this image — `npm start` with webpack-dev-server handles dev.
 #
@@ -26,7 +27,6 @@ ARG APP_STAGE
 ARG LOGROCKET_ENV
 ARG SENTRY_DSN
 ARG SENTRY_ENV
-ARG SENTRY_AUTH_TOKEN
 ARG INTERVENTION_EXPORT_FEATURE_ENABLED
 ARG HFHS_INTEGRATION_FEATURE_ENABLED
 ARG DISABLED_SMS_CAMPAIGN
@@ -49,7 +49,6 @@ ENV API_URL=${API_URL} \
     LOGROCKET_ENV=${LOGROCKET_ENV} \
     SENTRY_DSN=${SENTRY_DSN} \
     SENTRY_ENV=${SENTRY_ENV} \
-    SENTRY_AUTH_TOKEN=${SENTRY_AUTH_TOKEN} \
     INTERVENTION_EXPORT_FEATURE_ENABLED=${INTERVENTION_EXPORT_FEATURE_ENABLED} \
     HFHS_INTEGRATION_FEATURE_ENABLED=${HFHS_INTEGRATION_FEATURE_ENABLED} \
     DISABLED_SMS_CAMPAIGN=${DISABLED_SMS_CAMPAIGN} \
@@ -71,7 +70,11 @@ COPY . .
 
 # `npm run build` runs: webpack prod build → postbuild removes *.js.map source maps
 # (NODE_ENV=production is set inside this command via cross-env in the npm script)
-RUN npm run build
+# SENTRY_AUTH_TOKEN comes in as a BuildKit secret (`--secret id=sentry_auth_token,...`) rather
+# than a build-arg, so it never lands in the image metadata. Without it the Sentry webpack
+# plugin is skipped: the build still succeeds, source maps just aren't uploaded.
+RUN --mount=type=secret,id=sentry_auth_token \
+    SENTRY_AUTH_TOKEN="$(cat /run/secrets/sentry_auth_token 2>/dev/null || true)" npm run build
 
 # Strip devDependencies after build so the resulting node_modules is production-only,
 # but with patch-package's patches already applied to the surviving prod deps.

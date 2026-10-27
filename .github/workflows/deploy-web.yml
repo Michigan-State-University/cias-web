@@ -1,0 +1,166 @@
+name: Deploy Web
+
+# Builds the cias-web image with one environment's configuration baked into the
+# JS bundle, pushes it to ECR and rolls the web service onto it. The steps live
+# in deploy/deploy-web.sh.
+#
+# Triggers:
+#   - Publishing a GitHub release: a pre-release (e.g. v1.4.0-rc.1, cut from
+#     test) deploys to staging; a full release (e.g. v1.4.0, cut from master)
+#     deploys to production. The release tag becomes the image tag, prefixed
+#     with the environment (cias-web:staging-v1.4.0-rc.1).
+#   - Actions → Deploy Web → Run workflow: redeploys or rollbacks, on any branch
+#     or tag, to the environment you pick. Only available once this file is on
+#     the default branch (dev).
+#
+# A release runs the workflow from the tagged commit, so it only deploys from
+# commits that contain this file and the Dockerfile.
+#
+# Each GitHub environment holds:
+#   variables: the AWS settings (AWS_ACCOUNT_ID, AWS_DEPLOY_ROLE_ARN, AWS_REGION,
+#              ECR_REPOSITORY_URI, ECS_CLUSTER_ARN, WEB_SERVICE_ARN), the build
+#              configuration (API_URL, WEBSOCKET_URL, WEB_URL, APP_STAGE,
+#              SENTRY_ENV, SENTRY_DSN, LOGROCKET_ENV,
+#              INTERVENTION_EXPORT_FEATURE_ENABLED, HFHS_INTEGRATION_FEATURE_ENABLED,
+#              DISABLED_SMS_CAMPAIGN, ALLOWED_USERS_FOR_SMS_CAMPAIGNS) and,
+#              optionally, VERIFY_WEB_URL=false until WEB_URL is cut over to ECS
+#   secrets:   ADDITIONAL_ORIGIN_SECURE_TOKEN, SENTRY_AUTH_TOKEN
+# An unset optional value is baked in empty, which disables that feature (an
+# empty DISABLED_SMS_CAMPAIGN enables SMS campaigns for everyone), so copy each
+# environment's values from its current Dokku config. Give production
+# environments required reviewers so a deploy waits for approval, and restrict
+# them to release tags.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment to deploy to
+        type: environment
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  # Works out where this run deploys, and refuses to send anything but a master
+  # commit beyond staging, before anyone is asked to approve the deploy.
+  resolve:
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.target.outputs.environment }}
+      image_tag: ${{ steps.target.outputs.image_tag }}
+    steps:
+      - name: Pick the environment and image tag
+        id: target
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PRERELEASE: ${{ github.event.release.prerelease }}
+          INPUT_ENVIRONMENT: ${{ inputs.environment }}
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          if [[ "$EVENT_NAME" == release ]]; then
+            [[ "$PRERELEASE" == true ]] && environment=staging || environment=production
+          else
+            environment="$INPUT_ENVIRONMENT"
+          fi
+
+          # Tag runs deploy as the tag name; branch runs fall back to the commit SHA
+          # (deploy/deploy-web.sh's default).
+          image_tag=""
+          if [[ "$REF_TYPE" == tag ]]; then
+            image_tag="$REF_NAME"
+            if [[ ! "$image_tag" =~ ^[A-Za-z0-9_.-]{1,100}$ ]]; then
+              echo "::error::Tag '$image_tag' isn't a valid image tag (letters, digits, '.', '_', '-')"
+              exit 1
+            fi
+          fi
+
+          echo "Deploying ${image_tag:-$GITHUB_SHA} to $environment"
+          echo "environment=$environment" >> "$GITHUB_OUTPUT"
+          echo "image_tag=$image_tag" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        if: steps.target.outputs.environment != 'staging'
+        with:
+          fetch-depth: 0
+
+      - name: Check the commit is on master
+        if: steps.target.outputs.environment != 'staging'
+        run: |
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/master; then
+            echo "::error::Only commits on master can be deployed outside staging; cut the release from master"
+            exit 1
+          fi
+
+  deploy:
+    needs: resolve
+    runs-on: ubuntu-latest
+    environment: ${{ needs.resolve.outputs.environment }}
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      id-token: write # GitHub OIDC token, exchanged for the environment's AWS role
+    concurrency:
+      group: deploy-web-${{ needs.resolve.outputs.environment }}
+      cancel-in-progress: false
+    env:
+      IMAGE_TAG: ${{ needs.resolve.outputs.image_tag }}
+      # Web images only work in the environment they were built for, so their
+      # tags carry the environment's name.
+      IMAGE_TAG_PREFIX: ${{ needs.resolve.outputs.environment }}
+      AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}
+      AWS_DEPLOY_ROLE_ARN: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      ECR_REPOSITORY_URI: ${{ vars.ECR_REPOSITORY_URI }}
+      ECS_CLUSTER_ARN: ${{ vars.ECS_CLUSTER_ARN }}
+      WEB_SERVICE_ARN: ${{ vars.WEB_SERVICE_ARN }}
+      VERIFY_WEB_URL: ${{ vars.VERIFY_WEB_URL }}
+      API_URL: ${{ vars.API_URL }}
+      WEBSOCKET_URL: ${{ vars.WEBSOCKET_URL }}
+      WEB_URL: ${{ vars.WEB_URL }}
+      APP_STAGE: ${{ vars.APP_STAGE }}
+      SENTRY_ENV: ${{ vars.SENTRY_ENV }}
+      SENTRY_DSN: ${{ vars.SENTRY_DSN }}
+      LOGROCKET_ENV: ${{ vars.LOGROCKET_ENV }}
+      INTERVENTION_EXPORT_FEATURE_ENABLED: ${{ vars.INTERVENTION_EXPORT_FEATURE_ENABLED }}
+      HFHS_INTEGRATION_FEATURE_ENABLED: ${{ vars.HFHS_INTEGRATION_FEATURE_ENABLED }}
+      DISABLED_SMS_CAMPAIGN: ${{ vars.DISABLED_SMS_CAMPAIGN }}
+      ALLOWED_USERS_FOR_SMS_CAMPAIGNS: ${{ vars.ALLOWED_USERS_FOR_SMS_CAMPAIGNS }}
+    steps:
+      # deploy/deploy-web.sh falls back to cias-test values for unset AWS
+      # settings, so an environment with a missing variable would deploy to
+      # test. Fail instead. (The script itself rejects missing build settings.)
+      - name: Check environment variables
+        run: |
+          missing=()
+          for var in AWS_ACCOUNT_ID AWS_DEPLOY_ROLE_ARN AWS_REGION ECR_REPOSITORY_URI \
+            ECS_CLUSTER_ARN WEB_SERVICE_ARN API_URL WEBSOCKET_URL WEB_URL APP_STAGE \
+            SENTRY_ENV; do
+            [[ -n "${!var}" ]] || missing+=("$var")
+          done
+          if (( ${#missing[@]} > 0 )); then
+            echo "::error::Set these variables on the '$IMAGE_TAG_PREFIX' environment: ${missing[*]}"
+            exit 1
+          fi
+
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ env.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          # Refuse to deploy if the role belongs to a different account.
+          allowed-account-ids: ${{ env.AWS_ACCOUNT_ID }}
+          role-session-name: deploy-web-${{ github.run_id }}
+
+      - name: Build and deploy
+        # Secrets only reach the step that uses them.
+        env:
+          ADDITIONAL_ORIGIN_SECURE_TOKEN: ${{ secrets.ADDITIONAL_ORIGIN_SECURE_TOKEN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        run: deploy/deploy-web.sh . "$IMAGE_TAG"

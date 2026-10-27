@@ -38,8 +38,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           # Build-args MUST be set or webpack bakes empty strings into the bundle.
-          # Production CI will pull real values from SSM; these are placeholders for
-          # build-time validation only.
+          # deploy-web.yml passes each environment's real values; these are placeholders
+          # for build-time validation only.
           build-args: |
             SOURCE_VERSION=build-check-${{ github.sha }}
             NODE_VERSION=22
@@ -50,7 +50,6 @@ jobs:
             LOGROCKET_ENV=
             SENTRY_DSN=
             SENTRY_ENV=build-check
-            SENTRY_AUTH_TOKEN=
             INTERVENTION_EXPORT_FEATURE_ENABLED=0
             HFHS_INTEGRATION_FEATURE_ENABLED=0
             DISABLED_SMS_CAMPAIGN=
