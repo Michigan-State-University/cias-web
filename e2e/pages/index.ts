@@ -10,5 +10,4 @@ export {
   LiveChatPage,
   NAVIGATOR_EMAIL,
   PARTICIPANT_EMAIL,
-  SEEDED_PASSWORD,
 } from './LiveChatPage';

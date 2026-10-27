@@ -34,6 +34,7 @@ test.describe('Live chat', () => {
   test('a participant and a navigator exchange messages in real time', async ({
     page,
     browser,
+    seededCredentials,
   }) => {
     const dashboardPage = new DashboardPage(page);
     const interventionPage = new InterventionPage(page);
@@ -78,13 +79,13 @@ test.describe('Live chat', () => {
     const participant = new LiveChatPage(participantPage);
 
     try {
-      await navigator.login(NAVIGATOR_EMAIL);
+      await navigator.login(NAVIGATOR_EMAIL, seededCredentials);
       await navigator.goOnline();
       await navigator.openInbox();
 
       // --- participant: start a conversation ---------------------------------
 
-      await participant.login(PARTICIPANT_EMAIL);
+      await participant.login(PARTICIPANT_EMAIL, seededCredentials);
       await participant.enterInterventionAsParticipant(interventionId);
 
       await participant.openChatWidget();

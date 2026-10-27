@@ -1,29 +1,30 @@
 import { Page, expect } from '@playwright/test';
 
+import type { SeededCredentials } from '../fixtures/test';
 import { waitForApiResponse } from '../utils/waitForApiResponse';
 
 /**
  * Live chat: the admin-side setup, the navigator panel and the participant
  * chat widget.
  *
- * Why the navigator is `navigator@example.com` and not one of the e2e admin
- * accounts: `V1::LiveChat::InviteNavigators` rejects an existing user that is
- * neither a researcher nor a navigator, and the e2e admin accounts hold only
- * the `admin` role. Adding a navigator "from the team" is not an option either,
- * because the seeded accounts have no team.
+ * Both accounts come from the API's e2e seed. The admin pool cannot stand in
+ * for the navigator: `InviteNavigators` rejects a user that is neither a
+ * researcher nor a navigator.
  */
-export const NAVIGATOR_EMAIL = 'navigator@example.com';
+export const NAVIGATOR_EMAIL = 'e2e_navigator_0@example.com';
 export const PARTICIPANT_EMAIL = 'e2e_participant_0@example.com';
-export const SEEDED_PASSWORD = 'Password123!';
 
 export class LiveChatPage {
   constructor(private page: Page) {}
 
   /**
-   * Sign in a non-admin account. The e2e auth fixture only covers the admin
-   * pool, so the navigator and the participant log in through the UI.
+   * Sign in a seeded account through the UI — the auth fixture only covers the
+   * admin pool. Every seeded account shares one password.
    */
-  async login(email: string, password: string = SEEDED_PASSWORD) {
+  async login(
+    email: string,
+    { password, verificationCode }: SeededCredentials,
+  ) {
     await this.page.goto('/');
     await this.page.locator('[data-cy="login-email-input"]').fill(email);
     await this.page.locator('[data-cy="login-password-input"]').fill(password);
@@ -63,13 +64,7 @@ export class LiveChatPage {
     }
 
     if (outcome === '2fa') {
-      const code = process.env.E2E_VERIFICATION_CODE;
-      if (!code) {
-        throw new Error(
-          `${email} requires a 2FA code but E2E_VERIFICATION_CODE is not set.`,
-        );
-      }
-      await verificationInput.fill(code);
+      await verificationInput.fill(verificationCode);
       await this.page.locator('[data-cy="verification-submit-button"]').click();
     }
 
