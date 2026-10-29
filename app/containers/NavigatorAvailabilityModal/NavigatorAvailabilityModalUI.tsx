@@ -56,6 +56,7 @@ const NavigatorAvailabilityModalUI: ModalProps['modalContentRenderer'] = ({
         />
       </Column>
       <Button
+        data-cy="navigator-availability-save"
         disabled={isNil(online)}
         onClick={handleSave}
         px={30}

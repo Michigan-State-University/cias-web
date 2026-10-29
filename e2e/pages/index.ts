@@ -6,3 +6,8 @@ export {
 } from './InterventionPage';
 export { SessionPage } from './SessionPage';
 export { SessionMapPage } from './SessionMapPage';
+export {
+  LiveChatPage,
+  NAVIGATOR_EMAIL,
+  PARTICIPANT_EMAIL,
+} from './LiveChatPage';

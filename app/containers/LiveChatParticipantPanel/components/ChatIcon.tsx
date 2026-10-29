@@ -22,6 +22,7 @@ export const ChatIcon = ({ online, panelMinimized, onClick }: Props) => {
   return (
     <ChatIconButton
       id={LIVE_CHAT_ICON_ID}
+      data-cy="live-chat-icon"
       onClick={onClick}
       title={formatMessage(
         panelMinimized ? messages.openPanelTitle : messages.minimizePanelTitle,

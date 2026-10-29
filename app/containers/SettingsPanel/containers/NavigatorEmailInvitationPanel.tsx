@@ -63,6 +63,7 @@ const NavigatorEmailInvitationPanel = ({
         />
         {/* @ts-ignore */}
         <Button
+          data-cy="invite-navigator-button"
           loading={invitationLoading}
           onClick={inviteNavigators}
           ml={12}
