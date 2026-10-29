@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "id": "pr-416",
+  "state": "awaiting-approval",
+  "source": {
+    "kind": "pr",
+    "pr": 416,
+    "title": "[CIAS-4187] Test participants on live dashboards",
+    "url": "https://github.com/Michigan-State-University/cias-web/pull/416",
+    "author": "szymonklempert",
+    "headRef": "CIAS30-4187-test-participant-marker",
+    "baseRef": "dev",
+    "sha": "7716a743e48069904af68d3b7a8c01fd1fc2aeab",
+    "ticket": "CIAS30-4187",
+    "labels": [],
+    "changedFiles": [
+      "app/app.tsx",
+      "app/containers/AnswerSessionPage/actions.js",
+      "app/containers/AnswerSessionPage/components/TestRunBanner.tsx",
+      "app/containers/AnswerSessionPage/components/tests/TestRunBanner.test.tsx",
+      "app/containers/AnswerSessionPage/constants.js",
+      "app/containers/AnswerSessionPage/index.js",
+      "app/containers/AnswerSessionPage/messages.js",
+      "app/containers/AnswerSessionPage/reducer.js",
+      "app/containers/AnswerSessionPage/saga.js",
+      "app/containers/AnswerSessionPage/selectors.js",
+      "app/containers/AnswerSessionPage/tests/saga.test.js",
+      "app/containers/App/index.js",
+      "app/containers/App/tests/testLinkTokenGating.test.js",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/CopyLinkForm.tsx",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/CopyTestLinkButton.tsx",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/InviteUrlFormProvider.tsx",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/ParticipantListView.tsx",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/TestLinkTab.tsx",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/messages.ts",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/tests/CopyLinkForm.test.tsx",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/tests/CopyTestLinkButton.test.tsx",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/tests/ParticipantListView.test.tsx",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/tests/TestLinkTab.test.tsx",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/tests/__snapshots__/CopyLinkForm.test.tsx.snap",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/tests/__snapshots__/CopyTestLinkButton.test.tsx.snap",
+      "app/containers/InterventionDetailsPage/containers/ParticipantInviter/tests/__snapshots__/TestLinkTab.test.tsx.snap",
+      "app/containers/InterventionDetailsPage/saga.js",
+      "app/containers/InterventionDetailsPage/tests/saga.test.js",
+      "app/containers/TestLinkTokenGate/index.tsx",
+      "app/containers/TestLinkTokenGate/messages.ts",
+      "app/containers/TestLinkTokenGate/tests/index.test.tsx",
+      "app/global/reducers/auth/sagas/logOut.js",
+      "app/global/reducers/index.ts",
+      "app/global/reducers/intervention/actions.js",
+      "app/global/reducers/intervention/constants.ts",
+      "app/global/reducers/intervention/messages.js",
+      "app/global/reducers/intervention/reducer.js",
+      "app/global/reducers/intervention/sagas/generateTestLink.ts",
+      "app/global/reducers/intervention/sagas/index.js",
+      "app/global/reducers/intervention/sagas/tests/generateTestLink.test.js",
+      "app/global/reducers/intervention/selectors.js",
+      "app/global/reducers/testLinkToken/actions.ts",
+      "app/global/reducers/testLinkToken/constants.ts",
+      "app/global/reducers/testLinkToken/index.ts",
+      "app/global/reducers/testLinkToken/reducer.ts",
+      "app/global/reducers/testLinkToken/sagas/index.ts",
+      "app/global/reducers/testLinkToken/sagas/tests/verifyTestLinkToken.test.js",
+      "app/global/reducers/testLinkToken/sagas/verifyTestLinkToken.ts",
+      "app/global/reducers/testLinkToken/selectors.ts",
+      "app/global/reducers/testLinkToken/types.ts",
+      "app/global/reducers/types.d.ts",
+      "app/global/reducers/userIntervention/sagas/acceptInvitation.ts",
+      "app/global/reducers/userIntervention/sagas/tests/acceptInvitation.test.js",
+      "app/models/TestLinkToken/index.ts",
+      "app/translations/ar.json",
+      "app/translations/en.json",
+      "app/translations/es.json",
+      "app/utils/history.js",
+      "app/utils/localStorageService.js",
+      "app/utils/testLinkToken.ts",
+      "app/utils/tests/history.test.js",
+      "app/utils/tests/testLinkToken.test.ts"
+    ]
+  },
+  "knowledge": {
+    "dirs": [],
+    "pillsRead": [],
+    "pairedSource": {
+      "ref": "origin/dev",
+      "sha": "f77ea16b75c8f757598ce3c942b905cb2cf20e2a"
+    }
+  },
+  "decisions": [
+    {
+      "question": "How does a spec get hold of a real test-link token, given the button writes it to the clipboard?",
+      "options": [
+        "Read the token from the POST /v1/interventions/:id/test_link response body with waitForApiResponse",
+        "Read navigator.clipboard.readText() after the click",
+        "Mint the token with a direct API request outside the browser"
+      ],
+      "chosen": "Read the token from the POST /v1/interventions/:id/test_link response body with waitForApiResponse",
+      "reason": "Clipboard reads need permissions headless WebKit does not grant, and the existing suite already parses ids out of API responses (question-create.spec.ts:27-29); the copy itself is still asserted through its toast."
+    },
+    {
+      "question": "How do we exercise the gate verdicts staging will not produce on demand (expired, unreachable)?",
+      "options": [
+        "Intercept **/v1/test_link_tokens/verify with page.route — fulfil a 200 {status:'expired'} body, and abort for the unavailable branch",
+        "Leave both branches manual",
+        "Set TEST_LINK_TOKEN_TTL_MINUTES low on staging and wait for a real expiry"
+      ],
+      "chosen": "Intercept **/v1/test_link_tokens/verify with page.route — fulfil a 200 {status:'expired'} body, and abort for the unavailable branch",
+      "reason": "The server TTL is 15 minutes, which CONVENTIONS rules out as real waiting, and an unreachable API cannot be produced otherwise; the invalid verdict is left un-stubbed because a garbage token produces it for real."
+    },
+    {
+      "question": "Do we automate the marker-refusal block, given the harness can only drive a signed-in admin?",
+      "options": [
+        "Automate it as an admin, stating that the refusal is reached by role rather than by expiry",
+        "Leave the whole marker-refusal behaviour manual"
+      ],
+      "chosen": "Automate it as an admin, stating that the refusal is reached by role rather than by expiry",
+      "reason": "V1::TestRuns::MarkGuest only marks guest users, so an admin's fill returns meta.test_run false with a token sent and takes exactly the markerRefused path the expiry case takes; the expiry cause stays manual as TL-S13."
+    },
+    {
+      "question": "How are the two new mint buttons located, when CopyTestLinkButton has no data-cy?",
+      "options": [
+        "getByRole('button', { name }) with the defaultMessage copy",
+        "Add data-cy attributes to CopyTestLinkButton via TextButton's buttonProps"
+      ],
+      "chosen": "getByRole('button', { name }) with the defaultMessage copy",
+      "reason": "It is locator preference 2 in CONVENTIONS and needs no source change; a data-cy threaded through buttonProps would disappear anyway while the button renders its loading spinner."
+    },
+    {
+      "question": "How is the inviter tab strip addressed, since Tabs renders labels as plain divs with no test id?",
+      "options": [
+        "Scope getByText(label, { exact: true }) to [data-cy=\"tabs\"]",
+        "Use .nth() on the tab row",
+        "Add a data-cy to the shared Tabs component"
+      ],
+      "chosen": "Scope getByText(label, { exact: true }) to [data-cy=\"tabs\"]",
+      "reason": "[data-cy=\"tabs\"] already exists on the tab row and a hidden tab is not rendered at all, so presence and absence both assert cleanly without touching a component the change does not own."
+    }
+  ],
+  "stages": [
+    {
+      "stage": "triage",
+      "model": "claude-haiku-4-5",
+      "outcome": "ok",
+      "sessionId": "1e2ff2eb-baff-4ff3-9edf-55bebec3ec49",
+      "costUsd": 0.07356180000000001,
+      "durationMs": 16590,
+      "numTurns": 4,
+      "finishedAt": "2026-09-25T12:34:04.194Z"
+    },
+    {
+      "stage": "plan",
+      "model": "claude-opus-5",
+      "outcome": "ok",
+      "sessionId": "e66148ff-dc66-4bb1-90d4-68ba8d72815d",
+      "costUsd": 4.439718,
+      "durationMs": 512986,
+      "numTurns": 57,
+      "finishedAt": "2026-09-25T12:42:38.136Z"
+    },
+    {
+      "stage": "review-1",
+      "model": "claude-sonnet-5",
+      "outcome": "ok",
+      "sessionId": "936b7956-dbed-45bb-ac9f-910e5f85901a",
+      "costUsd": 0.6771128,
+      "durationMs": 118406,
+      "numTurns": 44,
+      "finishedAt": "2026-09-25T12:44:38.553Z"
+    }
+  ],
+  "totalCostUsd": 5.1904,
+  "createdAt": "2026-09-25T12:33:45.244Z",
+  "updatedAt": "2026-09-25T12:44:38.553Z",
+  "paired": {
+    "repo": "Michigan-State-University/cias-api",
+    "prs": [
+      {
+        "number": 607,
+        "title": "[CIAS-4187] Test participants on live dashboards",
+        "state": "MERGED",
+        "url": "https://github.com/Michigan-State-University/cias-api/pull/607"
+      }
+    ]
+  },
+  "change": {
+    "files": 42,
+    "changedLines": 1580,
+    "small": false
+  },
+  "triage": {
+    "skip": false,
+    "reason": "The PR adds new user-facing controls (test link button), new UI flows (test participants tab), new pages (token gate error pages), and validation changes (link expiry checking with distinct error messages)—all observable in the browser.",
+    "by": "model"
+  },
+  "scenarios": {
+    "total": 14,
+    "spec": 11,
+    "manual": 3,
+    "ids": [
+      "TL-S01",
+      "TL-S02",
+      "TL-S03",
+      "TL-S04",
+      "TL-S05",
+      "TL-S06",
+      "TL-S07",
+      "TL-S08",
+      "TL-S09",
+      "TL-S10",
+      "TL-S11",
+      "TL-S12",
+      "TL-S13",
+      "TL-S14"
+    ]
+  },
+  "review": {
+    "revisions": 0,
+    "verdict": "approved",
+    "unresolvedCorrections": []
+  },
+  "grounding": {
+    "checked": 152,
+    "issuesFound": 0,
+    "issuesLeft": 0,
+    "hints": 0
+  }
+}
