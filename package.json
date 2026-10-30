@@ -195,7 +195,7 @@
     "@babel/plugin-transform-react-inline-elements": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
-    "@babel/preset-typescript": "^7.26.0",
+    "@babel/preset-typescript": "^8.0.1",
     "@babel/register": "^7.25.9",
     "@playwright/test": "^1.57.0",
     "@sentry/webpack-plugin": "1.18.8",
