@@ -774,7 +774,7 @@
   "app.containers.DefaultSettings.selectActionPosition": "",
   "app.containers.DefaultSettings.selectQuestion": "",
   "app.containers.DefaultSettings.show_dashboard_button": "زر لوحة المعلومات الخاصة بي",
-  "app.containers.DefaultSettings.show_dashboard_button_tooltip_text": "قم بتشغيل هذا الخيار إذا كان لديك مشاركين مسجلين وتريد منهم الوصول إلى تقارير المشاركين أو الموارد التي تم تحميلها أو إعادة ملء الجلسة",
+  "app.containers.DefaultSettings.show_dashboard_button_tooltip_text": "قم بتشغيل هذا الخيار إذا كان لديك مشاركين مسجلين وتريد منهم الوصول إلى تقارير المشاركين أو الموارد التي تم تحميلها أو إعادة ملء الجلسة. في التدخلات المكونة من وحدات، عند التشغيل يرى المشاركون \"العودة إلى عرض الوحدات\" و\"انتقل إلى الوحدة التالية\"، وعند الإيقاف يرون زر \"جلسة كاملة\" فقط ويتم إخبارهم بأنه يمكنهم إغلاق المتصفح.",
   "app.containers.DefaultSettings.show_number": "",
   "app.containers.DefaultSettings.speechAnimation": "",
   "app.containers.DefaultSettings.speechPlaceholder": "",

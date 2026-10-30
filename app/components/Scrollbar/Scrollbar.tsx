@@ -88,6 +88,7 @@ const Scrollbar = ({
       ref={containerRef}
       horizontal={horizontal}
       containerThickness={containerThickness}
+      data-cy={horizontal ? 'scrollbar-horizontal' : 'scrollbar-vertical'}
     >
       {Boolean(scrollbarSize) && (
         <Draggable
