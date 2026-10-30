@@ -35,6 +35,8 @@ jest.mock('global/reducers/globalState', () => ({
 const { defaultMessage: completeSessionText } = messages.completeSession;
 const { defaultMessage: goBackToModulesText } = messages.goBackToModules;
 const { defaultMessage: goToNextModuleText } = messages.goToNextModule;
+const { defaultMessage: fillAgainText } = messages.fillAgain;
+const { defaultMessage: goToSessionMapText } = messages.goToSessionMap;
 
 const formatMessage = ({ defaultMessage }) => defaultMessage;
 
@@ -62,7 +64,11 @@ describe('<FinishScreenLayout />', () => {
 
   const logIn = () => localStorage.setItem(STATE, JSON.stringify({ id: 'u' }));
 
-  const renderLayout = ({ showDashboardButton, nextSessionId = null }) =>
+  const renderLayout = ({
+    showDashboardButton,
+    nextSessionId = null,
+    multipleFill = false,
+  }) =>
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
@@ -72,7 +78,7 @@ describe('<FinishScreenLayout />', () => {
               question={{
                 next_session_id: nextSessionId,
                 settings: { show_dashboard_button: showDashboardButton },
-                session_multiple_fill: false,
+                session_multiple_fill: multipleFill,
               }}
             />
           </Router>
@@ -144,5 +150,34 @@ describe('<FinishScreenLayout />', () => {
 
     expect(queryByText(completeSessionText)).toBeInTheDocument();
     expect(queryByText(goBackToModulesText)).not.toBeInTheDocument();
+  });
+
+  it('shows Fill Again for a multiple-fill session in a sequential intervention', () => {
+    logIn();
+    mockUserSession.interventionType = InterventionType.DEFAULT;
+    const { queryByText } = renderLayout({
+      showDashboardButton: false,
+      multipleFill: true,
+    });
+
+    expect(queryByText(fillAgainText)).toBeInTheDocument();
+    expect(queryByText(completeSessionText)).not.toBeInTheDocument();
+  });
+
+  describe('researcher preview of a module intervention', () => {
+    beforeEach(() => {
+      logIn();
+      window.history.pushState({}, '', '/interventions/i/sessions/s/preview');
+    });
+
+    afterEach(() => {
+      window.history.pushState({}, '', '/');
+    });
+
+    it('keeps the preview layout when the dashboard button is toggled off', () => {
+      const { queryByText } = renderLayout({ showDashboardButton: false });
+
+      expect(queryByText(goToSessionMapText)).toBeInTheDocument();
+    });
   });
 });
