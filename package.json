@@ -10,7 +10,7 @@
   "license": "GPL-3.0-or-later",
   "engineStrict": true,
   "engines": {
-    "npm": ">=10.0.0",
+    "npm": ">=10.0.0 <12",
     "node": "22.x"
   },
   "author": "Michigan State University <cias@msu.edu> (https://www.cias.app/)",
