@@ -84,6 +84,8 @@ export class InterventionPage {
     expect(response.status()).toBe(201);
 
     await this.page.waitForTimeout(1000);
+
+    return response;
   }
 
   async createMultipleSessions(count: number) {

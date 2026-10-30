@@ -774,7 +774,7 @@
   "app.containers.DefaultSettings.selectActionPosition": "Select Narrator Position",
   "app.containers.DefaultSettings.selectQuestion": "Select Screen",
   "app.containers.DefaultSettings.show_dashboard_button": "My Dashboard Button",
-  "app.containers.DefaultSettings.show_dashboard_button_tooltip_text": "Toggle on if you have registered participants and want them to access participant reports, uploaded resources or re-fill the session.",
+  "app.containers.DefaultSettings.show_dashboard_button_tooltip_text": "Toggle on if you have registered participants and want them to access participant reports, uploaded resources or re-fill the session. In module interventions, when on, participants see \"Back to modules view\" and \"Go to next module\"; when off, they see a single \"Complete Session\" button and are told they can close the browser.",
   "app.containers.DefaultSettings.show_number": "Show number",
   "app.containers.DefaultSettings.speechAnimation": "Select Speech Animation",
   "app.containers.DefaultSettings.speechPlaceholder": "Enter speech here...",

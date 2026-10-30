@@ -1,4 +1,4 @@
-import { Page, Response } from '@playwright/test';
+import { Page, Request, Response } from '@playwright/test';
 
 export type ApiResponseMatch = {
   /** Substring(s) the response URL must contain — all of them. */
@@ -10,6 +10,7 @@ export type ApiResponseMatch = {
 };
 
 const DEFAULT_TIMEOUT_MS = 60000;
+const FAILURES_BEFORE_GIVING_UP = 3;
 
 const describeMatch = ({ urlIncludes, method, status }: ApiResponseMatch) => {
   const url = Array.isArray(urlIncludes) ? urlIncludes.join(' + ') : urlIncludes;
@@ -40,6 +41,10 @@ const describeResponse = async (response: Response) => {
  * Matching semantics are unchanged: a mismatched status still does not resolve
  * the wait, so a request the app retries into a success still passes.
  *
+ * It gives up early once the request has failed FAILURES_BEFORE_GIVING_UP
+ * times — a 5xx, or a failed request (a 503 on the CORS preflight shows up as
+ * `requestfailed`, never as a response).
+ *
  * Register it before the action that triggers the request, as with
  * `page.waitForResponse`:
  *
@@ -62,17 +67,44 @@ export const waitForApiResponse = (
   const timeout = process.env.CI ? Math.max(requested, DEFAULT_TIMEOUT_MS) : requested;
   const fragments = Array.isArray(urlIncludes) ? urlIncludes : [urlIncludes];
   const unexpected: Response[] = [];
+  const failures: string[] = [];
 
-  return page
-    .waitForResponse((response) => {
-      const isTheRequest =
-        fragments.every((fragment) => response.url().includes(fragment)) &&
-        (!method || response.request().method() === method);
+  const isTheRequest = (request: Request) =>
+    fragments.every((fragment) => request.url().includes(fragment)) &&
+    (!method || request.method() === method);
 
-      if (!isTheRequest) return false;
-      if (status === undefined || response.status() === status) return true;
+  let giveUp: (error: Error) => void = () => {};
+  const apiDown = new Promise<never>((_, reject) => {
+    giveUp = reject;
+  });
+  const recordFailure = (description: string) => {
+    failures.push(description);
+    if (failures.length === FAILURES_BEFORE_GIVING_UP) {
+      giveUp(
+        new Error(
+          `API unavailable while waiting for ${describeMatch(match)}: ` +
+            `the request failed ${failures.length} times:\n    ${failures.join('\n    ')}`,
+        ),
+      );
+    }
+  };
+  const onRequestFailed = (request: Request) => {
+    const errorText = request.failure()?.errorText ?? '';
+    if (!isTheRequest(request) || /cancel|abort/i.test(errorText)) return;
 
-      unexpected.push(response);
+    recordFailure(`${request.method()} ${request.url()} → ${errorText}`);
+  };
+  page.on('requestfailed', onRequestFailed);
+
+  const response = page
+    .waitForResponse((candidate) => {
+      if (!isTheRequest(candidate.request())) return false;
+      if (status === undefined || candidate.status() === status) return true;
+
+      unexpected.push(candidate);
+      if (candidate.status() >= 500) {
+        recordFailure(`${candidate.request().method()} ${candidate.url()} → ${candidate.status()}`);
+      }
       return false;
     }, { timeout })
     .catch(async (error) => {
@@ -84,4 +116,8 @@ export const waitForApiResponse = (
           `  The API answered instead:\n    ${received.join('\n    ')}`,
       );
     });
+
+  return Promise.race([response, apiDown]).finally(() => {
+    page.off('requestfailed', onRequestFailed);
+  });
 };
