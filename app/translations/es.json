@@ -774,7 +774,7 @@
   "app.containers.DefaultSettings.selectActionPosition": "",
   "app.containers.DefaultSettings.selectQuestion": "",
   "app.containers.DefaultSettings.show_dashboard_button": "Botón Mi Panel de Control",
-  "app.containers.DefaultSettings.show_dashboard_button_tooltip_text": "Actívelo si tiene participantes registrados y desea que accedan a los informes de participantes, los recursos cargados o que vuelvan a llenar la sesión.",
+  "app.containers.DefaultSettings.show_dashboard_button_tooltip_text": "Actívelo si tiene participantes registrados y desea que accedan a los informes de participantes, los recursos cargados o que vuelvan a llenar la sesión. En las intervenciones por módulos, cuando está activado, los participantes ven \"Volver a la vista de módulos\" e \"Ir al módulo siguiente\"; cuando está desactivado, ven un único botón \"Sesión completa\" y se les indica que pueden cerrar el navegador.",
   "app.containers.DefaultSettings.show_number": "",
   "app.containers.DefaultSettings.speechAnimation": "",
   "app.containers.DefaultSettings.speechPlaceholder": "",
