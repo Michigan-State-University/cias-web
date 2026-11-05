@@ -9,7 +9,7 @@ import { waitForApiHealthy } from './utils/waitForApiHealthy';
  * 
  * Environment variables:
  * - E2E_ADMIN_EMAIL_PATTERN: Email pattern with {index} placeholder (default: 'e2e_admin_{index}@example.com')
- * - E2E_ADMIN_PASSWORD: Password for all e2e admin accounts
+ * - E2E_PASSWORD: Password for all e2e admin accounts
  * - E2E_VERIFICATION_CODE: 2FA code (if enabled)
  * - E2E_WORKER_COUNT: Size of the admin account pool (default: 5)
  * - E2E_ACCOUNT_OFFSET: First account in the pool this run should use (default: 0)
@@ -34,12 +34,12 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
   console.log(`\nSetup timeout set to ${timeoutMs / 1000}s for ${ACCOUNTS_NEEDED} accounts`);
 
   const emailPattern = process.env.E2E_ADMIN_EMAIL_PATTERN || 'e2e_admin_{index}@example.com';
-  const password = process.env.E2E_ADMIN_PASSWORD;
+  const password = process.env.E2E_PASSWORD;
   const verificationCode = process.env.E2E_VERIFICATION_CODE;
 
   if (!password || !verificationCode) {
     throw new Error(
-      'E2E_ADMIN_PASSWORD and E2E_VERIFICATION_CODE environment variables must be set',
+      'E2E_PASSWORD and E2E_VERIFICATION_CODE environment variables must be set',
     );
   }
 

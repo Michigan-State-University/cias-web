@@ -114,7 +114,7 @@ jobs:
           E2E_ACCOUNT_OFFSET: ${{ matrix.account }}
           E2E_ACCOUNTS_NEEDED: 1
           E2E_ADMIN_EMAIL_PATTERN: ${{ vars.E2E_ADMIN_EMAIL_PATTERN }}
-          E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
+          E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
           E2E_VERIFICATION_CODE: ${{ secrets.E2E_VERIFICATION_CODE }}
           E2E_WORKER_COUNT: ${{ vars.E2E_WORKER_COUNT }}
           E2E_AUTH_SETUP_DELAY_MS: ${{ vars.E2E_AUTH_SETUP_DELAY_MS }}
