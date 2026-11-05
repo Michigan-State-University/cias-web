@@ -16,6 +16,11 @@ ARG NODE_VERSION=22
 # ---------- builder ----------
 FROM node:${NODE_VERSION}-slim AS builder
 
+# ca-certificates → sentry-cli's source-map upload (in `npm run build`) verifies TLS against
+# the system CA bundle, which node:*-slim purges. Node and npm use their own bundled CAs.
+RUN apt-get update -qq && apt-get install -y --no-install-recommends ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /web
 
 # Build-time env vars baked into the JS bundle by webpack's Dotenv plugin.
