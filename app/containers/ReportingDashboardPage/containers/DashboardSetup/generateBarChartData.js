@@ -4,14 +4,26 @@ import { ChartIntervalType } from 'models/Chart';
 
 import { jsMonthToStringFormatter } from 'utils/formatters';
 import { ChartTypeDto } from 'global/reducers/dashboardSections';
-import { X_AXIS_KEY, STACK_Y_AXIS_KEY, POPULATION_KEY } from './constants';
+import {
+  X_AXIS_KEY,
+  STACK_Y_AXIS_KEY,
+  INVALID_Y_AXIS_KEY,
+  POPULATION_KEY,
+} from './constants';
 
 const NUMBER_OF_MONTHS = 12;
 const LAST_MONTH_INDEX = 11;
 const NUMERIC_VALUES = [110, 50, 215, 400, 300, 150];
 const PERCENTAGE_VALUES = [90, 25, 15, 65, 35, 50];
 const NOT_MATCHED_VALUES = [130, 500, 90, 120, 300, 20];
-export const MAX_NUMERIC_VALUE = 400;
+// Index 0 pairs with a 90% matched share against a population of 110, so it must stay at or
+// below 11 - higher and the first period's tooltip reports an impossible >100% breakdown.
+const INVALID_VALUES = [10, 30, 15, 40, 25, 10];
+export const MAX_NUMERIC_VALUE = Math.max(
+  ...NUMERIC_VALUES.map(
+    (value, index) => value + NOT_MATCHED_VALUES[index] + INVALID_VALUES[index],
+  ),
+);
 
 const NUMBER_OF_QUARTERS = 4;
 const LAST_QUARTER_INDEX = 3;
@@ -60,6 +72,8 @@ const generateBarChartMonthlyPreviewData = (chartType) => {
       ...(chartType !== ChartTypeDto.PERCENTAGE_BAR_CHART && {
         [STACK_Y_AXIS_KEY]: NOT_MATCHED_VALUES[index],
       }),
+      // Both bar types carry it: the numeric one stacks it, the percentage one only hovers it.
+      [INVALID_Y_AXIS_KEY]: INVALID_VALUES[index],
     };
 
     return {
@@ -83,6 +97,8 @@ const generateBarChartQuarterlyPreviewData = (chartType) => {
       ...(chartType !== ChartTypeDto.PERCENTAGE_BAR_CHART && {
         [STACK_Y_AXIS_KEY]: NOT_MATCHED_VALUES[index],
       }),
+      // Both bar types carry it: the numeric one stacks it, the percentage one only hovers it.
+      [INVALID_Y_AXIS_KEY]: INVALID_VALUES[index],
     };
 
     return {

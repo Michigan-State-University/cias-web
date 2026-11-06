@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { ChartTypeDto } from 'global/reducers/dashboardSections';
+import {
+  ChartTypeDto,
+  isChartRegenerationInProgress,
+} from 'global/reducers/dashboardSections';
 
 import { ChartIntervalType } from 'models/Chart';
 
@@ -17,11 +20,18 @@ import FlexRow from 'components/Row';
 import ChartSettingsGeneralSection from './ChartSettingsGeneralSection';
 import ChartSettingsTopSection from './ChartSettingsTopSection';
 import BarChartFormulaPattern from './BarChartFormulaPattern';
+import ChartFormulaSection from './ChartFormulaSection';
+import ChartValiditySettings from './ChartValiditySettings';
 
 import { FullWidthContainer } from '../../../styled';
+import { FormulaGroupPanel } from '../styled';
 import messages from '../messages';
 import chartIntervalTypesMessages from '../chartIntervalTypesMessages';
-import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
+import {
+  ChartSettingsContext,
+  DashboardSectionsContext,
+  isMinAnsweredStale,
+} from '../constants';
 
 const BarChartSettings = ({
   chart,
@@ -36,6 +46,9 @@ const BarChartSettings = ({
   onEditStatus,
   onEditTrendLine,
   onCopyChart,
+  onRegenerateChart,
+  onEditMinAnsweredVariables,
+  onEditPositiveDespiteMissingData,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -43,10 +56,18 @@ const BarChartSettings = ({
     statusPermissions: { canBeEdited },
   } = useContext(ChartSettingsContext);
 
-  const { chartType, formula, id, status, trendLine, intervalType } = chart;
+  const {
+    chartType,
+    formula,
+    id,
+    status,
+    trendLine,
+    intervalType,
+    formulaVariableCount,
+  } = chart;
 
   const {
-    loaders: { deleteChartLoader },
+    loaders: { deleteChartLoader, regenerateChartLoader },
   } = useContext(DashboardSectionsContext);
 
   const handleChangeTypeToNumeric = () =>
@@ -69,7 +90,11 @@ const BarChartSettings = ({
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
         hasFormula={formula.payload !== ''}
+        isMinAnsweredStale={isMinAnsweredStale(formula, formulaVariableCount)}
         onCopyChart={onCopyChart}
+        onRegenerateChart={onRegenerateChart}
+        isRegenerating={isChartRegenerationInProgress(chart)}
+        isEnqueuingRegeneration={regenerateChartLoader}
       />
 
       <Row mt={36}>
@@ -165,21 +190,35 @@ const BarChartSettings = ({
       <ChartSettingsGeneralSection
         chart={chart}
         onEditDescription={onEditDescription}
-        onEditFormulaPayload={onEditFormulaPayload}
         onEditName={onEditName}
       />
 
-      <Row mt={36}>
-        <Col>
-          {formula.patterns.map((pattern, index) => (
-            <BarChartFormulaPattern
-              key={`Pattern-${index}-Chart-${id}`}
-              pattern={pattern}
-              onEdit={onEditFormulaPattern(index)}
-            />
-          ))}
-        </Col>
-      </Row>
+      <FormulaGroupPanel>
+        <ChartFormulaSection
+          chart={chart}
+          onEditFormulaPayload={onEditFormulaPayload}
+        />
+
+        <Row mt={36}>
+          <Col>
+            {formula.patterns.map((pattern, index) => (
+              <BarChartFormulaPattern
+                key={`Pattern-${index}-Chart-${id}`}
+                pattern={pattern}
+                onEdit={onEditFormulaPattern(index)}
+              />
+            ))}
+          </Col>
+        </Row>
+
+        <ChartValiditySettings
+          formulaVariableCount={formulaVariableCount}
+          minAnsweredVariables={formula.minAnsweredVariables}
+          positiveDespiteMissingData={formula.positiveDespiteMissingData}
+          onEditMinAnsweredVariables={onEditMinAnsweredVariables}
+          onEditPositiveDespiteMissingData={onEditPositiveDespiteMissingData}
+        />
+      </FormulaGroupPanel>
     </FullWidthContainer>
   );
 };
@@ -197,6 +236,9 @@ BarChartSettings.propTypes = {
   onEditStatus: PropTypes.func,
   onEditTrendLine: PropTypes.func,
   onCopyChart: PropTypes.func,
+  onRegenerateChart: PropTypes.func,
+  onEditMinAnsweredVariables: PropTypes.func,
+  onEditPositiveDespiteMissingData: PropTypes.func,
 };
 
 export default memo(BarChartSettings);

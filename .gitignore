@@ -31,3 +31,9 @@ cypress.env.json
 /playwright/.auth/
 /e2e/.auth/
 /.auth/
+
+# htd-cq scan artifacts
+htd-cq-output/
+
+# htd-cq scan artifacts
+.htd-cq-coverage/

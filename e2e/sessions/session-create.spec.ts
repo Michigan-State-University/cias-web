@@ -1,5 +1,6 @@
 import { test, expect } from '../fixtures/test';
 import { DashboardPage, InterventionPage } from '../pages';
+import { waitForApiResponse } from '../utils/waitForApiResponse';
 
 test.describe('Session Creation', () => {
   
@@ -15,7 +16,7 @@ test.describe('Session Creation', () => {
       await page.waitForTimeout(500);
     }
 
-    expect(await interventionPage.getSessionCount()).toBe(3);
+    await interventionPage.expectSessionCount(3);
 
     await expect(page.locator('[data-cy^="enter-session-"]').nth(0)).toBeVisible();
     await expect(page.locator('[data-cy^="enter-session-"]').nth(1)).toBeVisible();
@@ -32,7 +33,7 @@ test.describe('Session Creation', () => {
     await interventionPage.createSession('classic');
     await interventionPage.createSession('sms');
 
-    expect(await interventionPage.getSessionCount()).toBe(2);
+    await interventionPage.expectSessionCount(2);
     await expect(page.locator('[data-cy^="enter-session-"]').nth(0)).toBeVisible();
     await expect(page.locator('[data-cy^="enter-session-"]').nth(1)).toBeVisible();
   });
@@ -44,13 +45,12 @@ test.describe('Session Creation', () => {
     await dashboardPage.goto();
     await dashboardPage.createIntervention();
 
-    const responsePromise = page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
-    );
+    const responsePromise = waitForApiResponse(page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
 
     await interventionPage.createSession('classic');
 

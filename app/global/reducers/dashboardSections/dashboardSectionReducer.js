@@ -10,6 +10,7 @@ import {
   EDIT_CHART_SUCCESS,
   EDIT_SECTION_REQUEST,
   EDIT_SECTION_SUCCESS,
+  FETCH_CHART_SUCCESS,
   REORDER_CHARTS_REQUEST,
   SET_CHARTS_DATA,
   SET_CHARTS_FILTERS,
@@ -34,7 +35,8 @@ const dashboardSectionReducer = (state = null, action = null) =>
       }
 
       case EDIT_CHART_REQUEST:
-      case EDIT_CHART_SUCCESS: {
+      case EDIT_CHART_SUCCESS:
+      case FETCH_CHART_SUCCESS: {
         updateItemById(draft.charts, payload.chart.id, (item) =>
           chartReducer(item, action),
         );

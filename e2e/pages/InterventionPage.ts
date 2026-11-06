@@ -1,11 +1,16 @@
 import { Page, Locator, expect } from '@playwright/test';
 
+import { waitForApiResponse } from '../utils/waitForApiResponse';
+
 // Access setting types
 export enum InterventionAccessType {
   ANYONE = 'anyone',
   REGISTERED = 'registered',
   INVITED = 'invited',
 }
+
+// The copy dialog shows ~5 rows per screen; 20 scrolls covers the first 100.
+const MAX_COPY_LIST_SCROLLS = 20;
 
 // Intervention types (matches backend values)
 export enum InterventionType {
@@ -66,12 +71,11 @@ export class InterventionPage {
     }
 
     // Intercept the API call before clicking create
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST',
-      { timeout: 30000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      timeout: 30000,
+    });
 
     // Click the create session button in the dialog
     await createSessionDialogButton.click();
@@ -80,6 +84,8 @@ export class InterventionPage {
     expect(response.status()).toBe(201);
 
     await this.page.waitForTimeout(1000);
+
+    return response;
   }
 
   async createMultipleSessions(count: number) {
@@ -111,12 +117,11 @@ export class InterventionPage {
       .locator('[data-cy="session-type-option-Session::ResearchAssistant"]')
       .click();
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions') &&
-        response.request().method() === 'POST',
-      { timeout: 30000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions',
+      method: 'POST',
+      timeout: 30000,
+    });
 
     await this.page.locator('[data-cy="create-session-submit-button"]').click();
 
@@ -159,6 +164,13 @@ export class InterventionPage {
     return sessions.count();
   }
 
+  // Assert on the session count with a retrying expectation. `getSessionCount()`
+  // is a one-shot read: right after a navigation the list has not loaded from
+  // the staging API yet, so it returns 0.
+  async expectSessionCount(count: number) {
+    await expect(this.page.locator('[data-cy^="enter-session-"]')).toHaveCount(count);
+  }
+
   async deleteSession(sessionIndex: number) {
     // We need to find the session ID from the dropdown trigger
     // The sessions have data-cy="enter-session-{index}" and the dropdown is in the same container
@@ -177,11 +189,10 @@ export class InterventionPage {
     const deleteOption = this.page.locator('[data-cy="dropdown-option-delete"]');
     await deleteOption.waitFor({ state: 'visible', timeout: 5000 });
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.request().method() === 'DELETE',
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions/',
+      method: 'DELETE',
+    });
 
     await deleteOption.click();
 
@@ -203,64 +214,47 @@ export class InterventionPage {
     const duplicateOption = this.page.locator('[data-cy="dropdown-option-duplicate"]');
     await duplicateOption.waitFor({ state: 'visible', timeout: 5000 });
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.url().includes('/clone') &&
-        response.request().method() === 'POST',
-      { timeout: 15000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: ['/sessions/', '/clone'],
+      method: 'POST',
+      timeout: 15000,
+    });
 
     await duplicateOption.click();
 
     await responsePromise;
   }
 
-  async duplicateSessionInternally(sessionIndex: number, targetInterventionName: string) {
-    const dropdownTriggers = this.page.locator('[data-cy^="dropdown-trigger-session-list-item-options"]');
-    await dropdownTriggers.nth(sessionIndex).click();
+  async duplicateSessionInternally(sessionIndex: number, targetInterventionId: string) {
+    await this.openCopySessionDialog(sessionIndex);
+    await this.selectCopyTarget(targetInterventionId);
 
-    const duplicateInternallyOption = this.page.locator('[data-cy="dropdown-option-copy"]');
-    await duplicateInternallyOption.waitFor({ state: 'visible', timeout: 5000 });
-    await duplicateInternallyOption.click();
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: ['/sessions/', '/duplicate'],
+      method: 'POST',
+      status: 200,
+    });
 
-    await this.page.locator('[role="dialog"]').waitFor({ state: 'visible', timeout: 5000 });
-
-    await this.page.waitForTimeout(2000);
-
-    const targetInterventionRow = this.page
-      .locator('[role="dialog"]')
-      .getByText(targetInterventionName, { exact: false });
-    
-    await targetInterventionRow.waitFor({ state: 'visible', timeout: 10000 });
-    await targetInterventionRow.click();
-
-    await this.page.waitForTimeout(2000);
-
-    const pasteButton = this.page.locator('button:has-text("Paste session in this intervention")');
-
-    await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
-    
-    // Wait for the API response that duplicates the session internally
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.url().includes('/duplicate') &&
-        response.request().method() === 'POST' &&
-        response.status() === 200,
-      { timeout: 15000 },
-    );
-    
-    await pasteButton.click();
+    await this.copyPasteButton.click();
 
     await responsePromise;
-    await this.page.locator('[role="dialog"]').waitFor({ state: 'hidden', timeout: 10000 });
+    await expect(this.page.locator('[role="dialog"]')).toBeHidden();
   }
 
   // Opens the internal-copy picker for a session, selects the target intervention
   // and clicks "Paste session in this intervention" — without asserting the result.
   // Used to exercise the RA-conflict guard (which blocks the paste client-side).
-  async startInternalSessionCopy(sessionIndex: number, targetInterventionName: string) {
+  async startInternalSessionCopy(sessionIndex: number, targetInterventionId: string) {
+    await this.openCopySessionDialog(sessionIndex);
+    await this.selectCopyTarget(targetInterventionId);
+    await this.copyPasteButton.click();
+  }
+
+  private get copyPasteButton(): Locator {
+    return this.page.locator('button:has-text("Paste session in this intervention")');
+  }
+
+  private async openCopySessionDialog(sessionIndex: number) {
     const dropdownTriggers = this.page.locator('[data-cy^="dropdown-trigger-session-list-item-options"]');
     await dropdownTriggers.nth(sessionIndex).click();
 
@@ -268,18 +262,55 @@ export class InterventionPage {
     await copyOption.waitFor({ state: 'visible', timeout: 5000 });
     await copyOption.click();
 
+    await expect(this.page.locator('[role="dialog"]')).toBeVisible();
+  }
+
+  // Selects the target intervention in the copy dialog by id.
+  //
+  // The dialog's list is a react-window grid: only the rows in view exist in the
+  // DOM, and the API orders starred interventions first, then newest first. On a
+  // shared staging account, interventions created by other clients land above the
+  // target, so a "wait for the name to show up" lookup misses it. Scroll the grid
+  // until the row renders instead.
+  private async selectCopyTarget(targetInterventionId: string) {
     const dialog = this.page.locator('[role="dialog"]');
-    await dialog.waitFor({ state: 'visible', timeout: 5000 });
-    await this.page.waitForTimeout(2000);
+    const rows = dialog.locator('[data-cy^="copy-modal-item-"]');
+    const target = dialog.locator(`[data-cy="copy-modal-item-${targetInterventionId}"]`);
 
-    const targetRow = dialog.getByText(targetInterventionName, { exact: false });
-    await targetRow.waitFor({ state: 'visible', timeout: 10000 });
-    await targetRow.click();
-    await this.page.waitForTimeout(1000);
+    // Rows render once the first page of interventions comes back from the API.
+    await expect(rows.first()).toBeVisible();
 
-    const pasteButton = this.page.locator('button:has-text("Paste session in this intervention")');
-    await pasteButton.waitFor({ state: 'visible', timeout: 5000 });
-    await pasteButton.click();
+    for (let step = 0; step < MAX_COPY_LIST_SCROLLS && (await target.count()) === 0; step += 1) {
+      await rows.first().evaluate((row) => {
+        let scroller = row.parentElement;
+        while (
+          scroller &&
+          !(
+            scroller.scrollHeight > scroller.clientHeight &&
+            /(auto|scroll)/.test(getComputedStyle(scroller).overflowY)
+          )
+        ) {
+          scroller = scroller.parentElement;
+        }
+        if (scroller) scroller.scrollTop += scroller.clientHeight;
+      });
+      // Give react-window a moment to render the next rows (and the infinite
+      // loader to fetch the next page when the end is reached).
+      await this.page.waitForTimeout(500);
+    }
+
+    await expect(target, `intervention ${targetInterventionId} not found in the copy dialog`).toHaveCount(1);
+
+    // Centre the row before clicking. If Playwright has to scroll it into view as
+    // part of the click, react-window sets pointer-events: none while it scrolls
+    // and the click keeps landing on the grid ("<div> intercepts pointer events").
+    await target.evaluate((row) => row.scrollIntoView({ block: 'center' }));
+    await expect
+      .poll(() => target.evaluate((row) => getComputedStyle(row).pointerEvents))
+      .not.toBe('none');
+    await target.click();
+
+    await expect(this.copyPasteButton).toBeEnabled();
   }
 
   async addNote(noteText: string) {
@@ -293,13 +324,12 @@ export class InterventionPage {
     // Click outside to trigger the save (blur triggers save in ApprovableInput)
     await this.page.locator('h2:has-text("Note")').click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
   }
 
   async getNoteText(): Promise<string> {
@@ -323,13 +353,12 @@ export class InterventionPage {
       return;
     }
 
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await label.click();
 
@@ -361,13 +390,12 @@ export class InterventionPage {
     await label.waitFor({ state: 'visible', timeout: 30000 });
     await label.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 30000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 30000,
+    });
   }
 
   async addInvitedParticipant(email: string) {
@@ -376,11 +404,11 @@ export class InterventionPage {
     await emailInput.fill(email);
     await emailInput.press('Enter');
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') && response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      status: 200,
+      timeout: 10000,
+    });
   }
 
   async isSessionScheduleVisible(sessionIndex: number): Promise<boolean> {
@@ -431,13 +459,12 @@ export class InterventionPage {
   async setEstimateTime(sessionIndex: number, minutes: string) {
     const input = this.getEstimateTimeInput(sessionIndex);
     
-    const responsePromise = this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.request().method() === 'PUT' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    const responsePromise = waitForApiResponse(this.page, {
+      urlIncludes: '/sessions/',
+      method: 'PUT',
+      status: 200,
+      timeout: 10000,
+    });
     
     await input.fill(minutes);
     await input.blur();
@@ -470,13 +497,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -493,13 +519,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -516,13 +541,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
 
     await this.page.waitForTimeout(500);
@@ -540,13 +564,12 @@ export class InterventionPage {
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
     await confirmButton.click();
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
@@ -564,37 +587,35 @@ export class InterventionPage {
     await confirmButton.click();
 
     // Wait for API response
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
 
     await this.page.waitForTimeout(500);
   }
 
   async getInterventionName(): Promise<string> {
-    await this.nameInput.waitFor({ state: 'visible', timeout: 10000 });
+    await this.nameInput.waitFor({ state: 'visible' });
     const input = this.nameInput;
     return input.inputValue();
   }
 
   async editInterventionName(newName: string) {
-    await this.nameInput.waitFor({ state: 'visible', timeout: 10000 });
+    await this.nameInput.waitFor({ state: 'visible' });
     
     await this.nameInput.fill(newName);
     
     // Trigger blur by pressing Tab or clicking outside - this should trigger the save
     await this.nameInput.press('Tab');
     
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/interventions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/interventions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
   }
 }

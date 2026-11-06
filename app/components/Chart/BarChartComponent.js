@@ -34,6 +34,8 @@ const BarChartComponent = ({
   yAxis,
   tooltip,
   stackDataKey,
+  secondStackDataKey,
+  secondStackFill,
   ...chartProps
 }) => {
   const mergedData = useMemo(() => {
@@ -86,6 +88,16 @@ const BarChartComponent = ({
             {children}
           </Bar>
         )}
+        {secondStackDataKey && (
+          <Bar
+            dataKey={secondStackDataKey}
+            fill={secondStackFill}
+            stackId="stack-1"
+            {...chartProps}
+          >
+            {children}
+          </Bar>
+        )}
         {data?.length > 3 && (
           <Brush
             startIndex={0}
@@ -120,6 +132,16 @@ BarChartComponent.propTypes = {
   yAxis: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   tooltip: PropTypes.object,
   stackDataKey: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  secondStackDataKey: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  secondStackFill: (props, propName, componentName) => {
+    if (props.secondStackDataKey && typeof props[propName] !== 'string') {
+      return new Error(
+        `\`${componentName}\` requires \`${propName}\` when \`secondStackDataKey\` is set; ` +
+          'a <Bar> without an explicit fill renders black.',
+      );
+    }
+    return null;
+  },
 };
 
 export default memo(BarChartComponent);

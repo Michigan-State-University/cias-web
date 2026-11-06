@@ -1,5 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 
+import { waitForApiResponse } from '../utils/waitForApiResponse';
+
 export class SessionPage {
   readonly page: Page;
   readonly backToInterventionButton: Locator;
@@ -36,13 +38,12 @@ export class SessionPage {
     
     await this.page.keyboard.press('Tab');
 
-    await this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/sessions/') &&
-        response.request().method() === 'PATCH' &&
-        response.status() === 200,
-      { timeout: 10000 },
-    );
+    await waitForApiResponse(this.page, {
+      urlIncludes: '/sessions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 10000,
+    });
   }
 
   async getSessionName(): Promise<string> {
@@ -97,12 +98,86 @@ export class SessionPage {
    * Wait for a question to be created via API
    */
   async waitForQuestionCreated() {
-    return this.page.waitForResponse(
-      (response) =>
-        response.url().includes('/question_groups') &&
-        response.request().method() === 'POST' &&
-        response.status() === 201,
-      { timeout: 15000 }
+    return waitForApiResponse(this.page, {
+      urlIncludes: '/question_groups',
+      method: 'POST',
+      status: 201,
+      timeout: 15000,
+    });
+  }
+
+  async addScreen(questionType: 'single' | 'multiple' | 'text' | 'other') {
+    const created = this.waitForQuestionCreated();
+    await this.clickAddNewScreen();
+    await this.selectQuestionType(questionType);
+    await created;
+    await expect(
+      this.page.locator('[data-cy="question-details"]'),
+    ).toBeVisible();
+  }
+
+  get narratorHandle(): Locator {
+    return this.page.locator('#lottie');
+  }
+
+  get narratorCharacter(): Locator {
+    return this.page.locator('.react-draggable', {
+      has: this.page.locator('#lottie'),
+    });
+  }
+
+  async openNarratorTab() {
+    const settingsPanel = this.page.locator('[data-cy="settings-panel"]');
+    await expect(settingsPanel).toBeVisible();
+    await settingsPanel.getByText('Narrator', { exact: true }).click();
+    await expect(
+      this.page.locator('[data-cy="narrator-blocks"]'),
+    ).toBeVisible();
+  }
+
+  narratorBlockHeader(index: number): Locator {
+    return this.page
+      .locator(`[data-cy="narrator-block-${index}"]`)
+      .getByText(new RegExp(`^${index + 1}\\.`))
+      .last();
+  }
+
+  async openNarratorBlock(index: number) {
+    await expect(
+      this.page.locator(`[data-cy="narrator-block-${index}"]`),
+    ).toBeVisible();
+
+    const cursor = await this.narratorCharacter.evaluate(
+      (node) => getComputedStyle(node).cursor,
     );
+    if (cursor === 'grab') return;
+
+    await this.narratorBlockHeader(index).click();
+
+    await expect(
+      this.narratorCharacter,
+      'The narrator never became draggable (NarratorContainer sets cursor: grab ' +
+        'only when draggable && editingPossible). Reaching the editor via ' +
+        'gotoViaIntervention is known to work; a direct goto may not.',
+    ).toHaveCSS('cursor', 'grab');
+  }
+
+  async gotoViaIntervention(interventionId: string) {
+    await this.page.goto(`/interventions/${interventionId}`);
+
+    const sessionLink = this.page.locator('[data-cy="enter-session-0"]');
+    await expect(sessionLink).toBeVisible();
+    await sessionLink.click();
+
+    await this.page.waitForURL(/\/sessions\/[^/]+\//, { timeout: 30000 });
+    if (!/\/edit$/.test(this.page.url())) {
+      await this.page.getByText('Screen Creation').first().click();
+    }
+    await this.page.waitForURL(/\/edit$/, { timeout: 30000 });
+
+    await this.verifySessionPageLoaded();
+    await expect(
+      this.page.locator('[data-cy="question-details"]'),
+    ).toBeVisible();
   }
 }

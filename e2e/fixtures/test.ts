@@ -10,10 +10,19 @@ export const test = base.extend<{}, { workerStorageState: string }>({
       // Get total number of auth files available
       const WORKER_COUNT = parseInt(process.env.E2E_WORKER_COUNT || '5', 10);
 
-      // Wrap worker index to available auth files using modulo
-      // This handles cases where Playwright assigns worker indices beyond the worker count
-      // (e.g., when running multiple browser projects)
-      const authFileIndex = workerInfo.workerIndex % WORKER_COUNT;
+      // Where this process starts in the account pool. Sharded CI runs give each
+      // shard its own offset so two shards never drive the same admin account:
+      // the API rotates the access token on every request, so sharing an account
+      // across processes logs them both out.
+      const ACCOUNT_OFFSET = parseInt(process.env.E2E_ACCOUNT_OFFSET || '0', 10);
+
+      // `parallelIndex`, NOT `workerIndex`: workerIndex is unique per worker
+      // process and keeps climbing as Playwright recycles workers (a new project,
+      // or a worker replaced after a failure), so it walks off the accounts this
+      // run authenticated. parallelIndex stays within 0..workers-1 and is
+      // guaranteed distinct between workers running at the same time.
+      const authFileIndex =
+        (ACCOUNT_OFFSET + workerInfo.parallelIndex) % WORKER_COUNT;
       const authFile = path.join(__dirname, `../.auth/admin-worker-${authFileIndex}.json`);
 
       // Verify the auth file exists

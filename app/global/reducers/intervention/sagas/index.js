@@ -39,6 +39,7 @@ import bulkCreatePredefinedParticipantsSaga from './bulkCreatePredefinedParticip
 import unassignTagSaga from './unassignTag';
 import fulfillRaSessionSaga from './fulfillRaSession';
 import fetchRaSessionQuestionGroupsSaga from './fetchRaSessionQuestionGroups';
+import generateTestLinkSaga from './generateTestLink';
 
 export * from './onCollaboratorRemovedReceive';
 export * from './refreshInterventionData';
@@ -125,6 +126,7 @@ export default function* allInterventionSagas() {
     unassignTagSaga(),
     fulfillRaSessionSaga(),
     fetchRaSessionQuestionGroupsSaga(),
+    generateTestLinkSaga(),
   ]);
 }
 

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
@@ -16,6 +16,7 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import SettingsTab from '../SettingsTab';
+import { updateSettings } from '../../../actions';
 
 describe('<SettingsTab />', () => {
   const mockFunctions = {
@@ -67,5 +68,56 @@ describe('<SettingsTab />', () => {
       </Provider>,
     );
     expect(container).toMatchSnapshot();
+  });
+
+  describe('"Fire report if get this far" toggle', () => {
+    const autofinishOffStore = createTestStore({
+      session: { session: { autofinishEnabled: false } },
+    });
+
+    const renderWithTimerSetting = (props = {}) =>
+      render(
+        <Provider store={autofinishOffStore}>
+          <IntlProvider locale={DEFAULT_LOCALE}>
+            <MemoryRouter>
+              <SettingsTab
+                {...defaultProps}
+                settings={{
+                  ...defaultProps.settings,
+                  start_autofinish_timer: false,
+                }}
+                {...props}
+              />
+            </MemoryRouter>
+          </IntlProvider>
+        </Provider>,
+      );
+
+    const getTimerSwitch = (container) =>
+      container.querySelector('input#start_autofinish_timer');
+
+    it('Should be editable when autofinish is off in the session', () => {
+      const { container } = renderWithTimerSetting();
+
+      expect(getTimerSwitch(container)).toBeEnabled();
+    });
+
+    it('Should dispatch the setting update when toggled', () => {
+      const dispatchSpy = jest.spyOn(autofinishOffStore, 'dispatch');
+      const { container } = renderWithTimerSetting();
+
+      fireEvent.click(getTimerSwitch(container));
+
+      expect(dispatchSpy).toHaveBeenCalledWith(
+        updateSettings('start_autofinish_timer', true),
+      );
+      dispatchSpy.mockRestore();
+    });
+
+    it('Should be disabled when question editing is disabled', () => {
+      const { container } = renderWithTimerSetting({ disabled: true });
+
+      expect(getTimerSwitch(container)).toBeDisabled();
+    });
   });
 });

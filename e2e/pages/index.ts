@@ -5,3 +5,4 @@ export {
   InterventionType,
 } from './InterventionPage';
 export { SessionPage } from './SessionPage';
+export { SessionMapPage } from './SessionMapPage';

@@ -19,6 +19,7 @@ import {
   REDIRECT_TO_PREVIEW,
   CREATE_USER_SESSION_REQUEST,
   CREATE_USER_SESSION_SUCCESS,
+  SET_TEST_RUN_FILL,
   CREATE_USER_SESSION_FAILURE,
   NEXT_QUESTION_REQUEST,
   NEXT_QUESTION_SUCCESS,
@@ -184,3 +185,6 @@ export const verifyPidError = (error) =>
 
 export const setRaFulfillment = (isRaFulfillment) =>
   actionBuilder(SET_RA_FULFILLMENT, { isRaFulfillment });
+
+export const setTestRunFill = (testRun, testLinkTokenSent = false) =>
+  actionBuilder(SET_TEST_RUN_FILL, { testRun, testLinkTokenSent });
