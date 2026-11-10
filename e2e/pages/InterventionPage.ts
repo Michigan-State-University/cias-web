@@ -539,15 +539,16 @@ export class InterventionPage {
     // Confirm in the modal
     const confirmButton = this.page.locator('[data-cy="confirmation-box-confirm-button"]');
     await confirmButton.waitFor({ state: 'visible', timeout: 5000 });
-    await confirmButton.click();
 
-    await waitForApiResponse(this.page, {
+    const responsePromise = waitForApiResponse(this.page, {
       urlIncludes: '/interventions/',
       method: 'PATCH',
       status: 200,
       timeout: 10000,
     });
 
+    await confirmButton.click();
+    await responsePromise;
 
     await this.page.waitForTimeout(500);
   }
