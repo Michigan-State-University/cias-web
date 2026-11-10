@@ -1,4 +1,4 @@
-import { Touch, useCallback, useEffect, useRef, useState } from 'react';
+import { Touch, useCallback, useEffect, useState } from 'react';
 
 export type GestureData = {
   timeoutId: NodeJS.Timeout;
@@ -10,7 +10,6 @@ export const useTapAndHold = (
   fingers: number,
   timeoutMs: number,
   moveThresholdPx: number,
-  handleGlobally?: boolean,
 ) => {
   const [gestureData, setGestureData] = useState<GestureData>();
 
@@ -67,41 +66,21 @@ export const useTapAndHold = (
     [gestureData, stopGesture],
   );
 
-  // use callback ref (https://reactjs.org/docs/refs-and-the-dom.html#callback-refs)
-  // to react to ref changes in useEffect without using a reference object in
-  // the dependency array
-  const ref = useRef<HTMLElement | null>(null);
-  const [refChange, setRefChange] = useState(true);
-  const refSetter = useCallback((element: HTMLElement | null) => {
-    ref.current = element;
-    setRefChange((value) => !value);
-  }, []);
-
   useEffect(() => {
-    const target = handleGlobally ? document : ref.current;
-
-    if (!target) return;
-
-    target.addEventListener('touchstart', handleTouchStart as EventListener);
-    target.addEventListener('touchend', stopGesture);
-    target.addEventListener('touchmove', handleTouchMove as EventListener);
+    document.addEventListener('touchstart', handleTouchStart as EventListener);
+    document.addEventListener('touchend', stopGesture);
+    document.addEventListener('touchmove', handleTouchMove as EventListener);
 
     return () => {
-      target.removeEventListener(
+      document.removeEventListener(
         'touchstart',
         handleTouchStart as EventListener,
       );
-      target.removeEventListener('touchend', stopGesture);
-      target.removeEventListener('touchmove', handleTouchMove as EventListener);
+      document.removeEventListener('touchend', stopGesture);
+      document.removeEventListener(
+        'touchmove',
+        handleTouchMove as EventListener,
+      );
     };
-  }, [
-    handleTouchStart,
-    stopGesture,
-    handleTouchMove,
-    refChange,
-    handleGlobally,
-  ]);
-
-  // TODO use when implementing https://htdevelopers.atlassian.net/browse/CIAS30-2307
-  return { ref: refSetter };
+  }, [handleTouchStart, stopGesture, handleTouchMove]);
 };
