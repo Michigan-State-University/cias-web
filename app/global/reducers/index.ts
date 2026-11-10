@@ -10,6 +10,8 @@ import { answersReducerKey } from './answers/reducer';
 import { AnswersState } from './answers/types';
 import { tlfbReducerKey } from './tlfb/reducer';
 import { TlfbState } from './tlfb/types';
+import { smsCampaignsReducerKey } from './smsCampaigns/reducer';
+import { SmsCampaignsState } from './smsCampaigns/types';
 import { testLinkTokenReducerKey } from './testLinkToken/reducer';
 import { TestLinkTokenState } from './testLinkToken/types';
 
@@ -20,5 +22,6 @@ export type RootState = {
   [notificationsReducerKey]: NotificationsState;
   [answersReducerKey]: AnswersState;
   [tlfbReducerKey]: TlfbState;
+  [smsCampaignsReducerKey]: SmsCampaignsState;
   [testLinkTokenReducerKey]: TestLinkTokenState;
 };

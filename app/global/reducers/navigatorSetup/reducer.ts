@@ -2,7 +2,7 @@ import produce from 'immer';
 import { getType } from 'typesafe-actions';
 
 import { deleteItemById, updateItemById } from 'utils/reduxUtils';
-import { WithReducer } from '../types';
+import type { WithReducer } from '../types';
 
 import {
   fetchNavigatorSetupError,

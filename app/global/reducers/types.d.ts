@@ -4,6 +4,7 @@ import { AnswersAction } from './answers/types';
 import { LiveChatAction } from './liveChat/types';
 import { NavigatorSetupAction } from './navigatorSetup/types';
 import { NotificationsAction } from './notifications/types';
+import { SmsCampaignsAction } from './smsCampaigns/types';
 import { TestLinkTokenAction } from './testLinkToken/types';
 import { TlfbAction } from './tlfb/types';
 
@@ -16,5 +17,6 @@ export type RootAction =
   | LiveChatAction
   | NavigatorSetupAction
   | NotificationsAction
+  | SmsCampaignsAction
   | TestLinkTokenAction
   | TlfbAction;
