@@ -190,6 +190,33 @@ export default defineMessages({
     id: `${scope}.sendPredefinedParticipantSmsInvitationError`,
     defaultMessage: 'Unable to send SMS invitation.',
   },
+  sendPredefinedParticipantSmsInvitationResendTooSoon: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationResendTooSoon`,
+    defaultMessage:
+      'An SMS was already sent to this participant recently. Try again in {minutes} min.',
+  },
+  sendPredefinedParticipantSmsInvitationOptedOut: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationOptedOut`,
+    defaultMessage: 'This participant opted out of SMS messages.',
+  },
+  sendPredefinedParticipantSmsInvitationNotEligible: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationNotEligible`,
+    defaultMessage: 'This phone number cannot receive SMS messages.',
+  },
+  sendPredefinedParticipantSmsInvitationSendFailed: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationSendFailed`,
+    defaultMessage: 'The SMS could not be sent. Please try again.',
+  },
+  sendPredefinedParticipantSmsInvitationNotPublished: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationNotPublished`,
+    defaultMessage:
+      'SMS invitations are available once the intervention is published.',
+  },
+  sendPredefinedParticipantSmsInvitationNotCurrentEditor: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationNotCurrentEditor`,
+    defaultMessage:
+      'You are not the current editor of this intervention, so you cannot send SMS invitations.',
+  },
   sendPredefinedParticipantEmailInvitationSuccess: {
     id: `${scope}.sendPredefinedParticipantEmailInvitationSuccess`,
     defaultMessage: 'E-mail invitation has been successfully sent.',
