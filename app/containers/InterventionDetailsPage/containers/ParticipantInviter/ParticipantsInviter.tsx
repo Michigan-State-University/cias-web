@@ -37,7 +37,10 @@ export const ParticipantsInviter: FC<Props> = ({ ...props }) => {
       />
       <TextButton
         onClick={() => setModalVisible(true)}
-        buttonProps={TEXT_BUTTON_PROPS}
+        buttonProps={{
+          ...TEXT_BUTTON_PROPS,
+          'data-cy': 'participants-inviter-button',
+        }}
       >
         {formatMessage(messages.participantsInviterButtonTitle)}
         <Icon src={MailIcon} />

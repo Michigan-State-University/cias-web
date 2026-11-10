@@ -30,4 +30,16 @@ export default defineMessages({
     id: `${scope}.UPLOAD_PREDEFINED_PARTICIPANTS`,
     defaultMessage: 'Bulk predefined participants upload',
   },
+  [InviteParticipantModalView.SMS_CAMPAIGNS]: {
+    id: `${scope}.SMS_CAMPAIGNS`,
+    defaultMessage: 'SMS campaigns',
+  },
+  [InviteParticipantModalView.SEND_SMS_INVITATION]: {
+    id: `${scope}.SEND_SMS_INVITATION`,
+    defaultMessage: 'Send SMS invitation',
+  },
+  [InviteParticipantModalView.SEND_SMS_REMINDER]: {
+    id: `${scope}.SEND_SMS_REMINDER`,
+    defaultMessage: 'Send reminder',
+  },
 });

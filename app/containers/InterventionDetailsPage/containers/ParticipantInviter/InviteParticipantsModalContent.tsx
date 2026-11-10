@@ -1,6 +1,7 @@
 import { FC, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { Session, SessionTypes } from 'models/Session';
@@ -9,7 +10,9 @@ import {
   canCopyInvitationLink,
   canCreatePredefinedParticipants,
   canInviteParticipants,
+  canSendSmsCampaign,
 } from 'models/Status/statusPermissions';
+import { SmsCampaignComposableKind, SmsCampaignKind } from 'models/SmsCampaign';
 
 import { normalizeArrayToObject } from 'utils/normalizeArrayToObject';
 
@@ -18,6 +21,10 @@ import {
   makeSelectOrganization,
   makeSelectOrganizationLoader,
 } from 'global/reducers/organizations';
+import {
+  withAllSmsCampaignsSagas,
+  withSmsCampaignsReducer,
+} from 'global/reducers/smsCampaigns';
 
 import Loader from 'components/Loader';
 import { SelectOption } from 'components/Select/types';
@@ -36,6 +43,9 @@ import messages from './messages';
 import { CreatePredefinedParticipantView } from './CreatePredefinedParticipantView';
 import { ManagePredefinedParticipantView } from './ManagePredefinedParticipantView';
 import { UploadPredefinedParticipantsView } from './UploadPredefinedParticipantsView';
+import { SmsCampaignComposeView } from './SmsCampaignComposeView';
+import { SmsCampaignsView } from './SmsCampaignsView';
+import { useSmsCampaignsPolling } from './useSmsCampaignsPolling';
 
 export type Props = {
   interventionId: string;
@@ -62,6 +72,16 @@ export const InviteParticipantsModalContent: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
+
+  useInjectReducer(withSmsCampaignsReducer);
+  useInjectSaga(withAllSmsCampaignsSagas);
+
+  // Mounted for every view, unlike the individual views below, which the
+  // `view` switch renders exclusively — the poller has to outlive them all.
+  useSmsCampaignsPolling(
+    interventionId,
+    interventionStatus !== InterventionStatus.DRAFT,
+  );
 
   const [activeParticipantListViewTab, setActiveParticipantListViewTab] =
     useState(formatMessage(messages.emailParticipantsTab));
@@ -171,6 +191,21 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     });
   };
 
+  const handleOpenSmsCampaigns = () => {
+    setCurrentView({
+      view: InviteParticipantModalView.SMS_CAMPAIGNS,
+    });
+  };
+
+  const handleComposeSmsCampaign = (kind: SmsCampaignComposableKind) => {
+    setCurrentView({
+      view:
+        kind === SmsCampaignKind.INVITATION
+          ? InviteParticipantModalView.SEND_SMS_INVITATION
+          : InviteParticipantModalView.SEND_SMS_REMINDER,
+    });
+  };
+
   const handleManage = (participantId: string) => {
     setCurrentView({
       view: InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT,
@@ -186,11 +221,15 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     );
   };
 
+  const handleBackToSmsCampaigns = () =>
+    handleBack({ view: InviteParticipantModalView.SMS_CAMPAIGNS });
+
   const invitingPossible = canInviteParticipants(interventionStatus);
   const copyingInvitationLinkPossible =
     canCopyInvitationLink(interventionStatus);
   const creatingPredefinedParticipantsPossible =
     canCreatePredefinedParticipants(interventionStatus);
+  const sendingSmsCampaignPossible = canSendSmsCampaign(interventionStatus);
 
   const showLoader =
     organizationLoading ||
@@ -228,6 +267,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               onInvite={handleInvite}
               onUploadEmails={handleUploadEmails}
               onManage={handleManage}
+              onOpenSmsCampaigns={handleOpenSmsCampaigns}
               activeTab={activeParticipantListViewTab}
               setActiveTab={setActiveParticipantListViewTab}
             />
@@ -285,6 +325,28 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               healthClinicOptions={healthClinicOptions}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onBack={handleBack}
+            />
+          )}
+          {view === InviteParticipantModalView.SMS_CAMPAIGNS && (
+            <SmsCampaignsView
+              interventionId={interventionId}
+              sendingPossible={sendingSmsCampaignPossible}
+              onCompose={handleComposeSmsCampaign}
+              onBack={handleBack}
+            />
+          )}
+          {view === InviteParticipantModalView.SEND_SMS_INVITATION && (
+            <SmsCampaignComposeView
+              interventionId={interventionId}
+              kind={SmsCampaignKind.INVITATION}
+              onBack={handleBackToSmsCampaigns}
+            />
+          )}
+          {view === InviteParticipantModalView.SEND_SMS_REMINDER && (
+            <SmsCampaignComposeView
+              interventionId={interventionId}
+              kind={SmsCampaignKind.MANUAL_REMINDER}
+              onBack={handleBackToSmsCampaigns}
             />
           )}
         </>
