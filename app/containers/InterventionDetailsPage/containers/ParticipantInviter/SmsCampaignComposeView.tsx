@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +9,7 @@ import {
   SmsCampaignMeta,
 } from 'models/SmsCampaign';
 
+import { makeSelectPredefinedParticipants } from 'global/reducers/intervention';
 import {
   clearSmsCampaignErrors,
   createSmsCampaignRequest,
@@ -20,6 +21,7 @@ import {
   makeSelectSmsCampaignsMetaError,
 } from 'global/reducers/smsCampaigns';
 
+import { countSmsCampaignRecipients } from 'utils/smsCampaignRecipients';
 import { calculateSmsBodyLength, isSmsBodyValid } from 'utils/smsBodyLength';
 
 import { colors } from 'theme';
@@ -28,6 +30,7 @@ import Button from 'components/Button';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import Loader from 'components/Loader';
+import { ConfirmationModal } from 'components/Modal';
 import Row from 'components/Row';
 import Text from 'components/Text';
 
@@ -39,6 +42,19 @@ import { SmsCampaignErrorList } from './SmsCampaignErrorList';
 import messages from './messages';
 
 const DEFAULT_DAYS_AFTER = 3;
+
+const CONFIRMATION_MESSAGES = {
+  [SmsCampaignKind.INVITATION]: {
+    title: messages.smsCampaignSendInvitationConfirmationTitle,
+    content: messages.smsCampaignSendInvitationConfirmationContent,
+    submit: messages.smsCampaignSendInvitationSubmit,
+  },
+  [SmsCampaignKind.MANUAL_REMINDER]: {
+    title: messages.smsCampaignSendReminderConfirmationTitle,
+    content: messages.smsCampaignSendReminderConfirmationContent,
+    submit: messages.smsCampaignSendReminderSubmit,
+  },
+};
 
 export type Props = {
   interventionId: string;
@@ -87,6 +103,17 @@ export const SmsCampaignComposeView: FC<Props> = ({
     };
   }, [interventionId]);
 
+  const predefinedParticipants = useSelector(
+    makeSelectPredefinedParticipants(),
+  );
+
+  const recipientsUpperBound = useMemo(
+    () => countSmsCampaignRecipients(predefinedParticipants ?? [], kind),
+    [predefinedParticipants, kind],
+  );
+
+  const [confirmingSend, setConfirmingSend] = useState(false);
+
   if (!meta && metaError && !metaLoading) {
     return (
       <Column flex={1} gap={20}>
@@ -133,9 +160,7 @@ export const SmsCampaignComposeView: FC<Props> = ({
 
   const canSubmit = bodyValid && reminderValid && !submitting;
 
-  const handleSubmit = () => {
-    if (!canSubmit) return;
-
+  const sendCampaign = () => {
     dispatch(
       createSmsCampaignRequest(
         interventionId,
@@ -158,8 +183,29 @@ export const SmsCampaignComposeView: FC<Props> = ({
     );
   };
 
+  const handleSubmit = () => {
+    if (!canSubmit) return;
+    setConfirmingSend(true);
+  };
+
+  const confirmation = CONFIRMATION_MESSAGES[kind];
+
   return (
     <Column flex={1} overflow="auto" gap={20}>
+      <ConfirmationModal
+        visible={confirmingSend}
+        onClose={() => setConfirmingSend(false)}
+        confirmAction={sendCampaign}
+        description={formatMessage(confirmation.title)}
+        content={formatMessage(confirmation.content, {
+          count: recipientsUpperBound,
+        })}
+        confirmationButtonText={formatMessage(confirmation.submit)}
+        confirmationButtonColor="primary"
+        icon="info"
+        maxWidth={480}
+      />
+
       <InviteParticipantsModalBackButton
         invitationType={ParticipantInvitationType.PREDEFINED}
         onBack={onBack}

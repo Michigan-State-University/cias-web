@@ -14,6 +14,7 @@ export class ParticipantInviterPage {
   readonly reminderBodyInput: Locator;
   readonly daysAfterInput: Locator;
   readonly submitButton: Locator;
+  readonly confirmSendButton: Locator;
   readonly errorList: Locator;
   readonly campaignsList: Locator;
 
@@ -41,6 +42,9 @@ export class ParticipantInviterPage {
     );
     this.daysAfterInput = page.locator('[data-cy="sms-campaign-days-after"]');
     this.submitButton = page.locator('[data-cy="sms-campaign-submit"]');
+    this.confirmSendButton = page.locator(
+      '[data-cy="confirmation-box-confirm-button"]',
+    );
     this.errorList = page.locator('[data-cy="sms-campaign-error-list"]');
     this.campaignsList = page.locator('[data-cy="sms-campaigns-list"]');
   }
@@ -118,6 +122,11 @@ export class ParticipantInviterPage {
     ).click();
     await metaResponse;
     await this.bodyInput.waitFor({ state: 'visible', timeout: 10000 });
+  }
+
+  async submitCampaign() {
+    await this.submitButton.click();
+    await this.confirmSendButton.click();
   }
 
   /** The checkbox input itself is visually hidden, so click its label. */

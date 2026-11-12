@@ -572,6 +572,24 @@ export default defineMessages({
     id: `${scope}.smsCampaignSendReminderSubmit`,
     defaultMessage: 'Send reminder',
   },
+  smsCampaignSendInvitationConfirmationTitle: {
+    id: `${scope}.smsCampaignSendInvitationConfirmationTitle`,
+    defaultMessage: 'Send the SMS invitation campaign?',
+  },
+  smsCampaignSendInvitationConfirmationContent: {
+    id: `${scope}.smsCampaignSendInvitationConfirmationContent`,
+    defaultMessage:
+      '{count, plural, =0 {The message will be sent to every active participant with a phone number who has not received an SMS invitation yet.} one {The message will be sent to up to # participant: every active participant with a phone number who has not received an SMS invitation yet. The actual number may be lower - participants who opted out of SMS or whose number cannot receive messages are skipped.} other {The message will be sent to up to # participants: every active participant with a phone number who has not received an SMS invitation yet. The actual number may be lower - participants who opted out of SMS or whose number cannot receive messages are skipped.}} This cannot be undone once sending starts.',
+  },
+  smsCampaignSendReminderConfirmationTitle: {
+    id: `${scope}.smsCampaignSendReminderConfirmationTitle`,
+    defaultMessage: 'Send the SMS reminder campaign?',
+  },
+  smsCampaignSendReminderConfirmationContent: {
+    id: `${scope}.smsCampaignSendReminderConfirmationContent`,
+    defaultMessage:
+      '{count, plural, =0 {The message will be sent to every invited participant who has not completed the intervention yet and has not had a reminder in the last 24 hours.} one {The message will be sent to up to # participant: every invited participant who has not completed the intervention yet and has not had a reminder in the last 24 hours. The actual number may be lower - participants who already completed the intervention, opted out of SMS or whose number cannot receive messages are skipped.} other {The message will be sent to up to # participants: every invited participant who has not completed the intervention yet and has not had a reminder in the last 24 hours. The actual number may be lower - participants who already completed the intervention, opted out of SMS or whose number cannot receive messages are skipped.}} This cannot be undone once sending starts.',
+  },
   smsCampaignErrorListHeader: {
     id: `${scope}.smsCampaignErrorListHeader`,
     defaultMessage: 'The message could not be sent',

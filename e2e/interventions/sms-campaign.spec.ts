@@ -8,6 +8,7 @@ import {
   InterventionPage,
   ParticipantInviterPage,
 } from '../pages';
+import { waitForApiResponse } from '../utils/waitForApiResponse';
 
 dayjs.extend(localizedFormat);
 
@@ -32,9 +33,9 @@ const expectReminderTimestamp = async (
   iso: string,
   timeout?: number,
 ) =>
-  expect(
-    row.locator(`[data-tip="${renderedTimestamp(iso)}"]`),
-  ).toBeVisible(timeout ? { timeout } : undefined);
+  expect(row.locator(`[data-tip="${renderedTimestamp(iso)}"]`)).toBeVisible(
+    timeout ? { timeout } : undefined,
+  );
 
 /**
  * Custom SMS invitations for predefined participants.
@@ -318,7 +319,7 @@ test.describe('Custom SMS invitations for predefined participants', () => {
     await inviter.openCompose('invitation');
 
     await inviter.bodyInput.fill('Hello ::nope::');
-    await inviter.submitButton.click();
+    await inviter.submitCampaign();
 
     await expect(inviter.errorList).toBeVisible();
     await inviter.expectErrorCode('UNKNOWN_LINK_VARIABLE');
@@ -443,7 +444,7 @@ test.describe('Custom SMS invitations for predefined participants', () => {
         /\/sms_campaigns$/.test(new URL(response.url()).pathname) &&
         response.request().method() === 'POST',
     );
-    await inviter.submitButton.click();
+    await inviter.submitCampaign();
     const response = await createResponse;
 
     expect(response.status()).toBe(422);
@@ -578,7 +579,7 @@ test.describe('Custom SMS invitations for predefined participants', () => {
     await expect(inviter.submitButton).toBeDisabled();
     await inviter.bodyInput.fill('Just a reminder to finish the session.');
     await expect(inviter.submitButton).toBeEnabled();
-    await inviter.submitButton.click();
+    await inviter.submitCampaign();
 
     await expect(
       page.locator('[data-cy="sms-campaign-status-rem-new"]'),
@@ -625,7 +626,7 @@ test.describe('Custom SMS invitations for predefined participants', () => {
     await inviter.openCampaignsView();
     await inviter.openCompose('reminder');
     await inviter.bodyInput.fill('Another nudge');
-    await inviter.submitButton.click();
+    await inviter.submitCampaign();
 
     await inviter.expectErrorCode('RATE_LIMITED');
     await expect(
@@ -689,5 +690,81 @@ test.describe('Custom SMS invitations for predefined participants', () => {
       '2026-11-03T10:15:00.000Z',
       15000,
     );
+  });
+  test('confirms the invitation campaign before anything is sent', async ({
+    page,
+  }) => {
+    await stubMeta(page);
+
+    const phone = {
+      iso: 'US',
+      prefix: '+1',
+      number: '5551234567',
+      confirmed: true,
+    };
+    await stubParticipants(page, [
+      [
+        participant('pp-1', { external_id: 'fresh-1', phone }),
+        participant('pp-2', { external_id: 'fresh-2', phone }),
+        // Already invited, inactive, and without a phone — none of these
+        // receive the invitation, so none of them count.
+        participant('pp-3', {
+          external_id: 'already-invited',
+          phone,
+          sms_invitation_sent_at: '2026-10-30T12:00:00.000Z',
+        }),
+        participant('pp-4', {
+          external_id: 'inactive',
+          phone,
+          active: false,
+        }),
+        participant('pp-5', { external_id: 'no-phone' }),
+      ],
+    ]);
+
+    let postCount = 0;
+    await stubCampaignList(page, []);
+    await page.route(SMS_CAMPAIGNS_URL, async (route: any) => {
+      if (route.request().method() !== 'POST') return route.fallback();
+      postCount += 1;
+      return route.fulfill({
+        status: 202,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          data: campaign({ id: 'inv-new', status: 'sending', sent_at: null }),
+        }),
+      });
+    });
+
+    await openPredefinedTabOnPublishedIntervention(page);
+
+    const inviter = new ParticipantInviterPage(page);
+    await inviter.openCampaignsView();
+    await inviter.openCompose('invitation');
+    await inviter.bodyInput.fill('Please join our study.');
+
+    await inviter.submitButton.click();
+
+    await expect(inviter.confirmSendButton).toBeVisible();
+    await expect(page.getByText('up to 2 participants')).toBeVisible();
+    expect(postCount).toBe(0);
+
+    // Backing out must not send anything.
+    const confirmationDialog = page
+      .getByRole('dialog')
+      .filter({ has: inviter.confirmSendButton });
+    await confirmationDialog.getByRole('button', { name: 'Cancel' }).click();
+    await expect(inviter.confirmSendButton).toBeHidden();
+    expect(postCount).toBe(0);
+    await expect(inviter.bodyInput).toHaveValue('Please join our study.');
+
+    const createResponse = waitForApiResponse(page, {
+      urlIncludes: '/sms_campaigns',
+      method: 'POST',
+      status: 202,
+    });
+    await inviter.submitCampaign();
+    await createResponse;
+    expect(postCount).toBe(1);
   });
 });
