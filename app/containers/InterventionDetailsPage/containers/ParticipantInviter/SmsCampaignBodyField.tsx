@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
@@ -8,7 +8,12 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import { SmsCampaignLink, SmsCampaignLinkType } from 'models/SmsCampaign';
 
-import { SmsBodyLength } from 'utils/smsBodyLength';
+import {
+  NonGsm7Character,
+  SmsBodyLength,
+  findNonGsm7Characters,
+  replaceWithGsm7Equivalents,
+} from 'utils/smsBodyLength';
 
 import SmsLinkModal from 'containers/SmsLinkModal';
 import settingsMessages from 'containers/Sessions/containers/TextMessagesPage/containers/TextMessageSettings/messages';
@@ -22,6 +27,7 @@ import TextArea from 'components/Input/TextArea';
 import { TextButton } from 'components/Button';
 
 import messages from './messages';
+import { WarningPanel } from './WarningPanel';
 import { TEXT_BUTTON_PROPS } from './constants';
 
 export type Props = {
@@ -66,6 +72,28 @@ export const SmsCampaignBodyField: FC<Props> = ({
   const handleRemoveLink = (variable: string) => {
     onLinksChange(links.filter((link) => link.variable !== variable));
     onBodyChange(body.split(`::${variable}::`).join(''));
+  };
+
+  const nonGsm7Characters = useMemo(() => findNonGsm7Characters(body), [body]);
+  // Naming the rest would turn a message written in Arabic or Polish into a
+  // wall of chips for its own alphabet.
+  const fixableCharacters = nonGsm7Characters.filter(
+    ({ replacement }) => replacement !== null,
+  );
+  const hasFixableCharacters = !!fixableCharacters.length;
+  const hasUnfixableNonGsm7 =
+    fixableCharacters.length < nonGsm7Characters.length;
+
+  // Nobody can spot a non-breaking space in a textarea, so what it is replaced
+  // with is what names it.
+  const characterLabel = ({ character, replacement }: NonGsm7Character) => {
+    if (character === '\t')
+      return formatMessage(messages.smsCampaignNonGsm7TabLabel);
+    if (replacement === ' ' || replacement === '\n')
+      return formatMessage(messages.smsCampaignNonGsm7SpaceLabel);
+    if (replacement === '')
+      return formatMessage(messages.smsCampaignNonGsm7ZeroWidthLabel);
+    return character;
   };
 
   const counterExceeded = counter.lengthExceeded || counter.segmentsExceeded;
@@ -120,6 +148,64 @@ export const SmsCampaignBodyField: FC<Props> = ({
           })}
         </Text>
       </Row>
+
+      {!!nonGsm7Characters.length && (
+        <WarningPanel
+          header={formatMessage(messages.smsCampaignNonGsm7WarningHeader)}
+          dataCy={`${dataCyPrefix}-non-gsm7`}
+        >
+          <Text fontSize={13} lineHeight={1.4}>
+            {formatMessage(messages.smsCampaignNonGsm7Warning)}
+          </Text>
+          {hasFixableCharacters && (
+            <>
+              <Text fontSize={13} lineHeight={1.4}>
+                {formatMessage(messages.smsCampaignNonGsm7FixableHint)}
+              </Text>
+              <Row gap={6} flexWrap="wrap">
+                {fixableCharacters.map((nonGsm7Character) => (
+                  <Badge
+                    key={nonGsm7Character.character}
+                    bg={colors.white}
+                    color={themeColors.warning}
+                  >
+                    <Text color={themeColors.warning} fontWeight="bold">
+                      {characterLabel(nonGsm7Character)}
+                    </Text>
+                  </Badge>
+                ))}
+              </Row>
+            </>
+          )}
+
+          {hasUnfixableNonGsm7 && (
+            <Text
+              fontSize={13}
+              lineHeight={1.4}
+              data-cy={`${dataCyPrefix}-non-gsm7-no-fix`}
+            >
+              {formatMessage(messages.smsCampaignNonGsm7NoFixHint)}
+            </Text>
+          )}
+
+          {hasFixableCharacters && (
+            // In a row the button sizes to its label; in the column it would
+            // stretch the full width and centre the text.
+            <Row>
+              <TextButton
+                buttonProps={{
+                  ...TEXT_BUTTON_PROPS,
+                  'data-cy': `${dataCyPrefix}-non-gsm7-fix`,
+                }}
+                onClick={() => onBodyChange(replaceWithGsm7Equivalents(body))}
+                disabled={disabled}
+              >
+                {formatMessage(messages.smsCampaignNonGsm7FixButton)}
+              </TextButton>
+            </Row>
+          )}
+        </WarningPanel>
+      )}
 
       {!!links.length && (
         <Column gap={4} data-cy={`${dataCyPrefix}-links`}>

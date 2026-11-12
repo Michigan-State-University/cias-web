@@ -1,14 +1,11 @@
 import React, { FC, ReactNode } from 'react';
 
-import warningIcon from 'assets/svg/warning-circle.svg';
-import { themeColors } from 'theme';
-
-import { AlertType, getBackgroundColorByType } from 'components/Alert';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Icon from 'components/Icon';
 import Row from 'components/Row';
 import Text from 'components/Text';
+
+import { WarningPanel } from './WarningPanel';
 
 export type ErrorListItem = {
   key: string;
@@ -23,20 +20,7 @@ export type Props = {
 };
 
 export const ErrorList: FC<Props> = ({ header, items, dataCy }) => (
-  <Column
-    borderRadius="8px"
-    py={12}
-    px={16}
-    gap={8}
-    background={getBackgroundColorByType(AlertType.WARNING)}
-    data-cy={dataCy}
-  >
-    <Row gap={8} align="center">
-      <Icon src={warningIcon} stroke={themeColors.text} />
-      <Text fontWeight="bold" fontSize={14} lineHeight={1.3}>
-        {header}
-      </Text>
-    </Row>
+  <WarningPanel header={header} dataCy={dataCy}>
     {/* Capped so a long list of rows cannot push the dialog buttons away. */}
     <Box maxHeight={200} overflow="auto">
       <Column gap={4}>
@@ -52,5 +36,5 @@ export const ErrorList: FC<Props> = ({ header, items, dataCy }) => (
         ))}
       </Column>
     </Box>
-  </Column>
+  </WarningPanel>
 );

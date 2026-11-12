@@ -10,6 +10,8 @@ import {
   SmsEncoding,
   buildResolvedSmsBody,
   calculateSmsBodyLength,
+  findNonGsm7Characters,
+  replaceWithGsm7Equivalents,
 } from '../smsBodyLength';
 
 // Values returned by GET .../sms_campaigns/meta.
@@ -243,4 +245,137 @@ describe('shared counter contract with cias-api', () => {
       );
     },
   );
+});
+
+describe('NFC normalization', () => {
+  // The backend normalizes before it counts; text pasted from macOS is NFD.
+  const decomposed = 'Zapraszamy o\u0301smego';
+  const composed = 'Zapraszamy \u00f3smego';
+
+  it('counts a decomposed character as the one character it is sent as', () => {
+    expect(calculateSmsBodyLength(decomposed, [], meta)).toEqual(
+      calculateSmsBodyLength(composed, [], meta),
+    );
+  });
+
+  it('names the composed letter, not the combining mark', () => {
+    expect(findNonGsm7Characters(decomposed)).toEqual(
+      findNonGsm7Characters(composed),
+    );
+  });
+});
+
+describe('findNonGsm7Characters', () => {
+  it('returns nothing for a body that fits GSM-7', () => {
+    expect(findNonGsm7Characters('Hello, world! {1} ~ \u20ac')).toEqual([]);
+  });
+
+  it('reports each offending character once, in order of first appearance', () => {
+    const found = findNonGsm7Characters(
+      '\u201ePolska\u201d \u2013 \u201ePolska\u201d',
+    );
+
+    expect(found.map(({ character }) => character)).toEqual([
+      '\u201e',
+      '\u201d',
+      '\u2013',
+    ]);
+  });
+
+  it('offers a GSM-7 equivalent for typographic punctuation', () => {
+    expect(findNonGsm7Characters('\u2026')).toEqual([
+      {
+        character: '\u2026',
+        replacement: '...',
+      },
+    ]);
+  });
+
+  it('offers no equivalent for a letter with a diacritic', () => {
+    expect(findNonGsm7Characters('\u0142')).toEqual([
+      {
+        character: '\u0142',
+        replacement: null,
+      },
+    ]);
+  });
+
+  it('replaces the characters that have no glyph the user could spot', () => {
+    const found = findNonGsm7Characters('a\u00a0b\tc\u200bd');
+
+    expect(found.map(({ replacement }) => replacement)).toEqual([' ', ' ', '']);
+  });
+
+  // The backend rejects the body outright over a zero-width character, so the
+  // only sendable outcome is dropping it.
+  it('offers to drop a zero-width joiner, which the backend rejects', () => {
+    expect(findNonGsm7Characters('\u200d')).toEqual([
+      {
+        character: '\u200d',
+        replacement: '',
+      },
+    ]);
+  });
+
+  it('offers to drop a control character', () => {
+    expect(findNonGsm7Characters('\u0007')).toEqual([
+      {
+        character: '\u0007',
+        replacement: '',
+      },
+    ]);
+  });
+
+  it('leaves the newline the backend allows alone', () => {
+    expect(findNonGsm7Characters('a\nb\r\n')).toEqual([]);
+  });
+
+  it('treats an emoji as one character rather than two surrogate halves', () => {
+    expect(findNonGsm7Characters('\ud83d\ude42')).toEqual([
+      {
+        character: '\ud83d\ude42',
+        replacement: null,
+      },
+    ]);
+  });
+});
+
+describe('replaceWithGsm7Equivalents', () => {
+  it('brings a body pasted from a text editor back to GSM-7', () => {
+    const body = '\u201eZapraszamy\u201d \u2013 badanie\u00a0jutro\u2026';
+    const replaced = replaceWithGsm7Equivalents(body);
+
+    expect(replaced).toEqual('"Zapraszamy" - badanie jutro...');
+    expect(findNonGsm7Characters(replaced)).toEqual([]);
+  });
+
+  it('leaves diacritics untouched', () => {
+    expect(
+      replaceWithGsm7Equivalents('\u017bycz\u0119 \u2013 zdrowia'),
+    ).toEqual('\u017bycz\u0119 - zdrowia');
+  });
+
+  it('turns every Unicode space variant into a plain space', () => {
+    const spaces = '\u2000\u2004\u2008\u205f\u3000';
+
+    expect(replaceWithGsm7Equivalents(`a${spaces}b`)).toEqual('a     b');
+  });
+
+  it('removes zero-width characters outright', () => {
+    expect(replaceWithGsm7Equivalents('a\u200b\ufeffb')).toEqual('ab');
+  });
+
+  it('drops the zero-width joiners the backend would reject', () => {
+    const family = '\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67';
+
+    expect(replaceWithGsm7Equivalents(family)).toEqual(
+      '\ud83d\udc68\ud83d\udc69\ud83d\udc67',
+    );
+  });
+
+  it('does not touch a link variable', () => {
+    expect(replaceWithGsm7Equivalents('Link: ::video::')).toEqual(
+      'Link: ::video::',
+    );
+  });
 });

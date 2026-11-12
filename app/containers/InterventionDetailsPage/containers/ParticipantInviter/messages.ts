@@ -517,6 +517,40 @@ export default defineMessages({
     defaultMessage:
       '{length}/{maxLength} characters · {segments} SMS ({encoding})',
   },
+  smsCampaignNonGsm7WarningHeader: {
+    id: `${scope}.smsCampaignNonGsm7WarningHeader`,
+    defaultMessage: 'This message will be sent as Unicode',
+  },
+  smsCampaignNonGsm7Warning: {
+    id: `${scope}.smsCampaignNonGsm7Warning`,
+    defaultMessage:
+      'Unicode encoding more than halves how much text fits in a single SMS.',
+  },
+  smsCampaignNonGsm7FixableHint: {
+    id: `${scope}.smsCampaignNonGsm7FixableHint`,
+    defaultMessage: 'These can be swapped for GSM-7 equivalents:',
+  },
+  smsCampaignNonGsm7NoFixHint: {
+    id: `${scope}.smsCampaignNonGsm7NoFixHint`,
+    defaultMessage:
+      'Some of them have no safe equivalent — a letter with a diacritic or an emoji can only be removed by hand, because replacing it would change what the message says.',
+  },
+  smsCampaignNonGsm7FixButton: {
+    id: `${scope}.smsCampaignNonGsm7FixButton`,
+    defaultMessage: 'Replace with GSM-7 equivalents',
+  },
+  smsCampaignNonGsm7SpaceLabel: {
+    id: `${scope}.smsCampaignNonGsm7SpaceLabel`,
+    defaultMessage: 'blank space',
+  },
+  smsCampaignNonGsm7TabLabel: {
+    id: `${scope}.smsCampaignNonGsm7TabLabel`,
+    defaultMessage: 'tab',
+  },
+  smsCampaignNonGsm7ZeroWidthLabel: {
+    id: `${scope}.smsCampaignNonGsm7ZeroWidthLabel`,
+    defaultMessage: 'invisible character',
+  },
   smsCampaignAddReminderLabel: {
     id: `${scope}.smsCampaignAddReminderLabel`,
     defaultMessage: 'Add a reminder sent automatically after a few days',

@@ -1,6 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BulkCreateErrorList /> matches snapshot with multiple known codes 1`] = `
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow: auto;
+  color: unset;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  background: #FFC179;
+  border-radius: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border-radius: 8px;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  gap: 4px;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -68,47 +109,6 @@ exports[`<BulkCreateErrorList /> matches snapshot with multiple known codes 1`] 
   font-size: 13px;
   color: #2F3850;
   line-height: 1.4;
-}
-
-.c3 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  max-height: 200px;
-  overflow: auto;
-  color: unset;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  gap: 8px;
-  background: #FFC179;
-  border-radius: 8px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-right: 16px;
-  padding-left: 16px;
-  border-radius: 8px;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  gap: 4px;
 }
 
 @media only screen and (min-width:768px) {

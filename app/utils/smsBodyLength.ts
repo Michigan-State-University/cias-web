@@ -30,6 +30,8 @@ const GSM7_EXTENDED_SET = new Set(GSM7_EXTENDED_CHARACTERS.split(''));
 
 const LINK_VARIABLE_PATTERN = /::([^:]+)::/g;
 
+const normalize = (body: string): string => body.normalize('NFC');
+
 /**
  * Replaces every `::variable::` that has a matching link with a placeholder of
  * the length the tracked link will have, then appends the personal link the
@@ -42,7 +44,7 @@ export const buildResolvedSmsBody = (
 ): string => {
   const linkedVariables = new Set(links.map(({ variable }) => variable));
 
-  const withTrackedLinks = body.replace(
+  const withTrackedLinks = normalize(body).replace(
     LINK_VARIABLE_PATTERN,
     (match, variable: string) =>
       linkedVariables.has(variable)
@@ -114,3 +116,103 @@ export const calculateSmsBodyLength = (
     segmentsExceeded: segments > meta.maxSegments,
   };
 };
+
+export type NonGsm7Character = {
+  character: string;
+  replacement: string | null;
+};
+
+const character = (codePoint: number) => String.fromCodePoint(codePoint);
+
+const GSM7_EQUIVALENT_CODE_POINTS: [number, string][] = [
+  // Single quotes and apostrophes: ‘ ’ ‚ ‛ ′ ´
+  [0x2018, "'"],
+  [0x2019, "'"],
+  [0x201a, "'"],
+  [0x201b, "'"],
+  [0x2032, "'"],
+  [0x00b4, "'"],
+  // Double quotes: “ ” „ ‟ ″ « »
+  [0x201c, '"'],
+  [0x201d, '"'],
+  [0x201e, '"'],
+  [0x201f, '"'],
+  [0x2033, '"'],
+  [0x00ab, '"'],
+  [0x00bb, '"'],
+  // Dashes: ‐ ‑ ‒ – — ― −
+  [0x2010, '-'],
+  [0x2011, '-'],
+  [0x2012, '-'],
+  [0x2013, '-'],
+  [0x2014, '-'],
+  [0x2015, '-'],
+  [0x2212, '-'],
+  // Other punctuation: … • · ⁄
+  [0x2026, '...'],
+  [0x2022, '*'],
+  [0x00b7, '.'],
+  [0x2044, '/'],
+  // Spaces that are not a space, and a tab. Kept as a space rather than
+  // removed (which is what Twilio's Smart Encoding does), because dropping
+  // them would run two words together.
+  [0x00a0, ' '],
+  [0x2000, ' '],
+  [0x2001, ' '],
+  [0x2002, ' '],
+  [0x2003, ' '],
+  [0x2004, ' '],
+  [0x2005, ' '],
+  [0x2006, ' '],
+  [0x2007, ' '],
+  [0x2008, ' '],
+  [0x2009, ' '],
+  [0x200a, ' '],
+  [0x202f, ' '],
+  [0x205f, ' '],
+  [0x3000, ' '],
+  [0x0009, ' '],
+  // Line and paragraph separators say what a newline says, in GSM-7.
+  [0x2028, '\n'],
+  [0x2029, '\n'],
+  // Characters with no width at all. The backend rejects the whole body over
+  // any of U+200B–U+200D, U+2060 and U+FEFF (`text_codes.rb`
+  // FORBIDDEN_CHARACTERS), so removing them is the only way to a sendable
+  // message — a zero-width joiner holding an emoji sequence together included.
+  [0x200b, ''],
+  [0x200c, ''],
+  [0x200d, ''],
+  [0x2060, ''],
+  [0xfeff, ''],
+  [0x00ad, ''],
+];
+
+const GSM7_EQUIVALENTS: Record<string, string> = Object.fromEntries(
+  GSM7_EQUIVALENT_CODE_POINTS.map(([codePoint, replacement]) => [
+    character(codePoint),
+    replacement,
+  ]),
+);
+
+const CONTROL_PATTERN =
+  // eslint-disable-next-line no-control-regex
+  /[\u0000-\u0008\u000b\u000e-\u001f\u007f-\u009f]/;
+
+const equivalentOf = (char: string): string | null =>
+  GSM7_EQUIVALENTS[char] ?? (CONTROL_PATTERN.test(char) ? '' : null);
+
+const isGsm7Character = (char: string): boolean =>
+  GSM7_BASIC_SET.has(char) || GSM7_EXTENDED_SET.has(char);
+
+export const findNonGsm7Characters = (body: string): NonGsm7Character[] =>
+  Array.from(new Set(Array.from(normalize(body))))
+    .filter((char) => !isGsm7Character(char))
+    .map((char) => ({
+      character: char,
+      replacement: equivalentOf(char),
+    }));
+
+export const replaceWithGsm7Equivalents = (body: string): string =>
+  Array.from(normalize(body))
+    .map((char) => equivalentOf(char) ?? char)
+    .join('');
