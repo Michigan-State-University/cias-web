@@ -1,0 +1,85 @@
+name: Check AWS role
+
+# Throwaway: logs in with the production environment's deploy role, using that
+# environment's variables, and makes the read-only calls the deploy makes.
+# Changes nothing in AWS. Delete the branch afterwards.
+
+on:
+  push:
+    branches: [check-aws-role]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          allowed-account-ids: ${{ vars.AWS_ACCOUNT_ID }}
+          role-session-name: check-aws-role-${{ github.run_id }}
+
+      - name: Read-only calls the deploy makes
+        env:
+          ECR_REPOSITORY_URI: ${{ vars.ECR_REPOSITORY_URI }}
+          ECS_CLUSTER_ARN: ${{ vars.ECS_CLUSTER_ARN }}
+          # cias-api sets API/WORKER, cias-web sets WEB; unset ones are empty.
+          SERVICES: ${{ vars.API_SERVICE_ARN }} ${{ vars.WORKER_SERVICE_ARN }} ${{ vars.WEB_SERVICE_ARN }}
+          MIGRATE_TASK_DEFINITION_ARN: ${{ vars.MIGRATE_TASK_DEFINITION_ARN }}
+          RDS_DB_INSTANCE_ID: ${{ vars.RDS_DB_INSTANCE_ID }}
+          ADDITIONAL_ORIGIN_SECURE_TOKEN_PARAMETER: ${{ vars.ADDITIONAL_ORIGIN_SECURE_TOKEN_PARAMETER }}
+        run: |
+          set -euo pipefail
+          ok() { echo "OK    $*"; }
+          fail() { echo "FAIL  $*"; exit 1; }
+
+          ok "assumed $(aws sts get-caller-identity --query Arn --output text)"
+          aws ecr get-login-password >/dev/null && ok "ECR login"
+
+          read -r -a services <<<"$SERVICES"
+          (( ${#services[@]} > 0 )) || fail "no *_SERVICE_ARN variable is set"
+          out="$(aws ecs describe-services --cluster "$ECS_CLUSTER_ARN" --services "${services[@]}")"
+          jq -e '.failures | length == 0' <<<"$out" >/dev/null || { jq '.failures' <<<"$out"; fail "service lookup"; }
+          jq -r '.services[] | "OK    service \(.serviceName): \(.status), running \(.runningCount), \(.taskDefinition)"' <<<"$out"
+
+          mapfile -t task_definitions < <(jq -r '.services[].taskDefinition' <<<"$out")
+          if [[ -n "$MIGRATE_TASK_DEFINITION_ARN" ]]; then
+            family="${MIGRATE_TASK_DEFINITION_ARN##*/}"
+            task_definitions+=("${family%%:*}")
+          fi
+
+          for td in "${task_definitions[@]}"; do
+            def="$(aws ecs describe-task-definition --task-definition "$td" --query taskDefinition)"
+            # Same check as the deploy script: something here must run our image.
+            jq -e --arg repo "$ECR_REPOSITORY_URI:" 'any(.containerDefinitions[]; .image | startswith($repo))' \
+              <<<"$def" >/dev/null || fail "no container in $td runs an image from $ECR_REPOSITORY_URI"
+            ok "$td runs $(jq -r --arg repo "$ECR_REPOSITORY_URI:" '[.containerDefinitions[].image | select(startswith($repo))] | join(", ")' <<<"$def")"
+            group="$(jq -r 'first(.containerDefinitions[].logConfiguration.options["awslogs-group"] // empty) // ""' <<<"$def")"
+            if [[ -n "$group" ]]; then
+              aws logs filter-log-events --log-group-name "$group" --limit 1 >/dev/null
+              ok "read logs in $group"
+            fi
+          done
+
+          if [[ -n "$RDS_DB_INSTANCE_ID" ]]; then
+            aws rds describe-db-snapshots --db-instance-identifier "$RDS_DB_INSTANCE_ID" --max-items 1 >/dev/null
+            ok "describe RDS snapshots of $RDS_DB_INSTANCE_ID"
+          fi
+
+          # Same read as deploy-web.sh (with decryption, so KMS is covered too), but
+          # the query leaves the value out: this log is public.
+          if [[ -n "$ADDITIONAL_ORIGIN_SECURE_TOKEN_PARAMETER" ]]; then
+            meta="$(aws ssm get-parameter --with-decryption --name "$ADDITIONAL_ORIGIN_SECURE_TOKEN_PARAMETER" \
+              --query 'Parameter.[Name, Type, Version]' --output text)" ||
+              fail "read SSM parameter $ADDITIONAL_ORIGIN_SECURE_TOKEN_PARAMETER"
+            ok "read SSM parameter: $meta"
+          else
+            echo "SKIP  SSM read (ADDITIONAL_ORIGIN_SECURE_TOKEN_PARAMETER not set)"
+          fi
+
+          echo "All read-only checks passed. Push, register, run-task, PassRole and update-service are first used by a real deploy."
