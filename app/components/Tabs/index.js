@@ -44,6 +44,7 @@ const Tabs = ({
         {children.map((child) => {
           if (!child || !child.props) return null;
           const { label, renderAsLink, hidden, linkMatch } = child.props;
+          const dataCy = child.props['data-cy'];
 
           if (hidden) return null;
 
@@ -58,6 +59,7 @@ const Tabs = ({
               onClick={onClickTabItem}
               emphasizeActiveLink={emphasizeActiveLink}
               labelStyle={labelStyle}
+              dataCy={dataCy}
             />
           );
         })}

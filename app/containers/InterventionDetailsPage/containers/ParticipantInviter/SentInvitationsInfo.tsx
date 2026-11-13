@@ -8,23 +8,22 @@ import { PredefinedParticipant } from 'models/PredefinedParticipant';
 import Text from 'components/Text';
 
 import messages from './messages';
-import { formatInvitationSentAt } from './utils';
+import { formatTimestamp } from './utils';
 
 export type Props = {
   participant: PredefinedParticipant;
 };
 
 export const SentInvitationsInfo = ({
-  participant: { smsInvitationSentAt, emailInvitationSentAt },
+  participant: { smsInvitationSentAt, emailInvitationSentAt, firstOpenedAt },
 }: Props) => {
   const { formatMessage } = useIntl();
 
-  const formattedSmsInvitationSentAt =
-    formatInvitationSentAt(smsInvitationSentAt);
+  const formattedSmsInvitationSentAt = formatTimestamp(smsInvitationSentAt);
 
-  const formattedEmailInvitationSentAt = formatInvitationSentAt(
-    emailInvitationSentAt,
-  );
+  const formattedEmailInvitationSentAt = formatTimestamp(emailInvitationSentAt);
+
+  const formattedFirstOpenedAt = formatTimestamp(firstOpenedAt);
 
   const sentInvitationsMessage = useMemo(() => {
     if (formattedSmsInvitationSentAt && formattedEmailInvitationSentAt) {
@@ -68,6 +67,20 @@ export const SentInvitationsInfo = ({
         mt={8}
       >
         {sentInvitationsMessage}
+      </Text>
+
+      <Text fontWeight="bold" lineHeight={1.2} mt={16}>
+        {formatMessage(messages.predefinedParticipantLinkOpenedLabel)}
+      </Text>
+      <Text
+        lineHeight={1.2}
+        color={themeColors.text}
+        textOpacity={formattedFirstOpenedAt ? 1 : 0.7}
+        mt={8}
+        data-cy="predefined-participant-link-opened"
+      >
+        {formattedFirstOpenedAt ??
+          formatMessage(messages.predefinedParticipantLinkNotOpened)}
       </Text>
     </>
   );

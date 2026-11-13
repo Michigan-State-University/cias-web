@@ -233,6 +233,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
                       type="submit"
                       onClick={handleSubmit}
                       loading={submitting}
+                      data-cy="predefined-participant-form-submit"
                     >
                       {formatMessage(
                         messages.predefinedParticipantFormSubmitButtonTitle,

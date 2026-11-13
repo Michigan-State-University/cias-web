@@ -454,4 +454,243 @@ export default defineMessages({
     defaultMessage:
       'A test link marks the participant it creates as test data; their fill is deleted automatically about 24 hours later, together with its contribution to the relevant charts. Open it in a private or incognito window and complete the fill in that tab.',
   },
+  lastReminderColumnHeader: {
+    id: `${scope}.lastReminderColumnHeader`,
+    defaultMessage: 'Last reminder',
+  },
+  sendSmsInvitationButtonTitle: {
+    id: `${scope}.sendSmsInvitationButtonTitle`,
+    defaultMessage: 'Send SMS invitation',
+  },
+  sendSmsReminderButtonTitle: {
+    id: `${scope}.sendSmsReminderButtonTitle`,
+    defaultMessage: 'Send reminder',
+  },
+  smsCampaignNotPublishedInfo: {
+    id: `${scope}.smsCampaignNotPublishedInfo`,
+    defaultMessage: 'Available once the intervention is published.',
+  },
+  smsCampaignNotPublishedError: {
+    id: `${scope}.smsCampaignNotPublishedError`,
+    defaultMessage:
+      'This intervention is not published, so no SMS can be sent right now.',
+  },
+  smsCampaignNotEditorInfo: {
+    id: `${scope}.smsCampaignNotEditorInfo`,
+    defaultMessage:
+      'Available to the current editor of this intervention only.',
+  },
+  smsCampaignNoInvitedParticipantsInfo: {
+    id: `${scope}.smsCampaignNoInvitedParticipantsInfo`,
+    defaultMessage:
+      'Available once at least one participant has received an SMS invitation.',
+  },
+  smsCampaignInvitationRecipientsInfo: {
+    id: `${scope}.smsCampaignInvitationRecipientsInfo`,
+    defaultMessage:
+      'The invitation goes to every active participant with a phone number who has not received an SMS invitation yet.',
+  },
+  smsCampaignReminderRecipientsInfo: {
+    id: `${scope}.smsCampaignReminderRecipientsInfo`,
+    defaultMessage:
+      'The reminder goes out immediately to every invited participant who has not completed the intervention yet.',
+  },
+  smsCampaignInvitationBodyLabel: {
+    id: `${scope}.smsCampaignInvitationBodyLabel`,
+    defaultMessage: 'Invitation message',
+  },
+  smsCampaignReminderBodyLabel: {
+    id: `${scope}.smsCampaignReminderBodyLabel`,
+    defaultMessage: 'Reminder message',
+  },
+  smsCampaignBodyPlaceholder: {
+    id: `${scope}.smsCampaignBodyPlaceholder`,
+    defaultMessage: 'Write the message participants will receive…',
+  },
+  smsCampaignPersonalLinkHint: {
+    id: `${scope}.smsCampaignPersonalLinkHint`,
+    defaultMessage:
+      "Each participant's personal link is added at the end automatically.",
+  },
+  smsCampaignCounter: {
+    id: `${scope}.smsCampaignCounter`,
+    defaultMessage:
+      '{length}/{maxLength} characters · {segments} SMS ({encoding})',
+  },
+  smsCampaignNonGsm7WarningHeader: {
+    id: `${scope}.smsCampaignNonGsm7WarningHeader`,
+    defaultMessage: 'This message will be sent as Unicode',
+  },
+  smsCampaignNonGsm7Warning: {
+    id: `${scope}.smsCampaignNonGsm7Warning`,
+    defaultMessage:
+      'Unicode encoding more than halves how much text fits in a single SMS.',
+  },
+  smsCampaignNonGsm7FixableHint: {
+    id: `${scope}.smsCampaignNonGsm7FixableHint`,
+    defaultMessage: 'These can be swapped for GSM-7 equivalents:',
+  },
+  smsCampaignNonGsm7NoFixHint: {
+    id: `${scope}.smsCampaignNonGsm7NoFixHint`,
+    defaultMessage:
+      'Some of them have no safe equivalent — a letter with a diacritic or an emoji can only be removed by hand, because replacing it would change what the message says.',
+  },
+  smsCampaignNonGsm7FixButton: {
+    id: `${scope}.smsCampaignNonGsm7FixButton`,
+    defaultMessage: 'Replace with GSM-7 equivalents',
+  },
+  smsCampaignNonGsm7SpaceLabel: {
+    id: `${scope}.smsCampaignNonGsm7SpaceLabel`,
+    defaultMessage: 'blank space',
+  },
+  smsCampaignNonGsm7TabLabel: {
+    id: `${scope}.smsCampaignNonGsm7TabLabel`,
+    defaultMessage: 'tab',
+  },
+  smsCampaignNonGsm7ZeroWidthLabel: {
+    id: `${scope}.smsCampaignNonGsm7ZeroWidthLabel`,
+    defaultMessage: 'invisible character',
+  },
+  smsCampaignAddReminderLabel: {
+    id: `${scope}.smsCampaignAddReminderLabel`,
+    defaultMessage: 'Add a reminder sent automatically after a few days',
+  },
+  smsCampaignDaysAfterLabel: {
+    id: `${scope}.smsCampaignDaysAfterLabel`,
+    defaultMessage: 'Send after (days)',
+  },
+  smsCampaignDaysAfterHint: {
+    id: `${scope}.smsCampaignDaysAfterHint`,
+    defaultMessage:
+      'Between 1 and {max}. It goes out at the same time of day as the invitation, only to participants who have not opened their link.',
+  },
+  smsCampaignSendInvitationSubmit: {
+    id: `${scope}.smsCampaignSendInvitationSubmit`,
+    defaultMessage: 'Send invitation',
+  },
+  smsCampaignSendReminderSubmit: {
+    id: `${scope}.smsCampaignSendReminderSubmit`,
+    defaultMessage: 'Send reminder',
+  },
+  smsCampaignSendInvitationConfirmationTitle: {
+    id: `${scope}.smsCampaignSendInvitationConfirmationTitle`,
+    defaultMessage: 'Send the SMS invitation campaign?',
+  },
+  smsCampaignSendInvitationConfirmationContent: {
+    id: `${scope}.smsCampaignSendInvitationConfirmationContent`,
+    defaultMessage:
+      '{count, plural, =0 {The message will be sent to every active participant with a phone number who has not received an SMS invitation yet.} one {The message will be sent to up to # participant: every active participant with a phone number who has not received an SMS invitation yet. The actual number may be lower - participants who opted out of SMS or whose number cannot receive messages are skipped.} other {The message will be sent to up to # participants: every active participant with a phone number who has not received an SMS invitation yet. The actual number may be lower - participants who opted out of SMS or whose number cannot receive messages are skipped.}} This cannot be undone once sending starts.',
+  },
+  smsCampaignSendReminderConfirmationTitle: {
+    id: `${scope}.smsCampaignSendReminderConfirmationTitle`,
+    defaultMessage: 'Send the SMS reminder campaign?',
+  },
+  smsCampaignSendReminderConfirmationContent: {
+    id: `${scope}.smsCampaignSendReminderConfirmationContent`,
+    defaultMessage:
+      '{count, plural, =0 {The message will be sent to every invited participant who has not completed the intervention yet and has not had a reminder in the last 24 hours.} one {The message will be sent to up to # participant: every invited participant who has not completed the intervention yet and has not had a reminder in the last 24 hours. The actual number may be lower - participants who already completed the intervention, opted out of SMS or whose number cannot receive messages are skipped.} other {The message will be sent to up to # participants: every invited participant who has not completed the intervention yet and has not had a reminder in the last 24 hours. The actual number may be lower - participants who already completed the intervention, opted out of SMS or whose number cannot receive messages are skipped.}} This cannot be undone once sending starts.',
+  },
+  smsCampaignErrorListHeader: {
+    id: `${scope}.smsCampaignErrorListHeader`,
+    defaultMessage: 'The message could not be sent',
+  },
+  smsCampaignScheduledReminderErrorPrefix: {
+    id: `${scope}.smsCampaignScheduledReminderErrorPrefix`,
+    defaultMessage: 'Scheduled reminder: {error}',
+  },
+  smsCampaignRetryAfter: {
+    id: `${scope}.smsCampaignRetryAfter`,
+    defaultMessage: 'Try again in {seconds} s.',
+  },
+  smsCampaignsListEmpty: {
+    id: `${scope}.smsCampaignsListEmpty`,
+    defaultMessage: 'No SMS has been sent for this intervention yet.',
+  },
+  smsCampaignsViewSendInfo: {
+    id: `${scope}.smsCampaignsViewSendInfo`,
+    defaultMessage:
+      'Send a new message to the predefined participants of this intervention.',
+  },
+  smsCampaignsSummaryNone: {
+    id: `${scope}.smsCampaignsSummaryNone`,
+    defaultMessage: 'No SMS sent yet.',
+  },
+  smsCampaignsSummaryLatest: {
+    id: `${scope}.smsCampaignsSummaryLatest`,
+    defaultMessage: 'Last campaign: {kind} · {status}',
+  },
+  smsCampaignsSummaryRecipients: {
+    id: `${scope}.smsCampaignsSummaryRecipients`,
+    defaultMessage: '{recipients} recipients',
+  },
+  smsCampaignsSummaryOpenButton: {
+    id: `${scope}.smsCampaignsSummaryOpenButton`,
+    defaultMessage: 'SMS campaigns',
+  },
+  smsCampaignsListHeader: {
+    id: `${scope}.smsCampaignsListHeader`,
+    defaultMessage: 'SMS campaigns',
+  },
+  smsCampaignKindColumnHeader: {
+    id: `${scope}.smsCampaignKindColumnHeader`,
+    defaultMessage: 'Type',
+  },
+  smsCampaignDateColumnHeader: {
+    id: `${scope}.smsCampaignDateColumnHeader`,
+    defaultMessage: 'Date',
+  },
+  smsCampaignRecipientsColumnHeader: {
+    id: `${scope}.smsCampaignRecipientsColumnHeader`,
+    defaultMessage: 'Recipients',
+  },
+  smsCampaignKindValue: {
+    id: `${scope}.smsCampaignKindValue`,
+    defaultMessage:
+      '{kind, select, invitation {Invitation} manual_reminder {Reminder} scheduled_reminder {Scheduled reminder} other {Campaign}}',
+  },
+  smsCampaignStatusValue: {
+    id: `${scope}.smsCampaignStatusValue`,
+    defaultMessage:
+      '{status, select, scheduled {Scheduled} sending {Sending} sent {Sent} failed {Failed} cancelled {Cancelled} skipped {Skipped} other {Unknown}}',
+  },
+  smsCampaignScheduledAtProvisional: {
+    id: `${scope}.smsCampaignScheduledAtProvisional`,
+    defaultMessage: '(approximate)',
+  },
+  smsCampaignRecipientsValue: {
+    id: `${scope}.smsCampaignRecipientsValue`,
+    defaultMessage: '{recipients} · {accepted} sent, {failed} failed',
+  },
+  smsCampaignRecipientsResolvedAtSendTime: {
+    id: `${scope}.smsCampaignRecipientsResolvedAtSendTime`,
+    defaultMessage: 'Decided when it is sent',
+  },
+  smsCampaignPreviewHeader: {
+    id: `${scope}.smsCampaignPreviewHeader`,
+    defaultMessage: 'Message',
+  },
+  smsCampaignShowPreviewLabel: {
+    id: `${scope}.smsCampaignShowPreviewLabel`,
+    defaultMessage: 'Show the message',
+  },
+  smsCampaignHidePreviewLabel: {
+    id: `${scope}.smsCampaignHidePreviewLabel`,
+    defaultMessage: 'Hide the message',
+  },
+  smsCampaignMetaError: {
+    id: `${scope}.smsCampaignMetaError`,
+    defaultMessage: 'The message settings could not be loaded.',
+  },
+  smsCampaignMetaRetryButton: {
+    id: `${scope}.smsCampaignMetaRetryButton`,
+    defaultMessage: 'Try again',
+  },
+  predefinedParticipantLinkOpenedLabel: {
+    id: `${scope}.predefinedParticipantLinkOpenedLabel`,
+    defaultMessage: `Link opened`,
+  },
+  predefinedParticipantLinkNotOpened: {
+    id: `${scope}.predefinedParticipantLinkNotOpened`,
+    defaultMessage: `Not opened yet`,
+  },
 });

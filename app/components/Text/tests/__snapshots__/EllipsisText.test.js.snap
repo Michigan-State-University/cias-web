@@ -56,7 +56,6 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
           <span
             class="c3"
             data-for=""
-            theme="[object Object]"
             width="0"
           >
             <span />
@@ -131,7 +130,6 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
             class="c3"
             data-for="Test"
             data-tip="Test"
-            theme="[object Object]"
             width="0"
           >
             <span />

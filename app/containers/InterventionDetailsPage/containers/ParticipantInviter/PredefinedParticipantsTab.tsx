@@ -5,7 +5,6 @@ import { useIntl } from 'react-intl';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
 import { SessionTypes } from 'models/Session';
-
 import {
   fetchPredefinedParticipantsRequest,
   makeSelectIntervention,
@@ -30,6 +29,7 @@ import { PredefinedParticipantsTable } from './PredefinedParticipantsTable';
 import { HealthClinicCollapse } from './HealthClinicCollapse';
 import messages from './messages';
 import { UploadPredefinedParticipantsButton } from './UploadPredefinedParticipantsButton';
+import { SmsCampaignsSummaryBar } from './SmsCampaignsSummaryBar';
 
 export type Props = {
   interventionId: string;
@@ -38,6 +38,7 @@ export type Props = {
   creatingPredefinedParticipantsPossible: boolean;
   onInvite: (invitationType: ParticipantInvitationType) => void;
   onManage: (participantId: string) => void;
+  onOpenSmsCampaigns: () => void;
 };
 
 export const PredefinedParticipantsTab: FC<Props> = ({
@@ -47,6 +48,7 @@ export const PredefinedParticipantsTab: FC<Props> = ({
   creatingPredefinedParticipantsPossible,
   onInvite,
   onManage,
+  onOpenSmsCampaigns,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -91,7 +93,10 @@ export const PredefinedParticipantsTab: FC<Props> = ({
     return Object.entries(groupBy(predefinedParticipants, 'healthClinicId'));
   }, [isReportingIntervention, predefinedParticipants]);
 
-  if (predefinedParticipantsLoading) return <Loader type="inline" />;
+  // Only the first load shows a spinner; background refreshes update in place.
+  if (predefinedParticipantsLoading && !predefinedParticipants?.length) {
+    return <Loader type="inline" />;
+  }
 
   if (predefinedParticipantsError) {
     return <ErrorAlert errorText={predefinedParticipantsError} />;
@@ -128,7 +133,12 @@ export const PredefinedParticipantsTab: FC<Props> = ({
           disabled={!creatingPredefinedParticipantsPossible}
         />
       </Row>
-      <Box overflow="auto" maxHeight="100%">
+      <Row mb={16}>
+        <SmsCampaignsSummaryBar onOpen={onOpenSmsCampaigns} />
+      </Row>
+      {/* `flex: 1` + `minHeight: 0` so the table scrolls instead of growing
+          past the modal and pushing everything below it out of sight. */}
+      <Box flex={1} minHeight="0px" overflow="auto">
         {predefinedParticipants?.length && !isReportingIntervention && (
           <PredefinedParticipantsTable
             predefinedParticipants={predefinedParticipants}

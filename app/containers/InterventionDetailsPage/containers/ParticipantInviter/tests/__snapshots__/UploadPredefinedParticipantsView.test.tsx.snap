@@ -216,6 +216,7 @@ exports[`<UploadPredefinedParticipantsView /> matches snapshot in the default (e
       <button
         class="c2"
         color="#B727EA"
+        data-cy="invite-participants-back-button"
         display="flex"
         font-weight="bold"
         type="button"
