@@ -29,6 +29,8 @@ const campaign = (overrides: Partial<SmsCampaign> = {}): SmsCampaign => ({
   failedCount: 0,
   recipientsCount: 2,
   scheduledAtProvisional: false,
+  body: 'Campaign body',
+  links: [],
   ...overrides,
 });
 

@@ -3,6 +3,8 @@
  * Mirrors the backend algorithm (`body_length.rb`)
  */
 
+import escapeRegExp from 'lodash/escapeRegExp';
+
 import { SmsCampaignLink, SmsCampaignMeta } from 'models/SmsCampaign';
 
 export enum SmsEncoding {
@@ -28,9 +30,36 @@ const GSM7_EXTENDED_CHARACTERS = '\f^{}\\[~]|€';
 const GSM7_BASIC_SET = new Set(GSM7_BASIC_CHARACTERS.split(''));
 const GSM7_EXTENDED_SET = new Set(GSM7_EXTENDED_CHARACTERS.split(''));
 
-const LINK_VARIABLE_PATTERN = /::([^:]+)::/g;
-
 const normalize = (body: string): string => body.normalize('NFC');
+
+export type SmsBodyPart = {
+  text: string;
+  isToken: boolean;
+};
+
+export const tokenizeSmsBody = (
+  body: string,
+  links: SmsCampaignLink[],
+): SmsBodyPart[] => {
+  const normalized = normalize(body);
+
+  if (!links.length) {
+    return normalized ? [{ text: normalized, isToken: false }] : [];
+  }
+
+  const pattern = new RegExp(
+    `(::(?:${links.map(({ variable }) => escapeRegExp(variable)).join('|')})::)`,
+    'g',
+  );
+
+  // Splitting on a capturing pattern alternates text and captures, so a part's
+  // index already says what it is: the odd ones are the tokens. Mapping before
+  // the filter keeps that parity intact.
+  return normalized
+    .split(pattern)
+    .map((text, index) => ({ text, isToken: index % 2 === 1 }))
+    .filter(({ text }) => text !== '');
+};
 
 /**
  * Replaces every `::variable::` that has a matching link with a placeholder of
@@ -42,27 +71,15 @@ export const buildResolvedSmsBody = (
   links: SmsCampaignLink[],
   meta: SmsCampaignMeta,
 ): string => {
-  const linkedVariables = new Set(links.map(({ variable }) => variable));
-
-  const withTrackedLinks = normalize(body).replace(
-    LINK_VARIABLE_PATTERN,
-    (match, variable: string) =>
-      linkedVariables.has(variable)
-        ? 'x'.repeat(meta.trackedLinkExpectedLength)
-        : match,
-  );
+  const withTrackedLinks = tokenizeSmsBody(body, links)
+    .map(({ text, isToken }) =>
+      isToken ? 'x'.repeat(meta.trackedLinkExpectedLength) : text,
+    )
+    .join('');
 
   return `${withTrackedLinks}\n${'x'.repeat(meta.personalLinkExpectedLength)}`;
 };
 
-/**
- * One pass over the text yields both facts the counter needs: whether every
- * character fits GSM-7, and how many of them are extended characters (which
- * cost two septets each). Iterates UTF-16 units, exactly as the backend does.
- *
- * Bails out on the first non-GSM-7 character: `extendedCount` is only ever
- * read for a GSM-7 text, and messages in Polish fail on their first diacritic.
- */
 const scanGsm7 = (text: string): { isGsm7: boolean; extendedCount: number } => {
   let extendedCount = 0;
 
@@ -117,9 +134,17 @@ export const calculateSmsBodyLength = (
   };
 };
 
+export enum NonGsm7CharacterKind {
+  TAB = 'TAB',
+  BLANK = 'BLANK',
+  ZERO_WIDTH = 'ZERO_WIDTH',
+  OTHER = 'OTHER',
+}
+
 export type NonGsm7Character = {
   character: string;
   replacement: string | null;
+  kind: NonGsm7CharacterKind;
 };
 
 const character = (codePoint: number) => String.fromCodePoint(codePoint);
@@ -198,19 +223,38 @@ const CONTROL_PATTERN =
   // eslint-disable-next-line no-control-regex
   /[\u0000-\u0008\u000b\u000e-\u001f\u007f-\u009f]/;
 
+const WHITESPACE_PATTERN = /\s/;
+
 const equivalentOf = (char: string): string | null =>
   GSM7_EQUIVALENTS[char] ?? (CONTROL_PATTERN.test(char) ? '' : null);
+
+const kindOf = (
+  char: string,
+  replacement: string | null,
+): NonGsm7CharacterKind => {
+  if (char === '\t') return NonGsm7CharacterKind.TAB;
+  if (replacement === '') return NonGsm7CharacterKind.ZERO_WIDTH;
+  if (WHITESPACE_PATTERN.test(char)) return NonGsm7CharacterKind.BLANK;
+  return NonGsm7CharacterKind.OTHER;
+};
 
 const isGsm7Character = (char: string): boolean =>
   GSM7_BASIC_SET.has(char) || GSM7_EXTENDED_SET.has(char);
 
-export const findNonGsm7Characters = (body: string): NonGsm7Character[] =>
-  Array.from(new Set(Array.from(normalize(body))))
-    .filter((char) => !isGsm7Character(char))
-    .map((char) => ({
-      character: char,
-      replacement: equivalentOf(char),
-    }));
+export const findNonGsm7Characters = (body: string): NonGsm7Character[] => {
+  const seen = new Set<string>();
+
+  return Array.from(normalize(body))
+    .filter((char) => {
+      if (isGsm7Character(char) || seen.has(char)) return false;
+      seen.add(char);
+      return true;
+    })
+    .map((char) => {
+      const replacement = equivalentOf(char);
+      return { character: char, replacement, kind: kindOf(char, replacement) };
+    });
+};
 
 export const replaceWithGsm7Equivalents = (body: string): string =>
   Array.from(normalize(body))

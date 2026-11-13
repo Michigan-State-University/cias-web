@@ -23,6 +23,7 @@ import {
 } from 'global/reducers/smsCampaigns';
 
 import { MANUAL_REMINDER_INTERVAL_HOURS } from 'utils/smsCampaignRecipients';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import Modal from 'components/Modal';
 import modalMessages from 'components/Modal/messages';
@@ -84,17 +85,12 @@ const predefinedParticipants = [
 ];
 
 const buildStore = (participants: unknown = predefinedParticipants) => {
-  const state = {
+  const store = createTestStore({
     intervention: { predefinedParticipants: participants },
     smsCampaigns: { ...smsCampaignsInitialState, meta },
-  };
-
-  return {
-    dispatch: jest.fn(),
-    getState: () => state,
-    subscribe: () => () => {},
-    replaceReducer: () => {},
-  } as any;
+  });
+  jest.spyOn(store, 'dispatch');
+  return store;
 };
 
 type RenderOptions = {

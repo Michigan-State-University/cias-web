@@ -56,6 +56,8 @@ describe('createSmsCampaign saga', () => {
           failed_count: 0,
           recipients_count: 2,
           scheduled_at_provisional: false,
+          body: 'Campaign body',
+          links: [],
         },
       },
     },
@@ -156,6 +158,8 @@ describe('createSmsCampaign saga', () => {
           failedCount: 0,
           recipientsCount: 2,
           scheduledAtProvisional: false,
+          body: 'Campaign body',
+          links: [],
         }),
       )
       .call(toast.success, formatMessage(messages.createSmsCampaignSuccess))

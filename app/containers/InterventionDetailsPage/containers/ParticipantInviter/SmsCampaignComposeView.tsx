@@ -43,15 +43,19 @@ import messages from './messages';
 
 const DEFAULT_DAYS_AFTER = 3;
 
-const CONFIRMATION_MESSAGES = {
+const KIND_MESSAGES = {
   [SmsCampaignKind.INVITATION]: {
-    title: messages.smsCampaignSendInvitationConfirmationTitle,
-    content: messages.smsCampaignSendInvitationConfirmationContent,
+    recipientsInfo: messages.smsCampaignInvitationRecipientsInfo,
+    bodyLabel: messages.smsCampaignInvitationBodyLabel,
+    confirmationTitle: messages.smsCampaignSendInvitationConfirmationTitle,
+    confirmationContent: messages.smsCampaignSendInvitationConfirmationContent,
     submit: messages.smsCampaignSendInvitationSubmit,
   },
   [SmsCampaignKind.MANUAL_REMINDER]: {
-    title: messages.smsCampaignSendReminderConfirmationTitle,
-    content: messages.smsCampaignSendReminderConfirmationContent,
+    recipientsInfo: messages.smsCampaignReminderRecipientsInfo,
+    bodyLabel: messages.smsCampaignReminderBodyLabel,
+    confirmationTitle: messages.smsCampaignSendReminderConfirmationTitle,
+    confirmationContent: messages.smsCampaignSendReminderConfirmationContent,
     submit: messages.smsCampaignSendReminderSubmit,
   },
 };
@@ -188,7 +192,7 @@ export const SmsCampaignComposeView: FC<Props> = ({
     setConfirmingSend(true);
   };
 
-  const confirmation = CONFIRMATION_MESSAGES[kind];
+  const kindMessages = KIND_MESSAGES[kind];
 
   return (
     <Column flex={1} overflow="auto" gap={20}>
@@ -196,11 +200,11 @@ export const SmsCampaignComposeView: FC<Props> = ({
         visible={confirmingSend}
         onClose={() => setConfirmingSend(false)}
         confirmAction={sendCampaign}
-        description={formatMessage(confirmation.title)}
-        content={formatMessage(confirmation.content, {
+        description={formatMessage(kindMessages.confirmationTitle)}
+        content={formatMessage(kindMessages.confirmationContent, {
           count: recipientsUpperBound,
         })}
-        confirmationButtonText={formatMessage(confirmation.submit)}
+        confirmationButtonText={formatMessage(kindMessages.submit)}
         confirmationButtonColor="primary"
         icon="info"
         maxWidth={480}
@@ -212,19 +216,11 @@ export const SmsCampaignComposeView: FC<Props> = ({
       />
 
       <Text fontSize={13} color={colors.manatee}>
-        {formatMessage(
-          isInvitation
-            ? messages.smsCampaignInvitationRecipientsInfo
-            : messages.smsCampaignReminderRecipientsInfo,
-        )}
+        {formatMessage(kindMessages.recipientsInfo)}
       </Text>
 
       <SmsCampaignBodyField
-        label={formatMessage(
-          isInvitation
-            ? messages.smsCampaignInvitationBodyLabel
-            : messages.smsCampaignReminderBodyLabel,
-        )}
+        label={formatMessage(kindMessages.bodyLabel)}
         body={body}
         onBodyChange={setBody}
         links={links}
@@ -262,11 +258,7 @@ export const SmsCampaignComposeView: FC<Props> = ({
           loading={submitting}
           data-cy="sms-campaign-submit"
         >
-          {formatMessage(
-            isInvitation
-              ? messages.smsCampaignSendInvitationSubmit
-              : messages.smsCampaignSendReminderSubmit,
-          )}
+          {formatMessage(kindMessages.submit)}
         </Button>
       </Row>
     </Column>

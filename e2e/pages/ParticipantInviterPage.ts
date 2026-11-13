@@ -124,6 +124,24 @@ export class ParticipantInviterPage {
     await this.bodyInput.waitFor({ state: 'visible', timeout: 10000 });
   }
 
+  campaignPreviewToggle(campaignId: string) {
+    return this.page.locator(
+      `[data-cy="sms-campaign-toggle-preview-${campaignId}"]`,
+    );
+  }
+
+  campaignPreviewBody(campaignId: string) {
+    return this.page.locator(
+      `[data-cy="sms-campaign-preview-${campaignId}-body"]`,
+    );
+  }
+
+  campaignPreviewLinks(campaignId: string) {
+    return this.page.locator(
+      `[data-cy="sms-campaign-preview-${campaignId}-links"]`,
+    );
+  }
+
   async submitCampaign() {
     await this.submitButton.click();
     await this.confirmSendButton.click();

@@ -75,6 +75,8 @@ const campaign = (overrides: Record<string, unknown> = {}) => ({
     failed_count: 0,
     recipients_count: 1,
     scheduled_at_provisional: false,
+    body: 'Campaign body',
+    links: [],
     ...overrides,
   },
 });
@@ -425,6 +427,61 @@ test.describe('Custom SMS invitations for predefined participants', () => {
     await expect(
       page.locator('[data-cy="sms-campaign-status-rem-1"]'),
     ).toHaveText('Cancelled');
+  });
+
+  test('opens the text of each campaign separately, since a reminder says something else', async ({
+    page,
+  }) => {
+    await stubMeta(page);
+    await stubCampaignList(page, [
+      campaign({
+        id: 'inv-preview',
+        body: 'Hello, your survey is here: ::survey::',
+        links: [
+          {
+            url: 'https://example.test/survey',
+            variable: 'survey',
+            link_type: 'website',
+          },
+        ],
+      }),
+      campaign({
+        id: 'rem-preview',
+        kind: 'scheduled_reminder',
+        status: 'scheduled',
+        body: 'A gentle reminder about your survey.',
+      }),
+    ]);
+
+    await setUpPublishedInterventionWithParticipant(page);
+
+    const inviter = new ParticipantInviterPage(page);
+    await inviter.openCampaignsView();
+    await expect(inviter.campaignsList).toBeVisible();
+
+    const invitationPreview = inviter.campaignPreviewBody('inv-preview');
+    const reminderPreview = inviter.campaignPreviewBody('rem-preview');
+
+    await expect(invitationPreview).toHaveCount(0);
+
+    await inviter.campaignPreviewToggle('inv-preview').click();
+    await expect(invitationPreview).toContainText(
+      'Hello, your survey is here: ::survey::',
+    );
+    await expect(inviter.campaignPreviewLinks('inv-preview')).toContainText(
+      'https://example.test/survey',
+    );
+    await expect(reminderPreview).toHaveCount(0);
+
+    await inviter.campaignPreviewToggle('rem-preview').click();
+    await expect(reminderPreview).toContainText(
+      'A gentle reminder about your survey.',
+    );
+    await expect(invitationPreview).toBeVisible();
+
+    await inviter.campaignPreviewToggle('inv-preview').click();
+    await expect(invitationPreview).toHaveCount(0);
+    await expect(reminderPreview).toBeVisible();
   });
 
   test('posts a real campaign and reports NO_RECIPIENTS when nobody has a phone number', async ({

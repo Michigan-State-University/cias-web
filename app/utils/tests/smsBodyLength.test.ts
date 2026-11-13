@@ -7,11 +7,13 @@ import {
 import contract from './fixtures/smsBodyLengthContract.json';
 
 import {
+  NonGsm7CharacterKind,
   SmsEncoding,
   buildResolvedSmsBody,
   calculateSmsBodyLength,
   findNonGsm7Characters,
   replaceWithGsm7Equivalents,
+  tokenizeSmsBody,
 } from '../smsBodyLength';
 
 // Values returned by GET .../sms_campaigns/meta.
@@ -29,6 +31,55 @@ const websiteLink = (variable: string) => ({
   url: 'https://example.org',
   variable,
   linkType: SmsCampaignLinkType.WEBSITE,
+});
+
+describe('tokenizeSmsBody', () => {
+  const link = websiteLink('survey');
+
+  it('marks a token that has a matching link', () => {
+    expect(tokenizeSmsBody('Open ::survey:: now', [link])).toEqual([
+      { text: 'Open ', isToken: false },
+      { text: '::survey::', isToken: true },
+      { text: ' now', isToken: false },
+    ]);
+  });
+
+  it('leaves a token without a matching link as plain text', () => {
+    expect(tokenizeSmsBody('Open ::ghost:: now', [link])).toEqual([
+      { text: 'Open ::ghost:: now', isToken: false },
+    ]);
+  });
+
+  it('marks every occurrence of the same token', () => {
+    expect(tokenizeSmsBody('::survey:: and ::survey::', [link])).toEqual([
+      { text: '::survey::', isToken: true },
+      { text: ' and ', isToken: false },
+      { text: '::survey::', isToken: true },
+    ]);
+  });
+
+  it('does not treat a variable as a regular expression', () => {
+    expect(tokenizeSmsBody('x ::abc:: y', [websiteLink('a.c')])).toEqual([
+      { text: 'x ::abc:: y', isToken: false },
+    ]);
+  });
+
+  it('returns the whole body when the campaign has no links', () => {
+    expect(tokenizeSmsBody('Plain ::text::', [])).toEqual([
+      { text: 'Plain ::text::', isToken: false },
+    ]);
+  });
+
+  it('finds a token after loose colons, as the backend gsub does', () => {
+    expect(tokenizeSmsBody('a::b ::survey::', [link])).toEqual([
+      { text: 'a::b ', isToken: false },
+      { text: '::survey::', isToken: true },
+    ]);
+  });
+
+  it('has nothing to show for an empty body', () => {
+    expect(tokenizeSmsBody('', [link])).toEqual([]);
+  });
 });
 
 describe('buildResolvedSmsBody', () => {
@@ -287,6 +338,7 @@ describe('findNonGsm7Characters', () => {
       {
         character: '\u2026',
         replacement: '...',
+        kind: NonGsm7CharacterKind.OTHER,
       },
     ]);
   });
@@ -296,6 +348,7 @@ describe('findNonGsm7Characters', () => {
       {
         character: '\u0142',
         replacement: null,
+        kind: NonGsm7CharacterKind.OTHER,
       },
     ]);
   });
@@ -306,6 +359,17 @@ describe('findNonGsm7Characters', () => {
     expect(found.map(({ replacement }) => replacement)).toEqual([' ', ' ', '']);
   });
 
+  it('says what kind of character has no glyph of its own', () => {
+    const found = findNonGsm7Characters('a\u00a0b\tc\u200bd\u2026');
+
+    expect(found.map(({ kind }) => kind)).toEqual([
+      NonGsm7CharacterKind.BLANK,
+      NonGsm7CharacterKind.TAB,
+      NonGsm7CharacterKind.ZERO_WIDTH,
+      NonGsm7CharacterKind.OTHER,
+    ]);
+  });
+
   // The backend rejects the body outright over a zero-width character, so the
   // only sendable outcome is dropping it.
   it('offers to drop a zero-width joiner, which the backend rejects', () => {
@@ -313,6 +377,7 @@ describe('findNonGsm7Characters', () => {
       {
         character: '\u200d',
         replacement: '',
+        kind: NonGsm7CharacterKind.ZERO_WIDTH,
       },
     ]);
   });
@@ -322,6 +387,7 @@ describe('findNonGsm7Characters', () => {
       {
         character: '\u0007',
         replacement: '',
+        kind: NonGsm7CharacterKind.ZERO_WIDTH,
       },
     ]);
   });
@@ -335,6 +401,7 @@ describe('findNonGsm7Characters', () => {
       {
         character: '\ud83d\ude42',
         replacement: null,
+        kind: NonGsm7CharacterKind.OTHER,
       },
     ]);
   });

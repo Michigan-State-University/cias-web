@@ -20,14 +20,11 @@ import Text from 'components/Text';
 
 import { SmsCampaignErrorList } from './SmsCampaignErrorList';
 import { SmsCampaignsTableRow } from './SmsCampaignsTableRow';
+import {
+  SMS_CAMPAIGN_ACTION_COLUMN_WIDTHS,
+  SMS_CAMPAIGN_COLUMN_HEADERS,
+} from './smsCampaignsTableColumns';
 import messages from './messages';
-
-const COLUMN_HEADERS = [
-  messages.smsCampaignKindColumnHeader,
-  messages.statusColumnHeader,
-  messages.smsCampaignDateColumnHeader,
-  messages.smsCampaignRecipientsColumnHeader,
-];
 
 export type Props = {
   interventionId: string;
@@ -72,23 +69,26 @@ export const SmsCampaignsList: FC<Props> = ({ interventionId }) => {
       <Table width="100%">
         <THead>
           <TR height={40}>
-            {COLUMN_HEADERS.map((header) => (
+            {SMS_CAMPAIGN_COLUMN_HEADERS.map((header) => (
               <TH key={header.id} padding={8}>
                 <Text textAlign="left" fontWeight="bold" fontSize={13}>
                   {formatMessage(header)}
                 </Text>
               </TH>
             ))}
-            <TH width={90} />
+            {SMS_CAMPAIGN_ACTION_COLUMN_WIDTHS.map((width) => (
+              <TH key={width} width={width} />
+            ))}
           </TR>
         </THead>
         <TBody>
-          {campaigns.map((campaign) => (
+          {campaigns.map((campaign, index) => (
             <SmsCampaignsTableRow
               key={campaign.id}
               campaign={campaign}
               cancelling={cancellingId === campaign.id}
               onCancel={handleCancel}
+              striped={index % 2 === 0}
             />
           ))}
         </TBody>

@@ -1,15 +1,15 @@
 import React, { FC, useMemo } from 'react';
-import { useIntl } from 'react-intl';
+import { MessageDescriptor, useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
 
-import player from 'assets/svg/player.svg';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import { SmsCampaignLink, SmsCampaignLinkType } from 'models/SmsCampaign';
 
 import {
   NonGsm7Character,
+  NonGsm7CharacterKind,
   SmsBodyLength,
   findNonGsm7Characters,
   replaceWithGsm7Equivalents,
@@ -22,13 +22,22 @@ import Badge from 'components/Badge';
 import Column from 'components/Column';
 import Img from 'components/Img';
 import Row from 'components/Row';
-import Text, { EllipsisText } from 'components/Text';
+import Text from 'components/Text';
 import TextArea from 'components/Input/TextArea';
 import { TextButton } from 'components/Button';
 
 import messages from './messages';
+import { SmsCampaignLinkRow } from './SmsCampaignLinkRow';
 import { WarningPanel } from './WarningPanel';
 import { TEXT_BUTTON_PROPS } from './constants';
+
+const NON_GSM7_LABEL_MESSAGES: Partial<
+  Record<NonGsm7CharacterKind, MessageDescriptor>
+> = {
+  [NonGsm7CharacterKind.TAB]: messages.smsCampaignNonGsm7TabLabel,
+  [NonGsm7CharacterKind.BLANK]: messages.smsCampaignNonGsm7SpaceLabel,
+  [NonGsm7CharacterKind.ZERO_WIDTH]: messages.smsCampaignNonGsm7ZeroWidthLabel,
+};
 
 export type Props = {
   label: string;
@@ -84,16 +93,9 @@ export const SmsCampaignBodyField: FC<Props> = ({
   const hasUnfixableNonGsm7 =
     fixableCharacters.length < nonGsm7Characters.length;
 
-  // Nobody can spot a non-breaking space in a textarea, so what it is replaced
-  // with is what names it.
-  const characterLabel = ({ character, replacement }: NonGsm7Character) => {
-    if (character === '\t')
-      return formatMessage(messages.smsCampaignNonGsm7TabLabel);
-    if (replacement === ' ' || replacement === '\n')
-      return formatMessage(messages.smsCampaignNonGsm7SpaceLabel);
-    if (replacement === '')
-      return formatMessage(messages.smsCampaignNonGsm7ZeroWidthLabel);
-    return character;
+  const characterLabel = ({ character, kind }: NonGsm7Character) => {
+    const kindMessage = NON_GSM7_LABEL_MESSAGES[kind];
+    return kindMessage ? formatMessage(kindMessage) : character;
   };
 
   const counterExceeded = counter.lengthExceeded || counter.segmentsExceeded;
@@ -209,35 +211,23 @@ export const SmsCampaignBodyField: FC<Props> = ({
 
       {!!links.length && (
         <Column gap={4} data-cy={`${dataCyPrefix}-links`}>
-          {links.map(({ url, variable, linkType }) => (
-            <Row
-              key={variable}
-              justify="between"
-              align="center"
-              borderTop="1px solid"
-              borderColor={colors.grey}
-              py={4}
-            >
-              <Row align="center" gap={5}>
-                {linkType === SmsCampaignLinkType.VIDEO && <Img src={player} />}
-                <EllipsisText width={240} text={url} fontSize={13} />
-              </Row>
-              <Row align="center" gap={8}>
-                <Badge color={colors.jungleGreen} bgWithOpacity>
-                  <Text color={colors.jungleGreen}>{`::${variable}::`}</Text>
-                </Badge>
+          {links.map((link) => (
+            <SmsCampaignLinkRow
+              key={link.variable}
+              link={link}
+              action={
                 <TextButton
                   buttonProps={{
                     ...TEXT_BUTTON_PROPS,
-                    'data-cy': `${dataCyPrefix}-remove-link-${variable}`,
+                    'data-cy': `${dataCyPrefix}-remove-link-${link.variable}`,
                   }}
-                  onClick={() => handleRemoveLink(variable)}
+                  onClick={() => handleRemoveLink(link.variable)}
                   disabled={disabled}
                 >
                   <Img src={binNoBg} alt="" />
                 </TextButton>
-              </Row>
-            </Row>
+              }
+            />
           ))}
         </Column>
       )}

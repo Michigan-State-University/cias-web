@@ -38,6 +38,8 @@ describe('cancelSmsCampaign saga', () => {
           failed_count: 0,
           recipients_count: null,
           scheduled_at_provisional: false,
+          body: 'Campaign body',
+          links: [],
         },
       },
     },
@@ -82,6 +84,8 @@ describe('cancelSmsCampaign saga', () => {
           failedCount: 0,
           recipientsCount: null,
           scheduledAtProvisional: false,
+          body: 'Campaign body',
+          links: [],
         }),
       )
       .call(toast.success, formatMessage(messages.cancelSmsCampaignSuccess))

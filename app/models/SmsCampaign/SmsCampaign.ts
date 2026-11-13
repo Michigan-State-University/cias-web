@@ -28,6 +28,8 @@ export type SmsCampaign = {
   id: string;
   kind: SmsCampaignKind;
   status: SmsCampaignStatus;
+  body: string;
+  links: SmsCampaignLink[];
   scheduledAt: Nullable<string>;
   sentAt: Nullable<string>;
   acceptedCount: number;

@@ -665,6 +665,18 @@ export default defineMessages({
     id: `${scope}.smsCampaignRecipientsResolvedAtSendTime`,
     defaultMessage: 'Decided when it is sent',
   },
+  smsCampaignPreviewHeader: {
+    id: `${scope}.smsCampaignPreviewHeader`,
+    defaultMessage: 'Message',
+  },
+  smsCampaignShowPreviewLabel: {
+    id: `${scope}.smsCampaignShowPreviewLabel`,
+    defaultMessage: 'Show the message',
+  },
+  smsCampaignHidePreviewLabel: {
+    id: `${scope}.smsCampaignHidePreviewLabel`,
+    defaultMessage: 'Hide the message',
+  },
   smsCampaignMetaError: {
     id: `${scope}.smsCampaignMetaError`,
     defaultMessage: 'The message settings could not be loaded.',
