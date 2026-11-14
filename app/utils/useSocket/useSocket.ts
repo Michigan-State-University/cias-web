@@ -46,17 +46,39 @@ export const useSocket = <
 
   const cable = useContext(SocketContext);
   const [channel, setChannel] = useState<TChannel | null>();
+  const [connected, setConnected] = useState(false);
 
   const memoizedParams = useDeepObjectMemo(socketConnectionParams);
 
-  const subscribe = useCallback(async () => {
+  const subscribe = useCallback(() => {
     if (!channel && cable && !suspend) {
       try {
-        const newChannel = (await cable.subscribeTo(
+        const newChannel = cable.subscribeTo(
           channelName,
           memoizedParams,
-        )) as TChannel;
+        ) as TChannel;
+        // Since @anycable/core 0.5.0 `subscribeTo` is synchronous and hands back
+        // a channel the server has not confirmed yet. Publish it straight away
+        // rather than awaiting the ack: callers reach it through
+        // `channel?.perform(...)`, so while this hook returns undefined their
+        // actions are dropped silently, and the library itself queues a
+        // `perform` until the subscription is acknowledged (Cable#_perform
+        // awaits `subscription.pending('subscribed')`).
         newChannel.on(LISTEN_SOCKET_MESSAGE_EVENT_NAME, messageListener);
+
+        // `channel.state` is read once per render, so the flag has to live in
+        // React state for a transition to reach the UI. The immediate call also
+        // covers the case the listeners cannot see: `subscribeTo` emits
+        // `connect` synchronously when the identifier is already subscribed,
+        // before there is anything listening.
+        const syncConnected = () =>
+          setConnected(newChannel.state === 'connected');
+
+        newChannel.on('connect', syncConnected);
+        newChannel.on('disconnect', syncConnected);
+        newChannel.on('close', syncConnected);
+        syncConnected();
+
         setChannel(newChannel);
       } catch {
         // Intentionally swallowed — WebSocket disconnect errors are non-actionable
@@ -67,8 +89,8 @@ export const useSocket = <
   const unsubscribe = useCallback(() => {
     if (channel) {
       channel.disconnect();
-      channel.close();
       setChannel(null);
+      setConnected(false);
       if (onUnsubscribe) {
         onUnsubscribe();
       }
@@ -94,9 +116,9 @@ export const useSocket = <
 
     return {
       perform,
-      isConnected: channel.state === 'connected',
+      isConnected: connected,
     };
-  }, [perform]);
+  }, [perform, connected]);
 };
 
 export default useSocket;

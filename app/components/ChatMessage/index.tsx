@@ -58,6 +58,7 @@ export const ChatMessage = ({
         </Box>
       )}
       <MessageContainer
+        data-cy="chat-message"
         bg={isMine ? themeColors.primary : themeColors.highlight}
         padding={12}
         borderRadius={8}

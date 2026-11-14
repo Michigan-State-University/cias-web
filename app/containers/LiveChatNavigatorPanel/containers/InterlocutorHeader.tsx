@@ -60,7 +60,7 @@ export const InterlocutorHeader = () => {
           )}
         </Box>
         {currentScreenTitle && (
-          <Box textAlign="left" mt={8}>
+          <Box textAlign="left" mt={8} data-cy="interlocutor-current-screen">
             <EllipsisText
               fontSize={12}
               color={colors.bluewood}

@@ -57,6 +57,7 @@ export const ChatMessageInput = ({
     <Box>
       <Box width="100%" height="46px" position="relative">
         <StyledTextArea
+          data-cy="chat-message-input"
           placeholder={formatMessage(i18nMessages.inputPlaceholder)}
           onChange={handleChange}
           value={value}
@@ -71,6 +72,7 @@ export const ChatMessageInput = ({
           transform="translate(-50%, -50%)"
         >
           <ImageButton
+            data-cy="chat-message-send"
             onClick={onSend}
             src={AirplaneIcon}
             title={formatMessage(i18nMessages.inputSendIconTitle)}

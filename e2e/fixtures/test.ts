@@ -2,8 +2,32 @@ import { test as base, expect } from '@playwright/test';
 import path from 'path';
 import fs from 'fs';
 
+export type SeededCredentials = {
+  password: string;
+  verificationCode: string;
+};
+
 // Extend the base test with worker-specific authentication and token management
-export const test = base.extend<{}, { workerStorageState: string }>({
+export const test = base.extend<
+  {},
+  { workerStorageState: string; seededCredentials: SeededCredentials }
+>({
+  seededCredentials: [
+    async ({}, use) => {
+      const password = process.env.E2E_ADMIN_PASSWORD;
+      const verificationCode = process.env.E2E_VERIFICATION_CODE;
+
+      if (!password || !verificationCode) {
+        throw new Error(
+          'E2E_ADMIN_PASSWORD and E2E_VERIFICATION_CODE environment variables must be set',
+        );
+      }
+
+      await use({ password, verificationCode });
+    },
+    { scope: 'worker' },
+  ],
+
   // Worker-scoped fixture that determines which auth file to use
   workerStorageState: [
     async ({}, use, workerInfo) => {

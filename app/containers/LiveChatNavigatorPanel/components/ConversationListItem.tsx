@@ -51,6 +51,7 @@ export const ConversationListItem = ({
   return (
     <ConversationInfoBox
       id={conversationId}
+      dataCy="conversation-list-item"
       active={opened}
       highlighted={markUnread}
       archived={!!archivedAt}

@@ -32,6 +32,7 @@ const NavigatorAvailabilityPanel = () => {
     <Row align="stretch" flexShrink={0} gap={24}>
       <Switch
         id="navigator-availability-switch"
+        dataCy="navigator-availability-switch"
         checked={!online}
         onToggle={handleToggle}
         labelPosition={LabelPosition.Right}

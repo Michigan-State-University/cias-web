@@ -29,6 +29,8 @@ export type Props = {
   title: string;
   content: string;
   onClick?: HTMLDivElement['onclick'];
+  /** Test hook placed on the container element. */
+  dataCy?: string;
 };
 
 const InfoBox = ({
@@ -43,6 +45,7 @@ const InfoBox = ({
   title,
   content,
   onClick,
+  dataCy,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -51,7 +54,7 @@ const InfoBox = ({
     : REGULAR_TEXT_OPACITY;
 
   return (
-    <InfoBoxContainer active={active} onClick={onClick}>
+    <InfoBoxContainer active={active} onClick={onClick} data-cy={dataCy}>
       <Column flexShrink={0} width={ICON_WIDTH} justify="center">
         {icon}
       </Column>

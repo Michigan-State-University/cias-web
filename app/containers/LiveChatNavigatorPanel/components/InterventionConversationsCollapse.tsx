@@ -54,7 +54,11 @@ const InterventionConversationCollapse = ({
   }, [hasUnreadConversations, interventionNameWidth]);
 
   return (
-    <Box borderBottom={`1px solid ${colors.linkWater}`} borderRadius="0">
+    <Box
+      data-cy="intervention-conversations-collapse"
+      borderBottom={`1px solid ${colors.linkWater}`}
+      borderRadius="0"
+    >
       <Collapse
         isOpened={openCollapsible}
         onToggle={toggleCollapsible}

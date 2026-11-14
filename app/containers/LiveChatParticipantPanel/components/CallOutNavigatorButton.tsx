@@ -19,6 +19,7 @@ const CallOutNavigatorButton = ({ disabled, ...props }: Props) => {
 
   return (
     <ImageButton
+      data-cy="call-out-navigator"
       src={MessageIcon}
       title={formatMessage(messages.callOutTheNavigator)}
       display="flex"
