@@ -317,6 +317,7 @@ describe('verifyQRCode saga', () => {
   const action = verifyQRCodeRequest('<PtID>Z394</PtID>');
   // The saga lives in plain JS, so TS infers its parameters as `never`.
   const saga = verifyQRCode as (...args: any[]) => any;
+  const userSession = { id: 'user-session-1', sessionId: 'session-1' };
 
   it('posts the label and stores the anonymized record', () => {
     const response = {
@@ -336,9 +337,13 @@ describe('verifyQRCode saga', () => {
     };
 
     return expectSaga(saga, action)
-      .provide([[matchers.call.fn(axios.post), response]])
+      .provide([
+        [matchers.select.like({}), userSession],
+        [matchers.call.fn(axios.post), response],
+      ])
       .call(axios.post, '/v1/henry_ford/verify_by_code', {
         hfhs_patient_data: { barcode: '<PtID>Z394</PtID>' },
+        session_id: 'session-1',
       })
       .put(setHfhsPatientDetailAnonymized(anonymizedPatient))
       .put(verifyQRCodeSuccess())
@@ -349,7 +354,10 @@ describe('verifyQRCode saga', () => {
     const error = new Error('422');
 
     return expectSaga(saga, action)
-      .provide([[matchers.call.fn(axios.post), throwError(error)]])
+      .provide([
+        [matchers.select.like({}), userSession],
+        [matchers.call.fn(axios.post), throwError(error)],
+      ])
       .put(verifyQRCodeError(error))
       .run();
   });
