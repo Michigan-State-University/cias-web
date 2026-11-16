@@ -215,10 +215,6 @@ export default defineMessages({
     id: `${scope}.confirmPatientData`,
     defaultMessage: 'Please confirm the patient information',
   },
-  continue: {
-    id: `${scope}.continue`,
-    defaultMessage: 'Continue',
-  },
   rescan: {
     id: `${scope}.rescan`,
     defaultMessage: 'Rescan QR Code',

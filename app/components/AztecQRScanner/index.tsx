@@ -16,6 +16,7 @@ import Text from 'components/Text';
 
 import { AztecQRScannerProps } from './types';
 import messages from './messages';
+import { StyledWebcam } from './styled';
 
 const TIME_BETWEEN_SCANS_MS = 500;
 const TIME_BETWEEN_DECODING_ATTEMPTS_MS = 150;
@@ -27,6 +28,27 @@ const videoConstraints: MediaTrackConstraints = {
   facingMode: 'environment', // Use rear camera on mobile
   width: { ideal: 1280 },
   height: { ideal: 720 },
+};
+
+// Browsers report the failure kind in `DOMException.name`; `message` is
+// free-form text that differs between engines. react-webcam reports a missing
+// getUserMedia API as a plain string.
+const getCameraErrorMessage = (error: Error | string) => {
+  if (typeof error === 'string') return messages.cameraNotFoundError;
+
+  switch (error.name) {
+    case 'NotFoundError':
+    case 'DevicesNotFoundError':
+    case 'OverconstrainedError':
+    case 'ConstraintNotSatisfiedError':
+      return messages.cameraNotFoundError;
+    case 'NotReadableError':
+    case 'TrackStartError':
+    case 'AbortError':
+      return messages.cameraInUseError;
+    default:
+      return messages.cameraPermissionError;
+  }
 };
 
 const AztecQRScanner: React.FC<AztecQRScannerProps> = ({
@@ -45,6 +67,18 @@ const AztecQRScanner: React.FC<AztecQRScannerProps> = ({
   const codeReaderRef = useRef<Nullable<BrowserMultiFormatReader>>(null);
   const hintTimeoutRef = useRef<Nullable<ReturnType<typeof setTimeout>>>(null);
   const onScanRef = useRef(onScan);
+  // Guards against a decode callback that is already queued when we stop.
+  const hasReportedRef = useRef(false);
+  const launchButtonRef = useRef<HTMLButtonElement>(null);
+  const stopButtonRef = useRef<HTMLButtonElement>(null);
+  const pendingFocusRef = useRef<Nullable<'launch' | 'stop'>>(null);
+
+  useEffect(() => {
+    const target = pendingFocusRef.current;
+    if (!target) return;
+    pendingFocusRef.current = null;
+    (target === 'stop' ? stopButtonRef : launchButtonRef).current?.focus();
+  }, [isCameraActive]);
 
   useEffect(() => {
     onScanRef.current = onScan;
@@ -92,12 +126,15 @@ const AztecQRScanner: React.FC<AztecQRScannerProps> = ({
   );
 
   const handleStartCamera = useCallback(() => {
+    hasReportedRef.current = false;
+    pendingFocusRef.current = 'stop';
     setScanError(null);
     setShowHint(false);
     setIsCameraActive(true);
   }, []);
 
   const handleStopCamera = useCallback(() => {
+    pendingFocusRef.current = 'launch';
     stopCamera();
     setScanError(null);
   }, [stopCamera]);
@@ -117,8 +154,9 @@ const AztecQRScanner: React.FC<AztecQRScannerProps> = ({
     getCodeReader().decodeFromVideoElementContinuously(
       video,
       (result: Nullable<Result>) => {
-        if (!result) return;
+        if (!result || hasReportedRef.current) return;
 
+        hasReportedRef.current = true;
         stopCamera();
         onScanRef.current(result.getText());
       },
@@ -127,28 +165,13 @@ const AztecQRScanner: React.FC<AztecQRScannerProps> = ({
 
   const handleUserMediaError = useCallback(
     (error: Error | string) => {
-      const errorMessage =
-        error instanceof Error ? error.message : String(error);
-      let userFriendlyMessage = formatMessage(messages.cameraPermissionError);
-
-      if (
-        errorMessage.includes('Permission denied') ||
-        errorMessage.includes('NotAllowedError')
-      ) {
-        userFriendlyMessage = formatMessage(messages.cameraPermissionError);
-      } else if (
-        errorMessage.includes('NotFoundError') ||
-        errorMessage.includes('no device')
-      ) {
-        userFriendlyMessage = formatMessage(messages.cameraNotFoundError);
-      } else if (errorMessage.includes('NotReadableError')) {
-        userFriendlyMessage = formatMessage(messages.cameraInUseError);
-      }
-
-      setScanError(userFriendlyMessage);
+      setScanError(formatMessage(getCameraErrorMessage(error)));
+      pendingFocusRef.current = 'launch';
       stopCamera();
 
-      onError(new Error(userFriendlyMessage));
+      if (onError) {
+        onError(error instanceof Error ? error : new Error(String(error)));
+      }
     },
     [formatMessage, onError, stopCamera],
   );
@@ -157,7 +180,12 @@ const AztecQRScanner: React.FC<AztecQRScannerProps> = ({
     <Box>
       {!isCameraActive && (
         <Box mb={20}>
-          <Button onClick={handleStartCamera} disabled={disabled} width="100%">
+          <Button
+            ref={launchButtonRef}
+            onClick={handleStartCamera}
+            disabled={disabled}
+            width="100%"
+          >
             {formatMessage(messages.startCameraButton)}
           </Button>
         </Box>
@@ -166,36 +194,36 @@ const AztecQRScanner: React.FC<AztecQRScannerProps> = ({
       {isCameraActive && (
         <Box>
           <Box mb={20}>
-            <Webcam
+            <StyledWebcam
               ref={webcamRef}
               audio={false}
               videoConstraints={videoConstraints}
               onUserMedia={handleUserMedia}
               onUserMediaError={handleUserMediaError}
-              style={{
-                width: '100%',
-                maxWidth: '640px',
-                height: 'auto',
-                border: `2px solid ${colors.linkWater}`,
-                borderRadius: '8px',
-              }}
             />
           </Box>
 
-          {isScanning && (
-            <Text mb={10} color={colors.grey}>
-              {formatMessage(messages.scanningInProgress)}
-            </Text>
-          )}
+          <Box aria-live="polite">
+            {isScanning && (
+              <Text mb={10} color={colors.grey}>
+                {formatMessage(messages.scanningInProgress)}
+              </Text>
+            )}
 
-          {showHint && (
-            <Text mb={10} color={colors.grey}>
-              {formatMessage(messages.scanTakingTooLong)}
-            </Text>
-          )}
+            {showHint && (
+              <Text mb={10} color={colors.grey}>
+                {formatMessage(messages.scanTakingTooLong)}
+              </Text>
+            )}
+          </Box>
 
           <Box>
-            <Button onClick={handleStopCamera} inverted width="100%">
+            <Button
+              ref={stopButtonRef}
+              onClick={handleStopCamera}
+              inverted
+              width="100%"
+            >
               {formatMessage(messages.stopCameraButton)}
             </Button>
           </Box>
@@ -203,7 +231,7 @@ const AztecQRScanner: React.FC<AztecQRScannerProps> = ({
       )}
 
       {scanError && (
-        <Text mt={20} color={themeColors.warning}>
+        <Text mt={20} color={themeColors.warning} role="alert">
           {scanError}
         </Text>
       )}

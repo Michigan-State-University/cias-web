@@ -442,14 +442,11 @@ function* verifyPatientData({ payload }) {
   }
 }
 
-function* verifyQRCode({ payload: { decodedString } }) {
-  const userSession = yield select(makeSelectUserSession());
-  if (!userSession) return;
-
+export function* verifyQRCode({ payload: { decodedString } }) {
   const requestUrl = `/v1/henry_ford/verify_by_code`;
 
   try {
-    const { data } = yield axios.post(requestUrl, {
+    const { data } = yield call(axios.post, requestUrl, {
       hfhs_patient_data: { barcode: decodedString },
     });
 

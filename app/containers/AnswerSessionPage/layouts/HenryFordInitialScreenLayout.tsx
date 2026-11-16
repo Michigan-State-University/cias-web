@@ -7,13 +7,19 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 import { Col, Container, Row, ScreenClassMap } from 'react-grid-system';
-import { Form, Formik, FormikConfig, FormikProps } from 'formik';
+import {
+  Form,
+  Formik,
+  FormikConfig,
+  FormikProps,
+  useFormikContext,
+} from 'formik';
 import * as Yup from 'yup';
 import { IntlShape } from 'react-intl/src/types';
 import { CountryCode } from 'libphonenumber-js/types';
 import { useSelector } from 'react-redux';
 
-import { colors, themeColors } from 'theme';
+import { colors, fontSizes, themeColors } from 'theme';
 
 import phoneTypesMessages from 'global/i18n/phoneTypesMessages';
 import validatorsMessages from 'global/i18n/validatorsMessages';
@@ -51,10 +57,10 @@ import {
 import Tabs from 'components/Tabs';
 import AztecQRScanner from 'components/AztecQRScanner/Loadable';
 
-import { makeSelectVerifyPatientDataState } from '../selectors';
 import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
 import { ActionButtons } from '../components/ActionButtons';
 import { ApiErrorMessage } from '../components/ApiErrorMessage';
+import answerSessionPageMessages from '../messages';
 import messages from './messages';
 
 const inputStyles = {
@@ -100,6 +106,22 @@ enum PatientDataFormError {
   BASE_DATA_VERIFICATION,
   MRN_VERIFICATION,
 }
+
+// Tabs unmounts the inactive pane, so the manual form would lose what the
+// participant typed on a tab round-trip. Mirror the values into a ref owned by
+// the layout and seed the form from it on remount.
+const KeepDraftValues = ({
+  draftRef,
+}: {
+  draftRef: MutableRefObject<Nullable<PatientDataFormValues>>;
+}) => {
+  const { values } = useFormikContext<PatientDataFormValues>();
+  useEffect(() => {
+    // eslint-disable-next-line no-param-reassign
+    draftRef.current = values;
+  }, [values]);
+  return null;
+};
 
 const emptyInitialValues: PatientDataFormValues = {
   firstName: '',
@@ -158,13 +180,33 @@ const HenryFordInitialScreenLayout = ({
   const [activeTab, setActiveTab] = useState(
     formatMessage(messages.enterManuallyTab),
   );
-  const { loading: manualVerifying } = useSelector(
-    makeSelectVerifyPatientDataState(),
+
+  const isVerifying = verifying || qrVerifying;
+
+  // CIAS-4008 AC: Enter Manually stays usable after a scan.
+  const isManualInputDisabled = disabled;
+
+  // CIAS-4006 AC: no switching tabs while a verification is in flight.
+  const handleTabChange = (tab: string) => {
+    if (!isVerifying) setActiveTab(tab);
+  };
+
+  // `verifyingError` is shared by both paths; show it on the confirm screen
+  // only when it came from the confirm screen's own Continue.
+  const [qrContinueSubmitted, setQrContinueSubmitted] = useState(false);
+
+  const manualDraftRef = useRef<Nullable<PatientDataFormValues>>(null);
+
+  const isConfirmScreenShown = Boolean(
+    showPatientDataDisplay && hfhsPatientDetailAnonymized,
   );
+  const confirmHeadingRef = useRef<HTMLElement>(null);
 
-  const isVerifying = verifying || manualVerifying || qrVerifying;
-
-  const isManualInputDisabled = disabled || showPatientDataDisplay;
+  // The scanner unmounts when the confirm screen replaces it; move focus to
+  // the confirm heading instead of letting it drop to <body>.
+  useEffect(() => {
+    if (isConfirmScreenShown) confirmHeadingRef.current?.focus();
+  }, [isConfirmScreenShown]);
 
   const columnClassMap: ScreenClassMap<number> = {
     xs: 12,
@@ -186,8 +228,8 @@ const HenryFordInitialScreenLayout = ({
       })),
     );
 
-  const initialValues: PatientDataFormValues = useMemo(() => {
-    if (!hfhsPatientDetail) return emptyInitialValues;
+  const detailInitialValues: Nullable<PatientDataFormValues> = useMemo(() => {
+    if (!hfhsPatientDetail) return null;
     const { sex, dob, phoneNumber, phoneType, ...restValues } =
       hfhsPatientDetail;
 
@@ -211,10 +253,16 @@ const HenryFordInitialScreenLayout = ({
     };
   }, [hfhsPatientDetail]);
 
+  // Read on every render (not memoized) so a remounted manual pane picks up
+  // the draft kept by `KeepDraftValues`.
+  const initialValues: PatientDataFormValues =
+    detailInitialValues ?? manualDraftRef.current ?? emptyInitialValues;
+
   const onSubmit: FormikConfig<PatientDataFormValues>['onSubmit'] = (
     values,
   ) => {
     if (!onSubmitPatientData) return;
+    setQrContinueSubmitted(false);
     const { sexOption, dobDate, phoneTypeOption, iso, number, ...restValues } =
       values;
 
@@ -266,15 +314,10 @@ const HenryFordInitialScreenLayout = ({
     }
   }, [verifyingError]);
 
-  // Handle QR scan success
   const handleQRScan = (decodedText: string) => {
     if (onQRCodeScan) {
       onQRCodeScan(decodedText);
     }
-  };
-
-  const handleQRScanError = () => {
-    // Error handling is done by the QR scanner component
   };
 
   return (
@@ -283,7 +326,7 @@ const HenryFordInitialScreenLayout = ({
       <Tabs
         controlled
         controlledTabActive={activeTab}
-        controlledSetTabActive={setActiveTab}
+        controlledSetTabActive={handleTabChange}
         emphasizeActiveLink
         withBottomBorder
       >
@@ -297,6 +340,7 @@ const HenryFordInitialScreenLayout = ({
           >
             {({ handleSubmit, isValid }) => (
               <Form autoComplete="off">
+                <KeepDraftValues draftRef={manualDraftRef} />
                 <Box>
                   <Container fluid style={{ padding: 0 }}>
                     <Row gutterWidth={24} style={{ rowGap: '24px' }}>
@@ -455,7 +499,7 @@ const HenryFordInitialScreenLayout = ({
                       continueButtonDisabled={
                         !isValid || continueButtonDisabled || isVerifying
                       }
-                      continueButtonLoading={manualVerifying}
+                      continueButtonLoading={verifying}
                       onContinueClick={handleSubmit}
                     />
                   </Box>
@@ -466,12 +510,18 @@ const HenryFordInitialScreenLayout = ({
         </div>
         {/* @ts-ignore - Tabs component expects children with label prop */}
         <div label={formatMessage(messages.scanQRCodeTab)}>
-          {showPatientDataDisplay && hfhsPatientDetailAnonymized ? (
-            <Box>
+          {isConfirmScreenShown && hfhsPatientDetailAnonymized ? (
+            <Box data-private>
               <Container fluid style={{ padding: 0 }}>
                 <Row gutterWidth={24} style={{ rowGap: '24px' }}>
                   <Col xs={12}>
-                    <Text fontSize="18px" fontWeight="bold" mb={16}>
+                    <Text
+                      ref={confirmHeadingRef}
+                      tabIndex={-1}
+                      fontSize="18px"
+                      fontWeight="bold"
+                      mb={16}
+                    >
                       {formatMessage(messages.confirmPatientData)}
                     </Text>
                   </Col>
@@ -532,12 +582,13 @@ const HenryFordInitialScreenLayout = ({
                           onSubmitPatientData &&
                           hfhsPatientDetailAnonymized
                         ) {
+                          setQrContinueSubmitted(true);
                           onSubmitPatientData({
                             id: hfhsPatientDetailAnonymized.id,
                           });
                         }
                       }}
-                      loading={qrVerifying}
+                      loading={verifying}
                       disabled={
                         !hfhsPatientDetailAnonymized ||
                         continueButtonDisabled ||
@@ -545,13 +596,14 @@ const HenryFordInitialScreenLayout = ({
                       }
                       width="100%"
                     >
-                      {formatMessage(messages.continue)}
+                      {formatMessage(answerSessionPageMessages.nextQuestion)}
                     </Button>
                   </Col>
                   <Col xs={12} sm={forceMobile ? 12 : 6}>
                     <Button
                       inverted
                       onClick={() => {
+                        setQrContinueSubmitted(false);
                         if (onTogglePatientDataDisplay) {
                           onTogglePatientDataDisplay();
                         }
@@ -564,32 +616,40 @@ const HenryFordInitialScreenLayout = ({
                   </Col>
                 </Row>
               </Container>
+              <Box role="alert">
+                {qrContinueSubmitted && verifyingError && (
+                  <ApiErrorMessage error={verifyingError} />
+                )}
+              </Box>
             </Box>
           ) : (
             <>
               <Text mb={16}>{formatMessage(messages.scanInstructions)}</Text>
               <AztecQRScanner
                 onScan={handleQRScan}
-                onError={handleQRScanError}
                 disabled={disabled || isVerifying || showPatientDataDisplay}
               />
-              {qrVerifyingError && (
-                <>
-                  <ApiErrorMessage error={qrVerifyingError} />
-                  <Box mt={12}>
-                    <Text fontSize="sm" color="text.secondary">
-                      {formatMessage(messages.qrScanFailureHint)}
+              <Box role="alert">
+                {qrVerifyingError && (
+                  <>
+                    <ApiErrorMessage error={qrVerifyingError} />
+                    <Box mt={12}>
+                      <Text fontSize={fontSizes.small} color={colors.grey}>
+                        {formatMessage(messages.qrScanFailureHint)}
+                      </Text>
+                    </Box>
+                  </>
+                )}
+              </Box>
+              <Box aria-live="polite">
+                {qrVerifying && (
+                  <Box mt={20}>
+                    <Text fontStyle="italic">
+                      {formatMessage(messages.verifyingQRCode)}
                     </Text>
                   </Box>
-                </>
-              )}
-              {qrVerifying && (
-                <Box mt={20}>
-                  <Text fontStyle="italic">
-                    {formatMessage(messages.verifyingQRCode)}
-                  </Text>
-                </Box>
-              )}
+                )}
+              </Box>
             </>
           )}
         </div>

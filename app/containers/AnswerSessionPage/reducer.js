@@ -315,6 +315,7 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case SET_HFHS_PATIENT_DETAIL_ANONYMIZED: {
         draft.hfhsPatientDetailAnonymized = payload.hfhsPatientDetailAnonymized;
+        draft.verifyQRCodeError = null;
         break;
       }
 

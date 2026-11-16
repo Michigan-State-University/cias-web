@@ -15,6 +15,13 @@ import messages from '../messages';
 const mockStopContinuousDecode = jest.fn();
 const mockReset = jest.fn();
 const mockDecodeContinuously = jest.fn();
+let mockUserMediaError: Error | string = new Error('Permission denied');
+
+const domError = (name: string, message: string) => {
+  const error = new Error(message);
+  error.name = name;
+  return error;
+};
 
 jest.mock('@zxing/library', () => ({
   BrowserMultiFormatReader: jest.fn().mockImplementation(() => ({
@@ -59,8 +66,7 @@ jest.mock('react-webcam', () => {
           key: 'err',
           type: 'button',
           'data-testid': 'emit-user-media-error',
-          onClick: () =>
-            onUserMediaError(new Error('NotAllowedError: Permission denied')),
+          onClick: () => onUserMediaError(mockUserMediaError),
         }),
       ]);
     },
@@ -89,6 +95,11 @@ const emitStreamReady = (getByTestId: any) =>
 const decodedResult = (text: string) => ({ getText: () => text });
 
 describe('<AztecQRScanner />', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockUserMediaError = domError('NotAllowedError', 'Permission denied');
+  });
+
   it('does not open the camera until asked to', () => {
     const { queryByTestId, getByText } = renderScanner();
 
@@ -111,7 +122,7 @@ describe('<AztecQRScanner />', () => {
   });
 
   it('reports a decoded code once and stops scanning', () => {
-    const { getByText, getByTestId, onScan } = renderScanner();
+    const { getByText, getByTestId, queryByTestId, onScan } = renderScanner();
 
     startCamera(getByText);
     emitStreamReady(getByTestId);
@@ -119,9 +130,14 @@ describe('<AztecQRScanner />', () => {
     const onDecode = mockDecodeContinuously.mock.calls[0][1];
     act(() => onDecode(decodedResult('<PtID>Z394</PtID>')));
 
+    // A frame already queued when we stopped must not report a second time.
+    act(() => onDecode(decodedResult('<PtID>Z394</PtID>')));
+
     expect(onScan).toHaveBeenCalledTimes(1);
     expect(onScan).toHaveBeenCalledWith('<PtID>Z394</PtID>');
     expect(mockStopContinuousDecode).toHaveBeenCalled();
+    // The webcam (and with it the MediaStream) is unmounted.
+    expect(queryByTestId('emit-user-media')).not.toBeInTheDocument();
     expect(
       getByText(messages.startCameraButton.defaultMessage),
     ).toBeInTheDocument();
@@ -154,14 +170,74 @@ describe('<AztecQRScanner />', () => {
     expect(onError).toHaveBeenCalledTimes(1);
   });
 
-  it('stops decoding when the camera is closed by hand', () => {
-    const { getByText, getByTestId } = renderScanner();
+  it.each([
+    ['NotFoundError', 'Requested device not found', 'cameraNotFoundError'],
+    ['OverconstrainedError', '', 'cameraNotFoundError'],
+    ['NotReadableError', 'Could not start video source', 'cameraInUseError'],
+    ['AbortError', 'Starting videoinput failed', 'cameraInUseError'],
+    ['NotAllowedError', 'Permission denied', 'cameraPermissionError'],
+    ['SecurityError', 'The request is not allowed', 'cameraPermissionError'],
+  ] as const)(
+    'classifies a %s camera error by its name',
+    (name, message, expectedMessageKey) => {
+      mockUserMediaError = domError(name, message);
+      const { getByText, getByTestId, onError } = renderScanner();
+
+      startCamera(getByText);
+      fireEvent.click(getByTestId('emit-user-media-error'));
+
+      expect(
+        getByText(messages[expectedMessageKey].defaultMessage),
+      ).toBeInTheDocument();
+      expect(onError).toHaveBeenCalledTimes(1);
+    },
+  );
+
+  it('treats an unsupported getUserMedia as no camera', () => {
+    mockUserMediaError = 'getUserMedia not supported';
+    const { getByText, getByTestId, onError } = renderScanner();
+
+    startCamera(getByText);
+    fireEvent.click(getByTestId('emit-user-media-error'));
+
+    expect(
+      getByText(messages.cameraNotFoundError.defaultMessage),
+    ).toBeInTheDocument();
+    expect(onError).toHaveBeenCalledWith(expect.any(Error));
+  });
+
+  it('releases the camera when closed by hand', () => {
+    const { getByText, getByTestId, queryByTestId } = renderScanner();
 
     startCamera(getByText);
     emitStreamReady(getByTestId);
     fireEvent.click(getByText(messages.stopCameraButton.defaultMessage));
 
     expect(mockStopContinuousDecode).toHaveBeenCalled();
+    expect(queryByTestId('emit-user-media')).not.toBeInTheDocument();
+  });
+
+  it('releases the camera after a permission error', () => {
+    const { getByText, getByTestId, queryByTestId } = renderScanner();
+
+    startCamera(getByText);
+    fireEvent.click(getByTestId('emit-user-media-error'));
+
+    expect(queryByTestId('emit-user-media')).not.toBeInTheDocument();
+  });
+
+  it('scans again after a relaunch', () => {
+    const { getByText, getByTestId, onScan } = renderScanner();
+
+    startCamera(getByText);
+    emitStreamReady(getByTestId);
+    act(() => mockDecodeContinuously.mock.calls[0][1](decodedResult('A')));
+
+    startCamera(getByText);
+    emitStreamReady(getByTestId);
+    act(() => mockDecodeContinuously.mock.calls[1][1](decodedResult('B')));
+
+    expect(onScan.mock.calls).toEqual([['A'], ['B']]);
   });
 
   it('points at manual entry once scanning drags on', () => {
@@ -195,6 +271,28 @@ describe('<AztecQRScanner />', () => {
     unmount();
 
     expect(mockReset).toHaveBeenCalled();
+  });
+
+  it('keeps keyboard focus on the Launch/Stop controls', () => {
+    const { getByText } = renderScanner();
+
+    startCamera(getByText);
+    expect(getByText(messages.stopCameraButton.defaultMessage)).toHaveFocus();
+
+    fireEvent.click(getByText(messages.stopCameraButton.defaultMessage));
+    expect(getByText(messages.startCameraButton.defaultMessage)).toHaveFocus();
+  });
+
+  it('returns focus to Launch after a camera error', () => {
+    const { getByText, getByTestId } = renderScanner();
+
+    startCamera(getByText);
+    fireEvent.click(getByTestId('emit-user-media-error'));
+
+    expect(getByText(messages.startCameraButton.defaultMessage)).toHaveFocus();
+    expect(
+      getByText(messages.cameraPermissionError.defaultMessage),
+    ).toHaveAttribute('role', 'alert');
   });
 
   it('cannot be started while disabled', () => {

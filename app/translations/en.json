@@ -555,7 +555,6 @@
   "app.containers.Answer.layouts.closeTab": "Close Tab",
   "app.containers.Answer.layouts.completeSession": "Complete Session",
   "app.containers.Answer.layouts.confirmPatientData": "Please confirm the patient information",
-  "app.containers.Answer.layouts.continue": "Continue",
   "app.containers.Answer.layouts.currencyAmountLabel": "Amount",
   "app.containers.Answer.layouts.currencyCodeLabel": "Currency",
   "app.containers.Answer.layouts.dateOfBirth": "Date of Birth",

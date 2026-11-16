@@ -48,6 +48,14 @@ const HenryFordInitialScreen = ({
 
   const [showPatientDataDisplay, setShowPatientDataDisplay] = useState(false);
 
+  // The scan result must not outlive the screen (shared clinic devices).
+  useEffect(
+    () => () => {
+      dispatch(setHfhsPatientDetailAnonymized(null));
+    },
+    [],
+  );
+
   useEffect(() => {
     if (hfhsPatientDetailAnonymized) {
       setShowPatientDataDisplay(true);

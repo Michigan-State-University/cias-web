@@ -96,6 +96,7 @@ if (process.env.LOGROCKET_ENV) {
     'avatar_url',
     'id',
     'uid',
+    'barcode',
   ];
 
   const { requestSanitizer, responseSanitizer } =
