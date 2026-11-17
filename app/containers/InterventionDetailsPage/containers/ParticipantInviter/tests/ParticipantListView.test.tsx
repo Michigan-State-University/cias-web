@@ -63,6 +63,7 @@ const defaultProps = {
   onUploadEmails: jest.fn(),
   onManage: jest.fn(),
   onOpenSmsCampaigns: jest.fn(),
+  smsCampaignsVisible: true,
 };
 
 const renderView = (store: any, props = {}) => {

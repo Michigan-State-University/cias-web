@@ -39,6 +39,7 @@ export type Props = {
   onInvite: (invitationType: ParticipantInvitationType) => void;
   onManage: (participantId: string) => void;
   onOpenSmsCampaigns: () => void;
+  smsCampaignsVisible: boolean;
 };
 
 export const PredefinedParticipantsTab: FC<Props> = ({
@@ -49,6 +50,7 @@ export const PredefinedParticipantsTab: FC<Props> = ({
   onInvite,
   onManage,
   onOpenSmsCampaigns,
+  smsCampaignsVisible,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -133,9 +135,11 @@ export const PredefinedParticipantsTab: FC<Props> = ({
           disabled={!creatingPredefinedParticipantsPossible}
         />
       </Row>
-      <Row mb={16}>
-        <SmsCampaignsSummaryBar onOpen={onOpenSmsCampaigns} />
-      </Row>
+      {smsCampaignsVisible && (
+        <Row mb={16}>
+          <SmsCampaignsSummaryBar onOpen={onOpenSmsCampaigns} />
+        </Row>
+      )}
       {/* `flex: 1` + `minHeight: 0` so the table scrolls instead of growing
           past the modal and pushing everything below it out of sight. */}
       <Box flex={1} minHeight="0px" overflow="auto">

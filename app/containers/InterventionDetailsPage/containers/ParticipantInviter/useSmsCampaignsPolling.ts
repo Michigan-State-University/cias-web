@@ -15,9 +15,9 @@ import {
  * campaigns view are rendered in exclusive branches, so a view-level host
  * would stop polling exactly when the campaigns list is on screen.
  *
- * `enabled` is false for an intervention that has never been published, where
- * the list is known to be empty — the modal opens for every invitation type,
- * so without it every email-only invite would pay for a pointless request.
+ * `enabled` has to cover every request this hook makes, the interval
+ * included: the campaign endpoints answer 403 to anyone without edit access
+ * to the intervention, and a GET 403 sends the whole app to `/no-access`.
  */
 export const useSmsCampaignsPolling = (
   interventionId: string,
@@ -36,7 +36,7 @@ export const useSmsCampaignsPolling = (
   // No websocket for campaigns, so poll while one is still open. Ticks on a
   // hidden tab are skipped and caught up on return.
   useEffect(() => {
-    if (!hasCampaignsInProgress) return undefined;
+    if (!enabled || !hasCampaignsInProgress) return undefined;
 
     const refreshIfVisible = () => {
       if (document.visibilityState !== 'visible') return;
@@ -53,15 +53,19 @@ export const useSmsCampaignsPolling = (
       clearInterval(intervalId);
       document.removeEventListener('visibilitychange', refreshIfVisible);
     };
-  }, [hasCampaignsInProgress, interventionId]);
+  }, [enabled, hasCampaignsInProgress, interventionId]);
 
   // A finished campaign changes the participants themselves, so refetch the
   // list on the in-progress -> settled edge.
   const wasInProgress = useRef(false);
   useEffect(() => {
+    if (!enabled) {
+      wasInProgress.current = false;
+      return;
+    }
     if (wasInProgress.current && !hasCampaignsInProgress) {
       dispatch(fetchPredefinedParticipantsRequest(interventionId));
     }
     wasInProgress.current = hasCampaignsInProgress;
-  }, [hasCampaignsInProgress, interventionId]);
+  }, [enabled, hasCampaignsInProgress, interventionId]);
 };

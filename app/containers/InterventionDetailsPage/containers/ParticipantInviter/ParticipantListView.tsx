@@ -33,6 +33,8 @@ export type Props = {
   onUploadEmails: () => void;
   onManage: (participantId: string) => void;
   onOpenSmsCampaigns: () => void;
+  /** False hides the campaigns bar: nothing is fetched for this user. */
+  smsCampaignsVisible: boolean;
   activeTab: string;
   setActiveTab: (tab: string) => void;
 };
@@ -66,6 +68,7 @@ export const ParticipantListView: FC<Props> = ({
   onUploadEmails,
   onManage,
   onOpenSmsCampaigns,
+  smsCampaignsVisible,
   activeTab,
   setActiveTab,
 }) => {
@@ -146,6 +149,7 @@ export const ParticipantListView: FC<Props> = ({
             onInvite={onInvite}
             onManage={onManage}
             onOpenSmsCampaigns={onOpenSmsCampaigns}
+            smsCampaignsVisible={smsCampaignsVisible}
           />
         </div>
         <div

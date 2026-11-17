@@ -22,6 +22,7 @@ import {
   makeSelectOrganizationLoader,
 } from 'global/reducers/organizations';
 import {
+  resetSmsCampaignsState,
   withAllSmsCampaignsSagas,
   withSmsCampaignsReducer,
 } from 'global/reducers/smsCampaigns';
@@ -76,15 +77,29 @@ export const InviteParticipantsModalContent: FC<Props> = ({
   useInjectReducer(withSmsCampaignsReducer);
   useInjectSaga(withAllSmsCampaignsSagas);
 
-  // Mounted for every view, unlike the individual views below, which the
-  // `view` switch renders exclusively — the poller has to outlive them all.
-  useSmsCampaignsPolling(
-    interventionId,
-    interventionStatus !== InterventionStatus.DRAFT,
-  );
-
   const [activeParticipantListViewTab, setActiveParticipantListViewTab] =
     useState(formatMessage(messages.emailParticipantsTab));
+
+  // Campaigns belong to the predefined participants tab, and the tab state is
+  // held here rather than in the tab, so this stays true across the campaign
+  // views the `view` switch renders instead of the participant list. The tab
+  // fetches the participants from an endpoint behind the same gate as the
+  // campaigns, so this adds no request a user could be refused.
+  const smsCampaignsVisible =
+    interventionStatus !== InterventionStatus.DRAFT &&
+    activeParticipantListViewTab ===
+      formatMessage(messages.predefinedParticipantsTab);
+
+  // Mounted for every view, unlike the individual views below, which the
+  // `view` switch renders exclusively — the poller has to outlive them all.
+  useSmsCampaignsPolling(interventionId, smsCampaignsVisible);
+
+  useEffect(
+    () => () => {
+      dispatch(resetSmsCampaignsState());
+    },
+    [interventionId],
+  );
 
   const isModularIntervention = interventionType !== InterventionType.DEFAULT;
   const isReportingIntervention = !!organizationId;
@@ -268,6 +283,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               onUploadEmails={handleUploadEmails}
               onManage={handleManage}
               onOpenSmsCampaigns={handleOpenSmsCampaigns}
+              smsCampaignsVisible={smsCampaignsVisible}
               activeTab={activeParticipantListViewTab}
               setActiveTab={setActiveParticipantListViewTab}
             />
