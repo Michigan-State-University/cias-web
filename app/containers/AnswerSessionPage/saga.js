@@ -458,8 +458,6 @@ function* verifyPatientData({ payload }) {
 
 export function* verifyQRCode({ payload: { decodedString } }) {
   const requestUrl = `/v1/henry_ford/verify_by_code`;
-  // The API only allows a scan from a session the user is answering, in an
-  // HFHS intervention that asks the Henry Ford initial question.
   const userSession = yield select(makeSelectUserSession());
 
   try {

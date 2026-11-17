@@ -14,8 +14,7 @@ export type HfhsPatientData = {
   mrn?: string;
 };
 
-// Returned from BE (the participant-provided values). A record matched by QR
-// code has none of them, so every attribute can be null.
+// Returned from BE; all null for a record matched by QR code.
 export type HfhsPatientDetail = {
   [Key in keyof Omit<HfhsPatientData, 'mrn'>]?: Nullable<HfhsPatientData[Key]>;
 };

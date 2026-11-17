@@ -21,7 +21,6 @@ import { StyledWebcam } from './styled';
 const TIME_BETWEEN_SCANS_MS = 500;
 const TIME_BETWEEN_DECODING_ATTEMPTS_MS = 150;
 
-// How long we let somebody struggle before pointing at the manual entry tab.
 const SCAN_HINT_DELAY_MS = 20000;
 
 const videoConstraints: MediaTrackConstraints = {
@@ -30,9 +29,7 @@ const videoConstraints: MediaTrackConstraints = {
   height: { ideal: 720 },
 };
 
-// Browsers report the failure kind in `DOMException.name`; `message` is
-// free-form text that differs between engines. react-webcam reports a missing
-// getUserMedia API as a plain string.
+// Match on `DOMException.name`: `message` differs between browsers.
 const getCameraErrorMessage = (error: Error | string) => {
   if (typeof error === 'string') return messages.cameraNotFoundError;
 

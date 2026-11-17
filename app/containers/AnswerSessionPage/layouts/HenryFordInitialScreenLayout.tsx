@@ -107,9 +107,7 @@ enum PatientDataFormError {
   MRN_VERIFICATION,
 }
 
-// Tabs unmounts the inactive pane, so the manual form would lose what the
-// participant typed on a tab round-trip. Mirror the values into a ref owned by
-// the layout and seed the form from it on remount.
+// Tabs unmounts the inactive pane; keep typed values across a tab round-trip.
 const KeepDraftValues = ({
   draftRef,
 }: {
@@ -183,16 +181,13 @@ const HenryFordInitialScreenLayout = ({
 
   const isVerifying = verifying || qrVerifying;
 
-  // CIAS-4008 AC: Enter Manually stays usable after a scan.
   const isManualInputDisabled = disabled;
 
-  // CIAS-4006 AC: no switching tabs while a verification is in flight.
   const handleTabChange = (tab: string) => {
     if (!isVerifying) setActiveTab(tab);
   };
 
-  // `verifyingError` is shared by both paths; show it on the confirm screen
-  // only when it came from the confirm screen's own Continue.
+  // `verifyingError` is shared; the confirm screen shows it only after its own Continue.
   const [qrContinueSubmitted, setQrContinueSubmitted] = useState(false);
 
   const manualDraftRef = useRef<Nullable<PatientDataFormValues>>(null);
@@ -202,8 +197,7 @@ const HenryFordInitialScreenLayout = ({
   );
   const confirmHeadingRef = useRef<HTMLElement>(null);
 
-  // The scanner unmounts when the confirm screen replaces it; move focus to
-  // the confirm heading instead of letting it drop to <body>.
+  // The scanner unmounts here; keep focus from dropping to <body>.
   useEffect(() => {
     if (isConfirmScreenShown) confirmHeadingRef.current?.focus();
   }, [isConfirmScreenShown]);
@@ -258,16 +252,14 @@ const HenryFordInitialScreenLayout = ({
       ),
       mrn: '',
       ...restValues,
-      // A record matched by QR code holds no typed-in values, so the API
-      // sends nulls; a controlled input must not get null.
+      // A QR-matched record has no typed values; inputs must not get null.
       firstName: firstName ?? '',
       lastName: lastName ?? '',
       zipCode: zipCode ?? '',
     };
   }, [hfhsPatientDetail]);
 
-  // Read on every render (not memoized) so a remounted manual pane picks up
-  // the draft kept by `KeepDraftValues`.
+  // Not memoized: a remounted pane must pick up the kept draft.
   const initialValues: PatientDataFormValues =
     detailInitialValues ?? manualDraftRef.current ?? emptyInitialValues;
 
@@ -346,9 +338,7 @@ const HenryFordInitialScreenLayout = ({
         {/* @ts-ignore - Tabs component expects children with label prop */}
         <div label={formatMessage(messages.enterManuallyTab)}>
           <Formik
-            // An already-verified participant only confirms a read-only form
-            // and Continue just saves the answer, so there is nothing to
-            // validate (a QR-verified record has no typed-in values at all).
+            // A verified participant only confirms a read-only form.
             validationSchema={
               hfhsPatientDetail ? undefined : schema(formatMessage)
             }
