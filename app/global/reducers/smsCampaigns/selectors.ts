@@ -5,6 +5,8 @@ import { RootState } from 'global/reducers';
 import {
   IN_PROGRESS_SMS_CAMPAIGN_STATUSES,
   SmsCampaign,
+  SmsCampaignKind,
+  SmsCampaignStatus,
 } from 'models/SmsCampaign';
 
 import { initialState } from './reducer';
@@ -47,12 +49,20 @@ export const makeSelectCancelSmsCampaignErrorCodes = () =>
   );
 
 /**
- * A campaign that should already have gone out but is still `scheduled` or
- * `sending` — one scheduled for the future is not in progress yet.
+ * A scheduled reminder still waiting for its date. Only this kind may be
+ * compared with the browser clock: an immediate campaign is stamped with
+ * server time, so a machine running behind would read a just-sent campaign
+ * as still pending.
  */
-const isInProgress = ({ status, scheduledAt }: SmsCampaign) =>
-  IN_PROGRESS_SMS_CAMPAIGN_STATUSES.includes(status) &&
-  (!scheduledAt || new Date(scheduledAt).getTime() <= Date.now());
+const isAwaitingSchedule = ({ kind, status, scheduledAt }: SmsCampaign) =>
+  kind === SmsCampaignKind.SCHEDULED_REMINDER &&
+  status === SmsCampaignStatus.SCHEDULED &&
+  !!scheduledAt &&
+  new Date(scheduledAt).getTime() > Date.now();
+
+const isInProgress = (campaign: SmsCampaign) =>
+  IN_PROGRESS_SMS_CAMPAIGN_STATUSES.includes(campaign.status) &&
+  !isAwaitingSchedule(campaign);
 
 export const makeSelectHasSmsCampaignsInProgress = () =>
   createSelector(selectSmsCampaigns, ({ campaigns }) =>
