@@ -32,7 +32,7 @@ export default defineMessages({
   },
   [InviteParticipantModalView.SMS_CAMPAIGNS]: {
     id: `${scope}.SMS_CAMPAIGNS`,
-    defaultMessage: 'SMS campaigns',
+    defaultMessage: 'SMS invitations & reminders',
   },
   [InviteParticipantModalView.SEND_SMS_INVITATION]: {
     id: `${scope}.SEND_SMS_INVITATION`,

@@ -623,13 +623,15 @@ export default defineMessages({
     id: `${scope}.smsCampaignsSummaryRecipients`,
     defaultMessage: '{recipients} recipients',
   },
+  // Not "SMS campaigns" - that is already the SMS session type in "Create
+  // session" on this same page. Repeated in `viewTitlesMessages`.
   smsCampaignsSummaryOpenButton: {
     id: `${scope}.smsCampaignsSummaryOpenButton`,
-    defaultMessage: 'SMS campaigns',
+    defaultMessage: 'SMS invitations & reminders',
   },
   smsCampaignsListHeader: {
     id: `${scope}.smsCampaignsListHeader`,
-    defaultMessage: 'SMS campaigns',
+    defaultMessage: 'SMS invitations & reminders',
   },
   smsCampaignKindColumnHeader: {
     id: `${scope}.smsCampaignKindColumnHeader`,
