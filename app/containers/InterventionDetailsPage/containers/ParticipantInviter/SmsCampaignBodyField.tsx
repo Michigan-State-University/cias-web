@@ -98,6 +98,12 @@ export const SmsCampaignBodyField: FC<Props> = ({
     return kindMessage ? formatMessage(kindMessage) : character;
   };
 
+  // Every invisible character shares one label, so without this a run of them
+  // would show as a row of identical chips.
+  const fixableLabels = Array.from(
+    new Set(fixableCharacters.map(characterLabel)),
+  );
+
   const counterExceeded = counter.lengthExceeded || counter.segmentsExceeded;
 
   return (
@@ -165,14 +171,14 @@ export const SmsCampaignBodyField: FC<Props> = ({
                 {formatMessage(messages.smsCampaignNonGsm7FixableHint)}
               </Text>
               <Row gap={6} flexWrap="wrap">
-                {fixableCharacters.map((nonGsm7Character) => (
+                {fixableLabels.map((fixableLabel) => (
                   <Badge
-                    key={nonGsm7Character.character}
+                    key={fixableLabel}
                     bg={colors.white}
                     color={themeColors.warning}
                   >
                     <Text color={themeColors.warning} fontWeight="bold">
-                      {characterLabel(nonGsm7Character)}
+                      {fixableLabel}
                     </Text>
                   </Badge>
                 ))}

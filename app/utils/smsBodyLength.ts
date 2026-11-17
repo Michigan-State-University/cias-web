@@ -210,6 +210,25 @@ const GSM7_EQUIVALENT_CODE_POINTS: [number, string][] = [
   [0x2060, ''],
   [0xfeff, ''],
   [0x00ad, ''],
+  // Bidirectional and format marks. Pasting from Outlook, iOS Contacts or
+  // Windows carries these invisibly, and unlike the ones above the backend
+  // accepts them - so they travel all the way to Twilio and force UCS-2 for
+  // a message that reads as plain Latin text. Removing them is safe for such
+  // a message; a genuinely right-to-left one is UCS-2 regardless, so nothing
+  // is saved there, but nothing is broken that the message itself needs.
+  [0x200e, ''],
+  [0x200f, ''],
+  [0x202a, ''],
+  [0x202b, ''],
+  [0x202c, ''],
+  [0x202d, ''],
+  [0x202e, ''],
+  [0x2066, ''],
+  [0x2067, ''],
+  [0x2068, ''],
+  [0x2069, ''],
+  [0x061c, ''],
+  [0x034f, ''],
 ];
 
 const GSM7_EQUIVALENTS: Record<string, string> = Object.fromEntries(

@@ -533,7 +533,7 @@ export default defineMessages({
   smsCampaignNonGsm7NoFixHint: {
     id: `${scope}.smsCampaignNonGsm7NoFixHint`,
     defaultMessage:
-      'Some of them have no safe equivalent — a letter with a diacritic or an emoji can only be removed by hand, because replacing it would change what the message says.',
+      'Some of them have no safe equivalent — a letter with a diacritic or an emoji, for instance, can only be removed by hand, because replacing it would change what the message says.',
   },
   smsCampaignNonGsm7FixButton: {
     id: `${scope}.smsCampaignNonGsm7FixButton`,
