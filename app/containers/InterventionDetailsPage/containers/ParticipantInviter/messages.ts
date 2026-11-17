@@ -562,7 +562,7 @@ export default defineMessages({
   smsCampaignDaysAfterHint: {
     id: `${scope}.smsCampaignDaysAfterHint`,
     defaultMessage:
-      'Between 1 and {max}. It goes out at the same time of day as the invitation, only to participants who have not opened their link.',
+      'Between 1 and {max}. It goes out at the same time of day as the invitation, only to participants who have not opened their invitation link.',
   },
   smsCampaignSendInvitationSubmit: {
     id: `${scope}.smsCampaignSendInvitationSubmit`,
@@ -689,7 +689,9 @@ export default defineMessages({
   },
   predefinedParticipantLinkOpenedLabel: {
     id: `${scope}.predefinedParticipantLinkOpenedLabel`,
-    defaultMessage: `Link opened`,
+    // `firstOpenedAt`, which only the invitation link stamps - and which
+    // decides who gets the scheduled reminder.
+    defaultMessage: `Invitation link opened`,
   },
   predefinedParticipantLinkNotOpened: {
     id: `${scope}.predefinedParticipantLinkNotOpened`,
