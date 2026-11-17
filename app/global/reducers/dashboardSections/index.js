@@ -10,6 +10,7 @@ export {
   deleteChartRequest,
   selectChartAction,
   copyChartRequest,
+  regenerateChartRequest,
   setChartFiltersRequest,
   reorderSectionsRequest,
   reorderChartsRequest,
@@ -28,4 +29,6 @@ export {
   ChartStatus,
   StatusPermissions,
   ChartStatusToColorMap,
+  isChartRegenerating,
+  isChartRegenerationInProgress,
 } from './constants';

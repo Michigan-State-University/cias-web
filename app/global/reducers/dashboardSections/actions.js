@@ -27,6 +27,12 @@ import {
   FETCH_SECTIONS_SUCCESS,
   COPY_CHART_REQUEST,
   COPY_CHART_SUCCESS,
+  REGENERATE_CHART_REQUEST,
+  REGENERATE_CHART_SUCCESS,
+  REGENERATE_CHART_ERROR,
+  REGENERATE_CHART_POLL_FINISHED,
+  FETCH_CHART_SUCCESS,
+  FETCH_CHART_ERROR,
   SELECT_CHART_ACTION,
   SET_CHARTS_DATA,
   SET_CHARTS_FILTERS,
@@ -132,6 +138,24 @@ export const copyChartRequest = (chartId) =>
 
 export const copyChartSuccess = (chart, dashboardSectionId) =>
   actionBuilder(COPY_CHART_SUCCESS, { chart, dashboardSectionId });
+
+export const regenerateChartRequest = (chartId) =>
+  actionBuilder(REGENERATE_CHART_REQUEST, { chartId });
+
+export const regenerateChartSuccess = (chartId) =>
+  actionBuilder(REGENERATE_CHART_SUCCESS, { chartId });
+
+export const regenerateChartError = (error) =>
+  actionBuilder(REGENERATE_CHART_ERROR, { error });
+
+export const regenerateChartPollFinished = (chartId) =>
+  actionBuilder(REGENERATE_CHART_POLL_FINISHED, { chartId });
+
+export const fetchChartSuccess = (chart) =>
+  actionBuilder(FETCH_CHART_SUCCESS, { chart });
+
+export const fetchChartError = (error) =>
+  actionBuilder(FETCH_CHART_ERROR, { error });
 
 export const selectChartAction = (dashboardSectionId, chartId) =>
   actionBuilder(SELECT_CHART_ACTION, {

@@ -11,7 +11,7 @@ test.describe('Research Assistant Sessions', () => {
 
     await interventionPage.createRaSession();
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
   });
 
   test('allows only one Research Assistant session per intervention', async ({
@@ -38,13 +38,9 @@ test.describe('Research Assistant Sessions', () => {
     const dashboardPage = new DashboardPage(page);
     const interventionPage = new InterventionPage(page);
 
-    // Keep the name short — the picker truncates long intervention names with an ellipsis.
-    const targetName = `ra-t-${Date.now().toString().slice(-6)}`;
-
     // Target intervention already has an RA session.
     await dashboardPage.goto();
     await dashboardPage.createIntervention();
-    await interventionPage.editInterventionName(targetName);
     const targetInterventionId = await dashboardPage.getInterventionIdFromUrl();
     await interventionPage.createRaSession();
 
@@ -55,7 +51,7 @@ test.describe('Research Assistant Sessions', () => {
     await interventionPage.createRaSession();
 
     // Attempt to copy the source RA session into the target.
-    await interventionPage.startInternalSessionCopy(0, targetName);
+    await interventionPage.startInternalSessionCopy(0, targetInterventionId);
 
     // The copy is blocked client-side: an error toast shows and the picker stays open.
     await expect(
@@ -65,8 +61,7 @@ test.describe('Research Assistant Sessions', () => {
 
     // The target still has exactly one session — nothing was copied.
     await page.goto(`/interventions/${targetInterventionId}`);
-    await page.waitForTimeout(1000);
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
   });
 
   test('duplicates a Research Assistant session into an intervention without one', async ({
@@ -75,13 +70,9 @@ test.describe('Research Assistant Sessions', () => {
     const dashboardPage = new DashboardPage(page);
     const interventionPage = new InterventionPage(page);
 
-    // Keep the name short — the picker truncates long intervention names with an ellipsis.
-    const targetName = `ra-c-${Date.now().toString().slice(-6)}`;
-
     // Target intervention without an RA session.
     await dashboardPage.goto();
     await dashboardPage.createIntervention();
-    await interventionPage.editInterventionName(targetName);
     const targetInterventionId = await dashboardPage.getInterventionIdFromUrl();
 
     // Source intervention with an RA session.
@@ -90,13 +81,12 @@ test.describe('Research Assistant Sessions', () => {
     await dashboardPage.createIntervention();
     await interventionPage.createRaSession();
 
-    await interventionPage.duplicateSessionInternally(0, targetName);
+    await interventionPage.duplicateSessionInternally(0, targetInterventionId);
 
     await page.goto(`/interventions/${targetInterventionId}`);
-    await page.waitForTimeout(1000);
 
     // The RA session was copied in...
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
     // ...and the target now counts as having an RA session.
     expect(await interventionPage.isRaSessionTypeAvailable()).toBe(false);
   });
@@ -113,7 +103,7 @@ test.describe('Research Assistant Sessions', () => {
     await interventionPage.createRaSession();
     await interventionPage.createSession('classic');
 
-    expect(await interventionPage.getSessionCount()).toBe(2);
+    await interventionPage.expectSessionCount(2);
   });
 
   test('re-enables creating a Research Assistant session after the existing one is deleted', async ({
@@ -131,7 +121,7 @@ test.describe('Research Assistant Sessions', () => {
     await interventionPage.deleteSession(0);
     await page.waitForTimeout(1000);
 
-    expect(await interventionPage.getSessionCount()).toBe(0);
+    await interventionPage.expectSessionCount(0);
     expect(await interventionPage.isRaSessionTypeAvailable()).toBe(true);
   });
 });

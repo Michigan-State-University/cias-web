@@ -1,29 +1,17 @@
-import _ from 'lodash';
-import { Form, Formik, useFormikContext } from 'formik';
-import React, { FC, useEffect, useMemo, useState } from 'react';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
+import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 
 import share from 'assets/svg/share.svg';
-import { makeSelectIntervention } from 'global/reducers/intervention';
 
-import Column from 'components/Column';
-import Divider from 'components/Divider';
-import Row from 'components/Row';
-import FormikSelect from 'components/FormikSelect';
 import CopyToClipboard from 'components/CopyToClipboard';
 import { SelectOption } from 'components/Select/types';
-import { Intervention } from 'models/Intervention';
 
-import { CopyLinkFormValues } from './types';
 import messages from './messages';
-import { createCopyLinkFormSchema, createInviteUrl } from './utils';
+import InviteUrlFormProvider from './InviteUrlFormProvider';
 
 export type Props = {
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
-  intervention: Intervention;
   interventionId: string;
   interventionLanguageCode: string;
   sessionOptions: SelectOption<string>[];
@@ -33,7 +21,6 @@ export type Props = {
 const CopyLinkForm: FC<Props> = ({
   isModularIntervention,
   isReportingIntervention,
-  intervention,
   interventionId,
   interventionLanguageCode,
   sessionOptions,
@@ -41,170 +28,59 @@ const CopyLinkForm: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const initialValues: CopyLinkFormValues = useMemo(
-    () => ({ sessionOption: null, healthClinicOption: null }),
-    [interventionId],
-  );
-
-  const validationSchema = useMemo(
-    () =>
-      createCopyLinkFormSchema(
-        formatMessage,
-        isModularIntervention,
-        isReportingIntervention,
-      ),
-    [isModularIntervention, isReportingIntervention],
-  );
-
-  const [sessionLanguageCode, setSessionLanguageCode] = useState('');
-
-  const SetProperSessionLanguageCode = () => {
-    const { values } = useFormikContext();
-    useEffect(() => {
-      const session = _.find(intervention.sessions, {
-        // @ts-ignore
-        id: values?.sessionOption?.value,
-      });
-      setSessionLanguageCode(session?.languageCode || '');
-    }, [values]);
-    return null;
-  };
-
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={() => {}}
-    >
-      {({ values, isValid, handleSubmit }) => (
-        <Form>
-          <Column>
-            <Divider />
-            {isModularIntervention && (
-              <CopyToClipboard
-                // @ts-ignore
-                textToCopy={createInviteUrl(
-                  isModularIntervention,
-                  isReportingIntervention,
-                  interventionId,
-                  null,
-                  values.healthClinicOption?.value,
-                  interventionLanguageCode,
-                )}
-                icon={share}
-                iconAlt={formatMessage(messages.copyLinkIconAlt)}
-                disabled={false}
-                buttonDisabled={
-                  isReportingIntervention && !values.healthClinicOption
-                }
-                onClick={handleSubmit}
-                mt={21}
-                mb={13}
-              >
-                {formatMessage(messages.copyInterventionLinkButtonTitle)}
-              </CopyToClipboard>
-            )}
-            {(!isModularIntervention || isReportingIntervention) && (
-              <Row mt={16} gap={16}>
-                {!isModularIntervention && (
-                  <FormikSelect
-                    formikKey="sessionOption"
-                    label={formatMessage(messages.sessionSelectLabel)}
-                    inputProps={{
-                      placeholder: formatMessage(
-                        messages.sessionSelectPlaceholder,
-                      ),
-                    }}
-                    options={sessionOptions}
-                  />
-                )}
-                {isReportingIntervention && (
-                  <FormikSelect
-                    formikKey="healthClinicOption"
-                    label={formatMessage(messages.clinicSelectLabel)}
-                    inputProps={{
-                      placeholder: formatMessage(
-                        messages.clinicSelectPlaceholder,
-                      ),
-                    }}
-                    options={healthClinicOptions}
-                  />
-                )}
-              </Row>
-            )}
-            {isModularIntervention && (
-              <Row mt={16} gap={16}>
-                <FormikSelect
-                  formikKey="sessionOption"
-                  label={formatMessage(messages.sessionSelectLabel)}
-                  inputProps={{
-                    placeholder: formatMessage(
-                      messages.sessionSelectPlaceholder,
-                    ),
-                  }}
-                  options={sessionOptions}
-                />
-                {isReportingIntervention && (
-                  <FormikSelect
-                    formikKey="healthClinicOption"
-                    label={formatMessage(messages.clinicSelectLabel)}
-                    inputProps={{
-                      placeholder: formatMessage(
-                        messages.clinicSelectPlaceholder,
-                      ),
-                    }}
-                    options={healthClinicOptions}
-                  />
-                )}
-              </Row>
-            )}
-            <CopyToClipboard
-              // @ts-ignore
-              textToCopy={createInviteUrl(
-                false, // Always use session URL for this button
-                isReportingIntervention,
-                interventionId,
-                values.sessionOption?.value,
-                values.healthClinicOption?.value,
-                sessionLanguageCode === ''
-                  ? interventionLanguageCode
-                  : sessionLanguageCode,
-              )}
-              icon={share}
-              iconAlt={formatMessage(messages.copyLinkIconAlt)}
-              disabled={!isValid || !values.sessionOption}
-              buttonDisabled={
-                !isValid ||
-                !values.sessionOption ||
-                (isReportingIntervention && !values.healthClinicOption)
-              }
-              onClick={handleSubmit}
-              mt={21}
-              mb={13}
-            >
-              {formatMessage(
-                isModularIntervention
-                  ? messages.copySessionLinkButtonTitle
-                  : messages.copyLinkButtonTitle,
-                {
-                  isModularIntervention: false,
-                },
-              )}
-            </CopyToClipboard>
-            <SetProperSessionLanguageCode />
-          </Column>
-        </Form>
+    // @ts-ignore — `intervention` is supplied by the provider's own `connect`
+    <InviteUrlFormProvider
+      isModularIntervention={isModularIntervention}
+      isReportingIntervention={isReportingIntervention}
+      interventionId={interventionId}
+      interventionLanguageCode={interventionLanguageCode}
+      sessionOptions={sessionOptions}
+      healthClinicOptions={healthClinicOptions}
+      renderInterventionControl={({ url, buttonDisabled, handleSubmit }) => (
+        <CopyToClipboard
+          // @ts-ignore
+          textToCopy={url}
+          icon={share}
+          iconAlt={formatMessage(messages.copyLinkIconAlt)}
+          disabled={false}
+          buttonDisabled={buttonDisabled}
+          onClick={handleSubmit}
+          mt={21}
+          mb={13}
+        >
+          {formatMessage(messages.copyInterventionLinkButtonTitle)}
+        </CopyToClipboard>
       )}
-    </Formik>
+      renderSessionControl={({
+        url,
+        disabled,
+        buttonDisabled,
+        handleSubmit,
+      }) => (
+        <CopyToClipboard
+          // @ts-ignore
+          textToCopy={url}
+          icon={share}
+          iconAlt={formatMessage(messages.copyLinkIconAlt)}
+          disabled={disabled}
+          buttonDisabled={buttonDisabled}
+          onClick={handleSubmit}
+          mt={21}
+          mb={13}
+        >
+          {formatMessage(
+            isModularIntervention
+              ? messages.copySessionLinkButtonTitle
+              : messages.copyLinkButtonTitle,
+            {
+              isModularIntervention: false,
+            },
+          )}
+        </CopyToClipboard>
+      )}
+    />
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectIntervention(),
-});
-
-const mapDispatchToProps = {};
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export default withConnect(CopyLinkForm);
+export default CopyLinkForm;

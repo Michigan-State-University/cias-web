@@ -6,4 +6,31 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
+    # Let new releases age before they are proposed; majors wait longer for follow-up fixes.
+    # Applies to version updates only, security updates are never delayed.
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+    # Minor and patch bumps arrive as one PR per dependency type; majors stay individual PRs.
+    groups:
+      production-minor-patch:
+        applies-to: version-updates
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      development-minor-patch:
+        applies-to: version-updates
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # These releases ship untranspiled ES2022 class static blocks into the eagerly loaded
+      # npm.formatjs chunk, which blanks the app on iOS < 16.4 / Chrome < 94 / Firefox < 93.
+      # Remove once node_modules/@formatjs is transpiled to the app's floor, or that floor is accepted.
+      - dependency-name: "@formatjs/intl-relativetimeformat"
+        versions: [">=12.3.2"]
+      - dependency-name: "@formatjs/intl-pluralrules"
+        versions: [">=6.3.2"]

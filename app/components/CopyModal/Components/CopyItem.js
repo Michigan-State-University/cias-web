@@ -48,6 +48,7 @@ const CopyItem = ({ data, index }) => {
   return (
     <Column key={`${id}-select-target-question-group-${index}`}>
       <Row
+        data-cy={`copy-modal-item-${id}`}
         width="100%"
         disabled={isDisabled(sessionsSize)}
         clickable

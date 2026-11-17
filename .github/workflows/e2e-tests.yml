@@ -2,41 +2,45 @@ name: E2E Tests
 
 on: push
 
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   API_URL: https://cias-api-staging.herokuapp.com
   WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
   WEB_URL: http://localhost:4200
-  # One shard per admin account in the pool. The API rotates the access token on
-  # every request, so two shards must never drive the same account.
+  # One shard per admin account: the API rotates tokens per request, so shards can't share one.
   SHARD_COUNT: 5
 
 jobs:
   build:
     name: Build app for E2E
+    # Dependabot runs get no secrets, so sign-in would fail
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      # Built once and shared with every shard — the shards only serve it
       - name: Build application
         run: npm run build
         env:
           NODE_ENV: production
 
       - name: Upload build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: e2e-build
           path: build/
@@ -47,15 +51,20 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Tag must match @playwright/test in package-lock.json (checked below)
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
+
+    # One job per staging account across all runs, or they log each other out
+    concurrency:
+      group: e2e-staging-account-${{ matrix.account }}
+      cancel-in-progress: false
 
     strategy:
-      # one shard failing must not cancel the others, or a single flake hides
-      # every other result
-      fail-fast: false
+      # All shards must pass; tests only fail after their CI retries, so flakes don't trigger this
+      fail-fast: true
       matrix:
-        # `account` is spelled out rather than derived from `shard`: GitHub
-        # expressions have no arithmetic, so `${{ matrix.shard - 1 }}` is a
-        # workflow syntax error
+        # `account` is spelled out: GitHub expressions can't do `matrix.shard - 1`
         include:
           - shard: 1
             account: 0
@@ -70,44 +79,34 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
+      # The image ships Node 24; the project requires 22
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Get Playwright version
-        id: playwright-version
-        run: echo "version=$(node -p "require('./package-lock.json').packages['node_modules/@playwright/test'].version")" >> $GITHUB_OUTPUT
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        id: playwright-cache
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-browsers-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
-
-      - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps webkit chromium firefox
-
-      - name: Install Playwright system dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps webkit chromium firefox
+      - name: Check the container image matches @playwright/test
+        run: |
+          missing=$(npx playwright install --dry-run webkit chromium \
+            | sed -n 's/^ *Install location: *//p' | sort -u \
+            | while read -r dir; do [ -d "$dir" ] || printf '%s ' "$dir"; done)
+          if [ -n "$missing" ]; then
+            echo "::error::Browsers missing from the container image: $missing. Bump the image tag in .github/workflows/e2e-tests.yml to match @playwright/test $(node -p "require('./package-lock.json').packages['node_modules/@playwright/test'].version")."
+            exit 1
+          fi
 
       - name: Download build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: e2e-build
           path: build/
 
-      # Each shard signs in as exactly one admin account — its own — so the
-      # shards cannot rotate each other's tokens out from under them.
       - name: Run Playwright tests
         run: npx playwright test --project=webkit --shard=${{ matrix.shard }}/${{ env.SHARD_COUNT }} --workers=1 --reporter=blob,list
         env:
@@ -122,7 +121,7 @@ jobs:
           ADDITIONAL_ORIGIN_SECURE_TOKEN: ${{ secrets.ADDITIONAL_ORIGIN_SECURE_TOKEN }}
 
       - name: Upload blob report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: blob-report-${{ matrix.shard }}
@@ -130,7 +129,7 @@ jobs:
           retention-days: 7
 
       - name: Upload traces and screenshots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: test-results-${{ matrix.shard }}
@@ -139,26 +138,26 @@ jobs:
 
   merge-reports:
     name: Merge E2E reports
-    if: always()
+    if: always() && github.actor != 'dependabot[bot]'
     needs: e2e-tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Download blob reports
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: all-blob-reports
           pattern: blob-report-*
@@ -168,7 +167,7 @@ jobs:
         run: npx playwright merge-reports --reporter html ./all-blob-reports
 
       - name: Upload HTML report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: playwright-report
           path: playwright-report/

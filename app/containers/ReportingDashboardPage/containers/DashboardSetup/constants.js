@@ -16,12 +16,19 @@ export const ChartSettingsContext = createContext({
   statusPermissions: StatusPermissions(''),
 });
 
+// A minimum above the formula's variable count can never be met - every participant would come
+// back Invalid / Insufficient Data. Flagged rather than clamped: the minimum is the researcher's
+// clinical threshold to choose.
+export const isMinAnsweredStale = (formula, formulaVariableCount) =>
+  (formula?.minAnsweredVariables ?? 0) > (formulaVariableCount ?? 0);
+
 export const CHART_NAME_MAX_WIDTH = elements.chartTileWidth / 2 - 50;
 export const CHART_WIDTH = elements.chartTileWidth - 50;
 export const CHART_HEIGHT = elements.chartTileHeight - 150;
 
 export const X_AXIS_KEY = 'label';
 export const STACK_Y_AXIS_KEY = 'notMatchedValue';
+export const INVALID_Y_AXIS_KEY = 'invalidValue';
 export const Y_AXIS_KEY = 'value';
 export const POPULATION_KEY = 'population';
 

@@ -80,10 +80,11 @@ Our goal is for cost to never be a barrier. This code is available to anyone at 
    the backend project, you can now log in to one of the accounts that has been automatically created. Please
    see [documentation](https://github.com/Michigan-State-University/cias-api#readme) of the backend project for more information
 
-## Cypress
+## E2E tests (Playwright)
 
-- Open Cypress dashboard `npm run cy:open`
-- Run Cypress tests `npm run cy:test`
+- Set the `E2E_*` variables from `.env.example`
+- Run the suite `npm run e2e`
+- Open the Playwright UI `npm run e2e:ui`
 
 ## Colors
 

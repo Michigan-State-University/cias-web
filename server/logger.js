@@ -1,9 +1,20 @@
 /* eslint-disable no-console */
 
+const os = require('os');
 const chalk = require('chalk');
-const ip = require('ip');
 
 const divider = chalk.gray('\n-----------------------------------');
+
+// First external IPv4 address. Node < 18.4 reported `family` as the number 4.
+const lanAddress = () =>
+  Object.values(os.networkInterfaces())
+    .flat()
+    .find(
+      (iface) =>
+        iface &&
+        !iface.internal &&
+        (iface.family === 'IPv4' || iface.family === 4),
+    )?.address || '127.0.0.1';
 
 /**
  * Logger middleware, you can customize it to make messages more personal
@@ -27,7 +38,7 @@ const logger = {
 ${chalk.bold('Access URLs:')}${divider}
 Localhost: ${chalk.magenta(`http://${host}:${port}`)}
       LAN: ${
-        chalk.magenta(`http://${ip.address()}:${port}`) +
+        chalk.magenta(`http://${lanAddress()}:${port}`) +
         (tunnelStarted ? `\n    Proxy: ${chalk.magenta(tunnelStarted)}` : '')
       }${divider}
 ${chalk.blue(`Press ${chalk.italic('CTRL-C')} to stop`)}

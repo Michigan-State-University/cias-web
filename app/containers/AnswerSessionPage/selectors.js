@@ -19,6 +19,18 @@ const selectAnswerSessionPageDomain = (state) =>
 const makeSelectAnswerSessionPage = () =>
   createSelector(selectAnswerSessionPageDomain, (substate) => substate);
 
+export const makeSelectTestRunFill = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.testRunFill,
+  );
+
+export const makeSelectTestRunMarkerFailed = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.testRunMarkerFailed,
+  );
+
 const makeSelectAnswers = () =>
   createSelector(selectAnswerSessionPageDomain, (substate) => substate.answers);
 

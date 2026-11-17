@@ -2,6 +2,8 @@ import { test as setup, expect } from '@playwright/test';
 import path from 'path';
 import fs from 'fs';
 
+import { waitForApiHealthy } from './utils/waitForApiHealthy';
+
 /**
  * Authentication setup for e2e tests with multi-user support.
  * 
@@ -26,7 +28,7 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
   // Set timeout based on the number of accounts to authenticate and the delay
   // Formula: (ACCOUNTS_NEEDED * (60s per auth + delay)) with some buffer
   const AUTH_DELAY_MS = parseInt(process.env.E2E_AUTH_SETUP_DELAY_MS || '2000', 10);
-  const timeoutMs = ACCOUNTS_NEEDED * (60000 + AUTH_DELAY_MS) + 30000; // 30s buffer
+  const timeoutMs = ACCOUNTS_NEEDED * (60000 + AUTH_DELAY_MS) + 30000 + 120000; // 30s buffer + 120s API health wait
 
   setup.setTimeout(timeoutMs);
   console.log(`\nSetup timeout set to ${timeoutMs / 1000}s for ${ACCOUNTS_NEEDED} accounts`);
@@ -59,6 +61,8 @@ setup('authenticate admin users for all workers', async ({ browser }) => {
   console.log(`Base URL: ${process.env.E2E_BASE_URL || 'http://localhost:4200'}`);
   console.log(`API URL: ${process.env.API_URL}`);
   console.log('');
+
+  await waitForApiHealthy();
 
   // Authenticate each admin account separately
   for (let n = 0; n < ACCOUNTS_NEEDED; n++) {

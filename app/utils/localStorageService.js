@@ -1,3 +1,4 @@
+import { clearTestLinkToken } from 'utils/testLinkToken';
 import { writeStorage, deleteFromStorage } from '@rehooks/local-storage';
 
 export const HEADERS = 'headers';
@@ -105,6 +106,7 @@ const LocalStorageService = (() => {
     clearHeaders();
     clearState();
     clearGuestHeaders();
+    clearTestLinkToken();
   };
 
   const isAuthenticated = () => {

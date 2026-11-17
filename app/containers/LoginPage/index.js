@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useIntl } from 'react-intl';
-import { parse } from 'query-string';
+import queryString from 'query-string';
 import has from 'lodash/has';
 import { toast } from 'react-toastify';
 import { useLocation } from 'react-router';
@@ -87,7 +87,7 @@ export const LoginPage = ({
   }, [verificationSuccess]);
 
   const queryObject = useMemo(
-    () => parse(search, { parseBooleans: true }),
+    () => queryString.parse(search, { parseBooleans: true }),
     [search],
   );
 

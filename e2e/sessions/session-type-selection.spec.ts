@@ -37,7 +37,7 @@ test.describe('Session Type Selection Modal', () => {
     await responsePromise;
 
     await page.waitForTimeout(1000);
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
   });
 
   test('should delete a session', async ({ page }) => {
@@ -50,12 +50,12 @@ test.describe('Session Type Selection Modal', () => {
     await interventionPage.createSession('classic');
     await interventionPage.createSession('classic');
 
-    expect(await interventionPage.getSessionCount()).toBe(2);
+    await interventionPage.expectSessionCount(2);
 
     await interventionPage.deleteSession(0);
 
     await page.waitForTimeout(1000);
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
   });
 
   test('should duplicate a session', async ({ page }) => {
@@ -67,7 +67,7 @@ test.describe('Session Type Selection Modal', () => {
 
     await interventionPage.createSession('classic');
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
     await interventionPage.duplicateSession(0);
 
@@ -75,7 +75,7 @@ test.describe('Session Type Selection Modal', () => {
 
     await page.waitForSelector('[data-cy="enter-session-1"]', { timeout: 15000 });
 
-    expect(await interventionPage.getSessionCount()).toBe(2);
+    await interventionPage.expectSessionCount(2);
 
     await expect(page.locator('[data-cy^="enter-session-"]').nth(0)).toBeVisible();
     await expect(page.locator('[data-cy^="enter-session-"]').nth(1)).toBeVisible();
@@ -85,37 +85,29 @@ test.describe('Session Type Selection Modal', () => {
     const dashboardPage = new DashboardPage(page);
     const interventionPage = new InterventionPage(page);
 
-    const uniqueKey = Date.now();
-    const sourceName = `source-${uniqueKey}`;
-    const targetName = `target-${uniqueKey}`;
-
     await dashboardPage.goto();
 
     await dashboardPage.createIntervention();
-    await interventionPage.editInterventionName(sourceName);
     const sourceInterventionId = await dashboardPage.getInterventionIdFromUrl();
 
     await page.goto('/');
     await dashboardPage.waitForInterventionsToLoad();
 
     await dashboardPage.createIntervention();
-    await interventionPage.editInterventionName(targetName);
     const targetInterventionId = await dashboardPage.getInterventionIdFromUrl();
 
-    expect(await interventionPage.getSessionCount()).toBe(0);
+    await interventionPage.expectSessionCount(0);
 
     await page.goto(`/interventions/${sourceInterventionId}`);
-    await page.waitForTimeout(1000);
 
     await interventionPage.createSession('classic');
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
-    await interventionPage.duplicateSessionInternally(0, targetName);
+    await interventionPage.duplicateSessionInternally(0, targetInterventionId);
 
     await page.goto(`/interventions/${targetInterventionId}`);
-    await page.waitForTimeout(1000);
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
     await expect(page.locator('[data-cy="enter-session-0"]')).toBeVisible();
   });

@@ -43,6 +43,12 @@ export const makeSelectInterventionLoader = (name) =>
 export const makeSelectInterventionError = (name) =>
   createSelector(selectIntervention, ({ errors }) => errors[name]);
 
+export const makeSelectGenerateTestLinkLoader = (url) =>
+  createSelector(
+    selectIntervention,
+    ({ loaders }) => !!loaders.generateTestLink?.[url],
+  );
+
 export const makeSelectCurrentSessionIndex = () =>
   createSelector(
     selectIntervention,

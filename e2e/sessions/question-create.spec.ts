@@ -28,7 +28,7 @@ test.describe('Question Creation - Single Answer', () => {
     const sessionData = await sessionResponse.json();
     const sessionId = sessionData.data.id;
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
     await page.goto(`/interventions/${interventionId}/sessions/${sessionId}/edit`);
 
@@ -174,7 +174,7 @@ test.describe('Question Creation - Single Answer', () => {
     const sessionData = await sessionResponse.json();
     const sessionId = sessionData.data.id;
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
     await page.goto(`/interventions/${interventionId}/sessions/${sessionId}/edit`);
     await sessionPage.verifySessionPageLoaded();
@@ -287,7 +287,7 @@ test.describe('Question Creation - Single Answer', () => {
     const sessionData = await sessionResponse.json();
     const sessionId = sessionData.data.id;
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
     await page.goto(`/interventions/${interventionId}/sessions/${sessionId}/edit`);
     await sessionPage.verifySessionPageLoaded();
@@ -394,7 +394,7 @@ test.describe('Question Creation - Single Answer', () => {
     const sessionData = await sessionResponse.json();
     const sessionId = sessionData.data.id;
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
     await page.goto(`/interventions/${interventionId}/sessions/${sessionId}/edit`);
     await sessionPage.verifySessionPageLoaded();
@@ -493,7 +493,7 @@ test.describe('Question Creation - Single Answer', () => {
     const sessionData = await sessionResponse.json();
     const sessionId = sessionData.data.id;
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
     await page.goto(`/interventions/${interventionId}/sessions/${sessionId}/edit`);
     await sessionPage.verifySessionPageLoaded();
@@ -618,7 +618,7 @@ test.describe('Question Creation - Single Answer', () => {
     const sessionData = await sessionResponse.json();
     const sessionId = sessionData.data.id;
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
     await page.goto(`/interventions/${interventionId}/sessions/${sessionId}/edit`);
     await sessionPage.verifySessionPageLoaded();
@@ -727,7 +727,7 @@ test.describe('Question Creation - Single Answer', () => {
     const session2Data = await session2Response.json();
     const session2Id = session2Data.data.id;
 
-    expect(await interventionPage.getSessionCount()).toBe(2);
+    await interventionPage.expectSessionCount(2);
 
     await page.goto(`/interventions/${interventionId}/sessions/${session2Id}/edit`);
     await sessionPage.verifySessionPageLoaded();
@@ -817,13 +817,18 @@ test.describe('Question Creation - Single Answer', () => {
     const sessionData = await sessionResponse.json();
     const sessionId = sessionData.data.id;
 
-    expect(await interventionPage.getSessionCount()).toBe(1);
+    await interventionPage.expectSessionCount(1);
 
     await page.goto(`/interventions/${interventionId}/sessions/${sessionId}/edit`);
     await sessionPage.verifySessionPageLoaded();
 
     await page.locator('[data-cy="add-screen-button"]').click();
-    await page.locator('[data-cy="question-type-single"]').click();
+    // Wait for the question to be saved — the branching picker further down only
+    // lists questions the API has already created.
+    await Promise.all([
+      waitForApiResponse(page, { urlIncludes: '/question_groups', method: 'POST', status: 201 }),
+      page.locator('[data-cy="question-type-single"]').click(),
+    ]);
     await page.waitForTimeout(1000);
 
     const titleContainer1 = page.locator('[data-cy="question-title-input"]');
@@ -863,7 +868,12 @@ test.describe('Question Creation - Single Answer', () => {
     await page.waitForTimeout(500);
 
     await page.locator('[data-cy="add-screen-button"]').click();
-    await page.locator('[data-cy="question-type-single"]').click();
+    // Wait for the question to be saved — the branching picker further down only
+    // lists questions the API has already created.
+    await Promise.all([
+      waitForApiResponse(page, { urlIncludes: '/question_groups', method: 'POST', status: 201 }),
+      page.locator('[data-cy="question-type-single"]').click(),
+    ]);
     await page.waitForTimeout(1000);
 
     const titleContainer2 = page.locator('[data-cy="question-title-input"]');
@@ -893,7 +903,12 @@ test.describe('Question Creation - Single Answer', () => {
     await page.waitForTimeout(500);
 
     await page.locator('[data-cy="add-screen-button"]').click();
-    await page.locator('[data-cy="question-type-single"]').click();
+    // Wait for the question to be saved — the branching picker further down only
+    // lists questions the API has already created.
+    await Promise.all([
+      waitForApiResponse(page, { urlIncludes: '/question_groups', method: 'POST', status: 201 }),
+      page.locator('[data-cy="question-type-single"]').click(),
+    ]);
     await page.waitForTimeout(1000);
 
     const titleContainer3 = page.locator('[data-cy="question-title-input"]');

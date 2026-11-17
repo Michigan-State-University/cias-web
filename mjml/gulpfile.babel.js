@@ -1,6 +1,5 @@
 import gulp from 'gulp'
 import babel from 'gulp-babel'
-import watch from 'gulp-watch'
 import log from 'fancy-log'
 import fs from 'fs'
 import path from 'path'
@@ -48,19 +47,20 @@ const compile = () =>
       templates.forEach((templPath) => {
         fs.readFile(path.normalize(templPath), 'utf8', (err, data) => {
           if (err) throw err
-          const result = mjml2html(data, {
+          mjml2html(data, {
             useMjmlConfigOptions: true,
-          })
-          const basename = path.basename(templPath)
-          const targetDir = path.normalize(`html/${basename.replace('.mjml', '.html')}`)
+          }).then((result) => {
+            const basename = path.basename(templPath)
+            const targetDir = path.normalize(`html/${basename.replace('.mjml', '.html')}`)
 
-          fs.writeFileSync(targetDir, result.html, {
-            flag: 'w',
+            fs.writeFileSync(targetDir, result.html, {
+              flag: 'w',
+            })
+            console.log(`${targetDir} written successfuly!`)
+            if (isWatching) {
+              console.log('\x1b[31m\x1b[43m%s\x1b[0m', 'Please, remember to use "npm build" to generate final templates!');
+            }
           })
-          console.log(`${targetDir} written successfuly!`)
-          if (isWatching) {
-            console.log('\x1b[31m\x1b[43m%s\x1b[0m', 'Please, remember to use "npm build" to generate final templates!');
-          }
         })
       })
     })
@@ -71,7 +71,7 @@ gulp.task('watch', () => {
   console.log(`Templates: ${templates}`)
   console.log(`Watched components: ${watchedComponents}`)
   compile()
-  return watch(
+  return gulp.watch(
     [path.normalize('components/**/*.js'), path.normalize('templates/**/*.mjml')],
     compile,
   )
