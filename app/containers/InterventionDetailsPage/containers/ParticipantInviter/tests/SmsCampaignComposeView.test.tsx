@@ -22,7 +22,6 @@ import {
   initialState as smsCampaignsInitialState,
 } from 'global/reducers/smsCampaigns';
 
-import { MANUAL_REMINDER_INTERVAL_HOURS } from 'utils/smsCampaignRecipients';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import Modal from 'components/Modal';
@@ -68,15 +67,20 @@ const participant = (id: string, overrides = {}) => ({
   ...overrides,
 });
 
+// The kinds must come out at different counts, or an assertion on the number
+// cannot tell which rules produced it: 3 invitations against 2 reminders.
 const predefinedParticipants = [
   participant('pp-1'),
   participant('pp-2'),
+  participant('pp-8'),
   participant('pp-3', { smsInvitationSentAt: INVITED_AT }),
   participant('pp-4', { active: false }),
   participant('pp-5', { phone: null }),
   participant('pp-6', {
     smsInvitationSentAt: INVITED_AT,
-    lastReminderSentAt: hoursAgo(MANUAL_REMINDER_INTERVAL_HOURS + 6),
+    // Literal hours: derived from the cooldown constant, this fixture would
+    // hold whatever that constant was changed to.
+    lastReminderSentAt: hoursAgo(30),
   }),
   participant('pp-7', {
     smsInvitationSentAt: INVITED_AT,
@@ -164,7 +168,11 @@ describe('SmsCampaignComposeView - send confirmation', () => {
     await fillBodyAndSubmit();
 
     expect(
-      screen.getByText(/The message will be sent to up to 2 participants/),
+      screen.getByText(/The message will be sent to up to 3 participants/),
+    ).toBeInTheDocument();
+    // Inside the dialog: the composer repeats this clause in its own hint.
+    expect(
+      confirmationDialog().getByText(/has not received an SMS invitation yet/),
     ).toBeInTheDocument();
     expect(createActions(store)).toHaveLength(0);
 
@@ -211,6 +219,11 @@ describe('SmsCampaignComposeView - send confirmation', () => {
 
     expect(
       screen.getByText(/The message will be sent to up to 2 participants/),
+    ).toBeInTheDocument();
+    expect(
+      confirmationDialog().getByText(
+        /has not had a reminder in the last 24 hours/,
+      ),
     ).toBeInTheDocument();
     expect(createActions(store)).toHaveLength(0);
 
