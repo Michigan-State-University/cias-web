@@ -42,6 +42,7 @@ import {
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
   FETCH_PREVIOUS_QUESTION_REQUEST,
   VERIFY_PATIENT_DATA_REQUEST,
+  VERIFY_QR_CODE_REQUEST,
   VERIFY_PID_REQUEST,
 } from './constants';
 import {
@@ -67,6 +68,9 @@ import {
   verifyPatientDataSuccess,
   submitAnswer,
   setHfhsPatientDetail,
+  setHfhsPatientDetailAnonymized,
+  verifyQRCodeSuccess,
+  verifyQRCodeError,
   verifyPidSuccess,
   verifyPidError,
   fetchUserSessionRequest,
@@ -452,6 +456,28 @@ function* verifyPatientData({ payload }) {
   }
 }
 
+export function* verifyQRCode({ payload: { decodedString } }) {
+  const requestUrl = `/v1/henry_ford/verify_by_code`;
+  const userSession = yield select(makeSelectUserSession());
+
+  try {
+    const { data } = yield call(axios.post, requestUrl, {
+      hfhs_patient_data: { barcode: decodedString },
+      session_id: userSession?.sessionId,
+    });
+
+    const hfhsPatientDetailAnonymized = jsonApiToObject(
+      data,
+      'hfhsPatientDetailAnonymized',
+    );
+
+    yield put(setHfhsPatientDetailAnonymized(hfhsPatientDetailAnonymized));
+    yield put(verifyQRCodeSuccess());
+  } catch (error) {
+    yield put(verifyQRCodeError(error));
+  }
+}
+
 function* verifyPid({ payload: { pid } }) {
   const requestUrl = `/v1/predefined_participants/verify`;
   const requestBody = objectToSnakeCase({ slug: pid });
@@ -506,6 +532,7 @@ export default function* AnswerSessionPageSaga() {
   yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
   yield takeEvery(FETCH_PREVIOUS_QUESTION_REQUEST, fetchPreviousQuestion);
   yield takeLatest(VERIFY_PATIENT_DATA_REQUEST, verifyPatientData);
+  yield takeLatest(VERIFY_QR_CODE_REQUEST, verifyQRCode);
   yield takeLatest(VERIFY_PID_REQUEST, verifyPid);
 }
 

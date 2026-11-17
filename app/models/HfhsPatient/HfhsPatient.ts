@@ -3,6 +3,7 @@ import { PhoneType } from './PhoneType';
 
 // Used when verifying patient on the HF initial screen
 export type HfhsPatientData = {
+  id?: string;
   firstName?: string;
   lastName?: string;
   dob?: string;
@@ -13,7 +14,16 @@ export type HfhsPatientData = {
   mrn?: string;
 };
 
-// Returned from BE
-export type HfhsPatientDetail = Omit<HfhsPatientData, 'mrn'> & {
-  patientId: string;
+// Returned from BE; all null for a record matched by QR code.
+export type HfhsPatientDetail = {
+  [Key in keyof Omit<HfhsPatientData, 'mrn'>]?: Nullable<HfhsPatientData[Key]>;
+};
+
+export type HfhsPatientDetailAnonymized = {
+  id: string;
+  firstName?: string;
+  lastName?: string;
+  dob?: string;
+  phoneNumber?: string;
+  mrn?: string;
 };

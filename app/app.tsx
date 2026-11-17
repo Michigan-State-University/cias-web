@@ -97,6 +97,7 @@ if (process.env.LOGROCKET_ENV) {
     'id',
     'uid',
     'test_link_token',
+    'barcode',
   ];
 
   const { requestSanitizer, responseSanitizer } =
