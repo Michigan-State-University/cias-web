@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -111,12 +111,11 @@ export const SmsCampaignComposeView: FC<Props> = ({
     makeSelectPredefinedParticipants(),
   );
 
-  const recipientsUpperBound = useMemo(
-    () => countSmsCampaignRecipients(predefinedParticipants ?? [], kind),
-    [predefinedParticipants, kind],
-  );
-
-  const [confirmingSend, setConfirmingSend] = useState(false);
+  // Counted when Send is clicked, not in a render-time memo: the reminder
+  // cooldown is measured from `Date.now()`, so a cutoff frozen when the
+  // composer opened would understate the "up to N" below it.
+  const [recipientsToConfirm, setRecipientsToConfirm] =
+    useState<Nullable<number>>(null);
 
   if (!meta && metaError && !metaLoading) {
     return (
@@ -189,7 +188,9 @@ export const SmsCampaignComposeView: FC<Props> = ({
 
   const handleSubmit = () => {
     if (!canSubmit) return;
-    setConfirmingSend(true);
+    setRecipientsToConfirm(
+      countSmsCampaignRecipients(predefinedParticipants ?? [], kind),
+    );
   };
 
   const kindMessages = KIND_MESSAGES[kind];
@@ -197,12 +198,12 @@ export const SmsCampaignComposeView: FC<Props> = ({
   return (
     <Column flex={1} overflow="auto" gap={20}>
       <ConfirmationModal
-        visible={confirmingSend}
-        onClose={() => setConfirmingSend(false)}
+        visible={recipientsToConfirm !== null}
+        onClose={() => setRecipientsToConfirm(null)}
         confirmAction={sendCampaign}
         description={formatMessage(kindMessages.confirmationTitle)}
         content={formatMessage(kindMessages.confirmationContent, {
-          count: recipientsUpperBound,
+          count: recipientsToConfirm ?? 0,
         })}
         confirmationButtonText={formatMessage(kindMessages.submit)}
         confirmationButtonColor="primary"
