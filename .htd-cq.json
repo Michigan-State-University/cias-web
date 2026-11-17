@@ -6,6 +6,12 @@
     "sonar.javascript.lcov.reportPaths": "coverage/lcov.info"
   },
   "trivyExtends": {
-    "skipDirs": ["node_modules", "build", "coverage", ".tmp-webpack", "htd-cq-output"]
+    "skipDirs": [
+      "node_modules",
+      "build",
+      "coverage",
+      ".tmp-webpack",
+      "htd-cq-output"
+    ]
   }
 }

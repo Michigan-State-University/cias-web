@@ -41,7 +41,11 @@ import {
   VERIFY_PATIENT_DATA_SUCCESS,
   VERIFY_PATIENT_DATA_ERROR,
   SET_HFHS_PATIENT_DETAIL,
+  SET_HFHS_PATIENT_DETAIL_ANONYMIZED,
   SELECT_VIDEO_STATS,
+  VERIFY_QR_CODE_REQUEST,
+  VERIFY_QR_CODE_SUCCESS,
+  VERIFY_QR_CODE_ERROR,
   VERIFY_PID_REQUEST,
   VERIFY_PID_SUCCESS,
   VERIFY_PID_ERROR,
@@ -87,6 +91,9 @@ export const initialState = {
   verifyPatientDataLoading: false,
   verifyPatientDataError: null,
   hfhsPatientDetail: null,
+  hfhsPatientDetailAnonymized: null,
+  verifyQRCodeLoading: false,
+  verifyQRCodeError: null,
   verifyPidLoading: false,
   verifyPidError: null,
   isRaFulfillment: false,
@@ -298,6 +305,7 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case VERIFY_PATIENT_DATA_REQUEST: {
         draft.verifyPatientDataLoading = true;
+        draft.verifyPatientDataError = null;
         break;
       }
       case VERIFY_PATIENT_DATA_SUCCESS: {
@@ -313,6 +321,28 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case SET_HFHS_PATIENT_DETAIL: {
         draft.hfhsPatientDetail = payload.hfhsPatientDetail;
+        break;
+      }
+
+      case SET_HFHS_PATIENT_DETAIL_ANONYMIZED: {
+        draft.hfhsPatientDetailAnonymized = payload.hfhsPatientDetailAnonymized;
+        draft.verifyQRCodeError = null;
+        break;
+      }
+
+      case VERIFY_QR_CODE_REQUEST: {
+        draft.verifyQRCodeLoading = true;
+        draft.verifyQRCodeError = null;
+        break;
+      }
+      case VERIFY_QR_CODE_SUCCESS: {
+        draft.verifyQRCodeLoading = false;
+        draft.verifyQRCodeError = null;
+        break;
+      }
+      case VERIFY_QR_CODE_ERROR: {
+        draft.verifyQRCodeLoading = false;
+        draft.verifyQRCodeError = payload.error;
         break;
       }
 
