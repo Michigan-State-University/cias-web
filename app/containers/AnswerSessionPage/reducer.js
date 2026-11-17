@@ -295,6 +295,7 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case VERIFY_PATIENT_DATA_REQUEST: {
         draft.verifyPatientDataLoading = true;
+        draft.verifyPatientDataError = null;
         break;
       }
       case VERIFY_PATIENT_DATA_SUCCESS: {

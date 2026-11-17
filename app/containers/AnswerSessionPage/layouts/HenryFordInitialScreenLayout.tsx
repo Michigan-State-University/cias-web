@@ -230,8 +230,16 @@ const HenryFordInitialScreenLayout = ({
 
   const detailInitialValues: Nullable<PatientDataFormValues> = useMemo(() => {
     if (!hfhsPatientDetail) return null;
-    const { sex, dob, phoneNumber, phoneType, ...restValues } =
-      hfhsPatientDetail;
+    const {
+      sex,
+      dob,
+      phoneNumber,
+      phoneType,
+      firstName,
+      lastName,
+      zipCode,
+      ...restValues
+    } = hfhsPatientDetail;
 
     const parsedPhone = phoneNumber
       ? parsePhoneNumberFromHfhs(phoneNumber)
@@ -250,6 +258,11 @@ const HenryFordInitialScreenLayout = ({
       ),
       mrn: '',
       ...restValues,
+      // A record matched by QR code holds no typed-in values, so the API
+      // sends nulls; a controlled input must not get null.
+      firstName: firstName ?? '',
+      lastName: lastName ?? '',
+      zipCode: zipCode ?? '',
     };
   }, [hfhsPatientDetail]);
 
@@ -333,7 +346,12 @@ const HenryFordInitialScreenLayout = ({
         {/* @ts-ignore - Tabs component expects children with label prop */}
         <div label={formatMessage(messages.enterManuallyTab)}>
           <Formik
-            validationSchema={schema(formatMessage)}
+            // An already-verified participant only confirms a read-only form
+            // and Continue just saves the answer, so there is nothing to
+            // validate (a QR-verified record has no typed-in values at all).
+            validationSchema={
+              hfhsPatientDetail ? undefined : schema(formatMessage)
+            }
             initialValues={initialValues}
             onSubmit={onSubmit}
             innerRef={formRef}
