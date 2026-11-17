@@ -60,6 +60,9 @@ export class ParticipantInviterPage {
   async goToPredefinedParticipantsTab() {
     const participantsResponse = waitForApiResponse(this.page, {
       urlIncludes: '/predefined_participants',
+      // Opening the tab also fetches `/…/sms_campaigns`, nested under the
+      // same path, which would resolve this wait too early.
+      urlExcludes: '/sms_campaigns',
       method: 'GET',
       status: 200,
     });
