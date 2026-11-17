@@ -20,6 +20,7 @@ import {
   FETCH_SMS_CAMPAIGNS_META_SUCCESS,
   FETCH_SMS_CAMPAIGNS_REQUEST,
   FETCH_SMS_CAMPAIGNS_SUCCESS,
+  RESET_SMS_CAMPAIGNS_STATE,
 } from './constants';
 
 export const fetchSmsCampaignsMetaRequest = createAction(
@@ -85,5 +86,16 @@ export const cancelSmsCampaignError = createAction(
 
 export const clearSmsCampaignErrors = createAction(
   CLEAR_SMS_CAMPAIGN_ERRORS,
+  (action) => () => action({}),
+);
+
+/**
+ * The slice is global but holds one intervention's campaigns, and
+ * `useInjectSaga` cancels the sagas on unmount - a worker killed mid-flight
+ * reaches neither its success nor its error branch, leaving its loader
+ * raised. Dispatch this whenever the modal leaves an intervention.
+ */
+export const resetSmsCampaignsState = createAction(
+  RESET_SMS_CAMPAIGNS_STATE,
   (action) => () => action({}),
 );

@@ -20,6 +20,7 @@ import {
   fetchSmsCampaignsMetaSuccess,
   fetchSmsCampaignsRequest,
   fetchSmsCampaignsSuccess,
+  resetSmsCampaignsState,
 } from './actions';
 import { SmsCampaignsAction, SmsCampaignsState } from './types';
 
@@ -119,6 +120,11 @@ export const smsCampaignsReducer: Reducer<
         draft.loaders.cancellingCampaignId = null;
         draft.cancelErrorCodes = payload.errorCodes;
         break;
+      }
+
+      case getType(resetSmsCampaignsState): {
+        // `meta` describes the SMS format, not the intervention, so it stays.
+        return { ...initialState, meta: state.meta };
       }
 
       case getType(clearSmsCampaignErrors): {

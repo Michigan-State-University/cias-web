@@ -16,6 +16,7 @@ import {
   fetchSmsCampaignsMetaError,
   fetchSmsCampaignsMetaRequest,
   fetchSmsCampaignsMetaSuccess,
+  resetSmsCampaignsState,
 } from '../actions';
 import { initialState, smsCampaignsReducer } from '../reducer';
 
@@ -188,5 +189,50 @@ describe('smsCampaigns reducer', () => {
     expect(state.cancelErrorCodes).toEqual([]);
     expect(state.metaError).toBe(false);
     expect(state.campaigns).toHaveLength(1);
+  });
+
+  describe('leaving an intervention', () => {
+    const dirty = {
+      ...initialState,
+      campaigns: [campaign()],
+      metaError: true,
+      createErrorCodes: ['RATE_LIMITED'],
+      createRetryAfter: 90,
+      cancelErrorCodes: ['CAMPAIGN_NOT_CANCELLABLE'],
+      meta: { maxSegments: 24 } as unknown as typeof initialState.meta,
+      loaders: {
+        fetchingMeta: true,
+        fetchingCampaigns: true,
+        creatingCampaign: true,
+        cancellingCampaignId: 'campaign-1',
+      },
+    };
+
+    it('drops the campaigns and errors of the intervention being left', () => {
+      const state = smsCampaignsReducer(dirty, resetSmsCampaignsState());
+
+      expect(state.campaigns).toEqual([]);
+      expect(state.metaError).toBe(false);
+      expect(state.createErrorCodes).toEqual([]);
+      expect(state.createRetryAfter).toBeNull();
+      expect(state.cancelErrorCodes).toEqual([]);
+    });
+
+    /**
+     * `useInjectSaga` cancels the workers when the modal unmounts, and a
+     * cancelled worker reaches neither its success nor its error branch - so
+     * nothing else ever lowers these.
+     */
+    it('lowers every loader, so the next open is not stuck mid-send', () => {
+      const state = smsCampaignsReducer(dirty, resetSmsCampaignsState());
+
+      expect(state.loaders).toEqual(initialState.loaders);
+    });
+
+    it('keeps the meta, which describes the SMS format, not the intervention', () => {
+      const state = smsCampaignsReducer(dirty, resetSmsCampaignsState());
+
+      expect(state.meta).toEqual({ maxSegments: 24 });
+    });
   });
 });
