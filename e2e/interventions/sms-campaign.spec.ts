@@ -192,7 +192,7 @@ const openPredefinedTabOnPublishedIntervention = async (page: any) => {
 };
 
 test.describe('Custom SMS invitations for predefined participants', () => {
-  test('offers no SMS campaigns at all on a draft intervention', async ({
+  test('disables the SMS buttons until the intervention is published', async ({
     page,
   }) => {
     const dashboardPage = new DashboardPage(page);
@@ -205,25 +205,24 @@ test.describe('Custom SMS invitations for predefined participants', () => {
     await inviter.goToPredefinedParticipantsTab();
     await inviter.createPredefinedParticipant(`e2e-draft-${Date.now()}`);
 
-    // Anchor the absence below: assert the tab actually rendered its list
-    // first, so this cannot pass just because nothing was drawn at all.
-    const table = page.locator('[data-cy="predefined-participants-table"]');
-    await expect(table).toBeVisible();
-    await expect(table.locator('tbody tr')).toHaveCount(1);
+    // The section stays visible on a draft, disabled with a reason, rather
+    // than vanishing — the researcher has to be able to see that the feature
+    // exists. Nothing here is stubbed on purpose: a draft must reach neither
+    // the campaign list nor `meta`, so any request would fail the run.
+    await inviter.openCampaignsView();
 
-    // A draft keeps the whole campaigns section out of the DOM rather than
-    // showing it disabled — `smsCampaignsVisible` in
-    // `InviteParticipantsModalContent` gates it on the status. The disabled
-    // state lives on the statuses that do render it; see the test below.
+    // A draft has no published link to send, and the API would answer
+    // 400 INTERVENTION_DRAFT anyway.
+    await expect(inviter.sendInvitationButton).toBeDisabled();
+    await expect(inviter.sendReminderButton).toBeDisabled();
+
+    await inviter.sendInvitationButton.hover({ force: true });
     await expect(
-      page.locator('[data-cy="sms-campaigns-summary-bar"]'),
-    ).toHaveCount(0);
-    await expect(
-      page.locator('[data-cy="open-sms-campaigns-view"]'),
-    ).toHaveCount(0);
+      page.getByText('Available once the intervention is published.'),
+    ).toBeVisible();
   });
 
-  test('disables the SMS buttons when the intervention is not published', async ({
+  test('keeps the SMS buttons disabled on a paused intervention', async ({
     page,
   }) => {
     await stubMeta(page);

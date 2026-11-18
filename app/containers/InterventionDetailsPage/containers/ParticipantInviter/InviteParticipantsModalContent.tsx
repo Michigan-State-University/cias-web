@@ -85,14 +85,19 @@ export const InviteParticipantsModalContent: FC<Props> = ({
   // views the `view` switch renders instead of the participant list. The tab
   // fetches the participants from an endpoint behind the same gate as the
   // campaigns, so this adds no request a user could be refused.
-  const smsCampaignsVisible =
-    interventionStatus !== InterventionStatus.DRAFT &&
+  const isPredefinedParticipantsTabActive =
     activeParticipantListViewTab ===
-      formatMessage(messages.predefinedParticipantsTab);
+    formatMessage(messages.predefinedParticipantsTab);
+
+  const smsCampaignsVisible = isPredefinedParticipantsTabActive;
+
+  const smsCampaignsPollingEnabled =
+    interventionStatus !== InterventionStatus.DRAFT &&
+    isPredefinedParticipantsTabActive;
 
   // Mounted for every view, unlike the individual views below, which the
   // `view` switch renders exclusively — the poller has to outlive them all.
-  useSmsCampaignsPolling(interventionId, smsCampaignsVisible);
+  useSmsCampaignsPolling(interventionId, smsCampaignsPollingEnabled);
 
   useEffect(
     () => () => {
