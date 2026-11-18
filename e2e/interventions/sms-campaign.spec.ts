@@ -192,7 +192,7 @@ const openPredefinedTabOnPublishedIntervention = async (page: any) => {
 };
 
 test.describe('Custom SMS invitations for predefined participants', () => {
-  test('disables the SMS buttons until the intervention is published', async ({
+  test('offers no SMS campaigns at all on a draft intervention', async ({
     page,
   }) => {
     const dashboardPage = new DashboardPage(page);
@@ -205,10 +205,49 @@ test.describe('Custom SMS invitations for predefined participants', () => {
     await inviter.goToPredefinedParticipantsTab();
     await inviter.createPredefinedParticipant(`e2e-draft-${Date.now()}`);
 
+    // Anchor the absence below: assert the tab actually rendered its list
+    // first, so this cannot pass just because nothing was drawn at all.
+    const table = page.locator('[data-cy="predefined-participants-table"]');
+    await expect(table).toBeVisible();
+    await expect(table.locator('tbody tr')).toHaveCount(1);
+
+    // A draft keeps the whole campaigns section out of the DOM rather than
+    // showing it disabled — `smsCampaignsVisible` in
+    // `InviteParticipantsModalContent` gates it on the status. The disabled
+    // state lives on the statuses that do render it; see the test below.
+    await expect(
+      page.locator('[data-cy="sms-campaigns-summary-bar"]'),
+    ).toHaveCount(0);
+    await expect(
+      page.locator('[data-cy="open-sms-campaigns-view"]'),
+    ).toHaveCount(0);
+  });
+
+  test('disables the SMS buttons when the intervention is not published', async ({
+    page,
+  }) => {
+    await stubMeta(page);
+    await stubCampaignList(page, []);
+
+    const dashboardPage = new DashboardPage(page);
+    const interventionPage = new InterventionPage(page);
+    const inviter = new ParticipantInviterPage(page);
+
+    await dashboardPage.goto();
+    await dashboardPage.createIntervention();
+    await interventionPage.createSession();
+    await interventionPage.publishIntervention();
+    // Paused is the nearest status that still shows the campaigns section but
+    // forbids sending (`ALLOWED_SENDING_SMS_CAMPAIGN` is published-only), so it
+    // is what exercises the disabled state.
+    await interventionPage.pauseIntervention();
+
+    await inviter.open();
+    await inviter.goToPredefinedParticipantsTab();
+    await inviter.createPredefinedParticipant(`e2e-paused-${Date.now()}`);
+
     await inviter.openCampaignsView();
 
-    // A draft has no published link to send, and the API would answer
-    // 400 INTERVENTION_DRAFT anyway.
     await expect(inviter.sendInvitationButton).toBeDisabled();
     await expect(inviter.sendReminderButton).toBeDisabled();
 
