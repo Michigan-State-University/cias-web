@@ -89,7 +89,9 @@ CIAS_WEB_DIR="${1:-.}"
 IMAGE_TAG="${2:-}"
 # The build bakes the working tree, so uncommitted changes would ship under a
 # commit tag that doesn't contain them.
-if [[ -n "$(git -C "$CIAS_WEB_DIR" status --porcelain)" ]]; then
+tree_status="$(git -C "$CIAS_WEB_DIR" status --porcelain)" ||
+  die "$CIAS_WEB_DIR is not a git checkout"
+if [[ -n "$tree_status" ]]; then
   die "$CIAS_WEB_DIR has uncommitted changes; commit or stash them first"
 fi
 if [[ -z "$IMAGE_TAG" ]]; then
