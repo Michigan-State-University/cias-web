@@ -41,12 +41,11 @@ VERIFY_WEB_URL="${VERIFY_WEB_URL:-true}"
 required_build_vars=(API_URL WEBSOCKET_URL WEB_URL APP_STAGE SENTRY_ENV
   DISABLED_SMS_CAMPAIGN)
 # Optional, but empty is not neutral: it disables LogRocket, Sentry and the
-# feature flags. Carry each environment's values over. Leave
-# ADDITIONAL_ORIGIN_SECURE_TOKEN empty unless the web origin is in the API's
-# ADDITIONAL_CORS_ORIGINS: whatever it holds is published in the bundle.
+# feature flags. Carry each environment's values over.
+# ADDITIONAL_ORIGIN_SECURE_TOKEN is deliberately never passed: whatever it held
+# would be published in the bundle.
 optional_build_vars=(LOGROCKET_ENV SENTRY_DSN INTERVENTION_EXPORT_FEATURE_ENABLED
-  HFHS_INTEGRATION_FEATURE_ENABLED ALLOWED_USERS_FOR_SMS_CAMPAIGNS
-  ADDITIONAL_ORIGIN_SECURE_TOKEN)
+  HFHS_INTEGRATION_FEATURE_ENABLED ALLOWED_USERS_FOR_SMS_CAMPAIGNS)
 # SENTRY_AUTH_TOKEN (optional) uploads source maps to Sentry during the build.
 # It is passed as a BuildKit secret, so it never lands in the image.
 

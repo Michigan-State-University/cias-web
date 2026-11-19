@@ -13,7 +13,7 @@ name: Deploy Web
 #
 # Each environment needs the variables mapped in the deploy job's env and the
 # SENTRY_AUTH_TOKEN secret; optional values left unset are baked in empty.
-# ADDITIONAL_ORIGIN_SECURE_TOKEN is deliberately not passed: it would be public.
+# ADDITIONAL_ORIGIN_SECURE_TOKEN is deliberately never built in: it would be public.
 
 on:
   release:
