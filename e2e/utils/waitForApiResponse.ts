@@ -3,6 +3,12 @@ import { Page, Request, Response } from '@playwright/test';
 export type ApiResponseMatch = {
   /** Substring(s) the response URL must contain — all of them. */
   urlIncludes: string | string[];
+  /**
+   * Substring(s) the response URL must NOT contain — none of them. Tells a
+   * collection apart from an endpoint nested under it, which the substring
+   * match above cannot.
+   */
+  urlExcludes?: string | string[];
   method?: string;
   /** Expected status. Responses with any other status are reported on timeout. */
   status?: number;
@@ -12,9 +18,10 @@ export type ApiResponseMatch = {
 const DEFAULT_TIMEOUT_MS = 60000;
 const FAILURES_BEFORE_GIVING_UP = 3;
 
-const describeMatch = ({ urlIncludes, method, status }: ApiResponseMatch) => {
-  const url = Array.isArray(urlIncludes) ? urlIncludes.join(' + ') : urlIncludes;
-  return `${method ?? 'any'} ${url}${status ? ` → ${status}` : ''}`;
+const describeMatch = ({ urlIncludes, urlExcludes, method, status }: ApiResponseMatch) => {
+  const url = [urlIncludes].flat().join(' + ');
+  const without = urlExcludes ? ` without ${[urlExcludes].flat().join(' + ')}` : '';
+  return `${method ?? 'any'} ${url}${without}${status ? ` → ${status}` : ''}`;
 };
 
 const describeResponse = async (response: Response) => {
@@ -60,17 +67,25 @@ export const waitForApiResponse = (
   page: Page,
   match: ApiResponseMatch,
 ): Promise<Response> => {
-  const { urlIncludes, method, status, timeout: requested = DEFAULT_TIMEOUT_MS } = match;
+  const {
+    urlIncludes,
+    urlExcludes,
+    method,
+    status,
+    timeout: requested = DEFAULT_TIMEOUT_MS,
+  } = match;
   // On CI the app talks to the remote staging API, which regularly takes longer
   // than the short timeouts many call sites pass (a 15s wait expiring was the
   // most common API failure). Treat the default as a floor there.
   const timeout = process.env.CI ? Math.max(requested, DEFAULT_TIMEOUT_MS) : requested;
-  const fragments = Array.isArray(urlIncludes) ? urlIncludes : [urlIncludes];
+  const fragments = [urlIncludes].flat();
+  const forbidden = [urlExcludes ?? []].flat();
   const unexpected: Response[] = [];
   const failures: string[] = [];
 
   const isTheRequest = (request: Request) =>
     fragments.every((fragment) => request.url().includes(fragment)) &&
+    !forbidden.some((fragment) => request.url().includes(fragment)) &&
     (!method || request.method() === method);
 
   let giveUp: (error: Error) => void = () => {};

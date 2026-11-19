@@ -23,7 +23,7 @@ export const PredefinedParticipantsTable: FC<Props> = ({
   const { formatMessage } = useIntl();
 
   return (
-    <Table width="100%">
+    <Table width="100%" data-cy="predefined-participants-table">
       <THead>
         <TR height={46}>
           <TH padding={8}>
@@ -39,6 +39,11 @@ export const PredefinedParticipantsTable: FC<Props> = ({
           <TH padding={8}>
             <Text textAlign="left" fontWeight="bold">
               {formatMessage(messages.invitationColumnHeader)}
+            </Text>
+          </TH>
+          <TH padding={8}>
+            <Text textAlign="left" fontWeight="bold">
+              {formatMessage(messages.lastReminderColumnHeader)}
             </Text>
           </TH>
           {hasRaSession && (

@@ -75,7 +75,7 @@ test.describe.serial('Session map — scrollbars', () => {
     const { before, after } = await dragBy(
       page,
       thumb,
-      { x: 80, y: 120 },
+      { x: -80, y: 120 },
       {
         whileDragging: async () => {
           await expect(thumb).toHaveClass(/react-draggable-dragging/);
@@ -102,7 +102,7 @@ test.describe.serial('Session map — scrollbars', () => {
     const mapPage = await openMap(page);
 
     const thumb = mapPage.scrollbarThumb('horizontal');
-    const { before, after } = await dragBy(page, thumb, { x: 140, y: 90 });
+    const { before, after } = await dragBy(page, thumb, { x: 140, y: -90 });
 
     expect(after.x).toBeGreaterThan(before.x);
     expectSameAxis(after.y, before.y, 'y');
@@ -116,17 +116,16 @@ test.describe.serial('Session map — scrollbars', () => {
     const thumb = mapPage.scrollbarThumb('vertical');
     const track = await boxOf(mapPage.verticalScrollbar);
 
-    const { after } = await dragBy(
-      page,
-      thumb,
-      { x: 0, y: 4000 },
-      { steps: 1 },
-    );
+    const { after } = await dragBy(page, thumb, { x: 0, y: 200 });
 
     expect(after.y).toBeGreaterThanOrEqual(track.y - TOLERANCE_PX);
     expect(after.y + after.height).toBeLessThanOrEqual(
       track.y + track.height + TOLERANCE_PX,
     );
+
+    expect(
+      Math.abs(after.y + after.height - (track.y + track.height)),
+    ).toBeLessThanOrEqual(TOLERANCE_PX);
   });
 
   test('dragging a scrollbar selects no text on the page', async ({ page }) => {

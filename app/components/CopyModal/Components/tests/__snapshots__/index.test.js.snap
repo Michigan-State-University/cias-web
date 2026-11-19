@@ -361,13 +361,8 @@ exports[`<CopyChooser /> should match the snapshot 1`] = `
                         <div>
                           <span
                             class="c12"
-                            color="#B727EA"
                             data-for="Intervention test title 1"
                             data-tip="Intervention test title 1"
-                            font-size="15"
-                            font-weight="bold"
-                            lineheight="1.3"
-                            theme="[object Object]"
                             width="0"
                           >
                             <span />
@@ -791,13 +786,8 @@ exports[`<CopyChooser /> should match the snapshot 1`] = `
                       <div>
                         <span
                           class="c12"
-                          color="#B727EA"
                           data-for="Intervention test title 1"
                           data-tip="Intervention test title 1"
-                          font-size="15"
-                          font-weight="bold"
-                          lineheight="1.3"
-                          theme="[object Object]"
                           width="0"
                         >
                           <span />

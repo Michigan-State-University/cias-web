@@ -90,7 +90,6 @@ const QuickExit = ({ isMobilePreview, beforeQuickExit }: Props) => {
     TAP_AND_HOLD_FINGERS,
     TAP_AND_HOLD_TIMEOUT_MS,
     TAP_AND_HOLD_MOVE_THRESHOLD_PX,
-    true,
   );
 
   const isTouchScreen = useIsTouchScreen();
