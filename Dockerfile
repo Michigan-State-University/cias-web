@@ -78,7 +78,8 @@ ENV NODE_ENV=production \
 # The ALB does the health checks.
 HEALTHCHECK NONE
 
-# tini runs as PID 1 so an ECS task stop shuts Express down gracefully.
+# tini runs as PID 1: it passes an ECS task stop's SIGTERM on to node, which exits
+# right away (server/ has no shutdown handler), and it reaps zombie processes.
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
         ca-certificates \
         tini \
