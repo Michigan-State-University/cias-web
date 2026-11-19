@@ -46,7 +46,6 @@ jobs:
           # for build-time validation only.
           build-args: |
             SOURCE_VERSION=build-check-${{ github.sha }}
-            NODE_VERSION=22
             API_URL=https://api-build-check.example.com
             WEBSOCKET_URL=wss://api-build-check.example.com/cable
             WEB_URL=https://build-check.example.com

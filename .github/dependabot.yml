@@ -34,3 +34,26 @@ updates:
         versions: [">=12.3.2"]
       - dependency-name: "@formatjs/intl-pluralrules"
         versions: [">=6.3.2"]
+
+  # Base images are pinned by digest, so this also brings rebuilt images with OS fixes.
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # Node majors move with .nvmrc and the app's engines, not on their own.
+      - dependency-name: "node"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    cooldown:
+      default-days: 7
+    # HTD's shared workflow; it isn't changed in this repo.
+    exclude-paths:
+      - ".github/workflows/code-quality.yml"
+    groups:
+      github-actions:
+        patterns: ["*"]
