@@ -80,7 +80,9 @@ HEALTHCHECK NONE
 
 # tini runs as PID 1: it passes an ECS task stop's SIGTERM on to node, which exits
 # right away (server/ has no shutdown handler), and it reaps zombie processes.
-RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+# upgrade: Debian fixes released since the pinned base image was built.
+RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends \
         ca-certificates \
         tini \
     && rm -rf /var/lib/apt/lists/*
