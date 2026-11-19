@@ -71,6 +71,12 @@ fi
 # SessionCreateButton treats only the exact string "true" as disabled.
 [[ "$DISABLED_SMS_CAMPAIGN" == true || "$DISABLED_SMS_CAMPAIGN" == false ]] ||
   die "DISABLED_SMS_CAMPAIGN must be true or false"
+# app/utils/env.ts reads these as Boolean(+value): only 1 turns a feature on, so
+# "true" would silently ship it off.
+for flag in INTERVENTION_EXPORT_FEATURE_ENABLED HFHS_INTEGRATION_FEATURE_ENABLED; do
+  [[ -z "${!flag:-}" || "${!flag}" == 0 || "${!flag}" == 1 ]] ||
+    die "$flag must be 0 or 1 (or empty, which turns it off)"
+done
 [[ "$API_URL" == https://* && "$WEB_URL" == https://* ]] ||
   die "API_URL and WEB_URL must start with https://"
 [[ "$WEBSOCKET_URL" == wss://* ]] || die "WEBSOCKET_URL must start with wss://"
