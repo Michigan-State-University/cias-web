@@ -1,15 +1,19 @@
 name: Build check
 
-# Run on every push to a feature branch and on PRs.
-# Goal: verify the Dockerfile builds successfully for linux/amd64.
-# Does not push anywhere, does not require AWS credentials.
+# Builds the image for linux/amd64 and checks it, for PRs into dev, test and
+# master and for pushes to those branches. Pushes nothing and needs no AWS
+# credentials.
 
 on:
   pull_request:
-    branches: [main]
+    branches: [dev, test, master]
   push:
-    branches-ignore: [main]
+    branches: [dev, test, master]
   workflow_dispatch:
+
+concurrency:
+  group: build-check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
