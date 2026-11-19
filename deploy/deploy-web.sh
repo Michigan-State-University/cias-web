@@ -106,6 +106,7 @@ export "${required_build_vars[@]}" "${optional_build_vars[@]}" SENTRY_AUTH_TOKEN
 # Registers a copy of a task definition with every container that runs an image
 # from ECR_REPOSITORY_URI switched to IMAGE, and prints the new revision's ARN.
 # Other containers (e.g. the nginx sidecar) are left as they are.
+# It runs inside $(...), where bash ignores set -e, so failures are checked by hand.
 register_revision() {
   local task_definition="$1" definition
   log "Registering a new revision of $task_definition with $IMAGE"
@@ -118,7 +119,7 @@ register_revision() {
         )
         | del(.taskDefinitionArn, .revision, .status, .requiresAttributes,
               .compatibilities, .registeredAt, .registeredBy, .deregisteredAt)'
-  )"
+  )" || die "could not read task definition $task_definition"
   # Without a match the new revision would be identical and the deploy a no-op.
   jq -e --arg image "$IMAGE" 'any(.containerDefinitions[]; .image == $image)' \
     <<<"$definition" >/dev/null ||
