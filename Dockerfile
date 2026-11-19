@@ -87,24 +87,24 @@ RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
         tini \
     && rm -rf /var/lib/apt/lists/*
 
-# node:22-slim already has a non-root `node` user (UID/GID 1000); creating another
-# would clash on GID 1000.
-RUN mkdir -p /web && chown -R node:node /web
-
 WORKDIR /web
 
+# Everything stays owned by root: the server only reads these files, so the node
+# user can't change the code or the bundle it serves.
 # Reuse the builder's pruned, patched node_modules: running npm ci here would run
 # the patch-package postinstall without patch-package installed.
-COPY --from=builder --chown=node:node /web/node_modules ./node_modules
-COPY --from=builder --chown=node:node /web/package.json /web/package-lock.json ./
-COPY --from=builder --chown=node:node /web/build ./build
-COPY --chown=node:node server/ ./server/
+COPY --from=builder /web/node_modules ./node_modules
+COPY --from=builder /web/package.json /web/package-lock.json ./
+COPY --from=builder /web/build ./build
+COPY server/ ./server/
 
 # The release tag, readable at runtime with `cat /release-version`.
 ARG SOURCE_VERSION=unspecified
 ENV SOURCE_VERSION=${SOURCE_VERSION}
 RUN echo "${SOURCE_VERSION}" > /release-version
 
+# node:22-slim's built-in non-root user (UID/GID 1000); creating another would
+# clash on GID 1000.
 USER node
 
 EXPOSE 4200

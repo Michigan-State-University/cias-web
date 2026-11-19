@@ -119,6 +119,16 @@ jobs:
           echo "Release version in image: $VERSION"
           [ "$VERSION" = "build-check-${{ github.sha }}" ] || (echo "Mismatch"; exit 1)
 
+      # Everything under /web is owned by root (see the Dockerfile).
+      - name: Check the node user can't change the app
+        run: |
+          docker run --rm cias-web:build-check sh -c '
+            for path in build/.write-check server/.write-check node_modules/.write-check package.json; do
+              if touch "$path" 2>/dev/null; then echo "$path is writable by $(id -un)"; exit 1; fi
+            done
+            echo "The app files are read-only for $(id -un)"
+          '
+
       # Lists vulnerabilities that have a fix (Debian packages, gems/npm packages, and
       # Ruby's/Node's own) in the job summary. On PRs and pushes a finding marks this step
       # failed without failing the job; the weekly run fails, so it sends a notification.
