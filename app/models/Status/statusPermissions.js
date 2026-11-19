@@ -20,6 +20,8 @@ const ALLOWED_CREATING_PREDEFINED_PARTICIPANTS = [
 
 const ALLOWED_BULK_IMPORTING_RA_ANSWERS = [InterventionStatus.PUBLISHED];
 
+const ALLOWED_SENDING_SMS_CAMPAIGN = [InterventionStatus.PUBLISHED];
+
 const ALLOWED_FILLING_RA_SESSION = [InterventionStatus.PUBLISHED];
 
 const ALLOWED_CHANGING_ACCESS_SETTINGS = [InterventionStatus.DRAFT];
@@ -61,6 +63,9 @@ export const canCopyInvitationLink = (interventionStatus) =>
 
 export const canCreatePredefinedParticipants = (interventionStatus) =>
   ALLOWED_CREATING_PREDEFINED_PARTICIPANTS.includes(interventionStatus);
+
+export const canSendSmsCampaign = (interventionStatus) =>
+  ALLOWED_SENDING_SMS_CAMPAIGN.includes(interventionStatus);
 
 export const canBulkImportRaAnswers = (interventionStatus) =>
   ALLOWED_BULK_IMPORTING_RA_ANSWERS.includes(interventionStatus);

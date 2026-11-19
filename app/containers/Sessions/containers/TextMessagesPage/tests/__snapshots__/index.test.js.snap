@@ -560,9 +560,6 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
                     class="c20"
                     data-for="text-message-plan-1"
                     data-tip="Text message plan 1"
-                    font-size="18"
-                    font-weight="bold"
-                    theme="[object Object]"
                     width="0"
                   >
                     <span />
@@ -601,7 +598,6 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
                       class="c22"
                       data-for="text-message-plan-1"
                       data-tip="Send 3 days after the session is completed"
-                      theme="[object Object]"
                       width="0"
                     >
                       <span />
@@ -658,9 +654,6 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
                     class="c20"
                     data-for="text-message-plan-2"
                     data-tip="Text message plan 2"
-                    font-size="18"
-                    font-weight="bold"
-                    theme="[object Object]"
                     width="0"
                   >
                     <span />
@@ -699,7 +692,6 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
                       class="c22"
                       data-for="text-message-plan-2"
                       data-tip="Send an alert to the specified number."
-                      theme="[object Object]"
                       width="0"
                     >
                       <span />

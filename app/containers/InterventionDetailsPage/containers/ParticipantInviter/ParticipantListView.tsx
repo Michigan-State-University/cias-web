@@ -32,9 +32,24 @@ export type Props = {
   onInvite: (invitationType: ParticipantInvitationType) => void;
   onUploadEmails: () => void;
   onManage: (participantId: string) => void;
+  onOpenSmsCampaigns: () => void;
+  /** False hides the campaigns bar: nothing is fetched for this user. */
+  smsCampaignsVisible: boolean;
   activeTab: string;
   setActiveTab: (tab: string) => void;
 };
+
+/**
+ * `Tabs` reads `label`, `hidden` and `data-cy` off its children's props, which
+ * a plain <div> does not type. Passing them as one spread keeps that in a
+ * single place instead of a @ts-ignore above every tab.
+ */
+const tabProps = (label: string, dataCy: string, hidden?: boolean) =>
+  ({
+    label,
+    'data-cy': dataCy,
+    hidden,
+  }) as Record<string, unknown>;
 
 export const ParticipantListView: FC<Props> = ({
   isModularIntervention,
@@ -52,6 +67,8 @@ export const ParticipantListView: FC<Props> = ({
   onInvite,
   onUploadEmails,
   onManage,
+  onOpenSmsCampaigns,
+  smsCampaignsVisible,
   activeTab,
   setActiveTab,
 }) => {
@@ -98,8 +115,12 @@ export const ParticipantListView: FC<Props> = ({
         }}
         minHeight="0px"
       >
-        {/* @ts-ignore */}
-        <div label={formatMessage(messages.emailParticipantsTab)}>
+        <div
+          {...tabProps(
+            formatMessage(messages.emailParticipantsTab),
+            'email-participants-tab',
+          )}
+        >
           <EmailParticipantsTab
             interventionId={interventionId}
             interventionName={interventionName}
@@ -112,8 +133,12 @@ export const ParticipantListView: FC<Props> = ({
             onUploadEmails={onUploadEmails}
           />
         </div>
-        {/* @ts-ignore */}
-        <div label={formatMessage(messages.predefinedParticipantsTab)}>
+        <div
+          {...tabProps(
+            formatMessage(messages.predefinedParticipantsTab),
+            'predefined-participants-tab',
+          )}
+        >
           <PredefinedParticipantsTab
             interventionId={interventionId}
             isReportingIntervention={isReportingIntervention}
@@ -123,10 +148,17 @@ export const ParticipantListView: FC<Props> = ({
             }
             onInvite={onInvite}
             onManage={onManage}
+            onOpenSmsCampaigns={onOpenSmsCampaigns}
+            smsCampaignsVisible={smsCampaignsVisible}
           />
         </div>
-        {/* @ts-ignore */}
-        <div label={testParticipantsTabLabel} hidden={!showTestLinkTab}>
+        <div
+          {...tabProps(
+            testParticipantsTabLabel,
+            'test-link-tab',
+            !showTestLinkTab,
+          )}
+        >
           <TestLinkTab
             isModularIntervention={isModularIntervention}
             isReportingIntervention={isReportingIntervention}
