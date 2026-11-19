@@ -13,8 +13,9 @@
 #   IMAGE_TAG     version to build and deploy (default: 8-char git SHA of
 #                 CIAS_WEB_DIR)
 #
-# Settings come from environment variables of the same name; only AWS_REGION
-# and VERIFY_WEB_URL have defaults, so a run can't land on another environment.
+# Settings come from environment variables of the same name; only AWS_REGION,
+# VERIFY_WEB_URL and ROLLOUT_TIMEOUT_SECONDS have defaults, so a run can't land
+# on another environment.
 # Run by .github/workflows/deploy-web.yml, or by hand.
 #
 # Requires aws (v2), docker, jq, git and curl. The AWS caller needs:
@@ -35,6 +36,8 @@ IMAGE_TAG_PREFIX="${IMAGE_TAG_PREFIX:-}"
 # After deploying, check that WEB_URL serves this image's bundle. Set to false
 # while WEB_URL still points elsewhere, e.g. at Dokku before the DNS cutover.
 VERIFY_WEB_URL="${VERIFY_WEB_URL:-true}"
+# How long to wait for the service to roll out the new revision.
+ROLLOUT_TIMEOUT_SECONDS="${ROLLOUT_TIMEOUT_SECONDS:-1200}"
 
 # Build configuration baked into the bundle; the checks below enforce the
 # formats.
@@ -66,6 +69,8 @@ if (( ${#missing[@]} > 0 )); then
 fi
 [[ "$VERIFY_WEB_URL" == true || "$VERIFY_WEB_URL" == false ]] ||
   die "VERIFY_WEB_URL must be true or false"
+[[ "$ROLLOUT_TIMEOUT_SECONDS" =~ ^[0-9]+$ ]] ||
+  die "ROLLOUT_TIMEOUT_SECONDS must be a number of seconds"
 # The app only recognises these two; "production" would silently act as neither.
 [[ "$APP_STAGE" == dev || "$APP_STAGE" == prod ]] || die "APP_STAGE must be dev or prod"
 # SessionCreateButton treats only the exact string "true" as disabled.
@@ -128,6 +133,43 @@ register_revision() {
     die "no container in $task_definition runs an image from $ECR_REPOSITORY_URI"
   aws ecs register-task-definition --cli-input-json "$definition" \
     --query taskDefinition.taskDefinitionArn --output text
+}
+
+# Waits until a service runs the given revision. Polls describe-services instead
+# of `aws ecs wait services-stable`, which gives up after 10 minutes and can't
+# tell a rollback from a slow rollout. Dies if ECS rolls the service back, marks
+# the rollout failed, or it hasn't finished within ROLLOUT_TIMEOUT_SECONDS.
+wait_for_rollout() {
+  local service="$1" revision="$2" state last=""
+  local deadline=$((SECONDS + ROLLOUT_TIMEOUT_SECONDS))
+  while :; do
+    state="$(
+      aws ecs describe-services --cluster "$ECS_CLUSTER_ARN" --services "$service" \
+        --query 'services[0].deployments' |
+        jq -r --arg rev "$revision" '
+          (map(select(.status == "PRIMARY")) | first) as $primary
+          | if $primary == null then "unknown"
+            elif $primary.taskDefinition != $rev then "rolled-back \($primary.taskDefinition)"
+            elif $primary.rolloutState == "FAILED" then "failed \($primary.rolloutStateReason // "")"
+            elif $primary.rolloutState == "COMPLETED"
+              or ($primary.rolloutState == null and length == 1
+                  and $primary.runningCount == $primary.desiredCount) then "completed"
+            else "running \($primary.runningCount)/\($primary.desiredCount), \($primary.failedTasks) failed"
+            end'
+    )" || die "could not describe $service"
+    case "$state" in
+      completed) log "$service is running $revision"; return 0 ;;
+      rolled-back*) die "$service was rolled back to ${state#rolled-back } instead of $revision" ;;
+      failed*) die "the rollout of $revision on $service failed: ${state#failed }" ;;
+    esac
+    if [[ "$state" != "$last" ]]; then
+      log "$service: $state"
+      last="$state"
+    fi
+    (( SECONDS < deadline )) ||
+      die "$service hasn't finished rolling out $revision after ${ROLLOUT_TIMEOUT_SECONDS}s ($state)"
+    sleep 15
+  done
 }
 
 # --- Build --------------------------------------------------------------------
@@ -194,15 +236,8 @@ aws ecs update-service --cluster "$ECS_CLUSTER_ARN" --service "$WEB_SERVICE_ARN"
 log "To roll back:"
 log "  aws ecs update-service --cluster $ECS_CLUSTER_ARN --service $WEB_SERVICE_ARN --task-definition $current"
 
-log "Waiting for the service to stabilize"
-aws ecs wait services-stable --cluster "$ECS_CLUSTER_ARN" --services "$WEB_SERVICE_ARN"
-
-# services-stable also returns after the deployment circuit breaker has rolled
-# the service back, so check it really settled on the new revision.
-running="$(aws ecs describe-services --cluster "$ECS_CLUSTER_ARN" --services "$WEB_SERVICE_ARN" \
-  --query 'services[0].taskDefinition' --output text)"
-[[ "$running" == "$revision" ]] ||
-  die "the service settled on $running instead of $revision (rolled back?)"
+log "Waiting for the rollout (up to ${ROLLOUT_TIMEOUT_SECONDS}s)"
+wait_for_rollout "$WEB_SERVICE_ARN" "$revision"
 
 # --- Verify -------------------------------------------------------------------
 
