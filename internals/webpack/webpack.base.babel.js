@@ -1,7 +1,12 @@
 /**
  * COMMON WEBPACK CONFIGURATION
  */
-const { getCommitHash, onHeroku, gitRevisionPlugin } = require('./utils');
+const {
+  getCommitHash,
+  getSentryRelease,
+  onHeroku,
+  gitRevisionPlugin,
+} = require('./utils');
 
 const path = require('path');
 const webpack = require('webpack');
@@ -138,6 +143,7 @@ module.exports = (options) => ({
       GIT_HASH: getCommitHash(),
       // add it in plugin because it is passed during build only, this makes it available during app start
       VERSION: process.env.VERSION,
+      SENTRY_RELEASE: getSentryRelease(),
     }),
     new CopyWebpackPlugin({ patterns: [{ from: 'public' }] }),
   ]),
