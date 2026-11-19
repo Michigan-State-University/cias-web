@@ -108,6 +108,12 @@ if [[ -n "$tree_status" ]]; then
 fi
 if [[ -z "$IMAGE_TAG" ]]; then
   IMAGE_TAG="$(git -C "$CIAS_WEB_DIR" rev-parse --short=8 HEAD)"
+elif tag_commit="$(git -C "$CIAS_WEB_DIR" rev-parse -q --verify "refs/tags/$IMAGE_TAG^{commit}")"; then
+  # Tags are mutable in ECR, so building another commit would replace the release image.
+  [[ "$tag_commit" == "$(git -C "$CIAS_WEB_DIR" rev-parse HEAD)" ]] ||
+    die "$CIAS_WEB_DIR isn't at $IMAGE_TAG ($tag_commit); check the tag out first"
+elif [[ "$IMAGE_TAG" =~ ^v[0-9] ]]; then
+  die "$IMAGE_TAG looks like a release tag but isn't a tag in $CIAS_WEB_DIR; fetch tags and check it out"
 fi
 IMAGE="$ECR_REPOSITORY_URI:$IMAGE_TAG_PREFIX-$IMAGE_TAG"
 
@@ -147,7 +153,7 @@ register_revision() {
 # tell a rollback from a slow rollout. Dies if ECS rolls the service back, marks
 # the rollout failed, or it hasn't finished within ROLLOUT_TIMEOUT_SECONDS.
 wait_for_rollout() {
-  local service="$1" revision="$2" state last=""
+  local service="$1" revision="$2" state last="" seen=""
   local deadline=$((SECONDS + ROLLOUT_TIMEOUT_SECONDS))
   while :; do
     state="$(
@@ -156,7 +162,9 @@ wait_for_rollout() {
         jq -r --arg rev "$revision" '
           (map(select(.status == "PRIMARY")) | first) as $primary
           | if $primary == null then "unknown"
-            elif $primary.taskDefinition != $rev then "rolled-back \($primary.taskDefinition)"
+            elif $primary.taskDefinition != $rev then
+              (if any(.[]; .taskDefinition == $rev) then "rolled-back" else "not-listed" end)
+              + " \($primary.taskDefinition)"
             elif $primary.rolloutState == "FAILED" then "failed \($primary.rolloutStateReason // "")"
             elif $primary.rolloutState == "COMPLETED"
               or ($primary.rolloutState == null and length == 1
@@ -168,6 +176,12 @@ wait_for_rollout() {
       completed) log "$service is running $revision"; return 0 ;;
       rolled-back*) die "$service was rolled back to ${state#rolled-back } instead of $revision" ;;
       failed*) die "the rollout of $revision on $service failed: ${state#failed }" ;;
+      # Right after update-service, a read can still show only the old deployment.
+      # Once the revision has been seen, its disappearance means a rollback.
+      not-listed*)
+        [[ -z "$seen" ]] || die "$service was rolled back to ${state#not-listed } instead of $revision"
+        state="waiting for ECS to list $revision" ;;
+      running*) seen=1 ;;
     esac
     if [[ "$state" != "$last" ]]; then
       log "$service: $state"
