@@ -17,6 +17,17 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends ca-certific
 
 WORKDIR /web
 
+# patch-package runs in postinstall, so patches/ must be in place before npm ci.
+# .npmrc sets legacy-peer-deps=true, which npm ci needs for this dependency tree.
+# NODE_ENV stays unset: with NODE_ENV=production `npm ci` skips devDependencies,
+# so the patch-package postinstall fails. The build script sets NODE_ENV itself.
+COPY package.json package-lock.json .npmrc ./
+COPY patches/ ./patches/
+COPY internals/scripts/npmcheckversion.js ./internals/scripts/npmcheckversion.js
+RUN npm ci --prefer-offline --no-audit --progress=false
+
+# The build configuration comes after npm ci: every build has its own values, and
+# declaring them earlier would make the dependency layer uncacheable.
 ARG API_URL
 ARG WEBSOCKET_URL
 ARG WEB_URL
@@ -33,9 +44,6 @@ ARG ALLOWED_USERS_FOR_SMS_CAMPAIGNS
 ARG SOURCE_VERSION=unspecified
 
 # webpack's Dotenv plugin (systemvars) reads these from the environment.
-# NODE_ENV stays unset here: with NODE_ENV=production `npm ci` skips
-# devDependencies, so the patch-package postinstall fails. The build script sets
-# NODE_ENV itself.
 ENV API_URL=${API_URL} \
     WEBSOCKET_URL=${WEBSOCKET_URL} \
     WEB_URL=${WEB_URL} \
@@ -48,13 +56,6 @@ ENV API_URL=${API_URL} \
     DISABLED_SMS_CAMPAIGN=${DISABLED_SMS_CAMPAIGN} \
     ALLOWED_USERS_FOR_SMS_CAMPAIGNS=${ALLOWED_USERS_FOR_SMS_CAMPAIGNS} \
     SOURCE_VERSION=${SOURCE_VERSION}
-
-# patch-package runs in postinstall, so patches/ must be in place before npm ci.
-# .npmrc sets legacy-peer-deps=true, which npm ci needs for this dependency tree.
-COPY package.json package-lock.json .npmrc ./
-COPY patches/ ./patches/
-COPY internals/scripts/npmcheckversion.js ./internals/scripts/npmcheckversion.js
-RUN npm ci --prefer-offline --no-audit --progress=false
 
 COPY . .
 
