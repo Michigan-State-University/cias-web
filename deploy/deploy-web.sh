@@ -69,8 +69,8 @@ if (( ${#missing[@]} > 0 )); then
 fi
 [[ "$VERIFY_WEB_URL" == true || "$VERIFY_WEB_URL" == false ]] ||
   die "VERIFY_WEB_URL must be true or false"
-[[ "$ROLLOUT_TIMEOUT_SECONDS" =~ ^[0-9]+$ ]] ||
-  die "ROLLOUT_TIMEOUT_SECONDS must be a number of seconds"
+[[ "$ROLLOUT_TIMEOUT_SECONDS" =~ ^[1-9][0-9]*$ ]] ||
+  die "ROLLOUT_TIMEOUT_SECONDS must be a whole number of seconds, without a leading zero"
 # The app only recognises these two; "production" would silently act as neither.
 [[ "$APP_STAGE" == dev || "$APP_STAGE" == prod ]] || die "APP_STAGE must be dev or prod"
 # SessionCreateButton treats only the exact string "true" as disabled.
