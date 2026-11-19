@@ -71,6 +71,13 @@ fi
   die "VERIFY_WEB_URL must be true or false"
 [[ "$ROLLOUT_TIMEOUT_SECONDS" =~ ^[1-9][0-9]*$ ]] ||
   die "ROLLOUT_TIMEOUT_SECONDS must be a whole number of seconds, without a leading zero"
+# These end up in AWS CLI arguments, so only the expected shapes get through.
+for var in ECS_CLUSTER_ARN WEB_SERVICE_ARN; do
+  [[ "${!var}" =~ ^arn:aws:ecs:[a-z0-9-]+:[0-9]{12}:[a-z-]+/[A-Za-z0-9_./:-]+$ ]] ||
+    die "$var must be an ECS ARN"
+done
+[[ "$ECR_REPOSITORY_URI" =~ ^[0-9]{12}\.dkr\.ecr\.[a-z0-9-]+\.amazonaws\.com/[a-z0-9._/-]+$ ]] ||
+  die "ECR_REPOSITORY_URI must look like <account>.dkr.ecr.<region>.amazonaws.com/<repo>"
 # The app only recognises these two; "production" would silently act as neither.
 [[ "$APP_STAGE" == dev || "$APP_STAGE" == prod ]] || die "APP_STAGE must be dev or prod"
 # SessionCreateButton treats only the exact string "true" as disabled.
