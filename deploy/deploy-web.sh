@@ -192,7 +192,8 @@ if (( ${#empty[@]} > 0 )); then
   log "  empty: ${empty[*]}"
 fi
 
-build_args=(--platform linux/amd64 --build-arg SOURCE_VERSION="$IMAGE_TAG")
+# --pull: always start from the current base image, not a stale local copy.
+build_args=(--pull --platform linux/amd64 --build-arg SOURCE_VERSION="$IMAGE_TAG")
 for var in "${required_build_vars[@]}" "${optional_build_vars[@]}"; do
   build_args+=(--build-arg "$var")
 done
