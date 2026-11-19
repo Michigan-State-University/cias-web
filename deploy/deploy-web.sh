@@ -153,15 +153,16 @@ docker build "${build_args[@]}" -t "$IMAGE" "$CIAS_WEB_DIR"
 
 # Check what got baked in before anything leaves this machine.
 log "Checking the image"
+# Each result gets its own labelled line, so an empty one can't shift the others.
 image_check="$(
   docker run --rm --platform linux/amd64 --entrypoint sh -e API_URL "$IMAGE" -c '
-    cat /release-version
-    ls build | grep -E "^main\.[0-9a-f]+\.js$" | head -1
-    grep -rlF "$API_URL" build | head -1'
+    echo "release=$(cat /release-version 2>/dev/null)"
+    echo "bundle=$(ls build | grep -E "^main\.[0-9a-f]+\.js$" | head -1)"
+    echo "api_url_file=$(grep -rlF "$API_URL" build | head -1)"'
 )"
-release_version="$(sed -n 1p <<<"$image_check")"
-main_bundle="$(sed -n 2p <<<"$image_check")"
-api_url_file="$(sed -n 3p <<<"$image_check")"
+release_version="$(sed -n 's/^release=//p' <<<"$image_check")"
+main_bundle="$(sed -n 's/^bundle=//p' <<<"$image_check")"
+api_url_file="$(sed -n 's/^api_url_file=//p' <<<"$image_check")"
 [[ "$release_version" == "$IMAGE_TAG" ]] ||
   die "/release-version is '$release_version', expected '$IMAGE_TAG'"
 [[ -n "$main_bundle" ]] || die "the image has no build/main.<hash>.js"
