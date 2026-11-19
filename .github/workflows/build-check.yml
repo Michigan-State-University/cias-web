@@ -54,7 +54,6 @@ jobs:
             HFHS_INTEGRATION_FEATURE_ENABLED=0
             DISABLED_SMS_CAMPAIGN=
             ALLOWED_USERS_FOR_SMS_CAMPAIGNS=
-            ADDITIONAL_ORIGIN_SECURE_TOKEN=
           tags: cias-web:build-check
 
       - name: Inspect image
