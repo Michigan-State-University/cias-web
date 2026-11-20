@@ -6,6 +6,7 @@
 .editorconfig
 .idea
 .vscode
+.history/
 **/.DS_Store
 
 # Local secrets / env — NEVER bake into the image (build args carry env per build)
@@ -20,11 +21,17 @@ coverage/
 e2e/
 cypress/
 playwright-report/
+playwright/
+blob-report/
 test-results/
 .tmp-webpack/
 .auth/
 **/*.log
 .eslintcache
+stats.json
+false/
+htd-cq-output/
+.htd-cq-coverage/
 
 # Docker / CI files (not needed inside the image)
 Dockerfile*
@@ -33,6 +40,7 @@ docker-compose*.yml
 
 # Tooling / repo metadata
 .claude
+**/CLAUDE.md
 docs
 README.md
 CHANGELOG.md
