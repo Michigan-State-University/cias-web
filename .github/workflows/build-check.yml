@@ -1,8 +1,8 @@
 name: Build check
 
 # Builds the image for linux/amd64 and checks it, for PRs into dev, test and
-# master and for pushes to those branches, and once a week for master. Pushes
-# nothing and needs no AWS credentials.
+# master and for pushes to those branches. Pushes nothing and needs no AWS
+# credentials. The weekly scan of master is in scan-master.yml.
 
 on:
   pull_request:
@@ -10,10 +10,6 @@ on:
   push:
     branches: [dev, test, master]
   workflow_dispatch:
-  # A fresh build of master (what production runs) is scanned weekly, so new CVEs
-  # show up even when nothing is merged.
-  schedule:
-    - cron: '17 6 * * 1'
 
 concurrency:
   group: build-check-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
@@ -31,9 +27,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-        with:
-          # Scheduled runs start on the default branch (dev); scan master instead.
-          ref: ${{ github.event_name == 'schedule' && 'master' || '' }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
@@ -46,8 +39,6 @@ jobs:
           load: true
           platforms: linux/amd64
           provenance: false
-          # A cached apt-get upgrade layer would hide newer Debian fixes from the weekly scan.
-          no-cache: ${{ github.event_name == 'schedule' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           # Build-args MUST be set or webpack bakes empty strings into the bundle.
@@ -130,13 +121,14 @@ jobs:
           '
 
       # Lists vulnerabilities that have a fix (Debian packages, gems/npm packages, and
-      # Ruby's/Node's own) in the job summary. On PRs and pushes a finding marks this step
-      # failed without failing the job; the weekly run fails, so it sends a notification.
+      # Ruby's/Node's own) in the job summary. A finding marks this step failed without
+      # failing the job.
       # Runs the scanner's image pinned by digest rather than aquasecurity/trivy-action,
       # whose tags were hijacked in March 2026 (CVE-2026-33634). Dependabot doesn't update
-      # docker images in workflows, so bump this pin by hand now and then.
+      # docker images in workflows, so bump this pin (here and in scan-master.yml) by hand now
+      # and then.
       - name: Scan the image for fixable vulnerabilities
-        continue-on-error: ${{ github.event_name != 'schedule' }}
+        continue-on-error: true
         env:
           TRIVY_IMAGE: aquasec/trivy:0.76.2@sha256:8f6bb947dbc528902e11f2f5be52f7b519f6a39d5d148f41166f2040499768fb
         run: |
