@@ -9,7 +9,7 @@
 # image names built from ARGs.
 
 # ---------- builder ----------
-FROM node:22-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee AS builder
+FROM node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee AS builder
 
 # sentry-cli's source-map upload (in `npm run build`) verifies TLS against the
 # system CA bundle, which node:*-slim doesn't ship.
@@ -69,7 +69,7 @@ RUN --mount=type=secret,id=sentry_auth_token \
 RUN npm prune --omit=dev
 
 # ---------- runtime ----------
-FROM node:22-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee AS runtime
+FROM node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee AS runtime
 
 ENV NODE_ENV=production \
     HOST=0.0.0.0 \
@@ -103,7 +103,7 @@ ARG SOURCE_VERSION=unspecified
 ENV SOURCE_VERSION=${SOURCE_VERSION}
 RUN echo "${SOURCE_VERSION}" > /release-version
 
-# node:22-slim's built-in non-root user (UID/GID 1000); creating another would
+# The node image's built-in non-root user (UID/GID 1000); creating another would
 # clash on GID 1000.
 USER node
 

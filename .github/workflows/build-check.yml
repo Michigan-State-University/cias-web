@@ -1,8 +1,7 @@
 name: Build check
 
-# Builds the image for linux/amd64 and checks it, for PRs into dev, test and
-# master and for pushes to those branches. Pushes nothing and needs no AWS
-# credentials. The weekly scan of master is in scan-master.yml.
+# Pushes nothing and needs no AWS credentials. The scheduled scan of master is in
+# scan-master.yml.
 
 on:
   pull_request:
@@ -120,13 +119,11 @@ jobs:
             echo "The app files are read-only for $(id -un)"
           '
 
-      # Lists vulnerabilities that have a fix (Debian packages, gems/npm packages, and
-      # Ruby's/Node's own) in the job summary. A finding marks this step failed without
-      # failing the job.
-      # Runs the scanner's image pinned by digest rather than aquasecurity/trivy-action,
-      # whose tags were hijacked in March 2026 (CVE-2026-33634). Dependabot doesn't update
-      # docker images in workflows, so bump this pin (here and in scan-master.yml) by hand now
-      # and then.
+      # Covers our npm packages, the npm that ships with Node and Debian packages. Node
+      # itself may not be detected: its fixes come with Dependabot's base image updates.
+      # Not aquasecurity/trivy-action: its tags were hijacked in March 2026 (CVE-2026-33634).
+      # Dependabot doesn't update images used in workflows, so bump this pin here and in
+      # scan-master.yml by hand.
       - name: Scan the image for fixable vulnerabilities
         continue-on-error: true
         env:

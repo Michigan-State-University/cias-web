@@ -10,9 +10,13 @@
 **/.DS_Store
 
 # Local secrets / env — NEVER bake into the image (build args carry env per build)
-.env
-.env.*
+# Patterns without **/ match only at the context root, so these use **/ (as .gitignore does).
+**/.env*
 *.local.yml
+**/certificates/
+**/*.pem
+**/*.key
+**/*.p12
 
 # Build / test artifacts (we generate fresh build/ in the builder stage)
 build/
