@@ -26,10 +26,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -43,7 +43,7 @@ jobs:
           NODE_ENV: production
 
       - name: Upload build
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: e2e-build
           path: build/
@@ -82,11 +82,11 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       # The image ships Node 24; the project requires 22
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -105,7 +105,7 @@ jobs:
           fi
 
       - name: Download build
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: e2e-build
           path: build/
@@ -123,7 +123,7 @@ jobs:
           E2E_AUTH_SETUP_DELAY_MS: ${{ vars.E2E_AUTH_SETUP_DELAY_MS }}
 
       - name: Upload blob report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: blob-report-${{ matrix.shard }}
@@ -131,7 +131,7 @@ jobs:
           retention-days: 7
 
       - name: Upload traces and screenshots
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: test-results-${{ matrix.shard }}
@@ -147,10 +147,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -159,7 +159,7 @@ jobs:
         run: npm ci
 
       - name: Download blob reports
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           path: all-blob-reports
           pattern: blob-report-*
@@ -169,7 +169,7 @@ jobs:
         run: npx playwright merge-reports --reporter html ./all-blob-reports
 
       - name: Upload HTML report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: playwright-report/
