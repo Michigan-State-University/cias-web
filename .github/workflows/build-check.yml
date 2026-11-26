@@ -1,8 +1,7 @@
 name: Build check
 
-# Builds the image for linux/amd64 and checks it, for PRs into dev, test and
-# master and for pushes to those branches. Pushes nothing and needs no AWS
-# credentials.
+# Pushes nothing and needs no AWS credentials. The scheduled scan of master is in
+# scan-master.yml.
 
 on:
   pull_request:
@@ -12,7 +11,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: build-check-${{ github.event.pull_request.number || github.ref }}
+  group: build-check-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -46,7 +45,6 @@ jobs:
           # for build-time validation only.
           build-args: |
             SOURCE_VERSION=build-check-${{ github.sha }}
-            NODE_VERSION=22
             API_URL=https://api-build-check.example.com
             WEBSOCKET_URL=wss://api-build-check.example.com/cable
             WEB_URL=https://build-check.example.com
@@ -110,3 +108,35 @@ jobs:
           VERSION=$(docker run --rm cias-web:build-check cat /release-version)
           echo "Release version in image: $VERSION"
           [ "$VERSION" = "build-check-${{ github.sha }}" ] || (echo "Mismatch"; exit 1)
+
+      # Everything under /web is owned by root (see the Dockerfile).
+      - name: Check the node user can't change the app
+        run: |
+          docker run --rm cias-web:build-check sh -c '
+            for path in build/.write-check server/.write-check node_modules/.write-check package.json; do
+              if touch "$path" 2>/dev/null; then echo "$path is writable by $(id -un)"; exit 1; fi
+            done
+            echo "The app files are read-only for $(id -un)"
+          '
+
+      # Covers our npm packages, the npm that ships with Node and Debian packages. Node
+      # itself may not be detected: its fixes come with Dependabot's base image updates.
+      # Not aquasecurity/trivy-action: its tags were hijacked in March 2026 (CVE-2026-33634).
+      # Dependabot doesn't update images used in workflows, so bump this pin here and in
+      # scan-master.yml by hand.
+      - name: Scan the image for fixable vulnerabilities
+        continue-on-error: true
+        env:
+          TRIVY_IMAGE: aquasec/trivy:0.76.2@sha256:8f6bb947dbc528902e11f2f5be52f7b519f6a39d5d148f41166f2040499768fb
+        run: |
+          status=0
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock "$TRIVY_IMAGE" \
+            image --quiet --scanners vuln --ignore-unfixed --severity HIGH,CRITICAL \
+            --exit-code 1 cias-web:build-check > trivy.txt || status=$?
+          {
+            echo "## Fixable HIGH/CRITICAL vulnerabilities"
+            echo '```'
+            cat trivy.txt
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+          exit "$status"

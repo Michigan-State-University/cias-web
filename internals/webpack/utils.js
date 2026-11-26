@@ -8,6 +8,10 @@ const getCommitHash = () =>
   process.env.GIT_REV ||
   gitRevisionPlugin.commithash();
 
+// One Sentry release per deploy: the release tag in Docker, the commit elsewhere.
+const getSentryRelease = () => `${process.env.SENTRY_ENV}-${getCommitHash()}`;
+
 exports.gitRevisionPlugin = gitRevisionPlugin;
 exports.onHeroku = onHeroku;
 exports.getCommitHash = getCommitHash;
+exports.getSentryRelease = getSentryRelease;
