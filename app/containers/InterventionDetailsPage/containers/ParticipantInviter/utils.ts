@@ -412,8 +412,8 @@ export const preparePredefinedParticipantData = ({
 export const getPredefinedParticipantUrl = (slug: string): string =>
   `${WEB_HOST}/usr/${slug}`;
 
-export const formatInvitationSentAt = (invitationSentAt: Nullable<string>) =>
-  invitationSentAt && dayjs(invitationSentAt).format('L LT');
+export const formatTimestamp = (timestamp: Nullable<string>) =>
+  timestamp ? dayjs(timestamp).format('L LT') : null;
 
 const parseBooleanFromCsv = (value?: string): boolean => {
   if (!value) return false;

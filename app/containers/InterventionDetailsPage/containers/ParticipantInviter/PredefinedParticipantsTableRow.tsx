@@ -25,7 +25,7 @@ import Tooltip from 'components/Tooltip';
 import messages from './messages';
 import { TEXT_BUTTON_PROPS } from './constants';
 import { CopyPredefinedParticipantUrlButton } from './CopyPredefinedParticipantUrlButton';
-import { getPredefinedParticipantUrl } from './utils';
+import { formatTimestamp, getPredefinedParticipantUrl } from './utils';
 
 export type Props = {
   predefinedParticipant: PredefinedParticipant;
@@ -51,6 +51,7 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
     active,
     smsInvitationSentAt,
     emailInvitationSentAt,
+    lastReminderSentAt,
     phone,
     slug,
     raSessionCompleted,
@@ -64,8 +65,9 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
       stripesPlacement="odd"
       color={colors.aliceBlueSaturated}
       bg={colors.white}
+      data-cy={`predefined-participant-row-${id}`}
     >
-      <NoMaxWidthTD padding={8} width={hasRaSession ? '34%' : '40%'}>
+      <NoMaxWidthTD padding={8} width={hasRaSession ? '26%' : '32%'}>
         <EllipsisText
           text={
             fullName?.trim() ||
@@ -76,17 +78,23 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
           fontSize={15}
         />
       </NoMaxWidthTD>
-      <NoMaxWidthTD padding={8} width={hasRaSession ? '16%' : '20%'}>
+      <NoMaxWidthTD padding={8} width={hasRaSession ? '14%' : '16%'}>
         <EllipsisText
           text={formatMessage(messages.statusColumnValue, { active })}
           fontSize={15}
         />
       </NoMaxWidthTD>
-      <NoMaxWidthTD padding={8} width={hasRaSession ? '17%' : '20%'}>
+      <NoMaxWidthTD padding={8} width={hasRaSession ? '14%' : '16%'}>
         <EllipsisText
           text={formatMessage(messages.invitationColumnValue, {
             invitationSent: !!(smsInvitationSentAt || emailInvitationSentAt),
           })}
+          fontSize={15}
+        />
+      </NoMaxWidthTD>
+      <NoMaxWidthTD padding={8} width={hasRaSession ? '14%' : '16%'}>
+        <EllipsisText
+          text={formatTimestamp(lastReminderSentAt) ?? '—'}
           fontSize={15}
         />
       </NoMaxWidthTD>
@@ -129,7 +137,7 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
           )}
         </NoMaxWidthTD>
       )}
-      <NoMaxWidthTD padding={8} width={hasRaSession ? '13%' : '20%'}>
+      <NoMaxWidthTD padding={8} width={hasRaSession ? '12%' : '20%'}>
         <Row justify="end" gap={13}>
           <CopyPredefinedParticipantUrlButton
             url={getPredefinedParticipantUrl(slug)}

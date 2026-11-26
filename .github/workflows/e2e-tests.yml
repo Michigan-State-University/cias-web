@@ -1,6 +1,9 @@
 name: E2E Tests
 
-on: push
+# Branch pushes only: a tag points at a commit its branch push already tested.
+on:
+  push:
+    branches: ['**']
 
 concurrency:
   group: e2e-${{ github.ref }}

@@ -22,7 +22,7 @@ import {
   Placement,
   Padding,
 } from '@floating-ui/react-dom';
-import { Options as OffsetOptions } from '@floating-ui/core/src/middleware/offset';
+import type { Options as OffsetOptions } from '@floating-ui/core/src/middleware/offset';
 import capitalize from 'lodash/capitalize';
 
 import { ZIndex } from 'theme';

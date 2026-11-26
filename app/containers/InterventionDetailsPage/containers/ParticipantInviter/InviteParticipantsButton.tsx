@@ -25,6 +25,7 @@ export const InviteParticipantsButton: FC<Props> = ({
       px={24}
       onClick={() => onInvite(invitationType)}
       disabled={disabled}
+      data-cy={`invite-participants-button-${invitationType}`}
     >
       {formatMessage(messages.inviteParticipantsButtonTitle, {
         invitationType,

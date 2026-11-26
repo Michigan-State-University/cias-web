@@ -21,7 +21,11 @@ export const InviteParticipantsModalBackButton: FC<Props> = ({
 
   return (
     <Row>
-      <BackButton onClick={() => onBack()} {...TEXT_BUTTON_PROPS}>
+      <BackButton
+        onClick={() => onBack()}
+        data-cy="invite-participants-back-button"
+        {...TEXT_BUTTON_PROPS}
+      >
         {formatMessage(messages.backButtonTitle, { invitationType })}
       </BackButton>
     </Row>
