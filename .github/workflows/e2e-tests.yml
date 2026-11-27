@@ -9,18 +9,20 @@ concurrency:
   group: e2e-${{ github.ref }}
   cancel-in-progress: true
 
+# Each shard starts its own cias-api with a fresh database, so shards share no
+# server, accounts or data, and nothing depends on the staging API.
 env:
-  API_URL: https://cias-api-staging.herokuapp.com
-  WEBSOCKET_URL: wss://cias-api-staging.herokuapp.com/cable
+  API_URL: http://localhost:3000
+  WEBSOCKET_URL: ws://localhost:3000/cable
   WEB_URL: http://localhost:4200
-  # One shard per admin account: the API rotates tokens per request, so shards can't share one.
   SHARD_COUNT: 5
+  # Throwaway credentials for the local API's seeded E2E users, not secrets.
+  E2E_PASSWORD: 'E2e-local-Password1!'
+  E2E_VERIFICATION_CODE: e2e-local-code
 
 jobs:
   build:
     name: Build app for E2E
-    # Dependabot runs get no secrets, so sign-in would fail
-    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -52,39 +54,94 @@ jobs:
   e2e-tests:
     name: Playwright E2E Tests (shard ${{ matrix.shard }})
     needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    # Tag must match @playwright/test in package-lock.json (checked below)
-    container:
-      image: mcr.microsoft.com/playwright:v1.57.0-noble
+    # Same image as cias-api's CI, whose setup the API steps follow
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
 
-    # One job per staging account across all runs, or they log each other out
-    concurrency:
-      group: e2e-staging-account-${{ matrix.account }}
-      cancel-in-progress: false
+    services:
+      postgres:
+        image: postgres:13.0-alpine
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     strategy:
       # All shards must pass; tests only fail after their CI retries, so flakes don't trigger this
       fail-fast: true
       matrix:
-        # `account` is spelled out: GitHub expressions can't do `matrix.shard - 1`
-        include:
-          - shard: 1
-            account: 0
-          - shard: 2
-            account: 1
-          - shard: 3
-            account: 2
-          - shard: 4
-            account: 3
-          - shard: 5
-            account: 4
+        shard: [1, 2, 3, 4, 5]
+
+    env:
+      RAILS_ENV: development
+      POSTGRES_PASSWORD: postgres
+      REDIS_URL: redis://localhost:6379/1
+      APP_HOSTNAME: http://localhost:3000
+      # One admin per shard is enough: no other shard uses this API.
+      E2E_WORKER_COUNT: 1
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
 
-      # The image ships Node 24; the project requires 22
+      # test and master run against the API branch of the same name, everything else against dev.
+      - name: Pick the API branch
+        id: api
+        run: |
+          case "$GITHUB_REF_NAME" in
+            test|master) echo "ref=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT" ;;
+            *) echo "ref=dev" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - name: Checkout the API
+        uses: actions/checkout@v5
+        with:
+          repository: Michigan-State-University/cias-api
+          ref: ${{ steps.api.outputs.ref }}
+          path: cias-api
+          persist-credentials: false
+
+      # As in cias-api's CI
+      - name: Install libffi7
+        run: sudo apt-get update -qq && sudo apt-get install -y libffi7
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@f9c4492e86def3e644ab32a0ef185eda5b0c20d0 # v1.342.0
+        with:
+          working-directory: cias-api
+          bundler-cache: true
+
+      # db:prepare would also run db/seeds.rb, which this doesn't need.
+      # Interventions require a language, and a schema-only database has none. With
+      # no TTS voice, saving narrator text doesn't call Google.
+      - name: Set up the API database
+        working-directory: cias-api
+        run: |
+          cp .env.template .env
+          cp config/database.docker.yml config/database.yml
+          mkdir -p tmp
+          ruby -rsecurerandom -e 'File.write("tmp/local_secret.txt", SecureRandom.hex(64))'
+          bin/rails db:create db:schema:load db:seed:e2e
+          bin/rails runner 'GoogleLanguage.find_or_create_by!(language_code: "en") { |l| l.language_name = "English" }'
+
+      - name: Start the API
+        working-directory: cias-api
+        run: |
+          nohup bundle exec puma -C config/puma.rb > "$RUNNER_TEMP/api.log" 2>&1 &
+          nohup bundle exec sidekiq -C config/sidekiq.yml > "$RUNNER_TEMP/sidekiq.log" 2>&1 &
+
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -94,15 +151,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check the container image matches @playwright/test
-        run: |
-          missing=$(npx playwright install --dry-run webkit chromium \
-            | sed -n 's/^ *Install location: *//p' | sort -u \
-            | while read -r dir; do [ -d "$dir" ] || printf '%s ' "$dir"; done)
-          if [ -n "$missing" ]; then
-            echo "::error::Browsers missing from the container image: $missing. Bump the image tag in .github/workflows/e2e-tests.yml to match @playwright/test $(node -p "require('./package-lock.json').packages['node_modules/@playwright/test'].version")."
-            exit 1
-          fi
+      - name: Cache Playwright browsers
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install WebKit
+        run: npx playwright install --with-deps webkit
 
       - name: Download build
         uses: actions/download-artifact@v7
@@ -110,17 +166,26 @@ jobs:
           name: e2e-build
           path: build/
 
+      - name: Wait for the API
+        run: |
+          for _ in $(seq 1 60); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$API_URL/v1/auth/ping" || true)
+            if [ "$code" != "000" ] && [ "$code" -lt 500 ]; then
+              echo "API is up (HTTP $code)"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::The API didn't start within 2 minutes"
+          tail -n 100 "$RUNNER_TEMP/api.log"
+          exit 1
+
       - name: Run Playwright tests
         run: npx playwright test --project=webkit --shard=${{ matrix.shard }}/${{ env.SHARD_COUNT }} --workers=1 --reporter=blob,list
         env:
           E2E_BASE_URL: http://localhost:4200
-          E2E_ACCOUNT_OFFSET: ${{ matrix.account }}
           E2E_ACCOUNTS_NEEDED: 1
-          E2E_ADMIN_EMAIL_PATTERN: ${{ vars.E2E_ADMIN_EMAIL_PATTERN }}
-          E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
-          E2E_VERIFICATION_CODE: ${{ secrets.E2E_VERIFICATION_CODE }}
-          E2E_WORKER_COUNT: ${{ vars.E2E_WORKER_COUNT }}
-          E2E_AUTH_SETUP_DELAY_MS: ${{ vars.E2E_AUTH_SETUP_DELAY_MS }}
+          E2E_ADMIN_PASSWORD: ${{ env.E2E_PASSWORD }}
 
       - name: Upload blob report
         uses: actions/upload-artifact@v6
@@ -138,9 +203,20 @@ jobs:
           path: test-results/
           retention-days: 7
 
+      - name: Upload API logs
+        uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: api-logs-${{ matrix.shard }}
+          path: |
+            ${{ runner.temp }}/api.log
+            ${{ runner.temp }}/sidekiq.log
+            cias-api/log/development.log
+          retention-days: 7
+
   merge-reports:
     name: Merge E2E reports
-    if: always() && github.actor != 'dependabot[bot]'
+    if: always()
     needs: e2e-tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
