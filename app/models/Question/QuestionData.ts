@@ -94,6 +94,8 @@ export interface HenryFordQuestionData extends SingleQuestionData {
 }
 export type HenryFordInitialScreenData = never;
 
+export interface FileUploadQuestionData extends QuestionPayloadData<string> {}
+
 export type QuestionData =
   | SingleQuestionData
   | MultipleQuestionData
@@ -115,4 +117,5 @@ export type QuestionData =
   | TlfbEventsData
   | TlfbQuestionData
   | HenryFordQuestionData
-  | HenryFordInitialScreenData;
+  | HenryFordInitialScreenData
+  | FileUploadQuestionData;

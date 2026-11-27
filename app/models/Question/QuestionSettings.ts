@@ -86,12 +86,16 @@ export interface ParticipantReportQuestionSettings
 export interface CurrencyQuestionSettings
   extends QuestionBaseSettings, RequiredSetting, StartAutofinishTimerSetting {}
 
-// Designs do not predict any settings to be available for TLFB screens but this is what BE returns
 export interface TlfbConfigSettings {}
 
 export interface TlfbEventsSettings extends StartAutofinishTimerSetting {}
 
 export interface TlfbQuestionSettings extends StartAutofinishTimerSetting {}
+
+export interface FileUploadQuestionSettings
+  extends QuestionBaseSettings, RequiredSetting, StartAutofinishTimerSetting {
+  showFileDescription: boolean;
+}
 
 export interface HenryFordQuestionSettings extends SingleQuestionSettings {}
 export interface HenryFordInitialScreenSettings extends QuestionBaseSettings {}
@@ -117,4 +121,5 @@ export type QuestionSettings =
   | TlfbEventsSettings
   | TlfbQuestionSettings
   | HenryFordQuestionSettings
-  | HenryFordInitialScreenSettings;
+  | HenryFordInitialScreenSettings
+  | FileUploadQuestionSettings;

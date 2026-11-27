@@ -1,12 +1,3 @@
-/**
- *
- * App.js
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- *
- */
-
 import React, { useEffect, useMemo, useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { Redirect, Switch } from 'react-router-dom';
@@ -66,6 +57,7 @@ import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 import ParticipantReportsPage from 'containers/ParticipantReportsPage/Loadable';
+import ParticipantUploadPage from 'containers/ParticipantUploadPage/Loadable';
 import SessionMapPage from 'containers/SessionMapPage/Loadable';
 import ParticipantInterventionsPage from 'containers/ParticipantInterventionsPage/Loadable';
 import UserInterventionInvitePage from 'containers/UserInterventionInvitePage/Loadable';
@@ -111,7 +103,6 @@ import {
   shouldFetchSelfDetailsByUserRoles,
 } from './utils';
 
-// Preview components defined outside App to avoid recreation on every render
 const AnswerSessionPageComponent = ({ match }) => (
   <AnswerSessionPage match={match} isPreview />
 );
@@ -375,6 +366,23 @@ export function App({ user, fetchSelfDetails }) {
           sidebarProps={{
             sidebarId: NAVIGATION.DEFAULT,
             activeTab: participantReportsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path={RoutePath.PARTICIPANT_UPLOAD}
+          component={ParticipantUploadPage}
+          protectedRoute
+          allowedRoles={[
+            Roles.Admin,
+            Roles.Researcher,
+            Roles.EInterventionAdmin,
+          ]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
           }}
         />
         <AppRoute

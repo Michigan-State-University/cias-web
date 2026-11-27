@@ -28,6 +28,9 @@ export const orderSettings = (settings) =>
     ...(!isNullOrUndefined(settings.none_of_above) && {
       none_of_above: settings.none_of_above,
     }),
+    ...(!isNullOrUndefined(settings.show_file_description) && {
+      show_file_description: settings.show_file_description,
+    }),
     ...(!isNullOrUndefined(settings.start_autofinish_timer) && {
       start_autofinish_timer: settings.start_autofinish_timer,
     }),

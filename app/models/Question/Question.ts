@@ -29,6 +29,7 @@ import {
   TlfbConfigSettings,
   TlfbEventsSettings,
   TlfbQuestionSettings,
+  FileUploadQuestionSettings,
 } from './QuestionSettings';
 import {
   QuestionBody,
@@ -55,6 +56,7 @@ import {
   TlfbQuestionBodyWithConfig,
   HenryFordQuestionBody,
   HenryFordInitialScreenBody,
+  FileUploadQuestionBody,
 } from './QuestionBody';
 import { QuestionOriginalText } from './QuestionOriginalText';
 
@@ -261,6 +263,14 @@ export type HenryFordInitialScreen = GenericQuestion<
 
 export type HenryFordInitialScreenDTO = CamelToSnake<HenryFordInitialScreen>;
 
+export type FileUploadQuestion = GenericQuestion<
+  QuestionTypes.FILE_UPLOAD,
+  FileUploadQuestionBody,
+  FileUploadQuestionSettings
+>;
+
+export type FileUploadQuestionDTO = CamelToSnake<FileUploadQuestion>;
+
 export type Question =
   | SingleQuestion
   | MultipleQuestion
@@ -282,5 +292,6 @@ export type Question =
   | TlfbEvents
   | TlfbQuestion
   | HenryFordQuestion
-  | HenryFordInitialScreen;
+  | HenryFordInitialScreen
+  | FileUploadQuestion;
 export type QuestionDTO = CamelToSnake<Question>;

@@ -2,6 +2,13 @@ import { Page, Locator, expect } from '@playwright/test';
 
 import { waitForApiResponse } from '../utils/waitForApiResponse';
 
+export type QuestionTypeDataCy =
+  | 'single'
+  | 'multiple'
+  | 'text'
+  | 'other'
+  | 'fileupload';
+
 export class SessionPage {
   readonly page: Page;
   readonly backToInterventionButton: Locator;
@@ -76,27 +83,18 @@ export class SessionPage {
     return this.page.url().includes('/sessions/');
   }
 
-  /**
-   * Click the "+ Add new screen" button
-   */
   async clickAddNewScreen() {
     const addScreenButton = this.page.locator('[data-cy="add-screen-button"]');
     await addScreenButton.waitFor({ state: 'visible', timeout: 10000 });
     await addScreenButton.click();
   }
 
-  /**
-   * Select a question type from the question type chooser
-   */
-  async selectQuestionType(questionType: 'single' | 'multiple' | 'text' | 'other') {
+  async selectQuestionType(questionType: QuestionTypeDataCy) {
     const questionTypeSelector = this.page.locator(`[data-cy="question-type-${questionType}"]`);
     await questionTypeSelector.waitFor({ state: 'visible', timeout: 5000 });
     await questionTypeSelector.click();
   }
 
-  /**
-   * Wait for a question to be created via API
-   */
   async waitForQuestionCreated() {
     return waitForApiResponse(this.page, {
       urlIncludes: '/question_groups',
@@ -106,7 +104,7 @@ export class SessionPage {
     });
   }
 
-  async addScreen(questionType: 'single' | 'multiple' | 'text' | 'other') {
+  async addScreen(questionType: QuestionTypeDataCy) {
     const created = this.waitForQuestionCreated();
     await this.clickAddNewScreen();
     await this.selectQuestionType(questionType);

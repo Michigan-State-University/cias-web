@@ -15,4 +15,5 @@ export enum AnswerType {
   THIRD_PARTY = 'Answer::ThirdParty',
   PHONE = 'Answer::Phone',
   HENRY_FORD = 'Answer::HenryFord',
+  FILE_UPLOAD = 'Answer::FileUpload',
 }

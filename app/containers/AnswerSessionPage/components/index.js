@@ -22,6 +22,7 @@ import {
   tlfbQuestion,
   henryFordQuestion,
   henryFordInitialScreen,
+  fileUploadQuestion,
 } from 'models/Session/QuestionTypes';
 
 import CurrencyQuestion from './CurrencyQuestion';
@@ -44,6 +45,7 @@ import TlfbEvents from './TlfbEvents';
 import TlfbQuestion from './TlfbQuestion';
 import HenryFordQuestion from './HenryFordQuestion';
 import HenryFordInitialScreen from './HenryFordInitialScreen';
+import FileUploadQuestion from './FileUploadQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
   const { type } = question;
@@ -90,6 +92,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <HenryFordQuestion question={question} {...sharedProps} />;
     case henryFordInitialScreen.id:
       return <HenryFordInitialScreen question={question} {...sharedProps} />;
+    case fileUploadQuestion.id:
+      return <FileUploadQuestion question={question} {...sharedProps} />;
     default:
       return <ErrorAlert errorText={`CANNOT RENDER ${type}`} />;
   }
