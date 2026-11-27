@@ -9,6 +9,9 @@ concurrency:
   group: e2e-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 # Each shard starts its own cias-api with a fresh database, so shards share no
 # server, accounts or data, and nothing depends on the staging API.
 env:
@@ -28,10 +31,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
           cache: 'npm'
@@ -45,7 +48,7 @@ jobs:
           NODE_ENV: production
 
       - name: Upload build
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: e2e-build
           path: build/
@@ -94,19 +97,31 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
-      # test and master run against the API branch of the same name, everything else against dev.
+      # The API branch of the same name for test and master, and for any other branch
+      # that has commits dev doesn't (a paired feature branch, not an old merged one).
+      # Otherwise dev.
       - name: Pick the API branch
         id: api
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          ref=dev
           case "$GITHUB_REF_NAME" in
-            test|master) echo "ref=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT" ;;
-            *) echo "ref=dev" >> "$GITHUB_OUTPUT" ;;
+            test|master) ref=$GITHUB_REF_NAME ;;
+            *)
+              if ahead=$(gh api "repos/Michigan-State-University/cias-api/compare/dev...$GITHUB_REF_NAME" --jq .ahead_by 2>/dev/null) &&
+                [ "$ahead" -gt 0 ]; then
+                ref=$GITHUB_REF_NAME
+              fi
+              ;;
           esac
+          echo "API branch: $ref"
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
 
       - name: Checkout the API
-        uses: actions/checkout@v5
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           repository: Michigan-State-University/cias-api
           ref: ${{ steps.api.outputs.ref }}
@@ -143,7 +158,7 @@ jobs:
           nohup bundle exec sidekiq -C config/sidekiq.yml > "$RUNNER_TEMP/sidekiq.log" 2>&1 &
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
           cache: 'npm'
@@ -152,16 +167,17 @@ jobs:
         run: npm ci
 
       - name: Cache Playwright browsers
-        uses: actions/cache@v5
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
-      - name: Install WebKit
-        run: npx playwright install --with-deps webkit
+      # The tests run in WebKit; the sign-in setup project uses Playwright's default, Chromium.
+      - name: Install browsers
+        run: npx playwright install --with-deps chromium webkit
 
       - name: Download build
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: e2e-build
           path: build/
@@ -188,7 +204,7 @@ jobs:
           E2E_ADMIN_PASSWORD: ${{ env.E2E_PASSWORD }}
 
       - name: Upload blob report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         if: always()
         with:
           name: blob-report-${{ matrix.shard }}
@@ -196,7 +212,7 @@ jobs:
           retention-days: 7
 
       - name: Upload traces and screenshots
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         if: failure()
         with:
           name: test-results-${{ matrix.shard }}
@@ -204,7 +220,7 @@ jobs:
           retention-days: 7
 
       - name: Upload API logs
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         if: failure()
         with:
           name: api-logs-${{ matrix.shard }}
@@ -223,10 +239,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '22'
           cache: 'npm'
@@ -235,7 +251,7 @@ jobs:
         run: npm ci
 
       - name: Download blob reports
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           path: all-blob-reports
           pattern: blob-report-*
@@ -245,7 +261,7 @@ jobs:
         run: npx playwright merge-reports --reporter html ./all-blob-reports
 
       - name: Upload HTML report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: playwright-report
           path: playwright-report/
