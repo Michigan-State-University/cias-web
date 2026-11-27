@@ -9,6 +9,8 @@ export enum RoutePath {
   DASHBOARD_SETUP = '/organization/:organizationId/dashboard-setup',
   DASHBOARD_VIEW = '/organization/:organizationId/dashboard',
   PARTICIPANT_REPORTS = '/reports',
+
+  PARTICIPANT_UPLOAD = '/participant-uploads/:uploadId',
   LOGIN = '/login',
   REGISTER = '/register',
   RESET_PASSWORD = '/reset-password',
