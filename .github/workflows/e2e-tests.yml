@@ -1,6 +1,9 @@
 name: E2E Tests
 
-on: push
+# Branch pushes only: a tag points at a commit its branch push already tested.
+on:
+  push:
+    branches: ['**']
 
 concurrency:
   group: e2e-${{ github.ref }}
@@ -118,7 +121,6 @@ jobs:
           E2E_VERIFICATION_CODE: ${{ secrets.E2E_VERIFICATION_CODE }}
           E2E_WORKER_COUNT: ${{ vars.E2E_WORKER_COUNT }}
           E2E_AUTH_SETUP_DELAY_MS: ${{ vars.E2E_AUTH_SETUP_DELAY_MS }}
-          ADDITIONAL_ORIGIN_SECURE_TOKEN: ${{ secrets.ADDITIONAL_ORIGIN_SECURE_TOKEN }}
 
       - name: Upload blob report
         uses: actions/upload-artifact@v6

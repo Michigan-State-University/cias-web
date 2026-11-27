@@ -1,0 +1,142 @@
+name: Build check
+
+# Pushes nothing and needs no AWS credentials. The scheduled scan of master is in
+# scan-master.yml.
+
+on:
+  pull_request:
+    branches: [dev, test, master]
+  push:
+    branches: [dev, test, master]
+  workflow_dispatch:
+
+concurrency:
+  group: build-check-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - name: Build image (no push)
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          push: false
+          load: true
+          platforms: linux/amd64
+          provenance: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          # Build-args MUST be set or webpack bakes empty strings into the bundle.
+          # deploy-web.yml passes each environment's real values; these are placeholders
+          # for build-time validation only.
+          build-args: |
+            SOURCE_VERSION=build-check-${{ github.sha }}
+            API_URL=https://api-build-check.example.com
+            WEBSOCKET_URL=wss://api-build-check.example.com/cable
+            WEB_URL=https://build-check.example.com
+            APP_STAGE=build-check
+            LOGROCKET_ENV=
+            SENTRY_DSN=
+            SENTRY_ENV=build-check
+            INTERVENTION_EXPORT_FEATURE_ENABLED=0
+            HFHS_INTEGRATION_FEATURE_ENABLED=0
+            DISABLED_SMS_CAMPAIGN=
+            ALLOWED_USERS_FOR_SMS_CAMPAIGNS=
+          tags: cias-web:build-check
+
+      - name: Inspect image
+        run: |
+          {
+            echo "## Image build successful"
+            echo ""
+            echo '```'
+            docker image inspect cias-web:build-check \
+              --format 'Size: {{.Size}} bytes / Arch: {{.Architecture}}/{{.Os}} / Created: {{.Created}}'
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Verify build-args were baked into the JS bundle
+        # Strong evidence the webpack DefinePlugin substitution worked.
+        # webpack output config: path=build/, filename=[name].[contenthash].js — files land
+        # directly in build/, not under build/static/js/.
+        run: |
+          docker run --rm cias-web:build-check sh -c '
+            if grep -rho "api-build-check.example.com" build/ 2>/dev/null | head -1 | grep -q "api-build-check"; then
+              echo "✓ API_URL was baked into the JS bundle"
+            else
+              echo "✗ API_URL was NOT found in the JS bundle"
+              echo "Contents of build/:"
+              ls build/ | head -20
+              exit 1
+            fi
+          '
+
+      - name: Smoke test — Express server boots and serves index.html
+        run: |
+          docker run -d --name cias-web-test -p 4200:4200 cias-web:build-check
+          # Give the Express server a moment to start
+          for i in 1 2 3 4 5 6; do
+            sleep 2
+            if curl -fsS http://localhost:4200/ -o /tmp/index.html; then
+              echo "Server responded on attempt $i"
+              break
+            fi
+          done
+          # Verify it served HTML, not an error page
+          grep -q '<html' /tmp/index.html || (echo "Did not serve HTML"; cat /tmp/index.html; exit 1)
+          echo "✓ Express server served the SPA"
+          docker logs cias-web-test
+          docker stop cias-web-test
+          docker rm cias-web-test
+
+      - name: Verify /release-version is baked in
+        run: |
+          VERSION=$(docker run --rm cias-web:build-check cat /release-version)
+          echo "Release version in image: $VERSION"
+          [ "$VERSION" = "build-check-${{ github.sha }}" ] || (echo "Mismatch"; exit 1)
+
+      # Everything under /web is owned by root (see the Dockerfile).
+      - name: Check the node user can't change the app
+        run: |
+          docker run --rm cias-web:build-check sh -c '
+            for path in build/.write-check server/.write-check node_modules/.write-check package.json; do
+              if touch "$path" 2>/dev/null; then echo "$path is writable by $(id -un)"; exit 1; fi
+            done
+            echo "The app files are read-only for $(id -un)"
+          '
+
+      # Covers our npm packages, the npm that ships with Node and Debian packages. Node
+      # itself may not be detected: its fixes come with Dependabot's base image updates.
+      # Not aquasecurity/trivy-action: its tags were hijacked in March 2026 (CVE-2026-33634).
+      # Dependabot doesn't update images used in workflows, so bump this pin here and in
+      # scan-master.yml by hand.
+      - name: Scan the image for fixable vulnerabilities
+        continue-on-error: true
+        env:
+          TRIVY_IMAGE: aquasec/trivy:0.76.2@sha256:8f6bb947dbc528902e11f2f5be52f7b519f6a39d5d148f41166f2040499768fb
+        run: |
+          status=0
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock "$TRIVY_IMAGE" \
+            image --quiet --scanners vuln --ignore-unfixed --severity HIGH,CRITICAL \
+            --exit-code 1 cias-web:build-check > trivy.txt || status=$?
+          {
+            echo "## Fixable HIGH/CRITICAL vulnerabilities"
+            echo '```'
+            cat trivy.txt
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+          exit "$status"

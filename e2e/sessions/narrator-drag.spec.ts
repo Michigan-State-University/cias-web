@@ -118,6 +118,13 @@ test.describe.serial('Session editor — narrator drag', () => {
     const parent = await boxOf(sessionPage.narratorCharacter.locator('..'));
     const character = await boxOf(sessionPage.narratorCharacter);
 
+    const saved = waitForApiResponse(page, {
+      urlIncludes: '/questions/',
+      method: 'PATCH',
+      status: 200,
+      timeout: 20000,
+    });
+
     await dragBy(
       page,
       sessionPage.narratorHandle,
@@ -129,6 +136,8 @@ test.describe.serial('Session editor — narrator drag', () => {
     expect(after.x).toBeGreaterThanOrEqual(parent.x - TOLERANCE_PX);
     expect(after.y).toBeGreaterThanOrEqual(parent.y - TOLERANCE_PX);
     expect(after.x).toBeLessThan(character.x);
+
+    await saved;
   });
 
   test('ctrl+drag does not move the character', async ({ page }) => {

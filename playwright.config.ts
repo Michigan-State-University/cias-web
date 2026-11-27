@@ -63,6 +63,9 @@ export default defineConfig({
       name: 'setup',
       testMatch: /.*\.setup\.ts/,
       retries: 2,
+      // The setup types the admin password and the 2FA code. Traces record fill()
+      // values, and traces, videos and screenshots end up in public CI artifacts.
+      use: { trace: 'off', video: 'off', screenshot: 'off' },
     },
     {
       name: 'chromium',

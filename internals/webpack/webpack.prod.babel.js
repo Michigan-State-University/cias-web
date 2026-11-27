@@ -1,5 +1,5 @@
 // Important modules this config uses
-const { getCommitHash } = require('./utils');
+const { getCommitHash, getSentryRelease } = require('./utils');
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -101,7 +101,14 @@ module.exports = require('./webpack.base.babel')({
             // webpack specific configuration
             include: './build',
             ignore: ['node_modules', 'webpack.config.js'],
-            release: `${process.env.SENTRY_ENV}-v${process.env.VERSION}`,
+            release: getSentryRelease(),
+            // A Sentry outage or a bad token shouldn't block a deploy: report a
+            // failed upload as a build warning instead of an error.
+            errorHandler: (err, _invokeErr, compilation) => {
+              compilation.warnings.push(
+                new Error(`Sentry CLI Plugin: ${err.message}`),
+              );
+            },
           }),
         ]
       : []),

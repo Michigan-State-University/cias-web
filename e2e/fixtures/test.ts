@@ -1,6 +1,33 @@
-import { test as base, expect } from '@playwright/test';
+import { test as base, expect, Page, Request } from '@playwright/test';
 import path from 'path';
 import fs from 'fs';
+
+const PENDING_REQUESTS_TIMEOUT_MS = 10000;
+
+// The API replaces the access token on every response, and the app stores the
+// new one when the response arrives. A request still running when a test ends
+// (a save fired by its last action) would leave the old token in the saved
+// state; the API stops accepting that a few seconds later, so the next test,
+// and every retry after it, would start logged out.
+const trackPendingRequests = (page: Page) => {
+  const pending = new Set<Request>();
+  const settle = (request: Request) => pending.delete(request);
+
+  page.on('request', (request) => {
+    if (['xhr', 'fetch'].includes(request.resourceType())) pending.add(request);
+  });
+  page.on('requestfinished', settle);
+  page.on('requestfailed', settle);
+
+  return async () => {
+    const deadline = Date.now() + PENDING_REQUESTS_TIMEOUT_MS;
+    while (pending.size > 0 && Date.now() < deadline) {
+      await page.waitForTimeout(100);
+    }
+    // Gives the app's response interceptor time to store the new token.
+    await page.waitForTimeout(250);
+  };
+};
 
 // Extend the base test with worker-specific authentication and token management
 export const test = base.extend<{}, { workerStorageState: string }>({
@@ -55,6 +82,7 @@ export const test = base.extend<{}, { workerStorageState: string }>({
   // starts with valid tokens.
   page: async ({ context, workerStorageState }, use) => {
     const page = await context.newPage();
+    const waitForPendingRequests = trackPendingRequests(page);
 
     await use(page);
 
@@ -63,6 +91,8 @@ export const test = base.extend<{}, { workerStorageState: string }>({
     // Only persist if the page is still on a valid (non-login) URL to avoid
     // saving a logged-out state after auth failures.
     try {
+      await waitForPendingRequests();
+
       const currentUrl = page.url();
       const isOnLoginPage = currentUrl.includes('/login');
 
