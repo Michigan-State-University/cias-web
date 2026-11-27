@@ -8,9 +8,10 @@ import React, {
 import { motion, AnimatePresence } from 'framer-motion';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
-import byteSize from 'byte-size';
 
 import {
+  buildFileAcceptMap,
+  formatFileSize,
   formatMimeFileFormat,
   formatMimeFileFormatList,
 } from 'utils/formatters';
@@ -46,9 +47,7 @@ type CommonProps = {
   error?: string;
   disabled?: boolean;
   maxSize?: number;
-  // Will look up in maxSizeMap if there is a restriction for selected file type.
-  // If not found, will use maxSize or MAX_FILE_SIZE if not provided (by default)
-  // Please use all lowercase keys!
+
   maxSizeMap?: Map<FileFormat, number>;
   onHideTooltip?: HelpIconTooltipProps['onHide'];
 };
@@ -124,7 +123,7 @@ export const FileUpload = ({
     if (file.size > maxSizeByFormat) {
       setInputError(
         formatMessage(messages.fileTooLargeCustomValidation, {
-          maxSize: byteSize(maxSizeByFormat, { precision: 2 }).toString(),
+          maxSize: formatFileSize(maxSizeByFormat),
         }),
       );
       return false;
@@ -159,19 +158,11 @@ export const FileUpload = ({
     return formatMimeFileFormat(acceptedFormats) ?? '';
   }, [acceptedFormats]);
 
-  // Convert string or string[] to Accept type (Record<string, string[]>)
   const acceptObject = useMemo(() => {
     if (!acceptedFormats) return undefined;
-    const formats = Array.isArray(acceptedFormats)
-      ? acceptedFormats
-      : [acceptedFormats];
-    const result: Record<string, string[]> = {};
-    formats.forEach((format) => {
-      if (!result[format]) {
-        result[format] = [];
-      }
-    });
-    return result;
+    return buildFileAcceptMap(
+      Array.isArray(acceptedFormats) ? acceptedFormats : [acceptedFormats],
+    );
   }, [acceptedFormats]);
 
   const handleReject: DropzoneOptions['onDropRejected'] = (fileRejections) => {
