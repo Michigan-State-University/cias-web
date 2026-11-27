@@ -1,9 +1,3 @@
-/*
- *
- * AnswerSessionPage constants
- *
- */
-
 import { QuestionTypes } from 'models/Question';
 
 export const RESET_REDUCER = 'app/AnswerSessionPage/RESET_REDUCER';
@@ -142,6 +136,12 @@ export const FULL_SIZE_QUESTIONS = [
 export const CONFIRMABLE_QUESTIONS = [
   QuestionTypes.TLFB_EVENTS,
   QuestionTypes.TLFB_QUESTION,
+];
+
+export const BLOCK_CONTINUE_UNTIL_ANSWERED_QUESTIONS = [
+  QuestionTypes.NUMBER,
+  QuestionTypes.CURRENCY,
+  QuestionTypes.FILE_UPLOAD,
 ];
 
 export const NO_CONTINUE_BUTTON_QUESTIONS = [

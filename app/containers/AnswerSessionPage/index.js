@@ -1,9 +1,3 @@
-/**
- *
- * AnswerSessionPage
- *
- */
-
 import React, {
   memo,
   useEffect,
@@ -129,6 +123,7 @@ import {
 import BranchingScreen from './components/BranchingScreen';
 import {
   FULL_SIZE_QUESTIONS,
+  BLOCK_CONTINUE_UNTIL_ANSWERED_QUESTIONS,
   CONFIRMABLE_QUESTIONS,
   NO_CONTINUE_BUTTON_QUESTIONS,
 } from './constants';
@@ -434,7 +429,6 @@ export function AnswerSessionPage({
   const isNewUserSession = useMemo(() => {
     const { lastAnswerAt, started } = userSession ?? {};
 
-    // keeping lastAnswerAt check for existing user sessions
     return !lastAnswerAt && !started;
   }, [userSession]);
 
@@ -487,8 +481,6 @@ export function AnswerSessionPage({
       return;
     }
 
-    // Stuck state: loading=true but we haven't marked this as attempted
-    // (Happens when component unmounts/remounts during locale change)
     if (
       fetchInterventionLoading &&
       fetchAttemptedRef.current !== interventionId
@@ -663,8 +655,8 @@ export function AnswerSessionPage({
     const continueButtonLoading =
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
 
-    const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
-    const isCurrencyQuestion = currentQuestion.type === QuestionTypes.CURRENCY;
+    const continueBlockedUntilAnswered =
+      BLOCK_CONTINUE_UNTIL_ANSWERED_QUESTIONS.includes(currentQuestion.type);
 
     const isAnswered = () => {
       if (!answer) {
@@ -694,13 +686,18 @@ export function AnswerSessionPage({
           const { value } = answerBody[0] ?? {};
           return value && !!value.match(/\d/);
         }
+
+        case QuestionTypes.FILE_UPLOAD: {
+          const { value } = answerBody[0] ?? {};
+          return Array.isArray(value) && value.length > 0;
+        }
         default:
           return true;
       }
     };
 
     const isButtonDisabled = () =>
-      (required || isNumericQuestion || isCurrencyQuestion) && !isAnswered();
+      (required || continueBlockedUntilAnswered) && !isAnswered();
 
     const sharedProps = {
       selectAnswer: selectAnswerProp,
@@ -857,7 +854,6 @@ export function AnswerSessionPage({
       return;
     }
     if (isUserSessionFinished && isGuestUser) {
-      // create new user session as a different guest user
       LocalStorageService.clearHeaders();
     }
     createUserSession(sessionId);
