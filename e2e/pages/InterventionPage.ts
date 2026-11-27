@@ -166,7 +166,7 @@ export class InterventionPage {
 
   // Assert on the session count with a retrying expectation. `getSessionCount()`
   // is a one-shot read: right after a navigation the list has not loaded from
-  // the staging API yet, so it returns 0.
+  // the API yet, so it returns 0.
   async expectSessionCount(count: number) {
     await expect(this.page.locator('[data-cy^="enter-session-"]')).toHaveCount(count);
   }
@@ -268,10 +268,10 @@ export class InterventionPage {
   // Selects the target intervention in the copy dialog by id.
   //
   // The dialog's list is a react-window grid: only the rows in view exist in the
-  // DOM, and the API orders starred interventions first, then newest first. On a
-  // shared staging account, interventions created by other clients land above the
-  // target, so a "wait for the name to show up" lookup misses it. Scroll the grid
-  // until the row renders instead.
+  // DOM, and the API orders starred interventions first, then newest first.
+  // Interventions created after the target land above it, so a "wait for the
+  // name to show up" lookup can miss it. Scroll the grid until the row renders
+  // instead.
   private async selectCopyTarget(targetInterventionId: string) {
     const dialog = this.page.locator('[role="dialog"]');
     const rows = dialog.locator('[data-cy^="copy-modal-item-"]');

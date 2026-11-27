@@ -21,11 +21,11 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Maximum time one test can run for — CI uses a remote staging API so needs more time */
+  /* Maximum time one test can run for (longer on CI) */
   timeout: process.env.CI ? 90000 : 30000,
   /* Assertions were the one timeout left on Playwright's 5s default while action
    * and navigation were raised for CI. That is not enough for elements that only
-   * render once data comes back from the remote staging API — e.g. the add-screen
+   * render once data comes back from the API — e.g. the add-screen
    * button, which waits on the session load. */
   expect: {
     timeout: process.env.CI ? 15000 : 5000,
@@ -51,7 +51,7 @@ export default defineConfig({
     /* Video recording */
     video: 'retain-on-failure',
 
-    // Add extra time for API responses — CI uses a remote staging API
+    // Add extra time for API responses on CI
     actionTimeout: process.env.CI ? 30000 : 15000,
     navigationTimeout: process.env.CI ? 60000 : 30000,
   },
@@ -99,7 +99,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: process.env.CI ? {
     // In CI, serve the pre-built production bundle from current branch
-    // The frontend will connect to API_URL from environment (staging API)
+    // The frontend will connect to API_URL from environment (the API the E2E job starts)
     command: 'npm run start:prod',
     url: 'http://localhost:4200',
     reuseExistingServer: false,

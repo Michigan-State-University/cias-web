@@ -22,7 +22,7 @@ export const waitForApiHealthy = async (timeout = DEFAULT_TIMEOUT_MS): Promise<v
 
     if (Date.now() + POLL_INTERVAL_MS > deadline) {
       throw new Error(
-        `Staging API unavailable: ${pingUrl} did not recover within ${timeout / 1000}s (last: ${lastResult})`,
+        `API unavailable: ${pingUrl} did not recover within ${timeout / 1000}s (last: ${lastResult})`,
       );
     }
     await new Promise((resolve) => setTimeout(resolve, POLL_INTERVAL_MS));
