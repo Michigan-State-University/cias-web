@@ -11,6 +11,10 @@ export default defineMessages<string>({
     defaultMessage:
       '<p>Would you like to receive a report generated from your responses?</p>',
   },
+  [QuestionTypes.FILE_UPLOAD]: {
+    id: `${scope}.Question::FileUpload`,
+    defaultMessage: '<p>Please attach the requested file.</p>',
+  },
   [QuestionTypes.SMS_QUESTION]: {
     id: `${scope}.Question::Sms`,
     defaultMessage: 'Enter SMS text here',

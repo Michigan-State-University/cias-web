@@ -18,6 +18,7 @@ import {
   tlfbQuestion,
   henryFordQuestion,
   smsQuestion,
+  fileUploadQuestion,
 } from 'models/Session/QuestionTypes';
 
 import currencyQuestionReducer from './CurrencyQuestion/reducer';
@@ -38,6 +39,7 @@ import tlfbConfigReducer from './TlfbConfig/reducer';
 import tlfbEventsReducer from './TlfbEvents/reducer';
 import tlfbQuestionsReducer from './TlfbQuestion/reducer';
 import henryFordQuestionReducer from './HenryFordQuestion/reducer';
+import fileUploadQuestionReducer from './FileUploadQuestion/reducer';
 
 /* eslint-disable default-case, no-param-reassign, default-param-last */
 const questionDataReducer = (question, data) => {
@@ -79,6 +81,8 @@ const questionDataReducer = (question, data) => {
       return tlfbQuestionsReducer(question, data);
     case henryFordQuestion.id:
       return henryFordQuestionReducer(question, data);
+    case fileUploadQuestion.id:
+      return fileUploadQuestionReducer(question, data);
     default:
       return question;
   }

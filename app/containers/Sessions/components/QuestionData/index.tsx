@@ -35,6 +35,7 @@ import {
   tlfbQuestion,
   henryFordQuestion,
   henryFordInitialScreen,
+  fileUploadQuestion,
 } from 'models/Session/QuestionTypes';
 import {
   InterventionSharedTo,
@@ -62,6 +63,7 @@ import TlfbEvents from './TlfbEvents';
 import TlfbQuestion from './TlfbQuestion';
 import HenryFordQuestion from './HenryFordQuestion';
 import HenryFordInitialScreen from './HenryFordInitialScreen';
+import FileUploadQuestion from './FileUploadQuestion';
 
 import { CommonQuestionProps } from './types';
 
@@ -132,6 +134,8 @@ const QuestionData = () => {
       return <HenryFordQuestion {...commonProps} />;
     case henryFordInitialScreen.id:
       return <HenryFordInitialScreen {...commonProps} />;
+    case fileUploadQuestion.id:
+      return <FileUploadQuestion {...commonProps} />;
     default:
       return null;
   }

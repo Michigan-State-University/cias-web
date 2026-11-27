@@ -47,6 +47,15 @@ export default defineMessages({
     id: `${scope}.required`,
     defaultMessage: 'Required',
   },
+  show_file_description: {
+    id: `${scope}.show_file_description`,
+    defaultMessage: 'Ask for a file description',
+  },
+  show_file_description_tooltip_text: {
+    id: `${scope}.show_file_description_tooltip_text`,
+    defaultMessage:
+      'Adds an optional field where the participant can describe the file they attach.',
+  },
   none_of_above: {
     id: `${scope}.none_of_above`,
     defaultMessage: 'Add "None of the above" option',
