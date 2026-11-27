@@ -321,7 +321,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c27 {
+.c28 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -629,6 +629,29 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
 }
 
 .c26 {
+  border-radius: 50%;
+  background-color: #FF7F50;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  margin-right: 18px;
+  background-color: rgba(255,127,80,1);
+  opacity: 1;
+  color: #2F3850;
+}
+
+.c27 {
   border-radius: 50%;
   background-color: #6B9E59;
   display: -webkit-box;
@@ -1053,7 +1076,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             </div>
             <div
               class="c10"
-              data-cy="question-type-tlfb"
+              data-cy="question-type-fileupload"
             >
               <div
                 class="c11"
@@ -1069,11 +1092,34 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c13"
                     font-weight="medium"
                   >
+                    File Upload
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="c10"
+              data-cy="question-type-tlfb"
+            >
+              <div
+                class="c11"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c27"
+                    opacity="1"
+                  />
+                  <p
+                    class="c13"
+                    font-weight="medium"
+                  >
                     Timeline Followback
                   </p>
                 </div>
                 <p
-                  class="c27"
+                  class="c28"
                   color="#107969"
                 >
                   Creates group

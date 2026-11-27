@@ -93,6 +93,10 @@ export default defineMessages<QuestionTypes>({
     id: `${scope}.Question::Sms`,
     defaultMessage: 'Sms Question',
   },
+  [QuestionTypes.FILE_UPLOAD]: {
+    id: `${scope}.Question::FileUpload`,
+    defaultMessage: 'File Upload',
+  },
   [QuestionTypes.SMS_INFORMATION_QUESTION]: {
     id: `${scope}.Question::SmsInformation`,
     defaultMessage: 'Sms Information',

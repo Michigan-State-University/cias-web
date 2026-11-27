@@ -2,8 +2,6 @@ import { TimeRange } from 'models/TimeRange';
 
 import { AnswerType } from './AnswerType';
 
-// answer value
-
 export interface NameAnswerValue {
   name: string;
   phoneticName?: string;
@@ -25,13 +23,12 @@ export interface PhoneAnswerValue {
 
 export type VariableAnswerValueType =
   | string
+  | string[]
   | number
   | boolean
   | NameAnswerValue
   | ParticipantReportAnswerValue
   | PhoneAnswerValue;
-
-// answer data
 
 export interface AnswerData<T> {
   value: T;
@@ -71,13 +68,9 @@ export type AnswerDataType =
   | GridAnswerData
   | HenryFordQuestionAnswerData;
 
-// answer body
-
 export interface AnswerBody<T extends AnswerDataType = AnswerDataType> {
   data: T[];
 }
-
-// answer
 
 export interface GenericAnswer<
   V extends AnswerType = AnswerType,
@@ -149,26 +142,27 @@ export type FeedbackAnswer = GenericAnswer<
 
 export type ParticipantReportAnswer = GenericAnswer<
   AnswerType.PARTICIPANT_REPORT,
-  // value is an empty string if question is skipped
   VariableAnswerData<ParticipantReportAnswerValue | ''>
 >;
 
 export type ThirdPartyReportAnswer = GenericAnswer<
   AnswerType.THIRD_PARTY,
-  // value is an empty string if question is skipped
   ThirdPartyReportAnswerData | VariableAnswerData<''>
 >;
 
 export type PhoneAnswer = GenericAnswer<
   AnswerType.PHONE,
-  // value is an empty string if question is skipped
   VariableAnswerData<PhoneAnswerValue | ''>
 >;
 
 export type HenryFordQuestionAnswer = GenericAnswer<
   AnswerType.HENRY_FORD,
-  // value is an empty string if question is skipped
   HenryFordQuestionAnswerData
+>;
+
+export type FileUploadAnswer = GenericAnswer<
+  AnswerType.FILE_UPLOAD,
+  VariableAnswerData<string[] | ''>
 >;
 
 export type Answer =
@@ -187,4 +181,5 @@ export type Answer =
   | ParticipantReportAnswer
   | ThirdPartyReportAnswer
   | PhoneAnswer
-  | HenryFordQuestionAnswer;
+  | HenryFordQuestionAnswer
+  | FileUploadAnswer;

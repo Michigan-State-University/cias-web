@@ -137,6 +137,12 @@ export const smsQuestion = new QuestionType(
   colors.jungleGreenLighter,
 );
 
+export const fileUploadQuestion = new QuestionType(
+  `${questionType}FileUpload`,
+  'File Upload',
+  colors.coral,
+);
+
 export const smsInformationQuestion = new QuestionType(
   `${questionType}SmsInformation`,
   'SmsInformation',
@@ -167,6 +173,7 @@ export const QuestionTypes = [
   henryFordQuestion,
   smsQuestion,
   smsInformationQuestion,
+  fileUploadQuestion,
 ];
 
 const notAddableQuestionTypes = [

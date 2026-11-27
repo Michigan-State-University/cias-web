@@ -3,6 +3,7 @@ import {
   DateQuestionData,
   ExternalLinkQuestionData,
   FeedbackQuestionData,
+  FileUploadQuestionData,
   FinishQuestionData,
   FreeResponseQuestionData,
   GridQuestionData,
@@ -97,6 +98,9 @@ export type HenryFordQuestionBody =
 export type HenryFordInitialScreenBody =
   QuestionBodyWithoutVariable<HenryFordInitialScreenData>;
 
+export type FileUploadQuestionBody =
+  QuestionBodyWithVariable<FileUploadQuestionData>;
+
 export type QuestionBody =
   | SingleQuestionBody
   | MultipleQuestionBody
@@ -119,4 +123,5 @@ export type QuestionBody =
   | TlfbQuestionBody
   | TlfbEventsBodyWithConfig
   | TlfbQuestionBodyWithConfig
-  | HenryFordQuestionBody;
+  | HenryFordQuestionBody
+  | FileUploadQuestionBody;
